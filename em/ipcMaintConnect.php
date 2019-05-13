@@ -1,0 +1,531 @@
+<?php
+/*  Filename: ipcMaintConnect.php
+    Date: 2018-12-20
+    By: Ninh
+    Copyright: BHD SOLUTIONS, LLC @ 2018
+*/  
+
+	// -- Initialize inputs --
+   
+    $act = "";
+	if (isset($_POST['act'])) {
+		$act = $_POST['act'];
+	}
+   
+    $ordno = "";
+	if (isset($_POST['ordno'])) {
+		$ordno = strtoupper($_POST['ordno']);
+	}
+
+    $mlo = "";
+	if (isset($_POST['mlo'])) {
+		$mlo = strtoupper($_POST['mlo']);
+	}
+
+	$ckid = "";
+	if (isset($_POST['ckid'])) {
+		$ckid = strtoupper($_POST['ckid']);
+	}
+
+    $cls = "";
+	if (isset($_POST['cls'])) {
+		$cls = strtoupper($_POST['cls']);
+	}
+
+    $adsr = "";
+	if (isset($_POST['adsr'])) {
+		$adsr = strtoupper($_POST['adsr']);
+	}
+
+    $prot = "";
+	if (isset($_POST['prot'])) {
+		$prot = strtoupper($_POST['prot']);
+	}
+
+    $ctyp = "";
+	if (isset($_POST['ctyp'])) {
+		$ctyp = strtoupper($_POST['ctyp']);
+    }
+    
+	$ffac = "";
+	if (isset($_POST['ffac'])) {
+		$ffac = strtoupper($_POST['ffac']);
+	}
+
+	$tfac = "";
+	if (isset($_POST['tfac'])) {
+		$tfac = strtoupper($_POST['tfac']);
+	}
+          
+    $tktno = "";
+	if (isset($_POST['tktno'])) {
+		$tktno = strtoupper($_POST['tktno']);
+	}
+    
+    $dd = "";
+	if (isset($_POST['dd'])) {
+		$dd = $_POST['dd'];
+	}
+    
+    $fdd = "";
+	if (isset($_POST['fdd'])) {
+		$fdd = $_POST['fdd'];
+	}
+    
+    $fport = "";
+	if (isset($_POST['fport'])) {
+		$fport = $_POST['fport'];
+	}
+    
+    $tport = "";
+	if (isset($_POST['tport'])) {
+		$tport = $_POST['tport'];
+    }
+    
+    // $input = "ACTION=$act | TKTNO=$tktno | CKID=$ckid | CLS=$cls | ADSR=$adsr | PROT=$prot | CONTYP=$ctyp | FAC(X)=$ffac | FAC(Y)=$tfac";
+   
+    // $evtLog = new EVTLOG($user, "MAINT", $act, $input);
+    $evtLog = new EVENTLOG($user, "MAINTENANCE", "SETUP MAINTENANCE CONNECTION", $act, '');
+    
+
+
+    $maintLog = new MAINTLOG();
+
+	// --- Dispatch by ACTION ---
+		
+	if ($act == "MTC_CONN") {
+        $result = maintConnect($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac);
+        $evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
+        $maintLog->log($user, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $ordno);
+        echo json_encode($result);
+        mysqli_close($db);
+        return;
+    }
+    
+    if ($act == "MTC_RESTORE") {
+        $result = maintRestore($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac);
+        $evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
+        $maintLog->log($user, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $ordno);
+        echo json_encode($result);
+        mysqli_close($db);
+        return;
+    }
+    else {
+        $result['rslt'] = FAIL;
+        $result['reason'] = INVALID_ACTION;
+        $result['rows'] = [];
+        $evtLog->log($result["rslt"], $result["reason"]);
+        echo json_encode($result);
+        mysqli_close($db);
+        return;
+    }
+	
+    function maintConnect($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac) {
+        
+        $result['log'] = "ACTION = MTC_CONN | CKID = $ckid | CLS = $cls | ADSR = $adsr | TKTNO = $tktno | MLO = $mlo | PROT = $prot | CTYP = $ctyp | FFAC = $ffac | TFAC = $tfac";
+
+		if ($userObj->grpObj->maint != "Y") {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:PERMISSION DENIED";
+			$result['reason'] = "MAINTENANCE CONNECT - " . 'PERMISSION DENIED';
+			return $result;
+        }
+        
+        if($tktno === "") {
+            $result["rslt"] = 'fail';
+            $result['jeop'] = "SP5:MISSING TKTNO";
+			$result["reason"] = "MAINTENANCE CONNECT - " . "MISSING TKTNO";
+			return $result;
+		}
+        
+        // the ckid must exist in DB
+		$cktObj = new CKT($ckid);
+		if ($cktObj->rslt == FAIL) {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:".$cktObj->reason;
+			$result['reason'] = "MAINTENANCE CONNECT - " . $cktObj->reason;
+			return $result;
+        }
+
+		// the ffac must exist in DB 
+		$ffacObj = new FAC($ffac);
+		if ($ffacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";
+			$result['reason'] = "MAINTENANCE CONNECT - " . "FAC: " . $ffac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the ffac must have port mapped
+        if ($ffacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";
+			$result['reason'] = "MAINTENANCE CONNECT - " . "FAC: " . $ffac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        
+        // the tfac must exist in DB
+        $tfacObj = new FAC($tfac);
+		if ($tfacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";
+			$result['reason'] = "MAINTENANCE CONNECT - " . "FAC: " . $tfac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the ffac must have port mapped
+        if ($tfacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";
+			$result['reason'] = "MAINTENANCE CONNECT - " . "FAC: " . $tfac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        // locate the MTCD facility and the TST facility
+        if ($ffacObj->portObj->psta == 'MTCD') {
+            if ($tfacObj->portObj->psta == 'MTCD') {
+                $result['rslt'] = "fail";
+                $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
+                $result['reason'] = "MAINTENANCE CONNECT - " . "ONLY ONE FACILITY CAN BE MTCD";
+                return $result;
+            }
+            $mtcdObj = $ffacObj;
+            $tstObj = $tfacObj;
+        }
+        else if ($tfacObj->portObj->psta == 'MTCD') {
+            if ($ffacObj->portObj->psta == 'MTCD') {
+                $result['rslt'] = "fail";
+                $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
+                $result['reason'] = "MAINTENANCE CONNECT - " . "ONLY ONE FACILITY CAN BE MTCD";
+                return $result;
+            }
+            $mtcdObj = $tfacObj;
+            $tstObj = $facObj;
+        }
+        else {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:MISSING AN MTCD FACILITY";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . "MISSING AN MTCD FACILITY";
+            return $result;
+        }
+
+        // MTCD fac and TST fac must be on different ptyp
+        if ($mtcdObj->portObj->ptyp == $tstObj->portObj->ptyp) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP4:TCD FAC AND TEST FAC MUST BE ON OPPOSITE PORT_TYP";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . "MTCD FAC AND TEST FAC MUST BE ON OPPOSITE PORT_TYP";
+            return $result;
+        }
+
+        // verify if MTCD fac is on the right CKTCON
+        $cktconObj = new CKTCON($mtcdObj->portObj->cktcon);
+        if ($cktconObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:UNABLE TO LOCATE CKTCON(" . $mtcdObj->portObj->cktcon . ") OF MTCD FAC(" . $mtcdObj->fac . ")";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . "COULD NOT LOCATE CKTCON(" . $mtcdObj->portObj->cktcon . ") OF MTCD FAC(" . $mtcdObj->fac . ")";
+            return $result;
+        }
+
+        
+        if ($cktconObj->loadIdx($mtcdObj->portObj->con_idx) === FALSE) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:UNABLE TO LOCATE CKTCON(" . $cktconObj->con . ") IDX(" . $mtcdObj->portObj->con_idx . ") OF MTCD FAC";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . "COULD NOT LOCATE CKTCON(" . $cktconObj->con . ") IDX(" . $mtcdObj->portObj->con_idx . ") OF MTCD FAC";
+            return $result;
+        }
+
+        if ($cktObj->ckid != $cktconObj->ckid) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:MTCD FAC " . $mtcdObj->fac . " IS NOT ON CKID " . $cktObj->ckid;            
+            $result['reason'] = "MAINTENANCE CONNECT - " . "MTCD FAC " . $mtcdObj->fac . " IS NOT ON CKID " . $cktObj->ckid;
+            return $result;
+        }
+
+        // locate MTCD FAC position on the connection
+        if ($cktconObj->fport == $mtcdObj->portObj->port) {
+            $fportObj = $mtcdObj->portObj;
+            $tportObj = $tstObj->portObj;
+        }
+        else if ($cktconObj->tport == $mtcdObj->portObj->port) {
+            $tportObj = $mtcdObj->portObj;
+            $fportObj = $tstObj->portObj;
+        }
+        else {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:COULD NOT LOCATE CKTCON OF MTCD FAC";           
+            $result['reason'] = "MAINTENANCE CONNECT - " . "COULD NOT LOCATE CKTCON OF MTCD FAC";
+            return $result;
+        }
+
+
+        // validate state-event
+        $sms = new SMS($fportObj->psta, $fportObj->ssta, "MT_CONN");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$fportObj->psta.")";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . $sms->reason;
+            return $result;
+        }
+        $fportObj->npsta = $sms->npsta;
+        $fportObj->nssta = $sms->nssta;
+
+        $sms = new SMS($tportObj->psta, $tportObj->ssta, "MT_CONN");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$tportObj->psta.")";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . $sms->reason;
+            return $result;
+        }
+        $tportObj->npsta = $sms->npsta;
+        $tportObj->nssta = $sms->nssta;
+
+        $path_id = 0;
+        /* will enable when testing of 100% non-blocking is done */
+        $pathObj = new PATH($ffacObj->portObj->port, $tfacObj->portObj->port);
+        $pathObj->createPath();
+        if($pathObj->rslt == 'fail') {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:UNABLE TO ESTABLISH PATH";            
+            $result['reason'] = "MAINTENANCE CONNECT - " . $pathObj->reason;
+            return $result; 
+        }
+        // apply PATH
+        $path_id = $pathObj->id;
+        $pathObj->setPath();
+        
+
+        // add new CON_IDX
+        $cktconObj->addIdx($cktObj->cktcon, $cktObj->id, $cktObj->ckid, "MAINT", "MAINT", $fportObj->id, $fportObj->port, 1, $tportObj->id, $tportObj->port, 1, $path_id);
+        if ($cktconObj->rslt != SUCCESS) {
+            $result['rslt'] = $cktconObj->rslt;
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+            $result['reason'] = "MAINTENANCE CONNECT - " . $cktconObj->reason;
+            return $result;
+        }
+            
+        
+        // 4) update PORT's PSTA and link with CKT, CKTCON
+        $fportObj->updPsta($fportObj->npsta, $fportObj->nssta, "-");
+		if ($fportObj->rslt != SUCCESS) {
+            $result['rslt'] = $fportObj->rslt;
+            $result['jeop'] = "SP5:".$fportObj->reason;            
+			$result['reason'] = "MAINTENANCE CONNECT - " . $fportObj->reason;
+			return $result;
+		}
+
+        $fportObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
+		if ($fportObj->rslt != SUCCESS) {
+            $result['rslt'] = $fportObj->rslt;
+            $result['jeop'] = "SP5:".$fportObj->reason;            
+			$result['reason'] = "MAINTENANCE CONNECT - " . $fportObj->reason;
+			return $result;
+        }
+       
+        $tportObj->updPsta($tportObj->npsta, $tportObj->nssta, "-");
+		if ($tportObj->rslt != SUCCESS) {
+            $result['rslt'] = $tportObj->rslt;
+            $result['jeop'] = "SP5:".$tportObj->reason;            
+			$result['reason'] = "MAINTENANCE CONNECT - " . $tportObj->reason;
+			return $result;
+		}
+
+        $tportObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
+		if ($tportObj->rslt != SUCCESS) {
+            $result['rslt'] = $tportObj->rslt;
+            $result['jeop'] = "SP5:".$tportObj->reason;            
+			$result['reason'] = "MAINTENANCE CONNECT - " . $tportObj->reason;
+			return $result;
+        }
+        
+        // update ticketNo
+        $cktObj->setTktno($tktno);
+        if ($cktObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:".$cktObj->reason;            
+            $result["reason"] = "MAINTENANCE CONNECT - " . $cktObj->reason;
+            return $result;
+        }
+
+        $cktconObj->queryCktConWithFac($cktconObj->con);
+        if ($cktconObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+            $result["reason"] = "MAINTENANCE CONNECT - " . $cktconObj->reason;
+            return $result;
+        }
+
+        $result['rows'] = $cktconObj->rows;
+        $result["rslt"] = SUCCESS;
+        $result["reason"] = "MAINTENANCE CONNECT - " . "SUCCESSFUL";
+        return $result;
+	}
+
+	
+    function maintRestore($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac) {
+
+        $result['log'] = "ACTION = MTC_RESTORE | CKID = $ckid | CLS = $cls | ADSR = $adsr | TKTNO = $tktno | MLO = $mlo | PROT = $prot | CTYP = $ctyp | FFAC = $ffac | TFAC = $tfac";
+
+		if ($userObj->grpObj->maint != "Y") {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:PERMISSION DENIED";            
+			$result['reason'] = "MAINTENANCE RESTORE - " . 'PERMISSION DENIED';
+			return $result;
+        }
+        
+        if($tktno === "") {
+            $result["rslt"] = 'fail';
+            $result['jeop'] = "SP5:MISSING TKTNO";            
+			$result["reason"] = "MAINTENANCE RESTORE - " . "MISSING TKTNO";
+			return $result;
+		}
+        
+        // the ckid must exist in DB
+		$cktObj = new CKT($ckid);
+		if ($cktObj->rslt == FAIL) {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:".$cktObj->reason;            
+			$result['reason'] = "MAINTENANCE RESTORE - " . $cktObj->reason;
+			return $result;
+        }
+
+		// the ffac must exist in DB 
+		$ffacObj = new FAC($ffac);
+		if ($ffacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";            
+			$result['reason'] = "MAINTENANCE RESTORE - " . "FAC: " . $ffac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the ffac must have port mapped
+        if ($ffacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";            
+			$result['reason'] = "MAINTENANCE RESTORE - " . "FAC: " . $ffac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        
+        // the tfac must exist in DB
+        $tfacObj = new FAC($tfac);
+		if ($tfacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";            
+			$result['reason'] = "MAINTENANCE RESTORE - " . "FAC: " . $tfac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the ffac must have port mapped
+        if ($tfacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";            
+			$result['reason'] = "MAINTENANCE RESTORE - " . "FAC: " . $tfac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        // locate the two MTCD facilities
+        $cktconObj = new CKTCON($cktObj->cktcon);
+        if ($cktconObj->rslt == FAIL) {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+			$result['reason'] = "MAINTENANCE RESTORE - " . $cktconObj->reason;
+			return $result;
+        }
+
+        if ($cktconObj->loadIdxByPortIds($ffacObj->port_id, $tfacObj->port_id) == 0) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP4:FAC " . $ffac . " OR " . $tfac . " IS NOT ON CKT " . $ckid;          
+			$result["reason"] = "MAINTENANCE RESTORE - " . "FAC: " . $ffac . " OR " . $tfac . " IS NOT ON CKT " . $ckid;
+			return $result;
+		}
+
+
+        // validate state-event for ffac
+        $sms = new SMS($ffacObj->portObj->psta, $ffacObj->portObj->ssta, "MT_RST");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
+            $result['reason'] = "MAINTENANCE RESTORE - " . $sms->reason;
+            return $result;
+        }
+        $ffacObj->portObj->npsta = $sms->npsta;
+        $ffacObj->portObj->nssta = $sms->nssta;
+
+        // validate state-event for tfac
+        $sms = new SMS($tfacObj->portObj->psta, $tfacObj->portObj->ssta, "MT_RST");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
+            $result['reason'] = "MAINTENANCE RESTORE - " . $sms->reason;
+            return $result;
+        }
+        $tfacObj->portObj->npsta = $sms->npsta;
+        $tfacObj->portObj->nssta = $sms->nssta;
+
+        $path_id = 0;
+        /* will enable when 100% non-blocking test is done
+        */
+        $pathObj = new PATH($ffacObj->portObj->port, $tfacObj->portObj->port);
+        $pathObj->createPath();
+        if($pathObj->rslt == 'fail') {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:UNABLE TO ESTABLISH PATH";            
+            $result['reason'] = "MAINTENANCE RESTORE - " . $pathObj->reason;
+            return $result; 
+        }
+        // apply PATH
+        $path_id = $pathObj->id;
+        $pathObj->setPath();
+
+        // update CKTCON IDX with ctyp = ctyp_o and path = $pathObj->id
+        $cktconObj->updateIdx($cktconObj->con, $cktconObj->idx, $cktconObj->ctyp_o, $cktconObj->ctyp_o, $path_id);
+        if ($cktconObj->rslt != SUCCESS) {
+            $result['rslt'] = $cktconObj->rslt;
+            $result['jeop'] = "SP5:$cktconObj->reason";            
+            $result['reason'] = "MAINTENANCE RESTORE - " . $cktconObj->reason;
+            return $result;
+        }           
+        
+        // update PORT's PSTA and link with CKT, CKTCON
+        $ffacObj->portObj->updPsta($ffacObj->portObj->npsta, $ffacObj->portObj->nssta, "-");
+		if ($ffacObj->portObj->rslt != SUCCESS) {
+            $result['rslt'] = $ffacObj->portObj->rslt;
+            $result['jeop'] = "SP5:".$ffacObj->portObj->reason;            
+			$result['reason'] = "MAINTENANCE RESTORE - " . $ffacObj->portObj->reason;
+			return $result;
+		}
+        
+        $tfacObj->portObj->updPsta($tfacObj->portObj->npsta, $tfacObj->portObj->nssta, "-");
+		if ($tfacObj->portObj->rslt != SUCCESS) {
+            $result['rslt'] = $tfacObj->portObj->rslt;
+            $result['jeop'] = "SP5:".$tfacObj->portObj->reason;            
+			$result['reason'] = "MAINTENANCE RESTORE - " . $tfacObj->portObj->reason;
+			return $result;
+        }
+        
+        // update ticketNo
+        $cktObj->setTktno($tktno);
+        if ($cktObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:$cktObj->reason";        
+            $result["reason"] = "MAINTENANCE RESTORE - " . $cktObj->reason;
+            return $result;
+        }
+        
+        $cktconObj->queryCktConWithFac($cktconObj->con);
+        if ($cktconObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:$cktconObj->reason";        
+            $result["reason"] = "MAINTENANCE RESTORE - " . $cktconObj->reason;
+            return $result;
+        }
+
+        $result['rows'] = $cktconObj->rows;
+        $result["rslt"] = SUCCESS;
+        $result["reason"] = "MAINTENANCE RESORE - " . "SUCCESSFUL";
+        return $result;
+	}
+
+
+?>

@@ -1,0 +1,870 @@
+<div id="cfgreport" class="tab-pane fade in" style="position: relative;">
+    <h4>CONFIGURATION REPORTS</h4>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <label for="cfgreport_cfgUser_txt">USER</label>
+                <input type="text" class="form-control" id="cfgreport_cfgUser_txt" >
+            </div>
+            <div class="col-sm-1">
+                <label for="cfgreport_action_sel">ACTION</label>
+                <select class="form-control" id="cfgreport_action_sel" >
+                    <option></option>
+                    <option>MAP</option>
+                    <option>UNMAP</option>
+            
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="cfgreport_fromDate_date">FROM DATE</label>
+                <input type="date" class="form-control" id="cfgreport_fromDate_date" >
+            </div>
+            <div class="col-sm-2">
+                <label for="cfgreport_toDate_date">TO DATE</label>
+                <input type="date" class="form-control" id="cfgreport_toDate_date" >
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <label for="cfgreport_report_sel">REPORT</label>
+                <select class="form-control" id="cfgreport_report_sel">
+                    <option> </option>
+                    <option>VIEW REPORT</option>
+                    <option>CREATE REPORT</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="cfgreport_type_txt">TYPE</label>
+                <select class="form-control" id="cfgreport_type_sel">
+                    <option>SETUP PORT MAPPING</option>
+                    <option>SETUP FACILITIES</option>
+                    <option>SETUP WIRE CENTER</option>
+                </select>
+            </div>
+            <div class="col-sm-7">
+                <button id="cfgreport_submit_btn" class="btn btn-primary">SUBMIT</button>
+                <button id="cfgreport_clear_btn" class="btn btn-primary">CLEAR</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12" id="cfgreport_portmap_tbl">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>REPORT DETAIL:</b>
+                </div>
+                <div style="float:right;">
+                    <a id="cfgreport_previous">Previous</a> |
+                    <a id="cfgreport_next">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="cfgreport_index_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed" style="table-layout: fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="cfgreport_DATE_tbl"     style="width:10%">DATE</th>
+                                <th id="cfgreport_USER_tbl"     style="width:7%">USER</th>
+                                <th id="cfgreport_ACTION_tbl"   style="width:10%">ACTION</th>
+                                <th id="cfgreport_PORT_tbl"     style="width:7%">PORT</th>
+                                <th id="cfgreport_FAC_tbl"      style="width:15%">FAC</th>
+                                <th id="cfgreport_FAC_TYPE_tbl" style="width:8%">FAC_TYPE</th>
+                                <th id="cfgreport_ORT_tbl"      style="width:5%">ORT</th>
+                                <th id="cfgreport_SPCFNC_tbl"   style="width:5%">SPCFNC</th>
+                                <th id="cfgreport_RESULT_tbl"   style="width:33%">RESULT</th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="cfgreport_tbl">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" id="cfgreport_wirecenter_tbl" style="display:none">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>REPORT DETAIL:</b>
+                </div>
+                <div style="float:right;">
+                    <a id="cfgreport_WC_previous">Previous</a> |
+                    <a id="cfgreport_WC_next">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="cfgreport_WC_index_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed" style="table-layout: fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="cfgreport_WC_DATE_tbl" style="width:10%">DATE</th>
+                                <th id="cfgreport_WC_USER_tbl" style="width:10%">USER</th>
+                                <th id="cfgreport_WC_EVENT_tbl" style="width:15%">EVENT</th>
+                                <th id="cfgreport_WC_FUNCTION_tbl" style="width:15%">FUNCTION</th>
+                                <th id="cfgreport_WC_TASK_tbl" style="width:10%">TASK</th>
+                                <th id="cfgreport_WC_DETAIL_tbl" style="width:40%">DETAIL</th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="cfgreport_WC_tbl_body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" id="cfgreport_facility_tbl" style="display:none">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>REPORT DETAIL:</b>
+                </div>
+                <div style="float:right;">
+                    <a id="cfgreport_FAC_previous">Previous</a> |
+                    <a id="cfgreport_FAC_next">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="cfgreport_FAC_index_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed" style="table-layout: fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="cfgreport_FAC_DATE_tbl" style="width:10%">DATE</th>
+                                <th id="cfgreport_FAC_USER_tbl" style="width:10%">USER</th>
+                                <th id="cfgreport_FAC_EVENT_tbl" style="width:15%">EVENT</th>
+                                <th id="cfgreport_FAC_FUNCTION_tbl" style="width:15%">FUNCTION</th>
+                                <th id="cfgreport_FAC_TASK_tbl" style="width:10%">TASK</th>
+                                <th id="cfgreport_FAC_DETAIL_tbl" style="width:40%">DETAIL</th>                              
+                            </tr>
+                        </thead>
+                        <tbody id="cfgreport_FAC_tbl_body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+
+
+
+<script>
+
+var cfgreport = {
+    action:             $("#cfgreport_action_sel"),
+    user:               $("#cfgreport_cfgUser_txt"),
+    type:               $("#cfgreport_type_sel"),
+    report:             $("#cfgreport_report_sel"),
+    port:               $("#cfgreport_portInfo_txt"),
+    fac:                $("#cfgreport_facInfo_txt"),
+    ftyp:               $("#cfgreport_ftyp_txt"),
+    ort:                $("#cfgreport_ort_txt"),
+    spcfnc:             $("#cfgreport_spcfnc_txt"),
+    fromDate:           $("#cfgreport_fromDate_date"), 
+    toDate:             $("#cfgreport_toDate_date"),
+    submitBtn:          $("#cfgreport_submit_btn"),
+    clearBtn:           $("#cfgreport_clear_btn"),
+    indexLbl:           $("#cfgreport_index_lbl"),
+    tbl: {
+        body:           $("#cfgreport_tbl"),
+        index:          0,
+        maxIndex:       0,
+        prevBtn:        $("#cfgreport_previous"),
+        nextBtn:        $("#cfgreport_next"),
+        headers: {
+            date:       $("#cfgreport_DATE_tbl"),
+            user:       $("#cfgreport_USER_tbl"),
+            action:     $("#cfgreport_ACTION_tbl"),
+            port:       $("#cfgreport_PORT_tbl"),
+            fac:        $("#cfgreport_FAC_tbl"),
+            fac_type:   $("#cfgreport_FAC_TYPE_tbl"),
+            ort:        $("#cfgreport_ORT_tbl"),
+            spcfnc:     $("#cfgreport_SPCFNC_tbl"),
+            result:     $("#cfgreport_RESULT_tbl"),
+        }
+    },
+
+    tblWireCenter: {
+        body:           $("#cfgreport_WC_tbl_body"),
+        index:          0,
+        maxIndex:       0,
+        rows:           [],
+        prevBtn:        $("#cfgreport_WC_previous"),
+        nextBtn:        $("#cfgreport_WC_next"),
+        indexLbl:       $("#cfgreport_WC_index_lbl"),
+        headers: {
+            time:       $("#cfgreport_WC_DATE_tbl"),
+            user:       $("#cfgreport_WC_USER_tbl"),
+            evt:        $("#cfgreport_WC_EVENT_tbl"),
+            fnc:        $("#cfgreport_WC_FUNCTION_tbl"),
+            task:       $("#cfgreport_WC_TASK_tbl"),
+            detail:     $("#cfgreport_WC_DETAIL_tbl"),
+        }
+    },
+
+    tblFacilities: {
+        body:           $("#cfgreport_FAC_tbl_body  "),
+        index:          0,
+        maxIndex:       0,
+        rows:           [],
+        prevBtn:        $("#cfgreport_FAC_previous"),
+        nextBtn:        $("#cfgreport_FAC_next"),
+        indexLbl:       $("#cfgreport_FAC_index_lbl"),
+        headers: {
+            time:       $("#cfgreport_FAC_DATE_tbl"),
+            user:       $("#cfgreport_FAC_USER_tbl"),
+            evt:        $("#cfgreport_FAC_EVENT_tbl"),
+            fnc:        $("#cfgreport_FAC_FUNCTION_tbl"),
+            task:       $("#cfgreport_FAC_TASK_tbl"),
+            detail:     $("#cfgreport_FAC_DETAIL_tbl"),
+        }
+    },
+
+    filterArray:    [],
+
+    tblRows:        [],
+
+    headers: {
+        date:       true,
+        user:       true,
+        action:     true,
+        port:       true,
+        fac:        true,
+        fac_type:   true,
+        ort:        true,
+        spcfnc:     true,
+        result:     true,
+        evt:        true,
+        fnc:        true,
+        task:       true,
+        detail:     true,
+        time:       true,
+    },
+
+
+    // FUNCTIONS
+
+    start: function() {
+        cfgreport.clearForm();
+        cfgreport.clearTable();
+        cfgreport.sortHeaderEvents();
+    },
+
+    clearForm: function() {
+        cfgreport.user.val("");
+        cfgreport.action.val("");
+        cfgreport.report.val("");
+        cfgreport.tblRows = [];
+        cfgreport.tblFacilities.rows = [];
+        cfgreport.tblWireCenter.rows = [];
+        cfgreport.type.val("SETUP PORT MAPPING").change();
+        cfgreport.indexLbl.text("");
+        cfgreport.fromDate.val(cfgreport.currentDate());
+        cfgreport.toDate.val(cfgreport.currentDate());
+    },
+
+    clearTable: function() {
+        cfgreport.tbl.body.empty();
+        cfgreport.indexLbl.text(`0 - 0 (Total: ${cfgreport.tblRows.length})`);
+        cfgreport.tblWireCenter.body.empty();
+        cfgreport.tblWireCenter.indexLbl.text(`0 - 0 (Total: ${cfgreport.tblWireCenter.rows.length})`);
+        cfgreport.tblFacilities.body.empty();
+        cfgreport.tblFacilities.indexLbl.text(`0 - 0 (Total: ${cfgreport.tblFacilities.rows.length})`);
+    },
+
+    query: function(action) {
+        $.post(ipcDispatch,
+    	{
+            api:        "ipcCfgReport",
+    		act:	    "VIEW REPORT",
+            user:	    $('#main_currentUser').text(),
+            uname:      cfgreport.user.val(),
+            action:     cfgreport.action.val(),
+            fromDate:   cfgreport.fromDate.val(),
+            toDate:     cfgreport.toDate.val()
+        },
+    	function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");
+                    cfgreport.tblRows = [];
+                    cfgreport.clearTable();
+                    return;
+                }
+                else {
+                    cfgreport.tbl.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].date.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    cfgreport.tblRows = obj.rows;
+                    var len = cfgreport.tblRows.length;
+                    cfgreport.tbl.maxIndex = Math.ceil(len / 100.0);
+                    cfgreport.tbl.index++;
+                    cfgreport.displayTable(cfgreport.tbl.index);
+                }
+            }
+        });
+    },
+    
+    queryWC: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:        "ipcEventlog",
+            act:        action,
+            user:	    $('#main_currentUser').text(),
+            uname:      cfgreport.user.val(),
+            fnc:        "SETUP WIRE CENTER",
+            evt:        "CONFIGURATION",
+            fromDate:   cfgreport.fromDate.val(),
+            toDate:     cfgreport.toDate.val(),
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    cfgreport.tblWireCenter.rows = [];
+                    cfgreport.clearTable();
+                    alert("There is no matching data!");
+                }
+                else {
+                    cfgreport.tblWireCenter.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].time.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].time = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    cfgreport.tblWireCenter.rows = obj.rows;
+                    var len = obj.rows.length; 
+                    cfgreport.tblWireCenter.maxIndex = Math.ceil(len/100.0);
+                    cfgreport.tblWireCenter.index++;
+                    cfgreport.displayWCTable(cfgreport.tblWireCenter.index);
+                }  
+            } 
+        });
+    },
+
+    queryFAC: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:        "ipcEventlog",
+            act:        action,
+            user:	    $('#main_currentUser').text(),
+            uname:      cfgreport.user.val(),
+            fnc:        "SETUP FACILITY",
+            evt:        "CONFIGURATION",
+            fromDate:   cfgreport.fromDate.val(),
+            toDate:     cfgreport.toDate.val(),
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    cfgreport.tblFacilities.rows = [];
+                    cfgreport.clearTable();
+                    alert("There is no matching data!");
+                }
+                else {
+                    cfgreport.tblFacilities.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].time.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].time = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    cfgreport.tblFacilities.rows = obj.rows;
+                    var len = obj.rows.length; 
+                    cfgreport.tblFacilities.maxIndex = Math.ceil(len/100.0);
+                    cfgreport.tblFacilities.index++;
+                    cfgreport.displayFACTable(cfgreport.tblFacilities.index);
+                }  
+            } 
+        });
+    },
+
+    displayTable: function(index) {
+        var startIndex  = (index - 1) * 100;
+        var stopIndex   = index * 100;
+        var len         = cfgreport.tblRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            cfgreport.tbl.body.empty();
+            var a = [];
+            var displayedRows = cfgreport.tblRows;
+            var tableHeader = ['date', 'user', 'action', 'port', 'fac', 'fac_type', 'ort', 'spcfnc', 'result'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr><td style="width:10%">' +   cfgreport.tblRows[i].date   + "</td>");
+                a.push('<td style="width:7%">'      +   cfgreport.tblRows[i].user   + "</td>");
+                a.push('<td style="width:10%">'     +   cfgreport.tblRows[i].action + "</td>");
+                a.push('<td style="width:7%">'      +   cfgreport.tblRows[i].port   + "</td>");
+                a.push('<td style="width:15%">'      +   cfgreport.tblRows[i].fac    + "</td>");
+                a.push('<td style="width:8%">'     +   cfgreport.tblRows[i].ftyp   + "</td>");
+                a.push('<td style="width:5%">'      +   cfgreport.tblRows[i].ort    + "</td>");
+                a.push('<td style="width:5%">'      +   cfgreport.tblRows[i].spcfnc + "</td>");
+                a.push('<td style="width:33%">'     +   cfgreport.tblRows[i].result + "</td></tr>");
+                
+            }
+            cfgreport.tbl.body.html(a.join(""));
+
+            if (len == 0) 
+                cfgreport.indexLbl.text("(total:" + len + ")") ;
+            else
+                cfgreport.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+        }
+    },
+
+    displayWCTable: function(index) {   
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = cfgreport.tblWireCenter.rows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }            
+            cfgreport.clearTable();
+            var a = [];
+            var displayedRows = cfgreport.tblWireCenter.rows;
+            var tableHeader = ['time', 'user', 'evt', 'fnc', 'task', 'detail'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr> <td style="display:none">' + cfgreport.tblWireCenter.rows[i].id + '</td>')  
+                a.push('<td style="width:10%">'         + cfgreport.tblWireCenter.rows[i].time + '</td>');
+                a.push('<td style="width:10%">'         + cfgreport.tblWireCenter.rows[i].user + '</td>');
+                a.push('<td style="width:15%">'         + cfgreport.tblWireCenter.rows[i].evt + '</td>');
+                a.push('<td style="width:15%">'         + cfgreport.tblWireCenter.rows[i].fnc + '</td>');
+                a.push('<td style="width:10%">'         + cfgreport.tblWireCenter.rows[i].task + '</td>');
+                a.push('<td style="width:40%";>'        + cfgreport.tblWireCenter.rows[i].detail + '</td>');
+                a.push('</tr>');
+            }
+            cfgreport.tblWireCenter.body.html(a.join(""));
+            if (len == 0) 
+                cfgreport.tblWireCenter.indexLbl.text("(total:" + len + ")") ;
+            else
+                cfgreport.tblWireCenter.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            
+        } 
+    },
+
+    displayFACTable: function(index) {   
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = cfgreport.tblFacilities.rows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }            
+            cfgreport.clearTable();
+            var a = [];
+            var displayedRows = cfgreport.tblFacilities.rows;
+            var tableHeader = ['time', 'user', 'evt', 'fnc', 'task','detail'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr> <td style="display:none">' + cfgreport.tblFacilities.rows[i].id + '</td>')  
+                a.push('<td style="width:10%">'         + cfgreport.tblFacilities.rows[i].time + '</td>');
+                a.push('<td style="width:10%">'         + cfgreport.tblFacilities.rows[i].user + '</td>');
+                a.push('<td style="width:15%">'         + cfgreport.tblFacilities.rows[i].evt + '</td>');
+                a.push('<td style="width:15%">'         + cfgreport.tblFacilities.rows[i].fnc + '</td>');
+                a.push('<td style="width:10%">'         + cfgreport.tblFacilities.rows[i].task + '</td>');
+                a.push('<td style="width:40%">'         + cfgreport.tblFacilities.rows[i].detail + '</td>');
+                a.push('</tr>');
+            }
+            cfgreport.tblFacilities.body.html(a.join(""));
+            if (len == 0) 
+                cfgreport.tblFacilities.indexLbl.text("(total:" + len + ")") ;
+            else
+                cfgreport.tblFacilities.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            
+        } 
+    },
+
+    convertArrayOfObjectsToCSV: function(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    },
+
+    //DOWNLOAD FUNCTION FOR PORT MAPPING
+    downloadCSV: function(args) {
+        var data, filename, link;
+
+        var csv = cfgreport.convertArrayOfObjectsToCSV({
+            data: cfgreport.tblRows,
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    //DOWNLOAD FUNCTION FOR WIRE CENTER
+    downloadWireCenterCSV: function(args) {
+        var data, filename, link;
+
+        var csv = cfgreport.convertArrayOfObjectsToCSV({
+            data: cfgreport.tblWireCenter.rows,
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    //DOWNLOAD FUNCTION FOR FACILITIES
+    downloadFacilitiesCSV: function(args) {
+        var data, filename, link;
+
+        var csv = cfgreport.convertArrayOfObjectsToCSV({
+            data: cfgreport.tblFacilities.rows,
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    currentDate: function() {
+        var today = new Date();
+        var dd    = today.getDate();
+        var mm    = today.getMonth()+1; //January is 0!
+        var yyyy  = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        } 
+
+        if (mm < 10) {
+            mm = '0' + mm
+        } 
+
+        todayDate = yyyy + '-' + mm + '-' + dd;
+
+        return todayDate;
+    },
+
+    currentTime: function() {
+        var today = new Date();
+        var cycle = false;
+        var hour;
+        if (today.getHours() > 12) {
+            hour = today.getHours() - 12;
+            cycle = true;
+        }
+        else {
+            cycle = false;
+            hour = today.getHours();
+        }
+
+        if (cycle == true) {
+            cycle = "PM";
+        }
+        else if (cycle == false) {
+            cycle = "AM";
+        }
+
+        time = `${hour}.${today.getMinutes()} ${cycle}`;
+        return time;
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in cfgreport.tbl.headers) {
+            cfgreport.tbl.headers[elem].click(function() {
+                if (cfgreport.tblRows.length != 0) {
+                    if (cfgreport.headers.elem) {
+                        cfgreport.tblRows = cfgreport.tblRows.sort(cfgreport.dynamicSort(`${elem}`));
+                        cfgreport.headers.elem = false;
+                    }
+                    else {
+                        cfgreport.tblRows = cfgreport.tblRows.sort(cfgreport.dynamicSort(`-${elem}`));
+                        cfgreport.headers.elem = true;
+                    }
+                    cfgreport.displayTable(cfgreport.tbl.index);
+                }
+            });
+        }
+
+        for (let elem in cfgreport.tblWireCenter.headers) {
+            cfgreport.tblWireCenter.headers[elem].click(function() {
+                if (cfgreport.tblWireCenter.rows.length != 0) {
+                    if (cfgreport.headers.elem) {
+                        cfgreport.tblWireCenter.rows = cfgreport.tblWireCenter.rows.sort(cfgreport.dynamicSort(`${elem}`));
+                        cfgreport.headers.elem = false;
+                    }
+                    else {
+                        cfgreport.tblWireCenter.rows = cfgreport.tblWireCenter.rows.sort(cfgreport.dynamicSort(`-${elem}`));
+                        cfgreport.headers.elem = true;
+                    }
+                    cfgreport.displayWCTable(cfgreport.tblWireCenter.index);
+                }
+            });
+        }
+
+        for (let elem in cfgreport.tblFacilities.headers) {
+            cfgreport.tblFacilities.headers[elem].click(function() {
+                if (cfgreport.tblFacilities.rows.length != 0) {
+                    if (cfgreport.headers.elem) {
+                        cfgreport.tblFacilities.rows = cfgreport.tblFacilities.rows.sort(cfgreport.dynamicSort(`${elem}`));
+                        cfgreport.headers.elem = false;
+                    }
+                    else {
+                        cfgreport.tblFacilities.rows = cfgreport.tblFacilities.rows.sort(cfgreport.dynamicSort(`-${elem}`));
+                        cfgreport.headers.elem = true;
+                    }
+                    cfgreport.displayFACTable(cfgreport.tblFacilities.index);
+                }
+            });
+        }
+
+    },
+
+}
+
+// ---------------------Click Events----------------------------
+cfgreport.type.change(function() {
+    if (cfgreport.type.val() == "SETUP WIRE CENTER") {
+        document.getElementById("cfgreport_wirecenter_tbl").style.display="block";
+        document.getElementById("cfgreport_portmap_tbl").style.display="none";
+        document.getElementById("cfgreport_facility_tbl").style.display="none";
+    }
+    else if (cfgreport.type.val() == "SETUP FACILITIES") {
+        document.getElementById("cfgreport_wirecenter_tbl").style.display="none";
+        document.getElementById("cfgreport_portmap_tbl").style.display="none";
+        document.getElementById("cfgreport_facility_tbl").style.display="block";
+    }
+    else if (cfgreport.type.val() == "SETUP PORT MAPPING") {
+        document.getElementById("cfgreport_wirecenter_tbl").style.display="none";
+        document.getElementById("cfgreport_portmap_tbl").style.display="block";
+        document.getElementById("cfgreport_facility_tbl").style.display="none";
+    }
+})
+
+
+cfgreport.submitBtn.click(function (){
+    if (cfgreport.report.val() == "VIEW REPORT") {
+        if (cfgreport.fromDate.val() > cfgreport.toDate.val()) {
+            alert("Invalid Date Range");
+        }
+        else if (cfgreport.type.val() == "SETUP PORT MAPPING") {
+            cfgreport.query(cfgreport.report.val());
+        }
+        else if (cfgreport.type.val() == "SETUP WIRE CENTER") {
+            cfgreport.queryWC(cfgreport.report.val());
+        }
+        else if (cfgreport.type.val() == "SETUP FACILITIES") {
+            cfgreport.queryFAC(cfgreport.report.val());
+        }
+    }
+    if (cfgreport.report.val() == "CREATE REPORT") {
+        if (cfgreport.fromDate.val() > cfgreport.toDate.val()) {
+            alert("Invalid Date Range");
+        }
+        else if (cfgreport.type.val() == "SETUP PORT MAPPING") {
+            var fromDate = cfgreport.fromDate.val().replace(/-/g, "");
+            var toDate = cfgreport.toDate.val().replace(/-/g, "");
+            cfgreport.downloadCSV({filename: `CONFIGURATION_REPORT_${fromDate}_${toDate}.csv`});
+        }
+        else if (cfgreport.type.val() == "SETUP WIRE CENTER") {
+            var fromDate = cfgreport.fromDate.val().replace(/-/g, "");
+            var toDate = cfgreport.toDate.val().replace(/-/g, "");
+            cfgreport.downloadWireCenterCSV({filename: `CONFIGURATION_REPORT_${fromDate}_${toDate}.csv`});
+        }
+        else if (cfgreport.type.val() == "SETUP FACILITIES") {
+            var fromDate = cfgreport.fromDate.val().replace(/-/g, "");
+            var toDate = cfgreport.toDate.val().replace(/-/g, "");
+            cfgreport.downloadFacilitiesCSV({filename: `CONFIGURATION_REPORT_${fromDate}_${toDate}.csv`});
+        }
+    }
+});
+
+cfgreport.clearBtn.click(function() {
+    cfgreport.clearForm();
+    cfgreport.clearTable();
+});
+
+cfgreport.tbl.nextBtn.click(function() {
+    if (cfgreport.tbl.index < cfgreport.tbl.maxIndex) {
+        cfgreport.tbl.index++;
+        cfgreport.displayTable(cfgreport.tbl.index);
+    }
+});
+
+cfgreport.tblFacilities.nextBtn.click(function() {
+    if (cfgreport.tblFacilities.index < cfgreport.tblFacilities.maxIndex) {
+        cfgreport.tblFacilities.index++;
+        cfgreport.displayFACTable(cfgreport.tblFacilities.index);
+    }
+});
+
+cfgreport.tblWireCenter.nextBtn.click(function() {
+    if (cfgreport.tblWireCenter.index < cfgreport.tblWireCenter.maxIndex) {
+        cfgreport.tblWireCenter.index++;
+        cfgreport.displayWCTable(cfgreport.tblWireCenter.index);
+    }
+});
+
+cfgreport.tbl.prevBtn.click(function() {
+    if (cfgreport.tbl.index > 1) {
+        cfgreport.tbl.index--;
+        cfgreport.displayTable(cfgreport.tbl.index);
+    }
+});
+cfgreport.tblFacilities.prevBtn.click(function() {
+    if (cfgreport.tblFacilities.index > 1) {
+        cfgreport.tblFacilities.index--;
+        cfgreport.displayFACTable(cfgreport.tblFacilities.index);
+    }
+});
+cfgreport.tblWireCenter.prevBtn.click(function() {
+    if (cfgreport.tblWireCenter.index > 1) {
+        cfgreport.tblWireCenter.index--;
+        cfgreport.displayWCTable(cfgreport.tblWireCenter.index);
+    }
+});
+</script>

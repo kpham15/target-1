@@ -1,0 +1,843 @@
+<div id="portmap" class="tab-pane fade in" style="position: relative">
+    <h4>SETUP PORT MAPPING</h4>  
+    
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-2 modifyPadding" hidden>
+                <label for="pm_node_num">NODE</label>
+                <input type="number" class="form-control" id="pm_node_num">
+            </div>
+                
+            <div class="col-sm-2 modifyPadding" hidden>
+                <label for="pm_slot_num">SLOT</label>
+                <input type="number" class="form-control" id="pm_slot_num">
+            </div>
+
+            <div class="col-sm-2 modifyPadding" hidden>
+                <label for="pm_pnum_num">PORT_NUM</label>
+                <input type="number" class="form-control" id="pm_pnum_num">
+            </div>
+            
+            <div class="col-sm-5 modifyPadding">
+                <label for="pm_port_txt">PORT</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="pm_port_txt">
+            </div>
+            
+            <div class="col-sm-2 modifyPadding" >
+                <label for="pm_ptyp_sel">PORT_TYP</label>
+                <select class="form-control" id="pm_ptyp_sel">
+                    <option></option>
+                </select>
+            </div>
+    
+            <div class="col-sm-3 modifyPadding">
+                <label for="pm_psta_sel">PSTA</label>
+                <select class="form-control" id="pm_psta_sel">
+                    <option></option>
+                </select>
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <button id="pm_findPort_btn" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-10 modifyPadding">
+                <label for="pm_fac_txt">FAC_ID</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="pm_fac_txt">
+            </div>
+    
+            <div class="col-sm-2 modifyPadding">
+                <button id="pm_findFac_btn" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+        
+        <div class="row">    
+            <div class="col-sm-10 modifyPadding">
+                <label for="pm_ckid_txt">CKID</label>
+                <label for="pm_tn_cbx">TN:</label>
+                <input type="checkbox" id="pm_tn_cbx" checked>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="pm_ckid_txt">
+            </div>
+
+            <div class="col-sm-2 modifyPadding">
+                <button id="pm_findCkid_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+
+        <div class="row">                    
+            <div class="col-sm-3 modifyPadding" > 
+                <label for="pm_act_sel">ACTION</label>    
+                <select class="form-control" id="pm_act_sel" >
+                    <option></option>                    
+                </select>
+            </div> 
+            <div class="col-sm-6 modifyPadding">
+                <button id="pm_cancel_btn" type="button" class="btn btn-primary">Clear</button>
+                <input type="hidden" id="pm_portId_num" style="width:50px;">
+                <input type="hidden" id="pm_facId_num" style="width:50px;">
+            </div>      
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+        <div class="col-sm-12">
+            <div style="float:left">
+                <label>LIST OF PORTS:</label>
+            </div>
+            <div style="float:right">
+                <a  id="pm_prev_btn">Previous</a> |
+                <a  id="pm_next_btn">Next</a>
+                &nbsp&nbsp&nbsp <label id="pm_index_lbl"></label>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="panel panel-default" style="table-layout: fixed">
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <!--
+                            <th style="width:10%">NODE</th>    
+                            <th style="width:10%">SLOT</th>
+                            <th style="width:10%">PNUM</th>
+                            <th style="width:10%">PTYP</th>
+                            -->
+                            <th id="pm_PORT_tbl" style="width:10%">PORT</th>
+                            <th id="pm_PSTA_tbl" style="width:10%">PSTA</th>
+                            <th id="pm_FAC_ID_tbl" style="width:25%">FAC_ID</th>
+                            <th id="pm_FTYP_tbl" style="width:15%">FAC_TYP</th>
+                            <th id="pm_ORT_tbl" style="width:10%">ORT</th>
+                            <th id="pm_SPCFNC_tbl" style="width:10%">SPCFNC</th>
+                            <th id="pm_CKID_tbl" style="width:20%">CKID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pm_tbl">
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+  
+</div>
+
+<div id="portmapModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+             <h5 class="modal-title">PORT MAPPING</h5>
+        </div>
+        <div class="modal-body" style="padding-top:0px; padding-bottom:0px">
+            <div class="row">
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_node_num">NODE</label>
+                    <input type="number" class="form-control" id="pmModal_node_num" disabled>
+                </div>
+                    
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_slot_num">SLOT</label>
+                    <input type="number" class="form-control" id="pmModal_slot_num" disabled>
+                </div>
+    
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_pnum_num">PORT_NUM</label>
+                    <input type="number" class="form-control" id="pmModal_pnum_num" disabled>
+                </div>   
+    
+                <div class="col-sm-3 modifyPadding">
+                    <label for="pmModal_ptyp_sel">PORT_TYP</label>
+                    <select class="form-control" id="pmModal_ptyp_sel" disabled>
+                        <option></option>
+                    </select>
+                </div>
+                    
+                <div class="col-sm-3 modifyPadding">
+                    <label for="pmModal_psta_sel">PSTA</label>
+                    <select class="form-control" id="pmModal_psta_sel" disabled>
+                        <option></option>
+                    </select>
+                </div>
+    
+                <!-- ------------------------------------------------ -->
+                <div class="col-sm-6 modifyPadding">
+                    <label for="pmModal_fac_txt">FAC_ID</label>
+                    <input type="text" class="form-control" id="pmModal_fac_txt">
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_ftyp_txt">FAC_TYP</label>
+                    <input type="text" class="form-control" id="pmModal_ftyp_txt">
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_ort_txt">ORT</label>
+                    <input type="text" class="form-control" id="pmModal_ort_txt">
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <label for="pmModal_spcfnc_txt">SPCFNC</label>
+                    <input type="text" class="form-control" id="pmModal_spcfnc_txt">
+                </div>
+                
+                <!-- ------------------------------------------------ -->
+                <div class="col-sm-3 modifyPadding" > 
+                    <label for="pmModal_act_txt">ACTION</label>    
+                    <input type="text" class="form-control" id="pmModal_act_txt" readonly>
+                </div> 
+                <div class="col-sm-6 modifyPadding">
+                    <button id="pmModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    <label id="pmModal_result_lbl" style="color:red"></label>
+                </div>
+     
+                
+                <div id="pmModal_displaytbl" class="col-sm-12" style="border-radius: 10px;border: 2px solid #EDEDED; padding:5px;">
+                                        
+                    <div class="col-sm-8 modifyPadding">
+                        <label for="pmModal_fac2_txt">FAC_ID</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="pmModal_fac2_txt" >
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="pmModal_ftyp2_sel">FAC_TYP</label>
+                        <select class="form-control" id="pmModal_ftyp2_sel">
+                            <option value=""></option>
+                            <option value="CP">CP</option>
+                            <option value="OE">OE</option>
+                            <option value="DSL">DSL</option>
+                            <option value="ME">ME</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="pmModal_findFac_btn"></label>
+                        <button type="button" class="btn btn-primary" id="pmModal_findFac_btn">View</button>
+                    </div>
+                   
+                    <!-- <div class="col-sm-6 modifyPadding">
+						<label id="pmModal_info_lbl"></label>
+                    </div> -->
+                    <div class="col-sm-12" style="padding-left:5px; padding-right:5px">
+                        <div style="float:left;">
+                            <b>LIST OF FACILITIES:</b>
+                        </div>
+                        <div style="float:right;">
+                            <a  id="previousFacModal">Previous</a> |
+                            <a  id="nextFacModal">Next</a>
+                            &nbsp&nbsp&nbsp <label id="pmModal_index_lbl"></label>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="col-sm-12 modifyPadding">
+                        <table class="table table-fixed">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">FAC_ID</th>
+                                    <th style="width:15%">FAC_TYP</th>
+                                    <th style="width:15%">ORT</th>
+                                    <th style="width:20%">SPCFNC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pmModal_tbl" style="height:150px">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- ------------------------------------------------- -->
+            </div>
+            
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+///-----------------PORT MAP--------------------------------------
+
+var pm = {
+    node:           $("#pm_node_num"),
+    slot:           $("#pm_slot_num"),
+    ptyp:           $("#pm_ptyp_sel"),
+    pnum:           $("#pm_pnum_num"),
+    port:           $("#pm_port_txt"),
+    psta:           $("#pm_psta_sel"),
+    fac:            $("#pm_fac_txt"),
+    ckid:           $("#pm_ckid_txt"),  //this id is for a text field, perhaps btn is not appropriate
+    tn:             $("#pm_tn_cbx"),
+    act:            $("#pm_act_sel"),
+    portId:         $("#pm_portId_num"),
+    facId:          $("#pm_facId_num"),
+    findPortBtn:    $("#pm_findPort_btn"), 
+    findFacBtn:     $("#pm_findFac_btn"),
+    cancelBtn:      $("#pm_cancel_btn"),
+    findCkidBtn:    $("#pm_findCkid_btn"),
+    prevBtn:        $("#pm_prev_btn"),
+    nextBtn:        $("#pm_next_btn"),
+    indexLbl:       $("#pm_index_lbl"),
+    tbl: {
+        body:       $("#pm_tbl"),
+        index:      0,
+        maxIndex:   0,  
+        headers: {
+            port:       $("#pm_PORT_tbl"),
+            psta:       $("#pm_PSTA_tbl"),
+            fac_id:     $("#pm_FAC_ID_tbl"),
+            ftyp:       $("#pm_FTYP_tbl"),
+            ort:        $("#pm_ORT_tbl"),
+            spcfnc:     $("#pm_SPCFNC_tbl"),
+            ckid:       $("#pm_CKID_tbl"),
+        }
+    },
+
+    headers: {
+        port:       true,
+        psta:       true,
+        fac_id:     true,
+        ftyp:       true,
+        ort:        true,
+        spcfnc:     true,
+        ckid:       true,
+    },
+
+    tblRows:        [],
+
+    
+    //--------------------PM OBJ FUNCTIONS--------------------//
+    start: function() {
+        pm.clearForm();
+        pm.sortHeaderEvents();
+        // pm.queryPort("query");    
+    },
+    
+    loadTable: function(index) {
+        var startIndex = (index - 1) * 50;
+        var stopIndex = index * 50;
+        var len = pm.tblRows.length;
+    
+        if (len >= startIndex) {
+            pm.tbl.body.empty();
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {
+                if (pm.tblRows[i].fac  ==  null) {
+                    pm.tblRows[i].fac = "";
+                }
+                if (pm.tblRows[i].ckt  ==  null) {
+                    pm.tblRows[i].cktid = "";
+                }
+                a.push('<tr> <td style="display:none">'+ pm.tblRows[i].id + '</td>') 
+                a.push('<td style="display:none">'     + pm.tblRows[i].fac_id + '</td>')   
+                a.push('<td style="display:none">'     + pm.tblRows[i].node + '</td>');
+                a.push('<td style="display:none">'     + pm.tblRows[i].slot + '</td>');
+                a.push('<td style="display:none">'     + pm.tblRows[i].pnum + '</td>');
+                a.push('<td style="display:none">'     + pm.tblRows[i].ptyp + '</td>');
+                a.push('<td style="width:10%">'        + pm.tblRows[i].port + '</td>');
+                a.push('<td style="width:10%">'        + pm.tblRows[i].psta + '</td>');
+                a.push('<td style="width:25%">'        + pm.tblRows[i].fac  + '</td>');
+                a.push('<td style="width:15%">'        + pm.tblRows[i].ftyp  + '</td>');
+                a.push('<td style="width:10%">'        + pm.tblRows[i].ort  + '</td>');
+                a.push('<td style="width:10%">'        + pm.tblRows[i].spcfnc  + '</td>');
+                a.push('<td style="width:20%">'        + pm.tblRows[i].ckid + '</td></tr>');
+            }
+            pm.tbl.body.html(a.join(""));
+            
+            if (len == 0) 
+                pm.indexLbl.text("(total:" + len + ")") ;
+            else
+                pm.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        }   
+    },
+    
+    populateModal: function() {
+        pmModal.node.val( pm.node.val());
+        pmModal.slot.val( pm.slot.val());
+        pmModal.pnum.val( pm.pnum.val());
+        pmModal.ptyp.val( pm.ptyp.val());
+        pmModal.psta.val( pm.psta.val());
+        pmModal.fac.val( pm.fac.val());
+        pmModal.act.val( pm.act.val()); 
+    },
+    
+    clearForm: function() {
+        pm.node.val("");
+        pm.slot.val("");
+        pm.pnum.val("");
+        pm.ptyp.val("");
+        pm.psta.val("");
+        pm.port.val("");
+        pm.fac.val("");
+        pm.ckid.val("");
+        pm.portId.val("");
+        pm.facId.val("");
+        pm.act.val("");
+    },
+    
+    //--------------------PM AJAX FUNCTIONS--------------------//
+    
+    queryPort: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPortmap",
+            act:	action,
+            user:	$("#main_currentUser").text(),
+            node:	pm.node.val(),
+            slot:	pm.slot.val(),
+            pnum:	pm.pnum.val(),
+            ptyp:	pm.ptyp.val(),
+            psta:	pm.psta.val(),
+            port:   pm.port.val().toUpperCase(),
+            fac:	pm.fac.val().toUpperCase(),
+            fac_id:	pm.facId.val(),
+            port_id:pm.portId.val(),
+            ckid:   pm.ckid.val().toUpperCase()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length  ===  0) {
+                    if (action != 'query')
+                        alert("No record found");
+                }
+                else {
+                    pm.tbl.index = 0;
+                    pm.tblRows = obj.rows;
+                    var len = pm.tblRows.length; 
+                    pm.tbl.maxIndex = Math.ceil(len / 50.0);
+                    pm.tbl.index++;
+                    pm.loadTable(pm.tbl.index);
+                }
+            }
+        });
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in pm.tbl.headers) {
+            pm.tbl.headers[elem].click(function() {
+                if (pm.tblRows.length != 0) {
+                    if (pm.headers.elem) {
+                        pm.tblRows = pm.tblRows.sort(pm.dynamicSort(`${elem}`));
+                        pm.headers.elem = false;
+                    }
+                    else {
+                        pm.tblRows = pm.tblRows.sort(pm.dynamicSort(`-${elem}`));
+                        pm.headers.elem = true;
+                    }
+                    pm.loadTable(pm.tbl.index);
+                }
+            });
+        }
+    },
+}
+
+var pmModal = {
+    modal:         $("#portmapModal"),
+    node:          $("#pmModal_node_num"),
+    slot:          $("#pmModal_slot_num"),
+    pnum:          $("#pmModal_pnum_num"),
+    ptyp:          $("#pmModal_ptyp_sel"),
+    psta:          $("#pmModal_psta_sel"),
+    fac:           $("#pmModal_fac_txt"),
+    ftyp:          $("#pmModal_ftyp_txt"),
+    ort:           $("#pmModal_ort_txt"),
+    spcfnc:        $("#pmModal_spcfnc_txt"),
+    act:           $("#pmModal_act_txt"),
+    submitBtn:     $("#pmModal_submit_btn"),
+    resultLbl:     $("#pmModal_result_lbl"),
+    displayTbl:    $("#pmModal_displaytbl"),
+    fac2:          $("#pmModal_fac2_txt"),
+    ftyp2:         $("#pmModal_ftyp2_sel"),
+    findFacBtn:    $("#pmModal_findFac_btn"),
+    infoLbl:       $('#pmModal_info_lbl'),         //does not appear anywhere else besides html pmModal
+    prevFacBtn:    $("#previousFacModal"),         //not seen in pmModal.js yet
+    nextFacBtn:    $("#nextFacModal"),             //not seen in pmModal.js yet
+    indexLbl:      $("#pmModal_index_lbl"),
+    tbl: {
+        body:      $("#pmModal_tbl"),
+        index:     0,
+        maxIndex:  0,
+    },
+    tblRows:       [],
+
+    loadTable: function(index) {   
+       
+        var startIndex  =   (index - 1) * 50;
+        var stopIndex   =   index * 50;
+        var len         =   pmModal.tblRows.length;
+        if (len >= startIndex) {
+            pmModal.tbl.body.empty();
+            if (len < stopIndex) {
+                stopIndex = len;
+            }          
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="display:none">' + pmModal.tblRows[i].id     + '</td>')  
+                a.push('<td style="width:50%">'         + pmModal.tblRows[i].fac    + '</td>');
+                a.push('<td style="width:15%">'         + pmModal.tblRows[i].ftyp   + '</td>');
+                a.push('<td style="width:15%">'         + pmModal.tblRows[i].ort    + '</td>');
+                a.push('<td style="width:20%">'         + pmModal.tblRows[i].spcfnc + '</td></tr>');
+            }
+            pmModal.tbl.body.html(a.join(""));
+            pmModal.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex);
+        } 
+    },
+
+    clearForm: function() {
+        pmModal.node.val("").change();
+        pmModal.slot.val("").change();
+        pmModal.pnum.val("").change();
+        pmModal.ptyp.val("").change();
+        pmModal.psta.val("").change();
+        pmModal.fac.val("");
+        
+        pmModal.ftyp.val("");
+        pmModal.ort.val("");
+        pmModal.act.val("");
+        pmModal.spcfnc.val("");
+        pmModal.submitBtn.prop('disabled',true);
+        
+        pmModal.tbl.body.empty();
+        pmModal.indexLbl.text("");
+        pmModal.resultLbl.text("");
+    },
+    
+    disableFacForm: function() {
+        pmModal.fac.prop('disabled', true);
+        pmModal.ftyp.prop('disabled', true);
+        pmModal.ort.prop('disabled', true);
+        pmModal.spcfnc.prop('disabled', true);
+    },
+
+    enableFacForm: function(){
+        pmModal.fac.prop('disabled', false);
+        pmModal.ftyp.prop('disabled', false);
+        pmModal.ort.prop('disabled', false);
+        pmModal.spcfnc.prop('disabled', false);
+    },
+    
+    //query: function(action) {
+    submit: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPortmap",
+            act:	action,
+            user:	$('#main_currentUser').text(),
+            node:	pmModal.node.val(),
+            slot:	pmModal.slot.val(),
+            pnum:	pmModal.pnum.val(),
+            ptyp:	pmModal.ptyp.val(),
+            port:   pmModal.node.val() + '-' + pmModal.slot.val() + '-' + pmModal.ptyp.val().toUpperCase() + '-' + pmModal.pnum.val(),
+            psta:	pmModal.psta.val(),
+            fac:	pmModal.fac.val(),
+            ftyp:   pmModal.ftyp.val(),
+            ort:    pmModal.ort.val(),
+            spcfnc: pmModal.spcfnc.val(),
+            fac_id:	pm.facId.val(),
+            port_id:pm.portId.val(),
+            ckt:    ""
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                pm.tbl.index    = 0;
+                pm.tblRows      = obj.rows;
+                var len         = pm.tblRows.length; 
+                pm.tbl.maxIndex = Math.ceil(len / 50.0);
+                pm.tbl.index++;
+                pm.loadTable(pm.tbl.index);
+                alert(obj.rslt + " - " + obj.reason);
+                pmModal.submitBtn.prop('disabled', true);
+                pmModal.modal.modal('hide');
+            }
+        });
+    },
+    
+    // USED FOR FIND BTN IN MODAL
+    queryFac: function() {
+        $.post(ipcDispatch,
+        {    
+            api:    "ipcFacilities",
+            user:	$('#main_currentUser').text(),
+            act:    'findFac',
+            fac_id: "",
+            fac:    pmModal.fac2.val().toUpperCase(),
+            ftyp:   pmModal.ftyp2.val(),
+            ort:    "",
+            spcfnc: ""
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No record found");
+                }
+                else {
+                    pmModal.tbl.body.empty();
+                    pmModal.tblRows = [];
+                    pmModal.tbl.index = 0;
+                    var len = obj.rows.length; 
+                
+                    //Filter only FAC with no Port
+                    for (var i = 0; i < len; i++) {
+                        if (obj.rows[i].port  == "") {
+                            pmModal.tblRows.push(obj.rows[i]);
+                        }
+                    }
+                    pmModal.tbl.maxIndex = Math.ceil(len / 50.0);
+                    pmModal.tbl.index++;           
+                    pmModal.loadTable(pmModal.tbl.index);
+                }  
+            } 
+        });
+    },
+    
+    //USED FOR DISPLAYING TABLE IN MODAL
+    queryAvailFac: function() {
+        $.post(ipcDispatch,
+    	{
+            api:    "ipcFacilities",
+    		act:	"findAvailFac",
+            user:	$('#main_currentUser').text()
+        },
+    	function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                pmModal.tblRows     = [];
+                pmModal.tbl.index   = 0;
+                var len = obj.rows.length; 
+            
+                //Filter only FAC with no Port
+                for (var i=0;i<len;i++) {
+                    if (obj.rows[i].port  == "") {
+                        pmModal.tblRows.push(obj.rows[i]);
+                    }
+                }
+                pmModal.tbl.maxIndex = Math.ceil(len/50.0);
+                pmModal.tbl.index++;           
+                pmModal.loadTable(pmModal.tbl.index);
+            }
+        });
+    },
+}
+//  -------------------------PM Click Events-------------------------
+
+pm.cancelBtn.click( function() {
+    pm.clearForm();
+    // pm.queryPort("query");
+    pm.tbl.body.empty();
+    pm.indexLbl.text("");
+})
+
+pm.findFacBtn.click( function() {
+    pm.queryPort("findFac");
+})
+
+
+pm.findCkidBtn.click( function() {
+    if (pm.tn.is(':checked')) {
+        var ckid = pm.ckid.val();
+        var telnum;
+        if ((telnum = getTN(ckid)) === false) {
+            var d = ckid.split('-');
+            if (d.length != 3 ||
+                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+            {
+                alert ("CKID: INVALID TN FORMAT");
+                return;
+            }
+            
+            telnum = ckid;
+        }
+        pm.ckid.val(telnum);
+    }
+    
+    pm.queryPort("findCkid");
+});
+
+pm.findPortBtn.click( function() {
+    // if (pm.ptyp.val() != "") {
+    //     pm.port.val('');
+    // }
+    pm.queryPort("findPort");
+});
+
+pm.nextBtn.click( function() {
+    if (pm.tbl.index < pm.tbl.maxIndex) {
+        pm.tbl.index++;
+        pm.loadTable(pm.tbl.index);
+    }
+});
+
+pm.prevBtn.click( function() {
+    if (pm.tbl.index > 1) {
+        pm.tbl.index--;
+        pm.loadTable(pm.tbl.index);   
+    }
+})
+
+
+
+$(document).on("click","#pm_tbl tr", function() {
+    var dataRow = $(this).children("td").map( function() {
+        return $(this).text(); 
+    }).get();
+    
+    //Populate the information 
+    pm.portId.val(dataRow[0]).change();
+    pm.facId.val(dataRow[1]).change();
+    pm.node.val(dataRow[2]).change();
+    pm.slot.val(dataRow[3]).change();
+    pm.pnum.val(dataRow[4]).change();
+    pm.ptyp.val(dataRow[5]).change();
+    pm.port.val(dataRow[6]).change();
+    pm.psta.val(dataRow[7]).change();
+    pm.fac.val(dataRow[8]).change();
+    pm.ckid.val(dataRow[12]).change();
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows
+    
+});
+
+
+pm.act.change(function() {
+    if (pm.act.val()  ==  "MAP") {
+        if (pm.portId.val() > 0) {
+            if (pm.facId.val() > 0) {
+                alert("This PORT is already MAPPED");
+                pm.act.val("");
+			}
+			else {
+				pmModal.clearForm(); 
+                pmModal.enableFacForm();
+				pm.populateModal();
+				pmModal.submitBtn.prop('disabled',false);
+				pmModal.displayTbl.show();
+				pmModal.queryAvailFac();
+				pmModal.modal.modal();
+			}
+        }
+        else {
+            alert("Please select a PORT from LIST OF PORTS");
+			pm.act.val("");
+        }
+    }
+    else if (pm.act.val()  ==  "UNMAP") {
+        if (pm.portId.val() > 0) {
+			if (pm.facId.val() > 0) {
+				pmModal.clearForm(); 
+                pmModal.disableFacForm();
+				pm.populateModal();
+				pmModal.submitBtn.prop('disabled',false);
+				pmModal.displayTbl.hide();
+				pmModal.modal.modal();
+			}
+			else {
+				alert("This PORT has not been MAPPED");
+				pm.act.val("");
+			}	  
+        }
+        else {
+            alert("Please select a PORT from LIST OF PORTS");
+			pm.act.val("");
+        }      
+    }
+});
+
+// --------------------------PMMODAL Click Events-------------------
+
+pmModal.submitBtn.click(function() {
+    if (pmModal.act.val() == "MAP") {
+        pmModal.submit('MAP');
+    } 
+    else if (pmModal.act.val() == "UNMAP") {
+        pmModal.submit('UNMAP');
+    }
+})
+
+pmModal.nextFacBtn.click( function() {
+    if (pmModal.tbl.index < pmModal.tbl.maxIndex) {
+        pmModal.tbl.index++;
+        pmModal.loadTable(pmModal.tbl.index);
+    }
+})
+
+pmModal.prevFacBtn.click( function() {
+    if (pmModal.tbl.index > 1) {
+        pmModal.tbl.index--;
+        pmModal.loadTable(pmModal.tbl.index);   
+    }
+})
+
+pmModal.findFacBtn.click(pmModal.queryFac);
+
+
+$(document).on("click","#pmModal_tbl tr", function() {
+    var dataRow = $(this).children("td").map( function() {
+        return $(this).text(); 
+    }).get();
+    
+    //Populate the information 
+    pm.facId.val(dataRow[0]).change();
+    pmModal.fac.val(dataRow[1]).change();
+    pmModal.ftyp.val(dataRow[2]).change();
+    pmModal.ort.val(dataRow[3]).change();
+    pmModal.spcfnc.val(dataRow[4]).change();
+	pmModal.submitBtn.prop('disabled',false);
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows
+    
+});
+
+pmModal.modal.on("hidden.bs.modal", function(){
+    // if ($('.active.tab-pane').is("#portmap")) {
+    //     alert('portmap page')
+    // }
+    if ($('.active.tab-pane').is("#sysview")) {
+        sysview.queryX(sysview.part);
+        sysview.queryY(sysview.part);
+    }
+    pm.clearForm
+});      //look into
+
+</script>
+
+

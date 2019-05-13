@@ -1,0 +1,541 @@
+<div id="bkup" class="tab-pane fade in">
+    <h4>BACKUP / RESTORE</h4>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="col-sm-12 modifyPadding">
+                <div class="col-sm-3 modifyPadding">
+                    <label for="bkup_user_txt">USER</label>
+                    <input type="text" class="form-control" id="bkup_user_txt" readonly>
+                </div>
+                <div class="col-sm-9 modifyPadding">
+                    <label for="bkup_name_txt">BACKUP FILE NAME</label>
+                    <input type="text" class="form-control" id="bkup_name_txt" readonly>
+                </div>
+
+                <div class="col-sm-2 modifyPadding">
+                    <label for="bkup_type_txt">TYPE</label>
+                    <input type="text" class="form-control" id="bkup_type_txt" readonly>
+                </div>
+
+                <div class="col-sm-6 modifyPadding">
+                    <label for="bkup_date">DATE</label>
+                    <input type="datetime" class="form-control" id="bkup_date" readonly>
+                </div>
+
+                <!-- <div class="col-sm-12 modifyPadding">
+                    <label for="bkup_detail_txt">DETAILS</label>
+                    <textarea id="bkup_detail_txt" class="form-group" style="width:100%; min-height: 100px;" readonly></textarea>
+                </div> -->
+            </div>
+            <div class="col-sm-4 modifyPadding">
+                <label for="bkkup_act_sel">ACTION</label>
+                <select id="bkup_act_sel" class="form-control">
+                    <option value=""></option>
+                    <option value="MANUAL">BACKUP MANUALLY</option>
+                    <option value="UPLOAD">UPLOAD BACKUP FILE</option>
+                    <option value="DELETE">DELETE BACKUP FILE</option>
+                    <option value="RESTORE">RESTORE DATABASE</option>
+                </select>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" id="bkup_id_num" style="width:50px;">
+
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF BACKUPs:</b>
+                </div>
+                <div style="float:right;">
+                    <a id="bkup_previous">Previous</a> |
+                    <a id="bkup_next">Next</a>
+                    &nbsp&nbsp&nbsp
+                    <label id="bkup_index_lbl"></label>
+                </div>
+
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">USER</th>
+                                <th style="width:20%">FNAME</th>
+                                <th style="width:15%">TYPE</th>
+                                <th style="width:20%">PATH</th>
+                                <th style="width:30%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bkup_tbl">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bkupModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">BACKUP</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label id="bkupModal_instruction_lbl">LET'S PRESS THE SUBMIT BUTTON TO START THE ACTION</label>
+                    <div id="bkupModal_upload" class="col-sm-12 modifyPadding">
+                        <h4>CHOOSE THE BACKUP FILE FILE FROM YOUR COMPUTER:</h4>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <input type="file" data-icon="false" id="bkupModal_file" accept=".sql">
+                            </div>
+                        </div> 
+
+                    </div>
+                    
+                    <div id="bkupModal_info" class="col-sm-12 modifyPadding">
+                        <div class="col-sm-3 modifyPadding">
+                            <label for="bkupModal_user_txt">USER</label>
+                            <input type="text" class="form-control" id="bkupModal_user_txt" readonly>
+                        </div>
+                        <div class="col-sm-9 modifyPadding">
+                            <label for="bkupModal_name_txt">BACKUP FILE NAME</label>
+                            <input type="text" class="form-control" id="bkupModal_name_txt" readonly>
+                        </div>
+            
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="bkupModal_type_txt">TYPE</label>
+                            <input type="text" class="form-control" id="bkupModal_type_txt" readonly>
+                        </div>
+            
+                        <div class="col-sm-6 modifyPadding">
+                            <label for="bkupModal_date_txt">DATE</label>
+                            <input type="datetime" class="form-control" id="bkupModal_date" readonly>
+                        </div>
+                        <!-- <div class="col-sm-12 modifyPadding">
+                            <label for="bkupModal_detail_txt">DETAILS</label>
+                            <textarea id="bkupModal_detail_txt" class="form-group" style="width:100%; min-height: 50px;" readonly></textarea>
+                        </div> -->
+
+                        <div id="bkupModal_downloadLink" class="col-sm-12 modifyPadding">
+                            <label for="bkupModal_bkupLink_lbl">Link of backup file: </label>
+                            <span id="bkupModal_bkupLink"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 modifyPadding">
+                        <div class="col-sm-3 modifyPadding">
+                            <label for="bkupModal_act_txt">ACTION</label>
+                            <input type="text" class="form-control" id="bkupModal_act_txt" readonly>
+                        </div>
+    
+                        <div class="col-sm-7 modifyPadding">
+                            <button id="bkupModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                            <button id="bkupModal_close_btn" type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+                        
+                            <label id="bkupModal_result_lbl" style="color:red"></label>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+// BK OBJ //
+var bkup = {
+    id:         $("#bkup_id_num"),
+    bkuser:     $("#bkup_user_txt"),
+    dbfile:     $("#bkup_name_txt"),
+    type:       $("#bkup_type_txt"),
+    date:       $("#bkup_date"),
+    // detail:     $("#bkup_detail_txt"),
+    act :       $("#bkup_act_sel"),
+    indexLbl:   $("#bkup_index_lbl"),
+    tbl :       {
+                body: $("#bkup_tbl"),
+                index:      0,
+                maxIndex:   0
+                },       
+    tblRows:    [],
+   
+    start: function() {
+        bkup.clearForm();
+        bkup.query("query");   
+    },
+
+    clearForm: function() {
+        bkup.id.val("");
+        bkup.bkuser.val("");
+        bkup.dbfile.val("");
+        bkup.type.val("");
+        bkup.date.val("");
+        // bkup.detail.val("");
+        bkup.act.val("");
+    },
+
+    displayTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = bkup.tblRows.length;
+      
+        if (len >= startIndex) {
+          if (len < stopIndex) {
+            stopIndex = len;
+          }
+          bkup.tbl.body.empty();
+          var a = [];
+          for (var i = 0; i < stopIndex; i++) {
+            a.push('<tr> <td style="display:none">' + bkup.tblRows[i].id + "</td>");
+            a.push('<td style="width:15%">' + bkup.tblRows[i].user + "</td>");
+            a.push('<td style="width:20%">' + bkup.tblRows[i].dbfile + "</td>");
+            a.push('<td style="width:15%">' + bkup.tblRows[i].bktyp + "</td>");
+            a.push('<td style="width:20%"><a href="' + bkup.tblRows[i].dbpath +'" download>Download</a></td>');
+            a.push('<td style="width:30%">' + bkup.tblRows[i].date + "</td></tr>");
+          }
+          bkup.tbl.body.html(a.join(""));
+          bkup.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex);
+        }
+    },
+
+    // Ajax Functions
+    query: function(action) {
+        
+        $.post(coQueryBkup,
+        {     
+            act:        action,
+            user:       $("#main_currentUser").text(),
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "query") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                else {
+                    bkup.tblRows = obj.rows;
+                    bkup.tbl.index = 0;
+                    var len = bkup.tblRows.length;
+                    bkup.tbl.maxIndex = Math.ceil(len / 100.0);
+                    bkup.tbl.index++;
+                    bkup.displayTable(bkup.tbl.index)
+                }
+            } 
+        })
+    }
+
+}
+
+// bkupModal OBJ //
+var bkupModal = {
+    modal:      $("#bkupModal"),
+    
+    bkuser:     $("#bkupModal_user_txt"),
+    dbfile:     $("#bkupModal_name_txt"),
+    type:       $("#bkupModal_type_txt"),
+    date:       $("#bkupModal_date"),
+    // detail:     $("#bkupModal_detail_txt"),
+    fileValue:  $("#bkupModal_file"),
+
+    instruct:   $("#bkupModal_instruction_lbl"),
+    uploadInfo: $("#bkupModal_upload"),
+    bkinfo:     $("#bkupModal_info"),
+    linkDisplay:$("#bkupModal_downloadLink"),
+
+    act :       $("#bkupModal_act_txt"),
+    link:       $("#bkupModal_bkupLink"),
+    result:     $("#bkupModal_result_lbl"),
+    submitBtn:  $("#bkupModal_submit_btn"),
+    closeBtn:   $("#bkupModal_close_btn"),
+    freeze:    false,
+
+    clearForm: function() {
+        
+        bkupModal.bkuser.val("");
+        bkupModal.dbfile.val("");
+        bkupModal.type.val("");
+        bkupModal.date.val("");
+        bkupModal.fileValue.val("");
+
+        bkupModal.act.val('');
+        bkupModal.result.text('');
+        bkupModal.link.empty();
+        bkupModal.submitBtn.prop("disabled", false);
+        bkupModal.freeze = false; 
+    },
+
+    populateModal: function() {
+        
+        bkupModal.bkuser.val(bkup.bkuser.val());
+        bkupModal.dbfile.val(bkup.dbfile.val());
+        bkupModal.type.val(bkup.type.val());
+        bkupModal.date.val(bkup.date.val());
+        // bkupModal.detail.val(bkup.detail.val())
+    },
+
+    query: function(action) {
+        if(action == "RESTORE") {
+            $("#freeze").show();
+            bkupModal.freeze = true;
+            var interval = setInterval(function(){
+                if (bkupModal.freeze == true) {
+                    $("#freeze").show();
+                }
+                else {
+                    $("#freeze").hide();
+                    clearInterval(interval); 
+                }
+              },500);
+        }
+        $.post(coQueryBkup,
+        {     
+            act:        action,
+            user:       $("#main_currentUser").text(),
+            id:         bkup.id.val(),
+            dbfile:     bkupModal.dbfile.val()
+        },
+        function (data, status) { 
+            //unfreeze the website
+            if (action == "RESTORE") {
+                bkupModal.freeze = false;
+                
+            }   
+
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alarm(obj.reason);
+            }
+            else {
+                //Disable the submit button
+                bkupModal.submitBtn.prop("disabled", true);
+
+                if(action != "RESTORE") {
+                    if (obj.rows.length === 0) {
+                        if (action != "query") {
+                            alarm("No Record Found");
+                            return;
+                        }
+                    }
+                    else {
+                        alarm(obj.rslt);
+                       
+                        bkup.tblRows = obj.rows;
+                        var len = bkup.tblRows.length;
+
+                        if(action == "MANUAL") {
+                            //display info in the modal form
+                            bkupModal.bkuser.val(bkup.tblRows[len-1].user);
+                            bkupModal.dbfile.val(bkup.tblRows[len-1].dbfile);
+                            bkupModal.type.val(bkup.tblRows[len-1].bktyp);
+                            bkupModal.date.val(bkup.tblRows[len-1].date);
+                            // bkupModal.detail.val(bkup.tblRows[len-1].detail)
+                            bkupModal.link.html('<a href="'+bkup.tblRows[len-1].dbpath +'" download>Download</a>');
+                            bkupModal.bkinfo.show("slow");
+                        }
+                        bkup.tbl.index = 0;
+                        bkup.tbl.maxIndex = Math.ceil(len / 100.0);
+                        bkup.tbl.index++;
+                        bkup.displayTable(bkup.tbl.index)
+    
+                    }
+                }
+                else {
+                    alarm(obj.rslt);
+                    
+                }
+              
+            } 
+        });
+    },
+
+
+    upload: function() {
+        //must use this method, don't use jquery in this command
+        if(bkupModal.fileValue.val() == "") {
+            alert("There is no file uploaded!")
+            return;
+        }
+        var file= document.getElementById('bkupModal_file').files[0];
+        if (file.size > 2097152) {
+            alarm("The file should be lower than 2MB");
+        }
+        else {
+            var data = new FormData();
+            data.append("user",$("#main_currentUser").text())
+            data.append("act","UPLOAD")
+            data.append("file",file)   
+
+
+            $.post({
+                url: coQueryBkup,
+                data: data,
+                processData: false,
+                contentType: false,
+            })
+            .done(function(data, status){
+                var obj = JSON.parse(data);
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+
+                    //Disable the submit button
+                    bkupModal.submitBtn.prop("disabled", true);
+
+                    if (obj.rows.length === 0) {
+                        alert("There is no backup file in database!");
+                    }
+                    else {
+                        bkup.tblRows = obj.rows;
+                        var len = bkup.tblRows.length;
+
+                        //display info in the modal form
+                        bkupModal.bkuser.val(bkup.tblRows[len-1].user);
+                        bkupModal.dbfile.val(bkup.tblRows[len-1].dbfile);
+                        bkupModal.type.val(bkup.tblRows[len-1].bktyp);
+                        bkupModal.date.val(bkup.tblRows[len-1].date);
+                        // bkupModal.detail.val(bkup.tblRows[len-1].detail)
+                        bkupModal.link.html('<a href="http://192.168.1.252/IPC_FrontEnd' + bkup.tblRows[len-1].dbpath +'" download>Download</a>');
+                        alarm(obj.rslt);
+
+                        bkupModal.bkinfo.show("slow");
+
+                        bkup.tbl.index = 0;
+                        bkup.tbl.maxIndex = Math.ceil(len / 100.0);
+                        bkup.tbl.index++;
+                        bkup.displayTable(bkup.tbl.index);
+                    }  
+                } 
+            });
+
+        }
+    }
+    
+}
+
+
+// BKUP Events Handling
+
+$(document).on("click","#bkup_tbl tr",function(){
+
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+    bkup.id.val(dataRow[0]);
+    bkup.bkuser.val(dataRow[1]);
+    bkup.dbfile.val(dataRow[2]);
+	bkup.type.val(dataRow[3]);
+	bkup.date.val(dataRow[5]);
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+$(document).on('change', '[id = bkup_act_sel]', function () {
+    if (bkup.act.val()  ==  "MANUAL") {
+
+        bkupModal.clearForm();
+
+        bkupModal.instruct.show();
+        bkupModal.uploadInfo.hide();
+        bkupModal.bkinfo.hide();
+        bkupModal.linkDisplay.show();
+
+        bkupModal.act.val(bkup.act.val());
+        
+        bkupModal.modal.modal();
+    }
+    else if (bkup.act.val() == "UPLOAD") {
+
+        bkupModal.clearForm();
+
+        bkupModal.instruct.hide();
+        bkupModal.uploadInfo.show();
+        bkupModal.bkinfo.hide();
+        bkupModal.linkDisplay.hide();
+
+        bkupModal.act.val(bkup.act.val());
+        bkupModal.modal.modal();
+    }
+    else if (bkup.act.val() == "DELETE") {
+        if(bkup.id.val() != "") {
+            bkupModal.clearForm();
+
+            bkupModal.instruct.hide();
+            bkupModal.uploadInfo.hide();
+    
+            bkupModal.populateModal();
+            bkupModal.bkinfo.show();
+            bkupModal.linkDisplay.hide();
+    
+            bkupModal.act.val(bkup.act.val());
+            bkupModal.modal.modal();
+        }
+        else {
+            alert("Lack of backup file information!");
+            bkup.clearForm();
+        }
+        
+    }
+    else if (bkup.act.val()  ==  "RESTORE") {
+        if(bkup.id.val() != "") {
+            bkupModal.clearForm();
+
+            bkupModal.instruct.hide();
+            bkupModal.uploadInfo.hide();
+    
+            bkupModal.populateModal();
+            bkupModal.bkinfo.show();
+            bkupModal.linkDisplay.hide();
+    
+            bkupModal.act.val(bkup.act.val());
+            bkupModal.modal.modal();
+        }
+        else {
+            alert("Lack of backup file information!");
+            bkup.clearForm();
+        }
+    } 
+      
+});
+
+// bkupModal Events Handling
+bkupModal.submitBtn.click(function () {
+   if(bkupModal.act.val() == "UPLOAD") {
+        bkupModal.upload();
+   }
+   else {
+        bkupModal.query(bkupModal.act.val());
+   } 
+});
+
+
+
+bkupModal.closeBtn.click(function () {
+  bkup.clearForm();
+
+});
+
+
+$("#bkupModal").on("hidden.bs.modal", function(){
+    bkup.clearForm();
+});
+
+
+
+</script>

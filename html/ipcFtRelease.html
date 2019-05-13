@@ -1,0 +1,431 @@
+<div id="releaseTable" class="tab-pane fade in">
+    <h4>Flow-Through Release Table</h4>
+    <!-- Row one for Action and buttons  -->
+    <div class="col-sm-12" style="padding-left: 0px">
+        <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+            <label for="rt_action_sel">ACTION</label>
+            <select id="rt_action_sel" class="form-control">
+                <option></option>
+                <option>ADD</option>
+                <option>DELETE</option>
+                <option>UPDATE</option>
+            </select>
+        </div>
+        <div class="col-sm-10" style="padding-left: 5px; padding-right: 5px">
+            <button class="btn btn-primary" id="rt_submit_btn">SUBMIT</button>
+            <button class="btn btn-primary" id="rt_clear_btn">CLEAR</button>
+        </div>
+    </div>
+
+
+    <!-- Table -->
+    <div class="col-sm-12" style="padding-left: 0px; padding-right: 15px">
+        <div class="panel panel-default" style="border: 0px">
+            <table class="table table-fixed col-sm-12" style="padding-left: 0px">
+                <thead style="width: 100%; padding-right: 15px">
+                    <tr>
+                        <th class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_sot_sel">SOT</label>
+                                <select style="text-align-last: center" id="rt_sot_sel" class="form-control">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_ot_sel">OT</label>
+                                <select style="text-align-last: center" id="rt_ot_sel" class="form-control">
+                                    <option></option>
+                                    <option>CD</option>
+                                    <option>CH</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_rot_sel">ROT</label>
+                                <select style="text-align-last: center" id="rt_rot_sel" class="form-control">
+                                    <option></option>
+                                    <option>CH</option>
+                                    <option>NC</option>
+                                    <option>T</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_cls_sel">CLS</label>
+                                <select style="text-align-last: center" id="rt_cls_sel" class="form-control">
+                                    <option></option>
+                                    <option>B</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_oc_sel">OC</label>
+                                <select style="text-align-last: center" id="rt_oc_sel"  class="form-control">
+                                    <option></option>
+                                    <option>BTH</option>
+                                    <option>CMB</option>
+                                    <option>UNE</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_adsr_sel">ADSR</label>
+                                <select style="text-align-last: center" id="rt_adsr_sel"  class="form-control">
+                                    <option></option>
+                                    <option>Y</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_rtAct_sel">ACT</label>
+                                <select style="text-align-last: center" id="rt_rtAct_sel"  class="form-control">
+                                    <option></option>
+                                    <option>C</option>
+                                    <option>I</option>
+                                    <option>O</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_facType_sel">FAC TYPE</label>
+                                <select style="text-align-last: center" id="rt_facType_sel"  class="form-control">
+                                    <option></option>
+                                    <option>OE</option>
+                                    <option>CP</option>
+                                    <option>ME</option>
+                                    <option>TRE</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_facId_sel">FAC ID</label>
+                                <select style="text-align-last: center" id="rt_facId_sel"  class="form-control">
+                                    <option></option>
+                                    <option>SL*</option>
+                                    <option>ADSL*</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th class="col-sm-3 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_fddInt_sel">FDD_INT</label>
+                                <select style="text-align-last: center" id="rt_fddInt_sel"  class="form-control">
+                                    <option></option>
+                                    <option>0</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_ddInt_sel">DD_INT</label>
+                                <select style="text-align-last: center" id="rt_ddInt_sel"  class="form-control">
+                                    <option></option>
+                                    <option>+1</option>
+                                    <option>0</option>
+                                    <option>-1</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_rtyp_sel">RTYPE</label>
+                                <select style="text-align-last: center" id="rt_rtyp_sel"  class="form-control">
+                                    <option></option>
+                                    <option>AUTO</option>
+                                    <option>MANUAL</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th class="col-sm-3 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_rt_sel">RT</label>
+                                <select style="text-align-last: center" id="rt_rt_sel"  class="form-control">
+                                    <option></option>
+                                    <option>01:00</option>
+                                    <option>08:00</option>
+                                    <option>13:00</option>
+                                    <option>10:00</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_jeopCond_sel">JCOND</label>
+                                <select style="text-align-last: center" id="rt_jeopCond_sel"  class="form-control">
+                                    <option></option>
+                                    <option>Hold For Call</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px"for="rt_jeop_sel">JEOP</label>
+                                <select style="text-align-last: center" id="rt_jeop_sel"  class="form-control">
+                                    <option></option>
+                                    <option>ID</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                                <button class="btn btn-primary" id="rt_find_btn">FIND</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="rt_tbl" style="height: 400px; float: none">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+var rt = {
+    act:            $("#rt_action_sel"),
+    submitBtn:      $("#rt_submit_btn"),
+    clearBtn:       $("#rt_clear_btn"),
+    findBtn:        $("#rt_find_btn"),
+    sot:            $("#rt_sot_sel"),
+    ot:             $("#rt_ot_sel"),
+    rot:            $("#rt_rot_sel"),
+    cls:            $("#rt_cls_sel"),
+    oc:             $("#rt_oc_sel"),
+    adsr:           $("#rt_adsr_sel"),
+    rtAct:          $("#rt_rtAct_sel"),
+    facType:        $("#rt_facType_sel"),
+    facId:          $("#rt_facId_sel"),
+    fddInt:         $("#rt_fddInt_sel"),
+    ddInt:          $("#rt_ddInt_sel"),
+    rtyp:           $("#rt_rtyp_sel"),
+    rt:             $("#rt_rt_sel"),
+    jCond:          $("#rt_jeopCond_sel"),
+    jeop:           $("#rt_jeop_sel"),
+    id:             "",
+    
+    tbl:    {
+        body:   $("#rt_tbl"),
+        index:  0,
+        maxIndex: 0,
+    },
+    tblRows:    [],
+
+    start: function() {
+        rt.clearForm();
+        rt.query('query');
+    },
+
+    clearForm: function() {
+        rt.sot.val("").change();
+        rt.ot.val("").change();
+        rt.rot.val("").change();
+        rt.cls.val("").change();
+        rt.oc.val("").change();
+        rt.adsr.val("").change();
+        rt.rtAct.val("").change();
+        rt.facType.val("").change();
+        rt.facId.val("").change();
+        rt.fddInt.val("").change();
+        rt.ddInt.val("").change();
+        rt.rtyp.val("").change();
+        rt.rt.val("").change();
+        rt.jCond.val("").change();
+        rt.jeop.val("").change();
+        rt.id = 0;
+    },
+
+    loadTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = rt.tblRows.length;
+    
+        if (len >= startIndex) {
+            rt.tbl.body.empty();
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {
+                if (rt.tblRows[i].sot       == "") {
+                    rt.tblRows[i].sot       = "-";
+                }
+                if (rt.tblRows[i].ot        == "") {
+                    rt.tblRows[i].ot        = "-";
+                }
+                if (rt.tblRows[i].rot       == "") {
+                    rt.tblRows[i].rot       = "-";
+                }
+                if (rt.tblRows[i].cls       == "") {
+                    rt.tblRows[i].cls       = "-";
+                }
+                if (rt.tblRows[i].oc        == "") {
+                    rt.tblRows[i].oc        = "-";
+                }
+                if (rt.tblRows[i].adsr      == "") {
+                    rt.tblRows[i].adsr      = "-";
+                }
+                if (rt.tblRows[i].act       == "") {
+                    rt.tblRows[i].act       = "-";
+                }
+                if (rt.tblRows[i].ftyp      == "") {
+                    rt.tblRows[i].ftyp      = "-";
+                }
+                if (rt.tblRows[i].fac       == "") {
+                    rt.tblRows[i].fac       = "-";
+                }
+                if (rt.tblRows[i].fdd_int   == "") {
+                    rt.tblRows[i].fdd_int   = "-";
+                }
+                if (rt.tblRows[i].dd_int    == "") {
+                    rt.tblRows[i].dd_int    = "-";
+                }
+                if (rt.tblRows[i].rtyp      == "") {
+                    rt.tblRows[i].rtyp      = "-";
+                }
+                if (rt.tblRows[i].rt        == "") {
+                    rt.tblRows[i].rt        = "-";
+                }
+                if (rt.tblRows[i].jcond     == "") {
+                    rt.tblRows[i].jcond     = "-";
+                }
+                if (rt.tblRows[i].jeop      == "") {
+                    rt.tblRows[i].jeop      = "-";
+                }
+                a.push('<tr>');
+                    a.push('<td class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].sot        + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].ot         + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].rot        + '</div>');
+                    a.push('</td>'); 
+                    a.push('<td class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].cls        + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].oc         + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].adsr       + '</div>');
+                    a.push('</td>'); 
+                    a.push('<td class="col-sm-2 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].act        + '</div>');
+                        a.push('<div class="col-sm-5 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].ftyp       + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].fac        + '</div>');
+                    a.push('</td>'); 
+                    a.push('<td class="col-sm-3 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].fdd_int    + '</div>');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].dd_int     + '</div>');
+                        a.push('<div class="col-sm-6 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].rtyp       + '</div>');
+                    a.push('</td>'); 
+                    a.push('<td class="col-sm-3 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].rt         + '</div>');
+                        a.push('<div class="col-sm-4 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].jcond      + '</div>');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">' + rt.tblRows[i].jeop       + '</div>');
+                        a.push('<div class="col-sm-2 modifyPadding" style="text-align:center; padding-right: 9px">' + " " +'</div>');
+                        a.push('<div style="display: none">' + rt.tblRows[i].id + '</div>');
+                    a.push('</td>');
+                a.push('</tr>');
+            }
+            rt.tbl.body.html(a.join(""));
+            // rt.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex);
+        }   
+    },
+
+    query: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcFtRelease",
+            act:	    action,
+            user:	    $("#main_currentUser").text(),
+            sot:        rt.sot.val(),
+            ot:         rt.ot.val(),
+            rot:        rt.rot.val(),
+            cls:        rt.cls.val(),
+            oc:         rt.oc.val(),
+            adsr:       rt.adsr.val(),
+            rtAct:      rt.rtAct.val(),
+            facType:    rt.facType.val(),
+            facId:      rt.facId.val(),
+            fddInt:     rt.fddInt.val(),
+            ddInt:      rt.ddInt.val(),
+            rtyp:       rt.rtyp.val(),
+            rt:         rt.rt.val(),
+            jCond:      rt.jCond.val(),
+            jeop:       rt.jeop.val(),
+            id:         rt.id,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length  ==  0) {
+                    alert("No record found");
+                }
+                else {
+                    rt.tbl.index = 0;
+                    rt.tblRows = obj.rows;
+                    var len = rt.tblRows.length; 
+                    rt.tbl.maxIndex = Math.ceil(len / 100.0);
+                    rt.tbl.index++;
+                    rt.loadTable(rt.tbl.index);
+                    if (action != "query") {
+                        alert(`${action} FT_RELEASE SUCCESS!`);
+                    }
+                }
+            }
+        });
+    },
+
+}
+
+// Table click event
+
+$(document).on("click","#rt_tbl tr",function() {
+    var dataRow= $(this).children("td").children('div').map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    rt.sot.val(dataRow[0]).change();
+    rt.ot.val(dataRow[1]).change();
+    rt.rot.val(dataRow[2]).change();
+    rt.cls.val(dataRow[3]).change();       
+    rt.oc.val(dataRow[4]).change();  
+    rt.adsr.val(dataRow[5]).change(); 
+    rt.rtAct.val(dataRow[6]).change(); 
+    rt.rtAct.val(dataRow[7]).change(); 
+    rt.facId.val(dataRow[8]).change(); 
+    rt.fddInt.val(dataRow[9]).change(); 
+    rt.ddInt.val(dataRow[10]).change(); 
+    rt.rtyp.val(dataRow[11]).change(); 
+    rt.rt.val(dataRow[12]).change(); 
+    rt.jCond.val(dataRow[13]).change(); 
+    rt.jeop.val(dataRow[14]).change();
+
+    rt.id = dataRow[16];
+    
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+// Row 1 Find Btn
+rt.findBtn.click(function() {
+    rt.query("query");
+});
+
+// Submit Button
+rt.submitBtn.click(function() {
+    if (rt.act.val() == "ADD") {
+        rt.query("ADD");
+        rt.act.val("");
+    }
+    else if (rt.act.val() == "UPDATE") {
+        rt.query("UPDATE");
+        rt.act.val("");
+    }
+    else if (rt.act.val() == "DELETE") {
+        rt.query("DELETE");
+        rt.act.val("");
+    }
+    else {
+        alert("please select an action");
+    }
+});
+
+// Clear Button
+rt.clearBtn.click(function() {
+    rt.clearForm();
+    rt.query('query');
+});
+
+</script>

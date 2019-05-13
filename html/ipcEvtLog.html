@@ -1,0 +1,325 @@
+<div id="evtlog" class="tab-pane fade in">
+    <h4>OLD EVENT REPORT</h4>
+   
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="col-sm-2 modifyPadding">
+                <label for="evtlog_user_txt">USER</label>
+                <input class="form-control modifyPadding" type="text" id="evtlog_user_txt">
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <label for="evtlog_function_sel">FUNCTION</label>
+                <select id="evtlog_function_sel" class="form-control">
+                    <option></option>
+                    <option>ALMADM</option>
+                    <option>BRDCST</option>
+                    <option>FACILITY</option>
+                    <option>MAINT</option>
+                    <option>MXCARD</option>
+                    <option>PATHADM</option>
+                    <option>PORTMAP</option>
+                    <option>SVCCONN</option>
+                    <option>USERS</option>
+                </select>
+
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="evtlog_event_sel">EVENT</label>
+                <select id="evtlog_event_sel" class="form-control">
+                    <option></option>
+                    <option>LOGIN</option>
+                    <option>MC_LOCK</option>
+                    <option>MC_UNLOCK</option>
+                </select>
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <label for="evtlog_date_sel">DATE</label>
+                <select id="evtlog_date_sel" class="form-control">
+                    <option></option>
+                    <option>Last 1 day</option>
+                    <option>Last 5 days</option>
+                    <option>Last 10 days</option>
+                    <option>Last 30 days</option>
+                </select>
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <button class="btn btn-primary" id="evtlog_find_btn">View</button>
+                <button class="btn btn-primary" id="evtlog_clear_btn">Clear</button>
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <label for="evtlog_detail_txt">DETAILS</label>
+                <textarea id="evtlog_detail_txt" class="form-group" style="width:100%; min-height: 355px; background-color: #F6F6F6" readonly>
+                    
+                </textarea>
+            </div>
+
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF EVENTS:</b>
+                </div>
+                <div style="float:right">
+                    <a  id="event_previous">Previous</a> |
+                    <a  id="event_next">Next</a>
+                    &nbsp&nbsp&nbsp<label id="evtlog_index_lbl"></label>
+                </div>
+            </div>
+            
+
+            <div class="col-sm-12">
+                <div class="panel panel-default">     
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">USER</th>
+                                <th style="width:20%">FNC</th>
+                                <th style="width:20%">EVT</th>
+                                <th style="width:23%">RSLT</th>
+                                <th style="width:22%">TIME</th>
+                            </tr>
+                        </thead>
+                        <tbody id="evtlog_tbl">
+                    
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // EVTLOG OBJ //
+
+var evtlog = {
+    user:           $("#evtlog_user_txt"),
+    id:             $("#event_id"),
+    fnc:            $("#evtlog_function_sel"),
+    evt:            $("#evtlog_event_sel"),
+    date:           $("#evtlog_date_sel"),
+    findBtn:        $("#evtlog_find_btn"),
+    clearBtn:       $("#evtlog_clear_btn"),
+    detail:         $("#evtlog_detail_txt"),
+    prevBtn:        $("#event_previous"),
+    nextBtn:        $("#event_next"),
+    index:          $("#evtlog_index_lbl"),
+    tbl: {
+        body:       $("#evtlog_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    fnc_brdcst:     [],
+    fnc_fac:        [],
+    fnc_portmap:    [],
+    fnc_prov:       [],
+    fnc_users:      [],
+    fnc_wc:         [],
+    fnc_almadm:     [],
+    fnc_pathadm:    [],
+    fnc_mxc:        [],
+    fnc_svc:        [],
+    fnc_maint:      [],
+
+    tblRows:        [],
+    
+    start: function() {
+        evtlog.clearForm();
+        evtlog.query('query');    
+    },
+    
+    clearForm: function() {
+        evtlog.id.val("");
+        evtlog.user.val("");
+        evtlog.fnc.val("");
+        evtlog.evt.val("");
+        evtlog.date.val("");
+        evtlog.detail.val("");
+    },
+    
+    
+    clearTable: function() {
+        evtlog.tbl.body.empty();
+    },
+    
+    displayTable: function(index) {   
+        var startIndex=(index-1)*100;
+        var stopIndex = index *100;
+        var len = evtlog.tblRows.length;
+    
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }            
+            evtlog.clearTable();
+            var a = [];
+            for (var i=startIndex; i<stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="display:none">' + evtlog.tblRows[i].id + '</td>')  
+                a.push('<td style="width:15%">'         + evtlog.tblRows[i].user + '</td>');
+                a.push('<td style="width:20%">'         + evtlog.tblRows[i].fnc + '</td>');
+                a.push('<td style="width:20%">'         + evtlog.tblRows[i].evt + '</td>');
+                a.push('<td style="width:23%">'         + evtlog.tblRows[i].rslt + '</td>');
+                a.push('<td style="display:none">'      + evtlog.tblRows[i].detail + '</td>');
+                a.push('<td style="width:22%">'         + evtlog.tblRows[i].time + '</td>');
+            }
+            evtlog.tbl.body.html(a.join(""));
+            evtlog.index.text((startIndex+1) + " - " + stopIndex + " (Total:" + len + ")");
+        } 
+    },
+    
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {
+            api:    'ipcEvtlog',     
+            act:    action,
+            user:	$('#main_currentUser').text(),
+            id:		evtlog.id.val(),
+            uname:  evtlog.user.val(),
+            fnc:    evtlog.fnc.val(),
+            evt:    evtlog.evt.val(),
+            days:   evtlog.date.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("There is no matching data!");
+                }
+                else {
+                    evtlog.tbl.index=0;
+                    evtlog.tblRows = obj.rows;
+                    var len = obj.rows.length; 
+                    evtlog.tbl.maxIndex = Math.ceil(len/100.0);
+                    evtlog.tbl.index++;
+                    evtlog.displayTable(evtlog.tbl.index);
+                }  
+            } 
+        });
+    }
+    
+    
+    
+}
+// ----------------------Click Events-----------------------------
+
+$(document).on("click","#evtlog_tbl tr",function() {
+    var dataRow= $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    evtlog.id.val(dataRow[0]).change();
+    evtlog.user.val(dataRow[1]).change();
+    evtlog.fnc.val(dataRow[2]).change();
+    evtlog.evt.val(dataRow[3]).change();       
+    evtlog.detail.val(dataRow[5]).change();  
+    evtlog.date.val(dataRow[6]).change(); 
+            
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+evtlog.findBtn.click(function() {
+    evtlog.query("query");
+})
+evtlog.clearBtn.click(function() {
+    evtlog.clearTable();
+    evtlog.clearForm();
+
+})
+
+
+
+evtlog.nextBtn.click(function() {
+    if (evtlog.tbl.index<evtlog.tbl.maxIndex) {
+        evtlog.tbl.index++;
+        evtlog.displayTable(evtlog.tbl.index);
+    }  
+})
+
+
+evtlog.prevBtn.click(function() {
+    if (evtlog.tbl.index>1) {
+        evtlog.tbl.index--;
+        evtlog.displayTable(evtlog.tbl.index);   
+    }         
+})
+
+evtlog.fnc.change(function() {
+    evtlog.evt.empty();
+    var a = [];
+    a.push('<option></option>');
+
+    // if (evtlog.fnc.val() == "PORTMAP") {
+    //     a.push('<option>MAP</option>');
+    //     a.push('<option>UNMAP</option>');
+
+    // }
+    if (evtlog.fnc.val() == "PORTMAP") {
+        for (var i=0; i<evtlog.fnc_portmap.length; i++) {
+            a.push('<option>' + evtlog.fnc_portmap[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "SVCCONN") {
+        for (var i=0; i<evtlog.fnc_svc.length; i++) {
+            a.push('<option>' + evtlog.fnc_svc[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "USERS") {
+        for (var i=0; i<evtlog.fnc_users.length; i++) {
+            a.push('<option>' + evtlog.fnc_users[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "BRDCST") {
+        for (var i=0; i<evtlog.fnc_brdcst.length; i++) {
+            a.push('<option>' + evtlog.fnc_brdcst[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "FACILITY") {
+        for (var i=0; i<evtlog.fnc_fac.length; i++) {
+            a.push('<option>' + evtlog.fnc_fac[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "ALMADM") {
+        for (var i=0; i<evtlog.fnc_almadm.length; i++) {
+            a.push('<option>' + evtlog.fnc_almadm[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "PATHADM") {
+        for (var i=0; i<evtlog.fnc_pathadm.length; i++) {
+            a.push('<option>' + evtlog.fnc_pathadm[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "MXCARD") {
+        for (var i=0; i<evtlog.fnc_mxc.length; i++) {
+            a.push('<option>' + evtlog.fnc_mxc[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "MAINT") {
+        for (var i=0; i<evtlog.fnc_maint.length; i++) {
+            a.push('<option>' + evtlog.fnc_maint[i] + '</option>');
+        }
+    }
+    else if (evtlog.fnc.val() == "WC") {
+        for (var i=0; i<evtlog.fnc_wc.length; i++) {
+            a.push('<option>' + evtlog.fnc_wc[i] + '</option>');
+        }
+    }
+
+    evtlog.evt.html(a.join(""));
+})
+
+
+</script>

@@ -1,0 +1,2392 @@
+
+<div id="maint" class="tab-pane fade in" style="position: relative;">
+    <h4>SETUP MAINTENANCE CONNECTION</h4>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-6 modifyPadding">
+                <label for="maint_ckid_txt">CKID</label>
+                <label for="maint_tn_cbx">TN:</label>
+                <input type="checkbox" id="maint_tn_cbx" checked>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="maint_ckid_txt" placeholder="123-456-7890">
+            </div>
+                
+            <div class="col-sm-2 modifyPadding">
+                <label for="maint_cls_sel">CLS</label>
+                <select class="form-control" id="maint_cls_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>BUS</option>
+                    <option>RES</option>
+                </select>
+            </div>
+        
+            <div class="col-sm-2 modifyPadding">
+                <label for="maint_adsr_sel">ADSR</label>
+                <select class="form-control" id="maint_adsr_sel" style="padding:2px 0 0 0">
+                    <option>N</option>
+                    <option>Y</option>
+                </select>
+            </div>   
+
+            <div class="col-sm-2 modifyPadding">
+                <button id="maint_findCkid_btn" style="text-align:right" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+        <!-- ----------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-6 modifyPadding">
+                <label for="maint_tktno_txt">TKTNO</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="maint_tktno_txt">
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="maint_mlo_sel">MLO</label>
+                <select class="form-control" id="maint_mlo_sel" style="padding:2px 0 0 0">
+                    <option>N</option>
+                    <option>Y</option>
+                </select>
+            </div> 
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="maint_prot_sel">PROT</label>
+                <select class="form-control" id="maint_prot_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>SSM</option>
+                    <option>SSP</option>
+                </select>
+            </div>
+
+            <!-- <div class="col-sm-4 modifyPadding"> -->
+                <!-- <label for="maint_date_date">DATE</label> -->
+                <input type="hidden" class="form-control" id="maint_date_date" readonly>
+            <!-- </div>  -->
+            
+            <div class="col-sm-2 modifyPadding">
+                <button id="maint_findTkt_btn" style="text-align:right" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+        <!-- ------------------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-5 modifyPadding">
+                <label for="maint_dd_date">DD</label>
+                <input type="date" class="form-control" id="maint_dd_date">
+            </div>
+            <div class="col-sm-5 modifyPadding">
+                <label for="maint_fdd_date">FDD</label>
+                <input type="date" class="form-control" id="maint_fdd_date">
+            </div>
+        </div>  
+        
+        <div class="row">
+            <div class="col-sm-2 modifyPadding">
+                <label for="maint_ctyp_sel">CONTYP</label>
+                <select class="form-control" id="maint_ctyp_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>GEN</option>
+                    <option>LPBK</option>
+                    <option>MLTP</option>
+                    <option>MTCD</option>
+                    <option>MAINT</option>
+                </select>
+            </div>  
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="maint_ffac_txt" style="float:left">FAC(X):</label>
+                &nbsp;&nbsp;&nbsp;
+                <a id="maint_ffacSearch_btn" style="height: 20px">Search</a>
+                <input style="text-transform: uppercase" type="text" class ="form-control" id="maint_ffac_txt">
+                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                    <label for="maint_portX_txt">PORT(X):</label>
+                </div>
+                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">                
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="maint_portX_txt">
+                </div>
+            </div> 
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="maint_tfac_txt" style="float:left">FAC(Y):</label>
+                &nbsp;&nbsp;&nbsp;
+                <a id="maint_tfacSearch_btn" style="height: 20px">Search</a>
+                <input style="text-transform: uppercase" type="text" class ="form-control" id="maint_tfac_txt">
+                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                    <label for="maint_portY_txt">PORT(Y):</label>
+                </div>
+                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="maint_portY_txt">
+                </div>
+            </div>
+                
+            <div id="maint_facSearch" class="col-sm-12 modifyPadding" style="display:none; background-color:#eff5ff;padding:0px; border: solid #F0F0F0 1px;  ">
+                <div class="col-sm-5 modifyPadding">
+                    <label for="maint_fac_txt">FAC</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="maint_fac_txt">
+                </div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="maint_psta_sel">PSTA</label>
+                    <select class="form-control" id="maint_psta_sel">
+                        <option></option>
+                        <option>MTCD</option>
+                        <option>RS</option>
+                        <option>TST</option>
+                        <option>SF</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 modifyPadding">
+                    <button id= "maint_facSearch_btn" class="btn btn-primary">View</button>
+                    <button id= "maint_facClose_btn" class="btn btn-primary">Close</button>
+                </div>
+    
+                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0; padding-left: 0px; padding-right: 0px">
+                    <table class="table table-fixed">
+                        <thead style="width:100%; padding-right: 15px">
+                            <tr>
+                                <th style="width:50%">FAC</th>
+                                <th style="width:20%">PSTA</th>
+                                <th style="width:30%">PORT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maint_tblFac" style="height:215px;">
+                        </tbody>
+                    </table>
+                    <div style="float:right;">
+                        <a id="maint_previousFac">Previous</a> |
+                        <a id="maint_nextFac">Next</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <label id="maint_indexFac_lbl"></label>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+
+        <!-- ------------------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-3 modifyPadding"> 
+                <label for="maint_act_sel">ACTION</label>    
+                <select class="form-control" id="maint_act_sel" style="padding:2px 0 0 0" >
+                    <option></option>
+                    <option>MTC_CONN</option>
+                    <option>MTC_DISCON</option>
+                    <option>MTC_RESTORE</option>
+                    <option>RESTORE_MTCD</option>
+                    <option>MTC_TEST</option>
+                    <option>CHANGE</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-8 modifyPadding">
+                <button id="maint_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                <!-- 3 input fields to be hidden after testing -->
+                <input id="maint_cktId_num" type="hidden" style="width:50px">
+                <input id="maint_cktconId_num" type="hidden" style="width:50px">
+                <input id="maint_cktconIdx_num" type="hidden" style="width:50px">
+            
+                <!-- <br> -->
+                <!-- <label id="checkProvInfor" style="color:red"></label> -->
+            </div>
+        </div>
+        <!-- ---------------------------------------------- -->
+
+        <!-- <div id="cktcon" class="col-sm-12 modifyPadding">
+            <div class="col-sm-2 modifyPadding">
+                <label for="ctyp">CTYP</label>
+                <select class="form-control" id="ctyp" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>GEN</option>
+                    <option>LPBK</option>
+                    <option>MTL</option>
+                </select>
+            </div>  
+            <div class="col-sm-5 modifyPadding">
+                <label for="ffac">FAC(X)</label>
+                <input type="text" class="form-control" id="ffac">
+            </div> 
+            <div class="col-sm-5 modifyPadding">
+                <label for="tfac">FAC(Y)</label>
+                <input type="text" class="form-control" id="tfac">
+            </div> 
+        </div>-->
+    
+        <!--<div class="row">
+            <div id="maint_cktconArea" class="col-sm-12 modifyPadding">
+                <label>LIST OF CONNECTIONS:</label>
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">ID</th>
+                                <th style="width:15%">CONTYP</th>
+                                <th style="width:40%">FAC(X)</th>
+                                <th style="width:40%">FAC(Y)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maint_tblCktCon" style="height:150px;">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+    
+    
+    <div class="col-sm-8 modifyPadding">
+
+        <div id ="maint_cktArea" class="row">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF CKTs:</b>
+                </div>
+    
+                <div style="float:right">
+                    <a  id="maint_previousCkt">Previous</a> |
+                    <a  id="maint_nextCkt">Next</a>
+                    &nbsp;&nbsp;&nbsp; <label id="maint_cktIndex_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width:100%; padding-right: 15px">
+                            <tr>
+                                <th style="width:22%">CKID</th>
+                                <th style="width:10%">CLS</th>
+                                <th style="width:9%">ADSR</th>
+                                <th style="width:9%">PROT</th>
+                                <th style="width:13%">ORDNO</th>
+                                <th style="width:13%">TKTNO</th>
+                                <th style="width:20%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maint_tblCkt" style="height:200px">
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="maint_tktArea" class="row" style="display:none;">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF TKTs:</b>
+                </div>
+    
+                <div style="float:right">
+                    <a  id="maint_previousTkt">Previous</a> |
+                    <a  id="maint_nextTkt">Next</a>
+                    &nbsp;&nbsp;&nbsp; <label id="maint_tktIndex_lbl"></label>
+                </div>
+            </div>
+            
+            
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width:100%; padding-right: 15px">
+                            <tr>
+                                <!-- <th style="width:12%">STAT</th> -->
+                                <th style="width:15%">TKTNO</th>
+                                <th style="width:19%">CKID</th>
+                                <th style="width:8%">CONTYP</th>
+                                <th style="width:15%">FFAC</th>
+                                <th style="width:15%">TFAC</th>
+                                <th style="width:16%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maint_tblTkt" style="height:200px">
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="maint_cktconArea" class="row" style="display:none;">
+            <div class="col-sm-12">
+                <label>LIST OF CONNECTIONS:</label>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width:100%; padding-right: 15px">
+                            <tr>
+                                <th style="width:15%"></th>
+                                <th style="width:42%">FROM (X):</th>
+                                <th style="width:43%">TO (Y):</th>
+                            </tr>
+                            <tr>
+                                <th style="width:5%">ID</th>
+                                <th style="width:10%">CONTYP</th>
+                                <th style="width:10%">PORT</th>
+                                <th style="width:10%">PSTA</th>
+                                <th style="width:22%">FAC(X)</th>
+                                <th style="width:10%">PORT</th>
+                                <th style="width:10%">PSTA</th>
+                                <th style="width:23%">FAC(Y)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maint_tblCktCon" style="height:200px;">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div> 
+
+    
+</div>
+
+<div id="maintModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SETUP MAINTENANCE CONNECTION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="maintModal_ckid_txt">CKID</label>
+                        <label for="maintModal_tn_cbx">TN:</label>
+                        <input type="checkbox" id="maintModal_tn_cbx" checked>    
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_ckid_txt" placeholder="123-456-7890">
+                    </div>
+                        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="maintModal_cls_sel">CLS</label>
+                        <select class="form-control" id="maintModal_cls_sel" style="padding:2px 0 0 0">
+                            <option></option>
+                            <option>BUS</option>
+                            <option>RES</option>
+                        </select>
+                    </div>
+        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="maintModal_adsr_sel">ADSR</label>
+                        <select class="form-control" id="maintModal_adsr_sel" style="padding:2px 0 0 0">
+                            <option>N</option>
+                            <option>Y</option>
+                        </select>
+                    </div>   
+        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="maintModal_prot_sel">PROT</label>
+                        <select class="form-control" id="maintModal_prot_sel" style="padding:2px 0 0 0">
+                            <option></option>
+                            <option>SSM</option>
+                            <option>SSP</option>
+                        </select>
+                    </div>
+                </div>
+                    <!-- ----------------------------------------- -->
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="maintModal_tktno_txt">TKTNO</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_tktno_txt">
+                    </div>
+                    
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="maintModal_mlo_sel">MLO</label>
+                        <select class="form-control" id="maintModal_mlo_sel" style="padding:2px 0 0 0">
+                            <option>N</option>
+                            <option>Y</option>
+                        </select>
+                    </div> 
+                </div>
+
+                <!-- ------------------------------------------------- -->
+                <div class="row">
+                    <div id="maintModal_reConForm">
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_ctyp_sel">CONTYP</label>
+                            <select class="form-control" id="maintModal_ctyp_sel" style="padding:2px 0 0 0">
+                                <option></option>
+                                <option>GEN</option>
+                                <option>LPBK</option>
+                                <option>MLTP</option>
+                                <option>MTCD</option>
+                                <option>MAINT</option>
+                            </select>
+                        </div>  
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_ffac_text">FAC(X)</label>
+                            <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_ffac_text">
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_tfac_text">FAC(Y)</label>
+                            <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_tfac_text">
+                      
+                        
+                        </div> 
+                    </div>
+                </div>
+                <!-- ------------------------------------------------- -->
+                <div class="row">
+                    <div id="maintModal_newConForm">
+                        <div class="col-sm-1 modifyPadding">
+                            <input id ="maintModal_pick1_rad" type="radio" name="selectTestFac" style="margin-left: 15px; margin-top: 30px;" checked>
+                        </div>  
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_conFCtyp_txt">CTYP</label>
+                            <input type="text" class="form-control" id="maintModal_conFCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="maintModal_conFfac_txt">FAC(X)</label>
+                            <input type="text" class="form-control" id="maintModal_conFfac_txt" readonly>
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_conTfac_sel">FAC(Y)</label>
+                            <select class="form-control" id="maintModal_conTfac_sel">
+                            </select>
+                        </div> 
+
+                        <div class="col-sm-1 modifyPadding">
+                            <input id ="maintModal_pick2_rad" type="radio" name="selectTestFac" style="margin-left: 15px; margin-top: 30px;">
+                        </div>  
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_conTCtyp_txt">CTYP</label>
+                            <input type="text" class="form-control" id="maintModal_conTCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="maintModal_conTfac_txt">FAC(Y)</label>
+                            <input type="text" class="form-control" id="maintModal_conTfac_txt" readonly>
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_conFfac_sel">FAC(X)</label>
+                            <select class="form-control" id="maintModal_conFfac_sel">
+                            </select>
+                        </div> 
+                    
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="maintModal_testPortForm">
+                        <div class="col-sm-1 modifyPadding">
+                            <input id ="maintModal_pickTest1_rad" type="radio" name="selectTestFac" style="margin-left: 15px; margin-top: 30px;" checked>
+                        </div>  
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_conTestFCtyp_txt">CTYP</label>
+                            <input type="text" class="form-control" id="maintModal_conTestFCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="maintModal_conTestFfac_txt">FAC(X)</label>
+                            <input type="text" class="form-control" id="maintModal_conTestFfac_txt" readonly>
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_conTestPort1_sel">TEST PORT</label>
+                            <select class="form-control" id="maintModal_conTestPort1_sel">
+                            </select>
+                        </div> 
+
+                        <div class="col-sm-1 modifyPadding">
+                            <input id ="maintModal_pickTest2_rad" type="radio" name="selectTestFac" style="margin-left: 15px; margin-top: 30px;">
+                        </div>  
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_conTestTCtyp_txt">CTYP</label>
+                            <input type="text" class="form-control" id="maintModal_conTestTCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="maintModal_conTestTfac_txt">FAC(Y)</label>
+                            <input type="text" class="form-control" id="maintModal_conTestTfac_txt" readonly>
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_conTestPort2_sel">TEST PORT</label>
+                            <select class="form-control" id="maintModal_conTestPort2_sel">
+                            </select>
+                        </div> 
+                    
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="maintModal_discConForm">
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="maintModal_discCtyp_txt">CONTYP</label>
+                            <input type="text" class="form-control" id="maintModal_discCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_discFfac_txt">FAC(X)</label>
+                            <input type="text" class="form-control" id="maintModal_discFfac_txt" readonly> 
+                        
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="maintModal_discTfac_txt">FAC(Y)</label>
+                            <input type="text" class="form-control" id="maintModal_discTfac_txt" readonly>
+                        
+                        </div> 
+                    </div>
+                </div>
+
+                <div id="maintModal_changeConForm" class="row">
+                    <div id="maintModal_outCon" class="col-sm-12 modifyPadding">
+                        <label class="col-sm-1 modifyPadding" style="float:left">OUT:</label>
+                        <div class="col-sm-10 modifyPadding" style="border:lightgray solid 1px">
+                            <div class="col-sm-2 modifyPadding">
+                                <label for="maintModal_oldCtyp_sel">CONTYP</label>
+                                <select class="form-control" id="maintModal_oldCtyp_sel" style="padding:2px 0 0 0" disabled>
+                                    <option></option>
+                                    <option>GEN</option>
+                                    <option>LPBK</option>
+                                    <option>MLPT</option>
+                                </select>
+                            </div>  
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="maintModal_oldFfac_txt" style="float:left">FAC(X):</label>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_oldFfac_txt" disabled>
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="maintModal_oldPortX_txt">PORT(X):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_oldPortX_txt" disabled>
+                                </div>
+                            </div> 
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="maintModal_oldTfac_txt" style="float:left">FAC(Y):</label>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_oldTfac_txt" disabled>
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="maintModal_oldPortY_txt">PORT(Y):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_oldPortY_txt" disabled>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div id="maintModal_inCon" class="col-sm-12 modifyPadding">
+                        <label class="col-sm-1 modifyPadding" style="float:left">IN:</label>
+                        <div class="col-sm-10 modifyPadding" style="border: lightgray solid 1px">
+                            <div class="col-sm-2 modifyPadding">
+                                <label for="maintModal_newCtyp_sel">CONTYP</label>
+                                <select class="form-control" id="maintModal_newCtyp_sel" style="padding:2px 0 0 0">
+                                    <option></option>
+                                    <option>GEN</option>
+                                    <option>LPBK</option>
+                                    <option>MLPT</option>
+                                </select>
+                            </div>  
+                
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="maintModal_newFfac_txt" style="float:left">FAC(X):</label>
+                                &nbsp;&nbsp;&nbsp;
+                                <a id="maintModal_newFfacSearch_btn" style="height: 20px">Search</a>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_newFfac_txt">
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="maintModal_newPortX_txt">PORT(X):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_newPortX_txt">
+                                </div>
+                            </div> 
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="maintModal_newTfac_txt" style="float:left">FAC(Y):</label>
+                                &nbsp;&nbsp;&nbsp;
+                                <a id="maintModal_newTfacSearch_btn" style="height: 20px">Search</a>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="maintModal_newTfac_txt">
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="maintModal_newPortY_txt">PORT(Y):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_newPortY_txt">
+                                </div>
+                            </div> 
+                
+                            <div id="maintModal_newFacSearch" class="col-sm-12 modifyPadding" style="display:none; background-color:#eff5ff;padding:0px; border: solid lightgray 1px;  ">
+                                <div class="col-sm-6 modifyPadding">
+                                    <label for="maintModal_newFac_txt">FAC</label>
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_newFac_txt">
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <label for="maintModal_newPort_txt">PORT</label>
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="maintModal_newPort_txt">
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <label for="maintModal_newPsta_sel">PSTA</label>
+                                    <select class="form-control" id="maintModal_newPsta_sel">
+                                        <option></option>
+                                        <option>MTCD</option>
+                                        <option>RS</option>
+                                        <option>TST</option>
+                                        <option>SF</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <button id= "maintModal_newFacSearch_btn" class="btn btn-primary">View</button>
+                                    <!-- <button id= "maintModal_newFacClose_btn" class="btn btn-primary">Close</button> -->
+                                </div>
+                    
+                                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+                                    <table class="table table-fixed">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50%">FAC</th>
+                                                <th style="width:20%">PSTA</th>
+                                                <th style="width:30%">PORT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="maintModal_newTblFac" style="height:120px;">
+                                        </tbody>
+                                    </table>
+                                    <div style="float:right;">
+                                        <a id="maintModal_newPreviousFac">Previous</a> |
+                                        <a id="maintModal_newNextFac">Next</a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <label id="maintModal_newIndexFac_lbl"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-sm-5 modifyPadding">
+                        <label for="maintModal_dd_date">DD</label>
+                        <input type="date" class="form-control" id="maintModal_dd_date">
+                    </div>
+                    <div class="col-sm-5 modifyPadding">
+                        <label for="maintModal_fdd_date">FDD</label>
+                        <input type="date" class="form-control" id="maintModal_fdd_date">
+                    </div>
+                </div>            
+            
+                <!-- ---------------------------------------------------- -->
+                <div class="row">
+                        <div class="col-sm-3 modifyPadding"> 
+                            <label for="maintModal_act_txt">ACTION</label>    
+                            <input type="text" class="form-control" id="maintModal_act_txt" readonly>
+                        </div>
+                        
+                        <div class="col-sm-8 modifyPadding">
+                            <button id="maintModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button id="maintModal_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                            <!-- moded to co-ipc-prov.html 
+                            <input id="ckt_id" type="text" style="width:50px">
+                            <input id="cktcon_id" type="text" style="width:50px">
+                            <input id="cktcon_idx" type="text" style="width:50px">
+                            -->
+                            <br>
+                            <label id="maintModal_result_txt" style="color:red"></label>
+                        </div>
+                </div>
+                    <!-- ---------------------------------------------- -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+//--------------------maint OBJ-----------------------//
+
+var maint = {
+    ckid:           $("#maint_ckid_txt"),
+    tn:             $("#maint_tn_cbx"),
+    cls:            $("#maint_cls_sel"),
+    adsr:           $("#maint_adsr_sel"),
+    prot:           $("#maint_prot_sel"),
+    findCkidBtn:    $("#maint_findCkid_btn"),
+    tktno:          $("#maint_tktno_txt"),
+    mlo:            $("#maint_mlo_sel"),
+    dd:             $("#maint_dd_date"),
+    fdd:            $("#maint_fdd_date"),
+    date:           $("#maint_date_date"),
+    findTktBtn:     $("#maint_findTkt_btn"),
+    act:            $("#maint_act_sel"),
+    clearBtn:       $("#maint_clear_btn"),
+    cktId:          $("#maint_cktId_num"),
+    cktconId:       $("#maint_cktconId_num"),
+    cktconIdx:      $("#maint_cktconIdx_num"),
+    
+
+    cktArea:           $("#maint_cktArea"),
+    prevCktBtn:        $("#maint_previousCkt"),
+    nextCktBtn:        $("#maint_nextCkt"),
+    indexCktLbl:       $("#maint_cktIndex_lbl"),
+    tblCkt:   {
+        body:       $("#maint_tblCkt"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    tktArea:           $("#maint_tktArea"),
+    prevTktBtn:        $("#maint_previousTkt"),
+    nextTktBtn:        $("#maint_nextTkt"),
+    indexTktLbl:       $("#maint_tktIndex_lbl"),
+    tblTkt:   {
+        body:       $("#maint_tblTkt"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    cktconArea:      $("#maint_cktconArea"),
+    tblCon:{
+        body:       $("#maint_tblCktCon"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRowsCkt:        [],
+    tblRowsTkt:        [],
+    tblRowsCon:     [],
+    tblRowsFac:     [],
+
+    //////////////////------------FAC SEARCH-----------------////////
+    contyp:         $("#maint_ctyp_sel"),
+    ffac:           $("#maint_ffac_txt"),
+    portX:          $("#maint_portX_txt"),
+    tfac:           $("#maint_tfac_txt"),
+    portY:          $("#maint_portY_txt"),
+    ffacSearchBtn:  $("#maint_ffacSearch_btn"),
+    tfacSearchBtn:  $("#maint_tfacSearch_btn"),
+
+    facSearch:      $("#maint_facSearch"),
+    fac:            $("#maint_fac_txt"),
+    psta:           $("#maint_psta_sel"),
+    facSearchBtn:   $("#maint_facSearch_btn"),
+    facCloseBtn:    $("#maint_facClose_btn"),
+    prevFacBtn:     $("#maint_previousFac"),
+    nextFacBtn:     $("#maint_nextFac"),
+    indexFacLbl:    $("#maint_indexFac_lbl"), 
+    ffacSelect:     false,
+
+    tblFac:   {
+        body:       $("#maint_tblFac"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRowsFac:     [],
+
+    ////////////////----------------////////////////////
+
+
+
+    start: function() {
+        maint.clearForm();
+    },
+    
+    clearForm: function() {
+        maint.ckid.val("").change();
+        maint.cls.val("").change();
+        maint.adsr.val("").change();
+        maint.prot.val("").change();
+        maint.tktno.val("").change();
+        maint.dd.val("").change();
+        maint.date.val("").change();
+        maint.fdd.val("").change();
+        maint.mlo.val("N").change();      //sets mlo default to "N"
+        maint.act.val("");
+        maint.cktId.val("").change();
+        maint.cktconId.val("").change();
+        maint.cktconIdx.val("").change();
+        maint.ffac.val("");
+        maint.tfac.val("");
+        maint.portX.val("");
+        maint.portY.val("");
+        maint.clearTblCkt();
+        maint.clearTblTkt();
+        maint.clearTblCktCon();
+        maint.clearTblFac();
+        maint.cktconArea.hide();
+        maint.cktArea.show();
+        maint.tktArea.hide();
+        maint.act.prop("disabled", false);
+        maint.facSearch.hide();
+        maint.contyp.val("");
+        maint.fac.val("");
+        maint.psta.val("TST");
+
+        maintModal.oldContyp.val("");      
+        maintModal.oldFfac.val(""); 
+        maintModal.oldPortX.val("");      
+        maintModal.oldFfac.val("");
+        maintModal.oldPortY.val("");             
+
+        maintModal.newContyp.val("");      
+        maintModal.newFfac.val("");       
+        maintModal.newPortX.val("");      
+        maintModal.newTfac.val("");        
+        maintModal.newPortY.val("");      
+        maintModal.newFac.val("");
+        maintModal.newPsta.val("");  
+        maintModal.newTblFac.body.empty();      
+        maintModal.newIndexFacLbl.text("");
+        maintModal.newFacSearch.hide();
+
+        maintModal.newFa
+    },
+    
+    clearTblTkt: function() {
+        maint.tblTkt.body.empty();
+        maint.indexTktLbl.text("");
+    },
+
+    clearTblCkt: function() {
+        maint.tblCkt.body.empty();
+        maint.indexCktLbl.text("");
+    },    
+
+    clearTblCktCon: function() {
+        maint.tblCon.body.empty();
+    },
+
+    clearTblTkt: function() {
+        maint.tblTkt.body.empty();
+        maint.indexTktLbl.text("");
+    }, 
+
+    clearTblFac: function() {
+        maint.tblFac.body.empty();
+        maint.indexFacLbl.text("");
+    },
+
+    populateModal: function() {
+        maintModal.ckid.val(maint.ckid.val());
+        maintModal.cls.val(maint.cls.val());
+        maintModal.adsr.val(maint.adsr.val());
+        maintModal.prot.val(maint.prot.val());
+        maintModal.tktno.val(maint.tktno.val());
+        maintModal.mlo.val(maint.mlo.val());
+
+        //for reConnect form
+        maintModal.ctyp.val(maint.contyp.val());
+        maintModal.ffac.val(maint.ffac.val());
+        maintModal.tfac.val(maint.tfac.val());
+
+        //for newConnect form
+        maintModal.fCtyp.val(maint.contyp.val());
+        maintModal.tCtyp.val(maint.contyp.val());
+        maintModal.conFacX.val(maint.ffac.val());
+        maintModal.conFacY.val(maint.tfac.val());
+
+        //for testPort form
+        maintModal.testFCtyp.val(maint.contyp.val());
+        maintModal.testTCtyp.val(maint.contyp.val());
+        maintModal.conTestFacX.val(maint.ffac.val());
+        maintModal.conTestFacY.val(maint.tfac.val());
+
+        //for discon Form
+        maintModal.discCtyp.val(maint.contyp.val());
+        maintModal.discFFac.val(maint.ffac.val());
+        maintModal.discTFac.val(maint.tfac.val());
+
+        maintModal.act.val(maint.act.val());
+        maintModal.dd.val(maint.dd.val());
+        maintModal.fdd.val(maint.fdd.val());
+
+        maintModal.oldContyp.val(maint.contyp.val());
+        maintModal.newContyp.val(maint.contyp.val());
+
+        maintModal.oldFfac.val(maint.ffac.val());
+        maintModal.oldPortX.val(maint.portX.val());
+        maintModal.oldTfac.val(maint.tfac.val());
+        maintModal.oldPortY.val(maint.portY.val());
+    },
+
+    skipRepeatRow: function(rows) {
+        len = rows.length;
+        tktno = '';
+        ckid = '';
+        for (i=0; i<len; i++) {
+            if (rows[i].tktno == tktno && rows[i].ckid == ckid) {
+                continue;
+            }
+            tktno = rows[i].tktno;
+            ckid = rows[i].ckid;
+            maint.tblRows.push(rows[i]);
+        }
+    },
+    
+    displayTbl: {
+        ckt: function(index) {   
+            var startIndex=(index-1)*100;
+            var stopIndex = index *100;
+            var len = maint.tblRowsCkt.length;
+        
+            if (len>=startIndex) {
+                if (len < stopIndex) {
+                    stopIndex=len;
+                }        
+                maint.clearTblCkt();
+                var a = [];
+                for (var i = startIndex; i < stopIndex; i++) {  
+                    a.push('<tr> <td style="display:none">' + maint.tblRowsCkt[i].id + '</td>');
+                    a.push('<td style="width:22%">' + maint.tblRowsCkt[i].ckid + '</td>');
+                    a.push('<td style="width:10%">' +  maint.tblRowsCkt[i].cls + '</td>');
+                    a.push('<td style="width:9%">' +  maint.tblRowsCkt[i].adsr + '</td>');
+                    a.push('<td style="width:9%">' +  maint.tblRowsCkt[i].prot + '</td>');
+                    a.push('<td style="width:13%">' +  maint.tblRowsCkt[i].ordno + '</td>');
+                    if (maint.tblRowsCkt[i].tktno == null) {
+                        maint.tblRowsCkt[i].tktno = "";
+                    }
+                    a.push('<td style="width:13%">' +  maint.tblRowsCkt[i].tktno + '</td>');
+                    a.push('<td style="width:20%">' +  maint.tblRowsCkt[i].date + '</td>');
+                    if (maint.tblRowsCkt[i].dd == null) {
+                        maint.tblRowsCkt[i].dd = "";
+                    }
+                    a.push('<td style="display:none">' +  maint.tblRowsCkt[i].dd + '</td>');
+                    if (maint.tblRowsCkt[i].fdd == null) {
+                        maint.tblRowsCkt[i].fdd = "";
+                    }
+                    a.push('<td style="display:none">' +  maint.tblRowsCkt[i].fdd + '</td>');
+                    a.push('<td style="display:none">' +  maint.tblRowsCkt[i].cktcon + '</td></tr>');
+                }
+                maint.tblCkt.body.html(a.join(""));
+
+                if (len == 0) 
+                    maint.indexCktLbl.text("(total:" + len + ")") ;
+                else
+                    maint.indexCktLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            } 
+        },
+        
+        tkt: function(index) {   
+            var startIndex=(index-1)*100;
+            var stopIndex = index *100;
+            var len = maint.tblRowsTkt.length;
+        
+            if (len>=startIndex) {
+                if (len < stopIndex) {
+                    stopIndex=len;
+                }        
+                maint.clearTblTkt();
+                var a = [];
+                for (var i = startIndex; i < stopIndex; i++) {  
+                    a.push('<tr> <td style="display:none">' + maint.tblRowsTkt[i].id + '</td>');
+                    // a.push('<td style="width:12%">' +  maint.tblRowsTkt[i].stat + '</td>');
+                    if(maint.tblRowsTkt[i].tktno == 'null' || maint.tblRowsTkt[i].tktno == null) {
+                        maint.tblRowsTkt[i].tktno = "";
+                    }
+                    a.push('<td style="width:15%">' +  maint.tblRowsTkt[i].tktno + '</td>');
+                    a.push('<td style="display:none">' +  maint.tblRowsTkt[i].mlo + '</td>');
+                    a.push('<td style="width:19%">' + maint.tblRowsTkt[i].ckid + '</td>');
+                    a.push('<td style="display:none">' +  maint.tblRowsTkt[i].cls + '</td>');
+                    a.push('<td style="display:none">' +  maint.tblRowsTkt[i].adsr + '</td>');
+                    a.push('<td style="display:none">' +  maint.tblRowsTkt[i].prot + '</td>');
+                    a.push('<td style="width:8%">' +  maint.tblRowsTkt[i].ctyp + '</td>');
+                    a.push('<td style="width:15%">' +  maint.tblRowsTkt[i].ffac + '</td>');
+                    a.push('<td style="width:15%">' +  maint.tblRowsTkt[i].tfac + '</td>');
+                    a.push('<td style="width:16%">' +  maint.tblRowsTkt[i].date + '</td></tr>');
+                }
+                maint.tblTkt.body.html(a.join(""));
+                maint.indexTktLbl.text((startIndex + 1) + " - " + stopIndex + " (Total: " + len + ")");
+            } 
+        },
+
+        cktCon: function(index) {   
+            var startIndex=(index-1)*100;
+            var stopIndex = index *100;
+            var len = maint.tblRowsCon.length;
+        
+            if (len>=startIndex) {
+                if (len < stopIndex) {
+                    stopIndex=len;   
+                }         
+                maint.clearTblCktCon();
+                var a = [];
+                for (var i = startIndex; i < stopIndex; i++) {  
+                    a.push('<tr> <td style="width:5%">'    + maint.tblRowsCon[i].idx  + '</td>');
+                    a.push('<td style="width:10%">'        + maint.tblRowsCon[i].ctyp + '</td>');
+                    a.push('<td style="width:10%">'        + maint.tblRowsCon[i].fport + '</td>');
+                    a.push('<td style="width:10%">'        + maint.tblRowsCon[i].fpsta + '</td>');
+                    a.push('<td style="width:22%">'        + maint.tblRowsCon[i].ffac + '</td>');
+                    a.push('<td style="width:10%">'        + maint.tblRowsCon[i].tport + '</td>');
+                    a.push('<td style="width:10%">'        + maint.tblRowsCon[i].tpsta + '</td>');
+                    a.push('<td style="width:23%">'        + maint.tblRowsCon[i].tfac + '</td></tr>');
+                    
+                }
+                maint.tblCon.body.html(a.join(""));
+            } 
+        },
+    
+        fac: function(index) {   
+            var startIndex=(index-1)*100;
+            var stopIndex = index *100;
+            var len = maint.tblRowsFac.length;
+        
+            if (len>=startIndex) {
+                if (len < stopIndex) {
+                    stopIndex=len;   
+                }         
+                maint.clearTblFac();
+                var a = [];
+                for (var i = startIndex; i < stopIndex; i++) {  
+                    a.push('<tr> <td style="width:50%">'    + maint.tblRowsFac[i].fac  + '</td>');
+                    a.push('<td style="width:20%">'        + maint.tblRowsFac[i].psta + '</td>');
+                    a.push('<td style="width:30%">'        + maint.tblRowsFac[i].port + '</td></tr>');
+                    
+                }
+                maint.tblFac.body.html(a.join(""));
+                maint.indexFacLbl.text((startIndex + 1) + " - " + stopIndex + " (Total: " + len + ")");
+
+            } 
+        },
+    },
+
+    query: {
+        tkt: function(action) {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcMaintReport",
+                act:	action,
+                user:	$('#main_currentUser').text(),
+                tktno:	maint.tktno.val().toUpperCase(),
+                mlo:	maint.mlo.val()      
+            },
+            function (data, status) {       
+                var obj = JSON.parse(data);
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+                    if (obj.rows.length === 0) {
+                        if (action == "queryTkt") {
+                            alert("No Record Found");
+                        }
+                    }
+                    maint.tblTkt.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].date.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        // obj.rows[i].dd = kris_getCorrectDateString(obj.rows[i].dd);
+                        // obj.rows[i].fdd = kris_getCorrectDateString(obj.rows[i].fdd);
+                        /**
+                         * end
+                         * */
+                    }
+                    maint.tblRowsTkt = obj.rows;
+                    // maint.skipRepeatRow(obj.rows);
+                    var len = maint.tblRowsTkt.length; 
+                    maint.tblTkt.maxIndex = Math.ceil(len/100.0);
+                    maint.tblTkt.index++;
+                    maint.displayTbl.tkt(maint.tblTkt.index);
+                } 
+            });
+        },
+        
+        ckt: function(action) {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcProv",
+                act:	action,
+                user:	$('#main_currentUser').text(),
+                ckid:	maint.ckid.val().toUpperCase(),
+                cls:	maint.cls.val(),
+                adsr:	maint.adsr.val(),
+                prot:	maint.prot.val(),
+            },
+            function (data, status) {       
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+                    if (obj.rows.length === 0) {
+                        if (action == "queryCkid") {
+                            alert("No Record Found");
+                        }
+                    }
+                    maint.tblCkt.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].date.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    maint.tblRowsCkt = obj.rows;
+                    var len = maint.tblRowsCkt.length; 
+                    maint.tblCkt.maxIndex = Math.ceil(len/100.0);
+                    maint.tblCkt.index++;
+                    maint.displayTbl.ckt(maint.tblCkt.index);
+                } 
+            });
+        },
+
+        cktConByCkid: function(ckid) {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcProv",
+                act:	"queryCktconByCkid",
+                user:	$('#main_currentUser').text(),
+                ckid:	ckid,  
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    maint.tblCon.index=0;
+                    maint.tblRowsCon = obj.rows;
+                    var len = maint.tblRowsCon.length; 
+                    maint.tblCon.maxIndex = Math.ceil(len/100.0);
+                    maint.tblCon.index++;
+                    maint.displayTbl.cktCon(maint.tblCon.index);
+                }
+            });
+        },
+
+        cktCon: function(cktcon_id) {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcProv",
+                act:	"queryCktcon",
+                user:	$('#main_currentUser').text(),
+                cktcon:	cktcon_id
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    maint.tblCon.index=0;
+                    maint.tblRowsCon = obj.rows;
+                    var len = maint.tblRowsCon.length; 
+                    maint.tblCon.maxIndex = Math.ceil(len/100.0);
+                    maint.tblCon.index++;
+                    maint.displayTbl.cktCon(maint.tblCon.index);
+                }
+            });
+        },
+
+        fac: function() {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcFacilities",
+                act:	"findFac",
+                user:	$('#main_currentUser').text(),
+                fac:	maint.fac.val().toUpperCase(),
+                psta:   maint.psta.val()
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    var filteredObj = [];
+                    for (var i=0; i<obj.rows.length; i++) {
+                        if(obj.rows[i].port == "") {
+                            continue;
+                        }
+                        if(maint.ffacSelect)
+                            if(obj.rows[i].port.split('-')[2] == 'X')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        else {
+                            if(obj.rows[i].port.split('-')[2] == 'Y')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        }
+                    }
+                    maint.tblFac.index=0;
+                    maint.tblRowsFac = filteredObj;
+                    var len = maint.tblRowsFac.length; 
+                    maint.tblFac.maxIndex = Math.ceil(len/100.0);
+                    maint.tblFac.index++;
+                    maint.displayTbl.fac(maint.tblFac.index);
+                }
+            });
+        },
+    }
+            
+}
+
+//--------------------maintMODAL OBJ------------------//
+
+var maintModal = {
+    modal:          $("#maintModal"),
+    ckid:           $("#maintModal_ckid_txt"),
+    tn:             $("#maintModal_tn_cbx"),
+    cls:            $("#maintModal_cls_sel"),
+    adsr:           $("#maintModal_adsr_sel"),
+    prot:           $("#maintModal_prot_sel"),
+    tktno:          $("#maintModal_tktno_txt"),
+    mlo:            $("#maintModal_mlo_sel"),
+    dd:             $("#maintModal_dd_date"),
+    fdd:            $("#maintModal_fdd_date"),
+
+    reConForm:     $("#maintModal_reConForm"),
+    ctyp:           $("#maintModal_ctyp_sel"),
+    // ffac:           $("#maintModal_ffac_sel"),
+    ffac:           $("#maintModal_ffac_text"),
+    // tfac:           $("#maintModal_tfac_sel"),
+    tfac:           $("#maintModal_tfac_text"),
+
+    discConForm:    $("#maintModal_discConForm"),
+    discCtyp:       $("#maintModal_discCtyp_txt"),
+    discFFac:       $("#maintModal_discFfac_txt"),
+    discTFac:       $("#maintModal_discTfac_txt"),
+    act:            $("#maintModal_act_txt"),
+    submitBtn:      $("#maintModal_submit_btn"),
+    clearBtn:       $("#maintModal_clear_btn"),
+    result:         $("#maintModal_result_txt"),
+    tblRows:        [],
+
+    newConForm:     $("#maintModal_newConForm"),
+    fCtyp:          $("#maintModal_conFCtyp_txt"),
+    tCtyp:          $("#maintModal_conTCtyp_txt"),
+    conFacX:        $("#maintModal_conFfac_txt"),
+    conTfac:        $("#maintModal_conTfac_sel"),
+    conFacY:        $("#maintModal_conTfac_txt"),
+    conFfac:        $("#maintModal_conFfac_sel"),
+    pick1:          $("#maintModal_pick1_rad"),
+    pick2:          $("#maintModal_pick2_rad"),
+    pickedFfac:     "",
+    pickedTfac:     "",
+
+    testPortForm:     $("#maintModal_testPortForm"),
+    testFCtyp:          $("#maintModal_conTestFCtyp_txt"),
+    testTCtyp:          $("#maintModal_conTestTCtyp_txt"),
+    conTestFacX:        $("#maintModal_conTestFfac_txt"),
+    conTestPort1:        $("#maintModal_conTestPort1_sel"),
+    conTestFacY:        $("#maintModal_conTestTfac_txt"),
+    conTestPort2:        $("#maintModal_conTestPort2_sel"),
+    pickTest1:          $("#maintModal_pickTest1_rad"),
+    pickTest2:          $("#maintModal_pickTest2_rad"),
+    pickedTestFac:     "",
+    pickedTestPort:    "",
+
+    //////////////////------------MAINT CHANGE-----------------////////
+    changeConForm:     $("#maintModal_changeConForm"),
+    oldContyp:         $("#maintModal_oldCtyp_sel"),
+    oldFfac:           $("#maintModal_oldFfac_txt"),
+    oldPortX:          $("#maintModal_oldPortX_txt"),
+    oldTfac:           $("#maintModal_oldTfac_txt"),
+    oldPortY:          $("#maintModal_oldPortY_txt"),
+
+    newContyp:         $("#maintModal_newCtyp_sel"),
+    newFfac:           $("#maintModal_newFfac_txt"),
+    newPortX:          $("#maintModal_newPortX_txt"),
+    newTfac:           $("#maintModal_newTfac_txt"),
+    newPortY:          $("#maintModal_newPortY_txt"),
+    newFfacSearchBtn:  $("#maintModal_newFfacSearch_btn"),
+    newTfacSearchBtn:  $("#maintModal_newTfacSearch_btn"),
+
+    newFacSearch:      $("#maintModal_newFacSearch"),
+    newFac:            $("#maintModal_newFac_txt"),
+    newPsta:           $("#maintModal_newPsta_sel"),
+    newFacSearchBtn:   $("#maintModal_newFacSearch_btn"),
+    newFacCloseBtn:    $("#maintModal_newFacClose_btn"),  
+    newPrevFacBtn:     $("#maintModal_newPreviousFac"),
+    newNextFacBtn:     $("#maintModal_newNextFac"),
+    newIndexFacLbl:    $("#maintModal_newIndexFac_lbl"),
+    newFfacSelect:     true,     
+
+    newTblFac:   {
+        body:       $("#maintModal_newTblFac"),
+        index:      0,
+        maxIndex:   0,
+    },
+    newTblRowsFac:     [],
+    
+    disableForm: function() {
+        maintModal.ckid.prop("disabled",true);
+        maintModal.cls.prop("disabled",true);
+        maintModal.adsr.prop("disabled",true);
+        maintModal.prot.prop("disabled",true);
+        maintModal.tktno.prop("disabled",false);
+        maintModal.mlo.prop("disabled",true);
+    },
+    
+    enableForm: function() {
+        maintModal.ckid.prop("disabled",false);
+        maintModal.cls.prop("disabled",false);
+        maintModal.adsr.prop("disabled",false);
+        maintModal.prot.prop("disabled",false);
+        maintModal.tktno.prop("disabled",false);
+        maintModal.mlo.prop("disabled",false);
+    },
+    
+    clearForm: function(){
+        maintModal.enableForm();
+        maintModal.ckid.val("");
+        maintModal.cls.val("");
+        maintModal.adsr.val("");
+        maintModal.prot.val("");
+        maintModal.tktno.val("");
+        maintModal.mlo.val("");
+        maintModal.dd.val("");
+        maintModal.fdd.val("");
+
+        maintModal.ctyp.val("");
+        maintModal.ctyp.prop("disabled",false);
+        maintModal.ffac.val("");
+        maintModal.ffac.prop("disabled",false);
+        maintModal.tfac.val("");
+        maintModal.tfac.prop("disabled",false);
+
+        maintModal.pick1.prop("disabled", false);
+        maintModal.pick2.prop("disabled", false);
+        maintModal.conFacX.val("");
+        maintModal.conFacY.val("");
+        maintModal.conFfac.val("");
+        maintModal.conTfac.val("");
+        maintModal.fCtyp.val("");
+        maintModal.tCtyp.val("");
+        maintModal.conFfac.prop("disabled",false);
+        maintModal.conTfac.prop("disabled",false);
+
+        maintModal.conTestFacX.val("");
+        maintModal.conTestFacY.val("");
+        maintModal.conTestPort1.val("");
+        maintModal.conTestPort2.val("");
+        maintModal.testFCtyp.val("");
+        maintModal.testTCtyp.val("");
+        maintModal.conTestPort1.prop("disabled",false);
+        maintModal.conTestPort2.prop("disabled",false);
+
+        maintModal.discCtyp.val("");
+        maintModal.discFFac.val("");
+        maintModal.discTFac.val("");
+        maintModal.result.text("");
+
+
+    },
+    
+    clearTblFac: function() {
+        maintModal.newTblFac.body.empty();
+        maintModal.newIndexFacLbl.text("");
+    },
+    
+    submitMtcConnect: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMaintConnect",
+            act:	"MTC_CONN",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.ctyp.val(),
+            // ffac:   maintModal.ffac.val(),
+            // tfac:   maintModal.tfac.val(),
+            ffac:   maintModal.pickedFfac,
+            tfac:   maintModal.pickedTfac,
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+
+    submitMtcDisconnect: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMaintDiscon",
+            act:	"MTC_DISCON",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.discCtyp.val(),
+            ffac:   maintModal.discFFac.val().toUpperCase(),
+            tfac:   maintModal.discTFac.val().toUpperCase(),
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+
+    submitRestoreMtcd: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMaintRestoreMtcd",
+            act:	"RESTORE_MTCD",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.ctyp.val(),
+            ffac:   maintModal.ffac.val().toUpperCase(),
+            tfac:   maintModal.tfac.val().toUpperCase(),
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+
+    submitMtcRestore: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMaintConnect",
+            act:	"MTC_RESTORE",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.ctyp.val(),
+            ffac:   maintModal.ffac.val().toUpperCase(),
+            tfac:   maintModal.tfac.val().toUpperCase(),
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+
+    submitMtcTest: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMaintTest",
+            act:	"MTC_TEST",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.ctyp.val(),
+            // ffac:   maintModal.ffac.val(),
+            // tfac:   maintModal.tfac.val(),
+            testfac:   maintModal.pickedTestFac,
+            testport:   maintModal.pickedTestPort,
+
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+
+    submitChange: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcProv",
+            act:	"CHANGE",
+            user:	$('#main_currentUser').text(),
+            ckid:	maintModal.ckid.val().toUpperCase(),
+            cls:	maintModal.cls.val(),
+            adsr:	maintModal.adsr.val(),
+            prot:	maintModal.prot.val(),
+            tktno:	maintModal.tktno.val().toUpperCase(),
+            mlo:	maintModal.mlo.val(),
+            ctyp:   maintModal.ctyp.val(),
+            ffac:   maintModal.ffac.val().toUpperCase(),
+            tfac:   maintModal.tfac.val().toUpperCase(),
+            newffac:maintModal.newFfac.val().toUpperCase(),
+            newtfac:maintModal.newTfac.val().toUpperCase(),
+            fport:  maintModal.oldPortX.val(),
+            tport:  maintModal.oldPortY.val(),
+            newfport: maintModal.newPortX.val(),
+            newtport: maintModal.newPortY.val(),
+            ckt_id:	maint.cktId.val(),
+            cktcon: maint.cktconId.val(),
+            idx:	maint.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                maintModal.modal.modal('hide');
+                alert(obj.reason);
+                maint.query.ckt('queryCkid');
+                maint.query.cktConByCkid(maint.ckid.val());
+            } 
+        });
+    },
+    
+    loadFacX: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcProv",
+            act:	"queryFacX",
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+
+            if (obj["rslt"] == "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                var a = [];
+                a.push('<option></option>');
+    
+                for (var i=0; i<obj["rows"].length; i++) 
+                {  
+                    a.push('<option>' + obj["rows"][i].fac + '</option>');
+                }
+                maintModal.conFfac.empty();
+                maintModal.conFfac.html(a.join(""));
+            }
+            
+        });
+    },
+    
+    loadFacY: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcProv",
+            act:	"queryFacY",
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            
+            if (obj["rslt"]  ==  "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                var a = [];
+                a.push('<option></option>');
+                for (var i=0; i<obj["rows"].length; i++) 
+                {  
+                    a.push('<option>' + obj["rows"][i].fac + '</option>');
+                }
+                maintModal.conTfac.empty();
+                maintModal.conTfac.html(a.join(""));
+            }
+            
+        });
+    },
+
+    loadTestPort: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcTb",
+            act:	"query",
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            
+            if (obj["rslt"]  ==  "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                var a = [];
+                a.push('<option></option>');
+                for (var i=0; i<obj["rows"].length; i++) 
+                {  
+                    a.push('<option value="'+obj["rows"][i].tp+'">' + obj["rows"][i].tp +'-'+ obj["rows"][i].name +'-'+obj["rows"][i].stat + '</option>');
+                }
+                maintModal.conTestPort1.empty();
+                maintModal.conTestPort2.empty();
+
+                maintModal.conTestPort1.html(a.join(""));
+                maintModal.conTestPort2.html(a.join(""));
+            }
+            
+        });
+    },
+
+    query: {
+        fac: function() {
+
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcFacilities",
+                act:	"findFac",
+                user:	$('#main_currentUser').text(),
+                fac:	maintModal.newFac.val().toUpperCase(),
+                psta:   maintModal.newPsta.val()
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    var filteredObj = [];
+                    for (var i=0; i<obj.rows.length; i++) {
+                        if(obj.rows[i].port == "") {
+                            continue;
+                        }
+                        if(maintModal.newFfacSelect)
+                            if(obj.rows[i].port.split('-')[2] == 'X')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        else {
+                            if(obj.rows[i].port.split('-')[2] == 'Y')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        }
+                    }
+                    maintModal.newTblFac.index=0;
+                    maintModal.newTblRowsFac = filteredObj;
+                    var len = maintModal.newTblRowsFac.length; 
+                    maintModal.newTblFac.maxIndex = Math.ceil(len/25.0);
+                    maintModal.newTblFac.index++;
+                    maintModal.displayTbl.fac(maintModal.newTblFac.index);
+                }
+            });
+        },
+    },
+     
+    displayTbl: {
+        fac: function(index) {   
+            var startIndex = (index-1) * 25;
+            var stopIndex = index * 25;
+            var len = maintModal.newTblRowsFac.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex = len;   
+                }         
+                maintModal.newTblFac.body.empty();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="width:50%">'    + maintModal.newTblRowsFac[i].fac  + '</td>');
+                    a.push('<td style="width:20%">'        + maintModal.newTblRowsFac[i].psta + '</td>');
+                    a.push('<td style="width:30%">'        + maintModal.newTblRowsFac[i].port + '</td></tr>');
+                }
+                maintModal.newTblFac.body.html(a.join(""));
+                if (len == 0) {
+                    maintModal.newIndexFacLbl.text(" (Total: " + len + ")");
+                }
+                else {
+                    maintModal.newIndexFacLbl.text((startIndex + 1) + " - " + stopIndex + " (Total: " + len + ")");
+                }
+            }
+        },
+    },
+
+
+}
+
+//--------------------maint CLICK FUNCTIONS---------------//
+
+maint.findCkidBtn.click(function(){
+    maint.cktArea.show();
+    maint.tktArea.hide();
+    maint.query.ckt('queryCkid');
+});
+
+maint.findTktBtn.click(function(){
+    maint.tktArea.show();
+    maint.cktArea.hide();
+    maint.query.tkt('queryTkt');
+});
+
+maint.clearBtn.click(function(){
+    maint.clearForm();
+    // maint.tbl.body.empty();    
+});
+
+maint.nextCktBtn.click(function(){
+    if (maint.tblCkt.index<maint.tblCkt.maxIndex) {
+        maint.tblCkt.index++;
+        maint.displayTbl.ckt(maint.tblCkt.index);
+    }  
+});
+
+maint.prevCktBtn.click(function(){
+    if (maint.tblCkt.index>1) {
+        maint.tblCkt.index--;
+        maint.displayTbl.ckt(maint.tblCkt.index);   
+    }         
+});
+
+maint.nextTktBtn.click(function(){
+    if (maint.tblTkt.index<maint.tblTkt.maxIndex) {
+        maint.tblTkt.index++;
+        maint.displayTbl.ckt(maint.tblTkt.index);
+    }  
+});
+
+maint.prevTktBtn.click(function(){
+    if (maint.tblTkt.index>1) {
+        maint.tblTkt.index--;
+        maint.displayTbl.ckt(maint.tblTkt.index);   
+    }         
+});
+
+maint.ffacSearchBtn.click(function() {
+    if (maint.facSearch.is(':visible')) {
+        if ($("label[for='maint_fac_txt']").text() == "FAC(Y)") {
+            maint.ffacSelect = true;
+            maint.fac.val("");
+            maint.psta.val("TST");
+            maint.tblFac.body.empty();
+            maint.facSearch.show();
+            $("label[for='maint_fac_txt']").text("FAC(X)");
+            maint.query.fac();
+        }
+        else {
+            maint.facSearch.hide();
+        }
+    }
+    else {
+        maint.ffacSelect = true;
+        maint.fac.val("");
+        maint.psta.val("TST");
+        maint.tblFac.body.empty();
+        maint.facSearch.show();
+        $("label[for='maint_fac_txt']").text("FAC(X)");
+        maint.query.fac();
+    }
+});
+
+maint.tfacSearchBtn.click(function() {
+    if (maint.facSearch.is(':visible')) {
+        if ($("label[for='maint_fac_txt']").text() == "FAC(X)") {
+            maint.ffacSelect = false;
+            maint.fac.val("");
+            maint.psta.val("TST");
+            maint.tblFac.body.empty();
+            maint.facSearch.show();
+            $("label[for='maint_fac_txt']").text("FAC(Y)");
+            maint.query.fac();
+        }
+        else {
+            maint.facSearch.hide();
+        }
+    }
+    else {
+        maint.ffacSelect = false;
+        maint.fac.val("");
+        maint.psta.val("TST");
+        maint.tblFac.body.empty();
+        maint.facSearch.show();
+        $("label[for='maint_fac_txt']").text("FAC(Y)");
+        maint.query.fac();
+    }
+});
+
+maint.facCloseBtn.click(function(){
+    maint.facSearch.hide();
+});
+
+maint.facSearchBtn.click(function(){
+    maint.query.fac();
+});
+
+// maint.ckid.change(function() {
+//     if (maintModal.tn.is(':checked')) {
+//         if (validateCkid(maint.ckid.val()) != true) {
+//             alert("Please fill in CKID with the format: XXX-XXX-XXXX Where X is a digit");
+//         }
+//     }
+// });
+
+// maint.tn.change(function() {
+//     if (maint.tn.is(':checked')) {
+//         if (validateCkid(maint.ckid.val()) != true) {
+//             alert("Please fill in CKID with the format: XXX-XXX-XXXX Where X is a digit");
+//         }
+//     }
+// });
+
+maint.prevFacBtn.click(function() {
+    if (maint.tblFac.index > 1) {
+        maint.tblFac.index--;
+        maint.displayTbl.fac(maint.tblFac.index);
+    }
+});
+
+maint.nextFacBtn.click(function() {
+    if (maint.tblFac.index < maint.tblFac.maxIndex) {
+        maint.tblFac.index++;
+        maint.displayTbl.fac(maint.tblFac.index);
+    }
+});
+//--------------------maintMODAL CLICK FUNCTIONS---------------//
+maintModal.newFfacSearchBtn.click(function() {
+    maintModal.newFfacSelect = true;
+    if (maintModal.newFacSearch.is(':visible')) {
+        if ($("label[for='maintModal_newFac_txt']").text() != "FAC(X)") {
+            maintModal.clearTblFac();
+            $("label[for='maintModal_newFac_txt']").text("FAC(X)");
+
+        }
+        else {
+            maintModal.newFacSearch.hide();
+            return;
+        }
+    }
+    else {
+        maintModal.clearTblFac();
+        $('#maintModal_newFac_txt').val('');
+        maintModal.newFacSearch.show();
+        $("label[for='maintModal_newFac_txt']").text("FAC(X)");
+
+    }
+
+    if ($('#maintModal_newFfac_txt').val() != '') {
+        $('#maintModal_newFac_txt').val($('#maintModal_newFfac_txt').val());
+        maintModal.query.fac();
+    }
+});
+
+maintModal.newTfacSearchBtn.click(function() {
+    maintModal.newFfacSelect = false;
+    if (maintModal.newFacSearch.is(':visible')) {
+        if ($("label[for='maintModal_newFac_txt']").text() != "FAC(Y)") {
+            maintModal.clearTblFac();
+            $("label[for='maintModal_newFac_txt']").text("FAC(Y)");
+        }
+        else {
+            maintModal.newFacSearch.hide();
+            return;
+        }
+    }
+    else {
+        maintModal.clearTblFac();
+        $('#maintModal_newFac_txt').val('');
+        maintModal.newFacSearch.show();
+        $("label[for='maintModal_newFac_txt']").text("FAC(Y)");
+    }
+
+    if ($('#maintModal_newTfac_txt').val() != '') {
+        $('#maintModal_newFac_txt').val($('#maintModal_newTfac_txt').val());
+        maintModal.query.fac();
+    }
+});
+
+maintModal.newPrevFacBtn.click(function(){
+    if (maintModal.newTblFac.index>1) {
+        maintModal.newTblFac.index--;
+        maintModal.displayTbl.fac(maintModal.newTblFac.index);   
+    }  
+})
+
+maintModal.newNextFacBtn.click(function() {
+    if (maintModal.newTblFac.index<maintModal.newTblFac.maxIndex) {
+        maintModal.newTblFac.index++;
+        maintModal.displayTbl.fac(maintModal.newTblFac.index);
+    }  
+})
+
+maintModal.newFacSearchBtn.click(function(){
+    maintModal.query.fac();
+});
+
+
+
+
+maintModal.submitBtn.click(function() {
+    if (maintModal.ckid.val() == '') {
+        alert("MISSING CKID");
+        return;
+    }
+    else {
+        if (maintModal.tn.is(':checked')) {
+            var ckid = maintModal.ckid.val();
+            var telnum;
+            if ((telnum = getTN(ckid)) === false) {
+                var d = ckid.split('-');
+                if (d.length != 3 ||
+                    !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                    && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                    && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))         
+                {
+                    alert ("CKID: INVALID TN FORMAT");
+                    return;
+                }
+                telnum = ckid;
+            }
+            maintModal.ckid.val(telnum);
+            maint.ckid.val(telnum);
+        }
+    }
+
+
+    if (maintModal.act.val() == "MTC_CONN") {
+        if (maintModal.pick1.is(':checked')) { 
+            maintModal.pickedTfac = maintModal.conTfac.val();
+            maintModal.pickedFfac = maintModal.conFacX.val();
+        }
+        else if (maintModal.pick2.is(':checked')) {
+            maintModal.pickedTfac = maintModal.conFacY.val();
+            maintModal.pickedFfac = maintModal.conFfac.val();
+        }
+
+        maint.ckid.val(maintModal.ckid.val());
+        maint.cls.val(maintModal.cls.val());
+        maint.adsr.val(maintModal.adsr.val());
+        maint.prot.val(maintModal.prot.val());
+        maint.tktno.val(maintModal.tktno.val());
+        maint.mlo.val(maintModal.mlo.val());
+        maintModal.submitMtcConnect();
+    } 
+    else if (maintModal.act.val() == "MTC_DISCON") {
+        maintModal.submitMtcDisconnect();
+    }
+    else if (maintModal.act.val() == "RESTORE_MTCD") {
+        maintModal.submitRestoreMtcd();
+    }
+    else if (maintModal.act.val() == "MTC_RESTORE") {
+        maintModal.submitMtcRestore();
+    }
+    else if (maintModal.act.val() == "MTC_TEST") {
+        if (maintModal.pickTest1.is(':checked')) { 
+            maintModal.pickedTestPort = maintModal.conTestPort1.val();
+            maintModal.pickedTestFac = maintModal.conTestFacX.val();
+        }
+        else if (maintModal.pickTest2.is(':checked')) {
+            maintModal.pickedTestFac = maintModal.conTestFacY.val();
+            maintModal.pickedTestPort = maintModal.conTestPort2.val();
+        }
+
+        maint.ckid.val(maintModal.ckid.val());
+        maint.cls.val(maintModal.cls.val());
+        maint.adsr.val(maintModal.adsr.val());
+        maint.prot.val(maintModal.prot.val());
+        maint.tktno.val(maintModal.tktno.val());
+        maint.mlo.val(maintModal.mlo.val());
+        maintModal.submitMtcTest();
+    } 
+    else if (maintModal.act.val() == "CHANGE") {
+        if(!((maintModal.oldFfac.val() == maintModal.newFfac.val() && maintModal.oldTfac.val() != maintModal.newTfac.val()) || (maintModal.oldFfac.val() != maintModal.newFfac.val() && maintModal.oldTfac.val() == maintModal.newTfac.val()))) {
+			alert("One of new facilities must be the same with the old connection!")
+            return;
+		}
+        maintModal.submitChange();
+    }
+});
+
+maintModal.clearBtn.click(maintModal.clearForm);
+
+maintModal.modal.on("hidden.bs.modal", function() {
+    if ($('.active.tab-pane').is("#sysview")) {
+        sysview.queryX(sysview.part);
+        sysview.queryY(sysview.part);
+    }
+    maintModal.clearForm();
+    maintModal.submitBtn.prop('disabled', false);
+    maint.act.val("");
+    maint.cktconIdx.val("").change();
+});
+
+// maintModal.ckid.change(function() {
+//     if (maintModal.tn.is(':checked')) {
+//         if (validateCkid(maintModal.ckid.val()) != true) {
+//             alert("Please fill in CKID with the format: XXX-XXX-XXXX Where X is a digit");
+//         }
+//     }
+// });
+
+// maintModal.tn.change(function() {
+//     if (maintModal.tn.is(':checked')) {
+//         if (validateCkid(maintModal.ckid.val()) != true) {
+//             alert("Please fill in CKID with the format: XXX-XXX-XXXX Where X is a digit");
+//         }
+//     }
+// });
+
+//--------------------TBL FAC CLICK FUNCTION-----------------//
+$(document).on("click","#maint_tblFac tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    if (maint.ffacSelect) {
+        maint.ffac.val(dataRow[0]);
+        maint.portX.val(dataRow[2]);
+    }
+    else {
+        maint.tfac.val(dataRow[0]);
+        maint.portY.val(dataRow[2]);
+    }
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+$(document).on("click","#maintModal_newTblFac tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    if (maintModal.newFfacSelect) {
+        maintModal.newFfac.val(dataRow[0]);
+        maintModal.newPortX.val(dataRow[2]);
+    }
+    else {
+        maintModal.newTfac.val(dataRow[0]);
+        maintModal.newPortY.val(dataRow[2]);
+    }
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+//---------------------TBL1 CLICK FUNCTIONS-----------------//
+
+
+$(document).on("click","#maint_tblCkt tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+    //Populate the information
+    
+    maint.cktId.val(dataRow[0]).change();
+    maint.ckid.val(dataRow[1]).change();
+    maint.cls.val(dataRow[2]).change();
+    maint.adsr.val(dataRow[3]).change();
+    maint.prot.val(dataRow[4]).change();
+    maint.tktno.val(dataRow[6]).change();
+    // maint.mlo.val(dataRow[6]).change();
+    maint.date.val(dataRow[7]).change();
+    maint.dd.val(dataRow[8]).change();
+    maint.fdd.val(dataRow[9]).change();
+    maint.cktconId.val(dataRow[10]).change();
+
+    maint.ffac.val("");
+    maint.tfac.val("");
+
+    maint.portX.val("");
+    maint.portY.val("");
+
+    maint.contyp.val("");
+
+    maint.facSearch.hide();
+    maint.cktconArea.show();
+    maint.query.cktConByCkid(maint.ckid.val());
+
+    // Reset maint_cktconIdx_num
+    maint.cktconIdx.val("");
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+
+    maint.act.prop("disabled", false);
+
+});
+
+$(document).on("click","#maint_tblTkt tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+    //Populate the information
+
+    maint.cktId.val(dataRow[0]).change();
+    maint.tktno.val(dataRow[1]).change();
+    maint.mlo.val(dataRow[2]).change();
+    maint.ckid.val(dataRow[3]).change();
+    maint.cls.val(dataRow[4]).change();
+    maint.adsr.val(dataRow[5]).change();
+    maint.prot.val(dataRow[6]).change();
+    maint.contyp.val(dataRow[7]);
+    maint.ffac.val(dataRow[8]);
+    maint.tfac.val(dataRow[9]);
+    maint.portX.val("");
+    maint.portY.val("");
+    maint.date.val(dataRow[10]).change();
+    
+    maint.facSearch.hide();
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+    maint.act.prop("disabled", true);
+});
+
+//--------------------TBL2 CLICK FUNCTIONS---------------//
+
+$(document).on("click","#maint_tblCktCon tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    maint.cktconIdx.val(dataRow[0]).change();
+    maint.contyp.val(dataRow[1]).change();
+    maint.ffac.val(dataRow[4]).change();
+    maint.tfac.val(dataRow[7]).change();
+    maint.portX.val(dataRow[2]).change();
+    maint.portY.val(dataRow[5]).change();
+	maintModal.ctyp.val(dataRow[1]).change();
+	maintModal.ffac.val(dataRow[4]).change();
+	maintModal.tfac.val(dataRow[7]).change();
+	// maintModal.discCtyp.val(dataRow[1]).change();
+	// maintModal.discFFac.val(dataRow[4]).change();
+	// maintModal.discTFac.val(dataRow[7]).change();
+    
+    maint.facSearch.hide();
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+//--------------------ACTION SELECTION CLICK FUNCTIONS---------------//
+
+maint.act.change(function() {
+    if (maint.act.val()  ==  "MTC_CONN") {
+        maintModal.clearForm();
+        maint.populateModal();
+
+        maintModal.loadFacX();
+        maintModal.loadFacY();
+        // maintModal.disableForm();
+        maintModal.pick1.prop('checked',true);
+        maintModal.pick2.prop('checked',false);
+        maintModal.conTfac.prop("disabled", false);
+        maintModal.conFfac.prop("disabled", true);
+
+        maintModal.newConForm.show();
+        maintModal.reConForm.hide();
+        maintModal.discConForm.hide();
+        maintModal.changeConForm.hide();
+        maintModal.testPortForm.hide();
+        maintModal.clearBtn.hide();
+        maintModal.modal.modal();
+    }
+    else if (maint.act.val()  ==  "MTC_RESTORE") {
+        maintModal.clearForm();
+        maint.populateModal();
+        maintModal.reConForm.show();
+        maintModal.newConForm.hide();
+        maintModal.discConForm.hide();
+        maintModal.changeConForm.hide();
+        maintModal.testPortForm.hide();
+
+        maintModal.clearBtn.hide();
+        maintModal.modal.modal();
+    }
+    else if (maint.act.val()  ==  "RESTORE_MTCD") {
+        maintModal.clearForm();
+        maint.populateModal();
+        maintModal.reConForm.show();
+        maintModal.discConForm.hide();
+        maintModal.changeConForm.hide();
+        maintModal.newConForm.hide();
+        maintModal.testPortForm.hide();
+
+        maintModal.clearBtn.hide();
+        maintModal.modal.modal();
+    }
+    else if (maint.act.val()  ==  "MTC_DISCON") {
+        
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS");
+            maint.act.val("");
+        }
+        else {
+            maintModal.clearForm();
+            maint.populateModal();
+            maintModal.disableForm();
+            maintModal.act.prop("disabled",true);
+            maintModal.reConForm.hide();
+            maintModal.newConForm.hide();
+            maintModal.changeConForm.hide();
+            maintModal.clearBtn.hide();
+            maintModal.testPortForm.hide();
+            maintModal.discConForm.show();
+
+            maintModal.modal.modal();
+        }
+    }
+    else if (maint.act.val()  ==  "MTC_TEST") {
+        maintModal.clearForm();
+        maint.populateModal();
+
+        maintModal.loadTestPort();
+        // maintModal.disableForm();
+        maintModal.pickTest1.prop('checked',true);
+        maintModal.pickTest2.prop('checked',false);
+        maintModal.conTestPort1.prop("disabled", false);
+        maintModal.conTestPort2.prop("disabled", true);
+
+        maintModal.newConForm.hide();
+        maintModal.reConForm.hide();
+        maintModal.discConForm.hide();
+        maintModal.changeConForm.hide();
+        maintModal.testPortForm.show();
+        maintModal.clearBtn.hide();
+        maintModal.modal.modal();
+    }
+    else if (maint.act.val()  ==  "CHANGE") {
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS");
+            maint.act.val("");
+            
+        }
+        else {
+            maintModal.clearForm();
+            maint.populateModal();
+            //maintModal.loadFacX();
+            //maintModal.loadFacY();
+            maintModal.newConForm.hide();
+            maintModal.reConForm.hide();
+            maintModal.discConForm.hide();
+            maintModal.changeConForm.show();
+            maintModal.testPortForm.hide();
+            maintModal.clearBtn.hide();
+            maintModal.modal.modal();
+        }
+
+    }
+});
+
+///--------------------radio button click funcctions-----------------//
+maintModal.pick1.click(function() {
+    if(maintModal.pick1.is(':checked')) { 
+        maintModal.conTfac.prop("disabled", false);
+        maintModal.conFfac.prop("disabled", true);
+    }
+});
+
+maintModal.pick2.click(function() {
+    if(maintModal.pick2.is(':checked')) { 
+        maintModal.conFfac.prop("disabled", false);
+        maintModal.conTfac.prop("disabled", true);
+    }
+});
+
+
+maintModal.pickTest1.click(function() {
+    if(maintModal.pickTest1.is(':checked')) { 
+        maintModal.conTestPort1.prop("disabled", false);
+        maintModal.conTestPort2.prop("disabled", true);
+    }
+});
+
+maintModal.pickTest2.click(function() {
+    if(maintModal.pickTest2.is(':checked')) { 
+        maintModal.conTestPort2.prop("disabled", false);
+        maintModal.conTestPort1.prop("disabled", true);
+    }
+});
+
+// functions
+
+function validateCkid(ckid) {
+    //1) allow the str with digit and dash only
+    var a = isFinite(ckid.slice(0,3));
+    var b = isFinite(ckid.slice(4,7));
+    var c = isFinite(ckid.slice(8,13));
+    if (a == false || b == false || c == false) {
+        return false;
+    }
+    //2) if str.length > 3 and less than 6, dash must be at index 3
+    if (ckid.length > 3) {
+        if (ckid.indexOf('-', 0) != 3) {
+            return false;
+        }
+    }
+    //3) if strlen > 6, dash must be at index 7, 
+    if (ckid.length > 7) {
+        if (ckid.indexOf('-', 7) != 7) {
+            return false;
+        }
+    }
+    //4) if strlen > 12 then false
+    if (ckid.length > 12) {
+        return false;
+    }
+    //5) otherwise, true.
+    return true;
+};
+
+
+</script>
+    
+    

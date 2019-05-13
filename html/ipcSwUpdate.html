@@ -1,0 +1,382 @@
+<div id="swUpd" class="tab-pane fade in" style="position:relative">
+    <h4>SOFTWARE UPDATE</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- <div class="col-sm-12 modifyPadding">
+                <label for="swUpd_file_sel">BATCH FILE</label>
+                <select id="swUpd_file_sel" class="form-control">  
+                </select>
+            </div> -->
+            
+
+            <div class="col-sm-10 modifyPadding">
+                <label for="swUpd_act_sel">ACTION</label>
+                <select id="swUpd_act_sel" class="form-control">
+                    <option></option>
+                    <option>UPLOAD SW</option>
+                    <option>INSTALL UPDATE SW</option>
+                    <option>RUN CURRENT SW</option>
+                    <option>RUN UPDATE SW</option>
+                    <option>RUN DEFAULT SW</option>
+                    <option>APPLY UPDATE SW</option>
+                    <option>APPLY DEFAULT SW</option>
+                    <option>SET DEFAULT SW</option>                    <!-- <option>DELETE</option> -->
+                </select>
+                <br>
+                <!-- <input type="hidden" id="swUpd_id_num" style="width:50px;"> -->
+                <!-- <label id="swUpd_result_lbl" style="color:red"></label>  -->
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <div class="col-sm-8">
+                <div style="float:left;">
+                    <b>LIST OF SW:</b>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="panel panel-default">     
+                    <table class="table table-fixed" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">SW</th>
+                                <th style="width:20%">STATUS</th>
+                                <th style="width:35%">VERSION</th>
+                                <th style="width:25%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="swUpd_tbl">
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+      
+</div>
+
+<div id="swUpdModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title">SOFTWARE UPLOAD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                        <div class="container">
+                            <h4>CHOOSE THE SOFTWARE FILE FROM YOUR COMPUTER:</h4>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <input type="file" data-icon="false" id="swUpdModal_file" accept=".zip">
+                                </div>
+                            </div> 
+
+                        </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="swUpdModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <br>
+                        <!-- <label id="swUpdModal_result_lbl" style="color:red"></label> -->
+
+                    </div>
+            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var swUpd = {
+    act:        $("#swUpd_act_sel"),
+    // file:       $("#swUpd_file_sel"),
+    // id:         $("#swUpd_id_num"),
+    // resultLbl:  $("#swUpd_result_lbl"),
+    // submit:     $("#swUpd_submit_btn"),
+    // execute:    $("#swUpd_execute_btn"),
+    // scriptArea: $("#swUpd_script_txt"),
+    tbl:    {
+        body:   $("#swUpd_tbl"),
+    },
+    // list:       [],
+    // commandArray: [],
+    // help_button: $("#swUpd_help_button"),
+    // help_sidebar: $("#swUpd_help_sidebar"),
+    // help_close: $("#swUpd_help_close"),
+    
+    start: function() {
+        swUpd.clearForm();
+        swUpd.displayTable(); 
+    },
+    
+    clearForm: function(){
+        swUpd.act.val("");
+        // swUpd.file.val("");
+        // swUpd.tbl.body.empty();
+        // swUpd.scriptArea.empty();
+        // swUpd.id.val("");
+        // swUpd.resultLbl.text("");
+    },
+    
+    displayTable: function(){   
+        var a = [];
+        a.push('<tr> <td style="width:20%">' + folderSwList.CURRENT.sw + '</td>')  
+        a.push('<td style="width:20%;">' +  folderSwList.CURRENT.status + '</td>');
+        a.push('<td style="width:35%">' + folderSwList.CURRENT.ver + '</td>')  
+        a.push('<td style="width:25%;">' +  folderSwList.CURRENT.date + '</td></tr>');
+        a.push('<tr> <td style="width:20%">' + folderSwList.UPDATE.sw + '</td>')  
+        a.push('<td style="width:20%;">' +  folderSwList.UPDATE.status + '</td>');
+        a.push('<td style="width:35%">' + folderSwList.UPDATE.ver + '</td>')  
+        a.push('<td style="width:25%;">' +  folderSwList.UPDATE.date + '</td></tr>');
+        a.push('<tr> <td style="width:20%">' + folderSwList.DEFAULT.sw + '</td>')  
+        a.push('<td style="width:20%;">' +  folderSwList.DEFAULT.status + '</td>');
+        a.push('<td style="width:35%">' + folderSwList.DEFAULT.ver + '</td>')  
+        a.push('<td style="width:25%;">' +  folderSwList.DEFAULT.date + '</td></tr>');
+        swUpd.tbl.body.html(a.join(""));  
+    },
+
+    query: function(action){
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: {
+                user: $('#main_currentUser').text(),
+                act: action,
+                api: "ipcSwUpdate",
+                // id:  swUpd.id.val()
+            },
+        })
+        .done(function(data, status) {
+            var obj = JSON.parse(data);
+            // alert(obj['reason']);
+            if (obj["rslt"] == "fail") {
+                alert(obj['reason']);
+            }
+            else {
+                if(action != 'INSTALL UPDATE SW' && action != 'SET DEFAULT SW') {
+                    var urlParts = window.location.href.split("/");
+                    urlParts.pop(); 
+                    urlParts.pop(); 
+                    urlParts = urlParts.join("/");
+                    window.location.replace(urlParts); 
+                }
+                else {
+                    swUpd.updateInfo();
+                }
+                
+            }
+           
+        })
+    
+    },
+
+    
+    updateInfo: function(){
+        $.post(ipcSwInfo,
+        {
+            act: "querySw"
+        }, function(data, status) {
+            var obj = JSON.parse(data);
+            folderSwList = obj;
+            swUpd.displayTable(); 
+        })
+    },
+    
+}
+
+//////////////////-------------------BatchModal-------------------///////////////
+
+var swUpdModal = {
+    modal:      $("#swUpdModal"),
+    fileValue:  $("#swUpdModal_file"),
+    submitBtn:  $("#swUpdModal_submit_btn"),
+    resultLbl:  $("#swUpdModal_result_lbl"),
+    
+    add: function() {
+        if(swUpdModal.fileValue.val() == "") {
+            alert("There is no file uploaded!")
+            return;
+        }
+        var file= document.getElementById("swUpdModal_file").files[0];
+        if (file.size > 2097152) {
+            alert("The file size must be less than 2MB!");
+            return;
+        }
+  
+        var data = new FormData();
+        data.append("user", $("#main_currentUser").text());
+        data.append("act", "UPLOAD SW");
+        data.append("api", 'ipcSwUpdate')
+        data.append("file", file);  
+
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            var obj = JSON.parse(data);
+            alert(obj['reason']);
+            // if (obj["rslt"] == "fail") {
+            //     alert(obj['reason']);
+            // }
+            // else {
+            //     if (obj['rows'].length == 0) {
+            //         alert("No record found!");
+            //     }
+            //     else {
+            //         var a = [];
+            //         swUpd.list = obj['rows'];
+            //         a.push('<option></option>');
+
+            //         for (var i=0; i<obj["rows"].length; i++) 
+            //         {  
+            //             a.push('<option value = "'+ i +'">' + swUpd.list[i].filename + '</option>');
+            //         }
+
+            //         swUpd.file.empty();
+            //         swUpd.file.html(a.join(""));
+            //         swUpdModal.resultLbl.text(obj['rslt']);;
+            //     }  
+            // } 
+        });
+    
+        // }
+    },
+    
+    clearForm: function() {
+        swUpdModal.fileValue.val("");
+    },
+    
+}
+// ----------------------Click Events-----------------------------
+
+// swUpd.help_button.click(function(){
+//     if(swUpd.help_sidebar.css('display') == 'block') {
+//         swUpd.help_sidebar.hide();
+//     }
+//     else {
+//         swUpd.help_sidebar.show();
+//     }
+// }),
+
+// swUpd.help_close.click(function() {
+//     if(swUpd.help_sidebar.css('display') == 'block') {
+//         swUpd.help_sidebar.hide();
+//     }
+// });
+
+// $(document).on("click","#swUpd_tbl tr",function() {            
+//     $(this).addClass("addColor"); //add class selected to current clicked row       
+//     $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+// });
+
+
+// swUpd.execute.click(function(){
+//    swUpd.executeCommand();
+// })
+
+swUpd.act.change(function() {
+    if (swUpd.act.val() !="") {
+        if (swUpd.act.val()  ==  "UPLOAD SW") {
+            if(folderSwList.CURRENT.status != 'Running') {
+                alert("To run this action. SW CURRENT should be in status Running")
+            }
+            else {
+                swUpdModal.clearForm();
+                swUpdModal.modal.modal();
+            }
+
+           
+        }
+        else if (swUpd.act.val()  ==  "INSTALL UPDATE SW") {
+            if(folderSwList.CURRENT.status != 'Running') {
+                alert("To run this action. SW CURRENT should be in status Running")
+            }
+            else {
+                swUpd.query('INSTALL UPDATE SW');
+                swUpd.clearForm();
+            }
+           
+        }
+        else {
+            confirm("This action will reload the page. Continue?", function(){
+                if (swUpd.act.val()  ==  "RUN CURRENT SW") {
+                    swUpd.query('RUN CURRENT SW');
+                    swUpd.clearForm();
+                }
+                else if (swUpd.act.val()  ==  "RUN UPDATE SW") {
+                    swUpd.query('RUN UPDATE SW');
+                    swUpd.clearForm();
+                }
+                else if (swUpd.act.val()  ==  "RUN DEFAULT SW") {
+                    swUpd.query('RUN DEFAULT SW');
+                    swUpd.clearForm();
+                }
+                else if (swUpd.act.val()  ==  "APPLY UPDATE SW") {
+                    if(folderSwList.UPDATE.status != 'Running') {
+                        alert("To run this action. SW Update should be in status Running")
+                    }
+                    else {
+                        swUpd.query('APPLY UPDATE SW');
+                        swUpd.clearForm();
+                    }
+                
+                }
+                else if (swUpd.act.val()  ==  "APPLY DEFAULT SW") {
+                    if(folderSwList.DEFAULT.status != 'Running') {
+                        alert("To run this action. SW Default should be in status Running")
+                    }
+                    else {
+                        swUpd.query('APPLY DEFAULT SW');
+                        swUpd.clearForm();
+                    }
+                }
+                else if (swUpd.act.val() == "SET DEFAULT SW") {
+                    if(folderSwList.CURRENT.status != 'Running') {
+                        alert("To run this action. SW CURRENT should be in status Running")
+                    }
+                    else {
+                        swUpd.query('SET DEFAULT SW');
+                        swUpd.clearForm();
+                    }
+                    
+                }  
+            });
+            
+        }
+        
+        
+    }
+
+});
+
+// swUpd.file.change(function() {
+//     if(swUpd.file.val() != "") {
+//         if (swUpd.list.length > 0) {
+//             var index = swUpd.file.val();
+//             swUpd.id.val(swUpd.list[index].id);
+//             swUpd.query("QUERYBATS");
+//         }
+//     }
+
+// });
+
+
+swUpdModal.submitBtn.click(function(){
+    swUpdModal.add();
+});
+
+// -------------------Functions-------------------------------------
+
+swUpdModal.modal.on("hidden.bs.modal", swUpd.clearForm);
+
+</script>

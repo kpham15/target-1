@@ -1,0 +1,514 @@
+<div id="brdcst" class="tab-pane fade in" style="position: relative;">
+    <h4>BROADCAST NOTIFICATION</h4>
+       
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="col-sm-4" hidden>
+                    <label for="brdcst_user_txt">USER</label>
+                    <input class="form-control" type="text" id="brdcst_user_txt">
+                </div>
+                <div class="col-sm-4">
+                    <label for="brdcst_owner_sel">MSG OWNER</label>
+                    <input class="form-control" type="text" id="brdcst_owner_txt" readonly>
+                </div>            
+                <div class="col-sm-2">
+                    <label for="brdcst_sa_sel">SA</label>
+                    <select id="brdcst_sa_sel" class="form-control">
+                        <option></option>
+                        <option>Y</option>
+                        <option>N</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" id="brdcst_find_btn">View</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="brdcst_act_sel">ACTION</label>
+                    <select id="brdcst_act_sel" class="form-control">
+                        <option></option>
+                        
+                        <option>ADD</option>
+                        <option>UPDATE</option>
+                        <option>DELETE</option>
+                       
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" id="brdcst_clear_btn">Clear</button>
+                    <input type="hidden" id="brdcst_id_num" style="width: 50px">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8">
+                    <label for="brdcst_title_txt">MESSAGE TITLE</label>
+                    <input style="text-transform: uppercase" class="form-control" type="text" id="brdcst_title_txt" readonly>
+                </div>
+                <div class="col-sm-4">
+                    <label for="brdcst_date_txt">DATE</label>
+                    <input class="form-control" type="text" id="brdcst_date_txt" readonly>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="brdcst_detail_txt">MESSAGE DETAILS</label>
+                    <textarea id="brdcst_detail_txt" class="form-group" style="width:100%; min-height:150px; background-color:#f5f5f5" readonly></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-7">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF BROADCAST MESSAGES:</b>
+                </div>
+                <div style="float:right">
+                    <a  id="brdcst_previous">Previous</a> |
+                    <a  id="brdcst_next">Next</a>
+                    &nbsp&nbsp&nbsp<label id="brdcst_index_lbl"></label>
+                </div>
+            </div>
+           
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="table-layout: fixed">     
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px;">
+                            <tr>
+                                <th style="display: none">USER</th>
+                                <th style="width:5%">SA</th>
+                                <th style="width:20%">OWNER</th>
+                                <th style="width:57%">MSG TITLE</th>
+                                <th style="width:18%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brdcst_tbl">
+                    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<!-- BRDCST MODAL CODE -->
+<div id="brdcstModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">BROADCAST NOTIFICATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2" hidden>
+                        <label for="brdcstModal_user_txt">USER</label>
+                        <input class="form-control" type="text" id="brdcstModal_user_txt" readonly>
+                    </div>
+                    <div class="col-sm-5">
+                        <label for="brdcstModal_date_txt">DATE</label>
+                        <input class="form-control" type="text" id="brdcstModal_date_txt" readonly>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="brdcstModal_owner_sel">MSG OWNER</label>
+                        <select id="brdcstModal_owner_sel" class="form-control">
+                        </select>
+            
+                    </div> 
+                    <div class="col-sm-8">
+                        <label for="brdcstModal_title_txt">MESSAGE TITLE</label>
+                        <input style="text-transform: uppercase" class="form-control" type="text" id="brdcstModal_title_txt">
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="brdcstModal_sa_sel">SA</label>
+                        <select id="brdcstModal_sa_sel" class="form-control">
+                            <option></option>
+                            <option>Y</option>
+                            <option>N</option>
+                        </select>
+                    </div>
+                    <!-- ------------------------------------------ -->
+                    <div class="col-sm-12">
+                        <label for="brdcstModal_detail_txt">MESSAGE DETAILS</label>
+                        <textarea id="brdcstModal_detail_txt" class="form-group" style="width:100%; min-height: 150px;"></textarea>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="brdcstModal_act_txt">ACTION</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="brdcstModal_act_txt" readonly>
+                    </div>
+                    <div class="col-sm-8">
+                        <button class="btn btn-primary" id="brdcstModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="brdcstModal_clear_btn" style="display:none;">Clear</button>
+                        <label id="brdcstModal_result_lbl" style="color:red"></label>
+                    </div>
+            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+var brdcst = {
+    user:           $("#brdcst_user_txt"),
+    owner:          $("#brdcst_owner_txt"),
+    owner_id:       "",
+    sa:             $("#brdcst_sa_sel"),
+    findBtn:        $("#brdcst_find_btn"),
+    act:            $("#brdcst_act_sel"),
+    clearBtn:       $("#brdcst_clear_btn"),
+    title:          $("#brdcst_title_txt"),
+    date:           $("#brdcst_date_txt"),
+    detail:         $("#brdcst_detail_txt"),
+    prevBtn:        $("#brdcst_previous"),
+    nextBtn:        $("#brdcst_next"),
+    indexLbl:       $("#brdcst_index_lbl"),
+    id:             $("#brdcst_id_num"),
+    tbl: {
+        body:       $("#brdcst_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRows:        [],
+
+
+
+
+    start: function() {
+        // brdcst.clearForm();
+        brdcstModal.loadOwner();
+        // brdcst.query('query');    
+    },
+    
+    query: function(action){
+    
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcBroadcast",
+            act:    action,
+            user:   $("#main_currentUser").text(),
+            uname:  brdcst.user.val(),
+            owner:  brdcst.owner.val(),
+            owner_id:  "",
+            grp:    login.user.grp,
+            ugrp:   login.user.ugrp,
+            sa:     brdcst.sa.val()
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    if (action == "find") {
+                        alert("No Record Found");
+                        return;
+                    }
+                    alert("There Are No Active Broadcast Messages");
+                }
+                brdcst.tbl.index=0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].date.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                brdcst.tblRows = obj.rows;
+                var len = brdcst.tblRows.length; 
+                brdcst.tbl.maxIndex = Math.ceil(len/100.0);
+                brdcst.tbl.index++;
+                brdcst.displayTable(brdcst.tbl.index);
+            }
+        });
+    },
+    
+    
+    displayTable: function(index){   
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = brdcst.tblRows.length;
+    
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }            
+            brdcst.clearTable();
+            var a = [];
+            for (var i=0; i<stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="display:none">' + brdcst.tblRows[i].id         + '</td>')  
+                a.push('<td style="display: none">'     + brdcst.tblRows[i].user       + '</td>');
+                a.push('<td style="width:5%">'          + brdcst.tblRows[i].sa         + '</td>');
+                a.push('<td style="width:20%">'         + brdcst.tblRows[i].owner      + '</td>');
+                a.push('<td style="display:none">'      + brdcst.tblRows[i].owner_id   + '</td>'); 
+                a.push('<td style="width:57%">'         + brdcst.tblRows[i].msg        + '</td>');
+                a.push('<td style="display:none">'      + brdcst.tblRows[i].detail     + '</td>');
+                a.push('<td style="width:18%">'         + brdcst.tblRows[i].date       + '</td></tr>');
+            }
+            brdcst.tbl.body.html(a.join(""));
+            if (len == 0) 
+                brdcst.indexLbl.text("(total:" + len + ")") ;
+            else
+                brdcst.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+    
+    
+    clearForm: function() {
+        brdcst.id.val("");
+        brdcst.date.val("");
+        brdcst.user.val("");
+        brdcst.sa.val("");
+        brdcst.detail.val("");
+        brdcst.act.val("");
+        brdcst.owner.val("");
+        brdcst.owner_id = "";
+        brdcst.title.val("");
+    },
+    
+    
+    clearTable: function() {
+        brdcst.tbl.body.empty();
+    },
+    
+    
+    populateModal: function(){
+        brdcstModal.user.val(brdcst.user.val());
+        brdcstModal.sa.val(brdcst.sa.val());
+        brdcstModal.title.val(brdcst.title.val());
+        brdcstModal.detail.val(brdcst.detail.val());
+        brdcstModal.act.val(brdcst.act.val());
+        brdcstModal.date.val(brdcst.date.val());
+    },
+}
+
+var brdcstModal = {
+    modal:          $("#brdcstModal"),
+    user:           $("#brdcstModal_user_txt"),
+    date:           $("#brdcstModal_date_txt"),
+    owner:          $("#brdcstModal_owner_sel"),
+    owner_id:       "",
+    title:          $("#brdcstModal_title_txt"),
+    sa:             $("#brdcstModal_sa_sel"),
+    detail:         $("#brdcstModal_detail_txt"),
+    act:            $("#brdcstModal_act_txt"),
+    submitBtn:      $("#brdcstModal_submit_btn"),
+    clearBtn:       $("#brdcstModal_clear_btn"),
+    resultLbl:      $("#brdcstModal_result_lbl"),
+        
+    clearForm: function(){
+        brdcstModal.user.val("");
+        brdcstModal.date.val("");
+        brdcstModal.owner_id = "";
+        brdcstModal.title.val("");
+        brdcstModal.sa.val("");
+        brdcstModal.detail.val("");
+        brdcstModal.resultLbl.text("");
+    },
+    
+        
+    loadOwner: function(){
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcUser",
+            act:    "queryBrdcstOwner",
+            user:   $("#main_currentUser").text()
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                var a = [];
+                a.push('<option value=""></option>');
+    
+                for (var i=0; i<obj.rows.length; i++) 
+                {  
+                    a.push('<option value="' + obj.rows[i].uname + '">' + obj.rows[i].fname + " " + obj.rows[i].mi + " " + obj.rows[i].lname + '</option>');
+                }
+                $(brdcstModal.owner).html(a.join(""));
+            } 
+        });
+    },
+
+    submit: function(action){
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcBroadcast",
+            act:    action,
+            user:   $("#main_currentUser").text(),
+            id:     brdcst.id.val(),
+            uname:  brdcstModal.user.val(),
+            msg:    brdcstModal.title.val().toUpperCase(),
+            owner:  $(brdcstModal.owner).find("option:selected").text(),
+            owner_id: $(brdcstModal.owner).find("option:selected").val(),
+            grp:    login.user.grp,
+            ugrp:   login.user.ugrp,
+            sa:     brdcstModal.sa.val(),
+            detail: brdcstModal.detail.val()
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                brdcst.clearForm();
+                brdcstModal.modal.modal('hide');
+                alert(obj.reason);
+                brdcst.query();
+            } 
+        });
+    }
+}
+
+
+// Events Handling
+
+
+
+
+
+
+$(document).on("click","#brdcst_tbl tr",function() {
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();    
+    
+    //Populate the information 
+    brdcst.id.val(dataRow[0]);
+    brdcst.user.val(dataRow[1]);
+    brdcst.sa.val(dataRow[2]);    
+    brdcst.owner.val(dataRow[3]);
+    brdcst.owner_id = dataRow[4];
+    brdcst.title.val(dataRow[5]);  
+    brdcst.detail.val(dataRow[6]);
+    brdcst.date.val(dataRow[7]);
+    
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});    
+
+brdcst.act.change(function() {
+    if (brdcst.act.val() !="") {
+        brdcstModal.clearForm();
+        
+        if (brdcst.act.val()  ==  "ADD") {
+            brdcstModal.owner.prop("disabled",false);
+            brdcstModal.user.val($("#main_currentUser").text());
+            brdcstModal.act.val(brdcst.act.val());
+            brdcstModal.date.val(today());
+            brdcstModal.title.prop("disabled",false);
+            brdcstModal.sa.prop("disabled",false);
+            brdcstModal.detail.prop("disabled",false);
+            brdcstModal.modal.modal();
+            
+        }     
+        else if (brdcst.act.val()  ==  "UPDATE") {
+            if (brdcst.id.val() != "") {
+                brdcstModal.owner.val(brdcst.owner_id);
+                brdcstModal.owner.prop("disabled",true);
+                brdcstModal.title.prop("disabled",false);
+                brdcstModal.sa.prop("disabled",false);
+                brdcstModal.detail.prop("disabled",false);
+                brdcst.populateModal();
+                brdcstModal.modal.modal();
+            }    
+            else {
+                alert("Please select a MSG from the LIST OF NOTICICATIONS");
+                brdcst.act.val("");
+			}    
+        }     
+        else if (brdcst.act.val()  ==  "DELETE") {
+
+            if (brdcst.id.val() !="") {
+                brdcstModal.owner.val(brdcst.owner_id);
+                brdcstModal.owner.prop("disabled",true);
+                brdcstModal.title.prop("disabled",true);
+                brdcstModal.sa.prop("disabled",true);
+                brdcstModal.detail.prop("disabled",true);
+                brdcst.populateModal()
+                brdcstModal.modal.modal();;
+            }    
+            else {
+                alert("Please select a MSG from the LIST OF NOTICICATIONS")
+                brdcst.act.val("");
+			}    
+        }    
+    }
+})
+
+
+brdcst.findBtn.click(function(){
+    brdcst.query("query");
+});
+
+brdcst.nextBtn.click(function(){
+    if (brdcst.tbl.index<brdcst.tbl.maxIndex) {
+        brdcst.tbl.index++;
+        brdcst.displayTable(brdcst.tbl.index);
+    }      
+});
+
+brdcst.prevBtn.click(function(){
+    if (brdcst.tbl.index>1) {
+        brdcst.tbl.index--;
+        brdcst.displayTable(brdcst.tbl.index);   
+    }             
+});
+
+brdcst.clearBtn.click(function() {
+    brdcst.clearForm();
+    brdcst.query('query');
+    // brdcst.clearTable();
+});
+
+brdcstModal.submitBtn.click(function(){
+    brdcstModal.submit(brdcstModal.act.val());
+});
+
+brdcstModal.clearBtn.click(function() {
+    brdcstModal.clearForm();
+});
+
+brdcstModal.modal.on("hidden.bs.modal", brdcst.clearForm);
+
+
+function today() {
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) {
+        mm='0'+mm;
+    }
+    return (mm + "-" + dd + "-" + yyyy);
+}
+</script>

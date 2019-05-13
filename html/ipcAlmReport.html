@@ -1,0 +1,479 @@
+<div id="almReport" class="tab-pane fade in" style="position: relative;">
+    <h4>ALARM REPORT</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- <div class="col-sm-2">
+                <label for="almReport_user_txt">USER</label>
+                <input type="text" class="form-control" id="almReport_user_txt">
+            </div> -->
+
+            <div class="col-sm-2 ">
+                <label for="almReport_action_sel">ACTION</label>
+                <select class="form-control" id="almReport_action_sel">
+                    <option></option>
+                    <option>ACK</option>
+                    <option>UN-ACK</option>
+                    <option>CLR</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-2 ">
+                <label for="almReport_sev_sel">SEV</label>
+                <select class="form-control" id="almReport_sev_sel">
+                    <option></option>
+                    <option>CRIT</option>
+                    <option>MAJ</option>
+                    <option>MIN</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2 ">
+                <label for="almReport_src_txt">SOURCE</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="almReport_src_txt">
+            </div>
+
+            <div class="col-sm-3 ">
+                <label for="almReport_fromDate_date">FROM DATE</label>
+                <input type="date" class="form-control" id="almReport_fromDate_date">
+            </div>
+
+            <div class="col-sm-3 ">
+                <label for="almReport_toDate_date">TO DATE</label>
+                <input type="date" class="form-control" id="almReport_toDate_date">
+            </div>
+        <!-- ------------------------- -->
+            <div class="col-sm-3">
+                <label for="almReport_report_sel">REPORT</label>
+                <select class="form-control" id="almReport_report_sel">
+                    <option></option>
+                    <option>VIEW REPORT</option>
+                    <option>CREATE REPORT</option>
+                </select>
+            </div>
+
+            <div class="col-sm-9 ">
+                <button id="almReport_submit_btn" style="text-align:right;" class="btn btn-primary">SUBMIT</button>
+                <button id="almReport_clear_btn" style="text-align:right;" class="btn btn-primary">CLEAR</button>
+            </div> 
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-12 modifyPadding">
+                <label for="almReport_remark_txt">COMMENTS</label>
+                <textarea id="almReport_remark_txt" class="form-group" style="width:100%; min-height: 100px; border-radius: 4px; background-color:#F6F6F6" readonly>
+                </textarea>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!-- ---------- -->
+    <div class="col-sm-12">
+        <div style="float:left;">
+            <b>LIST OF ALARMS:</b>
+        </div>
+        <div style="float: right;">
+            <a  id="almReport_previous">Previous</a> |
+            <a  id="almReport_next">Next</a>
+            &nbsp;&nbsp;&nbsp; <label id="almReport_index_lbl"></label>
+        </div>
+            
+    </div>
+        <!-- ---------- -->
+    <div class="col-sm-12">
+        <div class="panel panel-default">     
+            <table class="table table-fixed">
+                <thead style="width: 100%; padding-right: 15px">
+                    <tr>
+                        <th id="almReport_DATE_tbl" style="width:12%">DATE</th>
+                        <th id="almReport_ALMID_tbl" style="width:8%">ALMID</th>
+                        <th id="almReport_ACTION_tbl" style="width:7.5%">ACTION</th>
+                        <th id="almReport_ACK_tbl" style="width:7.5%">ACK</th>
+                        <th id="almReport_SA_tbl" style="width:5%">SA</th>
+                        <th id="almReport_SRC_tbl" style="width:25%">SRC</th>
+                        <th id="almReport_TYPE_tbl" style="width:10%">TYPE</th>
+                        <th id="almReport_COND_tbl" style="width:20%">COND</th>
+                        <th id="almReport_SEV_tbl" style="width:5%">SEV</th>
+                        <th id="almReport_COMMENTS_tbl" style="display:none">COMMENTS</th>
+                        <th style="display:none">PSTA</th>
+                        <th style="display:none">SSTA</th>
+                        <th style="display:none">REMARK</th>
+                        <th style="display:none">ID</th>
+                        <th style="display:none">ALMID</th>
+                    </tr>
+                </thead>
+                <tbody id="almReport_tbl">
+            
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JS START -->
+
+<script>
+var almReport = {
+
+    page:           $("#almReport"),
+    uname:          $("#almReport_user_txt"),
+    report:         $("#almReport_report_sel"),
+    action:         $("#almReport_action_sel"),
+    sev:            $("#almReport_sev_sel"),
+    src:            $("#almReport_src_txt"),
+    numDays:        $("#almReport_numDays_sel"),
+    submitBtn:      $("#almReport_submit_btn"),
+    clearBtn:       $("#almReport_clear_btn"),
+    indexLbl:       $("#almReport_index_lbl"),
+    fromDate:       $("#almReport_fromDate_date"),
+    toDate:         $("#almReport_toDate_date"),
+    remark:         $("#almReport_remark_txt"),
+    tbl:            {
+        body:       $("#almReport_tbl"),
+        index:      0,
+        maxIndex:   0,
+        previous:   $("#almReport_previous"),
+        next:       $("#almReport_next"),
+        headers: {
+            date:    $("#almReport_DATE_tbl"),
+            user:    $("#almReport_USER_tbl"),
+            action:  $("#almReport_ACTION_tbl"),
+            ack:     $("#almReport_ACK_tbl"),
+            sa:      $("#almReport_SA_tbl"),
+            src:     $("#almReport_SRC_tbl"),
+            type:    $("#almReport_TYPE_tbl"),
+            cond:    $("#almReport_COND_tbl"),
+            sev:     $("#almReport_SEV_tbl"),
+            remark:  $("#almReport_COMMENTS_tbl"),
+        }
+    },
+    headers: {
+        date: true,
+        user: true,
+        action: true,
+        ack: true,
+        sa: true,
+        src: true,
+        type: true,
+        cond: true,
+        sev: true,
+        remark: true
+    },
+
+    tblRows:        [],
+    
+    start: function () {
+        almReport.clearForm();
+        almReport.clearTable();
+        almReport.sortHeaderEvents();
+        // almReport.query('query');
+    },
+
+    clearForm: function() {
+        almReport.uname.val("");
+        almReport.report.val("");
+        almReport.sev.val("");
+        almReport.numDays.val("");
+        almReport.action.val("");
+        almReport.tblRows = [];
+        almReport.fromDate.val(almReport.currentDate());
+        almReport.toDate.val(almReport.currentDate());
+        
+    },
+
+    clearTable: function() {
+        almReport.tbl.body.empty();
+        almReport.indexLbl.text ("(total:" + almReport.tblRows.length + ")");
+
+    },
+
+    displayTable: function(index) { 
+        var startIndex= (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = almReport.tblRows.length;
+            
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }         
+            almReport.clearTable();
+            
+            var a = [];
+            var displayedRows = almReport.tblRows;
+            var tableHeader = ['date','user','action','ack','sa','src','type','cond','sev','result','remark','id'];
+            for (var i = startIndex; i < stopIndex; i++) 
+            {  
+                //check if column exists in the tblRows or the value NULL, if yes, put the empty string instead.  
+                for(let j=0; j<tableHeader.length; j++) {
+                    if(displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null)
+                        displayedRows[i][tableHeader[j]] = "";
+                } 
+
+                a.push('<tr><td style="width:12%">'     +   displayedRows[i].date + '</td>');
+                a.push('<td style="width:8%">'         +  displayedRows[i].almid      + '</td>');
+                a.push('<td style="width:7.5%">'         +  displayedRows[i].action    + '</td>');
+                a.push('<td style="width:7.5%">'         +  displayedRows[i].ack      + '</td>');
+                a.push('<td style="width:5%">'          +  displayedRows[i].sa       + '</td>');
+                a.push('<td style="width:25%">'         +  displayedRows[i].src      + '</td>');
+                a.push('<td style="width:10%">'         +  displayedRows[i].type     + '</td>');
+                a.push('<td style="width:20%">'          +  displayedRows[i].cond     + '</td>');
+                a.push('<td style="width:5%">'          +  displayedRows[i].sev      + '</td>');
+
+                a.push('<td style="display:none">'         +  displayedRows[i].remark   + '</td>');    
+                a.push('<td style="display:none">'      +  displayedRows[i].result   + '</td>');
+                a.push('<td style="display:none">'      +  displayedRows[i].id       + '</td></tr>');
+                    
+            }
+            almReport.tbl.body.html(a.join(""));
+            if (len == 0)
+                almReport.indexLbl.text("(total:" + len + ")") ;
+            else
+                almReport.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+
+        } 
+    },
+
+    query: function(act) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcAlmReport",
+            act:            act,
+            user:           $("#main_currentUser").text(),
+            uname:          almReport.uname.val(),
+            action:         almReport.action.val(),
+            sev:            almReport.sev.val(),
+            src:            almReport.src.val().toUpperCase(),
+            fromDate:       almReport.fromDate.val(),
+            toDate:         almReport.toDate.val(),
+        
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj["rows"] === undefined || obj.rows.length === 0 ) {
+                    alert("No Record Found");
+                    almReport.tblRows = [];
+                }
+                almReport.tbl.index = 0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].date.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                almReport.tblRows = obj.rows;
+                var len = almReport.tblRows.length; 
+                almReport.maxIndex = Math.ceil(len/100.0);
+                almReport.tbl.index++;
+                almReport.displayTable(almReport.tbl.index);
+                
+            }
+        });
+    },
+
+    convertArrayOfObjectsToCSV: function(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    },
+
+    // for downloading the report in .csv file, file name is including date and time
+    // ALARM_REPORT_2019-03-02_2019-03-08.csv
+    
+    downloadCSV: function(args) {
+        var data, filename, link;
+        var csv = almReport.convertArrayOfObjectsToCSV({
+            data: almReport.tblRows
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+
+        // filename = 'ALARM_REPORT_'+almReport.fromDate.val().replace(/-/g,'')+'_'+almReport.toDate.val().replace(/-/g,'')+'.csv';
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+    
+    // sort the table by clicked-on column, click again will sort in reversed order
+    sortHeaderEvents: function() {
+        for (let elem in almReport.tbl.headers) {
+            almReport.tbl.headers[elem].click(function() {
+                if(almReport.tblRows.length != 0) {
+                    if (almReport.headers.elem) {
+                        almReport.tblRows = almReport.tblRows.sort(almReport.dynamicSort(`${elem}`)); //ascending
+                        almReport.headers.elem = false;
+                    }
+                    else {
+                        almReport.tblRows = almReport.tblRows.sort(almReport.dynamicSort(`-${elem}`)); // descending
+                        almReport.headers.elem = true;
+                    }
+                    almReport.displayTable(almReport.tbl.index);
+                }
+
+            });
+        }
+    },
+
+    currentDate: function() {
+        var today = new Date();
+        var dd    = today.getDate();
+        var mm    = today.getMonth()+1; //January is 0!
+        var yyyy  = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        } 
+
+        if (mm < 10) {
+            mm = '0' + mm
+        } 
+
+        todayDate = yyyy + '-' + mm + '-' + dd;
+
+        return todayDate;
+    },
+
+    currentTime: function() {
+        var today = new Date();
+        var cycle = false;
+        var hour = today.getHours();
+
+        time = `${hour}-${today.getMinutes()}`;
+        return time;
+    },
+}
+
+// EVENTS HANDLING
+
+//Table Click event
+
+$(document).on("click","#almReport_tbl tr",function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    // almReport.date.val(dataRow[0]);
+    // almReport.almid.val(dataRow[1]);
+    // almReport.action.val(dataRow[2]);
+    // almReport.ack.val(dataRow[3]);
+    // almReport.sa.val(dataRow[4]);
+    // almReport.src.val(dataRow[5]);
+    // almReport.type.val(dataRow[6]);
+    // almReport.cond.val(dataRow[7]);
+	// almReport.sev.val(dataRow[8]);
+    almReport.remark.text(dataRow[9]);
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+almReport.clearBtn.click(function(){
+    almReport.clearForm();
+    almReport.clearTable();
+});
+
+almReport.tbl.next.click(function() {
+    if (almReport.tbl.index < almReport.maxIndex) {
+        almReport.tbl.index++;
+        almReport.displayTable(almReport.tbl.index);
+    }  
+});
+
+almReport.tbl.previous.click(function() {
+    if (almReport.tbl.index > 1) {
+        almReport.tbl.index--;
+        almReport.displayTable(almReport.tbl.index);
+    }
+});
+
+almReport.submitBtn.click(function() {
+    if (almReport.report.val() == "VIEW REPORT") {
+        if (almReport.fromDate.val() > almReport.toDate.val()) {
+            alert ("'TO DATE' must the same or after 'FROM DATE'!")
+        } 
+        else {
+            almReport.query(almReport.report.val());
+        }
+    }
+    if (almReport.report.val() == "CREATE REPORT") {
+        if (almReport.fromDate.val() > almReport.toDate.val()) {
+            alert("'TO DATE' must the same or after 'FROM DATE'!")
+        } 
+        else {
+            var fromDate = almReport.fromDate.val().replace(/-/g, "");
+            var toDate = almReport.toDate.val().replace(/-/g, "");
+            almReport.downloadCSV({filename: `ALARM_REPORT_${fromDate}_${toDate}.csv`});
+        }
+    }
+});
+
+
+
+
+</script>

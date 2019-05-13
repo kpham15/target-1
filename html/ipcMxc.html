@@ -1,0 +1,697 @@
+<div id="mxc" class="tab-pane fade in">
+        <h4>LOCK/UNLOCK MATRIX CARDS AND NODES</h4>
+   
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-1 modifyPadding">
+                <label for="mxc_node_num">NODE</label>
+                <select id="mxc_node_num" class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <label for="mxc_shelf_sel">SHELF</label>
+                <select id="mxc_shelf_sel" class="form-control">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="mxc_type_sel" >TYPE</label>
+                <select id="mxc_type_sel" class="form-control">
+                    <option></option>
+                    <option>MIOX</option>
+                    <option>MIOY</option>
+                    <option>MRE</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="mxc_slot_sel">SLOT</label>
+                <select id="mxc_slot_sel" class="form-control">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+
+                </select>
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="mxc_stat_sel" >PORT STATUS</label>
+                <select id="mxc_stat_sel" class="form-control">
+                    <option></option>
+                    <option>CONN</option>
+                    <option>WK</option>
+                    <option>SF</option>
+                    <option>RS</option>
+                    <option>DIP</option>
+                    <option>MAINT</option>
+                    <option>MLPT</option>
+                    <option>MTCD</option>
+                    <option>UNQ</option>
+                    <option>UAS</option>
+                    <option>LCK</option>
+                    <option>DEF</option>
+                    <option>INS</option>
+                </select>
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <button class="btn btn-primary" id="mxc_view_btn">VIEW</button>
+            </div>
+        <!--
+            <div class="col-sm-2 modifyPadding">
+                <button class="btn btn-primary" id="mxc_viewCards_btn">VIEW CARDS</button>
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <button class="btn btn-primary" id="mxc_viewPorts_btn">VIEW PORTS</button>
+            </div>
+        -->
+        </div>
+            <!------------------------------------------>
+        <div class="row">
+            <div class="col-sm-3 modifyPadding">
+                <label for="mxc_act_sel">ACTION</label>
+                <select id="mxc_act_sel" class="form-control">
+                    <option></option>
+                    <option>LCK</option>
+                    <option>UN-LCK</option>
+                    <option>VIEW_PORT_STATUS</option>
+                    <option>REFRESH</option>
+                    <option>LCK_NODE</option>
+                    <option>UN-LCK_NODE</option>
+                </select>
+            </div>
+
+            <div class="col-sm-3 modifyPadding"> 
+                <button class="btn btn-primary" id="mxc_clear_btn">Clear</button>
+                <br>
+            </div>
+        </div>
+            <!-- ------------------------------------------ -->
+        <div class="row" id="mxc_viewport">
+            <div class="col-sm-12 modifyPadding" style="padding-bottom: 0px;">
+                <div style="float: left">
+                    <b>LIST OF PORTS: </b>
+                </div>
+                <div style="float:right">
+                    <a  id="mxc_previous2">Previous</a> |
+                    <a  id="mxc_next2">Next</a>
+                    &nbsp&nbsp&nbsp<label id="mxc_index_lbl2"></label>
+                </div>
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%">PORT</th>
+                                <th style="width: 25%">PSTA</th>
+                                <th style="width: 25%">FAC</th>
+                                <th style="width: 25%">CKID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mxc_viewport_tbl" style="height: 257px">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- NEXT COLUMN -->
+    <div class="col-sm-7">
+
+        <div class="col-sm-12">
+            <div style="float:left;">
+                <b>LIST OF MATRIX CARDS:</b>
+            </div>
+            <div style="float:right">
+                <a  id="mxc_previous">Previous</a> | <a  id="mxc_next">Next</a>
+                &nbsp&nbsp&nbsp<label id="mxc_index_lbl"></label>
+            </div>
+        </div>
+        
+
+        <div class="col-sm-12">
+            <div class="panel panel-default" style="margin-bottom: 0px">     
+                <table class="table table-fixed">
+                    <thead style="width: 100%; padding-right: 15px;">
+                        <tr>
+                            <th id="mxc_NODE_tbl" style="width:20%">NODE</th>
+                            <th id="mxc_SHELF_tbl" style="width:20%">SHELF</th>
+                            <th id="mxc_SLOT_tbl" style="width:20%">SLOT</th>
+                            <th id="mxc_TYPE_tbl" style="width:20%">TYPE</th>
+                            <th id="mxc_STATUS_tbl" style="width:20%">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mxc_tbl">
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="mxcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">LOCK/UNLOCK MATRIX CARD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="mxcModal_node_txt">NODE</label>
+                        <input class="form-control modifyPadding" type="text" id="mxcModal_node_txt" readonly>
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="mxcModal_shelf_sel">SHELF</label>
+                        <input class="form-control modifyPadding" type="text" id="mxcModal_shelf_sel" readonly>
+                        
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="mxcModal_slot_sel">SLOT</label>
+                        <input class="form-control modifyPadding" type="text" id="mxcModal_slot_sel" readonly>
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="mxcModal_type_sel">TYPE</label>
+                        <input class="form-control modifyPadding" type="text" id="mxcModal_type_sel" readonly>
+                    </div>
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="mxcModal_stat_sel">PORT STATUS</label>
+                        <input class="form-control modifyPadding" type="text" id="mxcModal_stat_sel" readonly>
+                    </div>
+    
+                    <!-- ------------------------------------------ -->
+                    <!-- <hr> -->
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="mxcModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="mxcModal_act_txt" readonly>
+                    </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="mxcModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="mxcModal_clear_btn" style="display:none;">Clear</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" id="mxcModal_id_num" style="width:50px;">
+                        <br>
+                    </div>
+        
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+var mxc = {
+    node:               $("#mxc_node_num"),
+    shelf:              $("#mxc_shelf_sel"),
+    slot:               $("#mxc_slot_sel"),
+    type:               $("#mxc_type_sel"),
+    stat:               $("#mxc_stat_sel"),
+    viewBtn:            $("#mxc_view_btn"),
+    viewCardsBtn:       $("#mxc_viewCards_btn"),
+    viewPortsBtn:       $("#mxc_viewPorts_btn"),
+    act:                $("#mxc_act_sel"),
+    clearBtn:           $("#mxc_clear_btn"),
+    prevBtn:            $("#mxc_previous"),
+    nextBtn:            $("#mxc_next"),
+    prevBtn2:           $("#mxc_previous2"),
+    nextBtn2:           $("#mxc_next2"),
+    indexLbl:           $("#mxc_index_lbl"),
+    indexLbl2:          $("#mxc_index_lbl2"),
+
+    viewPort:           $("#mxc_viewport"),
+
+    viewportTbl: {
+        body:           $("#mxc_viewport_tbl"),
+        index:          0,
+        maxIndex:       0,
+    },
+
+    tbl:         {
+        body:           $("#mxc_tbl"),
+        index:          0,
+        maxIndex:       0,
+        headers: {
+            node:   $("#mxc_NODE_tbl"),
+            shelf:  $("#mxc_SHELF_tbl"),
+            slot:   $("#mxc_SLOT_tbl"),
+            type:   $("#mxc_TYPE_tbl"),
+            psta:   $("#mxc_STATUS_tbl"),
+        },
+    },
+    
+    headers: {
+        node:   true,
+        shelf:  true,
+        slot:   true,
+        type:   true,
+        psta:   true,
+    },
+
+    tblRows:            [],
+    viewPortTblRows:    [],
+    slotHeader:   $("#mxc_SLOT_tbl"),
+    
+    start: function() {
+        mxc.clearForm();
+        mxc.clearTables();
+        mxc.node.val('1').change();
+        mxc.query('queryMatrix');
+        mxc.sortHeaderEvents();    
+    },
+    
+    clearForm: function() {
+        mxcModal.id.val("").change();
+        mxc.node.val("").change();
+        mxc.shelf.val("").change();
+        mxc.slot.val("").change();
+        mxc.type.val("").change();
+        mxc.stat.val("").change();
+        mxc.act.val("").change();
+        mxc.indexLbl.text("").change();
+    },
+
+    enableForm: function() {
+        mxc.shelf.prop('disabled', false);
+        mxc.slot.prop('disabled', false);
+        mxc.type.prop('disabled', false);
+        //mxc.viewCardsBtn.prop('disabled', false);
+    },
+    
+    populateModal: function() {
+        mxcModal.node.val(mxc.node.val());
+        mxcModal.shelf.val(mxc.shelf.val());
+        mxcModal.slot.val(mxc.slot.val());
+        mxcModal.type.val(mxc.type.val());
+        mxcModal.stat.val(mxc.stat.val());
+    
+        mxcModal.act.val(mxc.act.val());
+        
+    },
+
+    clearTables: function() {
+        mxc.viewportTbl.body.empty();
+        mxc.tbl.body.empty();
+        mxc.viewPort.hide();
+    },
+
+    displayTable: function(index) {   
+        var startIndex = (index - 1) * 100;
+        var stopIndex  = index * 100;
+        var len = mxc.tblRows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;    
+            }        
+            mxc.tbl.body.empty();
+            var a = [];
+            var displayedRows = mxc.tblRows;
+            var tableHeader = ['node','shelf','slot','type','psta'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]] == undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+
+                a.push('<tr> <td style="display:none">' + displayedRows[i].id + '</td>')  
+                a.push('<td style="width:20%">'         + displayedRows[i].node + '</td>');
+                a.push('<td style="width:20%">'         + displayedRows[i].shelf + '</td>');
+                a.push('<td style="width:20%">'         + displayedRows[i].slot + '</td>');
+                a.push('<td style="width:20%">'         + displayedRows[i].type + '</td>');
+                a.push('<td style="width:20%">'         + displayedRows[i].psta + '</td>');
+            }
+            mxc.tbl.body.html(a.join(""));
+            // mxc.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex);
+            if (len == 0) 
+                mxc.indexLbl.text("(total:" + len + ")") ;
+            else
+                mxc.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+
+    displayViewPortTbl: function(index) {   
+        var startIndex = (index - 1) * 100;
+        var stopIndex  = index * 100;
+        var len = mxc.viewPortTblRows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;    
+            }        
+            mxc.viewportTbl.body.empty();
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) 
+            {  
+                a.push('<tr>');  
+                a.push('<td style="width:25%">'         + mxc.viewPortTblRows[i].port + '</td>');
+                a.push('<td style="width:25%">'         + mxc.viewPortTblRows[i].psta + '</td>');
+                a.push('<td style="width:25%">'         + mxc.viewPortTblRows[i].fac + '</td>');
+                a.push('<td style="width:25%">'         + mxc.viewPortTblRows[i].ckid + '</td></tr>');
+            }
+            mxc.viewportTbl.body.html(a.join(""));
+            // mxc.indexLbl2.text("From " + (startIndex + 1) + " to " + stopIndex);
+            if (len == 0) 
+                mxc.indexLbl2.text("(total:" + len + ")") ;
+            else
+                mxc.indexLbl2.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+
+    
+    query: function(action) {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMxc",
+            act:    action,
+            user:   $('#main_currentUser').text(),
+            id:     mxcModal.id.val(),
+            node:   mxc.node.val(),
+            shelf:  mxc.shelf.val(),
+            slot:   mxc.slot.val(),
+            type:   mxc.type.val(),
+            stat:   mxc.stat.val(),
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (action == "VIEW_PORT_STATUS") {
+                    if (obj.rows.length === 0) {
+                        alert("No records found");
+                    }
+                    else {
+                        mxc.viewportTbl.index = 0;
+                        mxc.viewPortTblRows = obj.rows;
+                        var len = mxc.viewPortTblRows.length;
+                        mxc.viewportTbl.maxIndex = Math.ceil(len/100.0);
+                        mxc.viewportTbl.index++;
+                        mxc.displayViewPortTbl(mxc.viewportTbl.index);
+                        alert(obj.rslt);
+                        mxc.viewPort.css('display', 'block');
+                    }
+                    return;
+                }
+                else {
+                    if (obj.rows.length === 0) {
+                        alert("No record found");
+                    }
+                    else {
+                        mxc.tbl.index=0;
+                        mxc.tblRows = obj.rows;
+                        var len = mxc.tblRows.length; 
+                        mxc.tbl.maxIndex = Math.ceil(len/100.0);
+                        mxc.tbl.index++;
+                        mxc.displayTable(mxc.tbl.index);
+                    }
+                }
+            } 
+        });
+    },
+    
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in mxc.tbl.headers) {
+            mxc.tbl.headers[elem].click(function() {
+                if (mxc.tblRows.length != 0) {
+                    if (mxc.headers.elem) {
+                        mxc.tblRows = mxc.tblRows.sort(mxc.dynamicSort(`${elem}`));
+                        mxc.headers.elem = false;
+                    }
+                    else {
+                        mxc.tblRows = mxc.tblRows.sort(mxc.dynamicSort(`-${elem}`));
+                        mxc.headers.elem = true;
+                    }
+                    mxc.displayTable(mxc.tbl.index);
+                }
+            });
+        }
+    }
+}
+
+var mxcModal = {
+    modal:              $("#mxcModal"),
+    node:               $("#mxcModal_node_txt"),
+    shelf:              $("#mxcModal_shelf_sel"),
+    slot:               $("#mxcModal_slot_sel"),
+    type:               $("#mxcModal_type_sel"),
+    stat:               $("#mxcModal_stat_sel"),
+    act:                $("#mxcModal_act_txt"),
+    submitBtn:          $("#mxcModal_submit_btn"),
+    clearBtn:           $("#mxcModal_clear_btn"),
+    id:                 $("#mxcModal_id_num"),
+    tblRows:            [],
+    
+    clearForm: function() {
+        mxcModal.node.val("");
+        mxcModal.shelf.val("");
+        mxcModal.slot.val("");
+        mxcModal.type.val("");
+        mxcModal.stat.val("");
+    },
+    
+    submit: function(action){
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcMxc",
+            act:    action,
+            user:   $('#main_currentUser').text(),
+            id:     mxcModal.id.val(),
+            node:   mxcModal.node.val(),
+            shelf:  mxcModal.shelf.val(),
+            slot:   mxcModal.slot.val(),
+            type:   mxcModal.type.val(),
+            stat:   mxcModal.stat.val()
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert("FAIL: " + obj.reason);
+            }
+            else {
+                if (action == "VIEW_PORT_STATUS") {
+                    if (obj.rows.length === 0) {
+                        alert("No records found");
+                    }
+                    else {
+                        mxc.viewportTbl.index = 0;
+                        mxc.viewPortTblRows = obj.rows;
+                        var len = mxc.viewPortTblRows.length;
+                        mxc.viewportTbl.maxIndex = Math.ceil(len/100.0);
+                        mxc.viewportTbl.index++;
+                        mxc.displayViewPortTbl(mxc.viewportTbl.index);
+                        alert(obj.rslt);
+                        mxcModal.modal.modal('hide');
+                        mxc.viewPort.css('display', 'block');
+                    }
+                    mxc.act.val("");
+                    return;
+                }
+                alert(obj.reason);
+                mxcModal.modal.modal('hide');
+                mxc.stat.val('');
+                mxc.query('query');
+            }
+        });
+    }    
+    
+}
+
+
+// ----------------------MXC Click Events-----------------------------
+
+$(document).on("click","#mxc_tbl tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    mxcModal.id.val(dataRow[0]).change();
+    mxc.node.val(dataRow[1]).change();
+    mxc.shelf.val(dataRow[2]).change();
+    mxc.slot.val(dataRow[3]).change();
+     
+    mxc.type.val(dataRow[4]).change();       
+    //mxc.stat.val(dataRow[5]).change();  
+
+    mxc.enableForm();
+        
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+mxc.nextBtn.click(function(){
+    if (mxc.tbl.index<mxc.tbl.maxIndex) {
+        mxc.tbl.index++;
+        mxc.displayTable(mxc.tbl.index);
+    }  
+});
+
+mxc.prevBtn.click(function(){
+    if (mxc.tbl.index>1) {
+        mxc.tbl.index--;
+        mxc.displayTable(mxc.tbl.index);   
+    }         
+});
+
+mxc.nextBtn2.click(function(){
+    if (mxc.viewportTbl.index < mxc.viewportTbl.maxIndex) {
+        mxc.viewportTbl.index++;
+        mxc.displayViewPortTbl(mxc.viewportTbl.index);
+    }  
+});
+
+mxc.prevBtn2.click(function(){
+    if (mxc.viewportTbl.index > 1) {
+        mxc.viewportTbl.index--;
+        mxc.displayViewPortTbl(mxc.viewportTbl.index);   
+    }         
+});
+
+
+// ------------------Buttons---------------------------
+// mxc.viewCardsBtn.click(function() {
+//     if (mxc.stat.val() != "INS" && mxc.stat.val() != "OOS" && mxc.stat.val() != "LCK" && mxc.stat.val() != "") {
+//         alert("Please select from the following STATUSES for cards: INS, OOS, LCK")
+//     }
+//     else {
+//         mxc.query("query");
+//     }
+// });
+
+// mxc.viewPortsBtn.click(function() {
+//     mxc.query("VIEW_PORT_STAT");
+// });
+
+mxc.viewBtn.click(function() {
+        mxc.query('queryMatrix');
+})
+
+mxc.clearBtn.click(function() {
+    mxc.clearForm();
+    mxc.clearTables();
+    mxc.node.val('1').change();
+    mxc.query('queryMatrix');
+});
+
+// ----------------ACTION FIELD ----------------------
+mxc.act.change(function() {
+    if (mxc.act.val() != "") {
+        mxcModal.clearForm();
+        //If a card is selected
+        if (mxcModal.id.val() != "") {
+            mxc.populateModal();
+            mxcModal.modal.modal();
+            return;
+        }
+        else {
+            if (mxc.act.val() == "LCK_NODE" || mxc.act.val() == "UN-LCK_NODE") {
+                mxc.populateModal();
+                mxcModal.modal.modal();
+            }
+            else {
+                //If no card is selected and action is not VIEW_PORT_STAT
+                alert("Please select a CARD from LIST OF MATRIX CARDS");
+                mxc.act.val("");
+            }
+        }
+    }
+});
+
+// -------------------Functions-------------------------------------
+
+mxcModal.modal.on("hidden.bs.modal", function() {
+    if (mxcModal.act.val() === "VIEW_PORT_STAT") {
+        mxc.act.val("");
+        return;
+    }
+    mxc.act.val("");
+    mxc.clearForm;
+});
+
+// -----------------------MXCMODAL Click Events------------
+
+mxcModal.submitBtn.click(function(){
+    if (mxcModal.act.val() == "LCK") {
+        mxcModal.submit('lck');
+    } 
+    else if (mxcModal.act.val() == "UN-LCK") {
+        mxcModal.submit('unlck');
+    } 
+    else if (mxcModal.act.val() == "VIEW_PORT_STATUS") {
+        mxcModal.submit('VIEW_PORT_STATUS');
+    } 
+    else if (mxcModal.act.val() == "REFRESH") {
+        mxcModal.submit('refresh');
+    }
+    // else if (mxcModal.act.val() == "REMOVE") {
+    //     mxcModal.submit('remove');
+    // }
+    // else if (mxcModal.act.val() == "INSERT") {
+    //     mxcModal.submit('insert');
+    // }
+    else if (mxcModal.act.val() == "LCK_NODE") {
+        mxcModal.submit('lck_node');
+    }
+    else if (mxcModal.act.val() == "UN-LCK_NODE") {
+        mxcModal.submit('unlck_node');
+    }
+    mxc.act.val("");
+});
+
+mxcModal.clearBtn.click(mxcModal.clearForm);
+
+
+</script>

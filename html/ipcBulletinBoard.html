@@ -1,0 +1,329 @@
+<div id="bulletinBoard" class="tab-pane fade in active" style="position: relative;">
+    <h4>BULLETIN-BOARD</h4>
+       
+    <div class="row">
+        <div class="col-sm-5" hidden>
+            <div class="col-sm-4 modifyPadding" hidden>
+                <label for="bulletinBoard_user_txt">USER</label>
+                <input class="form-control modifyPadding" type="text" id="bulletinBoard_user_txt">
+            </div>
+            <div class="col-sm-4 modifyPadding">
+                <label for="bulletinBoard_owner_sel">MSG OWNER</label>
+                <input class="form-control modifyPadding" type="text" id="bulletinBoard_owner_txt" readonly>
+            </div>            
+            <div class="col-sm-2 modifyPadding">
+                <label for="bulletinBoard_sa_sel">SA</label>
+                <select id="bulletinBoard_sa_sel" class="form-control">
+                    <option></option>
+                    <option>Y</option>
+                    <option>N</option>
+                </select>
+            </div>
+            <!-- <div class="col-sm-1 modifyPadding">
+                <button class="btn btn-primary" id="bulletinBoard_find_btn">View</button>
+            </div> -->
+            
+            
+            <div class="col-sm-12 modifyPadding"></div>
+        
+            <div class="col-sm-10 modifyPadding">
+                <label for="bulletinBoard_title_txt">MESSAGE TITLE</label>
+                <input class="form-control modifyPadding" type="text" id="bulletinBoard_title_txt" readonly>
+            </div>
+            <div class="col-sm-4 modifyPadding">
+                <label for="bulletinBoard_date_txt">DATE</label>
+                <input class="form-control modifyPadding" type="text" id="bulletinBoard_date_txt" readonly>
+            </div>
+            
+            <div class="col-sm-12 modifyPadding">
+                <label for="bulletinBoard_detail_txt">MESSAGE DETAILS</label>
+                <textarea id="bulletinBoard_detail_txt" class="form-group" style="width:100%; min-height:150px; background-color:#f5f5f5" readonly></textarea>
+            </div>
+
+            <div class="col-sm-12 modifyPadding"></div>
+            
+            <div class="col-sm-5 modifyPadding">
+                <button class="btn btn-primary" id="bulletinBoard_clear_btn">Clear</button>
+                <button class="btn btn-primary" id="bulletinBoard_refresh_btn">Refresh</button>
+                <input type="hidden" id="bulletinBoard_id_num" style="width: 50px">
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF BULLETIN-BOARD MESSAGES:</b>
+                </div>
+                <div style="float:right">
+                    <a  id="bulletinBoard_previous">Previous</a> |
+                    <a  id="bulletinBoard_next">Next</a>
+                    &nbsp;&nbsp;&nbsp;<label id="bulletinBoard_index_lbl"></label>
+                </div>
+            </div>
+           
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="table-layout: fixed">     
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px;">
+                            <tr>
+                                <th style="width:13%">DATE</th>
+                                <th style="display: none">USER</th>
+                                <th style="width:3%">SA</th>
+                                <th style="width:14%">MSG OWNER</th>
+                                <th style="width:15%">MSG TITLE</th>
+                                <th style="width:55%">MSG DETAIL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bulletinBoard_tbl">
+                    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm-12"  align="center">
+                <button id="bulletinBoard_continue_btn" class="btn btn-primary">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- BRDCST MODAL CODE -->
+<!-- <div id="bulletinBoardModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">BROADCAST NOTIFICATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="bulletinBoardModal_user_txt">USER</label>
+                        <input class="form-control modifyPadding" type="text" id="bulletinBoardModal_user_txt" readonly>
+                    </div>
+                    <div class="col-sm-5 modifyPadding">
+                        <label for="bulletinBoardModal_date_txt">DATE</label>
+                        <input class="form-control modifyPadding" type="text" id="bulletinBoardModal_date_txt" readonly>
+                    </div>
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="bulletinBoardModal_owner_sel">MSG OWNER</label>
+                        <select id="bulletinBoardModal_owner_sel" class="form-control">
+                        </select>
+            
+                    </div> 
+                    <div class="col-sm-8 modifyPadding">
+                        <label for="bulletinBoardModal_title_txt">MESSAGE TITLE</label>
+                        <input class="form-control modifyPadding" type="text" id="bulletinBoardModal_title_txt">
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="bulletinBoardModal_sa_sel">SA</label>
+                        <select id="bulletinBoardModal_sa_sel" class="form-control">
+                            <option></option>
+                            <option>Y</option>
+                            <option>N</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 modifyPadding">
+                        <label for="bulletinBoardModal_detail_txt">MESSAGE DETAILS</label>
+                        <textarea id="bulletinBoardModal_detail_txt" class="form-group" style="width:100%; min-height: 150px;"></textarea>
+                    </div>
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="bulletinBoardModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="bulletinBoardModal_act_txt" readonly>
+                    </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="bulletinBoardModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="bulletinBoardModal_clear_btn" style="display:none;">Clear</button>
+                        <label id="bulletinBoardModal_result_lbl" style="color:red"></label>
+                    </div>
+            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script>
+
+var bulletinBoard = {
+    user:           $("#bulletinBoard_user_txt"),
+    owner:          $("#bulletinBoard_owner_txt"),
+    owner_id:       "",
+    sa:             $("#bulletinBoard_sa_sel"),
+    clearBtn:       $("#bulletinBoard_clear_btn"),
+    refreshBtn:     $("#bulletinBoard_refresh_btn"),
+    continueBtn:    $("#bulletinBoard_continue_btn"),
+    title:          $("#bulletinBoard_title_txt"),
+    date:           $("#bulletinBoard_date_txt"),
+    detail:         $("#bulletinBoard_detail_txt"),
+    prevBtn:        $("#bulletinBoard_previous"),
+    nextBtn:        $("#bulletinBoard_next"),
+    indexLbl:       $("#bulletinBoard_index_lbl"),
+    id:             $("#bulletinBoard_id_num"),
+    tbl: {
+        body:       $("#bulletinBoard_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRows:        [],
+
+
+
+    start: function() {
+        bulletinBoard.clearForm();
+        bulletinBoard.query('query');    
+    },
+    
+    query: function(){
+    
+        $.post(ipcDispatch,
+        {     
+            api:        "ipcBroadcast",
+            act:        'query',
+            user:       $("#main_currentUser").text(),
+            uname:      bulletinBoard.user.val(),
+            owner:      bulletinBoard.owner.val(),
+            owner_id:   "",
+            grp:        login.user.grp,
+            ugrp:       login.user.ugrp,
+            sa:         bulletinBoard.sa.val()
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    
+                    alert("There Are No Active Broadcast Messages");
+                }
+                bulletinBoard.tbl.index=0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].date.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                bulletinBoard.tblRows = obj.rows;
+                var len = bulletinBoard.tblRows.length; 
+                bulletinBoard.tbl.maxIndex = Math.ceil(len/5);
+                bulletinBoard.tbl.index++;
+                bulletinBoard.displayTable(bulletinBoard.tbl.index);
+            }
+        });
+    },
+    
+    displayTable: function(index){   
+        var startIndex = (index - 1) * 5;
+        var stopIndex = index * 5;
+        var len = bulletinBoard.tblRows.length;
+    
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }            
+            bulletinBoard.clearTable();
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="display:none">' + bulletinBoard.tblRows[i].id         + '</td>')  
+                a.push('<td style="width:13%">'         + bulletinBoard.tblRows[i].date       + '</td>');
+                a.push('<td style="display: none">'     + bulletinBoard.tblRows[i].user       + '</td>');
+                a.push('<td style="width:3%">'          + bulletinBoard.tblRows[i].sa         + '</td>');
+                a.push('<td style="width:14%">'         + bulletinBoard.tblRows[i].owner      + '</td>');
+                a.push('<td style="display:none">'      + bulletinBoard.tblRows[i].owner_id   + '</td>'); 
+                a.push('<td style="width:15%">'         + bulletinBoard.tblRows[i].msg        + '</td>');
+                a.push('<td style="width:55%">'      + bulletinBoard.tblRows[i].detail     + '</td></tr>');
+            }
+            bulletinBoard.tbl.body.html(a.join(""));
+            if (len == 0) 
+                bulletinBoard.indexLbl.text("(total:" + len + ")") ;
+            else
+                bulletinBoard.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+    
+    clearForm: function() {
+        bulletinBoard.id.val("");
+        bulletinBoard.date.val("");
+        bulletinBoard.user.val("");
+        bulletinBoard.sa.val("");
+        bulletinBoard.detail.val("");
+        bulletinBoard.owner.val("");
+        bulletinBoard.owner_id = "";
+        bulletinBoard.title.val("");
+    },
+    
+    clearTable: function() {
+        bulletinBoard.tbl.body.empty();
+    },
+}
+
+
+// Events Handling
+
+
+
+
+$(document).on("click","#bulletinBoard_tbl tr",function() {
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();    
+    
+    //Populate the information 
+    bulletinBoard.id.val(dataRow[0]);
+    bulletinBoard.user.val(dataRow[1]);
+    bulletinBoard.sa.val(dataRow[2]);    
+    bulletinBoard.owner.val(dataRow[3]);
+    bulletinBoard.owner_id = dataRow[4];
+    bulletinBoard.title.val(dataRow[5]);  
+    bulletinBoard.detail.val(dataRow[6]);
+    bulletinBoard.date.val(dataRow[7]);
+    
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+bulletinBoard.nextBtn.click(function(){
+    if (bulletinBoard.tbl.index<bulletinBoard.tbl.maxIndex) {
+        bulletinBoard.tbl.index++;
+        bulletinBoard.displayTable(bulletinBoard.tbl.index);
+    }      
+});
+
+bulletinBoard.prevBtn.click(function(){
+    if (bulletinBoard.tbl.index>1) {
+        bulletinBoard.tbl.index--;
+        bulletinBoard.displayTable(bulletinBoard.tbl.index);   
+    }             
+});
+
+bulletinBoard.clearBtn.click(function() {
+    bulletinBoard.clearForm();
+    bulletinBoard.query('query');
+});
+
+bulletinBoard.refreshBtn.click(function() {
+    bulletinBoard.query('query');
+});
+
+bulletinBoard.continueBtn.click(function() {
+    mB.sysview.click();
+});
+
+</script>

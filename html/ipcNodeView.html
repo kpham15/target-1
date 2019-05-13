@@ -1,0 +1,245 @@
+<div id="nodeview" class="tab-pane fade in">
+    <h4>NODE OVERVIEW</h4>
+    
+    <div class="nodeview_node">
+        <button id="nodeview_n1_btn">
+            Node 1
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n2_btn">
+            Node 2
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n3_btn">
+            Node 3
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n4_btn">
+            Node 4
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n5_btn">
+            Node 5
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+
+        <button id="nodeview_n6_btn">
+            Node 6
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n7_btn">
+            Node 7
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n8_btn">
+            Node 8
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n9_btn">
+            Node 9
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+        <button id="nodeview_n10_btn">
+            Node 10
+            <br>Alarm: None
+            <br>Temp: 92F
+            <br>Voltage: 44V
+        </button>
+    </div>
+    <div class="cardview" id="nodeview_front">
+    </div>
+    <div class="cardview" id="nodeview_back">
+    </div>
+ 
+</div>
+
+<script>
+
+var nodeview = {
+    nodeIndex:      0,
+    matrixcard:     [],
+    frontview:      $("#nodeview_front"),
+    backview:       $("#nodeview_back"),
+    firstnode:      $("#nodeview_n1_btn"),
+
+    start: function() {
+        nodeview.refresh();
+    },
+    
+    query:  function() {
+
+        // $.post("./php/coQueryMatrix.php",
+        $.post(ipcMxc,
+        {
+            act:	"queryMatrix",
+            user:	$('#main_currentUser').text(),
+            node:	nodeview.nodeIndex,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+    
+                nodeview.frontview.empty();
+                nodeview.backview.empty();
+                nodeview.matrixcard = obj.rows;
+                if (obj.rows.length  ==  0)
+                    alert("No record found");
+                else {
+                    nodeview.createCard();
+                }
+                
+            }
+        });
+    },
+    
+    
+    createCard: function() {
+        var mioArray = nodeview.matrixcard.filter(function(card) {
+            return card.type == 'MIO';
+        });
+     
+        var a =[];
+        a.push('<h4 style="color:black;">CO-500 FRONTVIEW</h4>')
+        for (var i=0; i < 10; i++) {
+            a.push('<div class="mxcard" id="nodeview_'+ mioArray[i].node +'_' + mioArray[i].slot +'_'+ mioArray[i].type +'"><span id="nodeview_'+ mioArray[i].node +'_' + mioArray[i].slot +'_'+ mioArray[i].type +'_alm" class="led"></span></div>');
+            $(document).on("click","#nodeview_"+ mioArray[i].node +'_' + mioArray[i].slot +'_'+ mioArray[i].type,function(){
+                
+            })
+        }
+        
+        nodeview.frontview.html(a.join(""));
+    
+        var mreArray = nodeview.matrixcard.filter(function(card) {
+            return card.type == 'MRE';
+        });
+    
+        a = [];
+        a.push('<h4 style="padding:0px">CO-500 BACKVIEW</h4>')
+        for (var i=0; i < 10; i++) {
+            a.push('<div class="mxcard" id="nodeview_'+ mreArray[i].node +'_' + mreArray[i].slot +'_'+ mreArray[i].type +'"><span id="nodeview_'+ mreArray[i].node +'_' + mreArray[i].slot +'_'+ mreArray[i].type +'_alm" class="led"></span></div>');
+            $(document).on("click","#nodeview_"+ mreArray[i].node +'_' + mreArray[i].slot +'_'+ mreArray[i].type,function(){
+                
+            })
+        }
+
+        nodeview.backview.html(a.join(""));
+        
+        for(var i=0; i<nodeview.matrixcard.length; i++) {
+            if(nodeview.matrixcard[i].psta == "INS") {
+                $("#nodeview_"+ nodeview.matrixcard[i].node +"_" + nodeview.matrixcard[i].slot +"_"+ nodeview.matrixcard[i].type+"_alm").addClass("mxcardActive");
+            }
+        }
+    },
+    
+    refresh:    function() {
+        nodeview.nodeIndex = 1;
+        nodeview.firstnode.addClass("addBorder"); 
+        nodeview.firstnode.siblings().removeClass("addBorder"); 
+        nodeview.query();
+        nodeview.nodeAlmQuery();
+        //start the interval
+        nodeview.almDisplay();
+    },
+    
+    matrixAlmQuery: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcMxc",
+            act:	"queryMatrix",
+            user:	$('#main_currentUser').text(),
+            node:	nodeview.nodeIndex,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                nodeview.matrixcard = obj.rows;
+                
+                for(var i=0; i<nodeview.matrixcard.length; i++) {
+                    if(nodeview.matrixcard[i].psta == "INS") {
+                        $("#nodeview_"+ nodeview.matrixcard[i].node +"_" + nodeview.matrixcard[i].slot +"_"+ nodeview.matrixcard[i].type+"_alm").addClass("mxcardActive");
+                    }
+                    else {
+                        $("#nodeview_"+ nodeview.matrixcard[i].node +"_" + nodeview.matrixcard[i].slot +"_"+ nodeview.matrixcard[i].type+"_alm").removeClass("mxcardActive");
+                    }
+                }
+            }
+        });
+    },
+
+    nodeAlmQuery: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "coQueryPort",
+            act:	"queryNode",
+            user:	$('#main_currentUser').text(),
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                var len = obj.rows.length;
+                var rows = obj.rows;
+                for (i=0; i<len; i++) {
+                    $('#nodeview_n' + rows[i].node + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "<br>" + rows[i].temp + "  |  " + rows[i].volt);
+                    $('#nodeview_n' + rows[i].node + '_btn').addClass("addNodeStyle");
+                }
+            }
+        });
+    },
+
+    
+    almDisplay: function() {
+        var interval = setInterval(function(){
+            if($('.active.tab-pane').is("#nodeview")) {
+                nodeview.matrixAlmQuery();
+                nodeview.nodeAlmQuery();
+            }
+            else {
+                clearInterval(interval);
+            }
+        }, 2000)
+    
+    }
+}
+
+
+// ---------------------------Click event-----------------------------------------
+
+$(document).on("click",".nodeview_node button",function() {
+
+    //Add border to the row
+    $(this).addClass("addBorder"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addBorder" ); //remove class selected from rest of the rows  
+
+    nodeview.nodeIndex = parseInt(this.id.slice(this.id.indexOf("_")+2));
+    nodeview.query();
+    
+});
+
+</script>

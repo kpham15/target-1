@@ -1,0 +1,1022 @@
+
+<div id="mainPage" style="display:none;">
+	<!-- use to freeze the website when needed -->
+	<div id="freeze"></div>
+	<div class="container" style="width:100%">
+		
+        <div id="header" class="row" style="border-style:none none solid none; border-color:white; border-width:1px; background-color:blue; color:white; position: relative">
+            <div class="col-sm-2 modifyPadding" align="left">
+			<div id="MainBegin_logo">TELEPATH NETWORKS, INC.
+            </div>
+            <small id="version_lbl">Version: 0.12 (2019-02-22)</small>
+		</div>
+		<div class="col-sm-8 modifyPadding" align="center">
+			<h3>Intelligent Provisioning Center</h3>
+			<div class="row">
+                <div class="col-xs-3" align="center" style="font-size:small">
+                    <label>Alarm: </label>
+                    <label style="background-color:white; width:70px" id="header_alm"></label>
+                </div>
+                <div id="header_wcname" class="col-xs-2" align="center" style="font-size:small"></div>
+				<div id="header_wcc" class="col-xs-1" align="center" style="font-size:small"></div>
+				<div id="header_npanxx" class="col-xs-2" align="center" style="font-size:small"></div>
+				<div id="header_frmID" class="col-xs-1" align="center" style="font-size:small"></div>
+                <div id="header_time" class="col-xs-3" align="center" style="font-size:small"></div>
+                <div id="header_date_format" class="col-xs-3" style="display:none"><input id="date_format" type="text" style="display: none" value="MM-DD-YY"></div>
+			</div>
+			
+		</div>
+		<div class="col-sm-2 modifyPadding" align="right">
+            <!-- <button id="login-btn">Login</button> -->
+			User: <label style="display:none" id="main_currentUser"></label><label id="main_userFLname"></label>
+            <button id="logout" style="color:black">Logout</button>
+            <div style="margin-top: 27px;"><input type="text" style="color:black; width: 120px; text-transform: uppercase;" id="MainBegin_searchInput_txt"><button id="MainBegin_searchButton" style="color:black">Help/Search</button></div>
+
+		</div>
+		<div id="displayMenu" >&#9776; Menu</div>
+	</div>
+	
+	<div class="row menuPadding" style="position:relative">
+
+		<div id="menu" style="display:none">
+			<div class="sidebar">
+				<div>
+				<!-- 
+                    <a id="menu_nodeview" data-toggle="pill" class="nav-link" href="#nodeview">
+					<i class="nav-icon cui-speedometer"></i> Node Overview
+                    </a> <br>
+                
+
+					<a id="menu_overview" data-toggle="pill" class="nav-link" href="#overview">
+					<i class="nav-icon cui-speedometer"></i> IPC Overview
+					</a> <br>
+                -->
+                    <a id="menu_sysview" data-toggle="pill" class="nav-link" href="#sysview">
+					<i class="nav-icon cui-speedometer"></i> System Overview
+                    </a> <br>
+                    
+					<a id="menu_bulletinBoard" data-toggle="pill" class="nav-link" href="#bulletinBoard">
+                    <i class="nav-icon cui-speedometer"></i> Bulletin-Board
+                    </a><br>	
+	
+				</div>
+			
+				<hr style="margin: 3px">
+
+				<label id="configMenu">CONFIGURATION</label>
+				<div id="configSubMenu" style="display: none">
+					
+					<a id="menu_wc" data-toggle="pill" class="nav-link" href="#wc">
+					<i class="nav-icon cui-speedometer"></i> Setup Wire Center
+					</a><br>
+				
+					<a id="menu_fac" data-toggle="pill" class="nav-link" href="#fac">
+					<i class="nav-icon cui-speedometer"></i> Setup Facilities
+					</a><br>
+			
+					<a id="menu_portmap" data-toggle="pill" class="nav-link" href="#portmap">
+					<i class="nav-icon cui-speedometer"></i> Setup Port Mapping
+					</a><br>
+					
+					<a id="menu_testAccess" data-toggle="pill" class="nav-link" href="#testAccess">
+                    <i class="nav-icon cui-speedometer"></i> Setup Test Accesses
+                    </a><br>
+                            
+				</div>
+
+				<hr style="margin: 3px">
+				
+				<label id="provMenu">PROVISIONING</label>
+				<div id="provSubMenu" style="display: none">
+					
+					<a id="menu_svc" data-toggle="pill" class="nav-link" href="#svc">
+					<i class="nav-icon cui-speedometer"></i> Setup Service Connection
+					</a><br>
+			
+					<a id="menu_batch" data-toggle="pill" class="nav-link" href="#batchExc">
+					<i class="nav-icon cui-speedometer"></i> Batch Execution
+					</a><br>
+
+                    <a id="menu_ftOrders" data-toggle="pill" class="nav-link" href="#ftOrders">
+                    <i class="nav-icon cui-speedometer"></i> FT Orders
+                    </a><br>
+                <!--
+					<a id="menu_ord" data-toggle="pill" class="nav-link" href="#ord">
+						<i class="nav-icon cui-speedometer"></i> Setup Flow-through Order
+					</a><br>
+				-->	
+				</div>
+				
+				<hr style="margin: 3px">
+
+				<label id="maintnMenu">MAINTENANCE</label>
+				<div id="maintnSubMenu" style="display: none">
+					
+					<a id="menu_maint" data-toggle="pill" class="nav-link" href="#maint">
+					<i class="nav-icon cui-speedometer"></i> Setup Maintenance Connection
+					</a><br>
+				
+					<a id="menu_mxc" data-toggle="pill" class="nav-link" href="#mxc">
+                            <i class="nav-icon cui-speedometer"></i> Lock/Unlock Matrix Cards and Nodes
+                        </a><br>
+				
+					<a id="menu_alm" data-toggle="pill" class="nav-link" href="#alm">
+					<i class="nav-icon cui-speedometer"></i> Alarm Administration
+					</a><br>
+				
+					<a id="menu_path" data-toggle="pill" class="nav-link" href="#path">
+					<i class="nav-icon cui-speedometer"></i> Path Administration
+                    </a><br>
+    			<!--
+	            	<a id="menu_bkup" data-toggle="pill" class="nav-link" href="#bkup">
+					<i class="nav-icon cui-speedometer"></i> Backup/Restore Database
+					</a><br>
+                -->
+                    
+				</div>
+				
+				<hr style="margin: 3px">
+
+				<label id="userAdminMenu">USER ADMINISTRATION</label>
+				<div id="userAdminSubMenu" style="display: none">
+					
+					<a id="menu_user" data-toggle="pill" class="nav-link" href="#user">
+					<i class="nav-icon cui-speedometer"></i> Setup Users
+					</a><br>
+
+					<a id="menu_brdcst" data-toggle="pill" class="nav-link" href="#brdcst">
+                    <i class="nav-icon cui-speedometer"></i> Broadcast Notification
+                    </a><br>
+                    
+				</div>	
+                <hr style="margin: 3px">
+
+                <label id="ipcAdminMenu">IPC ADMINISTRATION</label>
+                <div id="ipcAdminSubMenu" style="display: none">
+                    
+                    <a id="menu_ref" data-toggle="pill" class="nav-link" href="#ref">
+                    <i class="nav-icon cui-speedometer"></i> IPC References
+                    </a><br>
+    
+                    <a id="menu_nodeAdmin" data-toggle="pill" class="nav-link" href="#nodeAdmin">
+                    <i class="nav-icon cui-speedometer"></i> Node Administration
+                    </a><br>
+                <!--
+                    <a id="menu_nodeRef" data-toggle="pill" class="nav-link" href="#nodeRef">
+                    <i class="nav-icon cui-speedometer"></i> Node Reference
+                    </a><br>  
+                -->    
+                    <a id="menu_searchAdmin" data-toggle="pill" class="nav-link" href="#searchAdmin">
+                    <i class="nav-icon cui-speedometer"></i> Setup Help/Search
+                    </a><br>
+                    
+                    <a id="menu_SwUpd" data-toggle="pill" class="nav-link" href="#swUpd">
+                    <i class="nav-icon cui-speedometer"></i> Software Update
+                    </a><br>
+                    
+                    <a id="menu_eventReport" data-toggle="pill" class="nav-link" href="#eventReport">
+                    <i class="nav-icon cui-speedometer"></i> Event Report
+                    </a><br>
+                    
+
+				</div>	
+				
+				<hr style="margin: 3px">
+
+            
+				<label id="flowthroughMenu">FLOW-THROUGH ADMINISTRATION</label>
+                <div id="flowthroughSubMenu" style="display: none">
+                    
+                    <a id="menu_releaseTable" data-toggle="pill" class="nav-link" href="#releaseTable">
+                    <i class="nav-icon cui-speedometer"></i> FT Release Table
+                    </a><br>
+
+                    <a id="menu_modificationTable" data-toggle="pill" class="nav-link" href="#modTable">
+                    <i class="nav-icon cui-speedometer"></i> FT Modification Table
+                    </a><br>
+
+
+                </div>
+           
+				<hr style="margin: 3px">
+
+				<label id="reportMenu">REPORTS</label>
+				<div id="reportSubMenu" style="display: none">
+					
+					<!-- <a id="menu_evtlog" data-toggle="pill" class="nav-link" href="#evtlog">
+					<i class="nav-icon cui-speedometer"></i> OLD Event Report
+                    </a><br> -->
+                    
+                    <a id="menu_cfgReport" data-toggle="pill" class="nav-link" href="#cfgreport">
+                    <i class="nav-icon cui-speedometer"></i> Configuration Report
+                    </a><br>
+                                                       
+                    <a id="menu_maintReport" data-toggle="pill" class="nav-link" href="#maintReport">
+                    <i class="nav-icon cui-speedometer"></i> Maintenance Report
+                    </a><br>
+                    
+                    <a id="menu_alarmReport" data-toggle="pill" class="nav-link" href="#almReport">
+                    <i class="nav-icon cui-speedometer"></i> Alarm Report
+                    </a><br>
+    
+                    <a id="menu_provReport" data-toggle="pill" class="nav-link" href="#provReport">
+                    <i class="nav-icon cui-speedometer"></i> Provisioning Report
+                    </a><br>
+    
+                    <!--
+					<a id="menu_trbl" data-toggle="pill" class="nav-link" href="#trbl">
+					<i class="nav-icon cui-speedometer"></i> Trouble Report
+                    </a><br>
+                                        <a id="menu_report" data-toggle="pill" class="nav-link" href="#report">
+                    <i class="nav-icon cui-speedometer"></i> Portmap/Provisioning/Maintenance Reports
+                    </a><br>
+
+					<a id="menu_mxStg" data-toggle="pill" class="nav-link" href="#mxStg">
+					<i class="nav-icon cui-speedometer"></i> Matrix Stages Test
+					</a><br>
+                    
+					<a id="menu_pathTest" data-toggle="pill" class="nav-link" href="#pathTest">
+					<i class="nav-icon cui-speedometer"></i> Path Test
+					</a><br>
+                    -->
+				</div>
+				
+				
+			</div>
+		</div>
+		
+        <!-- VERSION MODAL -->
+        <div id="versionModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Software Information </h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <textarea id="version_txt" class="form-group" style="width:100%; min-height: 250px; background-color:#F6F6F6" readonly>
+                
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF VERSION MODAL -->
+
+		<div id="mainView" class="tab-content"style="background-color: rgb(236, 247, 252)">
+
+<script>
+
+// var logoutConfirm = 'NO';
+
+var mB = {
+    page:           $("#mainPage"),
+    wcInfoInterval: 0,
+
+    // header section
+    loginUser:      $("#main_currentUser"),
+    userFLName:     $("main_userFLname"),
+    logoutBtn:      $("#logout"),
+    headerAlm:      $("#header_alm"),
+    headerWcn:      $("#header_wcname"),
+    headerWcc:      $("#header_wcc"),
+    headerNpanxx:   $("#header_npanxx"),
+    headerFrmId:    $("#header_frmID"),
+    dateFormat:     $("#date_format"),
+    versionLbl:     $('#version_lbl'),
+    versionDescr:   $('#version_txt'),
+    versionModal:   $('#versionModal'),
+    searchInput:    $('#MainBegin_searchInput_txt'),
+    searchBtn:      $('#MainBegin_searchButton'),
+
+    // menu setion
+    configMenu:     $("#configMenu"),
+    provMenu:       $("#provMenu"),
+    maintMenu:      $("#maintnMenu"),
+    userAdminMenu:  $("#userAdminMenu"),
+    ipcAdminMenu:   $("#ipcAdminMenu"),
+    reportMenu:     $("#reportMenu"),
+    ftMenu:         $("#flowthroughMenu"),
+    configSubMenu:  $("#configSubMenu"),
+    provSubMenu:    $("#provSubMenu"),
+    maintSubMenu:   $("#maintnSubMenu"),
+    userAdminSubMenu:$("#userAdminSubMenu"),
+    ipcAdminSubMenu:$("#ipcAdminSubMenu"),
+    reportSubMenu:  $("#reportSubMenu"),
+    ftSubMenu:      $("#flowthroughSubMenu"),
+
+
+
+    overview:       $("#menu_overview"),
+    wc:             $("#menu_wc"),
+    fac:            $("#menu_fac"),
+    portmap:        $("#menu_portmap"),
+    svc:            $("#menu_svc"),
+    maint:          $("#menu_maint"),
+    alm:            $("#menu_alm"),
+    mxc:            $("#menu_mxc"),
+    user:           $("#menu_user"),
+    ref:            $("#menu_ref"),
+    nodeAdmin:      $("#menu_nodeAdmin"),
+    searchAdmin:    $("#menu_searchAdmin"),
+    nodeRef:        $("#menu_nodeRef"),
+    evtlog:         $("#menu_evtlog"),
+    bulletinBoard:  $("#menu_bulletinBoard"),
+    brdcst:         $("#menu_brdcst"),
+    path:           $("#menu_path"),
+    batch:          $("#menu_batch"),
+    sysview:        $("#menu_sysview"),
+    nodeview:       $("#menu_nodeview"),
+    mxStg:          $("#menu_mxStg"),
+    bkup:           $("#menu_bkup"),
+    ord:            $("#menu_ord"),
+    ftOrders:       $("#menu_ftOrders"),
+    swUpd:          $("#menu_SwUpd"),
+    trbl:           $("#menu_trbl"),
+    report:         $("#menu_report"),
+    cfgReport:      $("#menu_cfgReport"),
+    maintReport:    $("#menu_maintReport"),
+    almReport:      $("#menu_alarmReport"),
+    provReport:     $("#menu_provReport"),
+    eventReport:    $("#menu_eventReport"),
+    testAccess:     $("#menu_testAccess"),
+
+    menu:           $("#menu"),
+    displayMenu:    $("#displayMenu"),
+    mainView:       $("#mainview"),
+
+
+    start: function() {
+        mB.page.show();
+        mB.wcInfoInterval = setInterval(wc.getHeaderInfo ,15000);
+    }
+
+    // VERSION DISPLAY README
+    // displayReadMe: function(){
+    //     $.post("./indexFunc.php",
+    //     {
+    //         act: "queryReadMe",
+    //     },
+    //     function(data,status) {
+    //         var obj = JSON.parse(data);
+
+    //         mB.versionDescr.val(obj.descr);
+    //         mB.versionLbl.text('Version: ' + obj.ver);
+    //     });
+
+    // }
+}
+
+var testAccessSession = false;
+mB.testAccess.click(function() {
+    if ($('.active.tab-pane').is("#testAccess")) {
+        mB.menu.hide();
+    }
+    if (testAccessSession === false) {
+        testAccess.start();
+    }
+    testAccessSession = true;
+});
+
+var eventReportSession = false;
+mB.eventReport.click(function() {
+    if ($('.active.tab-pane').is("#eventReport")) {
+        mB.menu.hide();
+    }
+    if (eventReportSession === false) {
+        eventReport.start();
+    }
+    eventReportSession = true;
+});
+
+var maintReportSession = false;
+mB.maintReport.click(function() {
+    if ($('.active.tab-pane').is("#maintReport")) {
+        mB.menu.hide();
+    }
+    if (maintReportSession === false) {
+        maintReport.start();
+    }
+    maintReportSession = true;
+});
+
+var provReportSession = false;
+mB.provReport.click(function() {
+    if ($('.active.tab-pane').is("#provReport")) {
+        mB.menu.hide();
+    }
+    if (provReportSession === false) {
+        provReport.start();
+    }
+    provReportSession = true;
+});
+
+var almReportSession = false;
+mB.almReport.click(function() {
+    if ($('.active.tab-pane').is("#almReport")) {
+        mB.menu.hide();
+    }
+    if (almReportSession === false) {
+        almReport.start();
+    }
+    almReportSession = true;
+});
+
+var reportSession = false;
+mB.report.click(function() {
+    if ($('.active.tab-pane').is("#report")) {
+        mB.menu.hide();
+    }
+    if (reportSession === false) {
+        report.start();
+    }
+    reportSession = true;
+});
+
+var cfgReportSession = false;
+mB.cfgReport.click(function() {
+    if ($('.active.tab-pane').is("#cfgreport")) {
+        mB.menu.hide();
+    }
+    if (cfgReportSession === false) {
+        cfgreport.start();
+    }
+    cfgReportSession = true;
+});
+
+mB.overview.click(function() {
+    if ($('.active.tab-pane').is("#overview")) {
+        mB.menu.hide();
+    }
+    overviewStart();
+    //timer();
+});
+
+var wcSession = false;
+mB.wc.click(function() {
+    if ($('.active.tab-pane').is("#wc")) {
+        mB.menu.hide();
+    }
+    if (wcSession === false) {
+        wc.start();
+    }
+    wcSession = true;
+});
+
+var facSession = false;
+mB.fac.click(function() {
+    if ($('.active.tab-pane').is("#fac")) {
+        mB.menu.hide();
+    }
+    if (facSession === false) {
+        fac.start();
+    }
+    facSession = true;
+});
+
+var portmapSession = false;
+mB.portmap.click(function() {
+    if ($('.active.tab-pane').is("#portmap")) {
+        mB.menu.hide();
+    }
+    if (portmapSession === false) {
+        pm.start();
+    }
+    portmapSession = true;
+});
+
+var svcSession = false;
+mB.svc.click(function() {
+    if ($('.active.tab-pane').is("#svc")) {
+        mB.menu.hide();
+    }
+    if (svcSession === false) {
+        svc.start();
+    }
+    svcSession = true;
+});
+
+var maintSession = 0;
+mB.maint.click(function() {
+    if ($('.active.tab-pane').is("#maint")) {
+        mB.menu.hide();
+    }
+    if (maintSession == 0) {
+        maint.start();
+    }
+    maintSession++;
+});
+
+var almSession = 0;
+mB.alm.click(function() {
+    if ($('.active.tab-pane').is("#alm")) {
+        mB.menu.hide();
+    }
+    if (almSession == 0) {
+        alm.start();
+    }
+    //alm.timer();
+    almSession++;
+});
+
+var mxcSession = 0;
+mB.mxc.click(function() {
+    if ($('.active.tab-pane').is("#mxc")) {
+        mB.menu.hide();
+    }
+    if (mxcSession == 0) {
+        mxc.start();
+    }
+    mxcSession++;
+});
+
+var userSession = 0;
+mB.user.click(function() {
+    if ($('.active.tab-pane').is("#user")) {
+        mB.menu.hide();
+    }
+    if (userSession == 0) {
+        user.start();
+    }
+    userSession++;
+});
+
+var refSession = false;
+mB.ref.click(function() {
+    if ($('.active.tab-pane').is("#ref")) {
+        mB.menu.hide();
+    }
+    if (refSession === false) {
+        ref.start();
+        refSession = true;
+    }
+    // refSession++;
+});
+
+var evtlogSession = false;
+mB.evtlog.click(function() {
+    if ($('.active.tab-pane').is("#evtlog")) {
+        mB.menu.hide();
+    }
+    if (evtlogSession === false) {
+        evtlog.start();
+    }
+    evtlogSession = true;
+});
+
+var trblSession = false;
+mB.trbl.click(function() {
+    if ($('.active.tab-pane').is("#trbl")) {
+        mB.menu.hide();
+    }
+    if (trblSession === false) {
+        trbl.start();
+    }
+    trblSession = true;
+});
+
+var brdcstSession = false;
+mB.brdcst.click(function() {
+    if ($('.active.tab-pane').is("#brdcst")) {
+        mB.menu.hide();
+    }
+    if (brdcstSession === false) {
+        brdcst.start();
+    }
+    brdcstSession = true;
+});
+
+mB.bulletinBoard.click(function() {
+    if ($('.active.tab-pane').is("#bulletinBoard")) {
+        mB.menu.hide();
+    }
+    bulletinBoard.start();
+});
+
+var pathSession = false;
+mB.path.click(function() {
+    if ($('.active.tab-pane').is("#path")) {
+        mB.menu.hide();
+    }
+    if (pathSession === false) {
+        pathAdm.start();
+    }
+    pathSession = true;
+});
+
+var batchSession = false;
+mB.batch.click(function() {
+    if ($('.active.tab-pane').is("#batchExc")) {
+        mB.menu.hide();
+    }
+    if (batchSession === false) {
+        batchExc.start();
+    }
+    batchSession = true;
+});
+
+// var sysviewSession = false;
+mB.sysview.click(function() {
+    if ($('.active.tab-pane').is("#sysview")) {
+        mB.menu.hide();
+    }
+    // if (sysviewSession === false) {
+        sysview.start();
+    // }
+    // sysviewSession = true;
+});
+
+// var nodeviewSession = false;
+mB.nodeview.click(function() {
+    if ($('.active.tab-pane').is("#nodeview")) {
+        mB.menu.hide();
+    }
+    // if (nodeviewSession === false) {
+        nodeview.start();
+    // }
+    // nodeviewSession = true;
+});
+
+var mxStgSession = false;
+mB.mxStg.click(function() {
+    if ($('.active.tab-pane').is("#mxStg")) {
+        mB.menu.hide();
+    }
+    if (mxStgSession === false) {
+        mxstg.start();
+    }
+    mxStgSession = true;
+});
+
+var bkupSession = false;
+mB.bkup.click(function() {
+    if ($('.active.tab-pane').is("#bkup")) {
+        mB.menu.hide();
+    }
+    if (bkupSession === false) {
+        bkup.start();
+    }
+    bkupSession = true;
+});
+
+var ordSession = false;
+mB.ord.click(function() {
+    if ($('.active.tab-pane').is("#ord")) {
+        mB.menu.hide();
+    }
+    if (ordSession === false) {
+        ord.start();
+    }
+    ordSession = true;
+});
+
+var ftReleaseSession = false;
+$("#menu_releaseTable").click(function() {
+    if ($('.active.tab-pane').is("#releaseTable")) {
+        mB.menu.hide();
+    }
+    if (ftReleaseSession === false) {
+        rt.start();
+    }
+    ftReleaseSession = true;
+});
+
+var ftModTableSession = false;
+$("#menu_modificationTable").click(function() {
+    if ($('.active.tab-pane').is("#modTable")) {
+        mB.menu.hide();
+    }
+    if (ftModTableSession === false) {
+        mt.start();
+    }
+    ftModTableSession = true;
+});
+
+var ftOrdersSession = false;
+mB.ftOrders.click(function() {
+    if ($('.active.tab-pane').is("#ftOrders")) {
+        mB.menu.hide();
+    }
+    if (ftOrdersSession === false) {
+        ftOrd.start();
+    }
+    ftOrdersSession = true;
+});
+// var nodeAdminSession = false;
+mB.nodeAdmin.click(function() {
+    if ($('.active.tab-pane').is("#nodeAdmin")) {
+        mB.menu.hide();
+    }
+    else {
+        nodeAdmin.checkNodes();
+    }
+    // if (nodeAdminSession === false) {
+        nodeAdmin.start();
+    // }
+    // nodeAdminSession = true;
+});
+// var nodeRefSession = false;
+mB.nodeRef.click(function() {
+    if ($('.active.tab-pane').is("#nodeRef")) {
+        mB.menu.hide();
+    }
+    // if (nodeRefSession === false) {
+        nodeRef.start();
+    // }
+    // nodeRefSession = true;
+});
+
+var searchAdminSession = false;
+mB.searchAdmin.click(function() {
+    if ($('.active.tab-pane').is("#searchAdmin")) {
+        mB.menu.hide();
+    }
+    if (searchAdminSession === false) {
+        searchAdmin.start();
+    }
+    searchAdminSession = true;
+});
+
+
+mB.swUpd.click(function() {
+    if ($('.active.tab-pane').is("#swUpd")) {
+        mB.menu.hide();
+    }
+    swUpd.start();
+});
+
+// $(window).resize(checkWinSize)
+
+// ---------------------Click Events-----------------------
+
+mB.logoutBtn.click(function () {
+    logout("manual logout");
+});
+mB.searchBtn.click(function(){
+    if(mB.searchInput.val() == "") {
+        alert("Please enter search input")
+    }
+    else {
+        search();
+    }
+});
+
+mB.configMenu.click(function(){
+    mB.configSubMenu.toggle();
+    mB.provSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+    mB.ftSubMenu.toggle(false);
+});
+
+mB.provMenu.click(function(){
+    mB.provSubMenu.toggle();
+    mB.configSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+    mB.ftSubMenu.toggle(false);
+});
+
+mB.maintMenu.click(function(){
+    mB.maintSubMenu.toggle();
+    mB.configSubMenu.toggle(false);
+    mB.provSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+    mB.ftSubMenu.toggle(false);
+});
+
+mB.userAdminMenu.click(function(){
+    mB.userAdminSubMenu.toggle();
+    mB.configSubMenu.toggle(false);
+    mB.provSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+    mB.ftSubMenu.toggle(false);
+});
+
+mB.reportMenu.click(function(){
+    mB.reportSubMenu.toggle();
+    mB.configSubMenu.toggle(false);
+    mB.provSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.ftSubMenu.toggle(false);
+});
+
+mB.ftMenu.click(function(){
+    mB.ftSubMenu.toggle();
+    mB.configSubMenu.toggle(false);
+    mB.provSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.ipcAdminSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+});
+
+mB.ipcAdminMenu.click(function(){
+    mB.ipcAdminSubMenu.toggle(true);
+    mB.ftSubMenu.toggle(false);
+    mB.configSubMenu.toggle(false);
+    mB.provSubMenu.toggle(false);
+    mB.maintSubMenu.toggle(false);
+    mB.userAdminSubMenu.toggle(false);
+    mB.reportSubMenu.toggle(false);
+});
+
+// VERSION CLICK EVENT
+mB.versionLbl.click(function(){
+    //mB.displayReadMe();
+    mB.versionModal.modal();
+
+});
+
+
+$(document).on("click","#displayMenu",function(){
+   
+    if (mB.menu.css('display')  ==  'block') {    
+        mB.menu.hide()     
+    }
+    else {
+        mB.menu.show()
+    }
+});
+
+
+//Closes Help sidebar by clicking on mainview
+$(document).on("click", "#mainView", function(evt) {
+    if (mB.menu.css('display') == "block") {
+        mB.menu.hide();
+        mB.configSubMenu.toggle(false);
+        mB.provSubMenu.toggle(false);
+        mB.maintSubMenu.toggle(false);
+        mB.userAdminSubMenu.toggle(false);
+        mB.reportSubMenu.toggle(false);
+        mB.ftSubMenu.toggle(false);    
+    }
+})
+
+
+
+// mB.mainView.click(checkWinSize);
+
+
+// -----------------Functions---------------------------------
+
+// function checkWinSize(){
+//     if (window.matchMedia('(max-width: 1100px)').matches) {
+//         mB.menu.hide()
+//     } else {
+//         mB.menu.show()
+//     }
+// }  
+
+function logout(action) {
+    clearInterval(mB.wcInfoInterval);
+    // $.post("./php/coQueryLogout.php",
+    $.post(ipcDispatch,
+    {    
+        api:    "ipcLogout",
+        user:	$("#main_currentUser").text()
+    },
+    function (data, status) {       
+        var obj = JSON.parse(data);
+        
+        if (obj.rslt == "fail") {
+            alert(obj.reason);
+        }
+        
+        else {
+            if (action == "manual logout") {
+                alert("You have logged out.", function(){
+                    location.reload();
+                });
+            }
+            else {
+                alert("Your session has timed out, please log in again!",  function(){
+                    location.reload();
+                });
+            }
+            // logoutConfirm = 'YES';
+        }
+    });
+}
+function search(){
+    $.post(ipcDispatch,
+    {
+        api:    "ipcSearch",
+        user: $("#main_currentUser").text(),
+        act: 'search',
+        item: mB.searchInput.val()
+    },
+    function (data, status) {
+        var obj = JSON.parse(data);
+
+        if (obj.rslt == "fail") {
+            alert(obj.reason);
+        }
+        else if (obj.rows.length === 0) {
+            alert("No record found");
+        }
+        else {
+            alert("<b>Item:</b> " + obj.rows[0]['item'] + "<br><b>Description: </b>" + obj.rows[0]['descr']);
+            mB.searchInput.val("");
+        }
+
+    });
+}
+//FUNCTION TO CONVERT GIVEN DATE TO PREFERRED FORMAT IN ipcRef
+function kris_getCorrectDateString(date_string) {
+    // console.log("mB.dateFormat = " + mB.dateFormat.val());
+    // console.log("length of first array = " + date_string.split("-")[0].length);
+
+    var date = date_string.split('-');
+    var new_date_string = '';
+
+    // CHECKS STRING IF FORMAT IS YYYY-MM-DD
+    if ((date[0].length) == 4){
+        
+        /***** Define and separate elements of given date*****/
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        //REMOVE first 2 digits of YEAR
+        var shortYear = year.slice(2,4);
+
+        // Compares value defined in ipcRef
+        if (mB.dateFormat.val() == "YYYY-MM-DD") {
+            new_date_string = date_string;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "MM-DD-YYYY") {
+            new_date_string = month + "-" + day + "-" + year;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "MM-DD-YY") {
+            new_date_string = month + "-" + day + "-" + shortYear;
+            //return date_string;
+        }
+    }
+    // CHECKS STRING IF FORMAT IS MM-DD-YYYY
+    else if (date[2].length == 4){
+        var month = date[0];
+        var day = date[1];
+        var year = date[2];
+        //REMOVE first 2 digits of YEAR
+        var shortYear = year.slice(2,4);
+
+        if (mB.dateFormat.val() == "MM-DD-YYYY") {
+            new_date_string = date_string;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "YYYY-MM-DD") {
+            new_date_string = year + "-" + month + "-" + day;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "MM-DD-YY") {
+            new_date_string = month + "-" + day + "-" + shortYear;
+            //return date_string;
+        }
+    }
+
+    // CHECK STRING FORMAT MM-DD-YY
+    else if ( (date[0].length == 2) && (date[2].length == 2) ) {
+        
+        var month = date[0];
+        var day = date[1];
+        var shortYear = date[2];
+        //ADDS 1st 2 digits of year back into YEAR
+        var year = "20" + shortYear;
+
+        if (mB.dateFormat.val() == "MM-DD-YY") {
+            new_date_string = date_string;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "MM-DD-YYYY") {
+            new_date_string = month + "-" + day + "-" + year;
+            //return date_string;
+        }
+        else if (mB.dateFormat.val() == "YYYY-MM-DD") {
+            new_date_string = year + "-" + month + "-" + day;
+            //return date_string;
+        }
+    }
+    //else {
+    //    new_date_string = date_string;
+        //return date_string;
+    //}
+
+    return new_date_string;
+}
+
+</script>

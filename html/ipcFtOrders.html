@@ -1,0 +1,1427 @@
+<div id="ftOrders" class="tab-pane fade in">
+    <h4>FLOW-THROUGH ORDERS</h4>
+
+    <div class="col-sm-12">
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_ordno_txt">ORDNO:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_ordno_txt" class="form-control">
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_ot_sel">OT:</label>
+                    <select id="ftOrd_ot_sel" class="form-control" style="font-size:12px">
+                        <option></option>
+                        <option>CD</option>
+                        <option>CH</option>
+                        <option>F</option>
+                        <option>NC</option>
+                        <option>T</option>
+                        <option>CIO</option>
+                        <option>LST</option>
+                        <option>MCT</option>
+                        <option>SET</option>
+                        <option>WAO</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_wc_txt">WC:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_wc_txt" class="form-control">
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_pri_sel">PRI:</label>
+                    <select id="ftOrd_pri_sel" class="form-control" style="padding-left:0px; padding-right:0px">
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1" style="padding-left:0px; padding-right:2.50px">
+                    <label for="ftOrd_stat_txt">STAT:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_stat_txt" class="form-control" style="font-size:12px">
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <button id="ftOrd_find1_btn" class="btn btn-primary">VIEW</button>
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" style="width: 9.33333333%">
+                    <label for="ftOrd_cdd_sel">CDD:</label>
+                    <select id="ftOrd_cdd_sel" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                        <option></option>
+                        <option>Y</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
+                    <label for="ftOrd_dd_date">DD:</label>
+                    <input type="date" id="ftOrd_dd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                </div>
+                <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
+                    <label for="ftOrd_fdd_date">FDD:</label>
+                    <input type="date" id="ftOrd_fdd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1" style="width: 20%">
+                    <label for="ftOrd_fdt_time">FDT:</label>
+                    <input type="time" id="ftOrd_fdt_time" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <button id="ftOrd_find2_btn" class="btn btn-primary">VIEW</button>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_action_sel">ACTION:</label>
+                    <select id="ftOrd_action_sel" class="form-control">
+                        <option></option>
+                        <option>FETCH_FT_ORDERS</option>
+                        <option>PROCESS_ORDER</option>
+                        <option>PROCESS_CKT</option>
+                        <option>PROCESS_FAC</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <button id="ftOrd_submit_btn" class="btn btn-primary" style="width: 100%">SUBMIT</button>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <button id="ftOrd_clear_btn" class="btn btn-primary" style="width: 100%">CLEAR</button>
+                </div>
+    
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <input type="text" hidden>
+                </div>
+    
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_ordId_txt">ORD ID:</label>
+                    <input id="ftOrd_ordId_txt" type="text" class="form-control">
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_cktId_txt">CKT ID:</label>
+                    <input id="ftOrd_cktId_txt" type="text" class="form-control">
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_facId_txt">FAC ID:</label>
+                    <input id="ftOrd_facId_txt" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-sm-7">
+            <label for="ftOrd_ords_tbl">LIST OF ORDERS:</label>
+            <div class="panel panel-default">
+                <table class="table table-fixed">
+                    <thead style="width: 100%; padding-right: 15px; padding-left: 5px">
+                        <tr style="height: 40px">
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px; padding-right:0px">STAT</th>
+                            <th class="col-sm-4" style="text-align:left; padding-left: 0px">ORDNO</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">OT</th>
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px">DD</th>
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px">FDD</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">PRI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ftOrd_ords_tbl" style="height: 150px; float: none; padding-left: 5px">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="col-sm-12" style="height: 200px">
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_cttype_sel">CTTYPE:</label>
+                    <select id="ftOrd_cttype_sel" class="form-control">
+                        <option></option>
+                        <option>TN</option>
+                        <option>CKID</option>
+                        <option>OE</option>
+                        <option>CP</option>
+                    </select>
+                </div>
+    
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_adsr_sel">ADSR:</label>
+                    <select id="ftOrd_adsr_sel" class="form-control">
+                        <option></option>
+                        <option>Y</option>
+                    </select>
+                </div>
+    
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_rOrdno_txt">R_ORDNO:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_rOrdno_txt" class="form-control" >
+                </div>
+    
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_ctid_txt">CTID:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_ctid_txt" class="form-control" >
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_ssm_sel">SSM:</label>
+                    <select id="ftOrd_ssm_sel" class="form-control">
+                        <option></option>
+                        <option>Y</option>
+                    </select>
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_ssp_sel">SSP:</label>
+                    <select id="ftOrd_ssp_sel" class="form-control">
+                        <option></option>
+                        <option>Y</option>
+                    </select>
+                </div>
+
+            </div>
+    
+            <!-- -------------------Second Row Second Column-------------------- -->
+    
+            <div class="row">
+
+    
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_rCttype_sel">R_CTTYPE:</label>
+                    <select id="ftOrd_rCttype_sel" class="form-control">
+                        <option></option>
+                        <option>TN</option>
+                        <option>CKID</option>
+                        <option>OE</option>
+                        <option>CP</option>
+                    </select>
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_lst_sel">LST:</label>
+                    <select style="padding-left: 0px" id="ftOrd_lst_sel" class="form-control">
+                        <option></option>
+                        <option>Y</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_octtype_sel">OCTTYPE:</label>
+                    <select id="ftOrd_octtype_sel" class="form-control">
+                        <option></option>
+                        <option>TN</option>
+                        <option>CKID</option>
+                        <option>OE</option>
+                        <option>CP</option>
+                    </select>
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_cls_sel">CLS:</label>
+                    <select style="padding-left: 0px" id="ftOrd_cls_sel" class="form-control">
+                        <option></option>
+                        <option>R</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_rCtid_txt">R_CTID:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_rCtid_txt" class="form-control" >
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_cktAct_sel">ACT:</label>
+                    <select style="padding-left: 0px" id="ftOrd_cktAct_sel" class="form-control">
+                        <option></option>
+                        <option>I</option>
+                        <option>O</option>
+                        <option>C</option>
+                        <option>H</option>
+                    </select>
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_rAct_sel">R_ACT:</label>
+                    <select style="padding-left: 0px" id="ftOrd_rAct_sel" class="form-control">
+                        <option></option>
+                        <option>I</option>
+                        <option>O</option>
+                        <option>C</option>
+                    </select>
+                </div>
+
+            </div>
+            
+            <!-- ---------------------Third Row Second Column------------------- -->
+            
+            <div class="row">
+    
+                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_oCtid_txt">OCTID:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_oCtid_txt" class="form-control" >
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_rOt_sel">R_OT:</label>
+                    <select id="ftOrd_rOt_sel" class="form-control">
+                        <option></option>
+                        <option>CD</option>
+                        <option>CH</option>
+                        <option>F</option>
+                        <option>NC</option>
+                        <option>T</option>
+                        <option>CIO</option>
+                        <option>LST</option>
+                        <option>MCT</option>
+                        <option>SET</option>
+                        <option>WAO</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_oc_sel">OC:</label>
+                    <select id="ftOrd_oc_sel" class="form-control">
+                        <option></option>
+                        <option>BTH</option>
+                        <option>CMB</option>
+                        <option>COR</option>
+                        <option>CPC</option>
+                        <option>HOT</option>
+                        <option>LNP</option>
+                        <option>LS</option>
+                        <option>LLNF</option>
+                        <option>UNE</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_noscm_sel">NOSCM:</label>
+                    <select id="ftOrd_noscm_sel" class="form-control" >
+                        <option></option>
+                        <option>MOD</option>
+                        <option>CAN</option>
+                        <option>CDD</option>
+                        <option>MDD</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-sm-7">
+            <label for="ftOrd_ckts_tbl">LIST OF CKTS:</label>
+            <div class="panel panel-default">
+                <table class="table table-fixed">
+                    <thead style="width: 100%; padding-right: 15px; padding-left: 5px">
+                        <tr style="height: 40px">
+                            <th class="col-sm-3" style="text-align:left; padding-left: 0px">CTID</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">CLS</th>
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px">ADSR</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">SSM</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">SSP</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">ACT</th>
+                            <th class="col-sm-3" style="text-align:left; padding-left: 0px">R_ORDNO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ftOrd_ckts_tbl" style="height: 120px; float: none; padding-left: 5px">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="col-sm-12" style="height: 200px">
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_facAct_sel">ACT:</label>
+                    <select id="ftOrd_facAct_sel" class="form-control">
+                        <option></option>
+                        <option>I</option>
+                        <option>O</option>
+                        <option>C</option>
+                        <option>H</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_op_sel">OP:</label>
+                    <select id="ftOrd_op_sel" class="form-control">
+                        <option></option>
+                        <option>IN</option>
+                        <option>OUT</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_ffac_txt">FFAC:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_ffac_txt" class="form-control" >
+                </div>
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_fftyp_txt">FFTYP:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_fftyp_txt" class="form-control" >
+                </div>
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_ffrloc_txt">FFRLOC:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_ffrloc_txt" class="form-control" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_tfac_txt">TFAC:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_tfac_txt" class="form-control" >
+                </div>
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label class="control-label" for="ftOrd_tftype_txt">TFTYP:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_tftype_txt" class="form-control" >
+                </div>
+                <div class="col-sm-4 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_tfrloc_txt">TFRLOC:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_tfrloc_txt" class="form-control" >
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-sm-7">
+            <label for="ftOrd_facs_tbl">LIST OF CKT FACILITIES:</label>
+            <div class="panel panel-default">
+                <table class="table table-fixed">
+                    <thead style="width: 100%; padding-right: 15px; padding-left: 5px">
+                        <tr style="height: 40px">
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">ACT</th>
+                            <th class="col-sm-1" style="text-align:left; padding-left: 0px">OP</th>
+                            <th class="col-sm-3" style="text-align:left; padding-left: 0px">FFAC</th>
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px">FFRLOC</th>
+                            <th class="col-sm-3" style="text-align:left; padding-left: 0px">TFAC</th>
+                            <th class="col-sm-2" style="text-align:left; padding-left: 0px">TFRLOC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ftOrd_facs_tbl" style="height: 120px; float: none; padding-left: 5px">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+
+</div>
+
+<script>
+var ftOrd = {
+    // ORD FORM
+    ordno:          $("#ftOrd_ordno_txt"),
+    ot:             $("#ftOrd_ot_sel"),
+    wc:             $("#ftOrd_wc_txt"),
+    pri:            $("#ftOrd_pri_sel"),
+    stat:           $("#ftOrd_stat_txt"),
+    findBtn1:       $("#ftOrd_find1_btn"),
+    cdd:            $("#ftOrd_cdd_sel"),
+    dd:             $("#ftOrd_dd_date"),
+    fdd:            $("#ftOrd_fdd_date"),
+    fdt:            $("#ftOrd_fdt_time"),
+    findBtn2:       $("#ftOrd_find2_btn"),
+    action:         $("#ftOrd_action_sel"),
+    submitBtn:      $("#ftOrd_submit_btn"),
+    clearBtn:       $("#ftOrd_clear_btn"),
+
+    // CKT FORM
+    cttype:         $("#ftOrd_cttype_sel"),
+    adsr:           $("#ftOrd_adsr_sel"),
+    rOrdno:         $("#ftOrd_rOrdno_txt"),
+    ctid:           $("#ftOrd_ctid_txt"),
+    ssm:            $("#ftOrd_ssm_sel"),
+    rCttype:        $("#ftOrd_rCttype_sel"),
+    oCttype:        $("#ftOrd_octtype_sel"),
+    ssp:            $("#ftOrd_ssp_sel"),
+    rCtid:          $("#ftOrd_rCtid_txt"),
+    oCtid:          $("#ftOrd_oCtid_txt"),
+    lst:            $("#ftOrd_lst_sel"),
+    rOt:            $("#ftOrd_rOt_sel"),
+    oc:             $("#ftOrd_oc_sel"),
+    cls:            $("#ftOrd_cls_sel"),
+    rAct:           $("#ftOrd_rAct_sel"),
+    cktAct:         $("#ftOrd_cktAct_sel"),
+    noscm:          $("#ftOrd_noscm_sel"),
+
+    // FAC FORM
+    facAct:         $("#ftOrd_facAct_sel"),
+    op:             $("#ftOrd_op_sel"),
+    fftyp:          $("#ftOrd_fftyp_txt"),
+    ffac:           $("#ftOrd_ffac_txt"),
+    ffrloc:         $("#ftOrd_ffrloc_txt"),
+    tftyp:          $("#ftOrd_tftype_txt"),
+    tfac:           $("#ftOrd_tfac_txt"),
+    tfrloc:         $("#ftOrd_tfrloc_txt"),
+
+    //ARRAYS TO HOLD TABLE INFORMATION
+    OrdRows:        [],
+    CktRows:        [],
+    FacRows:        [],
+
+    //TABLE ITEMS
+    ordId:          $("#ftOrd_ordId_txt"),
+    cktId:          $("#ftOrd_cktId_txt"),
+    facId:          $("#ftOrd_facId_txt"),
+
+    tblOrd: {
+        body:       $("#ftOrd_ords_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblCkt: {
+        body:       $("#ftOrd_ckts_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblFac:  {
+        body:       $("#ftOrd_facs_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    start: function() {
+        ftOrd.clearForm();
+        ftOrd.queryOrd('queryOrd');
+        ftOrd.enableOrdForm();
+    },
+
+    clearForm: function() {
+        ftOrd.ordno.val("").change();          
+        ftOrd.ot.val("").change();             
+        ftOrd.wc.val("").change();             
+        ftOrd.pri.val("").change();            
+        ftOrd.stat.val("").change();           
+        ftOrd.cdd.val("").change();            
+        ftOrd.dd.val("").change();             
+        ftOrd.fdd.val("").change();            
+        ftOrd.fdt.val("").change();            
+        ftOrd.action.val("").change();
+
+        ftOrd.cttype.val("").change();         
+        ftOrd.adsr.val("").change();           
+        ftOrd.rOrdno.val("").change();         
+        ftOrd.ctid.val("").change();           
+        ftOrd.ssm.val("").change();            
+        ftOrd.rCttype.val("").change();        
+        ftOrd.oCttype.val("").change();        
+        ftOrd.ssp.val("").change();            
+        ftOrd.rCtid.val("").change();          
+        ftOrd.oCtid.val("").change();          
+        ftOrd.lst.val("").change();            
+        ftOrd.rOt.val("").change();            
+        ftOrd.oc.val("").change();             
+        ftOrd.cls.val("").change();            
+        ftOrd.rAct.val("").change();           
+        ftOrd.cktAct.val("").change();         
+        ftOrd.noscm.val("").change();
+
+        ftOrd.facAct.val("").change();      
+        ftOrd.op.val("").change();       
+        ftOrd.fftyp.val("").change();          
+        ftOrd.ffac.val("").change();           
+        ftOrd.ffrloc.val("").change();         
+        ftOrd.tftyp.val("").change();          
+        ftOrd.tfac.val("").change();           
+        ftOrd.tfrloc.val("").change();
+
+        ftOrd.ordId.val("").change();
+        ftOrd.cktId.val("").change();
+        ftOrd.facId.val("").change();
+    },
+
+    clearCktForm: function() {
+        ftOrd.cttype.val("").change();         
+        ftOrd.adsr.val("").change();           
+        ftOrd.rOrdno.val("").change();         
+        ftOrd.ctid.val("").change();           
+        ftOrd.ssm.val("").change();            
+        ftOrd.rCttype.val("").change();        
+        ftOrd.oCttype.val("").change();        
+        ftOrd.ssp.val("").change();            
+        ftOrd.rCtid.val("").change();          
+        ftOrd.oCtid.val("").change();          
+        ftOrd.lst.val("").change();            
+        ftOrd.rOt.val("").change();            
+        ftOrd.oc.val("").change();             
+        ftOrd.cls.val("").change();            
+        ftOrd.rAct.val("").change();           
+        ftOrd.cktAct.val("").change();         
+        ftOrd.noscm.val("").change();
+        ftOrd.cktId.val("").change();
+        ftOrd.tblCkt.body.empty();
+    },
+
+    clearFacForm: function() {
+        ftOrd.facAct.val("").change();      
+        ftOrd.op.val("").change();       
+        ftOrd.fftyp.val("").change();          
+        ftOrd.ffac.val("").change();           
+        ftOrd.ffrloc.val("").change();         
+        ftOrd.tftyp.val("").change();          
+        ftOrd.tfac.val("").change();           
+        ftOrd.tfrloc.val("").change();
+        ftOrd.facId.val("").change();
+        ftOrd.tblFac.body.empty();   
+    },
+
+    disableOrdR1: function() {
+        ftOrd.ordno.prop('disabled',true);
+        ftOrd.ot.prop('disabled',true);
+        ftOrd.wc.prop('disabled',true);
+        ftOrd.pri.prop('disabled',true);
+        ftOrd.stat.prop('disabled',true);
+    },
+
+    disableOrdR2: function() {
+        ftOrd.cdd.prop('disabled', true);
+        ftOrd.dd.prop('disabled', true);
+        ftOrd.fdd.prop('disabled', true);
+        ftOrd.fdt.prop('disabled', true);
+    },
+
+    enableOrdR1: function() {
+        ftOrd.ordno.prop('disabled', false);
+        ftOrd.ot.prop('disabled', false);
+        ftOrd.wc.prop('disabled', false);
+        ftOrd.pri.prop('disabled', false);
+        ftOrd.stat.prop('disabled', false);
+    },
+
+    enableOrdR2: function() {
+        ftOrd.cdd.prop('disabled', false);
+        ftOrd.dd.prop('disabled', false);
+        ftOrd.fdd.prop('disabled', false);
+        ftOrd.fdt.prop('disabled', false);
+    },
+
+    disableOrdForm: function() {
+        ftOrd.ordno.prop('disabled', true);          
+        ftOrd.ot.prop('disabled', true);             
+        ftOrd.wc.prop('disabled', true);             
+        ftOrd.pri.prop('disabled', true);            
+        ftOrd.stat.prop('disabled', true);           
+        ftOrd.cdd.prop('disabled', true);            
+        ftOrd.dd.prop('disabled', true);             
+        ftOrd.fdd.prop('disabled', true);            
+        ftOrd.fdt.prop('disabled', true);            
+
+        ftOrd.cttype.prop('disabled', true);         
+        ftOrd.adsr.prop('disabled', true);           
+        ftOrd.rOrdno.prop('disabled', true);         
+        ftOrd.ctid.prop('disabled', true);           
+        ftOrd.ssm.prop('disabled', true);            
+        ftOrd.rCttype.prop('disabled', true);        
+        ftOrd.oCttype.prop('disabled', true);        
+        ftOrd.ssp.prop('disabled', true);            
+        ftOrd.rCtid.prop('disabled', true);          
+        ftOrd.oCtid.prop('disabled', true);          
+        ftOrd.lst.prop('disabled', true);            
+        ftOrd.rOt.prop('disabled', true);            
+        ftOrd.oc.prop('disabled', true);             
+        ftOrd.cls.prop('disabled', true);            
+        ftOrd.rAct.prop('disabled', true);           
+        ftOrd.cktAct.prop('disabled', true);         
+        ftOrd.noscm.prop('disabled', true);
+
+        ftOrd.facAct.prop('disabled', true);      
+        ftOrd.op.prop('disabled', true);       
+        ftOrd.fftyp.prop('disabled', true);          
+        ftOrd.ffac.prop('disabled', true);           
+        ftOrd.ffrloc.prop('disabled', true);         
+        ftOrd.tftyp.prop('disabled', true);          
+        ftOrd.tfac.prop('disabled', true);           
+        ftOrd.tfrloc.prop('disabled', true);
+
+    },
+
+    // ENABLES ORDER FORM WHEN FIELDS ARE EMPTY
+    enableOrdForm: function() {
+
+        ftOrd.ordno.prop('disabled', false);          
+        ftOrd.ot.prop('disabled', false);             
+        ftOrd.wc.prop('disabled', false);             
+        ftOrd.pri.prop('disabled', false);            
+        ftOrd.stat.prop('disabled', false);           
+        ftOrd.cdd.prop('disabled', false);            
+        ftOrd.dd.prop('disabled', false);             
+        ftOrd.fdd.prop('disabled', false);            
+        ftOrd.fdt.prop('disabled', false);            
+        ftOrd.action.prop('disabled', false);
+
+        ftOrd.cttype.prop('disabled', false);         
+        ftOrd.adsr.prop('disabled', false);           
+        ftOrd.rOrdno.prop('disabled', false);         
+        ftOrd.ctid.prop('disabled', false);           
+        ftOrd.ssm.prop('disabled', false);            
+        ftOrd.rCttype.prop('disabled', false);        
+        ftOrd.oCttype.prop('disabled', false);        
+        ftOrd.ssp.prop('disabled', false);            
+        ftOrd.rCtid.prop('disabled', false);          
+        ftOrd.oCtid.prop('disabled', false);          
+        ftOrd.lst.prop('disabled', false);            
+        ftOrd.rOt.prop('disabled', false);            
+        ftOrd.oc.prop('disabled', false);             
+        ftOrd.cls.prop('disabled', false);            
+        ftOrd.rAct.prop('disabled', false);           
+        ftOrd.cktAct.prop('disabled', false);         
+        ftOrd.noscm.prop('disabled', false);
+
+        ftOrd.facAct.prop('disabled', false);      
+        ftOrd.op.prop('disabled', false);       
+        ftOrd.fftyp.prop('disabled', false);          
+        ftOrd.ffac.prop('disabled', false);           
+        ftOrd.ffrloc.prop('disabled', false);         
+        ftOrd.tftyp.prop('disabled', false);          
+        ftOrd.tfac.prop('disabled', false);           
+        ftOrd.tfrloc.prop('disabled', false);
+
+    },
+
+    // DISABLES CKT FORM
+    disableCktForm: function() {
+        ftOrd.cttype.prop('disabled', true);         
+        ftOrd.adsr.prop('disabled', true);           
+        ftOrd.rOrdno.prop('disabled', true);         
+        ftOrd.ctid.prop('disabled', true);           
+        ftOrd.ssm.prop('disabled', true);            
+        ftOrd.rCttype.prop('disabled', true);        
+        ftOrd.oCttype.prop('disabled', true);        
+        ftOrd.ssp.prop('disabled', true);            
+        ftOrd.rCtid.prop('disabled', true);          
+        ftOrd.oCtid.prop('disabled', true);          
+        ftOrd.lst.prop('disabled', true);            
+        ftOrd.rOt.prop('disabled', true);            
+        ftOrd.oc.prop('disabled', true);             
+        ftOrd.cls.prop('disabled', true);            
+        ftOrd.rAct.prop('disabled', true);           
+        ftOrd.cktAct.prop('disabled', true);         
+        ftOrd.noscm.prop('disabled', true);
+
+        ftOrd.facAct.prop('disabled', true);      
+        ftOrd.op.prop('disabled', true);       
+        ftOrd.fftyp.prop('disabled', true);          
+        ftOrd.ffac.prop('disabled', true);           
+        ftOrd.ffrloc.prop('disabled', true);         
+        ftOrd.tftyp.prop('disabled', true);          
+        ftOrd.tfac.prop('disabled', true);           
+        ftOrd.tfrloc.prop('disabled', true);
+    },
+
+    // DISABLES FACILITY FORM
+    disableFacForm: function() {
+        ftOrd.facAct.prop('disabled', true);      
+        ftOrd.op.prop('disabled', true);       
+        ftOrd.fftyp.prop('disabled', true);          
+        ftOrd.ffac.prop('disabled', true);           
+        ftOrd.ffrloc.prop('disabled', true);         
+        ftOrd.tftyp.prop('disabled', true);          
+        ftOrd.tfac.prop('disabled', true);           
+        ftOrd.tfrloc.prop('disabled', true);
+    },
+
+    // WHEN PAGE LOADS
+    queryOrd: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcFtOrd",
+            user:	        $("#main_currentUser").text(),
+            act:         action,
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "queryOrd") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                ftOrd.tblOrd.index    = 0;
+                // for (var i = 0; i < obj.rows.length; i++) {
+                //     /**
+                //      * obtain Date portion of DateTime
+                //      * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                //      * */
+                //     // obj.rows[i].dd = kris_getCorrectDateString(obj.rows[i].dd);
+                //     // obj.rows[i].fdd = kris_getCorrectDateString(obj.rows[i].fdd);
+                //     /**
+                //      * end
+                //      * */
+                // }
+                ftOrd.OrdRows         = obj.rows;
+                var len               = ftOrd.OrdRows.length;
+                ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                ftOrd.tblOrd.index++;
+                ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+            }
+        });
+    },
+
+    displayTblOrd: function(index) {
+        var startIndex  = (index - 1) * 100;
+        var stopIndex   = index * 100;
+        var len         = ftOrd.OrdRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            ftOrd.tblOrd.body.empty();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) {
+                a.push('<tr><td style="display: none">'                                   + ftOrd.OrdRows[i].id    + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].stat  + '</td>');
+                a.push('<td class="col-sm-4" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].ordno + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].ot    + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].dd    + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].fdd   + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.OrdRows[i].pri   + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.OrdRows[i].cdd   + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.OrdRows[i].fdt   + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.OrdRows[i].wc    + '</td></tr>');
+            }
+            ftOrd.tblOrd.body.html(a.join(""));
+            // ftOrd.OrdIndexLbl.text("From " + (startIndex + 1) + " to " + stopIndex + " out of " + ftOrd.tblOrd.maxIndex);
+        }
+    },
+
+    // WHEN ORD TABLE ROW IS CLICKED
+    queryCkt: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcFtOrd",
+            user:	        $("#main_currentUser").text(),
+            act:            action,
+            ordno:          ftOrd.ordno.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "queryCkt") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                ftOrd.tblCkt.index    = 0;
+                ftOrd.CktRows         = obj.rows;
+                var len               = ftOrd.CktRows.length;
+                ftOrd.tblCkt.maxIndex = Math.ceil(len / 100.0);
+                ftOrd.tblCkt.index++;
+                ftOrd.displayTblCkt(ftOrd.tblCkt.index);
+            }
+        })
+    },
+
+    displayTblCkt: function(index) {
+        var startIndex  = (index - 1) * 100;
+        var stopIndex   = index * 100;
+        var len         = ftOrd.CktRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            ftOrd.tblCkt.body.empty();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) {
+                a.push('<tr><td style="display: none">'                                   + ftOrd.CktRows[i].id         + '</td>');
+                a.push('<td class="col-sm-3" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].ctid       + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].cls        + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].adsr       + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].ssm        + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].ssp        + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].act        + '</td>');
+                a.push('<td class="col-sm-3" style="text-align:left; padding-left: 0px">' + ftOrd.CktRows[i].relordno   + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].cttype     + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].octtype    + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].octid      + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].oc         + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].lst        + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].noscm      + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relcttype  + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relctid    + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relot      + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relact     + '</td></tr>');
+            }
+            ftOrd.tblCkt.body.html(a.join(""));
+            // ftOrd.CktIndexLbl.text("From " + (startIndex + 1) + " to " + stopIndex + " out of " + ftOrd.tblCkt.maxIndex);
+        }
+    },
+
+    //WHEN CKT TABLE ROW IS CLICKED
+    queryFac: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcFtOrd",
+            user:	        $("#main_currentUser").text(),
+            act:            action,
+            ctid:           ftOrd.ctid.val().toUpperCase(),
+            ordno:          ftOrd.ordno.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "queryFac") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                ftOrd.tblFac.index    = 0;
+                // for (var i = 0; i < obj.rows.length; i++) {
+                //     /**
+                //      * obtain Date portion of DateTime
+                //      * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                //      * */
+                //     obj.rows[i].dd = kris_getCorrectDateString(obj.rows[i].dd);
+                //     /**
+                //      * end
+                //      * */
+                // }
+                ftOrd.FacRows         = obj.rows;
+                var len               = ftOrd.FacRows.length;
+                ftOrd.tblFac.maxIndex = Math.ceil(len / 100.0);
+                ftOrd.tblFac.index++;
+                ftOrd.displayTblFac(ftOrd.tblFac.index);
+            }
+        })
+    },
+
+    displayTblFac: function(index) {
+        var startIndex  = (index - 1) * 100;
+        var stopIndex   = index * 100;
+        var len         = ftOrd.FacRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            ftOrd.tblFac.body.empty();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) {
+                a.push('<tr><td style="display: none">'                                   + ftOrd.FacRows[i].id       + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].act      + '</td>');
+                a.push('<td class="col-sm-1" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].op       + '</td>');
+                a.push('<td class="col-sm-3" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].ffacid   + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].ffrloc   + '</td>');
+                a.push('<td class="col-sm-3" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].tfacid   + '</td>');
+                a.push('<td class="col-sm-2" style="text-align:left; padding-left: 0px">' + ftOrd.FacRows[i].tfrloc   + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].ctid     + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].ffactyp  + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].tfactyp  + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].cd       + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].dd       + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.FacRows[i].stat     + '</td></tr>');
+            }
+            ftOrd.tblFac.body.html(a.join(""));
+            // ftOrd.FacIndexLbl.text("From " + (startIndex + 1) + " to " + stopIndex + " out of " + ftOrd.tblFac.maxIndex);
+        }
+    },
+
+    // FIND BUTTON 1
+    queryOrdRow1: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcFindOrder",
+            user:	        $("#main_currentUser").text(),
+            act:            action,
+            ordno:          ftOrd.ordno.val().toUpperCase(),
+            ot:             ftOrd.ot.val().toUpperCase(),
+            wc:             ftOrd.wc.val().toUpperCase(),
+            pri:            ftOrd.pri.val().toUpperCase(),
+            stat:           ftOrd.stat.val().toUpperCase(),
+            
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "query") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                ftOrd.tblOrd.index    = 0;
+                ftOrd.OrdRows         = obj.rows;
+                var len               = ftOrd.OrdRows.length;
+                ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                ftOrd.tblOrd.index++;
+                ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+            }
+        });
+    },
+
+    // FIND BUTTON 2
+    queryOrdRow2: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:            "ipcFindOrder",
+            user:	        $("#main_currentUser").text(),        
+            act:            action,
+            cdd:            ftOrd.cdd.val(),
+            dd:             ftOrd.dd.val(),
+            fdd:            ftOrd.fdd.val(),
+            fdt:            ftOrd.fdt.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    if (action != "query") {
+                        alert("No Record Found");
+                        return;
+                    }
+                }
+                ftOrd.tblOrd.index    = 0;
+                ftOrd.OrdRows         = obj.rows;
+                var len               = ftOrd.OrdRows.length;
+                ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                ftOrd.tblOrd.index++;
+                ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+            }
+        });
+    },
+
+    fetchFtOrders: function() {
+        $.ajax({
+            type: 'POST',
+            url: ipcDispatch,
+            data: {
+                "api":        "ipcFtOrd",
+                "user":       $("#main_currentUser").text(),
+                "act":        "FETCH_FT_ORDERS",
+            },
+            success: function(data) {
+                var obj = JSON.stringify(data);
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                } 
+                else {
+                    if (obj.rows == 0) {
+                        if (action != "query") {
+                            alert("No Record Found");
+                            return;
+                        }
+                    }
+                    ftOrd.queryOrd('queryOrd');
+                }
+            },
+            dataType: 'json',
+            async: false
+        });
+        // $.post(ipcDispatch,
+        // {
+        //     api:        "ipcFtOrd",
+        //     user:	    $("#main_currentUser").text(),        
+        //     act:        "FETCH_FT_ORDERS",
+        // },
+        // function(data) {
+        //     var obj = JSON.parse(data);
+        //     if (obj.rslt == "fail") {
+        //         alert(obj.reason);
+        //     } 
+        //     else {
+        //         if (obj.rows.length === 0) {
+        //             if (action != "query") {
+        //                 alert("No Record Found");
+        //                 return;
+        //             }
+        //         }
+        //         ftOrd.tblOrd.index    = 0;
+        //         ftOrd.OrdRows         = obj.rows;
+        //         var len               = ftOrd.OrdRows.length;
+        //         ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+        //         ftOrd.tblOrd.index++;
+        //         ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+        //     }
+        // });
+    },
+
+    processConnection: function() {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcFtOrd",
+            user:	    $("#main_currentUser").text(),        
+            act:        "PROCESS_CONNECTION",
+            ordno:      ftOrd.ordno.val().toUpperCase(),
+            // ot:         ftOrd.ot.val().toUpperCase(),
+            // wc:         ftOrd.wc.val().toUpperCase(),
+            // pri:        ftOrd.pri.val().toUpperCase(),
+            // stat:       ftOrd.stat.val().toUpperCase(),
+            // cdd:        ftOrd.cdd.val().toUpperCase(),
+            // dd:         ftOrd.dd.val().toUpperCase(),
+            // fdd:        ftOrd.fdd.val().toUpperCase(),
+            // fdt:        ftOrd.fdt.val().toUpperCase(),
+            // cttype:     ftOrd.cttype.val().toUpperCase(),
+            // adsr:       ftOrd.adsr.val().toUpperCase(),
+            // relordno:   ftOrd.rOrdno.val().toUpperCase(),
+            ctid:       ftOrd.ctid.val().toUpperCase(),
+            // ssm:        ftOrd.ssm.val().toUpperCase(),
+            // relcttype:  ftOrd.rCttype.val().toUpperCase(),
+            // octtype:    ftOrd.oCttype.val().toUpperCase(),
+            // ssp:        ftOrd.ssp.val().toUpperCase(),
+            // relctid:    ftOrd.rCtid.val().toUpperCase(),
+            // octid:      ftOrd.oCtid.val().toUpperCase(),
+            // lst:        ftOrd.lst.val().toUpperCase(),
+            // relot:      ftOrd.rOt.val().toUpperCase(),
+            // oc:         ftOrd.oc.val().toUpperCase(),
+            cls:        ftOrd.cls.val().toUpperCase(),
+            // relact:     ftOrd.rAct.val().toUpperCase(),
+            // noscm:      ftOrd.noscm.val().toUpperCase(),
+            // facact:     ftOrd.facAct.val().toUpperCase(),
+            op:         ftOrd.op.val().toUpperCase(),
+            // ffactyp:    ftOrd.fftyp.val().toUpperCase(),
+            ffacid:     ftOrd.ffac.val().toUpperCase(),
+            // ffrloc:     ftOrd.ffrloc.val().toUpperCase(),
+            // tfactyp:    ftOrd.tftyp.val().toUpperCase(),
+            tfacid:     ftOrd.tfac.val().toUpperCase(),
+            // tfrloc:     ftOrd.tfrloc.val().toUpperCase(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                // if (obj.rows.length === 0) {
+                //     if (action != "query") {
+                //         alert("No Record Found");
+                //         return;
+                //     }
+                // }
+                // ftOrd.tblOrd.index    = 0;
+                // ftOrd.OrdRows         = obj.rows;
+                // var len               = ftOrd.OrdRows.length;
+                // ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                // ftOrd.tblOrd.index++;
+                // ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+                alert(obj.rslt);
+            }
+        });
+    },
+
+    processOrder: function() {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcFtOrd",
+            user:	    $("#main_currentUser").text(),        
+            act:        "PROCESS_ORD",
+            ordno:      ftOrd.ordno.val().toUpperCase(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                // if (obj.rows.length === 0) {
+                //     if (action != "query") {
+                //         alert("No Record Found");
+                //         return;
+                //     }
+                // }
+                // ftOrd.tblOrd.index    = 0;
+                // ftOrd.OrdRows         = obj.rows;
+                // var len               = ftOrd.OrdRows.length;
+                // ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                // ftOrd.tblOrd.index++;
+                // ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+                alert(obj.rslt);
+            }
+        });
+    },
+
+    processCkt: function() {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcFtOrd",
+            user:	    $("#main_currentUser").text(),        
+            act:        "PROCESS_CKT",
+            ordno:      ftOrd.ordno.val().toUpperCase(),
+            ctid:       ftOrd.ctid.val().toUpperCase(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                // if (obj.rows.length === 0) {
+                //     if (action != "query") {
+                //         alert("No Record Found");
+                //         return;
+                //     }
+                // }
+                // ftOrd.tblOrd.index    = 0;
+                // ftOrd.OrdRows         = obj.rows;
+                // var len               = ftOrd.OrdRows.length;
+                // ftOrd.tblOrd.maxIndex = Math.ceil(len / 100.0);
+                // ftOrd.tblOrd.index++;
+                // ftOrd.displayTblOrd(ftOrd.tblOrd.index);
+                alert(obj.rslt);
+            }
+        });
+    }
+
+
+}
+
+//--------------------ORD TABLE CLICK FUNCTIONS---------------//
+
+$(document).on("click", "#ftOrd_ords_tbl tr", function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+   // Populate Ord Form
+   /**
+    * Row 1
+    * */
+   ftOrd.ordno.val(dataRow[2]).change(); 
+   ftOrd.ot.val(dataRow[3]).change();
+   ftOrd.wc.val(dataRow[9]).change();
+   ftOrd.pri.val(dataRow[6]).change();
+   ftOrd.stat.val(dataRow[1]).change();
+    /**
+     * Row 2
+     * */
+   ftOrd.cdd.val(dataRow[7]).change();
+   ftOrd.dd.val(dataRow[4]).change();
+   ftOrd.fdd.val(dataRow[5]).change();
+   ftOrd.fdt.val(dataRow[8]).change();
+
+   ftOrd.ordId.val(dataRow[0]).change();
+   ftOrd.clearCktForm();
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+
+});
+
+//--------------------CKT TABLE CLICK FUNCTIONS---------------//
+
+$(document).on("click", "#ftOrd_ckts_tbl tr", function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+   // Populate Ckt Form
+
+   ftOrd.ctid.      val(dataRow[1]).change();
+   ftOrd.cls.       val(dataRow[2]).change();
+   ftOrd.adsr.      val(dataRow[3]).change();
+   ftOrd.ssm.       val(dataRow[4]).change();
+   ftOrd.ssp.       val(dataRow[5]).change();
+   ftOrd.cktAct.    val(dataRow[6]).change();
+   ftOrd.rOrdno.    val(dataRow[7]).change();
+   ftOrd.cttype.    val(dataRow[8]).change();
+   ftOrd.oCttype.   val(dataRow[9]).change();
+   ftOrd.oCtid.     val(dataRow[10]).change();
+   ftOrd.oc.        val(dataRow[11]).change();
+   ftOrd.lst.       val(dataRow[12]).change();
+   ftOrd.noscm.     val(dataRow[13]).change();
+   ftOrd.rCttype.   val(dataRow[14]).change();
+   ftOrd.rCtid.     val(dataRow[15]).change();
+   ftOrd.rOt.       val(dataRow[16]).change();
+   ftOrd.rAct.      val(dataRow[17]).change();   
+
+   ftOrd.cktId.val(dataRow[0]).change();
+   ftOrd.clearFacForm();
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+
+});
+
+//--------------------FAC TABLE CLICK FUNCTIONS---------------//
+
+$(document).on("click", "#ftOrd_facs_tbl tr", function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+   // Populate Facs Form
+   
+   ftOrd.facAct.    val(dataRow[1]).change();
+   ftOrd.op.        val(dataRow[2]).change();
+   ftOrd.ffac.      val(dataRow[3]).change();
+   ftOrd.ffrloc.    val(dataRow[4]).change();
+   ftOrd.tfac.      val(dataRow[5]).change();
+   ftOrd.tfrloc.    val(dataRow[6]).change();
+   ftOrd.ctid.      val(dataRow[7]).change();
+   ftOrd.fftyp.     val(dataRow[8]).change();
+   ftOrd.tftyp.     val(dataRow[9]).change();
+
+   ftOrd.facId.val(dataRow[0]).change();
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+
+});
+
+/**
+ * FUNCTIONS TO HANDLE WHEN ID CHANGES
+ * */
+ftOrd.ordId.change(function() {
+    if (ftOrd.ordId.val() != "") {
+        ftOrd.queryCkt("queryCkt");
+        ftOrd.disableOrdForm();
+        return;
+    }
+    ftOrd.cktId.empty();
+    ftOrd.clearCktForm();
+});
+
+ftOrd.cktId.change(function() {
+    if (ftOrd.cktId.val() != "") {
+        ftOrd.queryFac("queryFac");
+        return;
+    }
+    ftOrd.facId.empty();
+    ftOrd.clearFacForm();
+});
+
+
+// ORD FORM BUTTONS
+
+ftOrd.findBtn1.click(function() {
+    ftOrd.queryOrdRow1("findOrder");
+});
+
+ftOrd.findBtn2.click(function() {
+    ftOrd.queryOrdRow2("findOrderByDD");
+});
+
+ftOrd.clearBtn.click(function() {
+    ftOrd.start();
+});
+
+// DISABLES ORD FORM BASED ON USER INPUT
+
+// DISABLE ORD ROW 1
+ftOrd.ordno.on('input', function() {
+    if (ftOrd.ordno.val() != "") {
+        ftOrd.disableOrdR1();
+        ftOrd.ordno.prop('disabled',false);
+        ftOrd.ordno.focus();
+        return;
+    }
+    ftOrd.enableOrdR1();
+});
+
+ftOrd.ot.change(function() {
+    if (ftOrd.ot.val() != "") {
+        ftOrd.disableOrdR1();
+        ftOrd.ot.prop('disabled',false);
+        return;
+    }
+    ftOrd.enableOrdR1();
+});
+
+ftOrd.wc.on('input', function() {
+    if (ftOrd.wc.val() != "") {
+        ftOrd.disableOrdR1();
+        ftOrd.wc.prop('disabled',false);
+        ftOrd.wc.focus();
+        return;
+    }
+    ftOrd.enableOrdR1();
+});
+
+ftOrd.pri.change(function() {
+    if (ftOrd.pri.val() != "") {
+        ftOrd.disableOrdR1();
+        ftOrd.pri.prop('disabled',false);
+        return;
+    }
+    ftOrd.enableOrdR1();
+});
+
+ftOrd.stat.on('input', function() {
+    if (ftOrd.stat.val() != "") {
+        ftOrd.disableOrdR1();
+        ftOrd.stat.prop('disabled',false);
+        ftOrd.stat.focus();
+        return;
+    }
+    ftOrd.enableOrdR1();
+});
+
+// DISABLE ORD ROW 2
+ftOrd.cdd.change(function() {
+    if (ftOrd.cdd.val() != "") {
+        ftOrd.disableOrdR2();
+        ftOrd.cdd.prop('disabled', false);
+        return;
+    }
+    ftOrd.enableOrdR2();
+});
+
+ftOrd.dd.change(function() {
+    if (ftOrd.dd.val() != "") {
+        ftOrd.disableOrdR2();
+        ftOrd.dd.prop('disabled', false);
+        return;
+    }
+    ftOrd.enableOrdR2();
+});
+
+ftOrd.fdd.change(function() {
+    if (ftOrd.fdd.val() != "") {
+        ftOrd.disableOrdR2();
+        ftOrd.fdd.prop('disabled', false);
+        return;
+    }
+    ftOrd.enableOrdR2();
+});
+
+ftOrd.fdt.change(function() {
+    if (ftOrd.fdt.val() != "") {
+        ftOrd.disableOrdR2();
+        ftOrd.fdt.prop('disabled', false);
+        return;
+    }
+    ftOrd.enableOrdR2();
+});
+
+ftOrd.submitBtn.on("click", function() {
+    if (ftOrd.action.val() == "FETCH_FT_ORDERS") {
+        ftOrd.fetchFtOrders();
+    }
+    else if (ftOrd.action.val() == "PROCESS_ORDER") {
+        if (ftOrd.ordno.val() !== "") {
+            ftOrd.processOrder();
+        }
+        else {
+            alert ("SELECT FROM LIST OF ORDERS");
+        }
+    }
+    else if (ftOrd.action.val() == "PROCESS_CKT") {
+        if (ftOrd.ctid.val() !== "") {
+            ftOrd.processCkt();
+        }
+        else {
+            alert ("SELECT FROM LIST OF CKTS");
+        }
+    }
+    else if (ftOrd.action.val() == "PROCESS_FAC") {
+        if (ftOrd.facId.val() !== "") {
+            ftOrd.processConnection();
+        }
+        else {
+            alert("SELECT FROM THE LIST OF CKT FACILITIES");
+        }
+    }
+});
+</script>

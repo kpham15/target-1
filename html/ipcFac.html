@@ -1,0 +1,639 @@
+<div id="fac" class="tab-pane fade in" style="position: relative;">
+    <h4>SETUP FACILITIES</h4>
+    
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-7 modifyPadding">
+                <label for="fac_fac_txt">FAC_ID</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="fac_fac_txt">
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="fac_psta_sel">PSTA</label>
+                <select class="form-control" id="fac_psta_sel">
+                    <option></option>
+                    <option>AVAIL</option>
+                    <option>SF</option>
+                    <option>CONN</option>
+                    <option>MTCD</option>
+                    <option>DEF</option>
+                </select>
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <button id="fac_findFac_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 modifyPadding">
+                <label for="fac_ftyp_sel">FAC_TYP</label>
+                <select class="form-control" id="fac_ftyp_sel">
+                    <option></option>
+
+                </select>
+            </div>
+
+            <div class="col-sm-2 modifyPadding">
+                <label for="fac_ort_sel">ORT</label>
+                <select class="form-control" id="fac_ort_sel">
+                    <option></option>
+
+                </select>
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="fac_spcfnc_sel">SPCFNC</label>
+                <select class="form-control" id="fac_spcfnc_sel">
+                    <option></option>
+
+                </select>
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <!-- <label for="fac_portInfor_txt">PORT</label> -->
+                <input type="hidden" class="form-control" id="fac_portInfor_txt" readonly>
+            </div>
+                
+            
+            <div class="col-sm-2 modifyPadding">
+                <button id="fac_findFOS_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 modifyPadding">
+                <label for="fac_act_sel">ACTION</label>
+                <select class="form-control" id="fac_act_sel">
+
+                </select>
+            </div>
+
+            <div class="col-sm-6 modifyPadding">
+                <button id="fac_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            </div>
+
+            <div class="col-sm-2 modifyPadding">
+                <input type="hidden" id="fac_id_num" style="width:20px;">
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="col-sm-12">
+            <div style="float:left;">
+                <b>LIST OF FACILITIES:</b>
+            </div>
+            <div style="float:right;">
+                <a id="fac_previous">Previous</a> |
+                <a id="fac_next">Next</a>
+                &nbsp;&nbsp;&nbsp;
+                <label id="fac_index_lbl"></label>
+            </div>
+
+        </div>
+        <div class="col-sm-12">
+            <div class="panel panel-default" style="table-layout: fixed">
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th style="width:35%">FAC_ID</th>
+                            <th style="width:15%">FAC_TYP</th>
+                            <th style="width:10%">ORT</th>
+                            <th style="width:15%">SPCFNC</th>
+                            <th style="width:15%">PORT</th>
+                            <th style="width:10%">PSTA</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="fac_tbl">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FAC MODAL CODE -->
+
+<!-- facModal -->
+<div id="facModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SETUP FACILITIES</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12" style="padding:0px;">
+                        <div class="col-sm-7 modifyPadding">
+                            <label for="facModal_fac_txt">FAC_ID</label>
+                            <input style="text-transform: uppercase" type="text" class="form-control" id="facModal_fac_txt">
+                        </div>
+
+                        <div id="facModal_range_show" class="col-sm-2 modifyPadding">
+                            <label for="facModal_range_sel">RANGE</label>
+                            <select class="form-control" id="facModal_range_sel">
+                                <option></option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                                <option>1000</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3 modifyPadding">
+                            <label for="facModal_portInfo_txt">PORT</label>
+                            <input style="text-transform: uppercase" type="text" class="form-control" id="facModal_portInfor_txt" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="facModal_ftyp_sel">FAC_TYP</label>
+                        <select class="form-control" id="facModal_ftyp_sel">
+                            <option></option>
+                            <option>BRG</option>
+                            <option>CP</option>
+                            <option>DAML</option>
+                            <option>DSLAM</option>
+                            <option>OE</option>
+                            <option>REG</option>
+                            <option>ME</option>
+                            <option>MFT</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="facModal_ort_sel">ORT</label>
+                        <select class="form-control" id="facModal_ort_sel">
+                            <option></option>
+                            <option>CP</option>
+                            <option>OE</option>
+                            <option>ME.D</option>
+                            <option>ME.P</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="facModal_spcfnc_sel">SPCFNC</label>
+                        <select class="form-control" id="facModal_spcfnc_sel">
+                            <option></option>
+                            <option>SP</option>
+                            <option>RE</option>
+                            <option>ADAS</option>
+                            <option>DAML</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="facModal_act_txt">ACTION</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="facModal_act_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-9 modifyPadding">
+                        <button id="facModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button id="facModal_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                        <!-- <br>
+                        <label id="facModal_result_lbl" style="color:red"></label> -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// FAC OBJ //
+
+var fac = {
+    fac:        $("#fac_fac_txt"),
+    port:       $("#fac_portInfor_txt"),
+    findBtn:    $("#fac_findFac_btn"),
+    ftyp:       $("#fac_ftyp_sel"),
+    ort:        $("#fac_ort_sel"),
+    spcfnc:     $("#fac_spcfnc_sel"),
+    psta:       $("#fac_psta_sel"),
+    findFOSBtn: $("#fac_findFOS_btn"),
+    act:        $("#fac_act_sel"),
+    clearBtn:   $("#fac_clear_btn"),
+    id:         $("#fac_id_num"),
+    prevBtn:    $("#fac_previous"),
+    nextBtn:    $("#fac_next"),
+    indexLbl:   $("#fac_index_lbl"),
+    tbl: {
+        body:     $("#fac_tbl"),
+        index:    0,
+        maxIndex: 0,
+    },
+    
+    tblRows:    [],
+
+    options: {
+        ftyp: [],
+        ort: [],
+        spcfnc: [],
+    },
+    
+    start: function() {
+        fac.clearForm();
+        // fac.queryFac();  
+        fac.loadOptions();
+    },
+    
+    loadOptions: function() {
+        fac.queryFtyp();
+        fac.queryOrt();
+        fac.querySpcfnc();
+
+    },
+
+    queryFtyp: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    "queryFtyp",
+            user:   $("#main_currentUser").text(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                fac.options.ftyp = obj.rows;
+                fac.ftyp.empty();
+                var a = [];
+                a.push('<option></option>');
+                fac.options.ftyp.forEach(function(element) {
+                    if (element.ipctyp != "OSP") {
+                        a.push('<option>' + element.ftyp + '</option>');
+                    }
+                });
+                fac.ftyp.html(a.join(""));
+            }
+        });
+    },
+
+    queryOrt: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    "queryOrt",
+            user:   $("#main_currentUser").text(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                fac.options.ort = obj.rows;
+                fac.ort.empty();
+                var b = [];
+                b.push('<option></option>');
+                fac.options.ort.forEach(function(element) {
+                    b.push('<option>' + element.ort + "</option>");
+                });
+                fac.ort.html(b.join(""));
+            }
+        });
+    },
+
+    querySpcfnc: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    "querySpcfnc",
+            user:   $("#main_currentUser").text(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                fac.options.spcfnc = obj.rows;
+                fac.spcfnc.empty();
+                var c = [];
+                c.push('<option></option>');
+                fac.options.spcfnc.forEach(function(element) {
+                    c.push('<option>' + element.spcfnc + "</option>");
+                });
+                fac.spcfnc.html(c.join(""));
+            }
+        });
+    },
+
+    displayTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = fac.tblRows.length;
+        
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            fac.tbl.body.empty();
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {
+                a.push('<tr> <td style="display:none">' + fac.tblRows[i].id + "</td>");
+                a.push('<td style="width:35%">' + fac.tblRows[i].fac + "</td>");
+                a.push('<td style="width:15%">' + fac.tblRows[i].ftyp + "</td>");
+                a.push('<td style="width:10%">' + fac.tblRows[i].ort + "</td>");
+                a.push('<td style="width:15%">' + fac.tblRows[i].spcfnc + "</td>");
+                a.push('<td style="width:15%">' + fac.tblRows[i].port + "</td>");
+                a.push('<td style="width:10%">' + fac.tblRows[i].psta + "</td></tr>");
+            }
+            fac.tbl.body.html(a.join(""));
+            if (len == 0) 
+                fac.indexLbl.text("(total:" + len + ")") ;
+            else
+                fac.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        }
+    },
+    
+    clearForm: function() {
+        fac.id.val("");
+        fac.fac.val("");
+        fac.ftyp.val("");
+        fac.ort.val("");
+        fac.spcfnc.val("");
+        fac.port.val("");
+        fac.psta.val("");
+        fac.act.val("");
+    },
+    
+    populateModal: function() {
+        facModal.fac.val(fac.fac.val());
+        facModal.ftyp.val(fac.ftyp.val());
+        facModal.ort.val(fac.ort.val());
+        facModal.spcfnc.val(fac.spcfnc.val());
+        facModal.port.val(fac.port.val());
+        facModal.act.val(fac.act.val());
+    },
+    
+    queryFac: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    "findFac",
+            user:   $("#main_currentUser").text(),
+            fac_id: fac.id.val(),
+            fac:    fac.fac.val().toUpperCase(),
+            psta:   fac.psta.val(),
+            ftyp:   fac.ftyp.val(),
+            ort:    fac.ort.val(),
+            spcfnc: fac.spcfnc.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                fac.tbl.index = 0;
+                fac.tblRows = obj.rows;
+                var len = fac.tblRows.length;
+                fac.tbl.maxIndex = Math.ceil(len / 100.0);
+                fac.tbl.index++;
+                fac.displayTable(fac.tbl.index);
+            }
+        });
+    },
+
+
+    queryFOS: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    "findFOS",
+            user:   $("#main_currentUser").text(),
+            fac_id: fac.id.val(),
+            fac:    fac.fac.val().toUpperCase(),
+            psta:   fac.psta.val(),
+            ftyp:   fac.ftyp.val(),
+            ort:    fac.ort.val(),
+            spcfnc: fac.spcfnc.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");
+                    return;
+                }
+                fac.tbl.index = 0;
+                fac.tblRows = obj.rows;
+                var len = fac.tblRows.length;
+                fac.tbl.maxIndex = Math.ceil(len / 100.0);
+                fac.tbl.index++;
+                fac.displayTable(fac.tbl.index);
+            }
+        });
+    }
+}
+
+var facModal = {
+    modal:      $("#facModal"),
+    fac:        $("#facModal_fac_txt"),
+    range:      $("#facModal_range_sel"),
+    rangeShow:  $("#facModal_range_show"),
+    port:       $("#facModal_portInfor_txt"),
+    ftyp:       $("#facModal_ftyp_sel"),
+    ort:        $("#facModal_ort_sel"),
+    spcfnc:     $("#facModal_spcfnc_sel"),
+    act:        $("#facModal_act_txt"),
+    submitBtn:  $("#facModal_submit_btn"),
+    clearBtn:   $("#facModal_clear_btn"),
+    result:     $("#facModal_result_lbl"),
+    tblRows:    [],
+    
+    clearForm: function() {
+        facModal.fac.val("");
+        facModal.ftyp.val("");
+        facModal.ort.val("");
+        facModal.spcfnc.val("");
+        facModal.port.val("");
+        facModal.result.text("");
+        facModal.range.val("");
+    },
+    
+    submit: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcFacilities",
+            act:    action,
+            user:   $("#main_currentUser").text(),
+            fac_id: fac.id.val(),
+            fac:    facModal.fac.val().toUpperCase(),
+            ftyp:   facModal.ftyp.val(),
+            ort:    facModal.ort.val(),
+            spcfnc: facModal.spcfnc.val(),
+            range:  facModal.range.val()
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (action == 'DELETE') {
+                    fac.tblRows = [];
+                }
+                else {
+                    fac.tblRows = obj.rows;
+                }
+                fac.tbl.index = 0;
+                var len = fac.tblRows.length;
+                fac.tbl.maxIndex = Math.ceil(len / 100.0);
+                fac.tbl.index++;
+                fac.displayTable(fac.tbl.index);
+                facModal.result.text(obj.rslt);
+                alert (obj.rslt );
+            }
+        });
+    }
+}
+
+// ----------------------Click Events--------------------------------------------
+
+$(document).on("click", "#fac_tbl tr", function() {
+    var dataRow = $(this)
+        .children("td")
+        .map(function() {
+        return $(this).text();
+        })
+        .get();
+
+    //Populate the information
+    fac.id.val(dataRow[0]);
+    fac.fac.val(dataRow[1]);
+    fac.ftyp.val(dataRow[2]);
+    fac.ort.val(dataRow[3]);
+    fac.spcfnc.val(dataRow[4]);
+    fac.port.val(dataRow[5]);
+    fac.psta.val(dataRow[6]);
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass("addColor"); //remove class selected from rest of the rows
+});
+
+fac.nextBtn.click(function() {
+    if (fac.tbl.index < fac.tbl.maxIndex) {
+        fac.tbl.index++;
+        fac.displayTable(fac.tbl.index);
+    }
+});
+
+fac.prevBtn.click(function() {
+    if (fac.tbl.index > 1) {
+        fac.tbl.index--;
+        fac.displayTable(fac.tbl.index);
+    }
+});
+
+fac.clearBtn.click(function() {
+    fac.clearForm();
+    fac.tbl.body.empty();
+    fac.indexLbl.text('');
+});
+
+fac.findBtn.click(function() {
+    fac.queryFac();
+});
+
+fac.findFOSBtn.click(function() {
+    fac.queryFOS();
+});
+
+fac.act.change(function() {
+    if (fac.act.val() == "UPDATE") {
+        if (fac.id.val() != "") {
+            facModal.clearForm();
+            fac.populateModal();
+            
+            facModal.fac.prop("disabled", false);
+            facModal.ftyp.prop("disabled", false);
+            facModal.ort.prop("disabled", false);
+            facModal.spcfnc.prop("disabled", false);
+            facModal.clearBtn.prop("disabled", false);
+            facModal.rangeShow.hide();
+            facModal.clearBtn.show();
+            facModal.modal.modal();
+        } 
+        else {
+            alert("Please select a FAC_ID from the LIST OF FACILITIES");
+            fac.act.val("");
+        }
+    } 
+    else if (fac.act.val() == "DELETE") {
+        if (fac.id.val() != "") {
+            facModal.clearForm();
+            fac.populateModal();
+
+            facModal.fac.prop("disabled", true);
+            facModal.ftyp.prop("disabled", true);
+            facModal.ort.prop("disabled", true);
+            facModal.spcfnc.prop("disabled", true);
+            facModal.rangeShow.hide();
+            facModal.clearBtn.hide();
+            facModal.modal.modal();
+        } 
+        else {
+            alert("Please select a FAC_ID from the LIST OF FACILITIES");
+            fac.act.val("")
+        }
+    } 
+    else if (fac.act.val() == "ADD") {
+        facModal.clearForm();
+        facModal.act.val(fac.act.val());
+        facModal.fac.prop("disabled", false);
+        facModal.ftyp.prop("disabled", false);
+        facModal.ort.prop("disabled", false);
+        facModal.spcfnc.prop("disabled", false);
+        facModal.rangeShow.show();
+        facModal.clearBtn.show();
+        facModal.modal.modal();
+    }
+});
+
+
+// ----------------FACMODAL---------------------------------------------
+
+facModal.modal.on("hidden.bs.modal", fac.clearForm);
+
+// ---------------Click Events-------------------------
+
+facModal.submitBtn.click(function() {
+    facModal.submit(facModal.act.val());
+});
+
+facModal.clearBtn.click(facModal.clearForm);
+// -----------------Function-------------------------
+
+
+
+</script>

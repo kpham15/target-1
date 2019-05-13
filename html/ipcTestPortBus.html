@@ -1,0 +1,354 @@
+<div id="testPB" class="tab-pane fade in" style="position: relative;">
+    <h4>SETUP TEST PORT/TEST BUS</h4>
+    
+    <div style="margin-top: 50px; width:100%;height: 370px; background-color:rgb(214, 230, 222)">
+        <div class="testPB_tpX" style="margin-top: 10px; width:50%;float:left; text-align: center">
+            <div class="testPort" id="testPB_tp1" style="background-color: rgb(160, 218, 67)" >
+               <label style="margin: 10px">Z-TP1</label> 
+            </div>
+        
+            <div class="testPort" id="testPB_tp2" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP2</label> 
+            </div>
+            <div class="testPort" id="testPB_tp3" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP3</label> 
+            </div>
+            <div class="testPort" id="testPB_tp4" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP4</label> 
+            </div>
+            
+        </div>
+        <div class="testPB_tpY" style="margin-top: 10px; width:50%; float:left; text-align: center">
+            <div class="testPort"  id="testPB_tp5" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP5</label> 
+            </div>
+            <div class="testPort" id="testPB_tp6" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP6</label> 
+            </div>
+            <div class="testPort" id="testPB_tp7" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP7</label> 
+            </div>
+            <div class="testPort" id="testPB_tp8" style="background-color: rgb(160, 218, 67)">
+                <label style="margin: 10px">Z-TP8</label> 
+            </div>
+        </div>
+
+        <div style="float:left; width:50%; text-align: center">
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpX_line" id="testPB_tp1_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpX_line" id="testPB_tp2_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpX_line" id="testPB_tp3_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpX_line" id="testPB_tp4_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+        </div>
+        <div style="float: left; width:50%; text-align: center">
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpY_line" id="testPB_tp5_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpY_line" id="testPB_tp6_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpY_line" id="testPB_tp7_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+            <div class="testPort">
+                <div style="float: left; height:50px; width:45%;"></div>
+                <div class="testPB_tpY_line" id="testPB_tp8_line" style="float: left;background-color: red; height: 50px; width:10%"></div>
+                <div style="float: left;height:50px; width:45%;"></div>
+            </div>
+        </div>
+
+        <div style="float: left; width:49%; margin-right:1%; background-color:rgb(255, 217, 0); height: 100px;">
+           <label style="margin:10px">TBX</label> <br>
+            <div style="float:left; margin:10px;">
+                <select id="testPB_tbX_sel">
+                    <option></option>
+                    <option>PASS-THROUGH</option>
+                    <option>DSP-SEND CABLE TONE</option>
+                    <option>DSP-SEND DTMF</option>
+                    <option>DSP-DETECT OFFHOOK</option>
+                </select>
+            </div>
+            <div style="float:left; width: 15%; margin:10px;">
+                <input id="testPB_tbX_input" type="text" style="display:none">
+            </div>
+        </div>
+        <div style="float: left; width:49%; margin-left:1%; background-color:rgb(255, 217, 0); height: 100px;">
+            <label style="margin:10px">TBY</label> <br>
+            <div style="float:left; margin:10px;">
+                <select id="testPB_tbY_sel">
+                    <option></option>
+                    <option>PASS-THROUGH</option>
+                    <option>DSP-SEND CABLE TONE</option>
+                    <option>DSP-SEND DTMF</option>
+                    <option>DSP-DETECT OFFHOOK</option>
+                </select>
+            </div>
+            <div style="float:left; width: 15%; margin:10px;">
+                <input id="testPB_tbY_input" type="text" style="display:none">
+            </div>
+        </div>
+        <div style="float: left; width:50%; text-align: center">
+            <div class="tb_facPort"></div>
+            <div class="tb_facPort">
+                <div style="float: left; height:50px; width:47.5%;"></div>
+                <div id= "testPB_portX_line" style="float: left;background-color: red; height: 50px; width:5%"></div>
+                <div style="float: left;height:50px; width:47.5%;"></div>
+            </div>
+        </div>
+        <div style="float: left; width:50%; text-align: center">
+            <div class="tb_facPort"></div>
+            <div class="tb_facPort">
+                <div style="float: left; height:50px; width:47.5%;"></div>
+                <div id= "testPB_portY_line" style="float: left;background-color: red; height: 50px; width:5%"></div>
+                <div style="float: left;height:50px; width:47.5%;"></div>
+            </div>
+        </div>
+        <div style="width:50%;float:left; text-align: center">
+            <div class="tb_facPort" id="testPB_portX" style="background-color: rgb(250, 206, 118);">
+                <label style="width:30%; margin: 10px 5px 10px 5px;">FACX: </label>
+                <input id="testPB_facX_input" style="width:60%" type="text">
+            </div>
+            <div class="tb_facPort" id="testPB_facX" style="background-color: rgb(250, 206, 118);">
+                <label style="width:30%; margin: 10px 5px 10px 5px;">PORTX: </label>
+                <input id="testPB_portX_input"  style="width:60%" type="text">
+            </div>
+
+        </div>
+        <div style="width:50%; float:left; text-align: center">
+            <div class="tb_facPort" id="testPB_portY" style="background-color: rgb(250, 206, 118);">
+                <label style="width:30%; margin: 10px 5px 10px 5px;">FACY: </label>
+                <input id="testPB_facY_input" style="width:60%" type="text">
+            </div>
+            <div class="tb_facPort" id="testPB_facY" style="background-color: rgb(250, 206, 118);">
+                <label style="width:30%; margin: 10px 5px 10px 5px;">PORTY: </label>
+                <input id="testPB_portY_input" style="width:60%" type="text">
+            </div>
+        
+        </div>
+    </div>
+        
+
+    <div style="margin-top: 30px;width:50%; float:left">
+        <div style="float:left; width: 25%; margin-right: 10px">
+            <label for="testPB_action">ACTION</label>
+            <select id="testPB_actionX_sel" class="form-control modifyPadding">
+                <option></option>
+                <option>CONNECT</option>
+                <option>DISCONNECT</option>
+            </select>
+        </div>
+        <div style="float:left; width: 14%;">
+            <button id="testPB_submitX_btn" class="btn btn-primary">Submit</button>
+        </div>
+        <div style="float:left; width: 14%;">
+            <button id="testPB_clearX_btn" class="btn btn-primary">Clear</button>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; width:50%; float:left">
+        <div style="float:left; width: 25%; margin-right: 10px">
+            <label for="testPB_action">ACTION</label>
+            <select id="testPB_actionY_sel" class="form-control modifyPadding">
+                <option></option>
+                <option>CONNECT</option>
+                <option>DISCONNECT</option>
+            </select>
+        </div>
+        <div style="float:left; width: 14%;">
+            <button id="testPB_submitY_btn" class="btn btn-primary">Submit</button>
+        </div>
+        <div style="float:left; width: 14%;">
+            <button id="testPB_clearY_btn" class="btn btn-primary">Clear</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    var testPB = {
+        // test port boxes
+        tp1:        $("#testPB_tp1"),
+        tp2:        $("#testPB_tp2"),
+        tp3:        $("#testPB_tp3"),
+        tp4:        $("#testPB_tp4"),
+        tp5:        $("#testPB_tp5"),
+        tp6:        $("#testPB_tp6"),
+        tp7:        $("#testPB_tp7"),
+        tp8:        $("#testPB_tp8"),
+    
+        tp1Line:    $("#testPB_tp1_line"),
+        tp2Line:    $("#testPB_tp2_line"),
+        tp3Line:    $("#testPB_tp3_line"),
+        tp4Line:    $("#testPB_tp4_line"),
+        tp5Line:    $("#testPB_tp5_line"),
+        tp6Line:    $("#testPB_tp6_line"),
+        tp7Line:    $("#testPB_tp7_line"),
+        tp8Line:    $("#testPB_tp8_line"),
+    
+        // Test bus boxes
+        tbX:        $("#testPB_tbX"),
+        tbXSel:     $("#testPB_tbX_sel"),
+        tbXInput:   $("#testPB_tbX_input"),
+        facX:       $("#testPB_facX_input"),
+        portX:      $("#testPB_portX_input"),
+        portXLine:  $("#testPB_portX_line"),
+        actionX:    $("#testPB_actionX_sel"),
+        submitBtnX: $("#testPB_submitX_btn"),
+        clearBtnX:  $("#testPB_clearX_btn"),
+    
+        tbY:        $("#testPB_tbY"),
+        tbYSel:     $("#testPB_tbY_sel"),
+        tbYInput:   $("#testPB_tbY_input"),
+        facY:       $("#testPB_facY_input"),
+        portY:      $("#testPB_portY_input"),
+        portYLine:  $("#testPB_portY_line"),
+        actionY:    $("#testPB_actionY_sel"),
+        submitBtnY: $("#testPB_submitY_btn"),
+        clearBtnY:  $("#testPB_clearY_btn"),
+        
+        start: function() {
+            testPB.clearX();
+            testPB.clearY();
+        },
+
+        clearX: function() {
+            testPB.tbXSel.val("").change();
+            testPB.facX.val("");
+            testPB.portX.val("").trigger('input');
+        },
+
+        clearY: function() {
+            testPB.tbYSel.val("").change();
+            testPB.facY.val("");
+            testPB.portY.val("").trigger('input');
+        }
+    
+    }
+    
+    testPB.portX.bind('input', function() { 
+        if($(this).val() == "") {
+            testPB.portXLine.hide();
+        }
+        else {
+            testPB.portXLine.show();
+        }
+    });
+    
+    testPB.portY.bind('input', function() { 
+        if($(this).val() == "") {
+            testPB.portYLine.hide();
+        }
+        else {
+            testPB.portYLine.show();
+        }
+    });
+
+    
+    /**
+     * Event handlers to display and hide TB input box depending on the TB select box option
+     * */
+    testPB.tbXSel.on("change", function() {
+        testPB.tbXInput.hide();
+        if ($(this).val() == "PASS-THROUGH") {
+            $(".testPB_tpX div").css("background-color","rgb(160, 218, 67)");
+            $(".testPB_tpX div").css("color","black");
+            $(".testPB_tpX_line").css("background-color","red");
+            $(".testPB_tpX div").off("click")
+            $(".testPB_tpX div").click(function(){
+                $(this).addClass("addBorder");
+                $(this).siblings().removeClass("addBorder");
+                var pXnum = this.id.slice(9);
+
+                $("#testPB_tp"+pXnum+"_line").show();
+                $(".testPB_tpX_line:not(#testPB_tp"+pXnum+"_line)").hide();
+            })
+        }
+        else {
+            if ($(this).val() == "DSP-SEND DTMF") {
+                testPB.tbXInput.show();
+            }
+            $(".testPB_tpX div").removeClass("addBorder");
+            $(".testPB_tpX_line").removeClass("addBorder");
+
+            $(".testPB_tpX_line").hide();
+
+            $(".testPB_tpX div").css("background-color","#01517f");
+            $(".testPB_tpX div").css("color","white");
+            $(".testPB_tpX div").off("click")
+
+        }
+    });
+    
+    testPB.tbYSel.on("change", function() {
+        testPB.tbYInput.hide();
+        if ($(this).val() == "PASS-THROUGH") {
+            $(".testPB_tpY div").css("background-color","rgb(160, 218, 67)");
+            $(".testPB_tpY div").css("color","black");
+            $(".testPB_tpY_line").css("background-color","red");
+            $(".testPB_tpY div").off("click")
+            $(".testPB_tpY div").click(function(){
+                $(this).addClass("addBorder");
+                $(this).siblings().removeClass("addBorder");
+                var pYnum = this.id.slice(9);
+
+                $("#testPB_tp"+pYnum+"_line").show();
+                $(".testPB_tpY_line:not(#testPB_tp"+pYnum+"_line)").hide();
+            })
+        }
+        else {
+            if ($(this).val() == "DSP-SEND DTMF") {
+                testPB.tbYInput.show();
+            }
+            $(".testPB_tpY div").removeClass("addBorder");
+            $(".testPB_tpY_line").removeClass("addBorder");
+
+            $(".testPB_tpY_line").hide();
+
+            $(".testPB_tpY div").css("background-color","#01517f");
+            $(".testPB_tpY div").css("color","white");
+            $(".testPB_tpY div").off("click")
+
+        }
+    });
+    
+    
+    testPB.actionX.on("click", function() {
+        
+    });
+    
+    testPB.actionY.on("click", function() {
+    
+    });
+    
+    testPB.clearBtnX.on("click", function() {
+        testPB.clearX();
+    });
+    
+    testPB.clearBtnY.on("click", function() {
+        testPB.clearY();
+    });
+    
+    
+</script>

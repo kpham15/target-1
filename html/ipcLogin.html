@@ -1,0 +1,373 @@
+<div id="login" class="container" style="display:none; height:680px; width:100%; background-color: rgb(236, 247, 252)">
+    <div id="header" class="row" style="border-style:none none solid none; border-color:white; border-width:1px;background-color:blue; color:white">
+        <div  class="col-sm-2 modifyPadding" align="left">
+            <!-- <img src="./resources/Telepath_Logo_Part.JPG" style="float:left" height="42" width="42">          -->
+                
+            <div id="login_logo">TELEPATH NETWORKS, INC.</div>
+            <small id="login_version_lbl">Version: 0.12 (2019-02-22)</small>
+        </div>
+
+        <div class="col-sm-8" align="center">
+            <h3>Intelligent Provisioning Center</h3>
+            <div class="row">
+
+                <!--
+                    <div class="col-xs-2" align="center" style="font-size:small"><label>Alarm: </label><label style="background-color:white; width:70px" id="Login_Alarm_txt">NONE</label></div>                
+                -->
+                <div class="col-xs-3"></div>
+                <div id="login_header_wcname" class="col-xs-2" align="center" style="font-size:small"></div>
+				<div id="login_header_wcc" class="col-xs-1" align="center" style="font-size:small"></div>
+				<div id="login_header_npanxx" class="col-xs-2" align="center" style="font-size:small"></div>
+                <div id="login_header_frmID" class="col-xs-1" align="center" style="font-size:small"></div>
+                <div id="login_header_time" class="col-xs-3" align="center" style="font-size:small"></div>
+                
+
+			</div>
+        </div>
+    </div>
+    
+    <h1 style="text-align: center; color:red">WARNING</h1>
+    <h3 style="text-align: center; border: 1px solid black; background-color:#F5F5F5">
+        PRIVATE/PROPRIETARY
+        <br>NO DISCLOSURE OUTSIDE TELEPATH NETWORKS EXCEPT BY WRITTEN AGREEMENT. ANY UNAUTHORIZED ACCESS TO, OR MISSUSE OF THE SYSTEM OR DATA MAY RESULT IN CIVIL AND/OR CRIMINAL PROSECUTION, EMPLOYEE DISCIPLINE UP TO AND INCLUDING DISCHARGE, OR TERMINATION OF VENDOR/SERVICE CONTRACTS.
+        <br>THIS SYSTEM ACCESS/USAGE IS MONITORED AND AUDITED.
+    </h3>
+
+    <div style="width:30%; margin:20px auto 0 auto; padding: 25px  ;border: 1px solid black; background-color:#F5F5F5;text-align: center;">
+        <div class="form-group row">
+            <label for="login_username" class="col-sm-4 col-form-label">Username</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="login_username">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label id="login_password_lbl" for="login_password_input" class="col-sm-4 col-form-label">Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="login_password_input">
+            </div>
+        </div>
+        <div id="login_newPwView" style="display:none;">
+            <div class="form-group row">
+                <label for="login_newPassWord" class="col-sm-4 col-form-label">New Password</label>
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="login_newPassWord" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="login_confirmPassWord" class="col-sm-4 col-form-label">Confirm New Password</label>
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="login_confirmPassWord" >
+                </div>
+            </div>
+            
+        </div>
+        <button id="login_btn" type="submit" class="btn btn-primary">Login</button>
+        <br><a id="login_firstLogin">First time login/Change password? <br>Click here!</a>
+    </div>        
+
+</div>
+
+<div id="alertLayer">
+    <div id="alert" style="position: absolute;">
+        <div id="alertHeader" class="col-sm-12" style="padding: 0px;background-color: #0000FF; color:white">
+            <label style="margin:4px;">Intelligent Provisioning Center</label>
+        </div>
+        <div class="col-sm-12">
+            <p id="popup_message" style="margin:5px" readonly></p>
+        </div>
+        <button id="ok-btn" class="btn btn-primary" style="margin:5px 5px 10px 5px">OK</button>
+        <button id="no-btn" class="btn btn-primary" style="margin:5px 5px 10px 5px">NO</button>
+    </div>
+</div>
+
+<script>
+var keyId;
+
+var login = {
+    user: {
+        fname: "",
+        mi: "",
+        lname: "",
+        grp: 0,
+        ugrp: "",
+        loginTime: "",
+        idle_to: '',
+    },
+    page:               $("#login"),
+    warning:            $("#warning"),
+    swVersion:          $("#login_version_lbl"),
+    username:           $("#login_username"),
+    password:           $("#login_password_input"),
+    passwordLbl:        $("#login_password_lbl"),
+    newPwView:          $("#login_newPwView"),
+    newpassword:        $("#login_newPassWord"),
+    confirmPassword:    $("#login_confirmPassWord"),
+    loginBtn:           $("#login_btn"),
+    firstLoginBtn:      $("#login_firstLogin"),
+
+    start: function() {
+        login.page.show();
+        login.getSwVersion();
+        wc.getHeaderInfo();
+    },
+    getSwVersion: function() {
+        $.post("./indexFunc.php",
+        {
+            act: "queryReadMe"
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            login.swVersion.text('Version: ' + obj.ver);
+            mB.versionDescr.val(obj.descr);
+            mB.versionLbl.text('Version: ' + obj.ver);
+        });
+    },
+    submitLogin: function() {
+        keyId = "";
+        $.post(ipcDispatch,{
+            api: "ipcConfirm",
+            act: "confirm"
+        }, function(data, status) {
+            var obj = JSON.parse(data);
+            if(obj.rslt == 'fail') {
+                alert(obj.reason);
+            }
+            else {
+                keyId = obj.key;
+                if(keyId == "") {
+                    alert("Confirm key is not available yet")
+                    return;
+                }
+                login.postUserPassword()
+            }
+        });
+        
+    },
+
+    postUserPassword: function() {
+
+        if(login.newpassword.val() !="" &&
+        login.newpassword.val() !==  login.confirmPassword.val()) {
+            alert("New password and confirm password should be the same");
+        }
+        else {
+            $.post(ipcDispatch,
+            {    
+                api:    "ipcLogin",
+                act:    "login", 
+                user:   login.username.val(),
+                pw:     encode(login.password.val()),
+                newPw:  encode(login.newpassword.val())
+            },
+            function (data, status) {       
+                var obj = JSON.parse(data);
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+                    $("#main_currentUser").text(obj.rows[0].uname);
+                    $("#main_userFLname").text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
+                    login.user.fname = obj.rows[0].fname;
+                    login.user.mi = obj.rows[0].mi;
+                    login.user.lname = obj.rows[0].lname;
+                    login.user.grp = obj.rows[0].grp;
+                    login.user.ugrp = obj.rows[0].ugrp;
+                    login.user.idle_to = obj.rows[0].user_idle_to;
+                    login.username.val("");
+                    login.password.val("");
+                    login.newpassword.val("");
+                    login.warning.hide();
+                    login.page.hide();
+                    opt.query("queryOpt");
+                    bulletinBoard.query('query');
+                    brdcstModal.loadOwner();
+                    mB.start();
+                    //$("#mainPage").show();
+                } 
+            });
+        }
+
+    },
+
+    passwordLabelChange: function() {
+        if(login.passwordLbl.text() == "Password") {
+            login.passwordLbl.text('Current Password');
+        }
+        else if (login.passwordLbl.text() == "Current Password") {
+            login.passwordLbl.text('Password');
+        }
+    }
+}
+//----------------------Click Events----------------
+
+login.loginBtn.click(function() {
+    login.submitLogin();
+})
+
+
+login.firstLoginBtn.click(function(){
+    login.newpassword.val("");
+    login.confirmPassword.val("");
+
+    if (login.firstLoginBtn.html() == "First time login/Change password? <br>Click here!") {
+        login.newPwView.show();
+        login.firstLoginBtn.html("Go back!");
+        login.passwordLabelChange();
+    }
+    else {
+        login.newPwView.hide();
+        login.firstLoginBtn.html("First time login/Change password? <br>Click here!");
+        login.passwordLabelChange();
+    }
+})
+
+/////////////////////-------------//////////////////////
+window.alert = function(message,action,showOk=true){
+    $("#popup_message").html(message);
+    $("#no-btn").hide();
+    if(showOk){
+        $("#ok-btn").show();
+    }
+    else {
+        $("#ok-btn").hide();
+    }
+    $(document ).off("click", "#ok-btn");
+    $(document).on("click", "#ok-btn", function() {
+        $('#alertLayer').hide();
+        if(action != undefined) {
+            action();
+        }
+    })    
+    $('#alertLayer').show();
+    var topOffset = (document.body.clientHeight)/2 - (document.getElementById("alert").offsetHeight)/2;
+    var leftOffset = (document.body.clientWidth)/2 - (document.getElementById("alert").offsetWidth)/2;
+    $("#alert").css('top',topOffset);
+    $("#alert").css('left',leftOffset);
+}
+
+function closeAlert() {
+    $('#alertLayer').hide();
+}
+
+window.confirm = function(message, action) {
+    $("#popup_message").html(message);
+    $("#no-btn").show();
+    $(document ).off("click", "#ok-btn");
+    $(document ).off("click", "#no-btn");
+    $(document).on("click", "#ok-btn", function() {
+        $('#alertLayer').hide();
+        if(action != undefined) {
+            action();
+        }
+    })
+    $(document).on("click", "#no-btn", function() {
+        $('#alertLayer').hide();
+    })
+    //Move alert box to center
+    $('#alertLayer').show();
+    var topOffset = (document.body.clientHeight)/2 - (document.getElementById("alert").offsetHeight)/2;
+    var leftOffset = (document.body.clientWidth)/2 - (document.getElementById("alert").offsetWidth)/2;
+    $("#alert").css('top',topOffset);
+    $("#alert").css('left',leftOffset);
+}
+
+///////Make the DIV element draggagle:
+dragElement(document.getElementById("alert"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "Header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    if((elmnt.offsetHeight + elmnt.offsetTop - pos2) > document.body.clientHeight || (elmnt.offsetWidth + elmnt.offsetLeft - pos1) > document.body.clientWidth) {
+        return;
+    }
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+/// Take care of event when window size is changed
+$(window).resize(function(){
+    var alertBox = document.getElementById("alert");
+    if((alertBox.offsetHeight + alertBox.offsetTop) > document.body.clientHeight){
+        alertBox.style.top = (document.body.clientHeight - alertBox.offsetHeight) + "px";
+    }
+    if((alertBox.offsetWidth + alertBox.offsetLeft) > document.body.clientWidth) {
+        alertBox.style.left = ( document.body.clientWidth - alertBox.offsetWidth) + "px";
+    }
+})
+
+
+
+
+$('#login_logo').click(function() {
+    login.username.val('ninh'),
+    login.password.val('c0nsulta'),
+    login.newpassword.val('');
+    login.submitLogin();
+});
+
+///-------------------encode data------------------/////
+function encode(data) {
+    var header = {
+        "alg": "HS256",
+        "typ": "JWT"
+        };
+
+    var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+    var encodedHeader = base64url(stringifiedHeader);
+
+    var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+    var encodedData = base64url(stringifiedData);
+
+    var signature = encodedHeader + "." + encodedData;
+    signature = CryptoJS.HmacSHA256(signature, keyId);
+    signature = base64url(signature);
+    return encodedHeader+"."+encodedData+"."+signature;
+}
+function base64url(source) {
+    // Encode in classical base64
+    encodedSource = CryptoJS.enc.Base64.stringify(source);
+
+    // Remove padding equal characters
+    encodedSource = encodedSource.replace(/=+$/, '');
+    
+    // Replace characters according to base64url specifications
+    encodedSource = encodedSource.replace(/\+/g, '-');
+    encodedSource = encodedSource.replace(/\//g, '_');
+    
+    return encodedSource;
+}
+
+</script>
+    

@@ -1,0 +1,420 @@
+<div id="maintReport" class="tab-pane fade in" style="position: relative;">
+    <h4>MAINTENANCE REPORT</h4>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-1">
+                <label for="maintReport_user_txt">USER</label>
+                <input type="text" class="form-control" id="maintReport_user_txt">
+            </div>
+            <div class="col-sm-2">
+                <label for="maintReport_tktno_txt">TKTNO</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="maintReport_tktno_txt">
+            </div>
+            <div class="col-sm-2">
+                <label for="maintReport_action_sel">ACTION</label>
+                <select class="form-control" id="maintReport_action_sel">
+                    <option></option>
+                    <option>MTC_CONN</option>
+                    <option>MTC_DISCON</option>
+                    <option>MTC_RESTORE</option>
+                    <option>RESTORE_MTCD</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="maintReport_fromDate_date">FROM DATE:</label>
+                <input type="date" class="form-control" id="maintReport_fromDate_date">
+            </div>
+            <div class="col-sm-2">
+                <label for="maintReport_toDate_date">TO DATE:</label>
+                <input type="date" class="form-control" id="maintReport_toDate_date">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <label for="maintReport_report_sel">REPORT</label>
+                <select class="form-control" id="maintReport_report_sel">
+                    <option></option>
+                    <option>VIEW REPORT</option>
+                    <option>CREATE REPORT</option>
+                </select>
+            </div>
+            <div class="col-sm-10">
+                <button id="maintReport_submit_btn" style="text-align:right;" class="btn btn-primary">SUBMIT</button>
+                <button id="maintReport_clear_btn" style="text-align:right;" class="btn btn-primary">CLEAR</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF MAINTENANCE REPORTS:</b>
+                </div>
+                <div style="float: right;">
+                    <a  id="maintReport_prev_btn">Previous</a> |
+                    <a  id="maintReport_next_btn">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="maintReport_index_lbl"></label>
+                </div>  
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="margin-bottom: 0px">     
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="maintReport_DATE_tbl" style="width:10%">DATE</th>
+                                <th id="maintReport_USER_tbl" style="width:5%">USER</th>
+                                <th id="maintReport_TKTNO_tbl" style="width:15%">TKTNO</th>
+                                <th id="maintReport_ACTION_tbl" style="width:10%">ACTION</th>
+                                <th id="maintReport_ORDNO_tbl" style="width:10%">ORDNO</th>
+                                <th id="maintReport_RESULT_tbl" style="width:50%">RESULT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintReport_tbl">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- JS START -->
+
+<script>
+var maintReport = {
+
+    page:           $("#maintReport"),
+    user:           $("#maintReport_user_txt"),
+    tktno:          $("#maintReport_tktno_txt"),
+    action:         $("#maintReport_action_sel"),
+    fromDate:       $("#maintReport_fromDate_date"),
+    toDate:         $("#maintReport_toDate_date"),
+    report:         $("#maintReport_report_sel"),
+    submitBtn:      $("#maintReport_submit_btn"),
+    clearBtn:       $("#maintReport_clear_btn"),
+    indexLbl:       $("#maintReport_index_lbl"),
+    tbl:            {
+        body:       $("#maintReport_tbl"),
+        index:      0,
+        maxIndex:   0,
+        prevBtn:    $("#maintReport_prev_btn"),
+        nextBtn:    $("#maintReport_next_btn"),
+        headers: {
+            date:   $("#maintReport_DATE_tbl"),
+            user:   $("#maintReport_USER_tbl"),
+            tktno:  $("#maintReport_TKTNO_tbl"),
+            action: $("#maintReport_ACTION_tbl"),
+            result: $("#maintReport_RESULT_tbl"),
+            ordno:  $("#maintReport_ORDNO_tbl"),
+        }
+    },
+    tblRows:        [],
+
+    headers: {
+        date:       true,
+        user:       true,
+        tktno:      true,
+        action:     true,
+        result:     true,
+        ordno:      true,
+    },
+
+    start: function () {
+        maintReport.clearForm();
+        maintReport.clearTable();
+        maintReport.sortHeaderEvents();
+    },
+
+    clearForm: function() {
+        maintReport.user.val("");
+        maintReport.action.val("");
+        maintReport.report.val("");
+        maintReport.tktno.val("");
+        maintReport.tblRows = [];
+        maintReport.filterArray = [];
+        maintReport.fromDate.val(maintReport.currentDate());
+        maintReport.toDate.val(maintReport.currentDate());
+    },
+
+    clearTable: function() {
+        maintReport.tbl.body.empty();
+        maintReport.indexLbl.text ("(total:" + maintReport.tblRows.length + ")");
+    },
+
+    query: function(action) {
+        $.post(ipcDispatch,
+    	{
+            api:            "ipcMaintReport",
+            act:            action,
+            user:           $("#main_currentUser").text(),
+            uname:          maintReport.user.val(),
+            tktno:          maintReport.tktno.val().toUpperCase(),
+            action:         maintReport.action.val(),
+            fromDate:       maintReport.fromDate.val(),
+            toDate:         maintReport.toDate.val()
+
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");
+                    maintReport.tblRows = [];
+                    maintReport.filterArray = [];   
+                }
+                maintReport.tbl.index = 0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].date.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                maintReport.tblRows = obj.rows;
+                var len = maintReport.tblRows.length;
+                maintReport.maxIndex = Math.ceil(len/100.0);
+                maintReport.tbl.index++;
+                maintReport.displayTable(maintReport.tbl.index);
+                
+            }
+        });
+    },
+
+    displayTable: function(index) { 
+        var startIndex= (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = maintReport.tblRows.length;
+            
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }
+            maintReport.clearTable();
+            var a = [];
+            var displayedRows = maintReport.tblRows;
+            var tableHeader = ['date' ,'user' ,'tktno' ,'action' , 'result', 'ordno'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr>');
+                a.push('<td style="width: 10%">'     +   displayedRows[i].date     + '</td>');
+                a.push('<td style="width: 5%">'      +   displayedRows[i].user     + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].id       + '</td>');
+                a.push('<td style="width: 15%">'     +   displayedRows[i].tktno    + '</td>');
+                a.push('<td style="width: 10%">'     +   displayedRows[i].action   + '</td>');
+                a.push('<td style="width: 10%">'     +   displayedRows[i].ordno   + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].mlo      + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].ckid     + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].cls      + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].adsr     + '</td>');
+                a.push('<td style="display:none">'   +   displayedRows[i].prot     + '</td>');
+                a.push('<td style="width: 50%">'     +   displayedRows[i].result   + '</td>');
+                a.push('</tr>');
+            }
+            maintReport.tbl.body.html(a.join(""));
+            if (len == 0) 
+
+                maintReport.indexLbl.text("(total:" + len + ")") ;
+            else
+                maintReport.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+
+    convertArrayOfObjectsToCSV: function(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    },
+
+    downloadCSV: function(args) {
+        var data, filename, link;
+
+        var csv = maintReport.convertArrayOfObjectsToCSV({
+            data: maintReport.tblRows,
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    currentDate: function() {
+        var today = new Date();
+        var dd    = today.getDate();
+        var mm    = today.getMonth()+1; //January is 0!
+        var yyyy  = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        } 
+
+        if (mm < 10) {
+            mm = '0' + mm
+        } 
+
+        todayDate = yyyy + '-' + mm + '-' + dd;
+
+        return todayDate;
+    },
+
+    currentTime: function() {
+        var today = new Date();
+        var cycle = false;
+        var hour;
+        if (today.getHours() > 12) {
+            hour = today.getHours() - 12;
+            cycle = true;
+        }
+        else {
+            cycle = false;
+            hour = today.getHours();
+        }
+
+        if (cycle == true) {
+            cycle = "PM";
+        }
+        else if (cycle == false) {
+            cycle = "AM";
+        }
+
+        time = `${hour}.${today.getMinutes()} ${cycle}`;
+        return time;
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in maintReport.tbl.headers) {
+            maintReport.tbl.headers[elem].click(function() {
+                if (maintReport.tblRows.length != 0) {
+                    if (maintReport.headers.elem) {
+                        maintReport.tblRows = maintReport.tblRows.sort(maintReport.dynamicSort(`${elem}`));
+                        maintReport.headers.elem = false;
+                    }
+                    else {
+                        maintReport.tblRows = maintReport.tblRows.sort(maintReport.dynamicSort(`-${elem}`));
+                        maintReport.headers.elem = true;
+                    }
+                    maintReport.displayTable(maintReport.tbl.index);
+                }
+            });
+        }
+    },
+
+}
+
+// EVENTS HANDLING
+maintReport.clearBtn.click(function() {
+    maintReport.clearForm();
+    maintReport.clearTable();
+});
+
+maintReport.tbl.nextBtn.click(function() {
+    if (maintReport.tbl.index < maintReport.maxIndex) {
+        maintReport.tbl.index++;
+        maintReport.displayTable(maintReport.tbl.index);
+    }  
+});
+
+maintReport.tbl.prevBtn.click(function() {
+    if (maintReport.tbl.index > 1) {
+        maintReport.tbl.index--;
+        maintReport.displayTable(maintReport.tbl.index);
+    }
+});
+
+maintReport.submitBtn.click(function (){
+    if (maintReport.report.val() == "VIEW REPORT") {
+        if (maintReport.fromDate.val() > maintReport.toDate.val()) {
+            alert ("'TO DATE' must the same or after 'FROM DATE'!")
+        }
+        else {
+            maintReport.query(maintReport.report.val());
+        }
+    }
+    if (maintReport.report.val() == "CREATE REPORT") {
+        if (maintReport.fromDate.val() > maintReport.toDate.val()) {
+            alert ("'TO DATE' must the same or after 'FROM DATE'!")
+        }
+        else {
+            var fromDate = maintReport.fromDate.val().replace(/-/g, "");
+            var toDate = maintReport.toDate.val().replace(/-/g, "");
+            maintReport.downloadCSV({filename: `MAINTENANCE_REPORT_${fromDate}_${toDate}.csv`});
+        }
+    }
+});
+
+
+</script>

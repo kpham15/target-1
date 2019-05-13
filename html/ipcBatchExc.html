@@ -1,0 +1,426 @@
+<div id="batchExc" class="tab-pane fade in" style="position:relative">
+    <h4>BATCH EXECUTION</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="col-sm-12 modifyPadding">
+                <label for="batchExc_file_sel">BATCH FILE</label>
+                <select id="batchExc_file_sel" class="form-control">  
+                </select>
+            </div>
+            
+
+            <div class="col-sm-6 modifyPadding">
+                <label for="batchExc_act_sel">ACTION</label>
+                <select id="batchExc_act_sel" class="form-control">
+                    <option></option>
+                    <!-- <option>LOAD</option> -->
+                    <option>UPLOAD</option>
+                    <option>DELETE</option>
+                </select>
+                <br>
+                <input type="hidden" id="batchExc_id_num" style="width:50px;">
+                <label id="batchExc_result_lbl" style="color:red"></label> 
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <div class="col-sm-12 modifyPadding">
+                <label>SCRIPTS:</label>
+                <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:#F6F6F6; border: 1px gray solid"></div>
+            </div>
+
+            <button style="float:left" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
+       
+            <button style="float:right" class="btn btn-primary" id="batchExc_download_btn">DOWNLOAD RESULT</button>    
+       
+            <!-- <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF SCRIPTS:</b>
+                </div>
+            </div> -->
+            <!-- <div class="col-sm-12">
+                <div class="panel panel-default">     
+                    <table class="table table-fixed" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">ID</th>
+                                <th style="width:95%">SCRIPT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batchExc_tbl">
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+            </div> -->
+        </div>
+    </div>
+
+      
+</div>
+
+<div id="batchExcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title">UPLOAD BATCH FILE</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                        <div class="container">
+                            <h4>CHOOSE THE FILE FROM YOUR COMPUTER:</h4>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <!-- change color of selected file to blue & bold font -->
+                                    <input type="file" data-icon="false" id="batchExcModal_file" accept=".csv" style="color:blue; font-weight: bold;">
+                                </div>
+                            </div> 
+
+                        </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="batchExcModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <br>
+                        <label id="batchExcModal_result_lbl" style="color:red"></label>
+
+                    </div>
+            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var batchExc = {
+    act:        $("#batchExc_act_sel"),
+    file:       $("#batchExc_file_sel"),
+    id:         $("#batchExc_id_num"),
+    resultLbl:  $("#batchExc_result_lbl"),
+    // submit:     $("#batchExc_submit_btn"),
+    execute:    $("#batchExc_execute_btn"),
+    download:   $("#batchExc_download_btn"),
+    scriptArea: $("#batchExc_script_txt"),
+    // tbl:    {
+    //     body:   $("#batchExc_tbl"),
+    // },
+    list:       [],
+    commandArray: [],
+
+
+    totalCommands: 0,
+    failCommands: 0,
+    successCommands: 0,
+    
+    start: function() {
+        batchExc.clearForm();
+        batchExc.query('QUERY');    
+    },
+    
+    clearForm: function(){
+        batchExc.act.val("");
+        batchExc.file.val("");
+        // batchExc.tbl.body.empty();
+        batchExc.scriptArea.empty();
+        batchExc.id.val("");
+        batchExc.resultLbl.text("");
+        batchExc.download.prop("disabled", true);
+    },
+    
+    // displayTable: function(index){   
+    //     var a = [];
+    //     a.push('<tr> <td style="width:5%">' + batchExc.list[index].id + '</td>')  
+    //     a.push('<td style="width:95%; word-wrap: break-word">' +  batchExc.list[index].content + '</td></tr>');
+    //     batchExc.tbl.body.html(a.join(""));  
+    // },
+    
+    query: function(action){
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: {
+                api: "ipcBatchExc",
+                user: $('#main_currentUser').text(),
+                act: action,
+                id:  batchExc.id.val()
+            },
+        })
+        .done(function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj["rslt"] == "fail") {
+                alert(obj['reason']);
+            }
+            else {
+                if (action == "QUERYBATS") {
+                    // batchExc.tbl.body.empty();
+                    batchExc.scriptArea.empty();
+                    var a = [];
+                    var length = obj['rows'].length;
+                    batchExc.commandArray= obj['rows'];
+                    for (var i=1; i<length; i++) 
+                    {  
+                        // a.push('<tr> <td style="display:none">' + obj['rows'][i].id + '</td>')  
+                        // a.push('<td style="display:none">' + obj['rows'][i].batch_id + '</td>')
+                        // a.push('<td style="width:5%">' +  obj['rows'][i].cmd_id + '</td>');
+                        // a.push('<td style="width:95%; word-wrap: break-word">' + obj['rows'][i].cmd + '</td></tr>');
+                        a.push(obj['rows'][i].cmd_id + " " + obj['rows'][i].cmd + "<br>")
+                    }
+                    // batchExc.tbl.body.html(a.join(""));
+                    batchExc.scriptArea.html(a.join(""));
+                    
+                }
+                else if (action == "QUERY" || action == "DELETE") {
+                    var a = [];
+                    batchExc.list = obj['rows'];
+                    a.push('<option value="">Select a batch file</option>');
+    
+                    for (var i=0; i < obj["rows"].length; i++) 
+                    {  
+                        a.push('<option value = "'+ i +'">' + batchExc.list[i].filename + '</option>');
+                    }
+    
+                    batchExc.file.empty();
+                    batchExc.file.html(a.join(""));
+                    if (action == "DELETE") {
+                        batchExc.resultLbl.text(obj['rslt']);
+                    }
+                }
+      
+            } 
+        });
+    
+    },
+
+    executeCommand: function() {
+        if(batchExc.id.val() == "") {
+            alert("Please choose a batch file to execute!");
+            return;
+        }
+
+        // initialize "Commands" for use in recurExecute
+        batchExc.totalCommands = batchExc.commandArray.length -1;
+        batchExc.failCommands = 0;
+        batchExc.successCommands = 0;
+        batchExc.scriptArea.empty();
+        
+        batchExc.recurExecute(1);   
+     
+        
+    },
+
+    recurExecute: function (i) {
+        if(i<batchExc.commandArray.length) {
+            var paraArray = batchExc.commandArray[0].cmd.replace(/\s/g, "").split(",");
+
+            ///Delete all line break in cmd string
+            batchExc.commandArray[i].cmd = batchExc.commandArray[i].cmd.replace(/^\s+|\s+$/g, '');
+            batchExc.scriptArea.append(batchExc.commandArray[i].cmd_id + " " + batchExc.commandArray[i].cmd+'<br>\n');
+            var paraValueArray = batchExc.commandArray[i].cmd.replace(/\s/g, "").split(",");
+            
+            var urlPost="";
+            var api = "";
+            if(paraValueArray[0] == 'SETFAC')
+                api = "ipcFacilities";
+            else if(paraValueArray[0] == 'PORTMAP')
+                api = "ipcPortmap";
+            else if(paraValueArray[0] == 'PROV' && paraValueArray[1] == 'CONNECT')
+                api = "ipcProvConnect";
+            else if(paraValueArray[0] == 'PROV' && paraValueArray[1] == 'DISCONNECT')
+                api = "ipcProvDisconnect";
+
+
+            var transferArray = {};
+            for(var j=1; j<paraArray.length; j++) {
+                transferArray[paraArray[j]] = paraValueArray[j];
+            }
+            transferArray['user'] = $('#main_currentUser').text();
+            transferArray['api'] = api;            
+
+            $.ajax({
+                url: ipcDispatch,
+                type: "POST",
+                data: transferArray,
+            })
+            .done(function(data, status) {  
+                var obj = JSON.parse(data);
+
+                if (obj["rslt"] == "fail"){
+                    batchExc.scriptArea.append('<font color="red">'+obj['rslt'] + " " + obj['reason']+'</font><br>\n');
+                    batchExc.failCommands++
+                }
+                else{
+                    batchExc.scriptArea.append('<font color="blue">'+obj['rslt'] + " " + obj['reason']+'</font><br>\n');
+                    batchExc.successCommands++
+                }
+
+        
+                if(obj["rslt"] == "fail" && paraValueArray[0] == "PROV") {
+                    batchExc.download.prop("disabled", false);
+                    return;
+                }
+
+                batchExc.recurExecute(i+1);
+            });
+        }
+        else {
+            // enable download button when the batch is done running
+            batchExc.download.prop("disabled", false);
+        }
+       
+       
+    }
+    
+}
+
+//////////////////-------------------BatchModal-------------------///////////////
+
+var batchExcModal = {
+    modal:      $("#batchExcModal"),
+    fileValue:  $("#batchExcModal_file"),
+    submitBtn:  $("#batchExcModal_submit_btn"),
+    resultLbl:  $("#batchExcModal_result_lbl"),
+    
+    add: function() {
+        if(batchExcModal.fileValue.val() == "") {
+            alert("There is no file uploaded!")
+            return;
+        }
+        var file= document.getElementById("batchExcModal_file").files[0];
+        if (file.size > 2097152) {
+           batchExcModal.resultLbl.text("The file size must be less than 2MB!");
+        }
+        else {
+           var data = new FormData();
+           data.append("api", "ipcBatchExc");
+           data.append("user", $("#main_currentUser").text());
+           data.append("act", "ADD");
+           data.append("file", file);  
+    
+    
+           $.ajax({
+               url: ipcDispatch,
+               type: "POST",
+               data: data,
+               processData: false,
+               contentType: false,
+           })
+           .done(function(data, status){
+                var obj = JSON.parse(data);
+                if (obj["rslt"] == "fail") {
+                    alert(obj['reason']);
+                }
+                else {
+                    if (obj['rows'].length == 0) {
+                        alert("No record found!");
+                    }
+                    else {
+                        var a = [];
+                        batchExc.list = obj['rows'];
+                        a.push('<option></option>');
+    
+                        for (var i=0; i<obj["rows"].length; i++) 
+                        {  
+                            a.push('<option value = "'+ i +'">' + batchExc.list[i].filename + '</option>');
+                        }
+    
+                        batchExc.file.empty();
+                        batchExc.file.html(a.join(""));
+                        alert(obj['rslt']);
+                    }  
+                } 
+           });
+    
+        }
+    },
+    
+    clearForm: function() {
+        batchExcModal.fileValue.val("");
+    },
+    
+}
+// ----
+$(document).on("click","#batchExc_tbl tr",function() {            
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+batchExc.execute.click(function(){
+   batchExc.executeCommand();
+})
+
+batchExc.act.change(function() {
+    if (batchExc.act.val() !="") {
+        if (batchExc.act.val()  ==  "UPLOAD") {
+            batchExcModal.clearForm();
+            batchExcModal.modal.modal();
+            
+        }
+        else if (batchExc.act.val()  ==  "DELETE") {
+            if (batchExc.id.val() != "") {
+                batchExc.query('DELETE');
+            }
+            else {
+                alert("Please select a batch file!")
+                batchExc.act.val("");
+            }
+            
+            batchExc.clearForm();
+        }
+        
+    }
+
+});
+
+// download button disabled when the batch file selection is changed
+batchExc.file.change(function() {
+    if(batchExc.file.val() != "") {
+        if (batchExc.list.length > 0) {
+            var index = batchExc.file.val();
+            batchExc.id.val(batchExc.list[index].id);
+            batchExc.query("QUERYBATS");
+            batchExc.download.prop("disabled", true);
+        }
+    }
+
+});
+
+
+batchExcModal.submitBtn.click(function(){
+    batchExcModal.add();
+});
+
+batchExc.download.click(function(){
+
+    var batchName = batchExc.list[batchExc.file.val()].filename
+    batchName = batchName.split(".")[0];
+    var datetime = new Date();
+    var logText = "User:" + $('#main_currentUser').text() +
+                    "\nBATCH_LOGFILE: "+ batchExc.list[batchExc.file.val()].filename+
+                    "\nDate:"+ datetime+"\n=====================\n";
+    logText += "Total commands: " + batchExc.totalCommands +"\n"; 
+    logText += "Successful commands: " + batchExc.successCommands +"\n"; 
+    logText += "Failed commands: " + batchExc.failCommands +"\n"; 
+    logText += "=====================\n";
+    logText += batchExc.scriptArea.text();
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(logText));
+    element.setAttribute('download', batchName +"_Result.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+})
+
+// -------------------Functions-------------------------------------
+
+batchExcModal.modal.on("hidden.bs.modal", batchExc.clearForm);
+
+</script>

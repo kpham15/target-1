@@ -1,0 +1,567 @@
+<!-- 5-3-2019 - NN-->
+<div id="path" class="tab-pane fade in">
+    <h4>PATH ADMINISTRATION</h4>
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="col-sm-2">
+                <label for="path_node_sel">NODE</label>
+                <select class="form-control" id="path_node_sel">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <!-- waiting for more code
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option> -->
+                </select>            
+            </div>
+    
+            <div class="col-sm-2">
+                <label for="path_slot_sel">SLOT</label>
+                <select class="form-control" id="path_slot_sel">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>            
+            </div>
+            <!--
+            <div class="col-sm-2">
+                <label for="path_ptyp_sel">TYPE</label>
+                <select class="form-control" id="path_ptyp_sel">
+                    <option>X</option>
+                    <option>Y</option>
+                </select>            
+            </div>
+            -->
+            <div class="col-sm-2">
+                <button id="path_findByNode_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">        
+        <div class="col-sm-9">
+            <div class="col-sm-3">
+                <label for="path_ckid_txt">CKID</label>
+                <label for="path_tn_cbx">TN:</label>
+                <input type="checkbox" id="path_tn_cbx" checked></input>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="path_ckid_txt" placeholder="123-456-7890">
+            </div>
+
+            <div class="col-sm-1">
+                <button id="path_findCkid_btn" class="btn btn-primary">View</button>
+            </div>
+            <div class="col-sm-3">
+                <label for="path_facId_txt">FAC_ID</label>
+                <input type="text" class="form-control" id="path_facId_txt">
+            </div>
+
+            <div class="col-sm-1">
+                <button id="path_findByFacId_btn" class="btn btn-primary">View</button>
+            </div>
+
+            <div class="col-sm-2">
+                <label for="path_port_txt">PORT</label>
+                <input type="text" class="form-control" id="path_port_txt">
+            </div>
+        
+            <div class="col-sm-1">
+                <button id="path_findByPort_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHERE IT USED TO BE
+        <div class="row">
+        <div class="col-sm-5">
+            <div class="col-sm-6">
+                <label for="path_ckid_txt">CKID</label>
+                <label for="path_tn_cbx">TN:</label>
+                <input type="checkbox" id="path_tn_cbx" checked></input>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="path_ckid_txt" placeholder="123-456-7890">
+            </div>
+
+            <div class="col-sm-2">
+                <button id="path_findCkid_btn" class="btn btn-primary">View</button>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                <label for="path_path_txt">PATH</label>
+                <input type="text" class="form-control" id="path_path_txt" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="col-sm-6">
+                <label for="path_act_sel">ACTION</label>
+                <select class="form-control" id="path_act_sel">
+                    <option></option>
+                    <option>SET_DEFECTIVE_PATH</option>
+                    <option>REPLACE_DEFECTIVE_PATH</option>
+                    <option>RELEASE_DEFECTIVE_PATH</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <button id="path_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                <button id="path_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div style="float:left">
+                    <label>LIST OF PATHS:</label>
+                </div>
+                <div style="float:right">
+                    <a id="path_prev_btn">Previous</a> |
+                    <a id="path_next_btn">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="path_index_lbl"></label>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="path_ID_tbl" style="width:5%">ID</th>
+                                <th id="path_STAT_tbl" style="width:5%">STAT</th>
+                                <th id="path_CKID_tbl" style="width:15%">CKID</th>
+                                <th id="path_IDX_tbl" style="width:5%">IDX</th>
+                                <th id="path_PORT_X_tbl" style="width:7%">PORT(X)</th>
+                                <th id="path_PORT_Y_tbl" style="width:8%">PORT(Y)</th>
+                                <th id="path_PATH_tbl" style="width:55%">PATH</th>
+                            </tr>
+                        </thead>
+                        <tbody id="path_table" style="height:300px">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+
+var pathAdm = {
+
+    act:            $("#path_act_sel"),
+    ckid:           $("#path_ckid_txt"),
+    tn_cbx:         $("#path_tn_cbx"),
+    clearBtn:       $("#path_clear_btn"),
+    findCkidBtn:    $("#path_findCkid_btn"),
+    facId:          $("#path_facId_txt"),
+    port:           $("#path_port_txt"),
+    node:           $("#path_node_sel"),
+    slot:           $("#path_slot_sel"),
+    ptyp:           $("#path_ptyp_sel"),
+    findByNodeBtn:  $("#path_findByNode_btn"),
+    findByFacIdBtn: $("#path_findByFacId_btn"),
+    findByPortBtn:  $("#path_findByPort_btn"),
+    id:             $("#path_id"),
+    indexLbl:       $("#path_index_lbl"),
+    nextBtn:        $("#path_next_btn"),
+    path:           $("#path_path_txt"),
+    portX:          $("#path_portX_txt"),
+    portY:          $("#path_portY_txt"),
+    pnum:           $("#path_pnum_num"),
+    prevBtn:        $("#path_prev_btn"),
+    tbl: {
+        body:       $("#path_table"),
+        index:      0,
+        maxIndex:   0,
+        nextBtn:    $("#path_next_btn"),
+        prevBtn:    $("#path_prev_btn"),
+        headers: {
+            id:     $("#path_ID_tbl"),
+            stat:   $("#path_STAT_tbl"),
+            ckid:   $("#path_CKID_tbl"),
+            idx:    $("#path_IDX_tbl"),
+            port_x: $("#path_PORT_X_tbl"),
+            port_y: $("#path_PORT_Y_tbl"),
+            path:   $("#path_PATH_tbl"),
+        }
+    },
+
+    headers: {
+        id:         true,
+        stat:       true,
+        ckid:       true,
+        idx:        true,
+        port_x:     true,
+        port_y:     true,
+        path:       true,
+    },
+
+    tblRows:        [],
+    
+    start: function() {
+      pathAdm.clearForm();
+      pathAdm.sortHeaderEvents();
+    },
+    
+    clearForm: function() {
+        pathAdm.act.val('');
+        pathAdm.ckid.val('');
+        pathAdm.path.val('');
+        pathAdm.portX.val('');
+        pathAdm.portY.val('');
+        pathAdm.facId.val('');
+        pathAdm.port.val('');
+    },
+      
+    clearTable: function() {
+        pathAdm.tbl.body.empty();
+        pathAdm.indexLbl.text(`0 - 0 (Total: 0)`);
+    },
+    
+    queryByNode: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPath",
+            act:    "queryByNode",
+            user:   mB.loginUser.text(),
+            node:   pathAdm.node.val(),
+            slot:   pathAdm.slot.val(),
+            ptyp:   pathAdm.ptyp.val(),
+        },
+        
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if(obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                pathAdm.tbl.index = 0;
+                pathAdm.tblRows = obj.rows;
+                var len = pathAdm.tblRows.length;
+                pathAdm.tbl.maxIndex = Math.ceil(len/100.0);
+                pathAdm.tbl.index++;
+                pathAdm.displayTable(pathAdm.tbl.index);
+            }
+        });
+
+    },
+
+    queryByFac: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPath",
+            act:    "queryByFac",
+            user:   mB.loginUser.text(),
+            fac:    pathAdm.facId.val(),
+        },
+    
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                pathAdm.tbl.index = 0;
+                pathAdm.tblRows = obj.rows;
+                var len = pathAdm.tblRows.length;
+                pathAdm.tbl.maxIndex = Math.ceil(len / 100.0);
+                pathAdm.tbl.index++;
+                pathAdm.displayTable(pathAdm.tbl.index);
+            }
+        });
+
+    },
+
+    queryByPort: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPath",
+            act:    "queryByPort",
+            user:   mB.loginUser.text(),
+            port:   pathAdm.port.val(),
+        },
+    
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                pathAdm.tbl.index = 0;
+                pathAdm.tblRows = obj.rows;
+                var len = pathAdm.tblRows.length;
+                pathAdm.tbl.maxIndex = Math.ceil(len / 100.0);
+                pathAdm.tbl.index++;
+                pathAdm.displayTable(pathAdm.tbl.index);
+            }
+        });
+
+    },
+      
+    query: function(action) {
+        
+        $.post(ipcDispatch,
+        {
+            api:    "ipcPath",
+            act:    action,
+            user:   mB.loginUser.text(),
+            id:     pathAdm.id.val(),
+            portx:  pathAdm.portX.val(),
+
+            porty:  pathAdm.portY.val(),
+            ckid:   pathAdm.ckid.val()
+        },
+    
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                pathAdm.tbl.index = 0;
+                pathAdm.tblRows = obj.rows;
+                var len = pathAdm.tblRows.length;
+                pathAdm.tbl.maxIndex = Math.ceil(len / 100.0);
+                pathAdm.tbl.index++;
+                pathAdm.displayTable(pathAdm.tbl.index);
+            }
+        });
+    },
+    
+    displayTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = pathAdm.tblRows.length;
+      
+        if (len >= startIndex) {
+            if (len < stopIndex)
+                stopIndex = len;
+            pathAdm.clearTable();
+            var a = [];
+            var displayedRows = pathAdm.tblRows;
+            var tableHeader = ['id', 'ctyp', 'ckid', 'idx', 'x', 'y', 'path'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr> <td style="width:5%">' + pathAdm.tblRows[i].id + "</td>");
+                a.push('<td style="width:5%">'     + pathAdm.tblRows[i].ctyp + "</td>");
+                a.push('<td style="width:15%">'     + pathAdm.tblRows[i].ckid + "</td>");
+                a.push('<td style="width:5%">'      + pathAdm.tblRows[i].idx + "</td>");
+                a.push('<td style="width:7%">'      + pathAdm.tblRows[i].x + "</td>");
+                a.push('<td style="width:8%">'      + pathAdm.tblRows[i].y + "</td>");
+                a.push('<td style="width:55%">'     + pathAdm.tblRows[i].path + "</td></tr>");
+            }
+            pathAdm.tbl.body.html(a.join(""));
+            if (len == 0)
+
+                pathAdm.indexLbl.text("(total:" + len + ")") ;
+            else
+                pathAdm.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+        }
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in pathAdm.tbl.headers) {
+            pathAdm.tbl.headers[elem].click(function() {
+                if (pathAdm.tblRows.length != 0) {
+                    if (pathAdm.headers.elem) {
+                        pathAdm.tblRows = pathAdm.tblRows.sort(pathAdm.dynamicSort(`${elem}`));
+                        pathAdm.headers.elem = false;
+                    }
+                    else {
+                        pathAdm.tblRows = pathAdm.tblRows.sort(pathAdm.dynamicSort(`-${elem}`));
+                        pathAdm.headers.elem = true;
+                    }
+                    pathAdm.displayTable(pathAdm.tbl.index);
+                }
+            });
+        }
+    },
+      
+}
+
+  
+    
+
+// ---------------------Click Events----------------------------
+
+// pathAdm.findPortBtn.click(function() {
+//     if (pathAdm.node.val() === '' || pathAdm.slot.val() === '' || pathAdm.ptyp.val() === '') {
+//         alert('INVALID NODE OR SLOT OR TYPE');
+//         return;
+//     }
+
+//     $.post(ipcDispatch,
+//     {
+//         api:    "ipcPath",
+//         act:    'query',
+//         user:   mB.loginUser.text(),
+//         id:     pathAdm.id.val(),
+//         ckid:   '%'
+//     },
+
+//     function(data, status) {
+//         var obj = JSON.parse(data);
+//         if (obj.rslt == "fail") {
+//             alert(obj.reason);
+//         } 
+//         else {
+//             var port;
+//             var node = parseInt(pathAdm.node.val()) - 1;
+//             var slot = parseInt(pathAdm.slot.val()) - 1;
+//             var ptyp = pathAdm.ptyp.val();
+//             pathAdm.tblRows = [];
+//             console.log('node=' + node + ' , slot=' + slot + ' , type=' + ptyp);
+
+//             for (var i=0; i<obj.rows.length; i++) {
+//                 if (pathAdm.ptyp.val() === 'X')
+//                     port = obj.rows[i].x.split('.');
+//                 else
+//                     port = obj.rows[i].y.split('.');
+
+//                 console.log('port=' + port);
+
+//                 if (parseInt(port[0]) === node && parseInt(port[2]) === slot) {
+//                     pathAdm.tblRows.push(obj.rows[i]);
+//                 }
+//             }
+//             pathAdm.tbl.index = 0;
+//             var len = pathAdm.tblRows.length;
+//             pathAdm.tbl.maxIndex = Math.ceil(len / 100.0);
+//             pathAdm.tbl.index++;
+//             pathAdm.displayTable(pathAdm.tbl.index);
+//         }
+//     });
+// });
+
+pathAdm.findCkidBtn.click(function() {
+    if (pathAdm.tn_cbx.is(':checked')) {
+        var ckid = pathAdm.ckid.val();
+        var telnum;
+        if ((telnum = getTN(ckid)) === false) {
+            var d = ckid.split('-');
+            if (d.length != 3 ||
+                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+            {
+                alert ("CKID: INVALID TN FORMAT");
+                return;
+            }
+            
+            telnum = ckid;
+        }
+        pathAdm.ckid.val(telnum);
+    }
+    
+    $.post(ipcDispatch,
+    {
+        api:    "ipcPath",
+        act:    'query',
+        user:   mB.loginUser.text(),
+        id:     pathAdm.id.val(),
+        ckid:   pathAdm.ckid.val().toUpperCase()
+    },
+
+    function(data, status) {
+        var obj = JSON.parse(data);
+        if (obj.rslt == "fail") {
+            alert(obj.reason);
+        } 
+        else {
+            pathAdm.tbl.index = 0;
+            pathAdm.tblRows = obj.rows;
+            var len = pathAdm.tblRows.length;
+            pathAdm.tbl.maxIndex = Math.ceil(len / 100.0);
+            pathAdm.tbl.index++;
+            pathAdm.displayTable(pathAdm.tbl.index);
+        }
+    });
+});
+
+pathAdm.clearBtn.click(function() {
+    pathAdm.clearForm();
+    pathAdm.clearTable();
+});
+
+pathAdm.tbl.nextBtn.click(function() {
+    if (pathAdm.tbl.index < pathAdm.tbl.maxIndex) {
+        pathAdm.tbl.index++;
+        pathAdm.displayTable(pathAdm.tbl.index);
+    }
+});
+
+pathAdm.tbl.prevBtn.click(function() {
+    if (pathAdm.tbl.index > 1) {
+        pathAdm.tbl.index--;
+        pathAdm.displayTable(pathAdm.tbl.index);
+    }
+});
+
+$(document).on("click","#path_table tr", function() {
+    var dataRow = $(this).children('td').map(function() {
+        return $(this).text();
+    }).get();
+
+    pathAdm.ckid.val(dataRow[2]);
+    pathAdm.path.val(dataRow[6]);
+
+});
+
+
+pathAdm.findByFacIdBtn.on('click', function() {
+    pathAdm.queryByFac();
+});
+
+pathAdm.findByPortBtn.on('click', function() {
+    pathAdm.queryByPort();
+});
+
+pathAdm.findByNodeBtn.on('click', function() {
+    pathAdm.queryByNode();
+});
+
+</script>

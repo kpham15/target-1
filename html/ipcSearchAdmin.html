@@ -1,0 +1,257 @@
+<div id="searchAdmin" class="tab-pane fade in" style="position: relative">
+    <h4>SETUP HELP/SEARCH</h4> 
+    <div class="row">
+
+
+        <div class="col-sm-4">
+            <div class="col-sm-6 modifyPadding">
+                <label for="searchAdmin_item_txt">ITEM:</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="searchAdmin_item_txt">
+            </div>
+            <div class="col-sm-3 modifyPadding">
+
+                <button id="searchAdmin_viewItem_btn" class="btn btn-primary">View</button>
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <label for="">DESCRIPTION:</label>
+                <textarea id="searchAdmin_descr_txt" class="form-group" style="width:100%; min-height:150px; background-color:#f5f5f5"></textarea>
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+
+                <label for="searchAdmin_act_sel">ACTION</label>
+                <select class="form-control" id="searchAdmin_act_sel">
+                    <option></option>
+                    <option>ADD</option>
+                    <option>UPDATE</option>
+                    <option>DELETE</option>
+                </select>
+            </div>
+            <div class="col-sm-8 modifyPadding">
+                <button id="searchAdmin_submit_btn" class="btn btn-primary">Submit</button>
+                <button id="searchAdmin_clear_btn" class="btn btn-primary">Clear</button>
+            </div>
+                
+        </div>
+                    
+        <div class="col-sm-8">
+            <div class="col-sm-12">
+                <div style="float:left">
+                    <label>LIST OF ITEMS:</label>
+                </div>
+                <div style="float:right">
+                    <a  id="searchAdmin_prev_btn">Previous</a> |
+                    <a  id="searchAdmin_next_btn">Next</a>
+                    &nbsp;&nbsp;&nbsp; <label id="searchAdmin_index_lbl"></label>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="table-layout: fixed">
+                    <table class="table table-fixed" style="table-layout: fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">ITEM</th>
+                                <th style="width:85%">DESCRIPTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchAdmin_tbl">
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+
+var searchAdmin = {
+    item:           $("#searchAdmin_item_txt"),
+    descr:          $("#searchAdmin_descr_txt"),
+    act:            $("#searchAdmin_act_sel"),
+
+    viewItemBtn:    $("#searchAdmin_viewItem_btn"), 
+    clearBtn:       $("#searchAdmin_clear_btn"),
+    submitBtn:      $("#searchAdmin_submit_btn"),
+    prevBtn:        $("#searchAdmin_prev_btn"),
+    nextBtn:        $("#searchAdmin_next_btn"),
+    indexLbl:       $("#searchAdmin_index_lbl"),
+    tbl: {
+        body:       $("#searchAdmin_tbl"),
+        index:      0,
+        maxIndex:   0,  
+    },
+    tblRows:        [],
+
+    
+    //--------------------SEARCHADMIN OBJ FUNCTIONS--------------------//
+    start: function() {
+        searchAdmin.clearForm();
+        searchAdmin.clearTable();
+    },
+    
+    loadTable: function(index) {
+        var startIndex = (index - 1) * 50;
+        var stopIndex = index * 50;
+        var len = searchAdmin.tblRows.length;
+    
+        if (len >= startIndex) {
+            searchAdmin.tbl.body.empty();
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {
+                a.push('<tr><td style="width:15%">'    + searchAdmin.tblRows[i].item + '</td>');
+                a.push('<td style="width:85%">'        + searchAdmin.tblRows[i].descr + '</td></tr>');
+            }
+            searchAdmin.tbl.body.html(a.join(""));
+            
+            if (len == 0) 
+                searchAdmin.indexLbl.text("(total:" + len + ")") ;
+            else
+                searchAdmin.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        }   
+    },
+    
+    clearForm: function() {
+        searchAdmin.item.val("");
+        searchAdmin.descr.val("");
+        searchAdmin.act.val("");
+        searchAdmin.indexLbl.text("");
+    },
+
+    clearTable: function() {
+        searchAdmin.tbl.body.empty();
+    },
+
+    submit: function(action) {
+        $.post(ipcDispatch, 
+        {
+            api: "ipcSearch",
+            act: action,
+            user: $("#main_currentUser").text(),
+            item: searchAdmin.item.val().toUpperCase(),
+            descr: searchAdmin.descr.val()
+
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+                searchAdmin.act.val("");
+            }
+            else {
+                alert(obj.reason);
+                searchAdmin.query();
+                searchAdmin.act.val("");
+
+            }
+        });
+    },
+    
+    //--------------------SEARCHADMIN AJAX FUNCTIONS--------------------//
+    
+    query: function() {
+        $.post(ipcDispatch,
+        {
+            api:    "ipcSearch",
+            act:	'search',
+            user:	$("#main_currentUser").text(),
+            item:	searchAdmin.item.val().toUpperCase()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length  ===  0) {
+                    alert("No record found");
+                }
+                else {
+                    searchAdmin.tbl.index = 0;
+                    searchAdmin.tblRows = obj.rows;
+                    var len = searchAdmin.tblRows.length; 
+                    searchAdmin.tbl.maxIndex = Math.ceil(len / 50.0);
+                    searchAdmin.tbl.index++;
+                    searchAdmin.loadTable(searchAdmin.tbl.index);
+                }
+            }
+        });
+    }  
+}
+
+//  -------------------------SearchAdmin Click Events-------------------------
+
+
+// WHEN AN ITEM FROM THE TABLE IS SELECTED
+$(document).on("click","#searchAdmin_tbl tr",function() {
+    var dataRow = $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();    
+    
+    //Populate the information 
+    searchAdmin.item.val(dataRow[0]);
+    searchAdmin.descr.val(dataRow[1]);
+    searchAdmin.act.val("");    
+    
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});    
+
+
+
+
+searchAdmin.clearBtn.click( function() {
+    searchAdmin.clearForm();
+    searchAdmin.clearTable();
+});
+
+searchAdmin.viewItemBtn.click( function() {
+    searchAdmin.query("viewItem");
+    searchAdmin.descr.val("");
+    searchAdmin.act.val("");
+
+});
+
+searchAdmin.nextBtn.click( function() {
+    if (searchAdmin.tbl.index < searchAdmin.tbl.maxIndex) {
+        searchAdmin.tbl.index++;
+        searchAdmin.loadTable(searchAdmin.tbl.index);
+    }
+});
+
+searchAdmin.prevBtn.click( function() {
+    if (searchAdmin.tbl.index > 1) {
+        searchAdmin.tbl.index--;
+        searchAdmin.loadTable(searchAdmin.tbl.index);   
+    }
+});
+
+searchAdmin.submitBtn.click( function() {
+    if (searchAdmin.act.val() == "ADD") {
+        searchAdmin.submit("ADD");
+        return;
+    }
+    if (searchAdmin.act.val() == "UPDATE") {
+        searchAdmin.submit("UPDATE");
+        return;
+    }
+    if (searchAdmin.act.val() == "DELETE") {
+        searchAdmin.submit("DELETE");
+        searchAdmin.clearForm();
+        return;
+    }
+    else {
+        alert("Please Select Action");
+    }
+})
+
+</script>
+
+

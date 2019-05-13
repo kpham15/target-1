@@ -1,0 +1,724 @@
+<div id="nodeAdmin" class="tab-pane fade in">
+    <h4>NODE ADMINISTRATION</h4>
+    <div class='row'>
+        <div class="col-sm-3">
+            <div class="col-sm-2 modifyPadding">
+                <label for="nodeAdmin_nodeId_num">NODE</label>
+                <input id="nodeAdmin_nodeId_num" type="number" class="form-control">
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeAdmin_rack_txt">RACK</label>
+                <input id="nodeAdmin_rack_txt" type="text" class="form-control">
+            </div>
+            
+            <!-- <div class="col-sm-2 modifyPadding">
+                <label for="nodeAdmin_stat_txt">STATUS</label>
+                <input id="nodeAdmin_stat_txt" type="text" class="form-control">
+            </div> -->
+
+            <div class="col-sm-2 modifyPadding">
+                <label for="nodeAdmin_com_txt">COM</label>
+                <input style="text-transform: uppercase" id="nodeAdmin_com_txt" type="text" class="form-control">
+            </div>
+
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeAdmin_ipadr_txt">IP_ADDRESS</label>
+                <input id="nodeAdmin_ipadr_txt" type="text" class="form-control">
+            </div>
+
+            <!-- <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeAdmin_alm_txt">ALARM</label>
+                <input id="nodeAdmin_alm_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeAdmin_temp_txt">TEMPERATURE</label>
+                <input id="nodeAdmin_temp_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeAdmin_volt_txt">VOLTAGE</label>
+                <input id="nodeAdmin_volt_txt" type="text" class="form-control">
+            </div> -->
+            
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeAdmin_port_num">IP_PORT</label>
+                <input id="nodeAdmin_port_num" type="number" class="form-control">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeAdmin_gateway_txt">GATEWAY</label>
+                <input id="nodeAdmin_gateway_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeAdmin_netmask_txt">NETMASK</label>
+                <input id="nodeAdmin_netmask_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeAdmin_scan_txt">SCAN</label>
+                <input style="text-transform: uppercase" id="nodeAdmin_scan_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeAdmin_pid_num">PID</label>
+                <input id="nodeAdmin_pid_num" type="number" class="form-control">
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-6 modifyPadding">
+                <label for="nodeAdmin_act_sel">ACTION</label>
+                <select class="form-control" id="nodeAdmin_act_sel">
+                    <option></option>
+                    <!-- <option>START</option>
+                    <option>STOP</option> -->
+                    <option>DISCOVER_NODE</option>
+                    <option>ASSIGN_NODE_IP</option>
+                    <option>UNASSIGN_NODE</option>
+                    <!-- <option>CONNECT_NODE</option> -->
+                    <option>START_NODE</option>
+                    <option>STOP_NODE</option>
+                    <option>UPDATE_NETWORK</option>
+                    <option>UPDATE_RACK</option>
+                </select>
+            </div>
+
+            <div class="col-sm-6 modifyPadding">
+                <button id="nodeAdmin_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                <button id="nodeAdmin_refresh_btn" type="button" class="btn btn-primary">Refresh</button>
+            </div>
+
+            <!-- <div class="col-sm-2 modifyPadding">
+                <input type="hidden" id="fac_id_num" style="width:20px;">
+            </div> -->
+
+        </div>
+        <div class="col-sm-9">
+            <div>
+                <label>LIST OF NODES:</label>
+    
+                <div style="width:100%" class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style = "width:100%; padding-right:17px;">
+                            <tr>
+                                <th style="width:8%">NODE</th>
+                                <th style="width:10%">RACK</th>
+                                <th style="width:12%">IP ADDRESS</th>
+                                <th style="width:12%">GATEWAY</th>
+                                <th style="width:12%">NETMASK</th>
+                                <th style="width:8%">IP_PORT</th>
+                                <th style="width:7%">STAT</th>
+                                <th style="width:7%">PSTA</th>
+                                <th style="width:10%">SCAN</th>
+                                <th style="width:6%">PID</th>
+                                <th style="width:8%">COM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="nodeAdmin_table">
+        
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<div id="nodeAdminModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">NODE ADMINISTRATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3 modifyPadding">
+                            <label for="nodeAdminModal_ipadr_txt">IP_ADDRESS</label>
+                            <input id="nodeAdminModal_ipadr_txt" type="text" class="form-control">
+                    </div>
+        
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeAdminModal_gateway_txt">GATEWAY</label>
+                        <input id="nodeAdminModal_gateway_txt" type="text" class="form-control">
+                    </div>
+        
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeAdminModal_netmask_txt">NETMASK</label>
+                        <input id="nodeAdminModal_netmask_txt" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeAdminModal_port_num">IP_PORT</label>
+                        <input id="nodeAdminModal_port_num" type="number" class="form-control">
+                    </div>
+                </div>
+                <h3 id="nodeAdminModal_instruct_txt" style="text-align: center"></h3>
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="nodeAdminModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="nodeAdminModal_act_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-8 modifyPadding">
+                        <button id="nodeAdminModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="nodeAdminModalUpdateRack" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">NODE ADMINISTRATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeAdminModalUpdateRack_nodeId_num">NODE</label>
+                        <input id="nodeAdminModalUpdateRack_nodeId_num" type="number" class="form-control">
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeAdminModalUpdateRack_rack_txt">RACK</label>
+                        <input id="nodeAdminModalUpdateRack_rack_txt" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="nodeAdminModalUpdateRack_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="nodeAdminModalUpdateRack_act_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-8 modifyPadding">
+                        <button id="nodeAdminModalUpdateRack_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+var nodeAdmin = {
+    nodeId :    $("#nodeAdmin_nodeId_num"),
+    rack :      $("#nodeAdmin_rack_txt"),
+    stat :      $("#nodeAdmin_stat_txt"),
+    alm :       $("#nodeAdmin_alm_txt"),
+    temp :      $("#nodeAdmin_temp_txt"),
+    volt :      $("#nodeAdmin_volt_txt"),
+    com :       $("#nodeAdmin_com_txt"),
+    ipadr :     $("#nodeAdmin_ipadr_txt"),
+    gw :        $("#nodeAdmin_gateway_txt"),
+    netmask :   $("#nodeAdmin_netmask_txt"),
+    port :      $("#nodeAdmin_port_num"),
+    //psta:       $("#nodeAdmin_psta_txt"),
+    scan:       $("#nodeAdmin_scan_txt"),
+    pid:        $("#nodeAdmin_pid_num"),
+    act:        $("#nodeAdmin_act_sel"),
+    clearBtn:   $("#nodeAdmin_clear_btn"),
+    refreshBtn: $("#nodeAdmin_refresh_btn"),
+    tblbody:    $("#nodeAdmin_table"),
+    tblRows:    [],
+    
+    start: function() {
+        // nodeAdmin.clearForm();
+        nodeAdmin.query("queryAll");
+    },
+
+    checkNodes: function() {
+        // var interval = setInterval(function() {
+        //     if ($('.active.tab-pane').is("#nodeAdmin")) {
+        //         nodeAdmin.query('CHECK_NODES');
+        //     }
+        //     else {
+        //         clearInterval(interval);
+        //     }
+        // }, 5000)
+    },
+    
+    clearForm: function() {
+        nodeAdmin.nodeId.val("");
+        nodeAdmin.rack.val("");
+        nodeAdmin.stat.val("");
+        nodeAdmin.alm.val("");
+        nodeAdmin.temp.val("");
+        nodeAdmin.volt.val("");
+        nodeAdmin.com.val("");
+        nodeAdmin.ipadr.val("");
+        nodeAdmin.gw.val("");
+        nodeAdmin.netmask.val("");
+        nodeAdmin.port.val("");
+        nodeAdmin.scan.val("");
+        nodeAdmin.pid.val("");
+        nodeAdmin.act.val("");
+    },
+      
+    query: function(action) {
+      $.post(ipcDispatch,
+        {
+        //   api:  "ipcNode",
+          api:  "ipcNodeAdmin",
+          act:  action,
+          user: $("#main_currentUser").text(),
+          node: nodeAdmin.nodeId.val()
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            if(action != 'queryAll' && action != 'CHECK_NODES') alert(obj.reason);
+            nodeAdmin.tblRows = obj.rows;
+            nodeAdmin.displayTable();
+          }
+        }
+      );
+    },
+
+    updateRack: function() {
+        $.post(ipcDispatch,
+        {
+          api:      "ipcNodeAdmin",
+          act:      "UPDATE_RACK",
+          user:     $("#main_currentUser").text(),
+          node:     nodeAdminModalUpdateRack.nodeId.val(),
+          rack:     nodeAdminModalUpdateRack.rack.val(),  
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            alert(obj.reason)
+            nodeAdmin.tblRows = obj.rows;
+            nodeAdmin.displayTable();
+          }
+        }
+      );
+        
+    },
+
+    updateNetwork: function(action) {
+        $.post(ipcDispatch,
+        {
+          api:      "ipcNodeAdmin",
+          act:      action,
+          user:     $("#main_currentUser").text(),
+          node:     nodeAdmin.nodeId.val(),
+          ipadr:    nodeAdminModal.ipadr.val(),
+          gw:       nodeAdminModal.gw.val(),
+          netmask:  nodeAdminModal.netmask.val(),
+          port:     nodeAdminModal.port.val()  
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            alert(obj.reason)
+            nodeAdmin.tblRows = obj.rows;
+            nodeAdmin.displayTable();
+          }
+        }
+      );
+    },
+
+    startCPS: function(action) {
+        $.post(ipcDispatch,
+        {
+          api:      "ipcNodeAdmin",
+          act:      action,
+          user:     $("#main_currentUser").text(),
+          node:     nodeAdmin.nodeId.val(),
+          ipadr:    nodeAdminModal.ipadr.val(),
+          port:     nodeAdminModal.port.val(),
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            alert(obj.reason)
+            nodeAdmin.tblRows = obj.rows;
+            nodeAdmin.displayTable();
+          }
+        }
+      );
+    },
+
+    stopCPS: function(action) {
+        $.post(ipcDispatch,
+        {
+          api:      "ipcNodeAdmin",
+          act:      action,
+          user:     $("#main_currentUser").text(),
+          node:     nodeAdmin.nodeId.val(),
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            alert(obj.reason)
+            nodeAdmin.tblRows = obj.rows;
+            nodeAdmin.displayTable();
+          }
+        }
+      );
+    },
+
+    setupNode: function(action) {
+        $.post(ipcDispatch,
+        {
+          api:      "ipcNodeAdmin",
+          act:      action,
+          user:     $("#main_currentUser").text(),
+          node:     nodeAdmin.nodeId.val(),
+          ipadr:    nodeAdminModal.ipadr.val(),
+          gw:       nodeAdminModal.gw.val(),
+          netmask:  nodeAdminModal.netmask.val(),
+          port:     nodeAdminModal.port.val()  
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+                alert(obj.reason);
+          } 
+          else {
+            if (action == "DISCOVER_NODE") {
+                alert(obj.rows['current'] + "\n" + obj.rows['volt'] + "\n"  + obj.rows['temp']);
+                return;
+            }
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            else {
+                alert(obj.reason);
+                nodeAdmin.tblRows = obj.rows;
+                nodeAdmin.displayTable();
+            }
+          }
+        }
+      );
+    },
+    
+    
+    displayTable: function() {
+        var len = nodeAdmin.tblRows.length;
+
+        nodeAdmin.tblbody.empty();
+        var a = [];
+        for (var i = 0; i < len; i++) {
+        a.push('<tr> <td style="width:8%">' + nodeAdmin.tblRows[i].node + "</td>");
+        a.push('<td style="width:10%">'      + nodeAdmin.tblRows[i].rack + "</td>");
+        a.push('<td style="width:12%">'     + nodeAdmin.tblRows[i].ipadr + "</td>");
+        a.push('<td style="width:12%">'     + nodeAdmin.tblRows[i].gateway + "</td>");
+        a.push('<td style="width:12%">'     + nodeAdmin.tblRows[i].netmask + "</td>");
+        a.push('<td style="width:8%">'     + nodeAdmin.tblRows[i].ip_port + "</td>");
+        a.push('<td style="width:7%">'     + nodeAdmin.tblRows[i].stat + "</td>");
+        if(nodeAdmin.tblRows[i].scan === null)
+            nodeAdmin.tblRows[i].scan = "";
+        a.push('<td style="width:7%">' + nodeAdmin.tblRows[i].psta + "</td>");
+        a.push('<td style="width:10%">'      + nodeAdmin.tblRows[i].scan + "</td>");
+        if(nodeAdmin.tblRows[i].pid === null)
+            nodeAdmin.tblRows[i].pid = "";
+        a.push('<td style="width:6%">'      + nodeAdmin.tblRows[i].pid + "</td>");
+        a.push('<td style="width:8%">'      + nodeAdmin.tblRows[i].com + "</td></tr>");
+        }
+    
+        nodeAdmin.tblbody.html(a.join(""));
+    },
+
+      
+}
+
+var nodeAdminModal = {
+    modal:      $("#nodeAdminModal"),
+    ipadr:      $("#nodeAdminModal_ipadr_txt"),
+    gw:         $("#nodeAdminModal_gateway_txt"),
+    netmask:    $("#nodeAdminModal_netmask_txt"),
+    port:       $("#nodeAdminModal_port_num"),
+    act:        $("#nodeAdminModal_act_txt"),
+    instruct:   $("#nodeAdminModal_instruct_txt"),
+    submitBtn:  $("#nodeAdminModal_submit_btn"),
+
+    clearForm: function() {
+        nodeAdminModal.ipadr.val("");
+        nodeAdminModal.gw.val("");
+        nodeAdminModal.netmask.val("");
+        nodeAdminModal.port.val("");
+    }
+
+}
+var nodeAdminModalUpdateRack = {
+    modal:      $("#nodeAdminModalUpdateRack"),
+    nodeId:     $("#nodeAdminModalUpdateRack_nodeId_num"),
+    rack:       $("#nodeAdminModalUpdateRack_rack_txt"),
+    act:        $("#nodeAdminModalUpdateRack_act_txt"),
+    submitBtn:  $("#nodeAdminModalUpdateRack_submit_btn"),
+
+    clearForm: function() {
+        nodeAdminModalUpdateRack.nodeId.val("");
+        nodeAdminModalUpdateRack.rack.val("");
+    }
+}
+
+// ---------------------Click Events----------------------------
+$(document).on("click", "#nodeAdmin_table tr", function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information
+    nodeAdmin.nodeId.val(dataRow[0]);
+    nodeAdmin.rack.val(dataRow[1]);
+    nodeAdmin.com.val(dataRow[10]);
+    nodeAdmin.port.val(dataRow[5]);
+    nodeAdmin.ipadr.val(dataRow[2]);
+    nodeAdmin.gw.val(dataRow[3]);
+    nodeAdmin.netmask.val(dataRow[4]);
+    nodeAdmin.scan.val(dataRow[8]);
+    nodeAdmin.pid.val(dataRow[9]);
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass("addColor"); //remove class selected from rest of the rows
+});
+
+nodeAdmin.clearBtn.click(function() {
+    nodeAdmin.clearForm();
+});
+
+nodeAdmin.refreshBtn.click(function() {
+    nodeAdmin.query("queryAll");
+})
+
+nodeAdmin.act.change(function() {
+    // if (nodeAdmin.nodeId.val() == "") {
+    //     alert("PLEASE CHOOSE NODE FROM THE TABLE")
+    //     nodeAdmin.clearForm();
+    //     return;
+    // }
+
+    if (nodeAdmin.act.val() == "DISCOVER_NODE") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+
+        nodeAdminModal.ipadr.prop('readOnly',true);
+        nodeAdminModal.port.prop('readOnly',true);
+        nodeAdminModal.netmask.prop('readOnly',true);
+        nodeAdminModal.gw.prop('readOnly',true);
+        
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        nodeAdminModal.modal.modal();
+    }
+    else if (nodeAdmin.act.val() == "ASSIGN_NODE_IP") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        nodeAdminModal.modal.modal();   
+    }
+    // else if (nodeAdmin.act.val() == "CONNECT_NODE") {
+    //    nodeAdminModal.clearForm();
+    //     nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+    //     nodeAdminModal.gw.val(nodeAdmin.gw.val());
+    //     nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+    //     nodeAdminModal.port.val(nodeAdmin.port.val());
+    //     nodeAdminModal.act.val(nodeAdmin.act.val());
+    //     nodeAdminModal.modal.modal();   
+    // }
+    
+    //UNASSGIN_NODE SUBMIT
+    else if (nodeAdmin.act.val() == "UNASSIGN_NODE") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        nodeAdminModal.modal.modal();
+    }
+
+
+    else if (nodeAdmin.act.val() == "START_NODE") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        nodeAdminModal.modal.modal();        
+    }
+    else if (nodeAdmin.act.val() == "STOP_NODE") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        nodeAdminModal.modal.modal();        
+    }
+    else if (nodeAdmin.act.val() == "UPDATE_RACK") {
+        nodeAdminModalUpdateRack.clearForm();
+        nodeAdminModalUpdateRack.nodeId.val(nodeAdmin.nodeId.val());
+        nodeAdminModalUpdateRack.rack.val(nodeAdmin.rack.val());
+        nodeAdminModalUpdateRack.act.val("UPDATE_RACK");
+        nodeAdminModalUpdateRack.modal.modal();
+        return;
+    }
+    else if (nodeAdmin.act.val() == "UPDATE_NETWORK") {
+        nodeAdminModal.clearForm();
+        nodeAdminModal.ipadr.val(nodeAdmin.ipadr.val());
+        nodeAdminModal.gw.val(nodeAdmin.gw.val());
+        nodeAdminModal.netmask.val(nodeAdmin.netmask.val());
+        nodeAdminModal.port.val(nodeAdmin.port.val());
+        nodeAdminModal.act.val(nodeAdmin.act.val());
+        //nodeAdminModal.instruct.html("CLICK SUBMIT TO: "+nodeAdmin.act.val())
+        nodeAdminModal.modal.modal();
+        return;
+    }
+    /// populate the modal
+    nodeAdminModal.act.val(nodeAdmin.act.val());
+    // nodeAdminModal.instruct.html("CLICK SUBMIT TO: "+nodeAdmin.act.val() + " SCANNING NODE "+nodeAdmin.nodeId.val())
+    // nodeAdminModal.instruct.html("CLICK SUBMIT TO: "+nodeAdmin.act.val())
+    nodeAdminModal.modal.modal();
+      
+});
+
+// nodeAdminModal.clearBtn.click(nodeAdminModal.clearForm);
+
+nodeAdminModal.submitBtn.click(function() {
+    // if (nodeAdminModal.act.val() == "START") { 
+    //     nodeAdmin.query('START_SCAN_NODE'); 
+    // } 
+    // else if (nodeAdminModal.act.val() == "STOP") {
+    //     nodeAdmin.query('STOP_SCAN_NODE'); 
+    // } 
+    if (nodeAdminModal.act.val() == "UPDATE_NETWORK") {
+        nodeAdmin.updateNetwork("UPDATE_NETWORK");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+    else if (nodeAdminModal.act.val() == "START_NODE") {
+        nodeAdmin.startCPS("START_NODE");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+    else if (nodeAdminModal.act.val() == "STOP_NODE") {
+        nodeAdmin.stopCPS("STOP_NODE");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+    else if (nodeAdminModal.act.val() == "DISCOVER_NODE") {
+        nodeAdmin.setupNode("DISCOVER_NODE");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+    else if (nodeAdminModal.act.val() == "ASSIGN_NODE_IP") {
+        nodeAdmin.setupNode("ASSIGN_NODE_IP");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+    // else if (nodeAdminModal.act.val() == "CONNECT") {
+    //     nodeAdmin.setupNode("CONNECT");
+    // }
+    else if (nodeAdminModal.act.val() == "UNASSIGN_NODE") {
+        nodeAdmin.setupNode("UNASSIGN_NODE");
+        alert(nodeAdmin.act.val() + " in progress...", null, false);
+    }
+
+});
+
+nodeAdminModalUpdateRack.submitBtn.click(function() {
+    if (nodeAdminModalUpdateRack.act.val() == "UPDATE_RACK") {
+        // node and rack must be filled
+        if (nodeAdminModalUpdateRack.nodeId.val() == "") {
+            alert("NODE MISSING");
+            return;
+        }
+        if (nodeAdminModalUpdateRack.rack.val() == "") {
+            alert("RACK MISSING");
+            return;
+        }
+        nodeAdmin.updateRack();
+    }
+});
+// --------------------------Functions---------------------------
+
+
+
+
+
+
+
+// ----------------FACMODAL---------------------------------------------
+
+nodeAdminModal.modal.on("hidden.bs.modal", nodeAdmin.clearForm);
+nodeAdminModalUpdateRack.modal.on("hidden.bs.modal", nodeAdmin.clearForm);
+// -----------------------Click Events----------------------------------
+
+
+// --------------------------Functions-----------------------------
+
+
+</script>

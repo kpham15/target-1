@@ -1,0 +1,298 @@
+<div id="modTable" class="tab-pane fade in">
+    <h4>Modification Table</h4>
+    <!-- Row one for Action and buttons  -->
+    <div class="col-sm-12" style="padding-left: 0px">
+        <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+            <label for="mt_action_sel">ACTION</label>
+            <select id="mt_action_sel" class="form-control">
+                <option></option>
+                <option>ADD</option>
+                <option>DELETE</option>
+                <option>UPDATE</option>
+            </select>
+        </div>
+        <div class="col-sm-10" style="padding-left: 5px; padding-right: 5px">
+            <button class="btn btn-primary" id="mt_submit_btn">SUBMIT</button>
+            <button class="btn btn-primary" id="mt_clear_btn">CLEAR</button>
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="col-sm-12" style="padding-left: 0px; padding-right: 15px">
+        <div class="panel panel-default" style="border: 0px">
+            <table class="table table-fixed col-sm-12" style="padding-left: 0px">
+                <thead style="width: 100%; padding-right: 15px">
+                    <tr>
+                        <th class="col-sm-12 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                            <div class="col-sm-1 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_ot_sel">OT</label>
+                                <select style="text-align-last: center" id="mt_ot_sel" class="form-control">
+                                    <option></option>
+                                    <option>NC</option>
+                                    <option>T</option>
+                                    <option>CD</option>
+                                    <option>CH</option>
+                                    <option>F</option>
+                                    <option>MCT</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_pri_sel">PRI</label>
+                                <select style="text-align-last: center" id="mt_pri_sel" class="form-control">
+                                    <option></option>
+                                    <option>1</option>
+                                    <option>0</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_cdd_sel">CDD</label>
+                                <select style="text-align-last: center" id="mt_cdd_sel" class="form-control">
+                                    <option></option>
+                                    <option>Y</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_noscm_sel">NOSCM</label>
+                                <select style="text-align-last: center" id="mt_noscm_sel" class="form-control">
+                                    <option></option>
+                                    <option>CDD</option>
+                                    <option>MOD, MDD, CAN</option>
+                                    <option>CDD, MOD, MDD, CAN</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_rtype_sel">RTYPE</label>
+                                <select style="text-align-last: center" id="mt_rtype_sel" class="form-control">
+                                    <option></option>
+                                    <option>ADMIN</option>
+                                    <option>IMMEDIATE</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 modifyPadding" style="text-align: center">
+                                <label style="padding-right: 7px" for="mt_processingfile_sel">PROCESSING FILE</label>
+                                <select style="text-align-last: center" id="mt_processingfile_sel" class="form-control">
+                                    <option></option>
+                                    <option>ADMIN</option>
+                                    <option>MODIFICATION</option>
+                                    <option>IMMEDIATE</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1 modifyPadding" style="padding-left: 0px; padding-right: 0px">
+                                <button class="btn btn-primary" id="mt_find_btn">VIEW</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="mt_tbl" style="height: 400px; float: none">
+
+                </tbody>
+            </table>
+            <div style="float:right;">
+                <a id="mt_previous">Previous</a> |
+                <a id="mt_next">Next</a>
+                &nbsp;&nbsp;&nbsp;
+                <label id="mt_index_lbl"></label>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script>
+var mt = {
+    page:           $("#modTable"),
+    act:            $("#mt_action_sel"),
+    submitBtn:      $("#mt_submit_btn"),
+    clearBtn:       $("#mt_clear_btn"),
+    ot:             $("#mt_ot_sel"),
+    pri:            $("#mt_pri_sel"),
+    cdd:            $("#mt_cdd_sel"),
+    noscm:          $("#mt_noscm_sel"),
+    rtype:          $("#mt_rtype_sel"),
+    processingfile: $("#mt_processingfile_sel"),
+    findBtn:        $("#mt_find_btn"),
+    id:             "",
+    nextBtn:        $("#mt_next"),
+    prevBtn:        $("#mt_previous"),
+    tbl:    {
+        body:       $("#mt_tbl"),
+        index:      0,
+        maxIndex:   0,
+        indexLbl:   $("#mt_index_lbl"),
+    },
+    tblRows:    [],
+
+    start: function() {
+        mt.clearForm();
+        mt.query('query');
+    },
+
+    clearForm: function() {
+        mt.ot.val("").change();
+        mt.pri.val("").change();
+        mt.cdd.val("").change();
+        mt.noscm.val("").change();
+        mt.rtype.val("").change();
+        mt.processingfile.val("").change();
+        mt.tbl.indexLbl.text("");
+        mt.id = 0;
+    },
+
+    loadTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = mt.tblRows.length;
+    
+        if (len >= startIndex) {
+            mt.tbl.body.empty();
+            if (len < stopIndex) {
+                stopIndex = len;
+            }
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {
+                if (mt.tblRows[i].ot == "") {
+                    mt.tblRows[i].ot = "-";
+                }
+                if (mt.tblRows[i].pri == "") {
+                    mt.tblRows[i].pri = "-";
+                }
+                if (mt.tblRows[i].cdd == "") {
+                    mt.tblRows[i].cdd = "-";
+                }
+                if (mt.tblRows[i].noscm == "") {
+                    mt.tblRows[i].noscm = "-";
+                }
+                if (mt.tblRows[i].rtyp == "") {
+                    mt.tblRows[i].rtyp = "-";
+                }
+                if (mt.tblRows[i].processingfile == "") {
+                    mt.tblRows[i].processingfile = "-";
+                }
+                a.push('<tr>');
+                    a.push('<td class="col-sm-12 modifyPadding" style="padding-left: 0px; padding-right: 0px">');
+                        a.push('<div class="col-sm-1 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].ot              + '</div>'); 
+                        a.push('<div class="col-sm-1 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].pri             + '</div>'); 
+                        a.push('<div class="col-sm-1 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].cdd             + '</div>');   
+                        a.push('<div class="col-sm-2 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].noscm           + '</div>');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].rtype            + '</div>');
+                        a.push('<div class="col-sm-3 modifyPadding" style="text-align:center; padding-right: 9px">'     + mt.tblRows[i].processing_file  + '</div>');
+                        a.push('<div class="col-sm-1 modifyPadding" style="text-align:center; padding-right: 9px">'     + " "                           + '</div>');
+                        a.push('<div style="display: none">'                                        + mt.tblRows[i].id              + '</div>');
+                    a.push('</td>');
+                a.push('</tr>');
+            }
+            mt.tbl.body.html(a.join(""));
+            // mt.tbl.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex + " | " + mt.tblRows.length);
+            if (len == 0) 
+                mt.tbl.indexLbl.text("(total:" + len + ")") ;
+            else
+                mt.tbl.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        }   
+    },
+
+    query: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:                "ipcFtModTable",
+            act:	            action,
+            user:	            $("#main_currentUser").text(),
+            ot:                 mt.ot.val(),
+            pri:                mt.pri.val(),
+            cdd:                mt.cdd.val(),
+            noscm:              mt.noscm.val(),
+            rtype:              mt.rtype.val(),
+            processingfile:     mt.processingfile.val(),
+            id:                 mt.id,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length  ==  0) {
+                    alert("No record found");
+                }
+                else {
+                    mt.tbl.index = 0;
+                    mt.tblRows = obj.rows;
+                    var len = mt.tblRows.length; 
+                    mt.tbl.maxIndex = Math.ceil(len / 100.0);
+                    mt.tbl.index++;
+                    mt.loadTable(mt.tbl.index);
+                    if (action != "query") {
+                        alert(`${action} FT_MOD_TABLE SUCCESS!`);
+                    }
+                }
+            }
+        });
+    },   
+
+    
+
+}
+
+// Table click event
+$(document).on("click","#mt_tbl tr",function() {
+    var dataRow= $(this).children("td").children('div').map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    mt.ot.val(dataRow[0]).change();
+    mt.pri.val(dataRow[1]).change();
+    mt.cdd.val(dataRow[2]).change();
+    mt.noscm.val(dataRow[3]).change();
+    mt.rtype.val(dataRow[4]).change();
+    mt.processingfile.val(dataRow[5]).change();
+
+    mt.id = dataRow[7];
+
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+// Row 1 Find Btn
+mt.findBtn.click(function() {
+    mt.query("query");
+});
+
+// Submit Button
+mt.submitBtn.click(function() {
+    if (mt.act.val() == "ADD") {
+        mt.query("ADD");
+        mt.act.val("");
+    }
+    else if (mt.act.val() == "UPDATE") {
+        mt.query("UPDATE");
+        mt.act.val("");
+    }
+    else if (mt.act.val() == "DELETE") {
+        mt.query("DELETE");
+        mt.act.val("");
+    }
+    else {
+        alert("please select an action");
+    }
+});
+
+// Clear Button
+mt.clearBtn.click(function() {
+    mt.clearForm();
+    mt.query('query');
+});
+
+// Next/Prev Buttons
+mt.prevBtn.click(function() {
+    if (mt.tbl.index > 1) {
+        mt.tbl.index--;
+        mt.loadTable(mt.tbl.index);
+    }
+});
+
+mt.nextBtn.click(function() {
+    if (mt.tbl.index < mt.tbl.maxIndex) {
+        mt.tbl.index++;
+        mt.loadTable(mt.tbl.index);
+    }
+});
+</script>

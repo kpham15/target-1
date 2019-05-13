@@ -1,0 +1,471 @@
+<div id="provReport" class="tab-pane fade in" style="position: relative;">
+    <h4>PROVISIONING REPORT</h4>
+        <!-- <button id = "alm_help_button" style="position:absolute; top:0; right:0;"> Help </button> -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12" style="padding-left: 0px">
+
+                <div class="col-sm-2">
+                    <label for="provReport_user_txt">USER</label>
+                    <input type="text" class="form-control" id="provReport_user_txt">
+                </div>
+
+                <div class="col-sm-2">
+                <label for="provReport_action_sel">ACTION</label>
+                    <select class="form-control" id="provReport_action_sel">
+                        <option></option>
+                        <option>CONNECT</option>
+                        <option>DISCONNECT</option>
+                        <option>UPDATE_CKT</option>
+                    </select>
+                </div>
+                
+
+                <div class="col-sm-2">
+                    <label for="provReport_ordno_txt">ORDNO</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="provReport_ordno_txt">
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="provReport_ckid_txt">CKID</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="provReport_ckid_txt">
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="provReport_fromDate_date">FROM DATE</label>
+                    <input type="date" class="form-control" id="provReport_fromDate_date">
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="provReport_toDate_date">TO DATE</label>
+                    <input type="date" class="form-control" id="provReport_toDate_date">
+                </div>
+            </div>
+
+
+            <!-- ----------------- -->
+            <div class="col-sm-12" style="padding-left: 0px">
+                <div class="col-sm-2">
+                    <label for="provReport_report_sel">REPORT</label>
+                    <select class="form-control" id="provReport_report_sel">
+                        <option></option>
+                        <option>VIEW REPORT</option>
+                        <option>CREATE REPORT</option>
+                    </select>
+                </div>
+                <div class="col-sm-10">
+                    <button id="provReport_submit_btn" style="text-align:right;" class="btn btn-primary">SUBMIT</button>
+                    <button id="provReport_clear_btn" style="text-align:right;" class="btn btn-primary">CLEAR</button>
+                </div>
+            </div>
+            <br>
+            <!-- ---------- -->
+
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>
+                        LIST OF REPORTS:
+                    </b>
+                </div>
+                <div style="float: right;">
+                    <a  id="provReport_previous_btn">Previous</a> |
+                    <a  id="provReport_next_btn">Next</a>
+                    &nbsp;&nbsp;&nbsp;<label id="provReport_index_lbl"></label>
+                </div>
+            </div>
+
+                <!-- ---------- -->
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="margin-bottom: 0px">     
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px;">
+                            <tr>
+                                <th id="provReport_DATE_tbl" style="width:10%">DATE</th>
+                                <th id="provReport_USER_tbl" style="width:10%">USER</th>
+                                <th id="provReport_ORDNO_tbl" style="width:10%">ORDNO</th>
+                                <th id="provReport_TKTNO_tbl" style="width:10%">TKTNO</th>
+                                <th id="provReport_CKID_tbl" style="width:20%">CKID</th>
+                                <th id="provReport_ACTION_tbl" style="width:10%">ACTION</th>
+                                <th id="provReport_RESULT_tbl" style="width:30%">RESULT</th>
+                                <th style="display:none">ID</th>
+                                <th style="display:none">CLS</th>
+                                <th style="display:none">ADSR</th>
+                                <th style="display:none">PROT</th>
+                                <th style="display:none">MLO</th>
+                                <th style="display:none">DD</th>
+                                <th style="display:none">FDD</th>
+                                <th style="display:none">CTYP</th>
+                                <th style="display:none">FFAC</th>
+                                <th style="display:none">FPORT</th>
+                                <th style="display:none">TPORT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="provReport_tbl">
+                    
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- JS START -->
+
+<script>
+var provReport = {
+
+    page:               $("#provReport"),
+    uname:              $("#provReport_user_txt"),
+    action:             $("#provReport_action_sel"),
+    report:             $("#provReport_report_sel"),
+    ordno:              $("#provReport_ordno_txt"),
+    ckid:               $("#provReport_ckid_txt"),
+    fromDate:           $("#provReport_fromDate_date"),
+    toDate:             $("#provReport_toDate_date"),
+    submitBtn:          $("#provReport_submit_btn"),
+    clearBtn:           $("#provReport_clear_btn"),
+    indexLbl:           $("#provReport_index_lbl"),
+    tbl:                {
+        body:           $("#provReport_tbl"),
+        index:          0,
+        maxIndex:       0,
+        previousBtn:    $("#provReport_previous_btn"),
+        nextBtn:        $("#provReport_next_btn"),
+        headers: {
+            date:           $("#provReport_DATE_tbl"),
+            user:           $("#provReport_USER_tbl"),
+            ordno:          $("#provReport_ORDNO_tbl"),
+            tktno:          $("#provReport_TKTNO_tbl"),
+            ckid:           $("#provReport_CKID_tbl"),
+            action:         $("#provReport_ACTION_tbl"),
+            result:         $("#provReport_RESULT_tbl"),
+        }
+    },
+
+    tblRows:            [],
+
+    headers: {
+        date:       true,
+        user:       true,
+        ordno:      true,
+        tktno:      true,
+        ckid:       true,
+        action:     true,
+        result:     true,
+    },
+
+    start: function () {
+        provReport.clearForm();
+        provReport.clearTable();
+        provReport.sortHeaderEvents();
+    },
+
+    clearForm: function() {
+        provReport.uname.val("");
+        provReport.action.val("");
+        provReport.report.val("");
+        provReport.ordno.val("");
+        provReport.ckid.val("");
+        provReport.toDate.val("")
+        provReport.fromDate.val("");
+        provReport.tblRows = [];
+        provReport.fromDate.val(provReport.currentDate());
+        provReport.toDate.val(provReport.currentDate());
+    },
+
+    clearTable: function() {
+        provReport.tbl.body.empty();
+        provReport.indexLbl.text ("(total:" + provReport.tblRows.length + ")");
+    },
+
+
+    query: function(action) {
+
+        $.post(ipcDispatch,
+        {
+            api:            'ipcProvReport',
+            act:            action,
+            user:           $("#main_currentUser").text(),
+            uname:          provReport.uname.val(),
+            action:         provReport.action.val(),
+            ordno:          provReport.ordno.val().toUpperCase(),
+            ckid:           provReport.ckid.val().toUpperCase(),
+            fromDate:       provReport.fromDate.val(),
+            toDate:         provReport.toDate.val(),          
+        },
+
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");
+                    provReport.tblRows = [];
+                }
+                provReport.tbl.index = 0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].date.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                provReport.tblRows = obj.rows;
+                var len = provReport.tblRows.length; 
+                provReport.maxIndex = Math.ceil(len/100.0);
+                provReport.tbl.index++;
+                provReport.displayTable(provReport.tbl.index);
+            }
+        });
+    },
+
+
+    displayTable: function(index) { 
+        var startIndex= (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = provReport.tblRows.length;
+            
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }    
+            provReport.clearTable();
+            var a = [];
+            var displayedRows = provReport.tblRows;
+            var tableHeader = ['date','user','ordno','tktno','ckid','action','result','id','cls','adsr','prot','mlo','dd','fdd','ctyp','ffac','fport','tfac','tport'];
+            for (var i = startIndex; i < stopIndex; i++) {  
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]] == undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+
+                a.push('<tr>');
+                a.push('<td style="width:10%">'         +   displayedRows[i].date      + '</td>');
+                a.push('<td style="width:10%">'         +   displayedRows[i].user      + '</td>');
+                a.push('<td style="width:10%">'         +   displayedRows[i].ordno     + '</td>');
+                a.push('<td style="width:10%">'         +   displayedRows[i].tktno     + '</td>');
+                a.push('<td style="width:20%">'         +   displayedRows[i].ckid      + '</td>');
+                a.push('<td style="width:10%">'         +   displayedRows[i].action    + '</td>');
+                a.push('<td style="width:30%">'         +   displayedRows[i].result    + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].id        + '</td>');  
+                a.push('<td style="display:none">'      +   displayedRows[i].cls       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].adsr      + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].prot      + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].mlo       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].dd        + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].fdd       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].ctyp       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].ffac       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].fport       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].tfac       + '</td>');
+                a.push('<td style="display:none">'      +   displayedRows[i].tport       + '</td>');
+                a.push('</tr>');
+            }
+            provReport.tbl.body.html(a.join(""));
+            if (len == 0) {
+                provReport.indexLbl.text ("(total:" + len + ")");
+            }
+            else {
+                provReport.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+            }
+        } 
+    },
+
+    convertArrayOfObjectsToCSV: function(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    },
+
+    downloadCSV: function(args) {
+        var data, filename, link;
+
+        var csv = provReport.convertArrayOfObjectsToCSV({
+            data: provReport.tblRows
+        });
+        if (csv == null) {
+            alert("NO REPORT TO CREATE");
+            return;
+        }
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }            
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    currentDate: function() {
+        var today = new Date();
+        var dd    = today.getDate();
+        var mm    = today.getMonth()+1; //January is 0!
+        var yyyy  = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        } 
+
+        if (mm < 10) {
+            mm = '0' + mm
+        } 
+
+        todayDate = yyyy + '-' + mm + '-' + dd;
+
+        return todayDate;
+    },
+
+    currentTime: function() {
+        var today = new Date();
+        var cycle = false;
+        var hour;
+        if (today.getHours() > 12) {
+            hour = today.getHours() - 12;
+            cycle = true;
+        }
+        else {
+            cycle = false;
+            hour = today.getHours();
+        }
+
+        if (cycle == true) {
+            cycle = "PM";
+        }
+        else if (cycle == false) {
+            cycle = "AM";
+        }
+
+        time = `${hour}.${today.getMinutes()} ${cycle}`;
+        return time;
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in provReport.tbl.headers) {
+            provReport.tbl.headers[elem].click(function() {
+                if (provReport.tblRows.length != 0) {
+                    if (provReport.headers.elem) {
+                        provReport.tblRows = provReport.tblRows.sort(provReport.dynamicSort(`${elem}`));
+                        provReport.headers.elem = false;
+                    }
+                    else {
+                        provReport.tblRows = provReport.tblRows.sort(provReport.dynamicSort(`-${elem}`));
+                        provReport.headers.elem = true;
+                    }
+                    provReport.displayTable(provReport.tbl.index);
+                }
+            });
+        }
+    }
+
+}
+
+// // EVENTS HANDLING
+
+provReport.clearBtn.click(function() {
+    provReport.clearForm();
+    provReport.clearTable();
+});
+
+provReport.tbl.nextBtn.click(function() {
+    if (provReport.tbl.index < provReport.maxIndex) {
+        provReport.tbl.index++;
+        provReport.displayTable(provReport.tbl.index);
+    }  
+});
+
+provReport.tbl.previousBtn.click(function() {
+    if (provReport.tbl.index > 1) {
+        provReport.tbl.index--;
+        provReport.displayTable(provReport.tbl.index);
+    }
+});
+
+provReport.submitBtn.click(function() {
+    if (provReport.report.val() == "VIEW REPORT") {
+        if (provReport.fromDate.val() > provReport.toDate.val()) {
+            alert ("'TO DATE' must the same or after 'FROM DATE'!")
+        } 
+        else {
+            provReport.query(provReport.report.val());
+        }
+    }
+    if (provReport.report.val() == "CREATE REPORT") {
+        if (provReport.fromDate.val() > provReport.toDate.val()) {
+            alert("'TO DATE' must the same or after 'FROM DATE'!")
+        } 
+        else {
+            var fromDate = provReport.fromDate.val().replace(/-/g, "");
+            var toDate = provReport.toDate.val().replace(/-/g, "");
+            provReport.downloadCSV({filename: `PROVISIONING_REPORT_${fromDate}_${toDate}.csv`});
+        }
+    }
+});
+
+
+
+
+</script>

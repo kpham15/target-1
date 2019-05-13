@@ -1,0 +1,317 @@
+<div id="nodeRef" class="tab-pane fade in" style="position: relative;">
+    <div class="col-sm-12">
+        <div class="col-sm-4">
+            <h4>NODE REFERENCES</h4>
+        </div>
+    </div>
+    
+    <div class='row'>
+        <div class="col-sm-5">
+            <div class="col-sm-1 modifyPadding">
+                <label for="nodeRef_node_num">NODE</label>
+                <input id="nodeRef_node_num" type="number" class="form-control">
+            </div>
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeRef_rackId_txt">RACK ID</label>
+                <input id="nodeRef_rackId_txt" type="text" class="form-control">
+            </div>
+            
+            <div class="col-sm-4 modifyPadding">
+                    <label for="nodeRef_ipadr_txt">IP_ADDRESS</label>
+                    <input id="nodeRef_ipadr_txt" type="text" class="form-control">
+            </div>
+            
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+
+            <div class="col-sm-2 modifyPadding">
+                <label for="nodeRef_port_num">PORT</label>
+                <input id="nodeRef_port_num" type="number" class="form-control">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeRef_gateway_txt">GATEWAY</label>
+                <input id="nodeRef_gateway_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeRef_netmask_txt">NETMASK</label>
+                <input id="nodeRef_netmask_txt" type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-12 modifyPadding">
+                <hr style="margin: 3px">
+            </div>
+
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeRef_act_sel">ACTION</label>
+                <select class="form-control" id="nodeRef_act_sel">
+                    <option></option>
+                    <option>UPDATE</option>
+                </select>
+            </div>
+
+            <div class="col-sm-6 modifyPadding">
+                <button id="nodeRef_submit_btn" type="button" class="btn btn-primary">SUBMIT</button>
+                <button id="nodeRef_clear_btn" type="button" class="btn btn-primary">CLEAR</button>
+            </div>
+
+            <!-- <div class="col-sm-2 modifyPadding">
+                <input type="hidden" id="fac_id_num" style="width:20px;">
+            </div> -->
+
+        </div>
+        <div class="col-sm-7">
+            <div>
+                <label>LIST OF NODES:</label>
+    
+                <div style="width:100%" class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">NODE</th>
+                                <th style="width:20%">RACK ID</th>
+                                <th style="width:20%">IP ADDRESS</th>
+                                <th style="width:10%">PORT</th>
+                                <th style="width:20%">GATEWAY</th>
+                                <th style="width:20%">NETMASK</th>
+                            </tr>
+                        </thead>
+                        <tbody id="nodeRef_table">
+        
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+
+<script>
+
+var nodeRef = {
+    node :      $("#nodeRef_node_num"),
+    rackId :    $("#nodeRef_rackId_txt"),
+    ipadr :     $("#nodeRef_ipadr_txt"),
+    gw :        $("#nodeRef_gateway_txt"),
+    netmask :   $("#nodeRef_netmask_txt"),
+    port :      $("#nodeRef_port_num"),
+    act:        $("#nodeRef_act_sel"),
+    submitBtn:  $('#nodeRef_submit_btn'),
+    clearBtn:   $("#nodeRef_clear_btn"),
+    tblbody:    $("#nodeRef_table"),
+    tblRows:    [],
+
+
+    
+    start: function() {
+        nodeRef.query("queryAll");
+    },
+    
+    // clears form on left and action select
+    clearForm: function() {
+        nodeRef.node.val("");
+        nodeRef.rackId.val("");
+        nodeRef.ipadr.val("");
+        nodeRef.gw.val("");
+        nodeRef.netmask.val("");
+        nodeRef.port.val("");
+        nodeRef.act.val("");
+    },
+    
+    //query to display information for all nodes in table on start
+    query: function(action) {
+      $.post(ipcDispatch,
+        {
+          api:  "ipcNode",
+          act:  action,
+          user: $("#main_currentUser").text(),
+        },
+    
+        function(data, status) {
+          var obj = JSON.parse(data);
+          if (obj.rslt == "fail") {
+            alert(obj.reason);
+          } 
+          else {
+            if (obj.rows.length === 0) {
+                alert("No Record Found");  
+                return;
+            }
+            nodeRef.tblRows = obj.rows;
+            nodeRef.displayTable();
+          }
+        }
+      );
+    },
+
+    //updates selected node, stores data from rows into tblrows and displays updated info
+    updateNodeInfo: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcNode",
+            act:        action,
+            user:       $("#main_currentUser").text(),
+            node:       nodeRef.node.val(),
+            rackId:     nodeRef.rackId.val(),
+            ipadr:      nodeRef.ipadr.val(),
+            gw:         nodeRef.gw.val(),
+            netmask:    nodeRef.netmask.val(),
+            port:       nodeRef.port.val(),
+        },
+        function(data,status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert (obj.reason);
+            }
+            else if (obj.rows.length === 0) {
+                alert ("No Record Found");
+                return;
+            }
+            else {
+            nodeRef.tblRows = obj.rows;
+            nodeRef.displayTable();
+            nodeRef.clearForm();
+            alert(obj.reason);
+            }
+
+        })
+    },
+    
+    // takes data and displays onto table
+    displayTable: function() {
+        var len = nodeRef.tblRows.length;
+
+        nodeRef.tblbody.empty();
+        var a = [];
+        for (var i = 0; i < len; i++) {
+        a.push('<tr> <td style="width:10%">'    + nodeRef.tblRows[i].node + "</td>");
+        a.push('<td style="width:20%">'         + nodeRef.tblRows[i].rack + "</td>");
+        a.push('<td style="width:20%">'         + nodeRef.tblRows[i].ipadr + "</td>");
+        a.push('<td style="width:10%">'         + nodeRef.tblRows[i].ip_port + "</td>");
+        a.push('<td style="width:20%">'         + nodeRef.tblRows[i].gateway + "</td>");
+        a.push('<td style="width:20%">'         + nodeRef.tblRows[i].netmask + "</td></tr>");
+        }
+    
+        nodeRef.tblbody.html(a.join(""));
+    },
+
+    // validates ip address - alerts on incorrect format when click outside box
+    validateIP: function() {
+        nodeRef.ipadr.change(function() {
+            if (validateIPaddress(nodeRef.ipadr.val()) != true) {
+                alert("Please fill in valid IP address!");
+            }
+        })
+    },
+
+    // validates gateway - alerts on incorrect format when click outisde box
+    validateGW: function() {
+        nodeRef.gw.change(function() {
+            if (validateIPaddress(nodeRef.gw.val()) != true) {
+                alert("Please fill in valid Gateway!");
+            }
+        })    
+    },
+
+    // validates netmask - alerts on incorrect format when click outisde box
+    validateNetmask: function() {
+        nodeRef.netmask.change(function() {
+            if (validateIPaddress(nodeRef.netmask.val()) != true) {
+                alert("Please fill in valid Netmask!")
+            }
+        })
+    }
+      
+}
+
+// ---------------------Click Events----------------------------
+
+$(document).on("click", "#nodeRef_table tr", function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information
+    nodeRef.node.val(dataRow[0]);
+    nodeRef.rackId.val(dataRow[1]);
+    nodeRef.port.val(dataRow[3]);
+    nodeRef.ipadr.val(dataRow[2]);
+    nodeRef.gw.val(dataRow[4]);
+    nodeRef.netmask.val(dataRow[5]);
+    
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass("addColor"); //remove class selected from rest of the rows
+});
+
+
+
+
+
+//clears left form and action select when clicked
+nodeRef.clearBtn.click(function() {
+    nodeRef.clearForm();
+});
+
+// various checks before allowing submit
+nodeRef.submitBtn.click(function() {
+    if(nodeRef.act.val() == "") {
+        alert("SELECT AN ACTION");
+        return;
+    }
+    else if (nodeRef.node.val() == "") {
+        alert("MUST ENTER A NODE NUMBER");
+        return;
+    }
+    else if (nodeRef.rackId.val() == "") {
+        alert("MUST ENTER A RACK ID");
+        return;
+    }
+    else if (nodeRef.ipadr.val() == "") {
+        alert("MUST ENTER VALID IP ADDRESS");
+        return;
+    }
+    else if (nodeRef.gw.val() == "") {
+        alert("MUST ENTER VALID GATEWAY");
+        return;
+    }
+    else if (nodeRef.netmask.val() == "") {
+        alert("MUST ENTER VALID NETMASK");
+        return;
+    }
+    else if (nodeRef.port.val() == "") {
+        alert("MUST ENTER VALID PORT")
+    }
+    else if (nodeRef.act.val() == "UPDATE") {
+        nodeRef.updateNodeInfo("updateNodeInfo");
+    }
+    
+});
+
+
+// --------------------------Functions-----------------------------
+function validateIPaddress(ipaddress) {  
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+        return true; 
+    }  
+    return false;
+}
+
+//event listener for validateIP/GW/Netmask
+nodeRef.validateIP();
+nodeRef.validateGW();
+nodeRef.validateNetmask();
+
+</script>

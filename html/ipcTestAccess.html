@@ -1,0 +1,561 @@
+<div id="testAccess" class="tab-pane fade in" style="position: relative">
+    <div class="col-sm-10">
+        <h4>SETUP TEST ACCESSES</h4>
+        <div>
+            <label for="testAccess_node_sel">NODE: </label>
+            <select id="testAccess_node_sel">
+                <option selected>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-2" style="width: 7%">
+                    <div style="text-align: center; font-weight: 700">TEST ACCESS</div>
+                </div>
+                <div class="col-sm-1" style="width: 1%">
+                    <div style="text-align: center; font-weight: 700" hidden>Editting</div>
+                </div>
+                <div class="col-sm-3" style="width: 15%">
+                    <div style="text-align: center; font-weight: 700">TEST EQUIPMENT</div>
+                </div>
+                <div class="col-sm-1" style="width: 10%">
+                    <div style="text-align: center; font-weight: 700">TEST BUS-X
+                    </div>
+                    <div style="text-align: center">
+                        <input type="checkbox" id="testAccess_tbx_cbx">
+                    </div>
+                </div>
+                <div class="col-sm-1" style="width: 10%">
+                    <div style="text-align: center; font-weight: 700">TEST BUS-Y
+                    </div>
+                    <div style="text-align: center">
+                        <input type="checkbox" id="testAccess_tby_cbx">
+                    </div>
+                </div>
+                <div class="col-sm-1" style="width: 10%">
+                    <div style="text-align: center; font-weight: 700">PORT 
+                    </div>
+                    <div style="text-align: center">
+                        <input type="checkbox" id="testAccess_port_cbx">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="testAccess_nameFields">
+
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="testAccess_act_sel">ACTION</label>
+                <select class="form-control" id="testAccess_act_sel">
+                    <option></option>
+                    <option>UPDATE</option>
+                    <option>RESET</option>
+                    <option>CONNECT</option>
+                    <option>DISCONNECT</option>
+                    <option>DSP-50ms single tone</option>
+                    <option>DSP-50ms dual tone</option>
+                    <option>DSP-forever single tone</option>
+                    <option>DSP-forever dual tone</option>
+                    <option>DSP-stop single tone</option>
+                    <option>DSP-stop dual tone</option>
+                </select>
+            </div>
+            <div class="col-sm-9">
+                <button id="testAccess_submit_btn" class="btn btn-primary">SUBMIT</button>
+                <button id="testAccess_cancel_btn" class="btn btn-primary">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var testAccess = {
+    nameFields: $("#testAccess_nameFields"),
+    node:       $("#testAccess_node_sel"),
+
+    name:       [],
+    cbx:        [],
+
+    tbXCbx:     $("#testAccess_tbx_cbx"),
+    tbYCbx:     $("#testAccess_tby_cbx"),
+    dspACbx:    $("#testAccess_dspA_cbx"),
+    dspBCbx:    $("#testAccess_dspB_cbx"),
+    portCbx:    $("#testAccess_port_cbx"),
+    statusCbx:  $("#testAccess_status_cbx"),
+
+    rowCbxIndex: "",
+    columnCbxIndex: "",
+    highlightedPort: "",
+
+    connectedTb: "",
+    connectedTp: "",
+    connectionMade: false,
+
+
+    rowChecked: false,
+    columnChecked: false,
+    portFilled: false,
+
+
+    tbX:        [],
+    tbY:        [],
+    dspA:       [],
+    dspB:       [],
+    port:       [],
+    status:     [],
+
+    act:        $("#testAccess_act_sel"),
+    submitBtn:  $("#testAccess_submit_btn"),
+    cancelBtn:  $("#testAccess_cancel_btn"),
+
+    formData: [],
+
+
+    columnCbx: [
+        '#testAccess_tbx',
+        '#testAccess_tby',
+    ],
+ 
+    rowCbx: [
+        '#testAccess_name1',
+        '#testAccess_name2',
+        '#testAccess_name3',
+        '#testAccess_name4',
+        '#testAccess_name5',
+        '#testAccess_name6',
+        '#testAccess_name7',
+        '#testAccess_name8',
+        '#testAccess_name9',
+        '#testAccess_name10',
+    ],
+
+    start: function() {
+        testAccess.query("query");
+        testAccess.createRows();
+        testAccess.disableUncheckedNameFields();
+        testAccess.eventHandlers.rowCboxClick();
+        testAccess.eventHandlers.columnCboxClick();
+        testAccess.memberVariables();
+    },
+
+    query: function(action) {
+        if (testAccess.isARowCbxChecked() !== false) {
+            var i       = testAccess.isARowCbxChecked();
+            var name    = $("#testAccess_name" + i + "_txt").val();
+            var tp      = i;
+            if (testAccess.isAColumnCbxChecked() !== false) {
+                if (testAccess.isAColumnCbxChecked() == '#testAccess_tbx') {
+                    var tbx = "y";
+                }
+                else {
+                    var tbx = "n";
+                }
+                if (testAccess.isAColumnCbxChecked() == "#testAccess_tby") {
+                    var tby = "y";
+                }
+                else {
+                    var tby = "n";
+                }
+
+            }
+            var port    = $("#testAccess_port" + i + "_txt").val();
+        }
+        $.post(ipcDispatch,
+        {
+            api:    "ipcTb",
+            act:    action,
+            user:   $("#main_currentUser").text(),
+            name:   name,
+            tp:     tp,
+            tbx:    tbx,
+            tby:    tby,
+            port:   port,
+            node:   testAccess.node.val(),
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (action == "UPDATE") {
+                    alert(action + " - Success: <br>Test Access: " + tp + "<br>Test Equipment: " + testAccess.formData[tp-1].name + " -> " + name);
+                }
+                if (action != "query" && action != "UPDATE") {
+                    alert(action + " - Success: <br>Test Access: " + tp);
+                }
+                obj.rows = testAccess.convertData(obj.rows);
+                testAccess.formData = obj.rows;
+                var len = testAccess.formData.length; 
+                testAccess.clearForm();
+                testAccess.resetForm();
+            } 
+        });
+    },
+    
+    // Handles Checkboxes
+    isARowCbxChecked: function() {
+        for (var i = 1; i < 11; i++) {
+            if ($("#testAccess_name" + i + "_cbx").prop('checked') != false) {
+                return i;
+            }
+        }
+        return false;
+    },
+
+    isAColumnCbxChecked: function() {
+        for (var i = 0; i < testAccess.columnCbx.length; i++) {
+            if ($(testAccess.columnCbx[i] + "_cbx").prop('checked') != false) {
+                return testAccess.columnCbx[i];
+            }
+        }
+        return false;
+    },
+
+    disableRowColumnCbx: function(row, name) {
+        testAccess.columnCbx.forEach(function(element) {
+            $(element + "_cbx").prop('disabled', true);
+        });
+        testAccess.rowCbx.forEach(function(element) {
+            $(element + "_cbx").prop('disabled', true);
+        });
+
+    },
+
+    enableRowColumnCbx: function() {
+        testAccess.columnCbx.forEach(function(element) {
+            $(element + "_cbx").prop('disabled', false);
+        });
+        testAccess.rowCbx.forEach(function(element) {
+            $(element + "_cbx").prop('disabled', false);
+        });
+    },
+
+    uncheckColumnCbox: function() {
+        testAccess.columnCbx.forEach(function(element) {
+            $(element + "_cbx").prop('checked', false);
+        });
+    },
+    
+    uncheckRowCbox: function() {
+        testAccess.rowCbx.forEach(function(element) {
+            $(element + "_cbx").prop('checked', false);
+        })
+    },
+
+    convertData: function(data) {
+        testAccess.connectedTb = "";
+        testAccess.connectedTp = "";
+        testAccess.enableRowColumnCbx();
+        var headers = ['tb_x', 'tb_y'];
+        data.forEach(function(element) {
+            headers.forEach(function(name) {
+                if (element[name] == 0) {
+                    element[name] = "";
+                }
+                else {
+                    element[name] = "1";
+                    testAccess.disableRowColumnCbx();
+                    if (name == "tb_x") {
+                        testAccess.connectedTb = "tbx"
+                    }
+                    else {
+                        testAccess.connectedTb = "tby"
+                    }
+                    testAccess.connectedTp = parseInt(element['tp']) + 1;
+                    testAccess.connectedTp = parseInt(element['tp']) + 1;
+
+                }
+            });
+            element['tp'] =  parseInt(element['tp']) + 1;
+        });
+        return data;
+    },
+
+    clearForm: function() {
+        testAccess.refreshData();
+        testAccess.removeHighlight();
+    },
+
+    refreshData: function() {
+        for (var i = 0; i < testAccess.formData.length; i++) {
+            $("#testAccess_name"   + testAccess.formData[i].tp + "_txt").val(testAccess.formData[i].name);
+            $("#testAccess_tbx"    + testAccess.formData[i].tp + "_txt").val(testAccess.formData[i].tb_x);
+            $("#testAccess_tby"    + testAccess.formData[i].tp + "_txt").val(testAccess.formData[i].tb_y);
+            $("#testAccess_port"   + testAccess.formData[i].tp + "_txt").val(testAccess.formData[i].port);
+        }
+    },
+
+    removeHighlight: function() {
+        for (var i = 0; i < testAccess.formData.length; i++) {
+            $("#testAccess_name"   + testAccess.formData[i].tp + "_txt").css("border-color", "");
+            $("#testAccess_tbx"    + testAccess.formData[i].tp + "_txt").css("border-color", "");
+            $("#testAccess_tby"    + testAccess.formData[i].tp + "_txt").css("border-color", "");
+            $("#testAccess_port"   + testAccess.formData[i].tp + "_txt").css("border-color", "");
+
+            $("#testAccess_name"   + testAccess.formData[i].tp + "_txt").removeClass("testAccess_highlightedSelection");
+            $("#testAccess_tbx"    + testAccess.formData[i].tp + "_txt").removeClass("testAccess_highlightedSelection");
+            $("#testAccess_tby"    + testAccess.formData[i].tp + "_txt").removeClass("testAccess_highlightedSelection");
+            $("#testAccess_port"   + testAccess.formData[i].tp + "_txt").removeClass("testAccess_highlightedSelection");
+        }
+    },
+
+    highlightSelectedConnection: function() {
+        testAccess.removeHighlight();
+        if (testAccess.isAColumnCbxChecked() !== false) {
+            var i = testAccess.isARowCbxChecked();
+            var prefix = testAccess.isAColumnCbxChecked();
+            $(prefix + i + "_txt").css("border-color", "blue");
+            $(prefix + i + "_txt").addClass("testAccess_highlightedSelection");
+        }
+    },
+
+
+
+    createRows: function() {
+        var a = [];
+        for (var i = 1; i < 11; i++) {
+            
+            a.push('<div class="row">');
+                a.push('<div class="col-sm-2" style="width: 7%">');
+                    a.push('<div for="testAccess_name' + i + '_txt" style="text-align: center">' + i + "</div>");
+                    a.push('</div>');
+                a.push('<div class="col-sm-1" style="width: 1%">');
+                    a.push('<input style="text-align: center;" type="checkbox" name="' + i + '" id="testAccess_name' + i + '_cbx" class="testAccess_cbx">');
+                    a.push('</div>');
+                a.push('<div class="col-sm-3" style="width: 15%">');
+                    a.push('<input id="testAccess_name' + i + '_txt" style="text-transform: uppercase" type="text" name="' + i + '" class="form-control testAccess_name" disabled>');
+                    a.push('</div>');
+                a.push('<div class="col-sm-1" style="width: 10%">');
+                    a.push('<input id="testAccess_tbx' + i + '_txt" style="text-transform: uppercase" type="text" name="' + i + '" class="form-control testAccess_tbx" disabled>');
+                    a.push('</div>');
+                a.push('<div class="col-sm-1" style="width: 10%">');
+                    a.push('<input id="testAccess_tby' + i + '_txt" style="text-transform: uppercase" type="text" name="' + i + '" class="form-control testAccess_tby" disabled>');
+                    a.push('</div>');
+                a.push('<div class="col-sm-1" style="width: 10%">');
+                    a.push('<input id="testAccess_port' + i + '_txt" style="text-transform: uppercase" type="text" name="' + i + '" class="form-control testAccess_port" disabled>');
+                    a.push('</div>');
+                a.push('</div>');
+        }
+        testAccess.nameFields.html(a.join(""));
+    },
+
+    memberVariables: function() {
+        testAccess.tbX.push($(".testAccess_tbx"));
+        testAccess.tbY.push($(".testAccess_tby"));
+        testAccess.port.push($(".testAccess_port"));
+        testAccess.name.push($(".testAccess_name"));
+        testAccess.cbx.push($(".testAccess_cbx"));
+    },
+
+    disableUncheckedNameFields: function() {
+        for (var i = 1; i < 11; i++) {
+            if ($("#testAccess_name" + i + "_cbx").prop('checked') != true) {
+                $("#testAccess_name" + i + "_txt").prop('disabled', true);
+                $("#testAccess_port" + i + "_txt").prop('disabled', true);
+            }
+            else {
+                $("#testAccess_name" + i + "_txt").prop('disabled', false);
+                if ($("#testAccess_port_cbx").prop('checked') != false) {
+                    $("#testAccess_port" + i + "_txt").prop('disabled', false);
+                }
+            }
+        }
+    },
+
+    resetForm: function() {
+        testAccess.uncheckRowCbox();
+        testAccess.uncheckColumnCbox();
+        testAccess.portCbx.prop('checked', false);
+        testAccess.connectionMade = false;
+
+        $("#testAccess_" + testAccess.connectedTb + "_cbx").prop('checked', true);
+        $("#testAccess_name" + testAccess.connectedTp + "_cbx").prop('checked', true);
+        if (testAccess.connectedTb !== "" && testAccess.connectedTp !== "") {
+            $("#testAccess_port_cbx").prop('checked', true);
+            $("#testAccess_port_cbx").prop('disabled', true);
+            testAccess.connectionMade = true;
+        }
+        else {
+            $("#testAccess_port_cbx").prop('disabled', false);
+        }
+        testAccess.disableUncheckedNameFields();
+        testAccess.clearForm();
+
+
+        testAccess.act.val("");
+    },
+
+    eventHandlers: {
+        rowCboxClick: function() {
+            testAccess.rowCbx.forEach(function(element) {
+                $(element + "_cbx").on("click", function() {
+                    if ($(this).prop('checked') == true) {
+                        testAccess.uncheckRowCbox();
+                        $(this).prop('checked', true);
+                        testAccess.highlightSelectedConnection();
+                    }
+                    else {
+                        testAccess.uncheckColumnCbox();
+                        testAccess.removeHighlight();
+                        testAccess.portCbx.prop('checked', false);
+                    }
+                    testAccess.disableUncheckedNameFields();
+                    testAccess.refreshData();
+                });
+            });
+        },
+
+        columnCboxClick: function() {
+            testAccess.columnCbx.forEach(function(element) {
+                $(element + "_cbx").on("click", function() {
+                    if ($(this).prop('checked') == true) {
+                        if (testAccess.isARowCbxChecked() !== false) {
+                            testAccess.uncheckColumnCbox();
+                            if ($(this).prop('checked') == false) {
+                                $(this).prop('checked', true);
+                            }
+                            testAccess.highlightSelectedConnection();
+                        }
+                        else {
+                            testAccess.uncheckColumnCbox();
+                            alert("PLEASE SELECT A TEST ACCESS FIRST");
+                        }
+                    }
+                    else {
+                        testAccess.removeHighlight();
+                    }
+
+                })
+            });
+            testAccess.portCbx.on("click", function() {
+                if ($(this).prop('checked') == true) {
+                    if (testAccess.isARowCbxChecked() !== false) {
+                        var i = testAccess.isARowCbxChecked();
+                        $("#testAccess_port" + i + "_txt").prop('disabled', false);
+                    }
+                    else {
+                        alert("PLEASE SELECT A TEST ACCESS FIRST");
+                        $(this).prop('checked', false);
+                    }
+                }
+                else {
+                    testAccess.port.forEach(function(element) {
+                        element.prop('disabled', true);
+                    });
+                    $(this).prop('checked', false);
+                }
+            });
+        },
+    },
+
+}
+
+testAccess.submitBtn.on("click", function() {
+    var checkedBox = false;
+    if (testAccess.act.val() != "") {
+        if (testAccess.isARowCbxChecked() !== false) {
+            if (testAccess.act.val() == "UPDATE") {
+                for (var i = 1; i < 11; i++) {
+                    if ($("#testAccess_name" + i + "_cbx").prop('checked') == true) {
+                        var index = parseInt(testAccess.formData[i].tp, 10);
+                        if ($("#testAccess_name" + i + "_txt").val() == testAccess.formData[index].name) {
+                            alert("Please make a change before updating");
+                        }
+                        else {
+                            testAccess.query("UPDATE");
+                        }
+                        checkedBox = true;
+                    }
+                }
+            }
+            else if (testAccess.act.val() == "RESET") {
+                for (var i = 1; i < 11; i++) {
+                    if ($("#testAccess_name" + i + "_cbx").prop('checked') == true) {
+                        confirm("Are you sure you want to reset the Test Equipment Name for Test Access <strong>" + i + "</strong>?", function() {
+                            testAccess.query("RESET");
+                        });
+                        checkedBox = true;
+                    }
+                }
+            }
+            else if (testAccess.act.val() == "CONNECT") {
+
+                if (testAccess.isAColumnCbxChecked() !== false && testAccess.isARowCbxChecked() !== false) {
+                    if ($("#testAccess_port" + testAccess.isARowCbxChecked() + "_txt").val() != "") {
+                        if ($(testAccess.isAColumnCbxChecked() + testAccess.isARowCbxChecked() + "_txt").val() !== "1") {
+                            testAccess.query("CONNECT");
+                        }
+                        else {
+                            alert("There is already a connection");
+                        }
+                        checkedBox = true;
+                    }
+                    else {
+                        alert("MISSING PORT");
+                    }
+                }
+                else {
+                    alert("PLEASE SELECT A TEST BUS");
+                }
+            }
+            else if (testAccess.act.val() == "DISCONNECT") {
+
+                if (testAccess.isAColumnCbxChecked() !== false && testAccess.isARowCbxChecked() !== false) {
+                    if ($("#testAccess_port" + testAccess.isARowCbxChecked() + "_txt").val() != "") {
+                        testAccess.query("DISCONNECT");
+                        checkedBox = true;
+                    }
+                    else {
+                        alert("MISSING PORT");
+                    }
+                }
+                else {
+                    alert("Please select a pair to disconnect");
+                }
+            }
+            else if (testAccess.act.val() == "DSP-50ms single tone" || testAccess.act.val() == "DSP-50ms dual tone" || testAccess.act.val() == "DSP-forever single tone" || testAccess.act.val() == "DSP-forever dual tone" || testAccess.act.val() == "DSP-stop single tone" || testAccess.act.val() == "DSP-stop dual tone") {
+                if (testAccess.isARowCbxChecked() !== false) {
+                    var row = testAccess.isARowCbxChecked();
+                    if ($("#testAccess_port" + testAccess.isARowCbxChecked() + "_txt").val() != "") {
+                        if ($("#testAccess_name" + row + "_txt").val() != "DSP-1" && $("#testAccess_name" + row + "_txt").val() != "DSP-2") {
+                            alert("The chosen test access Equipment Name must be DSP-1 or DSP-2");
+                        }
+                        else {
+                            if (testAccess.connectionMade == true) {
+                                testAccess.query(testAccess.act.val());
+                                checkedBox = true;
+                            }
+                            else {
+                                alert("No connection Present");
+                            }
+                        }
+                    }
+                    else {
+                        alert("MISSING PORT");
+                    }
+                }
+                else {
+                    alert("PLEASE SELECT A TEST ACCESS FIRST");
+                }
+            }
+        }
+        else {
+            alert("PLEASE SELECT A TEST ACCESS");
+        }
+        testAccess.act.val("");
+    }
+});
+
+testAccess.cancelBtn.on("click", function() {
+    testAccess.resetForm();
+});
+
+testAccess.node.change(function() {
+    testAccess.query('query');
+});
+</script>

@@ -1,0 +1,939 @@
+<div id="eventReport" class="tab-pane fade in">
+    <h4>EVENT REPORT</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-2">
+                        <label for="eventReport_user_txt">USER</label>
+                        <input class="form-control" type="text" id="eventReport_user_txt">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="eventReport_event_sel">EVENT</label>
+                        <select id="eventReport_event_sel" class="form-control">
+                            <option></option>
+                            <option>CONFIGURATION</option>
+                            <option>PROVISIONING</option>
+                            <option>MAINTENANCE</option>
+                            <option>USER MANAGEMENT</option>
+                            <option>IPC ADMINISTRATION</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="eventReport_fromDate_date">FROM:</label>
+                        <input type="date" id="eventReport_fromDate_date" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="eventReport_toDate_date">TO:</label>
+                        <input type="date" id="eventReport_toDate_date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <label for="eventReport_function_sel">FUNCTION</label>
+                        <select id="eventReport_function_sel" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="eventReport_task_sel">TASK:</label>
+                        <select id="eventReport_task_sel" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary" id="eventReport_find_btn">View</button>
+                        <button class="btn btn-primary" id="eventReport_clear_btn">Clear</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label for="eventReport_report_sel">REPORT</label>
+                        <select class="form-control" id="eventReport_report_sel">
+                            <option> </option>
+                            <option>VIEW REPORT</option>
+                            <option>CREATE REPORT</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8">
+                        <button id="eventReport_submit_btn" class="btn btn-primary">SUBMIT</button>
+                        <button id="eventReport_clear_btn" class="btn btn-primary">CLEAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-12">
+                <label for="eventReport_detail_txt">DETAILS</label>
+                <textarea id="eventReport_detail_txt" class="form-group" style="width:100%; min-height: 175px; background-color: #F6F6F6" readonly>
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF EVENTS:</b>
+                </div>
+                <div style="float:right">
+                    <a id="eventReport_previous">Previous</a> |
+                    <a id="eventReport_next">Next</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <label id="eventReport_index_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="table-layout: fixed">     
+                    <table class="table table-fixed" id="eventReport_table">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="eventReport_DATE_tbl" style="width:15%">DATE</th>
+                                <th id="eventReport_USER_tbl" style="width:15%">USER</th>
+                                <th id="eventReport_EVENT_tbl" style="width:20%">EVENT</th>
+                                <th id="eventReport_FUNCTION_tbl" style="width:30%">FUNCTION</th>
+                                <th id="eventReport_TASK_tbl" style="width:20%">TASK</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventReport_tbl" style="height: 300px">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // eventReport OBJ //
+
+var eventReport = {
+    user:           $("#eventReport_user_txt"),
+    id:             $("#eventReport_id"),
+    evt:            $("#eventReport_event_sel"),
+    fnc:            $("#eventReport_function_sel"),
+    task:           $("#eventReport_task_sel"),
+    fromDate:       $("#eventReport_fromDate_date"), 
+    toDate:         $("#eventReport_toDate_date"),
+    submitBtn:      $("#eventReport_submit_btn"),
+    clearBtn:       $("#eventReport_clear_btn"),
+    detail:         $("#eventReport_detail_txt"),
+    indexLbl:       $("#eventReport_index_lbl"),
+    report:         $("#eventReport_report_sel"),
+    tbl: {
+        body:       $("#eventReport_tbl"),
+        index:      0,
+        maxIndex:   0,
+        prevBtn:    $("#eventReport_previous"),
+        nextBtn:    $("#eventReport_next"),
+        headers: {
+            time:       $("#eventReport_DATE_tbl"),
+            user:       $("#eventReport_USER_tbl"),
+            evt:        $("#eventReport_EVENT_tbl"),
+            fnc:        $("#eventReport_FUNCTION_tbl"),
+            task:       $("#eventReport_TASK_tbl"),
+        },
+    },
+
+    headers: {
+        time:       true,
+        user:       true,
+        evt:        true,
+        fnc:        true,
+        task:       true,
+    },
+
+    fnc_brdcst:     [],
+    fnc_fac:        [],
+    fnc_portmap:    [],
+    fnc_prov:       [],
+    fnc_users:      [],
+    fnc_wc:         [],
+    fnc_almadm:     [],
+    fnc_pathadm:    [],
+    fnc_mxc:        [],
+    fnc_svc:        [],
+    fnc_maint:      [],
+
+    fncOptions: {
+        configuration: [
+            "SETUP WIRE CENTER", 
+            "PORT MAPPING", 
+            "SETUP FACILITY",
+        ],
+
+        provisioning: [ 
+            "SETUP SERVICE CONNECTION", 
+            "BATCH EXECUTION", 
+            "FT ADMIN REPORT", 
+            "FLOW-THROUGH RELEASE TABLE", 
+            "FLOW-THROUGH", 
+            "FOMS/FUSA",
+        ],
+
+        maintenance: [
+            "SETUP MAINTENANCE CONNECTION",
+            "LOCK/UNLOCK MATRIX CARD",
+            "LOCK/UNLOCK MATRIX NODE",
+            "ALARM ADMINISTRATION",
+            "PATH ADMINISTRATION",
+        ],
+
+        userManagement: [
+            "SETUP USER",
+            "USER ACCESS",
+            "USER SEARCH",
+            "SET/RESET PASSWORD",
+            "BROADCAST NOTIFICATION",
+        ],
+
+        ipcAdministration: [
+            "IPC REFERENCE DATA",
+            "SYSTEM SHUTDOWN",
+            "RESTORE SYSTEM",
+            "BACKUP DATABASE",
+            "UPDATE SOFTWARE RELEASES",
+            "NODE ADMINISTRATION",
+        ],
+
+        all: [
+            "SETUP WIRE CENTER", 
+            "PORT MAPPING", 
+            "SETUP FACILITY",
+            "SETUP SERVICE CONNECTION", 
+            "BATCH EXECUTION", 
+            "FT ADMIN REPORT", 
+            "FLOW-THROUGH RELEASE TABLE", 
+            "FLOW-THROUGH", 
+            "FOMS/FUSA",
+            "SETUP MAINTENANCE CONNECTION",
+            "LOCK/UNLOCK MATRIX CARD",
+            "LOCK/UNLOCK MATRIX NODE",
+            "ALARM ADMINISTRATION",
+            "PATH ADMINISTRATION",
+            "SETUP USER",
+            "USER ACCESS",
+            "USER SEARCH",
+            "SET/RESET PASSWORD",
+            "BROADCAST NOTIFICATION",
+            "IPC REFERENCE DATA",
+            "SYSTEM SHUTDOWN",
+            "RESTORE SYSTEM",
+            "BACKUP DATABASE",
+            "UPDATE SOFTWARE RELEASES",
+            "NODE ADMINISTRATION",
+        ],
+
+    },
+
+    taskOptions: {
+        setupWireCenter: [
+            "VIEW",
+            "UPDATE",
+            "RESET",
+            "UPDATE_NETWORK",
+            "TURN_UP",
+            "HOLD"
+        ],
+        
+        portMapping: [
+            "MAP",
+            "UNMAP",
+        ],
+        
+        setupServiceConnection: [
+            "CONNECT",
+            "DISCONNECT",
+            "DIP CONNECT",
+            "UPDATE_CKT",
+        ],
+
+        ftAdminReport: [
+
+        ],
+
+        fomsFusa: [
+
+        ],
+
+        batchExecution: [
+            "EXECUTE BATCH FILES",
+        ],
+
+        setupMaintenanceConnection: [
+            "MTC_CONN",
+            "MTC_DISCON",
+            "RESTORE_MTCD",
+            "MTC_RESTORE",
+            "MTC_LPBK_TEST",
+        ],
+
+        lockUnlockMatrixCard: [
+            "LOCK_CARD",
+            "UNLOCK_CARD",
+            "REFRESH_CARD",
+        ],
+
+        lockUnlockMatrixNode: [
+            "LOCK_NODE",
+            "UNLOCK_NODE",
+        ],
+
+        alarmAdministration: [
+            "ACK",
+            "UN-ACK",
+            "CLR ALARM",
+        ],
+
+        pathAdministration: [
+            "REPLACE DEF PATH",
+            "RELEASE DEF PATH",
+            "REPEAT CONNECT",
+        ],
+
+        broadcastNotification: [
+            "UPDATE MSG",
+            "DELETE MSG",
+            "ADD MSG",
+        ],
+
+        setupUser: [
+            "ADD USER",
+            "UPDATE USER",
+            "LOCK USER",
+            "UNLOCK USER",
+            "UPDATE USER GROUP",
+            "DELETE USER",
+            "CHANGE PASSWORD",
+            "RESET PW",
+        ],
+
+        userAccess: [
+
+        ],
+
+        userSearch: [
+
+        ],
+
+        setResetPassword: [
+
+        ],
+
+        backupDatabase: [
+            "BACKUP DB",
+            "RESTORE BACKUP DB",
+        ],
+
+        restoreSystem: [
+
+        ],
+
+        updateSoftwareReleases: [
+            "UPDATE SOFTWARE",
+            "ROLLBACK SOFTWARE",
+        ],
+
+        nodeAdministration: [
+
+        ],
+
+        systemShutdown: [
+            "LOCK IPC",
+            "UNLOCK IPC",
+            "SHUTDOWN IPC",
+        ],
+
+        ipcReferenceData: [
+            "UPDATE",
+            "RESET"
+        ],
+
+        flowThrough: [
+
+        ],
+
+        flowThroughReleaseTable: [
+
+        ],
+        
+        setupFacility: [
+            "VIEW",
+            "ADD",
+            "UPDATE",
+            "DELETE",
+        ],
+
+        all: [
+            "VIEW",
+            "UPDATE",
+            "RESET",
+            "MAP",
+            "UNMAP",
+            "CONNECT",
+            "DISCONNECT",
+            "DIP CONNECT",
+            "UPDATE_CKT",
+            "EXECUTE BATCH FILES",
+            "MTC_CONN",
+            "MTC_DISCON",
+            "RESTORE_MTCD",
+            "MTC_RESTORE",
+            "MTC_LPBK_TEST",
+            "LOCK_CARD",
+            "UNLOCK_CARD",
+            "REFRESH_CARD",
+            "LOCK_NODE",
+            "UNLOCK_NODE",
+            "ACK",
+            "UN-ACK",
+            "CLR ALARM",
+            "REPLACE DEF PATH",
+            "RELEASE DEF PATH",
+            "REPEAT CONNECT",
+            "UPDATE MSG",
+            "DELETE MSG",
+            "ADD MSG",
+            "ADD USER",
+            "UPDATE USER",
+            "LOCK USER",
+            "UNLOCK USER",
+            "UPDATE USER GROUP",
+            "DELETE USER",
+            "CHANGE PASSWORD",
+            "RESET PW",
+            "BACKUP DB",
+            "RESTORE BACKUP DB",
+            "UPDATE SOFTWARE",
+            "ROLLBACK SOFTWARE",
+            "LOCK IPC",
+            "UNLOCK IPC",
+            "SHUTDOWN IPC",
+            "UPDATE",
+            "RESET",
+            "VIEW",
+            "ADD",
+            "UPDATE",
+            "DELETE",
+            "HOLD"
+        ],
+    },
+
+    tblTime: true,
+    tblUser: true,
+    tblEvent: true,
+    tblFunction: true,
+    tblTask: true,
+
+
+    tblRows:        [],
+    
+    start: function() {
+        eventReport.clearForm();
+        eventReport.query('VIEW REPORT');
+        eventReport.sortHeaderEvents();
+    },
+    
+    clearForm: function() {
+        eventReport.id.val("");
+        eventReport.user.val("");
+        eventReport.evt.val("").change();
+        eventReport.fnc.val("").change();
+        eventReport.task.val("").change();
+        eventReport.detail.val("");
+        eventReport.report.val("");
+        eventReport.tblRows = [];
+        eventReport.indexLbl.text("");
+        eventReport.fromDate.val(eventReport.currentDate());
+        eventReport.toDate.val(eventReport.currentDate());
+    },
+    
+    
+    clearTable: function() {
+        eventReport.tbl.body.empty();
+    },
+    
+    displayTable: function(index) {   
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = eventReport.tblRows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }            
+            eventReport.clearTable();
+            var a = [];
+            var displayedRows = eventReport.tblRows;
+            var tableHeader = ['time', 'user', 'evt', 'fnc', 'task'];
+            for (var i = startIndex; i < stopIndex; i++) {
+                for (let j = 0; j < tableHeader.length; j++) {
+                    if (displayedRows[i][tableHeader[j]]== undefined || displayedRows[i][tableHeader[j]] == null) {
+                        displayedRows[i][tableHeader[j]] = "";
+                    }
+                }
+                a.push('<tr> <td style="display:none">' + eventReport.tblRows[i].id + '</td>')  
+                a.push('<td style="width:15%">'         + eventReport.tblRows[i].time + '</td>');
+                a.push('<td style="width:15%">'         + eventReport.tblRows[i].user + '</td>');
+                a.push('<td style="width:20%">'         + eventReport.tblRows[i].evt + '</td>');
+                a.push('<td style="width:30%">'         + eventReport.tblRows[i].fnc + '</td>');
+                a.push('<td style="width:20%">'         + eventReport.tblRows[i].task + '</td>');
+                a.push('<td style="display: none">'     + eventReport.tblRows[i].detail + '</td>');
+                a.push('</tr>');
+            }
+            eventReport.tbl.body.html(a.join(""));
+            if (len == 0) 
+                eventReport.indexLbl.text("(total:" + len + ")") ;
+            else
+                eventReport.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            
+        } 
+    },
+    
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:        "ipcEventlog",
+            act:        action,
+            user:	    $('#main_currentUser').text(),
+            id:		    eventReport.id.val(),
+            uname:      eventReport.user.val(),
+            fnc:        eventReport.fnc.val(),
+            evt:        eventReport.evt.val(),
+            fromDate:   eventReport.fromDate.val(),
+            toDate:     eventReport.toDate.val(),
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("There is no matching data!");
+                }
+                else {
+                    eventReport.tbl.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].time.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].time = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    eventReport.tblRows = obj.rows;
+                    var len = obj.rows.length; 
+                    eventReport.tbl.maxIndex = Math.ceil(len/100.0);
+                    eventReport.tbl.index++;
+                    eventReport.displayTable(eventReport.tbl.index);
+                }  
+            } 
+        });
+    },
+
+    convertArrayOfObjectsToCSV: function(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    },
+
+    downloadCSV: function(args) {
+        var data, filename, link;
+
+        var csv = eventReport.convertArrayOfObjectsToCSV({
+            data: eventReport.tblRows,
+        });
+        if (csv == null) {
+            alert("Please view report before download!")
+            return;
+        }
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    },
+
+    currentDate: function() {
+        var today = new Date();
+        var dd    = today.getDate();
+        var mm    = today.getMonth()+1; //January is 0!
+        var yyyy  = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        } 
+
+        if (mm < 10) {
+            mm = '0' + mm
+        } 
+
+        todayDate = yyyy + '-' + mm + '-' + dd;
+
+        return todayDate;
+    },
+
+    currentTime: function() {
+        var today = new Date();
+        var cycle = false;
+        var hour;
+        if (today.getHours() > 12) {
+            hour = today.getHours() - 12;
+            cycle = true;
+        }
+        else {
+            cycle = false;
+            hour = today.getHours();
+        }
+
+        if (cycle == true) {
+            cycle = "PM";
+        }
+        else if (cycle == false) {
+            cycle = "AM";
+        }
+
+        time = `${hour}.${today.getMinutes()} ${cycle}`;
+        return time;
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in eventReport.tbl.headers) {
+            eventReport.tbl.headers[elem].click(function() {
+                if (eventReport.tblRows.length != 0) {
+                    if (eventReport.headers.elem) {
+                        eventReport.tblRows = eventReport.tblRows.sort(eventReport.dynamicSort(`${elem}`));
+                        eventReport.headers.elem = false;
+                    }
+                    else {
+                        eventReport.tblRows = eventReport.tblRows.sort(eventReport.dynamicSort(`-${elem}`));
+                        eventReport.headers.elem = true;
+                    }
+                    eventReport.displayTable(eventReport.tbl.index);
+                }
+            });
+        }
+    }
+    
+}
+// ----------------------Click Events-----------------------------
+
+$(document).on("click","#eventReport_tbl tr",function() {
+    var dataRow= $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    eventReport.id.val(dataRow[0]).change();
+    eventReport.user.val(dataRow[2]).change();
+    eventReport.evt.val(dataRow[3]).change();       
+    eventReport.fnc.val(dataRow[4]).change();  
+    eventReport.task.val(dataRow[5]).change(); 
+    eventReport.detail.val(dataRow[6]).change(); 
+            
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+eventReport.submitBtn.click(function() {
+    if (eventReport.report.val() == "VIEW REPORT") {
+        if (eventReport.fromDate.val() > eventReport.toDate.val()) {
+            alert("Invalid Date Range");
+        }
+        else {
+            // eventReport.query(eventReport.report.val());
+            eventReport.query("VIEW REPORT");
+        }
+    }
+    if (eventReport.report.val() == "CREATE REPORT") {
+        if (eventReport.fromDate.val() > eventReport.toDate.val()) {
+            alert("Invalid Date Range");
+        }
+        else {
+            var fromDate = eventReport.fromDate.val().replace(/-/g, "");
+            var toDate = eventReport.toDate.val().replace(/-/g, "");
+            eventReport.downloadCSV({filename: `EVENT_REPORT_${fromDate}_${toDate}.csv`});
+        }
+    }
+});
+
+eventReport.clearBtn.click(function() {
+    eventReport.clearTable();
+    eventReport.clearForm();
+});
+
+
+eventReport.tbl.nextBtn.click(function() {
+    if (eventReport.tbl.index<eventReport.tbl.maxIndex) {
+        eventReport.tbl.index++;
+        eventReport.displayTable(eventReport.tbl.index);
+    }  
+});
+
+
+eventReport.tbl.prevBtn.click(function() {
+    if (eventReport.tbl.index>1) {
+        eventReport.tbl.index--;
+        eventReport.displayTable(eventReport.tbl.index);   
+    }         
+});
+
+// WHEN EVENT TYPE CHANGE, ALSO CHANGE AVAILABLE FUNCTIONS
+eventReport.evt.change(function() {
+    eventReport.fnc.empty();
+    eventReport.fnc.prop('disabled', true);
+    eventReport.task.empty();
+    eventReport.task.prop('disabled', true);
+    var a = [];
+    a.push('<option></option>');
+    if (eventReport.evt.val() == "CONFIGURATION") {
+        for (var i = 0; i < eventReport.fncOptions.configuration.length; i++) {
+            a.push('<option>' + eventReport.fncOptions.configuration[i] + '</option>');
+        }
+    }
+    else if (eventReport.evt.val() == "PROVISIONING") {
+        for (var i = 0; i < eventReport.fncOptions.provisioning.length; i++) {
+            a.push('<option>' + eventReport.fncOptions.provisioning[i] + '</option>');
+        }
+    }
+    else if (eventReport.evt.val() == "MAINTENANCE") {
+        for (var i = 0; i < eventReport.fncOptions.maintenance.length; i++) {
+            a.push('<option>' + eventReport.fncOptions.maintenance[i] + '</option>');
+        }
+    }
+    else if (eventReport.evt.val() == "USER MANAGEMENT") {
+        for (var i = 0; i < eventReport.fncOptions.userManagement.length; i++) {
+            a.push('<option>' + eventReport.fncOptions.userManagement[i] + '</option>');
+        }
+    }
+    else if (eventReport.evt.val() == "IPC ADMINISTRATION") {
+        for (var i = 0; i < eventReport.fncOptions.ipcAdministration.length; i++) {
+            a.push('<option>' + eventReport.fncOptions.ipcAdministration[i] + '</option>');
+        }
+    }
+    else if (eventReport.evt.val() == "") {
+        eventReport.fnc.empty();
+        eventReport.fnc.prop('disabled', true);
+        eventReport.task.empty();
+        eventReport.task.prop('disabled', true);
+    }
+    if (eventReport.evt.val() != "") {
+        eventReport.fnc.prop('disabled', false);
+    }
+    eventReport.fnc.html(a.join(""));
+});
+
+eventReport.fnc.change(function() {
+    eventReport.task.empty();
+    eventReport.task.prop('disabled', true);
+    var a = [];
+    a.push('<option></option>');
+    if (eventReport.fnc.val() == "SETUP WIRE CENTER") {
+        for (var i = 0; i < eventReport.taskOptions.setupWireCenter.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setupWireCenter[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "PORT MAPPING") {
+        for (var i = 0; i < eventReport.taskOptions.portMapping.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.portMapping[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SETUP FACILITY") {
+        for (var i = 0; i < eventReport.taskOptions.setupFacility.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setupFacility[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SETUP SERVICE CONNECTION") {
+        for (var i = 0; i < eventReport.taskOptions.setupServiceConnection.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setupServiceConnection[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "BATCH EXECUTION") {
+        for (var i = 0; i < eventReport.taskOptions.batchExecution.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.batchExecution[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "FT ADMIN REPORT") {
+        for (var i = 0; i < eventReport.taskOptions.ftAdminReport.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.ftAdminReport[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "FLOW-THROUGH RELEASE TABLE") {
+        for (var i = 0; i < eventReport.taskOptions.flowThroughReleaseTable.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.flowThroughReleaseTable[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "FLOW-THROUGH") {
+        for (var i = 0; i < eventReport.taskOptions.flowThrough.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.flowThrough[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "FOMS/FUSA") {
+        for (var i = 0; i < eventReport.taskOptions.fomsFusa.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.fomsFusa[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SETUP MAINTENANCE CONNECTION") {
+        for (var i = 0; i < eventReport.taskOptions.setupMaintenanceConnection.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setupMaintenanceConnection[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "LOCK/UNLOCK MATRIX CARD") {
+        for (var i = 0; i < eventReport.taskOptions.lockUnlockMatrixCard.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.lockUnlockMatrixCard[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "LOCK/UNLOCK MATRIX NODE") {
+        for (var i = 0; i < eventReport.taskOptions.lockUnlockMatrixNode.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.lockUnlockMatrixNode[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "ALARM ADMINISTRATION") {
+        for (var i = 0; i < eventReport.taskOptions.alarmAdministration.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.alarmAdministration[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "PATH ADMINISTRATION") {
+        for (var i = 0; i < eventReport.taskOptions.pathAdministration.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.pathAdministration[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SETUP USER") {
+        for (var i = 0; i < eventReport.taskOptions.setupUser.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setupUser[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "USER ACCESS") {
+        for (var i = 0; i < eventReport.taskOptions.userAccess.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.userAccess[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "USER SEARCH") {
+        for (var i = 0; i < eventReport.taskOptions.userSearch.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.userSearch[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SET/RESET PASSWORD") {
+        for (var i = 0; i < eventReport.taskOptions.setResetPassword.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.setResetPassword[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "BROADCAST NOTIFICATION") {
+        for (var i = 0; i < eventReport.taskOptions.broadcastNotification.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.broadcastNotification[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "IPC REFERENCE DATA") {
+        for (var i = 0; i < eventReport.taskOptions.ipcReferenceData.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.ipcReferenceData[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "SYSTEM SHUTDOWN") {
+        for (var i = 0; i < eventReport.taskOptions.systemShutdown.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.systemShutdown[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "RESTORE SYSTEM") {
+        for (var i = 0; i < eventReport.taskOptions.restoreSystem.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.restoreSystem[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "BACKUP DATABASE") {
+        for (var i = 0; i < eventReport.taskOptions.backupDatabase.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.backupDatabase[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "UPDATE SOFTWARE RELEASES") {
+        for (var i = 0; i < eventReport.taskOptions.updateSoftwareReleases.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.updateSoftwareReleases[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "NODE ADMINISTRATION") {
+        for (var i = 0; i < eventReport.taskOptions.nodeAdministration.length; i++) {
+            a.push('<option>' + eventReport.taskOptions.nodeAdministration[i] + '</option>');
+        }
+    }
+    else if (eventReport.fnc.val() == "") {
+        eventReport.task.empty();
+        eventReport.task.prop('disabled', true);
+    }
+    if (eventReport.fnc.val() != "") {
+        eventReport.task.prop('disabled', false);
+    }
+    eventReport.task.html(a.join(""));
+});
+
+
+</script>

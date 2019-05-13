@@ -1,0 +1,545 @@
+<div id="ord" class="tab-pane fade in">
+    <h4>SETUP FLOW-THROUGH ORDER</h4>
+   
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2 modifyPadding">
+                <label for="ord_no_txt">ORDNO</label>
+                <input class="form-control modifyPadding" type="text" id="ord_no_txt">
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_ot_sel" >OT</label>
+                <select id="ord_ot_sel" class="form-control">
+                    <option></option>
+                    <option>NC</option>
+                    <option>CH</option>
+                </select>
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <label for="ord_dd_date">DD</label>
+                <input type="date" class="form-control" id="ord_dd_date">
+            </div>
+            <div class="col-sm-2 modifyPadding">
+                <label for="ord_fdd_date">FDD</label>
+                <input type="date" class="form-control" id="ord_fdd_date">
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_wc_sel" >WC</label>
+                <select id="ord_wc_sel" class="form-control">
+                    <option></option>
+                    <option>ATT</option>
+                    <option>VZN</option>
+                </select>
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_pri_sel" >PRI</label>
+                <select id="ord_pri_sel" class="form-control">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <button class="btn btn-primary" id="ord_addOrd_btn" style="width:80px">ADD</button>
+            </div>
+
+        </div>
+            <!------------------------------------------>
+        <div class="col-sm-12">
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_cktyp_sel">CKTYP</label>
+                <select id="ord_cktyp_sel" class="form-control">
+                    <option></option>
+                    <option>TN</option>
+                    <option>CKID</option>
+                </select>
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="ord_ctid_txt">CTID</label>
+                <input type="text" class="form-control" id="ord_ctid_txt">
+            </div>
+
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_adsr_sel" >ADSR</label>
+                <select id="ord_adsr_sel" class="form-control">
+                    <option></option>
+                    <option>SSM</option>
+                    <option>SSP</option>
+                </select>
+            </div>
+
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_oc_sel" >OC</label>
+                <select id="ord_oc_sel" class="form-control">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_act_sel" >ACT</label>
+                <select id="ord_act_sel" class="form-control">
+                    <option></option>
+                    <option>I</option>
+                    <option>O</option>
+                    <option>C</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-1 modifyPadding">
+                <button class="btn btn-primary" id="ord_addCkt_btn" style="width:80px">ADD</button>
+            </div>
+
+            <div class="col-sm-2 modifyPadding">
+                <button class="btn btn-primary" id="ord_doneCkt_btn">DONE WITH CKT</button>
+            </div>
+        </div>
+
+            <!------------------------------------------>
+        <div class="col-sm-12">
+            <div class="col-sm-1 modifyPadding">
+                <label for="ord_con_sel">CON</label>
+                <select id="ord_con_sel" class="form-control">
+                    <option></option>
+                    <option>IN</option>
+                    <option>OUT</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-4" style="border:2px solid #004C4C; background-color: #EDEDED;">
+                <div class="col-sm-6 modifyPadding">
+                    <label for="ord_facId1_txt">FAC ID</label>
+                    <input type="text" class="form-control" id="ord_facId1_txt">
+                </div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="ord_facTyp1_txt">TYPE</label>
+                    <select id="ord_facTyp1_txt" class="form-control">
+                        <option></option>
+                        <option>CP</option>
+                        <option>OE</option>
+                        <option>TP</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-3 modifyPadding">
+                    <label for="ord_frloc1_txt">FRLOC</label>
+                    <input type="text" class="form-control" id="ord_frloc1_txt">
+                </div>
+            </div>
+
+            <div class="col-sm-4" style="border:2px solid #004C4C; background-color: #EDEDED">
+                <div class="col-sm-6 modifyPadding">
+                    <label for="ord_facId2_txt">FAC ID</label>
+                    <input type="text" class="form-control" id="ord_facId2_txt">
+                </div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="ord_facTyp2_sel">TYPE</label>
+                    <select id="ord_facTyp2_sel" class="form-control">
+                        <option></option>
+                        <option>CP</option>
+                        <option>OE</option>
+                        <option>TP</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-3 modifyPadding">
+                    <label for="ord_frloc2_txt">FRLOC</label>
+                    <input type="text" class="form-control" id="ord_frloc2_txt">
+                </div>
+            </div>
+
+            <div class="col-sm-1 modifyPadding">
+                <button class="btn btn-primary" id="ord_addCon_btn" style="width:80px">ADD</button>
+            </div>
+
+            <div class="col-sm-2 modifyPadding">
+                <button class="btn btn-primary" id="ord_doneCon_btn">DONE WITH CON</button>
+            </div>
+        </div>
+        <!-- ----------------------------------------------------------- -->
+    
+        <div class="col-sm-12" style="margin:10px 0 0 0;" >
+            <label for="ord_script_txt">ORDER SCRIPT</label>  
+            <a style="float:right;" id="ord_clrScript">Clear All</a>
+            <textarea id="ord_script_txt" style="width:100%; height: 250px; background-color:#EDEDED" readonly></textarea>
+        </div>
+
+        <div class="col-sm-12" style="align-content: center">
+            <button class="btn btn-primary" id="ord_saveOrd_btn" style="margin: 0;">SAVE ORDER</button>
+            &nbsp&nbsp&nbsp <label id="ord_result_lbl" style="color:red"></label>
+        </div>
+            
+    </div>
+
+</div>
+
+<script>
+var ord = {
+    no:             $("#ord_no_txt"),
+    ot:             $("#ord_ot_sel"),
+    dd:             $("#ord_dd_date"),
+    fdd:            $("#ord_fdd_date"),
+    wc:             $("#ord_wc_sel"),
+    pri:            $("#ord_pri_sel"),
+    addOrdBtn:      $("#ord_addOrd_btn"),
+    cktyp:          $("#ord_cktyp_sel"),
+    ctid:           $("#ord_ctid_txt"),
+    adsr:           $("#ord_adsr_sel"),
+    oc:             $("#ord_oc_sel"),
+    act:            $("#ord_act_sel"),
+    addCktBtn:      $("#ord_addCkt_btn"),
+    doneCktBtn:     $("#ord_doneCkt_btn"),
+    con:            $("#ord_con_sel"),
+    id1:            $("#ord_facId1_txt"),
+    type1:          $("#ord_facTyp1_txt"),
+    frloc1:         $("#ord_frloc1_txt"),
+    id2:            $("#ord_facId2_txt"),
+    type2:          $("#ord_facTyp2_sel"),
+    frloc2:         $("#ord_frloc2_txt"),
+    addConBtn:      $("#ord_addCon_btn"),
+    doneConBtn:     $("#ord_doneCon_btn"),
+    script:         $("#ord_script_txt"),
+    clearScriptBtn: $("#ord_clrScript"),
+    saveOrdBtn:     $("#ord_saveOrd_btn"),
+    resultLbl:      $("#ord_result_lbl"),
+    
+    start: function() {
+        ord.clearForm();
+        ord.enableOrd();
+        ord.disableCkt();
+        ord.disableCon();
+    
+        ord.doneCktBtn.prop("disabled",true);
+        ord.doneConBtn.prop("disabled",true);
+        ord.saveOrdBtn.prop("disabled",true);    
+    },
+    
+    query: function(action) {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcOrd",
+            act:        action,
+            user:       $("#main_currentUser").text(),
+            foms:       ord.script.html(),
+            ordno:      ord.no.val()
+        },
+        function(data,status){
+            var obj = JSON.parse(data);
+            console.log(obj);
+            if (obj.rslt == 'fail') {
+                alert(obj.reason);
+            }
+            else {
+                alert(obj.rslt);
+            }
+    
+        })
+    },
+    
+    clearForm: function() {
+        ord.no.val("");
+        ord.ot.val("");
+        ord.dd.val("");
+        ord.fdd.val("");
+        ord.wc.val("");
+        ord.pri.val("");
+    
+        ord.cktyp.val("");
+        ord.ctid.val("");
+        ord.adsr.val("");
+        ord.oc.val("");
+        ord.act.val("");
+    
+        ord.con.val("");
+        ord.id1.val("");
+        ord.type1.val("");
+        ord.frloc1.val("");
+        ord.id2.val("");
+        ord.type2.val("");
+        ord.frloc2.val("");
+    
+        ord.script.html("");
+       
+    },
+    
+    clrOrd: function() {
+        ord.no.val("");
+        ord.ot.val("");
+        ord.dd.val("");
+        ord.fdd.val("");
+        ord.wc.val("");
+        ord.pri.val("");
+    },
+    
+    
+    clrCkt: function() {
+        ord.cktyp.val("");
+        ord.ctid.val("");
+        ord.adsr.val("");
+        ord.oc.val("");
+        ord.act.val("");
+    
+    },
+    
+    
+    clrCon: function() {
+        ord.con.val("");
+        ord.id1.val("");
+        ord.type1.val("");
+        ord.frloc1.val("");
+        ord.id2.val("");
+        ord.type2.val("");
+        ord.frloc2.val("");
+    
+    },
+    
+    
+    disableOrd: function() {
+        ord.no.prop("disabled",true);
+        ord.ot.prop("disabled",true);
+        ord.dd.prop("disabled",true);
+        ord.fdd.prop("disabled",true);
+        ord.wc.prop("disabled",true);
+        ord.pri.prop("disabled",true);
+    
+        ord.addOrdBtn.prop("disabled",true);
+        
+    },
+    
+    
+    enableOrd: function() {
+        ord.no.prop("disabled",false);
+        ord.ot.prop("disabled",false);
+        ord.dd.prop("disabled",false);
+        ord.fdd.prop("disabled",false);
+        ord.wc.prop("disabled",false);
+        ord.pri.prop("disabled",false);
+    
+        ord.addOrdBtn.prop("disabled",false);
+        
+    },
+    
+    
+    disableCkt: function() {
+        ord.cktyp.prop("disabled",true);
+        ord.ctid.prop("disabled",true);
+        ord.adsr.prop("disabled",true);
+        ord.oc.prop("disabled",true);
+        ord.act.prop("disabled",true);
+    
+        ord.addCktBtn.prop("disabled",true);
+        
+    },
+    
+    
+    enableCkt: function() {
+        ord.cktyp.prop("disabled",false);
+        ord.ctid.prop("disabled",false);
+        ord.adsr.prop("disabled",false);
+        ord.oc.prop("disabled",false);
+        ord.act.prop("disabled",false);
+    
+        ord.addCktBtn.prop("disabled",false);
+        
+    },
+    
+    
+    disableCon: function() {
+        ord.con.prop("disabled",true);
+        ord.id1.prop("disabled",true);
+        ord.type1.prop("disabled",true);
+        ord.frloc1.prop("disabled",true);
+        ord.id2.prop("disabled",true);
+        ord.type2.prop("disabled",true);
+        ord.frloc2.prop("disabled",true);
+    
+        ord.addConBtn.prop("disabled",true);
+        
+    },
+    
+    
+    enableCon: function() {
+        ord.con.prop("disabled",false);
+        ord.id1.prop("disabled",false);
+        ord.type1.prop("disabled",false);
+        ord.frloc1.prop("disabled",false);
+        ord.id2.prop("disabled",false);
+        ord.type2.prop("disabled",false);
+        ord.frloc2.prop("disabled",false);
+    
+        ord.addConBtn.prop("disabled",false);
+        
+    },
+    
+}
+
+
+// ------------------------Click Event---------------------
+
+
+ord.addOrdBtn.click(function() {
+    
+    if(ord.no.val() != "" && ord.ot.val() != "" && ord.dd.val() != "" && ord.fdd.val() != ""
+        && ord.wc.val() != "" && ord.pri.val() != "" ) {
+        ord.script.append("*ORD{");
+        ord.script.append("ORDNO=" + ord.no.val() + ";");
+        ord.script.append("OT=" + ord.ot.val() + ";");
+        ord.script.append("DD=" + ord.dd.val() + ";");
+        ord.script.append("FDD=" + ord.fdd.val() + ";");
+        ord.script.append("WC=" + ord.wc.val() + ";");
+        ord.script.append("PRI=" + ord.pri.val() + ";");  
+        
+        ord.disableOrd();
+        ord.enableCkt();
+    }
+    else {
+        alert("All input fields in this row must be filled!")
+    }
+
+})
+
+
+ord.addCktBtn.click(function() {
+    if(ord.cktyp.val() != "" && ord.ctid.val() != "" && ord.adsr.val() != "" && ord.oc.val() != ""
+        && ord.act.val() != "" ) {
+        ord.script.append("CKT{");
+        ord.script.append("CTTYPE=" + ord.cktyp.val() + ";");
+        ord.script.append("CTID=" + ord.ctid.val() + ";");
+        ord.script.append("ADSR=" + ord.adsr.val() + ";");
+        ord.script.append("OC=" + ord.oc.val() + ";");
+        ord.script.append("ACT=" + ord.act.val() + ";");
+
+        if  (ord.act.val() == 'I') {
+            ord.con.val("IN");
+            ord.con.prop("disabled",true);
+        }
+        else if (ord.act.val() == 'O') {
+            ord.con.val("OUT");
+            ord.con.prop("disabled",true);
+        }
+        else {
+            ord.con.val("");
+        }
+        
+        ord.disableCkt();
+        ord.enableCon();
+
+        if  (ord.act.val() == 'I') {
+            ord.con.val("IN");
+            ord.con.prop("disabled",true);
+        }
+        else if (ord.act.val() == 'O') {
+            ord.con.val("OUT");
+            ord.con.prop("disabled",true);
+        }
+        else {
+            ord.con.val("");
+        }
+
+        ord.doneCktBtn.prop("disabled",true);
+        ord.doneConBtn.prop("disabled",true);
+    }
+    else {
+        alert("All input fields in this row must be filled!")
+    }
+})
+
+
+ord.addConBtn.click(function(){
+    if(ord.con.val() != "" && ord.id1.val() != "" && ord.type1.val() != "" && ord.frloc1.val() != ""
+        && ord.id2.val() != "" && ord.type2.val() != "" && ord.frloc2.val() != "" ) {
+        ord.script.append(ord.con.val() + "{");
+
+        ord.script.append("FAC{");
+        ord.script.append("TYPE=" + ord.type1.val() + ";");
+        ord.script.append("ID=" + ord.id1.val() + ";");
+        ord.script.append("FRLOC=" + ord.frloc1.val() + ";");
+        ord.script.append("}");
+
+        ord.script.append("FAC{");
+        ord.script.append("TYPE=" + ord.type2.val() + ";");
+        ord.script.append("ID=" + ord.id2.val() + ";");
+        ord.script.append("FRLOC=" + ord.frloc2.val() + ";");
+        ord.script.append("}");
+
+        ord.script.append("}");
+
+        ord.clrCon();
+        if  (ord.act.val() == 'I') {
+            ord.con.val("IN");
+            ord.con.prop("disabled",true);
+        }
+        else if (ord.act.val() == 'O') {
+            ord.con.val("OUT");
+            ord.con.prop("disabled",true);
+        }
+        else {
+            ord.con.val("");
+            ord.con.prop("disabled",false);
+        }
+
+        ord.doneConBtn.prop("disabled",false);
+
+    }
+    else {
+        alert("All input fields in this row must be filled!")
+    }
+
+})
+
+
+ord.doneConBtn.click(function() {
+    //Close the CKT part
+    ord.script.append("}");
+    
+    ord.doneConBtn.prop("disabled",true);
+    ord.doneCktBtn.prop("disabled",false);
+
+    ord.clrCon();
+    ord.disableCon();
+
+    ord.clrCkt();
+    ord.enableCkt();
+
+
+})
+
+
+ord.doneCktBtn.click(function(){
+    //Close the Order part
+    ord.script.append("}%");
+
+    ord.doneCktBtn.prop("disabled",true);
+    ord.saveOrdBtn.prop("disabled",false);
+
+    ord.clrCkt();
+    ord.disableCkt();
+})
+
+
+ord.clearScriptBtn.click(function() {
+    ord.clearForm();
+    ord.enableOrd();
+    ord.disableCkt();
+    ord.disableCon();
+
+    ord.doneConBtn.prop("disabled",true);
+    ord.doneCktBtn.prop("disabled",true);
+    ord.saveOrdBtn.prop("disabled",true);
+})
+
+
+ord.saveOrdBtn.click(function(){
+    if  (ord.script.html() == "") {
+        alert("There is nothing in the ORDER SCRIPT!")
+    }
+    else {
+        ord.query("add");
+    }
+})
+
+
+// -------------------------Function------------------------
+</script>

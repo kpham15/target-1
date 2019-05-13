@@ -1,0 +1,479 @@
+#menu {
+  float: left;
+  height:680px; 
+  border:1px solid gray; 
+  padding-left: 10px;
+  padding-top: 10px;
+  width:300px;
+  overflow-y: auto;
+  
+}
+.help_sidebar {
+  position: absolute;
+  right:0px;
+  top:0px;
+  margin-top: -12px;
+  margin-right: -7px;
+  height: 680px;
+  border:1px solid gray; 
+  padding-top: 10px;
+  width:25%;
+  overflow-y: auto;
+  
+}
+
+#mainView{
+  height:680px; 
+  border:1px solid gray;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+#header{
+  position: relative;
+}
+
+.tab-pane{
+  margin:5px;
+}
+.modal-body{
+  margin:15px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  /*for mobile phone */
+  [class*="col-sm-3"] {
+      width: 100%;
+  }
+
+  .btn-primary{
+    margin:10px;
+  }
+
+}
+
+#displayMenu{
+  margin:0 0 0 10px ;
+  font-size:17px;
+  cursor:pointer;  
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+@media only screen and (max-width: 4320px) {
+  #menu{
+    display:none;
+    z-index: 1;
+    overflow: hidden;
+    position: absolute;
+    background-color: white;
+    overflow-y: auto;
+    transition: 0.5s;
+  }
+  .help_sidebar{
+    display:none;
+    z-index: 1;
+    overflow: hidden;
+    background-color:beige;
+    overflow-y: auto;
+    transition: 0.5s;
+  }
+  #displayMenu{
+    display:block;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+label {
+  margin-bottom: 0px;
+}
+
+.form-control {
+  height: 30px;
+}
+
+.textbox {
+  height: 30px;
+  margin-top: 0px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+/* ---------------------------------------------------------- */
+
+.modifyPadding{
+  padding: 2px 2px 2px 2px;
+}
+
+.modifyPaddingFtOrdCol1{
+  padding: 5px 2.5px 5px 2.5px;
+}
+.modifyPaddingFtOrd, .modifyPaddingFtOrd select, .modifyPaddingFtOrd input, .modifyPaddingFtOrd label{
+  padding: 0px 5px 0px 5px !important;
+  font-size: 12px !important;
+  height: auto !important;
+  margin-bottom: 0px !important;
+}
+
+/* .modifyPaddingFtOrd label{
+  padding: 0px 0px 0px 0px !important;
+  font-size: 12px !important;
+  height: auto !important;
+  margin-bottom: 0px !important;
+} */
+
+.modifyPadding select{
+  padding:0 0 0 2px;
+}
+
+.modifyPadding input{
+  padding:0 0 0 5px;
+}
+
+.line-up{
+  float:left;
+  padding:0px 20px;
+}
+
+button:focus {
+  outline: none;
+}
+
+.btn-primary { 
+  color: #ffffff; 
+  background-color: rgb(84, 180, 236); 
+  border-color: rgb(118, 118, 245); 
+  margin-top:20px;
+  height: 30px;
+} 
+
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary.active, 
+.open .dropdown-toggle.btn-primary { 
+  color: #ffffff; 
+  background-color: rgb(118, 118, 245); 
+  border-color: blue; 
+} 
+
+/* ------------------TABLE DISPLAY---------------------------- */
+.table-fixed thead{
+  width: 98%;
+  
+}
+
+.table-fixed tbody {
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+  background-color: #F6F6F6;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td {
+  float: left;
+ }
+  
+.table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+
+ }
+ 
+
+ td:empty:before {
+  content: "\200b";
+ } 
+
+ td, th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+ }
+
+.addColor{
+  color: blue;
+}
+
+/* --------------------BUTTON DISABLE------------------------------------ */
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+/* --------------------SYSTEM OVERVIEW---------------------- */
+
+
+.sysView_node {
+  min-height: 80px;
+  width:100%;
+}
+
+.sysView_node button {
+  background-color: #EEEEEE;
+  font-size:70%; 
+  text-align: left;
+  min-width: 80px;
+  height: 80px;
+
+  margin-left: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.sysView_mio {
+  margin-top:10px;
+  border-bottom: solid black 2px;
+  width: 100%;
+  min-height: 45px;
+
+}
+
+.sysView_mio a {
+  min-width:45px;
+  height: 40px;
+
+  margin-left: 20px;
+  overflow: hidden;
+  
+}
+
+.sysView_XY {
+  width:100%;
+  min-height: 35px;
+}
+
+
+#sysView_portDisplay {
+  padding: 2px;
+  width:100%;
+  
+}
+
+.addBorder {
+
+  box-shadow: 0px 0px 0px 5px #00A4E9 inset;
+  box-sizing: border-box;
+}
+
+.addBGColor {
+  background-color: #93cbea;
+  
+}
+
+.addPortStyle {
+  min-width: 19.7%;
+  max-width: 19.7%;
+  height: 70px;
+  padding: 0px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 1px;
+
+  background-color: #EEEEEE;
+}
+
+.addNodeStyle {
+  width: 9%;
+  height: 80px;
+  padding: 0px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 2px;
+
+  background-color: #EEEEEE;
+}
+
+.changeBG {
+  background-color: red;
+  padding:2px;
+  border:solid 2px blue;
+  color: white;
+}
+
+/* --------------------RESTORE VIEW---------------------------- */
+
+#freeze {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+/* ---------------------NODE VIEW------------------------------- */
+
+
+.cardview{
+  text-align: center;
+  height: 500px;
+  width: 45%;
+  background-color:#fff0af;
+  float: left;
+  margin: 15px 5px 0 5px;
+  border:solid 4px gainsboro
+}
+
+
+.led {
+  padding-top: 50%;
+  width: 50%;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top:15px;
+}
+
+.mxcard {
+  height:90%; 
+  width:8%; 
+  background-color: #F5F5F5; 
+  margin:1%; 
+  float:left; 
+  text-align: center;
+  border:solid 2px black
+}
+
+.mxcardActive {
+  background-color: green;
+}
+
+/*------------- ALERT BOX------------- */
+#alertLayer {
+  display:none;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 2000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width:100%;
+  height: 100%;
+  
+}
+#alert {
+  cursor:pointer;
+  border:1px solid gray; 
+  background-color: #fff;
+  position: absolute;
+  text-align:center;
+  z-index:10000;
+  width: 400px;
+  min-height: 100px;
+}
+
+/* TEST PORT/BUS */
+
+.testPort {
+  width: 20%;
+  height: 50px;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 0px;
+  margin-top:0px;
+  display: inline-block; 
+  vertical-align: top;
+
+}
+
+.tb_facPort {
+  width: 30%;
+  height: 50px;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 0px;
+  margin-top:0px;
+  display: inline-block; 
+  vertical-align: top;
+}
+
+
+/* ---------Menu for port click in SYSVIEW */
+
+#sysview_portAct, .sysview_nodeActList, .sysview_mioActList{
+  list-style:none;
+  margin:0px;
+  margin-top:4px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:3px;
+  font-size:12px;
+  color: #333333;
+}
+
+#sysview_portAct li, #sysview_portAct li ul li {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+#sysview_portAct li ul {
+  display: none;
+  position: absolute;
+  width: 150px;
+  left: 140px;
+  top: 0;
+
+  list-style:none;
+  /* margin and padding */
+  margin:0px;
+  margin-top:4px; 
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:3px;
+
+  border:1px solid #B2B2B2;
+  width:150px;      
+  background:#F9F9F9;
+  box-shadow: 3px 3px 2px #E9E9E9;
+  border-radius:4px;
+}
+
+#sysview_act_group:hover ul {
+  display: block;
+}
+
+
+#sysview_portMenu, #sysview_nodeMenu, #sysview_mioMenu{
+  display:none;
+  position:fixed;
+  border:1px solid #B2B2B2;
+  /* width:150px;       */
+  background:#F9F9F9;
+  box-shadow: 3px 3px 2px #E9E9E9;
+  border-radius:4px;
+}
+
+.activeAction{
+  color: white;
+  background:#284570;
+  border-radius:2px;
+}
+
+.disableAction {
+  color: grey;
+}

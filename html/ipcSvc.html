@@ -1,0 +1,2080 @@
+<div id="svc" class="tab-pane fade in" style="position: relative;">
+    <h4>SETUP SERVICE CONNECTION</h4>
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-6 modifyPadding">
+                <label for="svc_ckid_txt">CKID</label>
+                <label for="svc_tn_cbx">TN:</label>
+                <input type="checkbox" id="svc_tn_cbx" checked>
+                <div id="svc_ckid">
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_ckid_txt" placeholder="123-456-7890">
+                </div>
+            </div>
+                
+            <div class="col-sm-2 modifyPadding">
+                <label for="svc_cls_sel">CLS</label>
+                <select class="form-control" id="svc_cls_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>BUS</option>
+                    <option>RES</option>
+                </select>
+            </div>
+        
+            <div class="col-sm-2 modifyPadding">
+                <label for="svc_adsr_sel">ADSR</label>
+                <select class="form-control" id="svc_adsr_sel" style="padding:2px 0 0 0">
+                    <option>N</option>
+                    <option>Y</option>
+                </select>
+            </div>   
+        
+            
+            <div class="col-sm-2 modifyPadding">
+                <button id="svc_findCkid_btn" style="text-align:right" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+        <!-- ----------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-6 modifyPadding">
+                <label for="svc_ordno_txt">ORDNO</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="svc_ordno_txt">
+            </div>
+            
+            <div class="col-sm-2 modifyPadding">
+                <label for="svc_mlo_sel">MLO</label>
+                <select class="form-control" id="svc_mlo_sel" style="padding:2px 0 0 0">
+                    <option>N</option>
+                    <option>Y</option>
+                </select>
+            </div> 
+        
+            <div class="col-sm-2 modifyPadding">
+                <label for="svc_prot_sel">PROT</label>
+                <select class="form-control" id="svc_prot_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>SSM</option>
+                    <option>SSP</option>
+                </select>
+            </div>
+        
+            <!--<div class="col-sm-1 modifyPadding">-->
+                <!--<label for="svc_date_date">DATE</label>-->
+                <input type="hidden" class="form-control" id="svc_date_date" readonly>
+            <!--</div>--> 
+            
+            <div class="col-sm-2 modifyPadding">
+                <button id="svc_findOrd_btn" style="text-align:right" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+        <!-- ------------------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-5 modifyPadding">
+                <label for="svc_dd_date">DD</label>
+                <input type="date" class="form-control" id="svc_dd_date">
+            </div>
+            <div class="col-sm-5 modifyPadding">
+                <label for="svc_fdd_date">FDD</label>
+                <input type="date" class="form-control" id="svc_fdd_date">
+            </div>
+        </div>  
+        
+        <div class="row">
+            <div class="col-sm-2 modifyPadding">
+                <label for="svc_ctyp_sel">CONTYP</label>
+                <select class="form-control" id="svc_ctyp_sel" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>GEN</option>
+                    <option>LPBK</option>
+                    <option>MLPT</option>
+                </select>
+            </div>  
+
+            <div class="col-sm-5 modifyPadding">
+                <label for="svc_ffac_txt" style="float:left">FAC(X):</label>
+                &nbsp;&nbsp;&nbsp;
+                <a id="svc_ffacSearch_btn" style="height: 20px">Search</a>
+                <input style="text-transform: uppercase" type="text" class ="form-control" id="svc_ffac_txt">
+                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                    <label for="svc_portX_txt">PORT(X):</label>
+                </div>
+                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_portX_txt">
+                </div>
+            </div> 
+            <div class="col-sm-5 modifyPadding">
+                <label for="svc_tfac_txt" style="float:left">FAC(Y):</label>
+                &nbsp;&nbsp;&nbsp;
+                <a id="svc_tfacSearch_btn" style="height: 20px">Search</a>
+                <input style="text-transform: uppercase" type="text" class ="form-control" id="svc_tfac_txt">
+                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                    <label for="svc_portY_txt">PORT(Y):</label>
+                </div>
+                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_portY_txt">
+                </div>
+            </div> 
+
+            <div id="svc_facSearch" class="col-sm-12 modifyPadding" style="display:none; background-color:#eff5ff;padding:0px; border: solid lightgray 1px;  ">
+                <div class="col-sm-6 modifyPadding">
+                    <label for="svc_fac_txt">FAC</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_fac_txt">
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <label for="svc_port_txt">PORT</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_port_txt">
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <label for="svc_psta_sel">PSTA</label>
+                    <select class="form-control" id="svc_psta_sel">
+                        <option></option>
+                        <option>MTCD</option>
+                        <option>RS</option>
+                        <option>TST</option>
+                        <option>SF</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 modifyPadding">
+                    <button id= "svc_facSearch_btn" class="btn btn-primary">View</button>
+                    <!--<button id= "svc_facClose_btn" class="btn btn-primary">Close</button>-->
+                </div>
+    
+                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">FAC</th>
+                                <th style="width:20%">PSTA</th>
+                                <th style="width:30%">PORT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblFac" style="height:180px;">
+                        </tbody>
+                    </table>
+                    <div style="float:right;">
+                        <a id="svc_previousFac">Previous</a> |
+                        <a id="svc_nextFac">Next</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <label id="svc_indexFac_lbl"></label>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+
+        <!-- ------------------------------------------------- -->
+        <div class="row">
+            <div class="col-sm-3 modifyPadding"> 
+                <label for="svc_act_sel">ACTION</label>    
+                <select class="form-control" id="svc_act_sel" style="padding:2px 0 0 0" >
+                    <option></option>
+                    <option>UPDATE_CKT</option>
+                    <option>CONNECT</option>
+                    <option>DISCONNECT</option>
+                    <option>CHANGE</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-8 modifyPadding">
+                <button id="svc_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                <!-- 3 input fields to be hidden after testing -->
+                <input id="svc_cktId_num" type="hidden" style="width:50px">
+                <input id="svc_cktconId_num" type="hidden" style="width:50px">
+                <input id="svc_cktconIdx_num" type="hidden" style="width:50px">
+            
+                <!-- <br> -->
+                <!-- <label id="checkProvInfor" style="color:red"></label> -->
+            </div>
+        </div>
+        <!-- ---------------------------------------------- -->
+
+        <!-- <div id="cktcon" class="col-sm-12 modifyPadding">
+            <div class="col-sm-2 modifyPadding">
+                <label for="ctyp">CTYP</label>
+                <select class="form-control" id="ctyp" style="padding:2px 0 0 0">
+                    <option></option>
+                    <option>GEN</option>
+                    <option>LPBK</option>
+                    <option>MTL</option>
+                </select>
+            </div>  
+            <div class="col-sm-5 modifyPadding">
+                <label for="ffac">FAC(X)</label>
+                <input type="text" class="form-control" id="ffac">
+            </div> 
+            <div class="col-sm-5 modifyPadding">
+                <label for="tfac">FAC(Y)</label>
+                <input type="text" class="form-control" id="tfac">
+            </div> 
+        </div>-->
+    
+        <!--<div class="row">
+            <div id="svc_cktconArea" class="col-sm-12 modifyPadding">
+                <label>LIST OF CONNECTIONS:</label>
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">ID</th>
+                                <th style="width:15%">CONTYP</th>
+                                <th style="width:40%">FAC(X)</th>
+                                <th style="width:40%">FAC(Y)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblCktCon" style="height:150px;">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+    
+    
+    <div class="col-sm-8 modifyPadding">
+
+        <div id ="svc_cktArea" class="row">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF CKTS:</b>
+                </div>
+    
+                <div style="float:right">
+                    <a  id="svc_previousCkt">Previous</a> |
+                    <a  id="svc_nextCkt">Next</a>
+                    &nbsp;&nbsp;&nbsp; <label id="svc_cktIndex_lbl"></label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width: 100%; padding-right: 15px">
+                            <tr>
+                                <th id="svc_CKID_tbl" style="width:28%">CKID</th>
+                                <th id="svc_CLS_tbl" style="width:9%">CLS</th>
+                                <th id="svc_ADSR_tbl" style="width:7%">ADSR</th>
+                                <th id="svc_PROT_tbl" style="width:7%">PROT</th>
+                                <th id="svc_ORDNO_tbl" style="width:20%">ORDNO</th>
+                                <th id="svc_MLO_tbl" style="width:5%">MLO</th>
+                                <th id="svc_DATE_tbl" style="width:20%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblCkt" style="height:200px">
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="svc_ordArea" class="row" style="display:none;">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF ORDERS:</b>
+                </div>
+    
+                <div style="float:right">
+                    <a  id="svc_previousOrd">Previous</a> |
+                    <a  id="svc_nextOrd">Next</a>
+                    &nbsp;&nbsp;&nbsp; <label id="svc_ordIndex_lbl"></label>
+                </div>
+            </div>
+            
+            
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style="width:98%">
+                            <tr>
+                                <!-- <th style="width:10%">STAT</th> -->
+                                <th style="width:18%">ORDNO</th>
+                                <th style="width:18%">CKID</th>
+                                <th style="width:8%">CONTYP</th>
+                                <th style="width:15%">FFAC</th>
+                                <th style="width:15%">TFAC</th>
+                                <th style="width:16%">DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblOrd" style="height:200px">
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="svc_cktconArea" class="row" style="display:none;">
+            <div class="col-sm-12">
+                <label>LIST OF CONNECTIONS:</label>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:15%"></th>
+                                <th style="width:42%">FROM (X):</th>
+                                <th style="width:43%">TO (Y):</th>
+                            </tr>
+                            <tr>
+                                <th style="width:5%">ID</th>
+                                <th style="width:10%">CONTYP</th>
+                                <th style="width:10%">PORT</th>
+                                <th style="width:10%">PSTA</th>
+                                <th style="width:22%">FAC(X)</th>
+                                <th style="width:10%">PORT</th>
+                                <th style="width:10%">PSTA</th>
+                                <th style="width:23%">FAC(Y)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblCktCon" style="height:200px;">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         
+        </div>
+        
+    </div> 
+
+</div>
+
+<div id="svcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SETUP SERVICE CONNECTION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="svcModal_ckid_txt">CKID</label>
+                        <label for="svcModal_tn_cbx">TN:</label>
+                        <input type="checkbox" id="svcModal_tn_cbx" checked>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_ckid_txt" placeholder="123-456-7890">
+                    </div>
+                        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="svcModal_cls_sel">CLS</label>
+                        <select class="form-control" id="svcModal_cls_sel" style="padding:2px 0 0 0">
+                            <option></option>
+                            <option>BUS</option>
+                            <option>RES</option>
+                        </select>
+                    </div>
+        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="svcModal_adsr_sel">ADSR</label>
+                        <select class="form-control" id="svcModal_adsr_sel" style="padding:2px 0 0 0">
+                            <option>N</option>
+                            <option>Y</option>
+                        </select>
+                    </div>   
+        
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="svcModal_prot_sel">PROT</label>
+                        <select class="form-control" id="svcModal_prot_sel" style="padding:2px 0 0 0">
+                            <option></option>
+                            <option>SSM</option>
+                            <option>SSP</option>
+                        </select>
+                    </div>
+                </div>
+                    <!-- ----------------------------------------- -->
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="svcModal_ordno_txt">ORDNO</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_ordno_txt">
+                    </div>
+                    
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="svcModal_mlo_sel">MLO</label>
+                        <select class="form-control" id="svcModal_mlo_sel" style="padding:2px 0 0 0">
+                            <option>N</option>
+                            <option>Y</option>
+                        </select>
+                    </div> 
+                </div>
+                    <!-- ------------------------------------------------- -->
+                <div class="row">
+                    <div id="svcModal_newConForm">
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="svcModal_ctyp_sel">CONTYP</label>
+                            <select class="form-control" id="svcModal_ctyp_sel" style="padding:2px 0 0 0">
+                                <option></option>
+                                <option>GEN</option>
+                                <option>LPBK</option>
+                                <option>MLPT</option>
+                            </select>
+                        </div>  
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="svcModal_ffac_sel">FAC(X)</label>
+                            <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_ffac_text">
+                        <!--
+                            <select class="form-control" id="svcModal_ffac_sel"> 
+                            </select>
+                        -->
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="svcModal_tfac_sel">FAC(Y)</label>
+                            <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_tfac_text">
+                        <!--
+                            <select class="form-control" id="svcModal_tfac_sel">
+                            </select>
+                        -->
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="svcModal_discConForm">
+                        <div class="col-sm-2 modifyPadding">
+                            <label for="svcModal_discCtyp_txt">CONTYP</label>
+                            <input type="text" class="form-control" id="svcModal_discCtyp_txt" readonly> 
+                        </div>  
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="svcModal_discFfac_txt">FAC(X)</label>
+                            <input type="text" class="form-control" id="svcModal_discFfac_txt" readonly> 
+                        
+                        </div> 
+                        <div class="col-sm-5 modifyPadding">
+                            <label for="svcModal_discTfac_txt">FAC(Y)</label>
+                            <input type="text" class="form-control" id="svcModal_discTfac_txt" readonly>
+                        
+                        </div> 
+                    </div>
+                </div>
+
+                <div id="svcModal_changeConForm" class="row">
+                    <div id="svcModal_outCon" class="col-sm-12 modifyPadding">
+                        <label class="col-sm-1 modifyPadding" style="float:left">OUT:</label>
+                        <div class="col-sm-10 modifyPadding" style="border:lightgray solid 1px">
+                            <div class="col-sm-2 modifyPadding">
+                                <label for="svcModal_oldCtyp_sel">CONTYP</label>
+                                <select class="form-control" id="svcModal_oldCtyp_sel" style="padding:2px 0 0 0" disabled>
+                                    <option></option>
+                                    <option>GEN</option>
+                                    <option>LPBK</option>
+                                    <option>MLPT</option>
+                                </select>
+                            </div>  
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="svcModal_oldFfac_txt" style="float:left">FAC(X):</label>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_oldFfac_txt" disabled>
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="svcModal_oldPortX_txt">PORT(X):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_oldPortX_txt" disabled>
+                                </div>
+                            </div> 
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="svcModal_oldTfac_txt" style="float:left">FAC(Y):</label>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_oldTfac_txt" disabled>
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="svcModal_oldPortY_txt">PORT(Y):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_oldPortY_txt" disabled>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div id="svcModal_inCon" class="col-sm-12 modifyPadding">
+                        <label class="col-sm-1 modifyPadding" style="float:left">IN:</label>
+                        <div class="col-sm-10 modifyPadding" style="border: lightgray solid 1px">
+                            <div class="col-sm-2 modifyPadding">
+                                <label for="svcModal_newCtyp_sel">CONTYP</label>
+                                <select class="form-control" id="svcModal_newCtyp_sel" style="padding:2px 0 0 0">
+                                    <option></option>
+                                    <option>GEN</option>
+                                    <option>LPBK</option>
+                                    <option>MLPT</option>
+                                </select>
+                            </div>  
+                
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="svcModal_newFfac_txt" style="float:left">FAC(X):</label>
+                                &nbsp;&nbsp;&nbsp;
+                                <a id="svcModal_newFfacSearch_btn" style="height: 20px">Search</a>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_newFfac_txt">
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="svcModal_newPortX_txt">PORT(X):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_newPortX_txt">
+                                </div>
+                            </div> 
+                            <div class="col-sm-5 modifyPadding">
+                                <label for="svcModal_newTfac_txt" style="float:left">FAC(Y):</label>
+                                &nbsp;&nbsp;&nbsp;
+                                <a id="svcModal_newTfacSearch_btn" style="height: 20px">Search</a>
+                                <input style="text-transform: uppercase" type="text" class ="form-control" id="svcModal_newTfac_txt">
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                                    <label for="svcModal_newPortY_txt">PORT(Y):</label>
+                                </div>
+                                <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_newPortY_txt">
+                                </div>
+                            </div> 
+                
+                            <div id="svcModal_newFacSearch" class="col-sm-12 modifyPadding" style="display:none; background-color:#eff5ff;padding:0px; border: solid lightgray 1px;  ">
+                                <div class="col-sm-6 modifyPadding">
+                                    <label for="svcModal_newFac_txt">FAC</label>
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_newFac_txt">
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <label for="svcModal_newPort_txt">PORT</label>
+                                    <input style="text-transform: uppercase" type="text" class="form-control" id="svcModal_newPort_txt">
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <label for="svcModal_newPsta_sel">PSTA</label>
+                                    <select class="form-control" id="svcModal_newPsta_sel">
+                                        <option></option>
+                                        <option>MTCD</option>
+                                        <option>RS</option>
+                                        <option>TST</option>
+                                        <option>SF</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2 modifyPadding">
+                                    <button id= "svcModal_newFacSearch_btn" class="btn btn-primary">View</button>
+                                    <!-- <button id= "svcModal_newFacClose_btn" class="btn btn-primary">Close</button> -->
+                                </div>
+                    
+                                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+                                    <table class="table table-fixed">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50%">FAC</th>
+                                                <th style="width:20%">PSTA</th>
+                                                <th style="width:30%">PORT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="svcModal_newTblFac" style="height:120px;">
+                                        </tbody>
+                                    </table>
+                                    <div style="float:right;">
+                                        <a id="svcModal_newPreviousFac">Previous</a> |
+                                        <a id="svcModal_newNextFac">Next</a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <label id="svcModal_newIndexFac_lbl"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                
+                </div>
+
+                    <!-- ---------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-sm-5 modifyPadding">
+                        <label for="svcModal_dd_date">DD</label>
+                        <input type="date" class="form-control" id="svcModal_dd_date">
+                    </div>
+                    <div class="col-sm-5 modifyPadding">
+                        <label for="svcModal_fdd_date">FDD</label>
+                        <input type="date" class="form-control" id="svcModal_fdd_date">
+                    </div>
+                </div>            
+            
+                    <!-- ---------------------------------------------------- -->
+                <div class="row">
+                        <div class="col-sm-3 modifyPadding"> 
+                            <label for="svcModal_act_txt">ACTION</label>    
+                            <input type="text" class="form-control" id="svcModal_act_txt" readonly>
+                        </div>
+                        
+                        <div class="col-sm-8 modifyPadding">
+                            <button id="svcModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button id="svcModal_clear_btn" type="button" class="btn btn-primary">Clear</button>
+                            <!-- moded to co-ipc-prov.html 
+                            <input id="ckt_id" type="text" style="width:50px">
+                            <input id="cktcon_id" type="text" style="width:50px">
+                            <input id="cktcon_idx" type="text" style="width:50px">
+                            -->
+                            <br>
+                            <label id="svcModal_result_txt" style="color:red"></label>
+                        </div>
+                </div>
+                    <!-- ---------------------------------------------- -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+//--------------------SVC OBJ-----------------------//
+
+var svc = {
+    ckid:           $("#svc_ckid_txt"),
+    tn_cbx:         $("#svc_tn_cbx"),
+    tn:     {
+        area:       $("#svc_area_code"),
+        office:     $("#svc_office_code"),
+        subs:       $("#svc_subs_code")
+    },         
+    cls:            $("#svc_cls_sel"),
+    adsr:           $("#svc_adsr_sel"),
+    prot:           $("#svc_prot_sel"),
+    findCkidBtn:    $("#svc_findCkid_btn"),
+    ordno:          $("#svc_ordno_txt"),
+    mlo:            $("#svc_mlo_sel"),
+    dd:             $("#svc_dd_date"),
+    fdd:            $("#svc_fdd_date"),
+    date:           $("#svc_date_date"),
+    findOrdBtn:     $("#svc_findOrd_btn"),
+    act:            $("#svc_act_sel"),
+    clearBtn:       $("#svc_clear_btn"),
+    cktId:          $("#svc_cktId_num"),
+    cktconId:       $("#svc_cktconId_num"),
+    cktconIdx:      $("#svc_cktconIdx_num"),
+    
+
+    cktArea:        $("#svc_cktArea"),
+    prevCktBtn:     $("#svc_previousCkt"),
+    nextCktBtn:     $("#svc_nextCkt"),
+    indexCktLbl:    $("#svc_cktIndex_lbl"),
+    tblCkt:   {
+        body:       $("#svc_tblCkt"),
+        index:      0,
+        maxIndex:   0,
+        headers: {
+            ckid:       $("#svc_CKID_tbl"),
+            cls:        $("#svc_CLS_tbl"),
+            adsr:       $("#svc_ADSR_tbl"),
+            prot:       $("#svc_PROT_tbl"),
+            ordno:      $("#svc_ORDNO_tbl"),
+            mlo:        $("#svc_MLO_tbl"),
+            date:       $("#svc_DATE_tbl"),
+        }
+    },
+    
+    cktHeaders: {
+        ckid:       true,
+        cls:        true,
+        adsr:       true,
+        prot:       true,
+        ordno:      true,
+        mlo:        true,
+        date:       true,
+
+    },
+
+    ordArea:        $("#svc_ordArea"),
+    prevOrdBtn:     $("#svc_previousOrd"),
+    nextOrdBtn:     $("#svc_nextOrd"),
+    indexOrdLbl:    $("#svc_ordIndex_lbl"),
+    tblOrd:   {
+        body:       $("#svc_tblOrd"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    cktconArea:     $("#svc_cktconArea"),
+    tblCon: {
+        body:       $("#svc_tblCktCon"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRowsCkt:     [],
+    tblRowsOrd:     [],
+    tblRowsCon:     [],
+    tblRowsFac:     [],
+
+    //////////////////------------FAC SEARCH-----------------////////
+    contyp:         $("#svc_ctyp_sel"),
+    ffac:           $("#svc_ffac_txt"),
+    portX:          $("#svc_portX_txt"),
+    tfac:           $("#svc_tfac_txt"),
+    portY:          $("#svc_portY_txt"),
+    ffacSearchBtn:  $("#svc_ffacSearch_btn"),
+    tfacSearchBtn:  $("#svc_tfacSearch_btn"),
+
+    facSearch:      $("#svc_facSearch"),
+    fac:            $("#svc_fac_txt"),
+    psta:           $("#svc_psta_sel"),
+    facSearchBtn:   $("#svc_facSearch_btn"),
+    facCloseBtn:    $("#svc_facClose_btn"),  
+    prevFacBtn:     $("#svc_previousFac"),
+    nextFacBtn:     $("#svc_nextFac"),
+    indexFacLbl:    $("#svc_indexFac_lbl"),
+    ffacSelect:     true,     
+
+    tblFac:   {
+        body:       $("#svc_tblFac"),
+        index:      0,
+        maxIndex:   0,
+    },
+    tblRowsFac:     [],
+
+    ////////////////----------------////////////////////
+
+    start: function() {
+        svc.clearForm();
+        svc.sortHeaderEvents();
+    },
+    
+    clearForm: function() {
+        svc.ckid.val("").change();
+        svc.cls.val("").change();
+        svc.adsr.val("").change();
+        svc.prot.val("").change();
+        svc.ordno.val("").change();
+        svc.dd.val("").change();
+        svc.date.val("").change();
+        svc.fdd.val("").change();
+        svc.mlo.val("N").change();      //sets mlo default to "N"
+        svc.act.val("");
+        svc.cktId.val("").change();
+        svc.cktconId.val("").change();
+        svc.cktconIdx.val("").change();
+        svc.ffac.val("");
+        svc.tfac.val("");
+        svc.portX.val("");
+        svc.portY.val("");
+        svc.clearTblCkt();
+        svc.clearTblOrd();
+        svc.clearTblCktCon();
+        svc.clearTblFac();
+        svc.cktconArea.hide();
+        svc.cktArea.show();
+        svc.ordArea.hide();
+        svc.act.prop("disabled", false);
+        svc.facSearch.hide();
+        svc.contyp.val("");
+        svc.fac.val("");
+        //svc.psta.val("SF");
+    },
+    clearFacForm: function() {
+        svc.ffac.val("");
+        svc.tfac.val("");
+        svc.portX.val("");
+        svc.portY.val("");
+        svc.facSearch.hide();
+        svc.contyp.val("");
+    },
+    
+    clearTblOrd: function() {
+        svc.tblOrd.body.empty();
+        svc.indexOrdLbl.text("");
+    },
+
+    clearTblCkt: function() {
+        svc.tblCkt.body.empty();
+        svc.indexCktLbl.text("");
+    },    
+
+    clearTblCktCon: function() {
+        svc.tblCon.body.empty();
+    },
+
+    clearTblOrd: function() {
+        svc.tblOrd.body.empty();
+        svc.indexOrdLbl.text("");
+    }, 
+    
+    clearTblFac: function() {
+        svc.tblFac.body.empty();
+        svc.indexFacLbl.text("");
+    },
+    
+    populateModal: function() {
+        svcModal.ckid.val(svc.ckid.val());
+        svcModal.cls.val(svc.cls.val());
+        svcModal.adsr.val(svc.adsr.val());
+        svcModal.prot.val(svc.prot.val());
+        svcModal.ordno.val(svc.ordno.val());
+        svcModal.mlo.val(svc.mlo.val());
+
+        svcModal.ctyp.val(svc.contyp.val());
+        svcModal.ffac.val(svc.ffac.val());
+        svcModal.tfac.val(svc.tfac.val());
+
+        svcModal.act.val(svc.act.val());
+        svcModal.dd.val(svc.dd.val());
+        svcModal.fdd.val(svc.fdd.val());
+
+        svcModal.oldContyp.val(svc.contyp.val());
+        svcModal.newContyp.val(svc.contyp.val());
+
+        svcModal.oldFfac.val(svc.ffac.val());
+        svcModal.oldPortX.val(svc.portX.val());
+        svcModal.oldTfac.val(svc.tfac.val());
+        svcModal.oldPortY.val(svc.portY.val());
+    },
+
+    skipRepeatRow: function(rows) {
+        len = rows.length;
+        ordno = '';
+        ckid = '';
+        for (i=0; i<len; i++) {
+            if (rows[i].ordno == ordno && rows[i].ckid == ckid) {
+                continue;
+            }
+            ordno = rows[i].ordno;
+            ckid = rows[i].ckid;
+            svc.tblRows.push(rows[i]);
+        }
+    },
+    
+    displayTbl: {
+        ckt: function(index) {   
+            var startIndex = (index-1) * 100;
+            var stopIndex = index * 100;
+            var len = svc.tblRowsCkt.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex = len;
+                }        
+                svc.clearTblCkt();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="display:none">' + svc.tblRowsCkt[i].id + '</td>');
+                    a.push('<td style="width:28%">' + svc.tblRowsCkt[i].ckid + '</td>');
+                    a.push('<td style="width:9%">' +  svc.tblRowsCkt[i].cls + '</td>');
+                    a.push('<td style="width:7%">' +  svc.tblRowsCkt[i].adsr + '</td>');
+                    a.push('<td style="width:7%">' +  svc.tblRowsCkt[i].prot + '</td>');
+                    a.push('<td style="width:20%">' +  svc.tblRowsCkt[i].ordno + '</td>');
+                    a.push('<td style="width:5%">' +  svc.tblRowsCkt[i].mlo + '</td>');
+                    a.push('<td style="width:20%">' +  svc.tblRowsCkt[i].date + '</td>');
+                    if (svc.tblRowsCkt[i].dd == null) {
+                        svc.tblRowsCkt[i].dd = "";
+                    }
+                    a.push('<td style="display:none">' +  svc.tblRowsCkt[i].dd + '</td>');
+                    if (svc.tblRowsCkt[i].fdd == null) {
+                        svc.tblRowsCkt[i].fdd = "";
+                    }
+                    a.push('<td style="display:none">' +  svc.tblRowsCkt[i].fdd + '</td>');
+                    a.push('<td style="display:none">' +  svc.tblRowsCkt[i].cktcon + '</td></tr>');
+                }
+                svc.tblCkt.body.html(a.join(""));
+
+                if (len == 0) 
+                    svc.indexCktLbl.text("(total:" + len + ")") ;
+                else
+                    svc.indexCktLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            } 
+        },
+        
+        ord: function(index) {   
+            var startIndex = (index-1) * 100;
+            var stopIndex = index * 100;
+            var len = svc.tblRowsOrd.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex = len;
+                }        
+                svc.clearTblOrd();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="display:none">' + svc.tblRowsOrd[i].id + '</td>');
+                    // a.push('<td style="width:10%">' +  svc.tblRowsOrd[i].stat + '</td>');
+                    a.push('<td style="width:18%">' +  svc.tblRowsOrd[i].ordno + '</td>');
+                    a.push('<td style="display:none">' +  svc.tblRowsOrd[i].mlo + '</td>');
+                    a.push('<td style="width:18%">' + svc.tblRowsOrd[i].ckid + '</td>');
+                    a.push('<td style="display:none">' +  svc.tblRowsOrd[i].cls + '</td>');
+                    a.push('<td style="display:none">' +  svc.tblRowsOrd[i].adsr + '</td>');
+                    a.push('<td style="display:none">' +  svc.tblRowsOrd[i].prot + '</td>');
+                    a.push('<td style="width:8%">' +  svc.tblRowsOrd[i].ctyp + '</td>');
+                    a.push('<td style="width:15%">' +  svc.tblRowsOrd[i].ffac + '</td>');
+                    a.push('<td style="width:15%">' +  svc.tblRowsOrd[i].tfac + '</td>');
+                    a.push('<td style="width:16%">' +  svc.tblRowsOrd[i].date + '</td></tr>');
+                }
+                svc.tblOrd.body.html(a.join(""));
+                
+                if (len == 0) 
+                    svc.indexOrdLbl.text("(total:" + len + ")") ;
+                else
+                    svc.indexOrdLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+            } 
+        },
+
+        cktCon: function(index) {   
+            var startIndex = (index-1) * 100;
+            var stopIndex = index * 100;
+            var len = svc.tblRowsCon.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex=len;   
+                }         
+                svc.clearTblCktCon();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="width:5%">'    + svc.tblRowsCon[i].idx  + '</td>');
+                    a.push('<td style="width:10%">'        + svc.tblRowsCon[i].ctyp + '</td>');
+                    a.push('<td style="width:10%">'        + svc.tblRowsCon[i].fport + '</td>');
+                    a.push('<td style="width:10%">'        + svc.tblRowsCon[i].fpsta + '</td>');
+                    a.push('<td style="width:22%">'        + svc.tblRowsCon[i].ffac + '</td>');
+                    a.push('<td style="width:10%">'        + svc.tblRowsCon[i].tport + '</td>');
+                    a.push('<td style="width:10%">'        + svc.tblRowsCon[i].tpsta + '</td>');
+                    a.push('<td style="width:23%">'        + svc.tblRowsCon[i].tfac + '</td></tr>');
+                    
+                }
+                svc.tblCon.body.html(a.join(""));
+            } 
+        },
+    
+        fac: function(index) {   
+            var startIndex = (index-1) * 25;
+            var stopIndex = index * 25;
+            var stopIndex = index * 100;
+            var len = svc.tblRowsFac.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex = len;   
+                }         
+                svc.tblFac.body.empty();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="width:50%">'    + svc.tblRowsFac[i].fac  + '</td>');
+                    a.push('<td style="width:20%">'        + svc.tblRowsFac[i].psta + '</td>');
+                    a.push('<td style="width:30%">'        + svc.tblRowsFac[i].port + '</td></tr>');
+                    
+                }
+                svc.tblFac.body.html(a.join(""));
+                if (len == 0) {
+                    svc.indexFacLbl.text(" (Total: " + len + ")");
+                }
+                else {
+                    svc.indexFacLbl.text((startIndex + 1) + " - " + stopIndex + " (Total: " + len + ")");
+                }
+            }
+        },
+    },
+
+    query: {
+        ord: function(action) {
+    
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcProvReport",                
+                act:	action,
+                user:	$('#main_currentUser').text(),
+                ordno:	svc.ordno.val().toUpperCase(),
+                mlo:	svc.mlo.val()      
+            },
+            function (data, status) {       
+                var obj = JSON.parse(data);
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+                    if (obj.rows.length === 0) {
+                        if (action == "queryOrd") {
+                            alert("No Record Found");
+                        }
+                    }
+                    svc.tblOrd.index = 0;
+                    svc.tblRowsOrd = obj.rows;
+                    // svc.skipRepeatRow(obj.rows);
+                    var len = svc.tblRowsOrd.length; 
+                    svc.tblOrd.maxIndex = Math.ceil(len/100.0);
+                    svc.tblOrd.index++;
+                    svc.displayTbl.ord(svc.tblOrd.index);
+                } 
+            });
+        },
+        
+        ckt: function(action) {
+            $.post(ipcDispatch,
+            {   
+                api:    "ipcProv",
+                act:	action,
+                user:	$('#main_currentUser').text(),
+                ckid:	svc.ckid.val().toUpperCase(),
+                cls:	svc.cls.val(),
+                adsr:	svc.adsr.val(),
+                prot:	svc.prot.val(),
+            },
+            function (data, status) {       
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail") {
+                    alert(obj.reason);
+                }
+                else {
+                    if (obj.rows.length === 0) {
+                        if (action == "queryCkid") {
+                            alert("No Record Found");
+                        }
+                    }
+                    svc.tblCkt.index = 0;
+                    for (var i=0; i< obj.rows.length; i++) {
+                        var date_str = obj.rows[i].date.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].date = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                    }
+                    svc.tblRowsCkt = obj.rows;
+                    var len = svc.tblRowsCkt.length; 
+                    svc.tblCkt.maxIndex = Math.ceil(len/100.0);
+                    svc.tblCkt.index++;
+                    svc.displayTbl.ckt(svc.tblCkt.index);
+                } 
+            });
+        },
+
+        cktConByCkid: function(ckid) {
+    
+            $.post(ipcDispatch,
+            {   
+                api:    "ipcProv",
+                act:	"queryCktconByCkid",
+                user:	$('#main_currentUser').text(),
+                ckid:	ckid,  
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    svc.tblCon.index=0;
+                    svc.tblRowsCon = obj.rows;
+                    var len = svc.tblRowsCon.length; 
+                    svc.tblCon.maxIndex = Math.ceil(len/100.0);
+                    svc.tblCon.index++;
+                    svc.displayTbl.cktCon(svc.tblCon.index);
+                }
+            });
+        },
+
+        cktCon: function(cktcon_id) {
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcProv",
+                act:	"queryCktcon",
+                user:	$('#main_currentUser').text(),
+                cktcon:	cktcon_id
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    svc.tblCon.index=0;
+                    svc.tblRowsCon = obj.rows;
+                    var len = svc.tblRowsCon.length; 
+                    svc.tblCon.maxIndex = Math.ceil(len/100.0);
+                    svc.tblCon.index++;
+                    svc.displayTbl.cktCon(svc.tblCon.index);
+                }
+            });
+        },
+
+        fac: function() {
+
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcFacilities",
+                act:	"findFac",
+                user:	$('#main_currentUser').text(),
+                fac:	svc.fac.val().toUpperCase(),
+                psta:   svc.psta.val()
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    var filteredObj = [];
+                    for (var i=0; i<obj.rows.length; i++) {
+                        if(obj.rows[i].port == "") {
+                            continue;
+                        }
+                        if(svc.ffacSelect)
+                            if(obj.rows[i].port.split('-')[2] == 'X')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        else {
+                            if(obj.rows[i].port.split('-')[2] == 'Y')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        }
+                    }
+                    svc.tblFac.index=0;
+                    svc.tblRowsFac = filteredObj;
+                    var len = svc.tblRowsFac.length; 
+                    svc.tblFac.maxIndex = Math.ceil(len/25.0);
+                    svc.tblFac.index++;
+                    svc.displayTbl.fac(svc.tblFac.index);
+                }
+            });
+        }
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in svc.tblCkt.headers) {
+            svc.tblCkt.headers[elem].click(function() {
+                if (svc.tblRowsCkt.length != 0) {
+                    if (svc.cktHeaders.elem) {
+                        svc.tblRowsCkt = svc.tblRowsCkt.sort(svc.dynamicSort(`${elem}`));
+                        svc.cktHeaders.elem = false;
+                    }
+                    else {
+                        svc.tblRowsCkt = svc.tblRowsCkt.sort(svc.dynamicSort(`-${elem}`));
+                        svc.cktHeaders.elem = true;
+                    }
+                    svc.displayTbl.ckt(svc.tblCkt.index);
+                }
+            });
+        }
+    }
+            
+}
+
+//--------------------SVCMODAL OBJ------------------//
+
+var svcModal = {
+    modal:          $("#svcModal"),
+    ckid:           $("#svcModal_ckid_txt"),
+    tn:             $("#svcModal_tn_cbx"),
+    cls:            $("#svcModal_cls_sel"),
+    adsr:           $("#svcModal_adsr_sel"),
+    prot:           $("#svcModal_prot_sel"),
+    ordno:          $("#svcModal_ordno_txt"),
+    mlo:            $("#svcModal_mlo_sel"),
+    dd:             $("#svcModal_dd_date"),
+    fdd:            $("#svcModal_fdd_date"),
+    newConForm:     $("#svcModal_newConForm"),
+    ctyp:           $("#svcModal_ctyp_sel"),
+    //ffac:           $("#svcModal_ffac_sel"),
+    ffac:           $("#svcModal_ffac_text"),
+    //tfac:           $("#svcModal_tfac_sel"),
+    tfac:           $("#svcModal_tfac_text"),
+    discConForm:    $("#svcModal_discConForm"),
+    discCtyp:       $("#svcModal_discCtyp_txt"),
+    discFFac:       $("#svcModal_discFfac_txt"),
+    discTFac:       $("#svcModal_discTfac_txt"),
+
+    //////////////////------------FAC SEARCH-----------------////////
+    changeConForm:     $("#svcModal_changeConForm"),
+    oldContyp:         $("#svcModal_oldCtyp_sel"),
+    oldFfac:           $("#svcModal_oldFfac_txt"),
+    oldPortX:          $("#svcModal_oldPortX_txt"),
+    oldTfac:           $("#svcModal_oldTfac_txt"),
+    oldPortY:          $("#svcModal_oldPortY_txt"),
+
+    newContyp:         $("#svcModal_newCtyp_sel"),
+    newFfac:           $("#svcModal_newFfac_txt"),
+    newPortX:          $("#svcModal_newPortX_txt"),
+    newTfac:           $("#svcModal_newTfac_txt"),
+    newPortY:          $("#svcModal_newPortY_txt"),
+    newFfacSearchBtn:  $("#svcModal_newFfacSearch_btn"),
+    newTfacSearchBtn:  $("#svcModal_newTfacSearch_btn"),
+
+    newFacSearch:      $("#svcModal_newFacSearch"),
+    newFac:            $("#svcModal_newFac_txt"),
+    newPsta:           $("#svcModal_newPsta_sel"),
+    newFacSearchBtn:   $("#svcModal_newFacSearch_btn"),
+    newFacCloseBtn:    $("#svcModal_newFacClose_btn"),  
+    newPrevFacBtn:     $("#svcModal_newPreviousFac"),
+    newNextFacBtn:     $("#svcModal_newNextFac"),
+    newIndexFacLbl:    $("#svcModal_newIndexFac_lbl"),
+    newFfacSelect:     true,     
+
+    newTblFac:   {
+        body:       $("#svcModal_newTblFac"),
+        index:      0,
+        maxIndex:   0,
+    },
+    newTblRowsFac:     [],
+
+    ////////////////----------------////////////////////
+
+    act:            $("#svcModal_act_txt"),
+    submitBtn:      $("#svcModal_submit_btn"),
+    clearBtn:       $("#svcModal_clear_btn"),
+    result:         $("#svcModal_result_txt"),
+    tblRows:        [],
+    
+    disableForm: function() {
+        svcModal.ckid.prop("disabled",true);
+        svcModal.cls.prop("disabled",true);
+        svcModal.adsr.prop("disabled",true);
+        svcModal.prot.prop("disabled",true);
+        svcModal.ordno.prop("disabled",false);
+        svcModal.mlo.prop("disabled",true);
+    },
+    
+    enableForm: function() {
+        svcModal.ckid.prop("disabled",false);
+        svcModal.cls.prop("disabled",false);
+        svcModal.adsr.prop("disabled",false);
+        svcModal.prot.prop("disabled",false);
+        svcModal.ordno.prop("disabled",false);
+        svcModal.mlo.prop("disabled",false);
+    },
+    
+    clearForm: function(){
+        svcModal.enableForm();
+        svcModal.ckid.val("");
+        svcModal.cls.val("");
+        svcModal.adsr.val("");
+        svcModal.prot.val("");
+        svcModal.ordno.val("");
+        svcModal.mlo.val("");
+        svcModal.dd.val("");
+        svcModal.fdd.val("");
+        svcModal.ctyp.val("");
+        svcModal.ctyp.prop("disabled",false);
+        svcModal.ffac.val("");
+        svcModal.ffac.prop("disabled",false);
+        svcModal.tfac.val("");
+        svcModal.tfac.prop("disabled",false);
+        svcModal.discCtyp.val("");
+        svcModal.discFFac.val("");
+        svcModal.discTFac.val("");
+        svcModal.result.text("");
+
+        svcModal.oldContyp.val("");      
+        svcModal.oldFfac.val(""); 
+        svcModal.oldPortX.val("");      
+        svcModal.oldFfac.val("");
+        svcModal.oldPortY.val("");             
+
+        svcModal.newContyp.val("");      
+        svcModal.newFfac.val("");       
+        svcModal.newPortX.val("");      
+        svcModal.newTfac.val("");        
+        svcModal.newPortY.val("");      
+        svcModal.newFac.val("");
+        svcModal.newPsta.val("");  
+        svcModal.newTblFac.body.empty();      
+        svcModal.newIndexFacLbl.text("");
+        svcModal.newFacSearch.hide();
+
+        //svcModal.newFa
+    },
+    
+    clearTblFac: function() {
+        svcModal.newTblFac.body.empty();
+        svcModal.newIndexFacLbl.text("");
+    },
+    
+    submitConnect: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcProv",
+            act:	"CONNECT",
+            user:	$('#main_currentUser').text(),
+            ckid:	svcModal.ckid.val().toUpperCase(),
+            cls:	svcModal.cls.val(),
+            adsr:	svcModal.adsr.val(),
+            prot:	svcModal.prot.val(),
+            ordno:	svcModal.ordno.val().toUpperCase(),
+            mlo:	svcModal.mlo.val(),
+            ctyp:   svcModal.ctyp.val(),
+            ffac:   svcModal.ffac.val().toUpperCase(),
+            tfac:   svcModal.tfac.val().toUpperCase(),
+            fport:  svc.portX.val(),
+            tport:  svc.portY.val(),
+            ckt_id:	svc.cktId.val(),
+            cktcon: svc.cktconId.val(),
+            idx:	svc.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                svcModal.modal.modal('hide');
+                alert(obj.reason);
+                svc.query.ckt('queryCkid');
+                svc.query.cktConByCkid(svc.ckid.val());
+            } 
+        });
+    },
+    submitChange: function() {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcProv",
+            act:	"CHANGE",
+            user:	$('#main_currentUser').text(),
+            ckid:	svcModal.ckid.val().toUpperCase(),
+            cls:	svcModal.cls.val(),
+            adsr:	svcModal.adsr.val(),
+            prot:	svcModal.prot.val(),
+            ordno:	svcModal.ordno.val().toUpperCase(),
+            mlo:	svcModal.mlo.val(),
+            ctyp:   svcModal.ctyp.val(),
+            ffac:   svcModal.ffac.val().toUpperCase(),
+            tfac:   svcModal.tfac.val().toUpperCase(),
+            newffac:svcModal.newFfac.val().toUpperCase(),
+            newtfac:svcModal.newTfac.val().toUpperCase(),
+            fport:  svcModal.oldPortX.val(),
+            tport:  svcModal.oldPortY.val(),
+            newfport: svcModal.newPortX.val(),
+            newtport: svcModal.newPortY.val(),
+            ckt_id:	svc.cktId.val(),
+            cktcon: svc.cktconId.val(),
+            idx:	svc.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                svcModal.modal.modal('hide');
+                alert(obj.reason);
+                svc.query.ckt('queryCkid');
+                svc.query.cktConByCkid(svc.ckid.val());
+            } 
+        });
+    },
+
+
+    submitDisconnect: function() {
+        $.post(ipcDispatch, 
+        {     
+            api:    "ipcProv",
+            act:	"DISCONNECT",
+            user:	$('#main_currentUser').text(),
+            ckid:	svcModal.ckid.val(),
+            cls:	svcModal.cls.val(),
+            adsr:	svcModal.adsr.val(),
+            prot:	svcModal.prot.val(),
+            ordno:	svcModal.ordno.val(),
+            mlo:	svcModal.mlo.val(),
+            ctyp:   svcModal.discCtyp.val(),
+            ffac:   svcModal.discFFac.val(),
+            tfac:   svcModal.discTFac.val(),
+            fport:  svc.portX.val(),
+            tport:  svc.portY.val(),
+            ckt_id:	svc.cktId.val(),
+            cktcon: svc.cktconId.val(),
+            idx:	svc.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                svcModal.modal.modal('hide');
+                alert("DISCONNECT SUCCESSFUL");
+                if (svc.tblRowsCon.length <= 1) {
+                    svc.clearForm();
+                    svc.clearTblCktCon();
+                    svc.query.ckt('queryCkid');
+                }
+                else {
+                    svc.clearFacForm();
+                    svc.query.cktConByCkid(svc.ckid.val());
+                }
+            } 
+        });
+    },
+
+    submitUpdate: function() {
+        $.post(ipcDispatch, 
+        {     
+            api:    "ipcProv",
+            act:	"UPDATE_CKT",
+            user:	$('#main_currentUser').text(),
+            ckid:	svcModal.ckid.val().toUpperCase(),
+            cls:	svcModal.cls.val(),
+            adsr:	svcModal.adsr.val(),
+            prot:	svcModal.prot.val(),
+            ordno:	svcModal.ordno.val().toUpperCase(),
+            mlo:	svcModal.mlo.val(),
+            ctyp:   svcModal.ctyp.val(),
+            ffac:   svcModal.ffac.val().toUpperCase(),
+            tfac:   svcModal.tfac.val().toUpperCase(),
+            fport:  svc.portX.val(),
+            tport:  svc.portY.val(),
+            ckt_id:	svc.cktId.val(),
+            cktcon: svc.cktconId.val(),
+            idx:	svc.cktconIdx.val()
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                svcModal.modal.modal('hide');
+                alert(obj.reason);
+                svc.query.ckt('queryCkid');
+                svc.query.cktConByCkid(svc.ckid.val());
+            } 
+        });
+    },
+
+    loadFacX: function() {
+        
+        $.post(ipcDispatch,
+        {
+            api:    "ipcProv",
+            act:	"queryFacX",
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+
+            if (obj["rslt"]  ==  "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                var a = [];
+                a.push('<option></option>');
+    
+                for (var i=0; i<obj["rows"].length; i++) 
+                {  
+                    a.push('<option>' + obj["rows"][i].fac + '</option>');
+                }
+                svcModal.ffac.empty();
+                svcModal.ffac.html(a.join(""));
+            }
+            
+        });
+    },
+    
+    loadFacY: function() {
+        
+        $.post(ipcDispatch,
+        {
+            api:    "ipcProv",
+            act:	"queryFacY",
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            
+            if (obj["rslt"]  ==  "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                var a = [];
+                a.push('<option></option>');
+                for (var i=0; i<obj["rows"].length; i++) 
+                {  
+                    a.push('<option>' + obj["rows"][i].fac + '</option>');
+                }
+                svcModal.tfac.empty();
+                svcModal.tfac.html(a.join(""));
+            }
+           
+        });
+    },
+
+    query: {
+        fac: function() {
+
+            $.post(ipcDispatch,
+            {     
+                api:    "ipcFacilities",
+                act:	"findFac",
+                user:	$('#main_currentUser').text(),
+                fac:	svcModal.newFac.val().toUpperCase(),
+                psta:   svcModal.newPsta.val()
+                
+            },
+            function (data, status) {
+                var obj = JSON.parse(data);
+                
+                if (obj.rslt == "fail"){
+                    alert(obj.reason);
+                }
+                else {
+                    var filteredObj = [];
+                    for (var i=0; i<obj.rows.length; i++) {
+                        if(obj.rows[i].port == "") {
+                            continue;
+                        }
+                        if(svcModal.newFfacSelect)
+                            if(obj.rows[i].port.split('-')[2] == 'X')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        else {
+                            if(obj.rows[i].port.split('-')[2] == 'Y')
+                                filteredObj.push(obj.rows[i]);
+                            else 
+                                continue;
+                        }
+                    }
+                    svcModal.newTblFac.index=0;
+                    svcModal.newTblRowsFac = filteredObj;
+                    var len = svcModal.newTblRowsFac.length; 
+                    svcModal.newTblFac.maxIndex = Math.ceil(len/25.0);
+                    svcModal.newTblFac.index++;
+                    svcModal.displayTbl.fac(svcModal.newTblFac.index);
+                }
+            });
+        }
+    },
+     
+    displayTbl: {
+        fac: function(index) {   
+            var startIndex = (index-1) * 25;
+            var stopIndex = index * 25;
+            var len = svcModal.newTblRowsFac.length;
+        
+            if (len >= startIndex) {
+                if (len < stopIndex) {
+                    stopIndex = len;   
+                }         
+                svcModal.newTblFac.body.empty();
+                var a = [];
+                for (var i=startIndex; i<stopIndex; i++) {  
+                    a.push('<tr> <td style="width:50%">'    + svcModal.newTblRowsFac[i].fac  + '</td>');
+                    a.push('<td style="width:20%">'        + svcModal.newTblRowsFac[i].psta + '</td>');
+                    a.push('<td style="width:30%">'        + svcModal.newTblRowsFac[i].port + '</td></tr>');
+                }
+                svcModal.newTblFac.body.html(a.join(""));
+                if (len == 0) {
+                    svcModal.newIndexFacLbl.text(" (Total: " + len + ")");
+                }
+                else {
+                    svcModal.newIndexFacLbl.text((startIndex + 1) + " - " + stopIndex + " (Total: " + len + ")");
+                }
+            }
+        }
+    }
+
+}
+
+//--------------------SVC CLICK FUNCTIONS---------------//
+
+
+svc.findCkidBtn.click(function(){
+    if (svc.tn_cbx.is(':checked')) {
+        var ckid = svc.ckid.val();
+        var telnum;
+        if ((telnum = getTN(ckid)) === false) {
+            var d = ckid.split('-');
+            if (d.length != 3 ||
+                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+            {
+                alert ("CKID: INVALID TN FORMAT");
+                return;
+            }
+            
+            telnum = ckid;
+        }
+        svc.ckid.val(telnum);
+    }
+        svc.cktArea.show();
+    svc.ordArea.hide();
+    svc.query.ckt('queryCkid');
+});
+
+svc.findOrdBtn.click(function(){
+    svc.ordArea.show();
+    svc.cktArea.hide();
+    svc.query.ord('queryOrd');
+});
+
+svc.clearBtn.click(function(){
+    svc.clearForm();
+    // svc.tbl.body.empty();    
+});
+
+// CKT TABLE EVENT HANDLERS
+svc.nextCktBtn.click(function(){
+    if (svc.tblCkt.index<svc.tblCkt.maxIndex) {
+        svc.tblCkt.index++;
+        svc.displayTbl.ckt(svc.tblCkt.index);
+    }  
+});
+
+svc.prevCktBtn.click(function(){
+    if (svc.tblCkt.index>1) {
+        svc.tblCkt.index--;
+        svc.displayTbl.ckt(svc.tblCkt.index);   
+    }         
+});
+
+// ORD TABLE EVENT HANDLERS
+svc.nextOrdBtn.click(function(){
+    if (svc.tblOrd.index<svc.tblOrd.maxIndex) {
+        svc.tblOrd.index++;
+        svc.displayTbl.ckt(svc.tblOrd.index);
+    }  
+});
+
+svc.prevOrdBtn.click(function(){
+    if (svc.tblOrd.index>1) {
+        svc.tblOrd.index--;
+        svc.displayTbl.ckt(svc.tblOrd.index);   
+    }         
+});
+
+// FAC SEARCH EVENT HANDLERS
+svc.ffacSearchBtn.click(function() {
+    svc.ffacSelect = true;
+    svc.tfacSelect = false;
+    if (svc.facSearch.is(':visible')) {
+        if ($("label[for='svc_fac_txt']").text() == "FAC(Y)") {
+            svc.fac.val(svc.ffac.val());
+            //svc.psta.val("SF");
+            svc.clearTblFac();
+            //svc.facSearch.show();
+            $("label[for='svc_fac_txt']").text("FAC(X)");
+            svc.query.fac();
+        }
+        else {
+            svc.facSearch.hide();
+        }
+    }
+    else {
+        svc.fac.val(svc.ffac.val());
+        //svc.psta.val("SF");
+        svc.clearTblFac();
+        svc.facSearch.show();
+        $("label[for='svc_fac_txt']").text("FAC(X)");
+        svc.query.fac();
+    }
+});
+
+svc.tfacSearchBtn.click(function() {
+    svc.tfacSelect = true;
+    svc.ffacSelect = false;
+    if (svc.facSearch.is(':visible')) {
+        if ($("label[for='svc_fac_txt']").text() == "FAC(X)") {
+            svc.fac.val(svc.tfac.val());
+            //svc.psta.val('SF');
+            svc.clearTblFac();
+            $("label[for='svc_fac_txt']").text("FAC(Y)");
+            svc.query.fac();
+        }
+        else {
+            svc.facSearch.hide();
+        }
+    }
+    else {
+        svc.fac.val(svc.tfac.val());
+        //svc.psta.val('SF');
+        svc.clearTblFac();
+        svc.facSearch.show();
+        $("label[for='svc_fac_txt']").text("FAC(Y)");
+        svc.query.fac();
+    }
+});
+
+svc.facCloseBtn.click(function(){
+    svc.facSearch.hide();
+});
+
+svc.facSearchBtn.click(function(){
+    svc.query.fac();
+});
+
+
+svc.prevFacBtn.click(function(){
+    if (svc.tblFac.index>1) {
+        svc.tblFac.index--;
+        svc.displayTbl.fac(svc.tblFac.index);   
+    }  
+})
+
+svc.nextFacBtn.click(function() {
+    if (svc.tblFac.index<svc.tblFac.maxIndex) {
+        svc.tblFac.index++;
+        svc.displayTbl.fac(svc.tblFac.index);
+    }  
+})
+
+
+//--------------------SVCMODAL CLICK FUNCTIONS---------------//
+
+svcModal.newFfacSearchBtn.click(function() {
+    svcModal.newFfacSelect = true;
+    if (svcModal.newFacSearch.is(':visible')) {
+        if ($("label[for='svcModal_newFac_txt']").text() != "FAC(X)") {
+            svcModal.clearTblFac();
+            $("label[for='svcModal_newFac_txt']").text("FAC(X)");
+
+        }
+        else {
+            svcModal.newFacSearch.hide();
+            return;
+        }
+    }
+    else {
+        svcModal.clearTblFac();
+        $('#svcModal_newFac_txt').val('');
+        svcModal.newFacSearch.show();
+        $("label[for='svcModal_newFac_txt']").text("FAC(X)");
+
+    }
+
+    if ($('#svcModal_newFfac_txt').val() != '') {
+        $('#svcModal_newFac_txt').val($('#svcModal_newFfac_txt').val());
+        svcModal.query.fac();
+    }
+});
+
+svcModal.newTfacSearchBtn.click(function() {
+    svcModal.newFfacSelect = false;
+    if (svcModal.newFacSearch.is(':visible')) {
+        if ($("label[for='svcModal_newFac_txt']").text() != "FAC(Y)") {
+            svcModal.clearTblFac();
+            $("label[for='svcModal_newFac_txt']").text("FAC(Y)");
+        }
+        else {
+            svcModal.newFacSearch.hide();
+            return;
+        }
+    }
+    else {
+        svcModal.clearTblFac();
+        $('#svcModal_newFac_txt').val('');
+        svcModal.newFacSearch.show();
+        $("label[for='svcModal_newFac_txt']").text("FAC(Y)");
+    }
+
+    if ($('#svcModal_newTfac_txt').val() != '') {
+        $('#svcModal_newFac_txt').val($('#svcModal_newTfac_txt').val());
+        svcModal.query.fac();
+    }
+});
+
+svcModal.newPrevFacBtn.click(function(){
+    if (svcModal.newTblFac.index>1) {
+        svcModal.newTblFac.index--;
+        svcModal.displayTbl.fac(svcModal.newTblFac.index);   
+    }  
+})
+
+svcModal.newNextFacBtn.click(function() {
+    if (svcModal.newTblFac.index<svcModal.newTblFac.maxIndex) {
+        svcModal.newTblFac.index++;
+        svcModal.displayTbl.fac(svcModal.newTblFac.index);
+    }  
+})
+
+svcModal.newFacSearchBtn.click(function(){
+    svcModal.query.fac();
+});
+
+
+svcModal.submitBtn.click(function() {
+    if (svcModal.ckid.val() == '') {
+        alert("MISSING CKID");
+        return;
+    }
+    else {
+        if (svcModal.tn.is(':checked')) {
+            var ckid = svcModal.ckid.val();
+            var telnum;
+            if ((telnum = getTN(ckid)) === false) {
+                var d = ckid.split('-');
+                if (d.length != 3 ||
+                    !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                    && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                    && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+                {
+                    alert ("CKID: INVALID TN FORMAT");
+                    return;
+                }
+                
+                telnum = ckid;
+            }
+            svcModal.ckid.val(telnum);
+            svc.ckid.val(telnum);
+        }
+    }
+
+    if (svcModal.act.val() == "UPDATE_CKT") {
+        svcModal.submitUpdate();
+    }
+    else if (svcModal.act.val() == "CONNECT") {
+        svc.ckid.val(svcModal.ckid.val());
+        svc.cls.val(svcModal.cls.val());
+        svc.adsr.val(svcModal.adsr.val());
+        svc.prot.val(svcModal.prot.val());
+        svc.ordno.val(svcModal.ordno.val());
+        svc.mlo.val(svcModal.mlo.val());
+        svcModal.submitConnect();
+    } 
+    else if (svcModal.act.val() == "DISCONNECT") {
+        svcModal.submitDisconnect();
+    }
+    else if (svcModal.act.val() == "CHANGE") {
+        if(!((svcModal.oldFfac.val() == svcModal.newFfac.val() && svcModal.oldTfac.val() != svcModal.newTfac.val()) || (svcModal.oldFfac.val() != svcModal.newFfac.val() && svcModal.oldTfac.val() == svcModal.newTfac.val()))) {
+			alert("One of new facilities must be the same with the old connection!")
+            return;
+		}
+        svcModal.submitChange();
+    }
+});
+
+svcModal.clearBtn.click(svcModal.clearForm);
+
+svcModal.modal.on("hidden.bs.modal", function() {
+    svcModal.clearForm();
+    svcModal.submitBtn.prop('disabled', false);
+    svc.act.val("");
+    svc.cktconIdx.val("").change();
+});
+    
+//--------------------TBL FAC CLICK FUNCTION-----------------//
+$(document).on("click","#svc_tblFac tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    if (svc.ffacSelect) {
+        svc.ffac.val(dataRow[0]);
+        svc.portX.val(dataRow[2]);
+    }
+    else {
+        svc.tfac.val(dataRow[0]);
+        svc.portY.val(dataRow[2]);
+    }
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+$(document).on("click","#svcModal_newTblFac tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    if (svcModal.newFfacSelect) {
+        svcModal.newFfac.val(dataRow[0]);
+        svcModal.newPortX.val(dataRow[2]);
+    }
+    else {
+        svcModal.newTfac.val(dataRow[0]);
+        svcModal.newPortY.val(dataRow[2]);
+    }
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+//---------------------TBL1 CLICK FUNCTIONS-----------------//
+
+
+$(document).on("click","#svc_tblCkt tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+    //Populate the information
+    
+    svc.cktId.val(dataRow[0]).change();
+	svc.ckid.val(dataRow[1]).change();
+    svc.cls.val(dataRow[2]).change();
+    svc.adsr.val(dataRow[3]).change();
+    svc.prot.val(dataRow[4]).change();
+    svc.ordno.val(dataRow[5]).change();
+    svc.mlo.val(dataRow[6]).change();
+    svc.date.val(dataRow[7]).change();
+    svc.dd.val(dataRow[8]).change();
+    svc.fdd.val(dataRow[9]).change();
+    svc.cktconId.val(dataRow[10]).change();
+
+    svc.ffac.val("");
+    svc.tfac.val("");
+
+    svc.portX.val("");
+    svc.portY.val("");
+
+    svc.contyp.val("");
+
+    svc.facSearch.hide();
+    svc.cktconArea.show();
+    svc.query.cktConByCkid(svc.ckid.val());
+
+    // Reset svc_cktconIdx_num
+    svc.cktconIdx.val("");
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+
+    svc.act.prop("disabled", false);
+
+});
+
+$(document).on("click","#svc_tblOrd tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+    //Populate the information
+
+    svc.cktId.val(dataRow[0]).change();
+    svc.ordno.val(dataRow[1]).change();
+    svc.mlo.val(dataRow[2]).change();
+    svc.ckid.val(dataRow[3]).change();
+    svc.cls.val(dataRow[4]).change();
+    svc.adsr.val(dataRow[5]).change();
+    svc.prot.val(dataRow[6]).change();
+    svc.contyp.val(dataRow[7]);
+    svc.ffac.val(dataRow[8]);
+    svc.tfac.val(dataRow[9]);
+    svc.portX.val("");
+    svc.portY.val("");
+    svc.date.val(dataRow[10]).change();
+    svc.facSearch.hide();
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+    svc.act.prop("disabled", true);
+});
+
+//--------------------TBL2 CLICK FUNCTIONS---------------//
+
+$(document).on("click","#svc_tblCktCon tr",function(){
+    var dataRow= $(this).children("td").map(function(){
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    svc.cktconIdx.val(dataRow[0]).change();
+    svc.contyp.val(dataRow[1]);
+    svc.ffac.val(dataRow[4]);
+    svc.tfac.val(dataRow[7]);
+    svc.portX.val(dataRow[2]);
+    svc.portY.val(dataRow[5]);
+    svcModal.ctyp.val(dataRow[1]).change();
+	svcModal.ffac.val(dataRow[4]).change();
+	svcModal.tfac.val(dataRow[7]).change();
+	svcModal.discCtyp.val(dataRow[1]).change();
+	svcModal.discFFac.val(dataRow[4]).change();
+	svcModal.discTFac.val(dataRow[7]).change();
+    svc.facSearch.hide();
+	
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+//--------------------ACTION SELECTION CLICK FUNCTIONS---------------//
+
+svc.act.change(function() {
+    if (svc.act.val()  ==  "UPDATE_CKT") {
+        svcModal.clearForm();
+        svc.populateModal();
+        svcModal.act.val(svc.act.val());
+        svcModal.enableForm();
+        svcModal.newConForm.hide();
+        svcModal.discConForm.hide();
+        svcModal.changeConForm.hide();
+        svcModal.clearBtn.show();
+        svcModal.modal.modal();
+		
+    }
+    else if (svc.act.val()  ==  "CONNECT") {
+        svcModal.clearForm();
+        svc.populateModal();
+        //svcModal.loadFacX();
+        //svcModal.loadFacY();
+        svcModal.newConForm.show();
+        svcModal.discConForm.hide();
+        svcModal.changeConForm.hide();
+        svcModal.clearBtn.hide();
+        svcModal.modal.modal();
+    }
+    else if (svc.act.val()  ==  "DISCONNECT") {
+        // if (svc.cktId.val() == "" || svc.cktconId.val() == "") {
+		// 	alert("Please select a CKT from the LIST OF CKTs");
+		// 	svc.act.val("");
+		// }
+        // else 
+        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS");
+            svc.act.val("");
+		}
+        else {
+            svc.populateModal();
+            svcModal.disableForm();
+			svcModal.act.prop("disabled",true);
+            svcModal.newConForm.hide();
+            svcModal.changeConForm.hide();
+			svcModal.discConForm.show();
+            svcModal.clearBtn.hide();
+            svcModal.modal.modal();
+        }
+    }
+    else if (svc.act.val()  ==  "CHANGE") {
+        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS");
+            svc.act.val("");
+            
+        }
+        else {
+            svcModal.clearForm();
+            svc.populateModal();
+            //svcModal.loadFacX();
+            //svcModal.loadFacY();
+            svcModal.newConForm.hide();
+            svcModal.discConForm.hide();
+            svcModal.changeConForm.show();
+            svcModal.clearBtn.hide();
+            svcModal.modal.modal();
+        }
+
+    }
+});
+
+// convert a 10-digit string to a telephone number, for examples, 5123334444 ==> 512-333-4444
+function getTN(ckid) {
+    if (ckid.match(/^[0-9]+$/) == null || ckid.length != 10) {
+        return false;
+    }
+    else {
+        return ckid.substring(0,3) + '-' + ckid.substring(3,6) + '-' + ckid.substring(6,10);
+    }
+};
+
+</script>

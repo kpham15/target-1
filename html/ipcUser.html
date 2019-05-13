@@ -1,0 +1,816 @@
+<div id="user" class="tab-pane fade in">
+    <h4>SETUP USERS</h4>
+    
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-3 modifyPadding">
+                <label for="user_user_txt">USER</label>
+                <input class="form-control modifyPadding" type="text" id="user_user_txt">
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="user_stat_sel" >STAT</label>
+                <select id="user_stat_sel" class="form-control">
+                    <option></option>
+                    <option>ACTIVE</option>
+                    <option>INACTIVE</option>
+                    <option>LOCKED</option>
+                    <option>DISABLED</option>
+                </select>
+            </div>
+            <div class="col-sm-5 modifyPadding">
+                <label for="user_lastLogin_txt">LAST LOGIN</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="user_lastLogin_txt" readonly>
+            </div>
+            <div class="col-sm-1 modifyPadding">
+                <button class="btn btn-primary" id="user_findUser_btn">View</button>
+            </div>
+        </div>
+
+            <!------------------------------------------>
+            <div class="row">
+                <div class="col-sm-3 modifyPadding">
+                    <label for="user_FN_txt">FNAME</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="user_FN_txt">
+                </div>
+                <div class="col-sm-1 modifyPadding">
+                    <label for="user_MI_txt">MI</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="user_MI_txt">
+                </div>
+                <div class="col-sm-4 modifyPadding">
+                    <label for="user_LN_txt">LNAME</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="user_LN_txt">
+                </div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="user_ssn_txt">EID</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="user_ssn_txt" readonly>
+                </div>
+                <div class="col-sm-1 modifyPadding">
+                    <button class="btn btn-primary" id="user_findNameSsn_btn">View</button>
+                </div>
+            </div>
+
+
+            <!------------------------------------------>
+            <div class="row">
+                <div class="col-sm-4 modifyPadding">
+                    <label for="user_tel">TEL</label>
+                    <label for="user_tn_cbx">TN:</label>
+                    <input type="checkbox" id="user_tn_cbx" checked>
+                    <input style="text-transform: uppercase" type="tel" class="form-control" id="user_tel">
+                </div>
+                <div class="col-sm-7 modifyPadding">
+                    <label for="user_email">EMAIL</label>
+                    <input style="text-transform: uppercase" type="email" class="form-control" id="user_email">
+                </div>
+                <div class="col-sm-1 modifyPadding">
+                    <button class="btn btn-primary" id="user_findTelEmail_btn">View</button>
+                </div>
+            </div>
+
+            <!-- ------------------------------------------ -->
+            <div class="row">
+                <div class="col-sm-6 modifyPadding">
+                    <label for="user_title_txt">TITLE</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="user_title_txt">
+                </div>
+                <div class="col-sm-5 modifyPadding">
+                    <label for="user_group_sel">GROUP</label>
+                    <select id="user_group_sel" class="form-control">
+                        <option></option>
+                        <option>ADMIN</option>
+                        <option>SUPERVISOR</option>
+                        <option>TECH-I</option>
+                        <option>TECH-II</option>
+                        <option>GENERAL</option>
+                    </select>
+                </div>
+                <div class="col-sm-1 modifyPadding">
+                    <button class="btn btn-primary" id="user_findTitleGrp_btn">View</button>
+                </div>
+            </div>
+            <!-- ------------------------------------------ -->
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3 modifyPadding">
+                    <label for="user_act_sel">ACTION</label>
+                    <select id="user_act_sel" class="form-control">
+                        <option></option>
+                        <option>ADD</option>
+                        <option>UPDATE</option>
+                        <option>LOCK</option>
+                        <option>UNLOCK</option>
+                        <option>DISABLE</option>
+                        <option>ENABLE</option>
+                        <option>DELETE</option>
+                        <option>RESET_PW</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 modifyPadding"> 
+                    <button class="btn btn-primary" id="user_clear_btn">Clear</button>
+                </div>
+            </div>
+            
+
+    </div>
+        <!-- --------------------------------- -->
+        <div class="col-sm-7">
+            <div class="col-sm-12">
+                <div style="float:left;">
+                    <b>LIST OF USERS:</b>
+                </div>
+                <div style="float:right">
+                    <a  id="user_previous">Previous</a> |
+                    <a  id="user_next">Next</a>
+                    &nbsp&nbsp&nbsp<label id="user_index_lbl"></label>
+                </div>
+            </div>
+            
+
+            <div class="col-sm-12">
+                <div class="panel panel-default">     
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th id="user_UNAME_tbl" style="width:20%">USER</th>
+                                <th id="user_STAT_tbl" style="width:15%">STAT</th>
+                                <th id="user_TITLE_tbl" style="width:20%">TITLE</th>
+                                <th id="user_GROUP_tbl" style="width:20%">GROUP</th>
+                                <th id="user_TEL_tbl" style="width:25%">TEL</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="user_tbl">
+                    
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+</div>
+
+<div id="userModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title">USER SETTINGS</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="userModal_user_txt">USER</label>
+                        <input class="form-control modifyPadding" type="text" id="userModal_user_txt">
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="userModal_stat_txt">STAT</label>
+                        <input type="text" class="form-control" id="userModal_stat_txt" disabled>
+                    </div>
+                    <!-- <div class="col-sm-6 modifyPadding">
+                        <label for="userModal_lastLogin_time">LAST LOGIN</label>
+                        <input type="time" class="form-control" id="userModal_lastLogin_time">
+                    </div> -->
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="userModal_FN_txt">FNAME</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="userModal_FN_txt">
+                    </div>
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="userModal_MI_txt">MI</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="userModal_MI_txt">
+                    </div>
+                </div>
+                    <!-- -------------------------------- -->
+                    <div class="row">
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="userModal_LN_txt">LNAME</label>
+                            <input style="text-transform: uppercase" type="text" class="form-control" id="userModal_LN_txt">
+                        </div>
+                        <div class="col-sm-4 modifyPadding">
+                            <label for="userModal_ssn_txt">SSN</label>
+                            <input style="text-transform: uppercase" type="text" class="form-control" id="userModal_ssn_txt">
+                        </div>
+                    </div>
+                    <!------------------------------------------>
+                    <div class="row">
+                        <div class="col-sm-6 modifyPadding">
+                            <label for="userModal_tel">TEL</label>
+                            <label for="userModal_tn_cbx">TN:</label>
+                            <input type="checkbox" id="userModal_tn_cbx" checked>
+                            <input style="text-transform: uppercase" type="tel" class="form-control" id="userModal_tel">
+                        </div>
+                        <div class="col-sm-6 modifyPadding">
+                            <label for="userModal_email">EMAIL</label>
+                            <input style="text-transform: uppercase" type="email" class="form-control" id="userModal_email">
+                        </div>
+                    </div>
+                    <!-- ------------------------------------------ -->
+                    <div class="row">
+                        <div class="col-sm-6 modifyPadding">
+                            <label for="userModal_title_txt">TITLE</label>
+                            <input style="text-transform: uppercase" type="text" class="form-control" id="userModal_title_txt">
+                        </div>
+                        <div class="col-sm-6 modifyPadding">
+                            <label for="userModal_group_sel">GROUP</label>
+                            <select id="userModal_group_sel" class="form-control">
+                                <option></option>
+                                <option>ADMIN</option>
+                                <option>SUPERVISOR</option>
+                                <option>TECH-I</option>
+                                <option>TECH-II</option>
+                                <option>GENERAL</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ------------------------------------------ -->
+                    <!-- <hr> -->
+
+                    <div class="row">
+                        <div class="col-sm-3 modifyPadding">
+                            <label for="userModal_act_txt">ACTION</label>
+                            <input type="text" class="form-control" id="userModal_act_txt" readonly>
+                        </div>
+                        <div class="col-sm-8 modifyPadding">
+                            <button class="btn btn-primary" id="userModal_submit_btn">Submit</button>
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button class="btn btn-primary" id="userModal_clear_btn">Clear</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id="userModal_id_num" style="width:50px;">
+                            <br>
+                            <label id="userModal_result_lbl" style="color:red"></label>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script>
+// USER OBJ //
+
+var user = {
+    user:           $("#user_user_txt"),
+    stat:           $("#user_stat_sel"),
+    lastLogin:      $("#user_lastLogin_txt"),
+    findUserBtn:    $("#user_findUser_btn"),
+    fn:             $("#user_FN_txt"),
+    mi:             $("#user_MI_txt"),
+    ln:             $("#user_LN_txt"),
+    ssn:            $("#user_ssn_txt"),
+    findNameSsnBtn: $("#user_findNameSsn_btn"),
+    tel:            $("#user_tel"),
+    tnCbx:          $("#user_tn_cbx"),
+    email:          $("#user_email"),
+    findTelEmailBtn:$("#user_findTelEmail_btn"),
+    title:          $("#user_title_txt"),
+    group:          $("#user_group_sel"),
+    findTitleGrpBtn:$("#user_findTitleGrp_btn"),
+    act:            $("#user_act_sel"),
+    clearBtn:       $("#user_clear_btn"),
+    previous:       $("#user_previous"),
+    next:           $("#user_next"),
+    index:          $("#user_index_lbl"),
+    tbl: {
+        body:       $("#user_tbl"),
+        index:      0,
+        maxIndex:   0,
+        headers: {
+            uname:  $("#user_UNAME_tbl"),
+            stat:   $("#user_STAT_tbl"),
+            title:  $("#user_TITLE_tbl"),
+            ugrp:   $("#user_GROUP_tbl"),
+            tel:    $("#user_TEL_tbl"),
+        }
+    },
+
+    headers: {
+        uname:   true,
+        stat:   true,
+        title:  true,
+        ugrp:  true,
+        tel:    true,
+    },
+
+    tblRows:        [],
+    
+    start: function() {
+        user.clearForm();
+        user.sortHeaderEvents();
+        // user.query('query');    
+    },
+    
+    clearForm: function() {
+        userModal.id.val("");
+        user.user.val("");
+        user.stat.val("");
+        user.lastLogin.val("");
+        user.fn.val("");
+        user.mi.val("");
+        user.ln.val("");
+        user.ssn.val("");
+        user.tel.val("");
+        user.email.val("");
+        user.title.val("");
+        user.group.val("");
+        user.act.val("");
+    },
+    
+    clearTable: function() {
+        user.tbl.body.empty();
+    },
+    
+    checkInfor: function() {
+        if (userModal.id.val() != "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    
+    displayTable: function(index) {   
+        var startIndex=(index-1)*100;
+        var stopIndex = index *100;
+        var len = user.tblRows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }            
+            user.clearTable();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="display:none">' + user.tblRows[i].id + '</td>')  
+                a.push('<td style="width:20%">'         + user.tblRows[i].uname + '</td>');
+                a.push('<td style="width:15%">'         + user.tblRows[i].stat + '</td>');
+                a.push('<td style="width:20%">'         + user.tblRows[i].title + '</td>');
+                a.push('<td style="width:20%">'         + user.tblRows[i].ugrp + '</td>');
+                a.push('<td style="width:25%">'         + user.tblRows[i].tel + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].email + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].lastlogin + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].fname + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].mi + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].lname + '</td>');
+                a.push('<td style="display:none">'      + user.tblRows[i].ssn + '</td></tr>');
+            }
+            user.tbl.body.html(a.join(""));
+            user.index.text("From " + (startIndex + 1) + " to " + stopIndex);
+            if (len == 0) 
+                user.index.text("(total:" + len + ")") ;
+            else
+                user.index.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+    
+    populateModal: function() {
+        userModal.user.val(user.user.val());
+        userModal.stat.val(user.stat.val());
+        userModal.lastLogin.val(user.lastLogin.val());
+        userModal.fn.val(user.fn.val());
+        userModal.mi.val(user.mi.val());
+        userModal.ln.val(user.ln.val());
+        userModal.ssn.val(user.ssn.val());
+        userModal.tel.val(user.tel.val());
+        userModal.email.val(user.email.val());
+        userModal.title.val(user.title.val());
+        userModal.group.val(user.group.val());
+    
+        userModal.act.val(user.act.val());
+    
+    },
+    
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:        "ipcUser",
+            act:	    action,
+            user:	    $('#main_currentUser').text(),
+            id:		    userModal.id.val().toUpperCase(),
+            uname:	    user.user.val().toUpperCase(),
+            stat:	    user.stat.val(),
+            fname:	    user.fn.val().toUpperCase(),
+            mi:	        user.mi.val().toUpperCase(),
+            lname:	    user.ln.val().toUpperCase(),
+            ssn:	    user.ssn.val().toUpperCase(),
+            tel:	    user.tel.val().toUpperCase(),
+            email:	    user.email.val().toUpperCase(),
+            title:	    user.title.val().toUpperCase(),
+            ugrp:	    user.group.val(),
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No record found");
+                }
+                else {
+                    user.tbl.index = 0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].lastlogin.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].lastlogin = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    user.tblRows = obj.rows;
+                    var len = user.tblRows.length; 
+                    user.tbl.maxIndex = Math.ceil(len/100.0);
+                    user.tbl.index++;
+                    user.displayTable(user.tbl.index);
+                    
+                }  
+            } 
+        });
+    },
+
+    // FUNCTION TO SORT TABLE 
+    // REQUIRES THE PROPERTY OF THE OBJECT IN THE ARRAY, 
+    // PUTTING A "-" IN FRONT OF THE PROPERTY WILL SORT DESCENDING
+    dynamicSort: function(property) {
+        var sortOrder = 1;
+
+        if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            if (sortOrder == -1) {
+                return b[property].localeCompare(a[property]);
+            }
+            else {
+                return a[property].localeCompare(b[property]);
+            }        
+        }
+    },
+
+    sortHeaderEvents: function() {
+        for (let elem in user.tbl.headers) {
+            user.tbl.headers[elem].click(function() {
+                if (user.tblRows.length != 0) {
+                    if (user.headers.elem) {
+                        user.tblRows = user.tblRows.sort(user.dynamicSort(`${elem}`));
+                        user.headers.elem = false;
+                    }
+                    else {
+                        user.tblRows = user.tblRows.sort(user.dynamicSort(`-${elem}`));
+                        user.headers.elem = true;
+                    }
+                    user.displayTable(user.tbl.index);
+                }
+            });
+        }
+    },
+
+    
+}
+
+var userModal = {
+    modal:          $("#userModal"),
+    user:           $("#userModal_user_txt"),
+    stat:           $("#userModal_stat_txt"),
+    fn:             $("#userModal_FN_txt"),
+    mi:             $("#userModal_MI_txt"),
+    ln:             $("#userModal_LN_txt"),
+    ssn:            $("#userModal_ssn_txt"),
+    tel:            $("#userModal_tel"),
+    tnCbx:          $("#userModal_tn_cbx"),
+    email:          $("#userModal_email"),
+    title:          $("#userModal_title_txt"),
+    group:          $("#userModal_group_sel"),
+    act:            $("#userModal_act_txt"),
+    submitBtn:      $("#userModal_submit_btn"),
+    clearBtn:       $("#userModal_clear_btn"),
+    result:         $("#userModal_result_lbl"),
+    lastLogin:      $("#userModal_lastLogin_time"),
+    id:             $("#userModal_id_num"),
+    
+    clearForm: function() {
+        userModal.result.text("");
+        userModal.user.val("");
+        userModal.stat.val("");
+        userModal.lastLogin.val("");
+        userModal.fn.val("");
+        userModal.mi.val("");
+        userModal.ln.val("");
+        userModal.ssn.val("");
+        userModal.tel.val("");
+        userModal.email.val("");
+        userModal.title.val("");
+        userModal.group.val("");
+    },
+
+    disableForm: function() {
+        userModal.result.prop("disabled", true);
+        userModal.user.prop("disabled", true);
+        // userModal.stat.prop("disabled", true);
+        userModal.lastLogin.prop("disabled", true);
+        userModal.fn.prop("disabled", true);
+        userModal.mi.prop("disabled", true);
+        userModal.ln.prop("disabled", true);
+        userModal.ssn.prop("disabled", true);
+        userModal.tel.prop("disabled", true);
+        userModal.email.prop("disabled", true);
+        userModal.title.prop("disabled", true);
+        userModal.group.prop("disabled", true);
+    },
+    enableForm: function() {
+        userModal.result.prop("disabled", false);
+        userModal.user.prop("disabled", false);
+        // userModal.stat.prop("disabled", false);
+        userModal.lastLogin.prop("disabled", false);
+        userModal.fn.prop("disabled", false);
+        userModal.mi.prop("disabled", false);
+        userModal.ln.prop("disabled", false);
+        userModal.ssn.prop("disabled", false);
+        userModal.tel.prop("disabled", false);
+        userModal.email.prop("disabled", false);
+        userModal.title.prop("disabled", false);
+        userModal.group.prop("disabled", false);
+    },
+    
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcUser",
+            act:	action,
+            user:	$('#main_currentUser').text(),
+            id:		userModal.id.val().toUpperCase(),
+            uname:	userModal.user.val().toUpperCase(),
+            stat:	userModal.stat.val(),
+            fname:	userModal.fn.val().toUpperCase(),
+            mi:	    userModal.mi.val().toUpperCase(),
+            lname:	userModal.ln.val().toUpperCase(),
+            ssn:	userModal.ssn.val().toUpperCase(),
+            tel:	userModal.tel.val().toUpperCase(),
+            email:	userModal.email.val().toUpperCase(),
+            title:	userModal.title.val().toUpperCase(),
+            ugrp:	userModal.group.val(),
+            
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                if (obj.rows.length === 0) {
+                    if (action == "query") {
+                        alert("No record found");
+                    }
+                }
+                else {
+                    user.tbl.index=0;
+                    for (var i = 0; i < obj.rows.length; i++) {
+                        /**
+                         * obtain Date portion of DateTime
+                         * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                         * */
+                        var date_str = obj.rows[i].lastlogin.split(" ");
+                        if (date_str.length == 2) {
+                            var date_string = date_str[0];
+                            obj.rows[i].lastlogin = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                        }
+                        /**
+                         * end
+                         * */
+                    }
+                    user.tblRows = obj.rows;
+                    var len = user.tblRows.length; 
+                    user.tbl.maxIndex = Math.ceil(len/100.0);
+                    user.tbl.index++;
+                    user.displayTable(user.tbl.index);
+                    alert("success");
+                    
+                }  
+            } 
+        });
+    }
+    
+}
+
+
+// ----------------------Click Events-----------------------------
+
+$(document).on("click","#user_tbl tr",function() {
+    var dataRow= $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    //Populate the information 
+    userModal.id.val(dataRow[0]).change();
+    user.user.val(dataRow[1]).change();
+    user.stat.val(dataRow[2]).change();
+    user.title.val(dataRow[3]).change();       
+    user.group.val(dataRow[4]).change();  
+    user.tel.val(dataRow[5]).change();       
+    user.email.val(dataRow[6]).change();  
+    user.lastLogin.val(dataRow[7]).change();       
+    user.fn.val(dataRow[8]).change();
+    user.mi.val(dataRow[9]).change();       
+    user.ln.val(dataRow[10]).change();       
+    user.ssn.val(dataRow[11]).change();       
+            
+    $(this).addClass("addColor"); //add class selected to current clicked row       
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+
+user.findUserBtn.click(function() {
+    user.query("findUser");
+});
+
+
+user.findNameSsnBtn.click(function() {
+    user.query("findNameSsn");
+});
+
+
+user.findTelEmailBtn.click(function() {
+    if (user.tel.val() != "" && user.tnCbx.is(':checked')) {
+        var tel = user.tel.val();
+        var telnum;
+        if ((telnum = getTN(tel)) === false) {
+            var d = tel.split('-');
+            if (d.length != 3 ||
+                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+            {
+                alert ("TEL: INVALID TN FORMAT");
+                return;
+            }
+            
+            telnum = tel;
+        }
+        user.tel.val(telnum);
+    }
+    user.query("findTelEmail");
+});
+
+
+user.findTitleGrpBtn.click(function() {
+    user.query("findTitleGrp");
+});
+
+
+user.next.click(function() {
+    if (user.tbl.index<user.tbl.maxIndex) {
+        user.tbl.index++;
+        user.displayTable(user.tbl.index);
+    }  
+});
+
+
+user.previous.click(function() {
+    if (user.tbl.index>1) {
+        user.tbl.index--;
+        user.displayTable(user.tbl.index);   
+    }         
+});
+
+userModal.modal.on("hidden.bs.modal", user.clearForm);
+
+user.clearBtn.click(function() {
+    user.clearForm();
+    user.tbl.body.empty();
+    user.index.text("");
+});
+
+
+user.act.change(function () {
+    if (user.act.val() !="") {
+        if (user.act.val()  ==  "ADD") {
+            userModal.clearForm();
+            userModal.act.val(user.act.val());
+            userModal.enableForm();
+            userModal.modal.modal();
+        } 
+        else if(user.act.val()  ==  "UPDATE"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.enableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "LOCK"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "UNLOCK"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "DISABLE"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "ENABLE"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "DELETE"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+        else if(user.act.val()  ==  "RESET_PW"){
+            if (user.checkInfor()) {
+                userModal.clearForm();
+                user.populateModal();
+                userModal.disableForm();
+                userModal.modal.modal();
+            }
+            else {
+                alert("Missing user information!");
+                user.act.val("");
+            }
+        }
+    }
+});
+
+userModal.submitBtn.click(function() {
+    if (userModal.tel.val() != "" && userModal.tnCbx.is(':checked')) {
+        var tel = userModal.tel.val();
+        var telnum;
+        if ((telnum = getTN(tel)) === false) {
+            var d = tel.split('-');
+            if (d.length != 3 ||
+                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+            {
+                alert ("TEL: INVALID TN FORMAT");
+                return;
+            }
+            
+            telnum = tel;
+        }
+        userModal.tel.val(telnum);
+    }
+    // userModal.tel.val(telnum);
+	userModal.query(userModal.act.val());
+});
+
+userModal.clearBtn.click(userModal.clearForm);
+
+
+
+
+</script>

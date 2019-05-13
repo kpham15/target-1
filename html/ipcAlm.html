@@ -1,0 +1,474 @@
+<div id="alm" class="tab-pane fade in" style="position: relative;">
+    <h4>ALARM ADMINISTRATION</h4>
+
+
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="col-sm-3" hidden>
+                <label for="alm_id_txt">ID</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="alm_id_txt" readonly>
+            </div>
+
+            <div class="col-sm-3">
+                <label for="alm_almId_num">ALMID</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="alm_almId_num" readonly>
+            </div>
+
+            <div class="col-sm-9">
+                <label for="alm_src_txt">SOURCE</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="alm_src_txt" readonly>
+            </div>
+            
+            <div class="col-sm-3">
+                <label for="alm_ack_txt">ACK</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="alm_ack_txt" readonly>
+            </div>
+
+            <div class="col-sm-9">
+                <label for="alm_cond_txt">CONDITION</label>
+                <input style="text-transform: uppercase" type="text" class="form-control" id="alm_cond_txt" readonly>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="alm_act_sel">ACTION</label>
+                <select class="form-control" id="alm_act_sel">
+                    <option></option>
+                </select>
+            </div>
+            <!-- <div class="col-sm-12">
+                <label id="checkAlmInfor" style="color:red"></label>
+            </div> -->
+            <div class="col-sm-1">
+                <button id="alm_refresh_btn" style="text-align:right" class="btn btn-primary">REFRESH</button>
+            </div>             
+            
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-12 ">
+                <label for="alm_remark_txt">COMMENTS</label>
+                <textarea id="alm_remark_txt" class="form-group" style="width:100%; min-height: 130px; border-radius: 4px; background-color:#F6F6F6" readonly>
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12" >
+        <div style="float:left;">
+            <b>
+                LIST OF ALARMS:
+            </b>
+        </div>
+        <div style="float: right;">
+            <a  id="alm_previous">Previous</a> |
+            <a  id="alm_next">Next</a>
+            &nbsp;&nbsp;&nbsp; <label id="alm_index_lbl"></label>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="panel panel-default" style="table-layout: fxxed;">     
+            <table class="table table-fixed">
+                <thead style="width: 100%; padding-right: 15px">
+                    <tr>
+                        <th style="width:8%">ALMID</th>
+                        <th style="display:none">ID</th>
+                        <th style="width:5%">SEV</th>
+                        <th style="width:5%">ACK</th>
+                        <th style="width:5%">SA</th>
+                        <th style="width:25%">SRC</th>
+                        <th style="width:10%">TYPE</th>
+                        <th style="width:25%">COND</th>
+                        <th style="width:5%">STAT</th>
+                        <th style="width:12%">DATETIME</th>
+                    </tr>
+                </thead>
+                <tbody id="alm_tbl">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="almModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ALARM ADMINISTRATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="almModal_almId_num">ALMID</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_almId_num" readonly>
+                    </div>
+
+                    <div class="col-sm-3 modifyPadding" hidden>
+                        <label for="almModal_id_txt">ID</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_id_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="almModal_src_txt">SRC</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_src_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="almModal_ack_txt">ACK</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_ack_txt" readonly>
+                    </div>
+            
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="almModal_cond_txt">COND</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_cond_txt" readonly>
+                    </div>
+            
+                    <div class="col-sm-12 modifyPadding">
+                        <label for="almModal_remark_txt">COMMENTS</label>
+                        <textarea id="almModal_remark_txt" class="form-group" style="width:100%; border-radius: 4px; min-height: 100px;"></textarea>
+                    </div>
+                
+
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="almModal_act_txt">ACTION</label>
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="almModal_act_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="almModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="almModal_clear_btn">Clear</button>
+                        <br>
+                        <label id="almModal_result_txt" style="color:red"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ALM OBJ //
+var alm = {
+    almid:          $("#alm_almId_num"),
+    id:             $("#alm_id_txt"),
+    src:            $("#alm_src_txt"),
+    ack:            $("#alm_ack_txt"),
+    cond:           $("#alm_cond_txt"),
+    remark:         $("#alm_remark_txt"),
+    act:            $("#alm_act_sel"),
+    previous:       $("#alm_previous"),
+    next:           $("#alm_next"),
+    index:          $("#alm_index_lbl"),
+    refreshBtn:     $("#alm_refresh_btn"),
+    tbl: {
+        body:       $("#alm_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    timerOn:        false,
+    
+    tblRows:        [],
+    
+    start: function() {
+        alm.clearForm();
+        alm.query('query');
+    },
+    
+    // timer: function() {
+    //     if (alm.timerOn == false) {
+    //         var interval = setInterval(function() {
+    //         if ($('.active.tab-pane').is("#alm")) {
+    //             alm.query('query');
+    //             alm.timerOn = true;
+    //         }
+    //         else {
+    //             clearInterval(interval);
+    //             alm.timerOn = false;
+    //         }
+    //         }, 15000)
+    //     }
+    // },
+
+    clearForm: function() {
+        almModal.id.val("");
+        alm.almid.val("");
+        alm.ack.val("");
+        alm.cond.val("");
+        alm.remark.val("");
+        alm.act.val("");
+    },
+    
+    
+    displayTable: function(index) {   
+        var startIndex= (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = alm.tblRows.length;
+    
+        if (len>=startIndex) {
+            if (len < stopIndex) {
+                stopIndex=len;
+            }            
+            alm.tbl.body.empty();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) 
+            {  
+                a.push('<tr> <td style="width:8%">' + alm.tblRows[i].almid + '</td>')  
+                a.push('<td style="display:none">'          + alm.tblRows[i].id    + '</td>');
+                if ( alm.tblRows[i].sev  ==  "MIN") {
+                    a.push('<td style="width:5%;background-color:yellow">' +  alm.tblRows[i].sev + '</td>');
+                }
+                else if (alm.tblRows[i].sev  ==  "MAJ") {
+                    a.push('<td style="width:5%;background-color:orange">' +  alm.tblRows[i].sev + '</td>');
+                }
+                else if (alm.tblRows[i].sev  ==  "CRI") {
+                    a.push('<td style="width:5%;background-color:red">'    +  alm.tblRows[i].sev + '</td>');
+                }
+                else if (alm.tblRows[i].sev  ==  "NONE") {
+                    a.push('<td style="width:5%;background-color:green">'  +  alm.tblRows[i].sev + '</td>');
+                }
+                a.push('<td style="width:5%">'     + alm.tblRows[i].ack       + '</td>');
+                a.push('<td style="width:5%">'      + alm.tblRows[i].sa        + '</td>');
+                a.push('<td style="width:25%">'     + alm.tblRows[i].src       + '</td>');
+                a.push('<td style="width:10%">'     + alm.tblRows[i].type      + '</td>');
+                a.push('<td style="width:25%">'     + alm.tblRows[i].cond      + '</td>');
+                a.push('<td style="width:5%">'     + alm.tblRows[i].psta      + '</td>');
+                a.push('<td style="width:12%; word-wrap: break-word">' + alm.tblRows[i].datetime + '</td>');
+                a.push('<td style="display:none">'  + alm.tblRows[i].remark    + '</td></tr>');
+            }
+            alm.tbl.body.html(a.join(""));
+            if (len == 0) 
+                alm.index.text("(total:" + len + ")") ;
+            else
+                alm.index.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
+        } 
+    },
+    
+    populateModal: function() {
+        almModal.almid.val(alm.almid.val());
+        almModal.id.val(alm.id.val());
+        almModal.src.val(alm.src.val());
+        almModal.ack.val(alm.ack.val());
+        almModal.cond.val(alm.cond.val());
+        almModal.act.val(alm.act.val());
+    },
+    
+
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcAlm",
+            act:    action,
+            user:	$('#main_currentUser').text(),
+            id:     almModal.id.val().toUpperCase(),
+            ack:    alm.ack.val().toUpperCase(),
+            src:    alm.src.val().toUpperCase(),
+            almid:  alm.almid.val().toUpperCase(),
+            cond:  	alm.cond.val().toUpperCase(),
+            remark: alm.remark.val(), 
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                alm.tbl.index = 0;
+                for (var i = 0; i < obj.rows.length; i++) {
+                    /**
+                     * obtain Date portion of DateTime
+                     * if DateTime splits into an array with 2 index then proceed to call getCorrectDateString function to format date portion
+                     * */
+                    var date_str = obj.rows[i].datetime.split(" ");
+                    if (date_str.length == 2) {
+                        var date_string = date_str[0];
+                        obj.rows[i].datetime = kris_getCorrectDateString(date_string) + " " + date_str[1];
+                    }
+                    /**
+                     * end
+                     * */
+                }
+                alm.tblRows = obj.rows;
+                var len = alm.tblRows.length; 
+                alm.maxIndex = Math.ceil(len/100.0);
+                alm.tbl.index++;
+                alm.displayTable(alm.tbl.index);
+            } 
+        });
+    }
+    
+
+    
+}
+
+// ALMMODAL OBJ //
+var almModal = {
+    modal:      $("#almModal"),
+    almid:      $("#almModal_almId_num"),
+    src:        $("#almModal_src_txt"),
+    ack:        $("#almModal_ack_txt"),
+    cond:       $("#almModal_cond_txt"),
+    remark:     $("#almModal_remark_txt"),
+    act:        $("#almModal_act_txt"),
+    submitBtn:  $("#almModal_submit_btn"),
+    cancelBtn:  $("#almModal_clear_btn"),
+    id:         $("#almModal_id_txt"),
+    result:     $("#almModal_result_txt"),
+    tblRows:    [],
+        
+    clearForm: function() {
+        almModal.remark.val("").change();
+        almModal.result.text("");
+    },
+    
+    query: function(action) {
+    
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcAlm",
+            act:    action,
+            user:	$('#main_currentUser').text(),
+            id:		almModal.id.val().toUpperCase(),
+            src:    almModal.src.val().toUpperCase(),
+            ack: 	almModal.ack.val().toUpperCase(),
+            almid: 	almModal.almid.val().toUpperCase(),
+            cond: 	almModal.cond.val().toUpperCase(),
+            remark: almModal.remark.val(),
+        },
+        function (data, status) {       
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            }
+            else {
+                // if (obj.rows.length === 0) {
+                //     alert("There is no matching data!");
+                // }
+                // else {
+                    alm.tbl.index = 0;
+                    alm.tblRows = obj.rows;
+                    var len = alm.tblRows.length; 
+                    alm.maxIndex = Math.ceil(len/100.0);
+                    alm.tbl.index++;
+                    alert(obj.rslt);
+                    alm.displayTable(alm.tbl.index);
+                    
+                // }  
+            } 
+        });
+    }
+    
+} 
+/**
+ * refreshes alarms in intervals
+ */
+
+// ---------------------Event Handling----------------------------
+$(document).on("click","#alm_tbl tr",function() {
+    var dataRow = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    alm.almid.val(dataRow[0]);
+    almModal.id.val(dataRow[1]);
+    alm.id.val(dataRow[1]);
+    alm.src.val(dataRow[5]);
+    alm.ack.val(dataRow[3]);
+	alm.cond.val(dataRow[7]);
+    alm.remark.val(dataRow[10]);
+    
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+alm.next.click(function() {
+    if (alm.tbl.index < alm.maxIndex) {
+        alm.tbl.index++;
+        alm.displayTable(alm.tbl.index);
+    }  
+});
+
+alm.previous.click(function() {
+    if (alm.tbl.index > 1) {
+        alm.tbl.index--;
+        alm.displayTable(alm.tbl.index);
+    }
+});
+
+alm.act.change(function () {
+    if (alm.act.val()  ==  "ACK") {
+        if (alm.almid.val() != "") {
+			if (alm.ack.val() != "") {
+                alert("ALARM already ACKNOWLEDGED");
+                alm.act.val("");
+			}
+			else {
+				almModal.clearForm();
+				alm.populateModal();
+                almModal.modal.modal();
+                almModal.ack.val($("#main_currentUser").text());
+			}
+        }
+        else {
+            alert("Please select an ALARM from LIST OF ALARMS");
+            alm.act.val("");
+ 
+		}
+	}
+    else if (alm.act.val()  ==  "UN-ACK") {
+        if (alm.almid.val() != "") {
+			if (alm.ack.val() == "") {
+                alert("ALARM has not been ACKNOWLEDGED");
+                alm.act.val("");
+			}
+			else {
+				almModal.clearForm();
+				alm.populateModal();
+                almModal.modal.modal();
+			}
+        }
+        else {
+            alert("Please select an ALARM from LIST OF ALARMS");
+            alm.act.val("");
+		}
+	}
+    else if (alm.act.val()  ==  "CLR") {
+        if (alm.almid.val() != "") {
+            almModal.clearForm();
+            alm.populateModal();
+            almModal.modal.modal();
+        }
+        else {
+            alert("Please select an ALARM from LIST OF ALARMS");
+            alm.act.val("");
+		}
+    }
+})
+
+alm.refreshBtn.click(function () {
+    alm.clearForm();
+    alm.query('query');    
+})
+
+almModal.cancelBtn.click(almModal.clearForm);
+
+almModal.submitBtn.click(function() {
+    if (almModal.act.val() == "ACK") {
+        almModal.query('ACK');
+    } 
+    else if (almModal.act.val() == "UN-ACK") {
+        almModal.query('UN-ACK');
+    } 
+    else if (almModal.act.val() == "CLR") {
+        almModal.query('CLR');
+    }
+    alm.query('query');
+})
+
+almModal.modal.on("hidden.bs.modal", alm.clearForm);
+
+
+
+</script>
+
+
