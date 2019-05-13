@@ -52,7 +52,6 @@ class FOMS {
       $relctid = "";
       $relot = "";
       $relact = "";
-      $stat = "NEW";
       
       if (array_key_exists('ORDNO',$this->ord)) {
         $ordno = $this->ord['ORDNO'];
@@ -117,8 +116,8 @@ class FOMS {
       }
 
       $qry = "INSERT INTO
-              t_Ckt (ordno, cttype, ctid, octtype, octid, adsr, ssm, ssp, oc, act, lst, cls, noscm, relordno, relcttype, relctid, relot, relact, stat)
-              VALUES ('$ordno', '$cttype', '$ctid', '$octtype', '$octid', '$adsr', '$ssm', '$ssp', '$oc', '$act', '$lst', '$cls', '$noscm', '$relordno', '$relcttype', '$relctid', '$relot', '$relact', '$stat')";
+              t_Ckt (ordno, cttype, ctid, octtype, octid, adsr, ssm, ssp, oc, act, lst, cls, noscm, relordno, relcttype, relctid, relot, relact)
+              VALUES ('$ordno', '$cttype', '$ctid', '$octtype', '$octid', '$adsr', '$ssm', '$ssp', '$oc', '$act', '$lst', '$cls', '$noscm', '$relordno', '$relcttype', '$relctid', '$relot', '$relact')";
 
       $res = $db->query($qry);
       if (!$res) {
@@ -157,7 +156,6 @@ class FOMS {
         $tfactyp = "";
         $tfacid = "";
         $tfrloc = "";
-        $stat = "NEW";
   
         $facs = [];
   
@@ -188,8 +186,8 @@ class FOMS {
         }
   
         $qry = "INSERT INTO
-                t_Ckcon (ordno, ctid, act, op, ffactyp, ffacid, ffrloc, tfactyp, tfacid, tfrloc, cd, dd, stat)
-                VALUES ('$ordno', '$ctid', '$act', '$op', '$ffactyp', '$ffacid', '$ffrloc', '$tfactyp', '$tfacid', '$tfrloc', '$cd', '$dd', '$stat')";
+                t_Ckcon (ordno, ctid, act, op, ffactyp, ffacid, ffrloc, tfactyp, tfacid, tfrloc, cd, dd)
+                VALUES ('$ordno', '$ctid', '$act', '$op', '$ffactyp', '$ffacid', '$ffrloc', '$tfactyp', '$tfacid', '$tfrloc', '$cd', '$dd')";
   
         $res = $db->query($qry);
         if (!$res) {
@@ -230,7 +228,6 @@ class FOMS {
     $fdt = "";
     $wc = "";
     $pri = "";
-    $stat = "NEW";
 
     if (array_key_exists('ORDNO',$this->ord)) {
       $ordno = $this->ord['ORDNO'];
@@ -258,11 +255,8 @@ class FOMS {
     if (array_key_exists('PRI',$this->ord)) {
       $pri = $this->ord['PRI'];
     }
-    if (array_key_exists('STAT',$this->ord)) {
-      $stat = $this->ord['STAT'];
-    }
 
-    $qry = "INSERT INTO t_Ord (ordno, ot, cdd, dd, fdd, fdt, wc, pri, stat) VALUES ('$ordno', '$ot', '$cdd', '$dd', '$fdd', '$fdt', '$wc', '$pri', '$stat')";
+    $qry = "INSERT INTO t_Ord (ordno, ot, cdd, dd, fdd, fdt, wc, pri) VALUES ('$ordno', '$ot', '$cdd', '$dd', '$fdd', '$fdt', '$wc', '$pri')";
 
     $res = $db->query($qry);
     if (!$res) {
@@ -280,6 +274,8 @@ class FOMS {
   }
 
 	public function parseCTString($CTString=NULL) {
+    global $db;
+    
 		if ($CTString === NULL) {
 			$this->rslt		= FAIL;
 			$this->reason	="MISSING CONTRACT STRING FOR INPUT";
@@ -290,15 +286,11 @@ class FOMS {
 
 		$strExtract = explode("*",$CTString);
     array_shift($strExtract);
-    $ord = $strExtract[1];
-    // $ord = str_replace(' ','',$ord);
-    // preg_replace('/\s*$^\s*/m', '', $ord);
-    // preg_replace('/[ \t]+/', '', $ord);
-    // preg_replace('/\\n/', '', $ord);
-    $ord = str_replace("\r\n", "", $ord);
-    $ord = substr($ord,0,-1);
+    $fomstc = $strExtract[1];
+    $fomstc = str_replace("\r\n", "", $fomstc);
+    $fomstc = substr($fomstc,0,-1);
 
-    $json_ord = str_replace(';',',',$ord);
+    $json_ord = str_replace(';',',',$fomstc);
     $json_ord = str_replace('=',':',$json_ord);
     $json_ord = str_replace(',}','},',$json_ord);
     $json_ord = str_replace('}}','}},',$json_ord);
@@ -389,6 +381,25 @@ class FOMS {
 		
 		$this->ord = json_decode(utf8_decode($json_ord), true);
     $this->ckts = $cktArray;
+
+
+    $currentDate = new DateTime('now'); // DATETIME
+    $currentDate = $currentDate->format('Y-m-d H:i:s');
+    $ordno = $this->ord['ORDNO'];
+
+    $qry = "INSERT INTO t_foms (`user`, `date`, `ordno`, `foms`)
+            VALUES ('ninh', '$currentDate', '$ordno', '$fomstc')";
+
+    $res = $db->query($qry);
+    if (!$res) {
+      $this->rslt = "fail";
+      $this->reason = mysqli_error($db);
+      $this->rows = [];
+    } else {
+      $this->rslt = "success";
+      $this->reason = "SUCCESSFUL - FOMS STRING PARSED";
+      $this->rows = [];
+    }
 
 		return;
 	}
