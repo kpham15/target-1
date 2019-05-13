@@ -284,9 +284,10 @@ class MXC {
         }
     }
 
+    // @TODO may need to remove 'node' from select. used for testing purpose
     public function getStatusByNodeType($node, $type) {
         global $db;
-        $qry = "SELECT psta FROM t_mxc WHERE node = '$node' AND type = '$type' AND node <= '$this->nodes'";
+        $qry = "SELECT node, psta FROM t_mxc WHERE node = '$node' AND type = '$type' AND node <= '$this->nodes'";
         
         $res = $db->query($qry);
         if (!$res) {

@@ -323,6 +323,17 @@
 			array_push($row['MIOX'], $mxcObj->rows);
 		}
 
+		$row['MIOY'] = [];
+
+		//gets status for MIOY
+		for ($m = 0; $m < $wcObj->nodes; $m++) {
+			
+			$node = $m + 1;
+			$mxcObj = new MXC();
+			$mxcObj->getStatusByNodeType($node, "MIOY");
+			array_push($row['MIOY'], $mxcObj->rows);
+		}
+
 		$rows[] = $row;
 
 		$result["rows"] = $rows;
