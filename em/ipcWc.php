@@ -304,6 +304,14 @@
 			$row['loginTime'] = '';
 		}
 
+		$mxcObj = new MXC();
+		$mxcObj->getStatByType('MIOX');
+		$row['MIOX'] = $mxcObj->rows;
+
+		$mxcObj = new MXC();
+		$mxcObj->getStatByType('MIOY');
+		$row['MIOY'] = $mxcObj->rows;
+
 		$rows[] = $row;
 
 		$result["rows"] = $rows;
