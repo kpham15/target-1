@@ -116,46 +116,46 @@ var opt = {
                     if  (!(selName in optVals[tabName])) {
                         optVals[tabName][selName] = [];
                     }
-                    if (tabName == "PORTMAP" && selName == "ACTION") {
-                        n = evtlog.fnc_portmap.length;
-                        evtlog.fnc_portmap[n] = optVal;
-                    }
-                    else if (tabName == "SVCCONN" && selName == "ACTION") {
-                        n = evtlog.fnc_svc.length;
-                        evtlog.fnc_svc[n] = optVal;
-                    }
-                    else if (tabName == "USERS" && selName == "ACTION") {
-                        n = evtlog.fnc_users.length;
-                        evtlog.fnc_users[n] = optVal;
-                    }
-                    else if (tabName == "WC" && selName == "ACTION") {
-                        n = evtlog.fnc_wc.length;
-                        evtlog.fnc_wc[n] = optVal;
-                    }
-                    else if (tabName == "ALMADM" && selName == "ACTION") {
-                        n = evtlog.fnc_almadm.length;
-                        evtlog.fnc_almadm[n] = optVal;
-                    }
-                    else if (tabName == "PATHADM" && selName == "ACTION") {
-                        n = evtlog.fnc_pathadm.length;
-                        evtlog.fnc_pathadm[n] = optVal;
-                    }
-                    else if (tabName == "MXC" && selName == "ACTION") {
-                        n = evtlog.fnc_mxc.length;
-                        evtlog.fnc_mxc[n] = optVal;
-                    }
-                    else if (tabName == "MAINT" && selName == "ACTION") {
-                        n = evtlog.fnc_maint.length;
-                        evtlog.fnc_maint[n] = optVal;
-                    }
-                    else if (tabName == "BRDCST" && selName == "ACTION") {
-                        n = evtlog.fnc_brdcst.length;
-                        evtlog.fnc_brdcst[n] = optVal;
-                    }
-                    else if (tabName == "FACILITY" && selName == "ACTION") {
-                        n = evtlog.fnc_fac.length;
-                        evtlog.fnc_fac[n] = optVal;
-                    }
+                    // if (tabName == "PORTMAP" && selName == "ACTION") {
+                    //     n = evtlog.fnc_portmap.length;
+                    //     evtlog.fnc_portmap[n] = optVal;
+                    // }
+                    // else if (tabName == "SVCCONN" && selName == "ACTION") {
+                    //     n = evtlog.fnc_svc.length;
+                    //     evtlog.fnc_svc[n] = optVal;
+                    // }
+                    // else if (tabName == "USERS" && selName == "ACTION") {
+                    //     n = evtlog.fnc_users.length;
+                    //     evtlog.fnc_users[n] = optVal;
+                    // }
+                    // else if (tabName == "WC" && selName == "ACTION") {
+                    //     n = evtlog.fnc_wc.length;
+                    //     evtlog.fnc_wc[n] = optVal;
+                    // }
+                    // else if (tabName == "ALMADM" && selName == "ACTION") {
+                    //     n = evtlog.fnc_almadm.length;
+                    //     evtlog.fnc_almadm[n] = optVal;
+                    // }
+                    // else if (tabName == "PATHADM" && selName == "ACTION") {
+                    //     n = evtlog.fnc_pathadm.length;
+                    //     evtlog.fnc_pathadm[n] = optVal;
+                    // }
+                    // else if (tabName == "MXC" && selName == "ACTION") {
+                    //     n = evtlog.fnc_mxc.length;
+                    //     evtlog.fnc_mxc[n] = optVal;
+                    // }
+                    // else if (tabName == "MAINT" && selName == "ACTION") {
+                    //     n = evtlog.fnc_maint.length;
+                    //     evtlog.fnc_maint[n] = optVal;
+                    // }
+                    // else if (tabName == "BRDCST" && selName == "ACTION") {
+                    //     n = evtlog.fnc_brdcst.length;
+                    //     evtlog.fnc_brdcst[n] = optVal;
+                    // }
+                    // else if (tabName == "FACILITY" && selName == "ACTION") {
+                    //     n = evtlog.fnc_fac.length;
+                    //     evtlog.fnc_fac[n] = optVal;
+                    // }
 
                     if (optVals[tabName][selName].length == "") {
                         optVals[tabName][selName].push('<option></option>');

@@ -27,7 +27,6 @@
     include "../class/ipcFtReleaseClass.php";
     include "../class/ipcFtypClass.php";
     include "../class/ipcGrpClass.php";
-    include "../class/ipcHwClass.php";
     include "../class/ipcMxcClass.php";
     include "../class/ipcMaintlogClass.php";
     include "../class/ipcNodeClass.php";
@@ -36,7 +35,6 @@
     include "../class/ipcOrtClass.php";
     include "../class/ipcPathClass.php";
     include "../class/ipcPortClass.php";
-    include "../class/ipcPortmapClass.php";
     include "../class/ipcPostRequestClass.php";
     include "../class/ipcProvlogClass.php";
     include "../class/ipcRefClass.php";
@@ -71,7 +69,6 @@
     // include "../../../class/ipcDebugClass.php";
     // include "../../../class/ipcEvtlogClass.php";
     // include "../../../class/ipcFacClass.php";
-    // include "../../../class/ipcFomsClass.php";
     // include "../../../class/ipcFtCkConClass.php";
     // include "../../../class/ipcFtCktClass.php";
     // include "../../../class/ipcFtOrdClass.php";
@@ -81,7 +78,6 @@
     // include "../../../class/ipcGrpClass.php";
     // include "../../../class/ipcHwClass.php";
     // include "../../../class/ipcMxcClass.php";
-    // include "../../../class/ipcMaintlogClass.php";
     // include "../../../class/ipcNodeClass.php";
     // include "../../../class/ipcOptClass.php";
     // include "../../../class/ipcOrdClass.php";
@@ -92,22 +88,13 @@
     // include "../../../class/ipcPostRequestClass.php";
     // include "../../../class/ipcProvlogClass.php";
     // include "../../../class/ipcRefClass.php";
-    // include "../../../class/ipcRelClass.php";
-    // include "../../../class/ipcSearchClass.php";
     // include "../../../class/ipcSmsClass.php";
     // include "../../../class/ipcSpcfncClass.php";
     // include "../../../class/ipcStgClass.php";
     // include "../../../class/ipcUsersClass.php";
     // include "../../../class/ipcWcClass.php";
-    // include "../../../class/ipcXClass.php";
-    // include "../../../class/ipcYClass.php";
-    // include "../../../class/ipcTbClass.php";
-    // include "../../../class/jwt.php";
-    // include "../../../class/ipcViolationClass.php";
-    // include "../../../class/ipcCmdClass.php";
-    // include "../../../class/ipcRcClass.php";
-    // include "../../../class/ipcDspClass.php";
-    // // common functions
+    
+    // common functions
     // include "../../../em/ipcLib.php";
 
 

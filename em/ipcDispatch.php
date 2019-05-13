@@ -3,100 +3,20 @@ include "./ipcClasses.php";
 
 $root_dir = '/var/www/html/target-1/UPDATE';
 
-// $ipcSwUpdate		 = "../../../em/ipcSwUpdate.php";
-// $ipcAlm				 = "../../../em/ipcAlm.php";
-// $ipcAlmReport		 = "../../../em/ipcAlmReport.php";
-// $ipcBatchExc		 = "../../../em/ipcBatchExc.php";
-// $ipcBroadcast		 = "../../../em/ipcBroadcast.php";
-// $ipcCfgReport		 = "../../../em/ipcCfgReport.php";
-// $ipcEventlog         = "../../../em/ipcEventlog.php";
-// $ipcEvtlog			 = "../../../em/ipcEvtlog.php";
-// $ipcFacilities		 = "../../../em/ipcFacilities.php";
-// $ipcFindOrder		 = "../../../em/ipcFindOrder.php";
-// $ipcFoms             = "../../../em/ipcFoms.php";
-// $ipcFtOrd			 = "../../../em/ipcFtOrd.php";
-// $ipcFtRelease		 = "../../../em/ipcFtRelease.php";
-// $ipcFtModTable		 = "../../../em/ipcFtModTable.php";
-// $ipcLogin			 = "../../../em/ipcLogin.php";
-// $ipcLogout			 = "../../../em/ipcLogout.php";
-// $ipcMaintConnect	 = "../../../em/ipcMaintConnect.php";
-// $ipcMaintDiscon		 = "../../../em/ipcMaintDiscon.php";
-// $ipcMaintReport		 = "../../../em/ipcMaintReport.php";
-// $ipcMaintRestoreMtcd = "../../../em/ipcMaintRestoreMtcd.php";
-// $ipcMxc				 = "../../../em/ipcMxc.php";
-// $ipcNode			 = "../../../em/ipcNode.php";
-// $ipcNodeAdmin        = "../../../em/ipcNodeAdmin.php";
-// $ipcOrd  			 = "../../../em/ipcOrd.php";
-// $ipcOpt				 = "../../../em/ipcOpt.php";
-// $ipcPath			 = "../../../em/ipcPath.php";
-// $ipcPortmap			 = "../../../em/ipcPortmap.php";
-// $ipcProv			 = "../../../em/ipcProv.php";
-// $ipcProvConnect		 = "../../../em/ipcProvConnect.php";
-// $ipcProvDisconnect	 = "../../../em/ipcProvDisconnect.php";
-// $ipcProvReport		 = "../../../em/ipcProvReport.php";
-// $ipcRef				 = "../../../em/ipcRef.php";
-// $ipcSearch 			 = "../../../em/ipcSearch.php";
-// $ipcTrouble			 = "../../../em/ipcTrouble.php";
-// $ipcUser			 = "../../../em/ipcUser.php";
-// $ipcWc				 = "../../../em/ipcWc.php";
-// $ipcTb               = "../../../em/ipcTb.php";
-// $ipcConfirm          = "../../../em/ipcConfirm.php";
-
-
-$ipcSwUpdate		 = "../em/ipcSwUpdate.php";
-$ipcAlm				 = "../em/ipcAlm.php";
-$ipcAlmReport		 = "../em/ipcAlmReport.php";
-$ipcBatchExc		 = "../em/ipcBatchExc.php";
-$ipcBroadcast		 = "../em/ipcBroadcast.php";
-$ipcCfgReport		 = "../em/ipcCfgReport.php";
-$ipcEventReport      = "../em/ipcEventlog.php";
-$ipcEvtlog			 = "../em/ipcEvtlog.php";
-$ipcFacilities		 = "../em/ipcFacilities.php";
-$ipcFindOrder		 = "../em/ipcFindOrder.php";
-$ipcFoms             = "../em/ipcFoms.php";
-$ipcFtOrd			 = "../em/ipcFtOrd.php";
-$FtRelease		     = "../em/ipcFtRelease.php";
-$ipcFtModTable		 = "../em/ipcFtModTable.php";
-$ipcLogin			 = "../em/ipcLogin.php";
-$ipcLogout			 = "../em/ipcLogout.php";
-$ipcMaintConnect	 = "../em/ipcMaintConnect.php";
-$ipcMaintDiscon		 = "../em/ipcMaintDiscon.php";
-$ipcMaintReport		 = "../em/ipcMaintReport.php";
-$ipcMaintRestoreMtcd = "../em/ipcMaintRestoreMtcd.php";
-$ipcMxc				 = "../em/ipcMxc.php";
-$ipcNode			 = "../em/ipcNode.php";
-$ipcNodeAdmin	     = "../em/ipcNodeAdmin.php";
-$ipcOrd  			 = "../em/ipcOrd.php";
-$ipcOpt				 = "../em/ipcOpt.php";
-$ipcPath			 = "../em/ipcPath.php";
-$ipcPortmap			 = "../em/ipcPortmap.php";
-$ipcProv			 = "../em/ipcProv.php";
-$ipcProvConnect		 = "../em/ipcProvConnect.php";
-$ipcProvDisconnect	 = "../em/ipcProvDisconnect.php";
-$ipcProvReport		 = "../em/ipcProvReport.php";
-$ipcRef				 = "../em/ipcRef.php";
-$ipcSearch 			 = "../em/ipcSearch.php";
-$ipcTrouble			 = "../em/ipcTrouble.php";
-$ipcUser			 = "../em/ipcUser.php";
-$ipcWc				 = "../em/ipcWc.php";
-$ipcTb               = "../em/ipcTb.php";
-$ipcConfirm          = "../em/ipcConfirm.php";
-
-
 
 /* Initialize expected inputs */
 $api = '';
-if(isset($_POST['api'])) {
+if (isset($_POST['api'])) {
     $api = $_POST['api'];
 }
 //get the key
-    if($api =='ipcConfirm') {
-        include $ipcConfirm;
-        return;
-    }
+if($api =='ipcConfirm') {
+    include "ipcConfirm.php";
+    return;
+}
 
 $user = '';
-if(isset($_POST['user'])) {
+if (isset($_POST['user'])) {
     $user = $_POST['user'];
 }
 
@@ -109,31 +29,30 @@ if ($dbObj->rslt == "fail") {
 }
 $db = $dbObj->con;
 
-$userObj = new USERS($user);
-if ($userObj->rslt != SUCCESS) {
-    $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", '-');
-    $result['rslt'] = $userObj->rslt;
-    $result['reason'] = $userObj->reason;
-    $evtLog->log($result["rslt"], $result["reason"]);    
-    $vioObj = new VIO();
-    $vioObj->setUnameViolation();
-    mysqli_close($db);
-    echo json_encode($result);
-    return;
-}
 
+// validate login user
+    $userObj = new USERS($user);
+    if ($userObj->rslt != SUCCESS) {
+        $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", '-');
+        $result['rslt'] = $userObj->rslt;
+        $result['reason'] = $userObj->reason;
+        $evtLog->log($result["rslt"], $result["reason"]);
+        $vioObj = new VIO();
+        $vioObj->setUnameViolation();
+        mysqli_close($db);
+        echo json_encode($result);
+        return;
+    }
 // The following apis skip user validation
-if($api =='ipcLogout') {
-    include $ipcLogout;
-    return;
-}
-
-if($api =='ipcLogin') {
-    include $ipcLogin;
-    return;
-}
-
-
+    if ($api =='ipcLogout') {
+        include "ipcLogout.php";
+        return;
+    }
+ 
+    if ($api =='ipcLogin') {
+        include "ipcLogin.php";
+        return;
+    }
 
 // validate login user
 if ($userObj->uname != 'SYSTEM') {
@@ -147,113 +66,111 @@ if ($userObj->uname != 'SYSTEM') {
 
 // Dispatch to API
 if($api =='ipcAlm') {
-    include $ipcAlm;
+    include "ipcAlm.php";
 }
 else if($api =='ipcAlmReport') {
-    include $ipcAlmReport;
+    include "ipcAlmReport.php";
 }
 else if($api =='ipcBatchExc') {
-    include $ipcBatchExc;
+    include "ipcBatchExc.php";
 }
 else if($api =='ipcBroadcast') {
-    include $ipcBroadcast;
+    include "ipcBroadcast.php";
 }
 else if($api =='ipcCfgReport') {
-    include $ipcCfgReport;
+    include "ipcCfgReport.php";
 }
 else if($api =='ipcEvtlog') {
-    include $ipcEvtlog;
+    include "ipcEvtlog.php";
 }
 else if($api =='ipcFacilities') {
-    include $ipcFacilities;
+    include "ipcFacilities.php";
 }
 else if($api =='ipcFindOrder') {
-    include $ipcFindOrder;
-}
-else if($api == 'ipcFoms') {
-    include $ipcFoms;
+    include "ipcFindOrder.php";
 }
 else if($api =='ipcFtModTable') {
-    include $ipcFtModTable;
+    include "ipcFtModTable.php";
 }
 else if($api =='ipcFtOrd') {
-    include $ipcFtOrd;
+    include "ipcFtOrd.php";
 }
 else if($api =='ipcFtRelease') {
-    include $ipcFtRelease;
+    include "ipcFtRelease.php";
 }
 else if($api =='ipcLib') {
-    include $ipcLib;
+    include "ipcLib.php";
 }
 else if($api =='ipcMaintConnect') {
-    include $ipcMaintConnect;
+    include "ipcMaintConnect.php";
 }
 else if($api =='ipcMaintDiscon') {
-    include $ipcMaintDiscon;
+    include "ipcMaintDiscon.php";
 }
 else if($api =='ipcMaintReport') {
-    include $ipcMaintReport;
+    include "ipcMaintReport.php";
 }
 else if($api =='ipcMaintRestoreMtcd') {
-    include $ipcMaintRestoreMtcd;
+    include "ipcMaintRestoreMtcd.php";
 }
 else if($api =='ipcMxc') {
-    include $ipcMxc;
-}
-else if($api =='ipcNode') {
-    include $ipcNode;
+    include "ipcMxc.php";
 }
 else if($api =='ipcNodeAdmin') {
-    include $ipcNodeAdmin;
+    include "ipcNodeAdmin.php";
 }
 else if($api =='ipcOpt') {
-    include $ipcOpt;
+    include "ipcOpt.php";
 }
 else if($api =='ipcPath') {
-    include $ipcPath;
+    include "ipcPath.php";
 }
 else if($api =='ipcPortmap') {
-    include $ipcPortmap;
+    include "ipcPortmap.php";
 }
 else if($api =='ipcProv') {
-    include $ipcProv;
+    include "ipcProv.php";
 }
-else if($api =='ipcProvConnect') {
-    include $ipcProvConnect;
-}
-else if($api =='ipcProvDisconnect') {
-    include $ipcProvDisconnect;
-}
+// else if($api =='ipcProvConnect') {
+//     include "ipcProvConnect.php";
+// }
+// else if($api =='ipcProvDisconnect') {
+//     include "ipcProvDisconnect.php";
+// }
 else if($api =='ipcProvReport') {
-    include $ipcProvReport;
+    include "ipcProvReport.php";
 }
 else if($api =='ipcRef') {
-    include $ipcRef;
+    include "ipcRef.php";
 }
 else if($api =='ipcSearch') {
-    include $ipcSearch;
+    include "ipcSearch.php";
 }
 else if($api =='ipcSwUpdate') {
-    include $ipcSwUpdate;
+    include "ipcSwUpdate.php";
 }
-else if($api =='ipcTrouble') {
-    include $ipcTrouble;
-}
+// else if($api =='ipcTrouble') {
+//     include "ipcTrouble.php";
+// }
 else if($api =='ipcUser') {
-    include $ipcUser;
+    include "ipcUser.php";
 }
 else if($api =='ipcWc') {
-    include $ipcWc;
+    include "ipcWc.php";
 }
-else if($api == "ipcEventlog") {
-    include $ipcEventlog;
+else if($api == 'ipcEventlog') {
+    include "ipcEventlog.php";
 }
-else if ($api == "ipcOrd") {
-    include $ipcOrd;
+else if($api == 'ipcOrd') {
+    include "ipcOrd.php";
 }
-else if($api == "ipcTb") {
-    include $ipcTb;
+else if($api == 'ipcTb') {
+    include "ipcTb.php";
 }
+// else if($api == 'ipcAction') {
+//     include "ipcAction.php";
+// }
+
 else {
     $result["rslt"] = FAIL;
     $result["reason"] = "INVALID_API";
