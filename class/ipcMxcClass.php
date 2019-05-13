@@ -284,6 +284,30 @@ class MXC {
         }
     }
 
+    public function getStatusByNodeType($node, $type) {
+        global $db;
+        $qry = "SELECT psta FROM t_mxc WHERE node = '$node' AND type = '$type' AND node <= '$this->nodes'";
+        
+        $res = $db->query($qry);
+        if (!$res) {
+            
+            $this->rslt = "fail";
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            
+            $rows = [];
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+            }
+            $this->rslt = "success";
+            $this->reason = "MXC_QUERY_MATCHED";
+            $this->rows = $rows;
+        }
+    }
+
     public function lockMxc() {
         global $db;
      

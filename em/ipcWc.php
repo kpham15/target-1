@@ -304,13 +304,24 @@
 			$row['loginTime'] = '';
 		}
 
-		$mxcObj = new MXC();
-		$mxcObj->getStatByType('MIOX');
-		$row['MIOX'] = $mxcObj->rows;
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOX');
+		// $row['MIOX'] = $mxcObj->rows;
 
-		$mxcObj = new MXC();
-		$mxcObj->getStatByType('MIOY');
-		$row['MIOY'] = $mxcObj->rows;
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOY');
+		// $row['MIOY'] = $mxcObj->rows;
+
+		$row['MIOX'] = [];
+		
+		// gets status for MIOX
+		for ($k = 0; $k < $wcObj->nodes; $k++) {
+
+			$node = $k + 1;
+			$mxcObj = new MXC();
+			$mxcObj->getStatusByNodeType($node, "MIOX");
+			array_push($row['MIOX'], $mxcObj->rows);
+		}
 
 		$rows[] = $row;
 
