@@ -304,6 +304,36 @@
 			$row['loginTime'] = '';
 		}
 
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOX');
+		// $row['MIOX'] = $mxcObj->rows;
+
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOY');
+		// $row['MIOY'] = $mxcObj->rows;
+
+		$row['MIOX'] = [];
+		
+		// gets status for MIOX
+		for ($k = 0; $k < $wcObj->nodes; $k++) {
+
+			$node = $k + 1;
+			$mxcObj = new MXC();
+			$mxcObj->getStatusByNodeType($node, "MIOX");
+			array_push($row['MIOX'], $mxcObj->rows);
+		}
+
+		$row['MIOY'] = [];
+
+		//gets status for MIOY
+		for ($m = 0; $m < $wcObj->nodes; $m++) {
+			
+			$node = $m + 1;
+			$mxcObj = new MXC();
+			$mxcObj->getStatusByNodeType($node, "MIOY");
+			array_push($row['MIOY'], $mxcObj->rows);
+		}
+
 		$rows[] = $row;
 
 		$result["rows"] = $rows;
