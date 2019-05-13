@@ -514,6 +514,7 @@ var wc = {
                 sysview.nodeList.html(a.join(""));
 
 
+
                 for (var i = 0; i < obj.rows[0].node_alm.length; i++) {
                     var n = i+1;
                     $('#sysview_n' + n + '_btn').html("<small>Node " 
@@ -537,10 +538,6 @@ var wc = {
                     else if (obj.rows[0].node_alm[i] == "NONE") {
                         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
                     }
-                }
-
-                if (sysview.nodeIndex != 0) {
-                    $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
                 }
 
                 // bind node menu here
