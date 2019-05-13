@@ -171,6 +171,13 @@ function postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac) {
 // Process all Orders
 function processOrd($ordno) {
     $ftordersObj = new FTORDERS($ordno);
+
+    if ($ftordersObj->ord['STAT'] !== 'RELEASED') {
+        $result['rslt'] = FAIL;
+        $result['reason'] = 'ORDER IS NOT RELEASED';
+        return $result;
+    }
+    
     $newCls = "";
 
     foreach ($ftordersObj->ckts as $ckt) {
