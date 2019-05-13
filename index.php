@@ -2,11 +2,11 @@
 <?php
 	include 'indexFunc.php';
 	/// Read the config file to get the name of running folder
-	if(basename(getcwd()) != readCfg("../bhd.cfg")) {
-		echo '<h1>Permission Denied</h1>';
-		return;
-	}
-	$folderList = getSwInfo();
+	// if(basename(getcwd()) != readCfg("../bhd.cfg")) {
+	// 	echo '<h1>Permission Denied</h1>';
+	// 	return;
+	// }
+	// $folderList = getSwInfo();
 
 
 	///////////////////---------------------------//////////////////////
