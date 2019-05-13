@@ -110,12 +110,12 @@ var opt = {
                     var selName = obj.rows[i]['opt'];
                     var optVal  = obj.rows[i]['optval'];
         
-                    // if  (!(tabName in optVals)) {
-                    //     optVals[tabName] = [];
-                    // }
-                    // if  (!(selName in optVals[tabName])) {
-                    //     optVals[tabName][selName] = [];
-                    // }
+                    if  (!(tabName in optVals)) {
+                        optVals[tabName] = [];
+                    }
+                    if  (!(selName in optVals[tabName])) {
+                        optVals[tabName][selName] = [];
+                    }
                     // if (tabName == "PORTMAP" && selName == "ACTION") {
                     //     n = evtlog.fnc_portmap.length;
                     //     evtlog.fnc_portmap[n] = optVal;
