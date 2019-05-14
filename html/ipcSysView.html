@@ -787,9 +787,6 @@ var sysview = {
     updateMio: function(node, mioX, mioY) {
         n = String(node);
 
-        if ($("#main_currentUser").text() == "") {
-            return;
-        }
         var selectedNodeX = String(sysview.nodeXActive);
         var selectedNodeY = String(sysview.nodeYActive);
         var selectedMioXOldPsta = sysview.mioX1Psta.text();
@@ -813,6 +810,10 @@ var sysview = {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
         }
 
+        if ($("#main_currentUser").text() == "") {
+            return;
+        }
+        
         if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
             sysview.queryX(sysview.partXNum);
         }
