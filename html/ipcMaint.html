@@ -2064,6 +2064,11 @@ maintModal.submitBtn.click(function() {
             maintModal.pickedTestPort = maintModal.conTestPort2.val();
         }
 
+        if (maintModal.pickedTestPort == "") {
+            alert("MISSING TEST PORT");
+            return;
+        }
+
         maint.ckid.val(maintModal.ckid.val());
         maint.cls.val(maintModal.cls.val());
         maint.adsr.val(maintModal.adsr.val());
