@@ -1213,8 +1213,6 @@ var sysview = {
             $(".sysview_nodeActList > li").removeClass();
             $(".sysview_nodeActList > li").off('mouseenter mouseleave');;
             
-            // @@TODO find out why menu isnt changing according to node_status
-
             if (sysview.nodeStatPicked == "OOS") {
                 sysview.activeAct(['actDiscover','actStartNode']);
                 sysview.deactiveAct(['actLockNode','actUnlockNode','actViewAlm','actStopNode','actFindFac','actFindCkid'])
