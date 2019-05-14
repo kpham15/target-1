@@ -787,6 +787,13 @@ var sysview = {
         sysview.info["node" + n].mioX = mioX;
         sysview.info["node" + n].mioY = mioY;
 
+        for (i = 0; i < sysview.mioXPsta.length; i++) {
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + n].mioX[i].psta);
+        }
+        for (i = 0; i < sysview.mioYPsta.length; i++) {
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + n].mioY[i].psta);
+        }
+
     },
     
     // refreshPage: function() {
