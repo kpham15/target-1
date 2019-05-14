@@ -1968,12 +1968,12 @@ maintModal.newFacSearchBtn.click(function(){
 maintModal.submitBtn.click(function() {
     if (maintModal.act.val() == "MTC_CONN") {
 
-        if (maintModal.pickedTfac.val() == "") {
+        if (maintModal.pickedTfac == "") {
             alert ("MISSING FAC(Y)");
             return;
         }
 
-        if (maintModal.pickedFfac.val() == "") {
+        if (maintModal.pickedFfac == "") {
             alert("MISSING FAC(X)");
             return;
         }
