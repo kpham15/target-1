@@ -731,7 +731,11 @@ var sysview = {
         console.log(mioX);
         console.log(mioY);
 
-        console.log(sysview.info.length());
+        n = toString(node);
+
+        sysview.info["node" + n].mioX = mioX;
+        sysview.info["node" + n].mioY = mioY;
+
     },
     
     // refreshPage: function() {
