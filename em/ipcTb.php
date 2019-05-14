@@ -528,8 +528,6 @@ function dsp50msST($tp, $node,$port, $tbx, $tby, $userObj) {
 			throw new Exception("TEST BUS - THERE IS NO TEST CONNECTION AT THIS PORT", 50);
             
 		}
-		
-
 		//--------------------UP TO THIS POINT: ALL CHECKINGS ARE GOOD---------------------//
 		//------------CREATE CMD---------------------//
 		//-------Insert cmd to t_cmdque----------//
