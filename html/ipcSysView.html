@@ -494,6 +494,9 @@ var sysview = {
     nodeX:           $("#sysview_nodeX"),
     nodeY:           $("#sysview_nodeY"),
 
+    nodeXActive:     "",
+    nodeYActive:     "",
+
     nodeASD: "",
 
     info: {
@@ -784,6 +787,7 @@ var sysview = {
         sysview.info["node" + n].mioX = mioX;
         sysview.info["node" + n].mioY = mioY;
 
+
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + n].mioX[i].psta);
@@ -792,6 +796,7 @@ var sysview = {
         for (i = 0; i < sysview.mioYPsta.length; i++) {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + n].mioY[i].psta);
         }
+
 
     },
     
@@ -2153,6 +2158,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
 
     if (sysview.nodeSide == "X") {
+        sysview.nodeXActive = sysview.nodeIndex;
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
@@ -2161,6 +2167,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.activeMioX = sysview.mioX1.attr('id');
     }
     else {
+        sysview.nodeYActive = sysview.nodeIndex;
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
