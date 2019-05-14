@@ -778,16 +778,13 @@ var sysview = {
     },
 
     updateMio: function(node, mioX, mioY) {
-        console.log(mioX);
-        console.log(mioY);
-
         n = String(node);
 
         // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
         sysview.info["node" + n].mioX = mioX;
         sysview.info["node" + n].mioY = mioY;
 
-        for (i = 0; i < sysview.mioXPsta.length; i++) {
+        for (i = 2; i < 4; i++) {
             console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + n].mioX[i].psta);
             console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
