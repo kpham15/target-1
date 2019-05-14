@@ -1966,6 +1966,14 @@ maintModal.newFacSearchBtn.click(function(){
 
 
 maintModal.submitBtn.click(function() {
+    if (maintModal.ffac.val() == "") {
+        alert("MISSING FAC(X)");
+        return;
+    }
+    if (maintModal.tfac.val() == "") {
+        alert ("MISSING FAC(Y)");
+        return;
+    }
     if (maintModal.ckid.val() == '') {
         alert("MISSING CKID");
         return;
