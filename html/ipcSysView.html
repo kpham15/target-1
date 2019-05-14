@@ -496,6 +496,49 @@ var sysview = {
 
     nodeASD: "",
 
+    info: {
+        node1: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node2: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node3: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node4: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node5: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node6: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node7: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node8: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node9: {
+            mioX:    [],
+            mioY:    [],
+        },
+        node10: {
+            mioX:    [],
+            mioY:    [],
+        },
+    },
+
     nodeXId:         [],
     nodeYId:         [],
     mioX1:           $("#sysview_mioX1"),
@@ -687,6 +730,8 @@ var sysview = {
     updateMio: function(node, mioX, mioY) {
         console.log(mioX);
         console.log(mioY);
+
+        console.log(sysview.info.length());
     },
     
     // refreshPage: function() {
