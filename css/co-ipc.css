@@ -307,8 +307,8 @@ button[disabled]{
 }
 
 .addMioStyle {
-  border-left: 1px black solid;
-  border-right: 1px black solid;
+  border-left: .5px black solid;
+  border-right: .5px black solid;
 }
 
 .changeBG {
