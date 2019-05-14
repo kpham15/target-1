@@ -1968,16 +1968,20 @@ maintModal.newFacSearchBtn.click(function(){
 maintModal.submitBtn.click(function() {
     if (maintModal.act.val() == "MTC_CONN") {
 
-        if (maintModal.conTfac.val() == "" || maintModal.tfac.val() == "") {
+        if (maintModal.pickedTfac.val() == "") {
             alert ("MISSING FAC(Y)");
             return;
         }
 
-        if (maintModal.conFfac.val() == "" || maintModal.ffac.val() == "") {
+        if (maintModal.pickedFfac.val() == "") {
             alert("MISSING FAC(X)");
             return;
         }
     }
+
+    // if (maintModal.act.val() == "MTC_TEST") {
+    //     if (maintModal.conFacX.val() =="" || maintModal.)
+    // }
     if (maintModal.ckid.val() == '') {
         alert("MISSING CKID");
         return;
