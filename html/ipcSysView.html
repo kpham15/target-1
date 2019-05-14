@@ -764,10 +764,14 @@ var sysview = {
                 sysview.mioXIndex = 1;
                 sysview.mioYIndex = 1;
                 sysview.mioX1.addClass("addBGColor");
+                sysview.mioX1.addClass("activeMioStyle");
                 sysview.mioX1.siblings().removeClass("addBGColor");
+                sysview.mioX1.siblings().removeClass("activeMioStyle");
                 sysview.activeMioX = sysview.mioX1.attr('id');
                 sysview.mioY1.addClass("addBGColor");
+                sysview.mioY1.addClass("activeMioStyle");
                 sysview.mioY1.siblings().removeClass("addBGColor");
+                sysview.mioY1.siblings().removeClass("activeMioStyle");
                 sysview.activeMioY = sysview.mioY1.attr('id');
                 sysview.xy = 'x';
                 sysview.part1X.addClass("addBorder");
@@ -2183,7 +2187,9 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
+        sysview.mioX1.addClass("activeMioStyle");
         sysview.mioX1.siblings().removeClass("addBGColor");
+        sysview.mioX1.siblings().removeClass("activeMioStyle");
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
     }
@@ -2192,7 +2198,9 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
+        sysview.mioY1.addClass("activeMioStyle");
         sysview.mioY1.siblings().removeClass("addBGColor");
+        sysview.mioY1.siblings().removeClass("activeMioStyle");
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
 
@@ -2249,7 +2257,9 @@ $(document).on("click",".sysview_mio button",function() {
 
     //Add border to the row
     $(this).addClass("addBGColor"); //add class selected to current clicked row
+    $(this).addClass("activeMioStyle"); //add class selected to current clicked row
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
+    $(this).siblings().removeClass( "activeMioStyle" ); //remove class selected from rest of the rows  
 
     var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
     ptyp = ptyp.slice(0, 1);
