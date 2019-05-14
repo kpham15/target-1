@@ -791,6 +791,8 @@ var sysview = {
         sysview.info["node" + n].mioX = mioX;
         sysview.info["node" + n].mioY = mioY;
 
+        console.log(sysview.nodeXActive);
+        console.log(sysview.nodeYActive);
         var selectedNodeX = String(sysview.nodeXActive);
         var selectedNodeY = String(sysview.nodeYActive);
         var selectedMioXOldPsta = sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta;
