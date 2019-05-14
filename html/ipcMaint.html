@@ -1996,20 +1996,26 @@ maintModal.submitBtn.click(function() {
         if (maintModal.pick1.is(':checked')) { 
             maintModal.pickedTfac = maintModal.conTfac.val();
             maintModal.pickedFfac = maintModal.conFacX.val();
+            if (maintModal.pickedTfac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
+            if (maintModal.pickdFfac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
         }
         else if (maintModal.pick2.is(':checked')) {
             maintModal.pickedTfac = maintModal.conFacY.val();
             maintModal.pickedFfac = maintModal.conFfac.val();
-        }
-
-        if (maintModal.pickedTfac == "") {
-            alert ("MISSING FAC(Y)");
-            return;
-        }
-
-        if (maintModal.pickedFfac == "") {
-            alert("MISSING FAC(X)");
-            return;
+            if (maintModal.pickedTfac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
+            if (maintModal.pickedFfac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
         }
 
         maint.ckid.val(maintModal.ckid.val());
@@ -2058,15 +2064,26 @@ maintModal.submitBtn.click(function() {
         if (maintModal.pickTest1.is(':checked')) { 
             maintModal.pickedTestPort = maintModal.conTestPort1.val();
             maintModal.pickedTestFac = maintModal.conTestFacX.val();
+            if (maintModal.pickedTestPort == "") {
+                alert("MISSING TEST PORT");
+                return;
+            }
+            if (maintModal.pickedTestFac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
         }
         else if (maintModal.pickTest2.is(':checked')) {
             maintModal.pickedTestFac = maintModal.conTestFacY.val();
             maintModal.pickedTestPort = maintModal.conTestPort2.val();
-        }
-
-        if (maintModal.pickedTestPort == "") {
-            alert("MISSING TEST PORT");
-            return;
+            if (maintModal.pickedTestPort == "") {
+                alert("MISSING TEST PORT");
+                return;
+            }
+            if (maintModal.pickedTestFac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
         }
 
         maint.ckid.val(maintModal.ckid.val());
