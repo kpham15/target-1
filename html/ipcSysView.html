@@ -787,18 +787,17 @@ var sysview = {
     updateMio: function(node, mioX, mioY) {
         n = String(node);
 
-        // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
-        sysview.info["node" + n].mioX = mioX;
-        sysview.info["node" + n].mioY = mioY;
-
-        console.log(sysview.nodeXActive);
-        console.log(sysview.nodeYActive);
         var selectedNodeX = String(sysview.nodeXActive);
         var selectedNodeY = String(sysview.nodeYActive);
         var selectedMioXOldPsta = sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta;
         var selectedMioYOldPsta = sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta;
         var selectedPartX = String(sysview.partXNum);
         var selectedPartY = String(sysview.partYNum);
+
+        // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
+        sysview.info["node" + n].mioX = mioX;
+        sysview.info["node" + n].mioY = mioY;
+
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
