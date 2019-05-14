@@ -306,6 +306,11 @@ button[disabled]{
   background-color: #EEEEEE;
 }
 
+.addMioStyle {
+  border-left: 1px black solid;
+  border-right: 1px black solid;
+}
+
 .changeBG {
   background-color: red;
   padding:2px;
