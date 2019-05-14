@@ -12,7 +12,7 @@
     <div class="col-sm-6 row" style="padding-left: 15px">
         <div>
             <!-- X -->
-            <div id="sysview_nodeX" class="sysview_nodeX col-sm-12" style="font-size: 0px; margin-left: 15px; float: left; width: 95%; padding-left: 0px; padding-right: 0px;"> 
+            <div id="sysview_nodeX" class="sysview_nodeX col-sm-12 tabrow" style="font-size: 0px; margin-left: 15px; float: left; width: 95%; padding-left: 0px; padding-right: 0px;"> 
 
             </div>
             <!-- X -->
@@ -64,7 +64,7 @@
     <div class="col-sm-6 row" style="float: right; padding-right: 20px">
         <div>
             <!-- Y -->
-            <div id="sysview_nodeY" class="sysview_nodeY col-sm-12" style="font-size: 0px; margin-left: 20px; float: left; width: 95%; padding-left: 0px; padding-right: 0px;"> 
+            <div id="sysview_nodeY" class="sysview_nodeY col-sm-12 tabrow" style="font-size: 0px; margin-left: 20px; float: left; width: 95%; padding-left: 0px; padding-right: 0px;"> 
 
             </div>
             <!-- Y -->
@@ -2205,6 +2205,8 @@ var sysviewNodeModal = {
 $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function() {
 
     //Add border to the row
+    $(this).removeClass("selected");
+    $(this).addClass("selected");
     $(this).addClass("addBGColor"); //add class selected to current clicked row
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
 
