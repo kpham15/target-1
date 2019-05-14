@@ -1966,22 +1966,6 @@ maintModal.newFacSearchBtn.click(function(){
 
 
 maintModal.submitBtn.click(function() {
-    if (maintModal.act.val() == "MTC_CONN") {
-
-        if (maintModal.pickedTfac == "") {
-            alert ("MISSING FAC(Y)");
-            return;
-        }
-
-        if (maintModal.pickedFfac == "") {
-            alert("MISSING FAC(X)");
-            return;
-        }
-    }
-
-    // if (maintModal.act.val() == "MTC_TEST") {
-    //     if (maintModal.conFacX.val() =="" || maintModal.)
-    // }
     if (maintModal.ckid.val() == '') {
         alert("MISSING CKID");
         return;
@@ -2016,6 +2000,16 @@ maintModal.submitBtn.click(function() {
         else if (maintModal.pick2.is(':checked')) {
             maintModal.pickedTfac = maintModal.conFacY.val();
             maintModal.pickedFfac = maintModal.conFfac.val();
+        }
+
+        if (maintModal.pickedTfac == "") {
+            alert ("MISSING FAC(Y)");
+            return;
+        }
+
+        if (maintModal.pickedFfac == "") {
+            alert("MISSING FAC(X)");
+            return;
         }
 
         maint.ckid.val(maintModal.ckid.val());
