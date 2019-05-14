@@ -789,8 +789,10 @@ var sysview = {
 
         var selectedNodeX = String(sysview.nodeXActive);
         var selectedNodeY = String(sysview.nodeYActive);
-        var selectedMioXOldPsta = sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta;
-        var selectedMioYOldPsta = sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta;
+        var selectedMioXOldPsta = sysview.mioX1Psta.text();
+        var selectedMioYOldPsta = sysview.mioY1Psta.text();
+        // var selectedMioXOldPsta = sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta;
+        // var selectedMioYOldPsta = sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta;
         var selectedPartX = String(sysview.partXNum);
         var selectedPartY = String(sysview.partYNum);
 
