@@ -795,6 +795,8 @@ var sysview = {
         var selectedNodeY = String(sysview.nodeYActive);
         var selectedMioXOldPsta = sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta;
         var selectedMioYOldPsta = sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta;
+        var selectedPartX = String(sysview.partXNum);
+        var selectedPartY = String(sysview.partYNum);
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
@@ -806,8 +808,12 @@ var sysview = {
         }
 
         if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
-
+            sysview.queryX(sysview.partXNum);
         }
+        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta) {
+            sysview.queryY(sysview.partYNum);
+        }
+        
     },
     
     // refreshPage: function() {
