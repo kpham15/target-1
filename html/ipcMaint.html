@@ -2021,12 +2021,37 @@ maintModal.submitBtn.click(function() {
         maintModal.submitMtcConnect();
     } 
     else if (maintModal.act.val() == "MTC_DISCON") {
+        if (maintModal.discFFac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.discTFac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
+        
         maintModal.submitMtcDisconnect();
     }
     else if (maintModal.act.val() == "RESTORE_MTCD") {
+        if (maintModal.ffac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.tfac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
         maintModal.submitRestoreMtcd();
     }
     else if (maintModal.act.val() == "MTC_RESTORE") {
+        if (maintModal.ffac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.tfac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
         maintModal.submitMtcRestore();
     }
     else if (maintModal.act.val() == "MTC_TEST") {
