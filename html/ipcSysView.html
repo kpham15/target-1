@@ -551,6 +551,7 @@ var sysview = {
     mioX8:           $("#sysview_mioX8"),
     mioX9:           $("#sysview_mioX9"),
     mioX10:          $("#sysview_mioX10"),
+
     mioY1:           $("#sysview_mioY1"),
     mioY2:           $("#sysview_mioY2"),
     mioY3:           $("#sysview_mioY3"),
@@ -561,6 +562,55 @@ var sysview = {
     mioY8:           $("#sysview_mioY8"),
     mioY9:           $("#sysview_mioY9"),
     mioY10:          $("#sysview_mioY10"),
+
+    mioXPsta: [
+        $("#sysview_mioX1_psta"),
+        $("#sysview_mioX2_psta"),
+        $("#sysview_mioX3_psta"),
+        $("#sysview_mioX4_psta"),
+        $("#sysview_mioX5_psta"),
+        $("#sysview_mioX6_psta"),
+        $("#sysview_mioX7_psta"),
+        $("#sysview_mioX8_psta"),
+        $("#sysview_mioX9_psta"),
+        $("#sysview_mioX10_psta"),
+    ],
+
+    mioYPsta: [
+        $("#sysview_mioY1_psta"),
+        $("#sysview_mioY2_psta"),
+        $("#sysview_mioY3_psta"),
+        $("#sysview_mioY4_psta"),
+        $("#sysview_mioY5_psta"),
+        $("#sysview_mioY6_psta"),
+        $("#sysview_mioY7_psta"),
+        $("#sysview_mioY8_psta"),
+        $("#sysview_mioY9_psta"),
+        $("#sysview_mioY10_psta"),
+    ],
+
+    mioX1Psta:           $("#sysview_mioX1_psta"),
+    mioX2Psta:           $("#sysview_mioX2_psta"),
+    mioX3Psta:           $("#sysview_mioX3_psta"),
+    mioX4Psta:           $("#sysview_mioX4_psta"),
+    mioX5Psta:           $("#sysview_mioX5_psta"),
+    mioX6Psta:           $("#sysview_mioX6_psta"),
+    mioX7Psta:           $("#sysview_mioX7_psta"),
+    mioX8Psta:           $("#sysview_mioX8_psta"),
+    mioX9Psta:           $("#sysview_mioX9_psta"),
+    mioX10Psta:          $("#sysview_mioX10_psta"),
+
+    mioY1Psta:           $("#sysview_mioY1_psta"),
+    mioY2Psta:           $("#sysview_mioY2_psta"),
+    mioY3Psta:           $("#sysview_mioY3_psta"),
+    mioY4Psta:           $("#sysview_mioY4_psta"),
+    mioY5Psta:           $("#sysview_mioY5_psta"),
+    mioY6Psta:           $("#sysview_mioY6_psta"),
+    mioY7Psta:           $("#sysview_mioY7_psta"),
+    mioY8Psta:           $("#sysview_mioY8_psta"),
+    mioY9Psta:           $("#sysview_mioY9_psta"),
+    mioY10Psta:          $("#sysview_mioY10_psta"),
+
 
     x:              $("#sysview_x"),
     y:              $("#sysview_y"),
@@ -733,8 +783,7 @@ var sysview = {
 
         n = String(node);
 
-        console.log(n);
-
+        // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
         sysview.info["node" + n].mioX = mioX;
         sysview.info["node" + n].mioY = mioY;
 
