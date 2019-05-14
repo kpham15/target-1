@@ -1966,13 +1966,16 @@ maintModal.newFacSearchBtn.click(function(){
 
 
 maintModal.submitBtn.click(function() {
-    if (maintModal.ffac.val() == "") {
+    if (maintModal.act.val() == "MTC_CONN") {
+    if (maintModal.conFfac.val() == "" || maintModal.ffac.val() == "") {
         alert("MISSING FAC(X)");
         return;
     }
-    if (maintModal.tfac.val() == "") {
+    if (maintMododal.conTfac.val() == "" || maintModal.tfac.val() == "") {
         alert ("MISSING FAC(Y)");
         return;
+    }
+
     }
     if (maintModal.ckid.val() == '') {
         alert("MISSING CKID");
