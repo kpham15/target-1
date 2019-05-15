@@ -305,8 +305,8 @@
 		}
 		$row['node_psta'] = [];
 		$mxcNode = 1;
-		$mxcObj = new MXC($mxcNode);
-		$mxcObj->queryByNode($node);
+		$mxcObj = new MXC();
+		$mxcObj->queryByNode($mxcNode);
 		array_push($row['node_psta'], $nodeObj->rows);
 
 
