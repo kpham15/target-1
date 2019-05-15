@@ -97,7 +97,12 @@ class FTMODTABLE {
     public function add($ot, $pri, $cdd, $noscm, $rtype, $processingfile) {
         global $db;
 
-        $qry = "INSERT INTO t_ftmodification VALUES (0, '$ot', '$pri', '$cdd', '$noscm', '$rtype', '$processingfile')";
+        // $qry = "INSERT INTO t_ftmodification VALUES (0, '$ot', '$pri', '$cdd', '$noscm', '$rtype', '$processingfile')";
+
+        $qry = "INSERT INTO 
+                t_ftmodification (ot, pri, cdd, noscm, rtype, processing_file) 
+                VALUES ('$ot', '$pri', '$cdd', '$noscm', '$rtype', '$processingfile')";
+                
         $res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
