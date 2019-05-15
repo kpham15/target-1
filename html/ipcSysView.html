@@ -808,7 +808,7 @@ var sysview = {
 
 
         for (var i = 0; i < wc.nodes; i++) {
-            var n = i+1;
+            var n = i + 1;
             // Creates Big node buttons
 
 
@@ -859,9 +859,7 @@ var sysview = {
 
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeX].mioX[i]);
-            // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeY].mioY[i]);
@@ -1691,51 +1689,39 @@ var sysview = {
     hoverEvent: {
         node: function() {
             $(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
-                console.log(this.id.slice(this.id.indexOf("_") + 6));
-                console.log(sysview.nodeXActive);
-                console.log($(this).attr('id'));
-                console.log($(this).parent().attr('id'));
                 if ($(this).parent().attr('id') == "sysview_nodeX") {
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
-                        console.log(1);
                         return;
                     }
                     else {
                         $(this).addClass("addBGColor");
-                        console.log(2);
 
                     }
                 }
                 else {
                     if ($(this).attr('id') == sysview.nodeYActiveId) {
-                        console.log(3);
                         return;
 
                     }
                     else {
                         $(this).addClass("addBGColor");
-                        console.log(4);
 
                     }
                 }
             }, function() {
                 if ($(this).parent().attr('id') == "sysview_nodeX") {
-                    if ($(this).attr('id') == sysview.nodeXActiveId) {
-                        console.log(5);                        
+                    if ($(this).attr('id') == sysview.nodeXActiveId) {                      
                         return;
                     }
-                    else {
-                        console.log(6);                        
+                    else {                     
                         $(this).removeClass("addBGColor");
                     }
                 }
                 else {
-                    if ($(this).attr('id') == sysview.nodeYActiveId) {
-                        console.log(7);                        
+                    if ($(this).attr('id') == sysview.nodeYActiveId) {                   
                         return;
                     }
                     else {
-                        console.log(8);
                         $(this).removeClass("addBGColor");
                     }
                 }
@@ -2334,9 +2320,6 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     sysview.nodeIndex = parseInt(sysview.nodeActive.slice(13));
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
 
-    console.log(sysview.nodeActive)
-    console.log(sysview.nodeIndex)
-    console.log(sysview.nodeSide)
     if (sysview.nodeSide == "X") {
         sysview.nodeXActiveId = $(this).attr('id');
         sysview.nodeXActive = sysview.nodeIndex;
