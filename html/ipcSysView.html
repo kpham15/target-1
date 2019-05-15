@@ -1646,10 +1646,8 @@ var sysview = {
     hoverEvent: {
         node: function() {
             $(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
-                console.log(this.id.slice(this.id.indexOf("_") + 6));
-                console.log(sysview.nodeXActive);
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
-                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
+                    if ($(this).attr('id') == sysview.nodeXActive) {
                         return;
                     }
                     else {
@@ -1657,7 +1655,7 @@ var sysview = {
                     }
                 }
                 else {
-                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
+                    if ($(this).attr('id') == sysview.nodeYActive) {
                         return;
                     }
                     else {
@@ -1666,7 +1664,7 @@ var sysview = {
                 }
             }, function() {
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
-                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
+                    if ($(this).attr('id') == sysview.nodeXActive) {
                         return;
                     }
                     else {
@@ -1674,7 +1672,7 @@ var sysview = {
                     }
                 }
                 else {
-                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
+                    if ($(this).attr('id') == sysview.nodeYActive) {
                         return;
                     }
                     else {
@@ -2280,7 +2278,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     console.log(sysview.nodeIndex)
     console.log(sysview.nodeSide)
     if (sysview.nodeSide == "X") {
-        sysview.nodeXActive = sysview.nodeIndex;
+        sysview.nodeXActive = $(this).attr('id');
         sysview.selectedNodeX = String(sysview.nodeXActive);
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
@@ -2295,7 +2293,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         }
     }
     else {
-        sysview.nodeYActive = sysview.nodeIndex;
+        sysview.nodeYActive = $(this).attr('id');
         sysview.selectedNodeY = String(sysview.nodeYActive);
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
