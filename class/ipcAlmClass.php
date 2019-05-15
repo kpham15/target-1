@@ -134,7 +134,11 @@ class ALMS {
         $now = date('Y-m-d H:i:s', time());
         $remark = $now . ": NEW-ALARM " . $remark;
 
-        $qry = "INSERT INTO t_alms VALUES(0, '$almid', '', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now')";
+        // $qry = "INSERT INTO t_alms VALUES(0, '$almid', '', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now')";
+
+        $qry = "INSERT INTO t_alms (almid, sa, src, type, cond, sev, psta, ssta, remark, datetime) ";
+        $qry .= " VALUES ('$almid', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now');
+
         $res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
