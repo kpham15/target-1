@@ -9,7 +9,7 @@
         
     </div>
 
-
+    
     <div class="col-sm-6 row" style="padding-left: 15px">
         <div>
             <!-- X -->
@@ -1215,7 +1215,7 @@ var sysview = {
         for (var i = startIndex; i < endIndex; i++) {
             var port = sysview.portX[i].node + '-' + sysview.portX[i].slot + '-' + sysview.portX[i].ptyp + '-' + sysview.portX[i].pnum;
 
-            a.push('<button style="border-radius: 4px" type="button" class="addPortFontStyle" id="sysview_x' + sysview.portX[i].id + '">&nbsp;<div style="float:left">&nbsp;' + port + '</div><div style="float:right">' + sysview.portX[i].psta + '&nbsp;</div><br><div class="' + sysview.portX[i].fac + '" style="float:left; overflow: hidden; text-overflow: ellipsis; width: 65%; text-align: left">&nbsp;' + sysview.portX[i].fac + '</div><div style="float:right">' + sysview.portX[i].ftyp + '&nbsp;</div><div>&nbsp;' + sysview.portX[i].ckid + '</div></button>')
+            a.push('<button style="border-radius: 4px" type="button" id="sysview_x' + sysview.portX[i].id + '">&nbsp;<div style="float:left">&nbsp;' + port + '</div><div style="float:right">' + sysview.portX[i].psta + '&nbsp;</div><br><div class="' + sysview.portX[i].fac + '" style="float:left; overflow: hidden; text-overflow: ellipsis; width: 65%; text-align: left">&nbsp;' + sysview.portX[i].fac + '</div><div style="float:right">' + sysview.portX[i].ftyp + '&nbsp;</div><br>&nbsp;' + sysview.portX[i].ckid + '</button>')
             $(document).on("click","#sysview_" + sysview.xy + sysview.portX[i].id,function(){
                 
             })
@@ -1266,7 +1266,7 @@ var sysview = {
         for (var i = startIndex; i < endIndex; i++) {
             var port = sysview.portY[i].node + '-' + sysview.portY[i].slot + '-' + sysview.portY[i].ptyp + '-' + sysview.portY[i].pnum;
 
-            a.push('<button style="border-radius: 4px" type="button" class="addPortFontStyle" id="sysview_y' + sysview.portY[i].id + '">&nbsp;<div style="float:left">&nbsp;' + port + '</div><div style="float:right">' + sysview.portY[i].psta + '&nbsp;</div><br><div class="' + sysview.portY[i].fac + '" style="float:left; overflow: hidden; text-overflow: ellipsis; width: 65%; text-align: left">&nbsp;' + sysview.portY[i].fac + '</div><div style="float:right">' + sysview.portY[i].ftyp + '&nbsp;</div><br><div>&nbsp;' + sysview.portY[i].ckid + '</div></button>')
+            a.push('<button style="border-radius: 4px" type="button" id="sysview_y' + sysview.portY[i].id + '">&nbsp;<div style="float:left">&nbsp;' + port + '</div><div style="float:right">' + sysview.portY[i].psta + '&nbsp;</div><br><div class="' + sysview.portY[i].fac + '" style="float:left; overflow: hidden; text-overflow: ellipsis; width: 65%; text-align: left">&nbsp;' + sysview.portY[i].fac + '</div><div style="float:right">' + sysview.portY[i].ftyp + '&nbsp;</div><br>&nbsp;' + sysview.portY[i].ckid + '</button>')
             $(document).on("click","#sysview_" + sysview.xy + sysview.portY[i].id,function(){
                 
             })
