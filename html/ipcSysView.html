@@ -744,22 +744,22 @@ var sysview = {
 
                 // creates btns
                 b.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeX' + n + '">NODE-' + n + '</button>')
-                sysview.nodeXId.push(sysview.nodeX.children());
                 
                 // creates btns
                 c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
-                sysview.nodeYId.push(sysview.nodeY.children());
-                
-                sysview.nodeIndex = 1;
-                sysview.nodeXActive = 1;
-                sysview.nodeYActive = 1;
-
-                
+                                
             }
         }
+        
+        sysview.nodeIndex = 1;
+        sysview.nodeXActive = 1;
+        sysview.nodeYActive = 1;
         sysview.firstLoad = false;
         sysview.nodeX.html(b.join(""));
         sysview.nodeY.html(c.join(""));
+        sysview.nodeXId.push(sysview.nodeX.children());
+        sysview.nodeYId.push(sysview.nodeY.children());
+
         sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
         sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
 
