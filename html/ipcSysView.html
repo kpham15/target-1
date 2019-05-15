@@ -2320,7 +2320,7 @@ $(document).on("click",".sysview_part a",function() {
 sysviewModal.modal.on("hidden.bs.modal", sysviewModal.clearForm);
 
 
-// HERE WE WILL ADD ACTIONS FOR THE LIST
+// HERE WE WILL ADD ACTIONS FOR THE NODE MENU 
 $(".sysview_nodeActList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
@@ -2379,7 +2379,7 @@ $(".sysview_nodeActList > li").click(function(){
     }
 });
 
-// HERE WE WILL ADD ACTIONS FOR THE LIST
+// HERE WE WILL ADD ACTIONS FOR THE MIO MENU
 $(".sysview_mioActList > li").click(function(){
 
     if ($(this).text() == 'REFRESH') {
@@ -2411,7 +2411,7 @@ $(".sysview_mioActList > li").click(function(){
     }
 });
 
-
+// HERE WE WILL ADD ACTIONS FOR THE PORT MENU
 $(".sysview_actList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
