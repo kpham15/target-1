@@ -855,11 +855,12 @@ var sysview = {
         sysview.info["node" + n].mioY = mioY;
 
 
-        for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeX].mioX[i]);
+
+        for (i = 0; i < mioX.length; i++) {
+            $("#sysview_mioX" + (i + 1) + "_psta").text(mioX[i]);
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeY].mioY[i]);
+            $("#sysview_mioY" + (i + 1) + "_psta").text(mioY[i]);
         }
 
         if ($("#main_currentUser").text() == "") {
