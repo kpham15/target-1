@@ -2225,7 +2225,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     
 });
 
-$(".addNodeBorder").hover(function() {
+$(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
     var node = String(this.id.slice(this.id.indexOf("_") + 5));
 
     console.log(node);
