@@ -809,9 +809,7 @@ var sysview = {
 
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
-            // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
