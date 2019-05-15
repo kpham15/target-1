@@ -258,33 +258,6 @@
 			$row['sev'] = $almObj->rows[0]['sev'];
 		}
 		
-		// get number of nodes and loop to get alm stat for each node from t_alms
-		// initialize arrays to be able to push
-		$row['node_alm'] = [];
-		$row['node_stat'] = [];
-		$row['node_temp'] = [];
-		$row['node_volt'] = [];
-		$row['node_rack'] = [];
-
-		// get stat, temp, volt, rackID from t_nodes and push into intialized arrays
-		for ($i = 0; $i < $wcObj->nodes; $i++) {
-			
-			$node = $i + 1;
-			$nodeObj = new NODE($node);
-			array_push($row['node_stat'], $nodeObj->stat);
-			array_push($row['node_temp'], $nodeObj->temp);
-			array_push($row['node_volt'], $nodeObj->volt);
-			array_push($row['node_rack'], $nodeObj->rack);
-			
-			$almObj->queryAlmByNode($node);
-			if (count($almObj->rows) == 0) {
-				array_push($row['node_alm'], "NONE");
-			}
-			else {
-				array_push($row['node_alm'], $almObj->rows[0]['sev']);
-			}
-		}
-		
 		$unameObj = new USERS($uname);
 		if ($unameObj->rslt == 'success') {
 			$row['loginTime'] = $unameObj->login;
