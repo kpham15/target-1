@@ -514,6 +514,7 @@ var wc = {
                 sysview.nodeList.html(a.join(""));
 
 
+
                 for (var i = 0; i < obj.rows[0].node_alm.length; i++) {
                     var n = i+1;
                     $('#sysview_n' + n + '_btn').html("<small>Node " 
@@ -539,13 +540,15 @@ var wc = {
                     }
                 }
 
-                if (sysview.nodeIndex != 0) {
-                    $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
-                }
-
                 // bind node menu here
                 sysview.bindNodeMenu();
                 sysview.bindMioMenu();
+                
+                for (k=0; k < sysview.nodes; k++) {
+                    var node = k + 1;
+                    sysview.updateMio(node, obj.rows[0]['MIOX'][k], obj.rows[0]['MIOY'][k])
+                }
+                
 
                 for (k=0; k < sysview.nodes; k++) {
                     var node = k + 1;

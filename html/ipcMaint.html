@@ -1996,10 +1996,26 @@ maintModal.submitBtn.click(function() {
         if (maintModal.pick1.is(':checked')) { 
             maintModal.pickedTfac = maintModal.conTfac.val();
             maintModal.pickedFfac = maintModal.conFacX.val();
+            if (maintModal.pickedTfac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
+            if (maintModal.pickedFfac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
         }
         else if (maintModal.pick2.is(':checked')) {
             maintModal.pickedTfac = maintModal.conFacY.val();
             maintModal.pickedFfac = maintModal.conFfac.val();
+            if (maintModal.pickedTfac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
+            if (maintModal.pickedFfac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
         }
 
         maint.ckid.val(maintModal.ckid.val());
@@ -2011,22 +2027,65 @@ maintModal.submitBtn.click(function() {
         maintModal.submitMtcConnect();
     } 
     else if (maintModal.act.val() == "MTC_DISCON") {
+        if (maintModal.discFFac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.discTFac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
+        
         maintModal.submitMtcDisconnect();
     }
     else if (maintModal.act.val() == "RESTORE_MTCD") {
+        if (maintModal.ffac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.tfac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
         maintModal.submitRestoreMtcd();
     }
     else if (maintModal.act.val() == "MTC_RESTORE") {
+        if (maintModal.ffac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.tfac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
         maintModal.submitMtcRestore();
     }
     else if (maintModal.act.val() == "MTC_TEST") {
         if (maintModal.pickTest1.is(':checked')) { 
             maintModal.pickedTestPort = maintModal.conTestPort1.val();
             maintModal.pickedTestFac = maintModal.conTestFacX.val();
+            if (maintModal.pickedTestFac == "") {
+                alert("MISSING FAC(X)");
+                return;
+            }
+            if (maintModal.pickedTestPort == "") {
+                alert("MISSING TEST PORT");
+                return;
+            }
+            
         }
         else if (maintModal.pickTest2.is(':checked')) {
             maintModal.pickedTestFac = maintModal.conTestFacY.val();
             maintModal.pickedTestPort = maintModal.conTestPort2.val();
+            if (maintModal.pickedTestFac == "") {
+                alert("MISSING FAC(Y)");
+                return;
+            }
+            if (maintModal.pickedTestPort == "") {
+                alert("MISSING TEST PORT");
+                return;
+            }
+            
         }
 
         maint.ckid.val(maintModal.ckid.val());
@@ -2042,6 +2101,23 @@ maintModal.submitBtn.click(function() {
 			alert("One of new facilities must be the same with the old connection!")
             return;
 		}
+        if (maintModal.newFfac.val() == "") {
+            alert("MISSING FAC(X)");
+            return;
+        }
+        if (maintModal.newTfac.val() == "") {
+            alert("MISSING FAC(Y)");
+            return;
+        }
+        if (maintModal.newPortX.val() == "") {
+            alert("MISSING PORT(X)");
+            return;
+        }
+        if(maintModal.newPortY.val() == "") {
+            alert("MISSING PORT(Y)");
+            return;
+        }
+        
         maintModal.submitChange();
     }
 });
