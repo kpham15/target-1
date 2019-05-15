@@ -727,11 +727,6 @@ var sysview = {
         // run the first load of the tab
         for (var i = 0; i < wc.nodes; i++) {
             if (sysview.firstLoad && wc.nodes > 0) {
-                // var n = i+1;
-                // $('#sysview_n' + n + '_btn').addClass("addBorder");
-                // $('#sysview_n' + n + '_btn').siblings().removeClass("addBorder");
-                // $('#sysview_n1_btn').addClass("addBorder");
-                // $('#sysview_n1_btn').siblings().removeClass("addBorder");
 
                 sysview.nodesNum = parseInt(sysview.nodes);
 
@@ -2184,7 +2179,6 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     sysview.nodeActive = $(this).attr('id');
     sysview.nodeIndex = parseInt(sysview.nodeActive.slice(13));
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
-
     if (sysview.nodeSide == "X") {
         sysview.nodeXActive = sysview.nodeIndex;
         sysview.mioType = "X";
@@ -2193,6 +2187,9 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioX1.addClass("activeMioStyle");
         sysview.mioX1.siblings().removeClass("addBGColor");
         sysview.mioX1.siblings().removeClass("activeMioStyle");
+        for (i = 0; i < sysview.mioXPsta.length; i++) {
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
+        }
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
     }
@@ -2204,6 +2201,9 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioY1.addClass("activeMioStyle");
         sysview.mioY1.siblings().removeClass("addBGColor");
         sysview.mioY1.siblings().removeClass("activeMioStyle");
+        for (i = 0; i < sysview.mioYPsta.length; i++) {
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
+        }
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
 
