@@ -1649,6 +1649,7 @@ var sysview = {
                 console.log(this.id.slice(this.id.indexOf("_") + 6));
                 console.log(sysview.nodeXActive);
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
+                    console.log($(this).attr('id'));
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
                         return;
                     }
