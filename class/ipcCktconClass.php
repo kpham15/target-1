@@ -204,7 +204,7 @@ class CKTCON {
             return;
         }
         $con = $result["cktcon"];
-        $qry = "INSERT INTO t_cktcon VALUES (0, '$con', '$ckt_id', '$ckid', 1, '$ctyp', '$ctyp', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
+        $qry = "INSERT INTO t_cktcon (con,ckt_id,ckid,idx,ctyp,ctyp_o,fp_id,fport,fp_n,tp_id,tport,tp_n,path) VALUES ('$con', '$ckt_id', '$ckid', 1, '$ctyp', '$ctyp', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = FAIL;
@@ -315,7 +315,6 @@ class CKTCON {
         $this->rslt = SUCCESS;
         $this->reason = 'UPDATE_CKTCON_CTYP';
     }
-
 
     public function updPath($con, $idx, $path) {
         global $db;
