@@ -2226,10 +2226,12 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
 });
 
 $(".addNodeBorder").hover(function() {
-    // var node = String(this.id.slice(this.id.indexOf("_") + 5));
+    var node = String(this.id.slice(this.id.indexOf("_") + 5));
 
+    console.log(node);
+    console.log(this.id.slice(this.id.indexOf("_") + 5));
     if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
-        if (this.id.slice(this.id.indexOf("_") + 5) == sysview.nodeXActive) {
+        if (node == sysview.nodeXActive) {
             return;
         }
         else {
