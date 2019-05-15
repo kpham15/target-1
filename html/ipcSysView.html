@@ -626,6 +626,13 @@ var sysview = {
     selectedPortX:  [],
     selectedPortY:  [],
 
+    selectedNodeX:          1,
+    selectedNodeY:          1,
+    selectedMioXOldPsta:    1,
+    selectedMioYOldPsta:    1,
+    selectedPartX:          1,
+    selectedPartY:          1,
+
     xy:             0,
     ptyp:           0,
     node:           [],
@@ -791,12 +798,12 @@ var sysview = {
     updateMio: function(node, mioX, mioY) {
         n = String(node);
 
-        var selectedNodeX = String(sysview.nodeXActive);
-        var selectedNodeY = String(sysview.nodeYActive);
-        var selectedMioXOldPsta = sysview.mioX1Psta.text();
-        var selectedMioYOldPsta = sysview.mioY1Psta.text();
-        var selectedPartX = String(sysview.partXNum);
-        var selectedPartY = String(sysview.partYNum);
+        sysview.selectedNodeX = String(sysview.nodeXActive);
+        sysview.selectedNodeY = String(sysview.nodeYActive);
+        sysview.selectedMioXOldPsta = sysview.mioX1Psta.text();
+        sysview.selectedMioYOldPsta = sysview.mioY1Psta.text();
+        sysview.selectedPartX = String(sysview.partXNum);
+        sysview.selectedPartY = String(sysview.partYNum);
 
         // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
         sysview.info["node" + n].mioX = mioX;
@@ -804,20 +811,20 @@ var sysview = {
 
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeX].mioX[i].psta);
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeY].mioY[i].psta);
         }
 
         if ($("#main_currentUser").text() == "") {
             return;
         }
         
-        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
+        if (sysview.selectedMioXOldPsta != sysview.info['node' + sysview.selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
             sysview.queryX(sysview.partXNum);
         }
-        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta) {
+        if (sysview.selectedMioYOldPsta != sysview.info['node' + sysview.selectedNodeY].mioY[sysview.mioYIndex - 1].psta) {
             sysview.queryY(sysview.partYNum);
         }
         
