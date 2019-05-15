@@ -754,14 +754,14 @@ var sysview = {
                 sysview.nodeXActive = 1;
                 sysview.nodeYActive = 1;
 
-                sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
-                sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
-
+                
             }
         }
         sysview.firstLoad = false;
         sysview.nodeX.html(b.join(""));
         sysview.nodeY.html(c.join(""));
+        sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
+        sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
 
         $("#sysview_nodeX1").addClass("addBGColor");
         $("#sysview_nodeX1").addClass("addNodeBorder");
