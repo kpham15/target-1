@@ -759,12 +759,12 @@ var sysview = {
                 sysview.nodeXActive = 1;
                 sysview.nodeYActive = 1;
                 $("#sysview_nodeX1").addClass("addBGColor");
-                $("#sysview_nodeX1").addClass("addMioStyle");
-                $("#sysview_nodeX1").siblings().addClass("addMioStyle");
+                $("#sysview_nodeX1").addClass("addNodeBorder");
+                $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
                 $("#sysview_nodeX1").siblings().removeClass("addBGColor");
                 $("#sysview_nodeY1").addClass("addBGColor");
-                $("#sysview_nodeY1").addClass("addMioStyle");
-                $("#sysview_nodeY1").addClass("addMioStyle");
+                $("#sysview_nodeY1").addClass("addNodeBorder");
+                $("#sysview_nodeY1").addClass("addNodeBorder");
                 $("#sysview_nodeY1").siblings().removeClass("addBGColor");
                 sysview.mioXIndex = 1;
                 sysview.mioYIndex = 1;
@@ -809,20 +809,20 @@ var sysview = {
 
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i]);
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i]);
         }
 
         if ($("#main_currentUser").text() == "") {
             return;
         }
         
-        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
+        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1]) {
             sysview.queryX(sysview.partXNum);
         }
-        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta) {
+        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1]) {
             sysview.queryY(sysview.partYNum);
         }
         

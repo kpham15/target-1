@@ -306,6 +306,12 @@ button[disabled]{
   background-color: #EEEEEE;
 }
 
+.addNodeBorder {
+  border-left: .5px black solid;
+  border-right: .5px black solid;
+  border-top: 1px black solid;
+}
+
 .addMioStyle {
   border-left: .5px black solid;
   border-right: .5px black solid;
