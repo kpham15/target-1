@@ -545,9 +545,6 @@ var sysview = {
 
     nodeXId:         [],
     nodeYId:         [],
-    nodeXActiveId:   "",
-    nodeYActiveId:   "",
-    
     mioX1:           $("#sysview_mioX1"),
     mioX2:           $("#sysview_mioX2"),
     mioX3:           $("#sysview_mioX3"),
@@ -1649,8 +1646,10 @@ var sysview = {
     hoverEvent: {
         node: function() {
             $(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
+                console.log(this.id.slice(this.id.indexOf("_") + 6));
+                console.log(sysview.nodeXActive);
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
-                    if ($(this).attr('id') == sysview.nodeXActive) {
+                    if ($(this).attr('id') == sysview.nodeXActiveId) {
                         return;
                     }
                     else {
@@ -1658,7 +1657,7 @@ var sysview = {
                     }
                 }
                 else {
-                    if ($(this).attr('id') == sysview.nodeYActive) {
+                    if ($(this).attr('id') == sysview.nodeYActiveId) {
                         return;
                     }
                     else {
@@ -1667,7 +1666,7 @@ var sysview = {
                 }
             }, function() {
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
-                    if ($(this).attr('id') == sysview.nodeXActive) {
+                    if ($(this).attr('id') == sysview.nodeXActiveId) {
                         return;
                     }
                     else {
@@ -1675,7 +1674,7 @@ var sysview = {
                     }
                 }
                 else {
-                    if ($(this).attr('id') == sysview.nodeYActive) {
+                    if ($(this).attr('id') == sysview.nodeYActiveId) {
                         return;
                     }
                     else {
@@ -2281,7 +2280,8 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     console.log(sysview.nodeIndex)
     console.log(sysview.nodeSide)
     if (sysview.nodeSide == "X") {
-        sysview.nodeXActive = $(this).attr('id');
+        sysview.nodeXActiveId = $(this).attr('id');
+        sysview.nodeXActive = sysview.nodeIndex;
         sysview.selectedNodeX = String(sysview.nodeXActive);
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
@@ -2296,7 +2296,8 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         }
     }
     else {
-        sysview.nodeYActive = $(this).attr('id');
+        sysview.nodeYActiveId = $(this).attr('id');
+        sysview.nodeYActive = sysview.nodeIndex;
         sysview.selectedNodeY = String(sysview.nodeYActive);
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
