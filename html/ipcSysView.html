@@ -1646,7 +1646,9 @@ var sysview = {
     hoverEvent: {
         node: function() {
             $(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
-                if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+                console.log(this.id.slice(this.id.indexOf("_") + 6));
+                console.log(sysview.nodeXActive);
+                if ($(this).parent().hasClass(".sysview_nodeX")) {
                     if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
                         return;
                     }
@@ -1663,7 +1665,7 @@ var sysview = {
                     }
                 }
             }, function() {
-                if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+                if ($(this).parent().hasClass(".sysview_nodeX")) {
                     if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
                         return;
                     }
