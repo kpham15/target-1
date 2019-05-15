@@ -1677,6 +1677,48 @@ var sysview = {
                     }
                 }
             });
+        },
+
+        mio: function() {
+            $(".sysview_mio button").hover(function() {
+                var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
+                ptyp = ptyp.slice(0, 1);
+                if (ptyp == "X") {
+                    if ($(this).attr('id') == sysview.activeMioX) {
+                        return;
+                    }
+                    else {
+                        $(this).addClass("addBGColor");
+                    }
+                }
+                else {
+                    if ($(this).attr('id') == sysview.activeMioY) {
+                        return;
+                    }
+                    else {
+                        $(this).addClass("addBGColor");
+                    }
+                }
+            }, function() {
+                var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
+                ptyp = ptyp.slice(0, 1);
+                if (ptyp == "X") {
+                    if ($(this).attr('id') == sysview.activeMioX) {
+                        return;
+                    }
+                    else {
+                        $(this).removeClass("addBGColor");
+                    }
+                }
+                else {
+                    if ($(this).attr('id') == sysview.activeMioY) {
+                        return;
+                    }
+                    else {
+                        $(this).removeClass("addBGColor");
+                    }
+                }
+            });
         }
     }
 }
@@ -2267,81 +2309,6 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     
 });
 
-$(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
-    if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
-        if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
-            return;
-        }
-        else {
-            $(this).addClass("addBGColor");
-        }
-    }
-    else {
-        if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
-            return;
-        }
-        else {
-            $(this).addClass("addBGColor");
-        }
-    }
-}, function() {
-    if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
-        if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
-            return;
-        }
-        else {
-            $(this).removeClass("addBGColor");
-        }
-    }
-    else {
-        if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
-            return;
-        }
-        else {
-            $(this).removeClass("addBGColor");
-        }
-    }
-});
-
-$(".sysview_mio button").hover(function() {
-    var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
-    ptyp = ptyp.slice(0, 1);
-    if (ptyp == "X") {
-        if ($(this).attr('id') == sysview.activeMioX) {
-            return;
-        }
-        else {
-            $(this).addClass("addBGColor");
-        }
-    }
-    else {
-        if ($(this).attr('id') == sysview.activeMioY) {
-            return;
-        }
-        else {
-            $(this).addClass("addBGColor");
-        }
-    }
-}, function() {
-    var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
-    ptyp = ptyp.slice(0, 1);
-    if (ptyp == "X") {
-        if ($(this).attr('id') == sysview.activeMioX) {
-            return;
-        }
-        else {
-            $(this).removeClass("addBGColor");
-        }
-    }
-    else {
-        if ($(this).attr('id') == sysview.activeMioY) {
-            return;
-        }
-        else {
-            $(this).removeClass("addBGColor");
-        }
-    }
-});
 
 $(document).on("click",".sysview_mio button",function() {
 
