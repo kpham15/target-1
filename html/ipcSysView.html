@@ -730,42 +730,6 @@ var sysview = {
         //         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
         //     }
         // }
-            var a = [];
-                var n = i+1;
-                a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>')
-            // creates btns
-            sysview.nodeList.html(a.join(""));
-
-
-
-            for (var i = 0; i < obj.rows[0].node_alm.length; i++) {
-                var n = i+1;
-                $('#sysview_n' + n + '_btn').html("<small>Node " 
-                    + n + "<br>" + obj.rows[0].node_stat[i] 
-                    + "<br>" + "Alm: " + obj.rows[0].node_alm[i] 
-                    + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" 
-                        + obj.rows[0].node_temp[i] + "  |  " 
-                        + obj.rows[0].node_volt[i] + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " 
-                            + obj.rows[0].node_rack[i] + "</div></div>");
-
-                $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
-                if (obj.rows[0].node_alm[i] == "MAJ") {
-                    $("#sysview_n" + n + '_btn').css("background-color", "#ffa500");
-                }
-                else if (obj.rows[0].node_alm[i] == "MIN") {
-                    $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
-                }
-                else if (obj.rows[0].node_alm[i] == "CRI") {
-                    $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
-                }
-                else if (obj.rows[0].node_alm[i] == "NONE") {
-                    $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
-                }
-            }
-
-        if (sysview.nodeIndex != 0) {
-            $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
-        }
             
         var a = [];
         var b = [];
