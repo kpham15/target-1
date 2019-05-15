@@ -306,6 +306,7 @@
 			$noderows = $mxcObj->rows;
 
 			$nodeinfo = [
+				node => $node,
 				node_alm => '',
 				node_stat => $nodeObj->stat,
 				node_volt => $nodeObj->volt,
