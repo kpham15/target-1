@@ -1146,8 +1146,8 @@ var sysview = {
                 
             }
             else if (sysview.nodeStatPicked == "INS") {
-                sysview.activeAct(['actLockNode','actUnlockNode','actStopNode','actViewAlm','actFindFac','actFindCkid'])
-                sysview.deactiveAct(['actDiscover','actStartNode'])
+                sysview.activeAct(['actLockNode','actStopNode','actViewAlm','actFindFac','actFindCkid'])
+                sysview.deactiveAct(['actDiscover','actStartNode','actUnlockNode'])
                 // sysview.actLockNode.hover(
                 //     function () {$(this).addClass('activeAction')},
                 //     function () {$(this).removeClass('activeAction')},
@@ -1183,7 +1183,7 @@ var sysview = {
             }
             else if (sysview.nodeStatPicked == "LCK") {
                 sysview.activeAct(['actUnlockNode'])
-                sysview.deactivateAct(['actStartNode', 'actLockNode', 'actDiscover', 'actViewAlm', 'actStopNode'])
+                sysview.deactiveAct(['actStartNode', 'actLockNode', 'actDiscover', 'actViewAlm', 'actStopNode'])
             }
 
 
