@@ -502,48 +502,7 @@ var sysview = {
 
     nodeASD: "",
 
-    info: {
-        node1: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node2: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node3: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node4: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node5: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node6: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node7: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node8: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node9: {
-            mioX:    [],
-            mioY:    [],
-        },
-        node10: {
-            mioX:    [],
-            mioY:    [],
-        },
-    },
+    info: [],
 
     nodeXId:         [],
     nodeYId:         [],
@@ -850,18 +809,15 @@ var sysview = {
         sysview.selectedPartX = String(sysview.partXNum);
         sysview.selectedPartY = String(sysview.partYNum);
 
-        // Puts MIO info from X and Y into appropriate destination inside of Object sysview.info
-        sysview.info["node" + n].mioX = mioX;
-        sysview.info["node" + n].mioY = mioY;
-
-
-
-        console.log(mioX.length);
         for (i = 0; i < mioX.length; i++) {
-            $("#sysview_mioX" + (i + 1) + "_psta").text(mioX[i]);
+            if (sysview.nodeXActive == node) {
+                $("#sysview_mioX" + (i + 1) + "_psta").text(mioX[i]);
+            }
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#sysview_mioY" + (i + 1) + "_psta").text(mioY[i]);
+            if (sysview.nodeYActive == node) {
+                $("#sysview_mioY" + (i + 1) + "_psta").text(mioY[i]);
+            }
         }
 
         if ($("#main_currentUser").text() == "") {
