@@ -2225,6 +2225,44 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     
 });
 
+$(".addNodeBorder").hover(function() {
+    // var node = String(this.id.slice(this.id.indexOf("_") + 5));
+
+    if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+        if (this.id.slice(this.id.indexOf("_") + 5) == sysview.nodeXActive) {
+            return;
+        }
+        else {
+            $(this).addClass("addBGColor");
+        }
+    }
+    else {
+        if (this.id.slice(this.id.indexOf("_") + 5) == sysview.nodeYActive) {
+            return;
+        }
+        else {
+            $(this).addClass("addBGColor");
+        }
+    }
+}, function() {
+    if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+        if (this.id.slice(this.id.indexOf("_") + 5) == sysview.nodeXActive) {
+            return;
+        }
+        else {
+            $(this).removeClass("addBGColor");
+        }
+    }
+    else {
+        if (this.id.slice(this.id.indexOf("_") + 5) == sysview.nodeYActive) {
+            return;
+        }
+        else {
+            $(this).removeClass("addBGColor");
+        }
+    }
+});
+
 $(".sysview_mio button").hover(function() {
     var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
     ptyp = ptyp.slice(0, 1);
