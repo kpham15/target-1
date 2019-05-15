@@ -345,6 +345,8 @@
 			
 		}
 		$row['node_psta'] = $nodePsta;
+		$row['MIOX'] = $miox;
+		$row['MIOY'] = $mioy;
 
 		
 		// $row['MIOY'] = [];
