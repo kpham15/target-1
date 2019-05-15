@@ -497,6 +497,8 @@ var sysview = {
 
     nodeXActive:     1,
     nodeYActive:     1,
+    nodeXActiveId:   "",
+    nodeYActiveId:   "",
 
     nodeASD: "",
 
@@ -760,6 +762,10 @@ var sysview = {
                 sysview.nodeIndex = 1;
                 sysview.nodeXActive = 1;
                 sysview.nodeYActive = 1;
+
+                sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
+                sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
+
                 $("#sysview_nodeX1").addClass("addBGColor");
                 $("#sysview_nodeX1").addClass("addNodeBorder");
                 $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
