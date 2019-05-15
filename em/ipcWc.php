@@ -332,10 +332,10 @@
 			$mioy = [];
 			for ($n = 0; $n < count($nodeinfo); $n++) {
 				if($nodeinfo[$n]['type'] == "MIOX" ) {
-					$miox[] = $nodeinfo[$n]['psta'];
+					$miox[] = ['psta' => $nodeinfo[$n]['psta']];
 				}
 				if ($nodeinfo[$n]['type'] == "MIOY") {
-					$mioy[] = $nodeinfo[$n]['psta'];
+					$mioy[] = ['psta' => $nodeinfo[$n]['psta']];
 				}
 
 			}
