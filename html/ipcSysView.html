@@ -815,21 +815,21 @@ var sysview = {
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i]);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeX].mioX[i]);
             // console.log($("#" + sysview.mioXPsta[i].attr('id')).text());
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i]);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeY].mioY[i]);
         }
 
         if ($("#main_currentUser").text() == "") {
             return;
         }
         
-        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1]) {
+        if (sysview.selectedMioXOldPsta != sysview.info['node' + sysview.selectedNodeX].mioX[sysview.mioXIndex - 1]) {
             sysview.queryX(sysview.partXNum);
         }
-        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1]) {
+        if (sysview.selectedMioYOldPsta != sysview.info['node' + sysview.selectedNodeY].mioY[sysview.mioYIndex - 1]) {
             sysview.queryY(sysview.partYNum);
         }
         
