@@ -731,7 +731,6 @@ var sysview = {
         //     }
         // }
             
-        var a = [];
         var b = [];
         var c = [];
         sysview.nodeXId = [];
@@ -742,9 +741,6 @@ var sysview = {
             if (sysview.firstLoad && wc.nodes > 0) {
 
                 var n = i + 1;
-
-                // Creates Big node buttons
-                a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>')
 
                 // creates btns
                 b.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeX' + n + '">NODE-' + n + '</button>')
@@ -791,7 +787,6 @@ var sysview = {
             }
         }
         sysview.firstLoad = false;
-        sysview.nodeList.html(a.join(""));
         sysview.nodeX.html(b.join(""));
         sysview.nodeY.html(c.join(""));
 
@@ -804,8 +799,13 @@ var sysview = {
     },
 
     updateNode: function(nodeInfo) {
+        var a = [];
         for (var i = 0; i < wc.nodes; i++) {
             var n = i+1;
+            // Creates Big node buttons
+            a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>')
+
+
             $('#sysview_n' + n + '_btn').html("<small>Node " 
                 + n + "<br>" + nodeInfo[i].node_stat 
                 + "<br>" + "Alm: " + nodeInfo[i].node_alm 
@@ -829,6 +829,8 @@ var sysview = {
             }
             sysview.updateMio(n, nodeInfo[i].MIOX, nodeInfo[i].MIOY);
         }
+
+        sysview.nodeList.html(a.join(""));
 
         // bind node menu here
         sysview.bindNodeMenu(nodeInfo);
