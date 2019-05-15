@@ -117,7 +117,13 @@ class FTRELEASE {
     public function add($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop) {
         global $db;
 
-        $qry = "INSERT INTO t_ftrelease VALUES (0, '$sot', '$ot', '$rot', '$cls', '$oc', '$adsr', '$act', '$ftyp', '$fac', '$fdd_int', '$dd_int', '$rtyp', '$rt', '$jcond', '$jeop')";
+        // $qry = "INSERT INTO t_ftrelease VALUES (0, '$sot', '$ot', '$rot', '$cls', '$oc', '$adsr', '$act', '$ftyp', '$fac', '$fdd_int', '$dd_int', '$rtyp', '$rt', '$jcond', '$jeop')";
+
+        $qry = "INSERT INTO t_ftrelease 
+                (sot, ot, rot, cls, oc, adsr, act, ftyp, fac, fdd_int, dd_int, rtyp, rt, jcond, jeop) 
+                VALUES 
+                ('$sot', '$ot', '$rot', '$cls', '$oc', '$adsr', '$act', '$ftyp', '$fac', '$fdd_int', '$dd_int', '$rtyp', '$rt', '$jcond', '$jeop')";
+
         $res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
