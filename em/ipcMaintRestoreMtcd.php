@@ -235,25 +235,42 @@
             $mtcdObj = $tfacObj->portObj;
             $tstObj = $ffacObj->portObj;
         }
-
+        echo 'bbbbb';
         // now, process the MTC_RESTORE
-        // 1) locate the PATH and open all relays
-        $path_id = 0;
-        /* will enable after 100% non-blocking test is done */
-        $pathObj = new PATH($ffacObj->port, $tfacObj->port);
-		$pathObj->load();
-        if($pathObj->rslt == 'fail') {
-            $result['rslt'] = 'fail';
-            $result['jeop'] = "SP5:UNABLE TO LOAD PATH";            
-            $result['reason'] = "MAINTENANCE DISCONNECT - " . $pathObj->reason;
-            return $result; 
+        // check if TEST PATH using dedicated test port or not
+		// if yes, then delete tbus path
+		// if no, (meaning test path using both normal ports), delete testpath in t_path table
+		if($tstObj->ssta == 'TST_SF' || $tstObj->ssta == 'TST_UAS') {
+			//get tbus path id
+            $tbpath_id = $cktconObj->tbus;
+            print_r($tbpath_id);
+			$tbusObj = new TBUS();
+			$tbusObj->deleteTBpath($tbpath_id);
+			if($tbusObj->rslt == 'fail') {
+				$result['rslt'] = 'fail';
+				$result['jeop'] = "SP5:$tbusObj->reason";            
+				$result['reason'] = "MAINTENANCE DISCONNECT - " . $tbusObj->reason;
+				return $result; 
+			}
+
         }
-        $pathObj->resetPath();
-		
-		// 2) delete the PATH from t_path
-		$pathObj->drop();
-        
-        
+        else {
+            // 1) locate the PATH and open all relays
+            $path_id = 0;
+            /* will enable after 100% non-blocking test is done */
+            $pathObj = new PATH($ffacObj->port, $tfacObj->port);
+            $pathObj->load();
+            if($pathObj->rslt == 'fail') {
+                $result['rslt'] = 'fail';
+                $result['jeop'] = "SP5:UNABLE TO LOAD PATH";            
+                $result['reason'] = "MAINTENANCE DISCONNECT - " . $pathObj->reason;
+                return $result; 
+            }
+            $pathObj->resetPath();
+            
+            // 2) delete the PATH from t_path
+            $pathObj->drop();
+        }
         // 3) delete MAINT CKTCON IDX
         $cktconObj->deleteIdx($cktconObj->con,$maint_idx);
         if ($cktconObj->rslt == FAIL) {

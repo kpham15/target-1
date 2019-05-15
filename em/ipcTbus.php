@@ -43,8 +43,8 @@ if (isset($_POST['port'])) {
 $evtLog = new EVENTLOG($user, "CONFIGURATION", "SETUP TEST BUS", $act, '');
     
 //Dispatch to functions
-if ($act == "checkAvailTbus") {
-    $result = checkAvailTbus($fac);
+if ($act == "queryTBpath") {
+    $result = queryTBpath($fac);
 	echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -59,7 +59,7 @@ else {
 	return;
 }
 
-function checkAvailTbus($fac) {
+function queryTBpath($fac) {
     // the fac must exist in DB 
     $facObj = new FAC($fac);
     if ($facObj->rslt == FAIL) {
@@ -77,7 +77,7 @@ function checkAvailTbus($fac) {
     $node = $facObj->portObj->node;
     $tb = $facObj->portObj->ptyp;
     $tbusObj = new TBUS();
-    $tbusObj->checkAvailable($node, $tb);
+    $tbusObj->queryTBpath($node, $tb);
 
     $result['rslt'] = $tbusObj->rslt;
     $result['reason'] = $tbusObj->reason;

@@ -18,7 +18,7 @@ class TBUS {
 
     
     
-    public function checkAvailable($node, $tb) {
+    public function queryTBpath($node, $tb) {
         global $db;
 
         $qry = "SELECT * FROM t_tbus WHERE node='$node' and tb='$tb' ";
@@ -42,7 +42,7 @@ class TBUS {
         }
     }
 
-    public function addTBus($node, $tb, $zport, $port) {
+    public function addTBpath($node, $tb, $zport, $port) {
         global $db;
 
         $qry = "INSERT INTO t_tbus (node,tb,zport,port) VALUES($node,'$tb','$zport','$port')";
@@ -53,8 +53,24 @@ class TBUS {
         }
         else {
             $this->rslt = "success";
-            $this->reason = "TBUS_ADDED";
+            $this->reason = "TBUS PATH ADDED";
             $this->id = $db->insert_id;
+        }
+    }
+
+    public function deleteTBpath($id) {
+        global $db;
+
+        $qry = "DELETE FROM t_tbus WHERE id=$id";
+        echo $qry;
+        $res = $db->query($qry);
+        if(!$res) {
+            $this->rslt = 'fail';
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $this->rslt = "success";
+            $this->reason = "TBUS PATH DELETED";
         }
     }
   

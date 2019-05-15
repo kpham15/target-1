@@ -1682,11 +1682,11 @@ var maintModal = {
         });
     },
 
-    checkAvailTbus: function(fac) {
+    queryTBpath: function(fac) {
         $.post(ipcDispatch,
         {     
             api:    "ipcTbus",
-            act:	"checkAvailTbus",
+            act:	"queryTBpath",
             fac:    fac,
             user:	$('#main_currentUser').text()
         },
@@ -2382,7 +2382,7 @@ maintModal.pickTest1.click(function() {
     if(maintModal.pickTest1.is(':checked')) { 
         maintModal.conTestPort1.prop("disabled", false);
         maintModal.conTestPort2.prop("disabled", true);
-        maintModal.checkAvailTbus(maintModal.conTestFacX.val());
+        maintModal.queryTBpath(maintModal.conTestFacX.val());
     }
 });
 
@@ -2390,7 +2390,7 @@ maintModal.pickTest2.click(function() {
     if(maintModal.pickTest2.is(':checked')) { 
         maintModal.conTestPort2.prop("disabled", false);
         maintModal.conTestPort1.prop("disabled", true);
-        maintModal.checkAvailTbus(maintModal.conTestFacY.val());
+        maintModal.queryTBpath(maintModal.conTestFacY.val());
     }
 });
 

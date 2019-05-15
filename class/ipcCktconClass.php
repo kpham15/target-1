@@ -22,6 +22,7 @@ class CKTCON {
     public $tport = '';
     public $tp_n = 0;
     public $path = 0;
+    public $tbus = 0;
     
     public $rslt = "";
     public $reason = "";
@@ -78,6 +79,7 @@ class CKTCON {
                 $this->fport = $this->rows[$i]['fport'];
                 $this->tport = $this->rows[$i]['tport'];
                 $this->path = $this->rows[$i]['path'];
+                $this->tbus = $this->rows[$i]['tbus'];
                 $this->rslt = SUCCESS;
                 $this->reason = "LOAD IDX";
                 return TRUE;
@@ -453,7 +455,7 @@ class CKTCON {
             $this->reason = mysqli_error($db);
             return;
         }
-
+        $this->tbus = $tbusId;
         $this->rslt = SUCCESS;
         $this->reason = 'TBUS UPDATED';
     }

@@ -610,7 +610,7 @@
         $node = $ffacObj->portObj->node;
         $tb = $ffacObj->portObj->ptyp;
         $tbusObj = new TBUS();
-        $tbusObj->checkAvailable($node, $tb);
+        $tbusObj->queryTBpath($node, $tb);
         if($tbusObj->rslt == 'fail') {
             $result['rslt'] = $tbusObj->rslt;
             $result['jeop'] = "SP5:$tbusObj->reason";
@@ -740,7 +740,7 @@
         //Ready to update table
 
         //add new testpath
-        $tbusObj->addTBus($node,$tb, $tstportObj->port, $fportObj->port);
+        $tbusObj->addTBpath($node,$tb, $tstportObj->port, $fportObj->port);
         if($tbusObj->rslt == 'fail') {
             $result['rslt'] = $tbusObj->rslt;
             $result['jeop'] = "SP5:".$tbusObj->reason;            
