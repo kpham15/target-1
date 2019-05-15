@@ -348,6 +348,16 @@
 				}
 			});
 
+			usort($mioy_rows, function($a, $b) {
+				if ($a['slot'] === $b['slot']) {
+					return 0;
+				} else if ($a['slot'] > $b['slot']) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
+
 			$miox = array_column($miox_rows, 'psta');
 			$mioy = array_column($mioy_rows, 'psta');
 
