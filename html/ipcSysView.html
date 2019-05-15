@@ -730,33 +730,64 @@ var sysview = {
         //         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
         //     }
         // }
-        if(sysview.nodeIndex != 0)
+            var a = [];
+                var n = i+1;
+                a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>')
+            // creates btns
+            sysview.nodeList.html(a.join(""));
+
+
+
+            for (var i = 0; i < obj.rows[0].node_alm.length; i++) {
+                var n = i+1;
+                $('#sysview_n' + n + '_btn').html("<small>Node " 
+                    + n + "<br>" + obj.rows[0].node_stat[i] 
+                    + "<br>" + "Alm: " + obj.rows[0].node_alm[i] 
+                    + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" 
+                        + obj.rows[0].node_temp[i] + "  |  " 
+                        + obj.rows[0].node_volt[i] + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " 
+                            + obj.rows[0].node_rack[i] + "</div></div>");
+
+                $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
+                if (obj.rows[0].node_alm[i] == "MAJ") {
+                    $("#sysview_n" + n + '_btn').css("background-color", "#ffa500");
+                }
+                else if (obj.rows[0].node_alm[i] == "MIN") {
+                    $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
+                }
+                else if (obj.rows[0].node_alm[i] == "CRI") {
+                    $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
+                }
+                else if (obj.rows[0].node_alm[i] == "NONE") {
+                    $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
+                }
+            }
+
+        if (sysview.nodeIndex != 0) {
             $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
+        }
             
+        var a = [];
+        var b = [];
+        var c = [];
+        sysview.nodeXId = [];
+        sysview.nodeYId = [];
+
         // run the first load of the tab
         for (var i = 0; i < wc.nodes; i++) {
             if (sysview.firstLoad && wc.nodes > 0) {
 
-                sysview.nodesNum = parseInt(sysview.nodes);
+                var n = i + 1;
 
-                sysview.nodeXId = [];
-                var a = [];
-                for (i = 0; i < sysview.nodesNum; i++) {
-                    var n = i+1;
-                    a.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeX' + n + '">NODE-' + n + '</button>')
-                }
+                // Creates Big node buttons
+                a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>')
+
                 // creates btns
-                sysview.nodeX.html(a.join(""));
+                b.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeX' + n + '">NODE-' + n + '</button>')
                 sysview.nodeXId.push(sysview.nodeX.children());
                 
-                sysview.nodeYId = [];
-                var a = [];
-                for (i = 0; i < sysview.nodesNum; i++) {
-                    var n = i+1;
-                    a.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
-                }
                 // creates btns
-                sysview.nodeY.html(a.join(""));
+                c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
                 sysview.nodeYId.push(sysview.nodeY.children());
                 
                 sysview.nodeIndex = 1;
@@ -796,12 +827,49 @@ var sysview = {
             }
         }
         sysview.firstLoad = false;
+        sysview.nodeList.html(a.join(""));
+        sysview.nodeX.html(b.join(""));
+        sysview.nodeY.html(c.join(""));
+
 
         sysview.queryX(sysview.partXNum);
         sysview.queryY(sysview.partYNum);
 
         sysview.hoverEvent.node();
         sysview.hoverEvent.mio();
+    },
+
+    updateNode: function(nodeInfo) {
+        for (var i = 0; i < wc.nodes; i++) {
+            var n = i+1;
+            $('#sysview_n' + n + '_btn').html("<small>Node " 
+                + n + "<br>" + nodeInfo[i].node_stat 
+                + "<br>" + "Alm: " + nodeInfo[i].node_alm 
+                + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" 
+                    + nodeInfo[i].node_temp + "  |  " 
+                    + nodeInfo[i].node_volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " 
+                        + nodeInfo[i].node_rack + "</div></div>");
+
+            $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
+            if (nodeInfo[i].node_alm == "MAJ") {
+                $("#sysview_n" + n + '_btn').css("background-color", "#ffa500");
+            }
+            else if (nodeInfo[i].node_alm == "MIN") {
+                $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
+            }
+            else if (nodeInfo[i].node_alm == "CRI") {
+                $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
+            }
+            else if (nodeInfo[i].node_alm == "NONE") {
+                $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
+            }
+            sysview.updateMio(n, nodeInfo[i].MIOX, nodeInfo[i].MIOY);
+        }
+
+        // bind node menu here
+        sysview.bindNodeMenu(nodeInfo);
+        sysview.bindMioMenu();
+
     },
 
     updateMio: function(node, mioX, mioY) {
@@ -1344,7 +1412,7 @@ var sysview = {
 
 
     // -----------------BIND MENU TO NODE-------------------
-    bindNodeMenu: function (){
+    bindNodeMenu: function (nodeInfo){
         $('.addNodeStyle').unbind('contextmenu');
         $('.addNodeStyle').bind("contextmenu",function(e){
             e.preventDefault();
@@ -1363,7 +1431,7 @@ var sysview = {
             // return;
 
             sysview.nodePicked = nodeId;
-            sysview.nodeStatPicked = sysview.nodesArray.node_stat[nodeIndex];
+            sysview.nodeStatPicked = nodeInfo[nodeIndex].node_stat;
             // console.log ("NODESTAT = " + sysview.nodeStatPicked);
             // console.log ("NODENUMBER = " +sysview.nodePicked);
             // return;
