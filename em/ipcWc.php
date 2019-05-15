@@ -340,13 +340,14 @@
 
 			}
 			$nodePsta[] = [$miox, $mioy];
+			$row['MIOX'] = $miox;
+			$row['MIOY'] = $mioy;
 			// $mio = [$miox, $mioy];
 			// $nodePsta[] = $mio ;
 			
 		}
 		$row['node_psta'] = $nodePsta;
-		$row['MIOX'] = $miox;
-		$row['MIOY'] = $mioy;
+		
 
 		
 		// $row['MIOY'] = [];
