@@ -325,6 +325,9 @@ button[disabled]{
   color: white;
 }
 
+.addPortFontStyle div{
+  font-size: 10px;
+}
 /* --------------------RESTORE VIEW---------------------------- */
 
 #freeze {
