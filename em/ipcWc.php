@@ -304,12 +304,55 @@
 			$row['loginTime'] = '';
 		}
 
-		$row['node_psta'] = [];
-		$mxcNode = 1;
-		$mxcObj = new MXC();
-		$mxcObj->queryByNode($mxcNode);
-		array_push($row['node_psta'], $mxcObj->rows);
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOX');
+		// $row['MIOX'] = $mxcObj->rows;
 
+		// $mxcObj = new MXC();
+		// $mxcObj->getStatByType('MIOY');
+		// $row['MIOY'] = $mxcObj->rows;
+
+
+		$row['nodeinfo'] = [];
+		
+		// gets status for MIOX
+		$nodePsta = [];
+		for ($k = 0; $k < $wcObj->nodes; $k++) {
+
+			$node = $k + 1;
+			$mxcObj = new MXC();
+			$mxcObj->queryByNode($node);
+			
+			$nodeinfo = $mxcObj->rows;
+			// print_r ($nodeinfo);
+			$miox = [];
+			$mioy = [];
+			for ($n = 0; $n < count($nodeinfo); $n++) {
+				if($nodeinfo[$n]['type'] == "MIOX" ) {
+					$miox[] = $nodeinfo[$n]['psta'];
+				}
+				if ($nodeinfo[$n]['type'] == "MIOY") {
+					$mioy[] = $nodeinfo[$n]['psta'];
+				}
+
+			}
+			$mio  = [$miox, $mioy];
+			$nodePsta[] = $mio ;
+			
+		}
+		$row['nodeinfo'] = $nodePsta;
+
+		
+		// $row['MIOY'] = [];
+
+		//gets status for MIOY
+		// for ($m = 0; $m < $wcObj->nodes; $m++) {
+			
+		// 	$node = $m + 1;
+		// 	$mxcObj = new MXC();
+		// 	$mxcObj->getStatusByNodeType($node, "MIOY");
+		// 	array_push($row['MIOY'], $mxcObj->rows);
+		// }
 
 		$rows[] = $row;
 
