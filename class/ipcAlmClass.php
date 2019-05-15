@@ -137,7 +137,7 @@ class ALMS {
         // $qry = "INSERT INTO t_alms VALUES(0, '$almid', '', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now')";
 
         $qry = "INSERT INTO t_alms (almid, sa, src, type, cond, sev, psta, ssta, remark, datetime) ";
-        $qry .= " VALUES ('$almid', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now');
+        $qry .= " VALUES ('$almid', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now')";
 
         $res = $db->query($qry);
 		if (!$res) {
