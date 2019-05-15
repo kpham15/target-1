@@ -845,8 +845,8 @@ var sysview = {
 
         sysview.selectedNodeX = String(sysview.nodeXActive);
         sysview.selectedNodeY = String(sysview.nodeYActive);
-        sysview.selectedMioXOldPsta = sysview.mioX1Psta.text();
-        sysview.selectedMioYOldPsta = sysview.mioY1Psta.text();
+        sysview.selectedMioXOldPsta = $("#" + sysview.activeMioX).text();
+        sysview.selectedMioYOldPsta = $("#" + sysview.activeMioY).text();
         sysview.selectedPartX = String(sysview.partXNum);
         sysview.selectedPartY = String(sysview.partYNum);
 
