@@ -303,11 +303,12 @@
 		else {
 			$row['loginTime'] = '';
 		}
+
 		$row['node_psta'] = [];
 		$mxcNode = 1;
 		$mxcObj = new MXC();
 		$mxcObj->queryByNode($mxcNode);
-		array_push($row['node_psta'], $nodeObj->rows);
+		array_push($row['node_psta'], $mxcObj->rows);
 
 
 		$rows[] = $row;
