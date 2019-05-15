@@ -560,6 +560,16 @@
 			return $result;
         }
 
+        //-----------------------check ckt info-----------------------------
+        //the ckid must exist in DB
+		$cktObj = new CKT($ckid);
+		if ($cktObj->rslt == FAIL) {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:".$cktObj->reason;
+			$result['reason'] = "MAINTENANCE TEST - " . $cktObj->reason;
+			return $result;
+        }
+
         //--------------------check the facs info----------------------
 		//the ffac must exist in DB 
 		$ffacObj = new FAC($ffac);
@@ -618,16 +628,7 @@
             return $result;
         }
         
-        //-----------------------check ckt info-----------------------------
-        //the ckid must exist in DB
-		$cktObj = new CKT($ckid);
-		if ($cktObj->rslt == FAIL) {
-            $result['rslt'] = 'fail';
-            $result['jeop'] = "SP5:".$cktObj->reason;
-			$result['reason'] = "MAINTENANCE TEST - " . $cktObj->reason;
-			return $result;
-        }
-
+        //-----------------------check cktcon info-----------------------------
         //verify if MTCD fac is on the right CKTCON
         $cktconObj = new CKTCON($ffacObj->portObj->cktcon);
         if ($cktconObj->rslt == FAIL) {
