@@ -12,7 +12,7 @@ class TBUS {
     public $rslt = "";
     public $reason = "";
 
-    public function __construct($node=NULL, $tp=NULL) {
+    public function __construct() {
 
     }
 

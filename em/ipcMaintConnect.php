@@ -596,7 +596,7 @@
         }
 
         //---------------------check tbus table---------------------
-        //from ffac, get nodeId, then check tbus
+        //from ffac, we have node info, and ptyp info. Now checking the tbus table
         $node = $ffacObj->portObj->node;
         $tb = $ffacObj->portObj->ptyp;
         $tbusObj = new TBUS();
@@ -678,6 +678,7 @@
 
         //-----------------------get relay info for tstport and fport----------------------------
         $portExtract = explode('-', $fportObj->port);
+        //re-order port info to match the format in t_X, t_Y table
         $portConvert = ($portExtract[0]-1).".".$portExtract[2].".".($portExtract[1]-1).".".($portExtract[3]-1);
         if($fportObj->ptyp == 'X')
             $portTypeObj = new X($portConvert);
@@ -690,7 +691,11 @@
             $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
             return $result;
         }
-        //get relay for fport
+        //create relay format for fport
+        //--check if the port is X type, then relay to connect fport to testbus is
+        //   stage.n:input.10   for examle: 1A.0:1.10
+        // if the port is Y type, the the relay in following format:
+        //   stage.n:10.output  for example: 7A.0:10.1
         $fd = $portTypeObj->d;
         $fd_extract = explode('.', $fd);
         if($fportObj->ptyp == 'X')
@@ -698,14 +703,15 @@
         else if($fportObj->ptyp == 'Y') {
             $frelay = "$fd_extract[1].$fd_extract[2]:10.$fd_extract[3]";
         }
-        //get relay for tstport
-        $tstportId = $tstportObj->pnum -1;
+        //create relay format for tstport
+        $tstPortNum = $tstportObj->pnum -1;
         if($fportObj->ptyp == 'X') {
-            $tstrelay = "TB.X:0.$tstportId";
+            $tstrelay = "TB.X:0.$tstPortNum";
         }
         else if($fportObj->ptyp == 'Y') {
-            $tstrelay = "TB.Y:0.$tstportId";
+            $tstrelay = "TB.Y:0.$tstPortNum";
         }
+
         //get row/col for relays 
         $rcObj = new RC();
         $rcObj->queryRC($frelay);
@@ -729,7 +735,7 @@
         $tstcol = $rcObj->rows[0]['col'];
 
         //--------------------------Update database table-----------------------------
-        //Update to this poitn, every checking, prepared data are good
+        //Up to this poitn, all checking processes are good , needed data is prepared
         //Ready to update table
 
         //add new testpath

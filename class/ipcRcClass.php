@@ -28,7 +28,7 @@ class RC {
             }
             else {
                 $this->rslt = 'fail';
-                $this->reason = "THERE IS NO INFO OF ROW/COL FOR RELAY ($rel)";
+                $this->reason = "INVALID RELAY ($rel)";
             }
 
         }
