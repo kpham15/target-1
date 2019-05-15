@@ -313,7 +313,7 @@
 		// $row['MIOY'] = $mxcObj->rows;
 
 
-		$row['nodeinfo'] = [];
+		$row['node_psta'] = [];
 		
 		// gets status for MIOX
 		$nodePsta = [];
@@ -336,11 +336,11 @@
 				}
 
 			}
-			$mio  = [$miox, $mioy];
+			$mio = [$miox, $mioy];
 			$nodePsta[] = $mio ;
 			
 		}
-		$row['nodeinfo'] = $nodePsta;
+		$row['node_psta'] = $nodePsta;
 
 		
 		// $row['MIOY'] = [];
