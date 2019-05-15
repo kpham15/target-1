@@ -1656,7 +1656,7 @@ var sysview = {
                 console.log(sysview.nodeXActive);
                 console.log($(this).attr('id'));
                 console.log($(this).parent().attr('id'));
-                if ($(this).parent().hasClass(".sysview_nodeX")) {
+                if ($(this).parent().attr('id') == "sysview_nodeX") {
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
                         console.log(1);
                         return;
@@ -1680,7 +1680,7 @@ var sysview = {
                     }
                 }
             }, function() {
-                if ($(this).parent().hasClass(".sysview_nodeX")) {
+                if ($(this).parent().attr('id') == "sysview_nodeX") {
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
                         console.log(5);                        
                         return;
