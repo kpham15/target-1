@@ -1272,8 +1272,8 @@ var maintModal = {
     conTestPort2:        $("#maintModal_conTestPort2_sel"),
     pickTest1:          $("#maintModal_pickTest1_rad"),
     pickTest2:          $("#maintModal_pickTest2_rad"),
-    pickedTestFac:     "",
-    pickedTestPort:    "",
+    pickedTestedFac:     "",
+    pickedTestFac:    "",
 
     //////////////////------------MAINT CHANGE-----------------////////
     changeConForm:     $("#maintModal_changeConForm"),
@@ -1518,7 +1518,7 @@ var maintModal = {
     submitMtcTest: function() {
         $.post(ipcDispatch,
         {     
-            api:    "ipcMaintTest",
+            api:    "ipcMaintConnect",
             act:	"MTC_TEST",
             user:	$('#main_currentUser').text(),
             ckid:	maintModal.ckid.val().toUpperCase(),
@@ -1530,8 +1530,8 @@ var maintModal = {
             ctyp:   maintModal.ctyp.val(),
             // ffac:   maintModal.ffac.val(),
             // tfac:   maintModal.tfac.val(),
-            testfac:   maintModal.pickedTestFac,
-            testport:   maintModal.pickedTestPort,
+            ffac:   maintModal.pickedTestedFac,
+            tstfac:   maintModal.pickedTestFac,
 
             ckt_id:	maint.cktId.val(),
             cktcon: maint.cktconId.val(),
@@ -1647,11 +1647,12 @@ var maintModal = {
         });
     },
 
-    loadTestPort: function() {
+    loadTestPort: function(fac, side) {
         $.post(ipcDispatch,
         {     
-            api:    "ipcTb",
-            act:	"query",
+            api:    "ipcFacilities",
+            act:	"queryTestFac",
+            fac:    fac,
             user:	$('#main_currentUser').text()
         },
         function (data, status) {
@@ -1665,13 +1666,46 @@ var maintModal = {
                 a.push('<option></option>');
                 for (var i=0; i<obj["rows"].length; i++) 
                 {  
-                    a.push('<option value="'+obj["rows"][i].tp+'">' + obj["rows"][i].tp +'-'+ obj["rows"][i].name +'-'+obj["rows"][i].stat + '</option>');
+                    a.push('<option>' + obj["rows"][i].fac + '</option>');
                 }
-                maintModal.conTestPort1.empty();
-                maintModal.conTestPort2.empty();
 
-                maintModal.conTestPort1.html(a.join(""));
-                maintModal.conTestPort2.html(a.join(""));
+                if(side == 'X') {
+                    maintModal.conTestPort1.empty();
+                    maintModal.conTestPort1.html(a.join(""));
+                }
+                if(side == 'Y') {
+                    maintModal.conTestPort2.empty();
+                    maintModal.conTestPort2.html(a.join(""));
+                }
+            }
+            
+        });
+    },
+
+    checkAvailTbus: function(fac) {
+        $.post(ipcDispatch,
+        {     
+            api:    "ipcTbus",
+            act:	"checkAvailTbus",
+            fac:    fac,
+            user:	$('#main_currentUser').text()
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            
+            if (obj["rslt"]  ==  "fail") {
+                alert(obj["reason"]);
+            }
+            else {
+                if(obj.rows.length > 0) {
+                    var tb = obj.rows[0];
+                    alert('TEST BUS IS BUSY WITH '+tb.zport+' AND '+tb.port)
+                    maintModal.conTestPort1.prop('disabled', true);
+                }
+                else {
+                    maintModal.conTestPort1.prop('disabled', false);
+                }
+    
             }
             
         });
@@ -2021,12 +2055,12 @@ maintModal.submitBtn.click(function() {
     }
     else if (maintModal.act.val() == "MTC_TEST") {
         if (maintModal.pickTest1.is(':checked')) { 
-            maintModal.pickedTestPort = maintModal.conTestPort1.val();
-            maintModal.pickedTestFac = maintModal.conTestFacX.val();
+            maintModal.pickedTestFac = maintModal.conTestPort1.val();
+            maintModal.pickedTestedFac = maintModal.conTestFacX.val();
         }
         else if (maintModal.pickTest2.is(':checked')) {
-            maintModal.pickedTestFac = maintModal.conTestFacY.val();
-            maintModal.pickedTestPort = maintModal.conTestPort2.val();
+            maintModal.pickedTestedFac = maintModal.conTestFacY.val();
+            maintModal.pickedTestFac = maintModal.conTestPort2.val();
         }
 
         maint.ckid.val(maintModal.ckid.val());
@@ -2288,9 +2322,10 @@ maint.act.change(function() {
         maintModal.clearForm();
         maint.populateModal();
 
-        maintModal.loadTestPort();
-        // maintModal.disableForm();
-        maintModal.pickTest1.prop('checked',true);
+        maintModal.loadTestPort(maintModal.conTestFacX.val(),'X');
+        maintModal.loadTestPort(maintModal.conTestFacY.val(),'Y');
+        maintModal.disableForm();
+        maintModal.pickTest1.prop('checked',true).trigger('click');
         maintModal.pickTest2.prop('checked',false);
         maintModal.conTestPort1.prop("disabled", false);
         maintModal.conTestPort2.prop("disabled", true);
@@ -2300,6 +2335,7 @@ maint.act.change(function() {
         maintModal.discConForm.hide();
         maintModal.changeConForm.hide();
         maintModal.testPortForm.show();
+
         maintModal.clearBtn.hide();
         maintModal.modal.modal();
     }
@@ -2346,6 +2382,7 @@ maintModal.pickTest1.click(function() {
     if(maintModal.pickTest1.is(':checked')) { 
         maintModal.conTestPort1.prop("disabled", false);
         maintModal.conTestPort2.prop("disabled", true);
+        maintModal.checkAvailTbus(maintModal.conTestFacX.val());
     }
 });
 
@@ -2353,6 +2390,7 @@ maintModal.pickTest2.click(function() {
     if(maintModal.pickTest2.is(':checked')) { 
         maintModal.conTestPort2.prop("disabled", false);
         maintModal.conTestPort1.prop("disabled", true);
+        maintModal.checkAvailTbus(maintModal.conTestFacY.val());
     }
 });
 

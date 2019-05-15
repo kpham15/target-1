@@ -55,7 +55,12 @@
 	$tfac = "";
 	if (isset($_POST['tfac'])) {
 		$tfac = strtoupper($_POST['tfac']);
-	}
+    }
+    
+    $tstfac = "";
+	if (isset($_POST['tstfac'])) {
+		$tstfac = strtoupper($_POST['tstfac']);
+    }
           
     $tktno = "";
 	if (isset($_POST['tktno'])) {
@@ -110,6 +115,16 @@
         mysqli_close($db);
         return;
     }
+
+    if ($act == "MTC_TEST") {
+        $result = maintTest($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tstfac);
+        $evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
+        $maintLog->log($user, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $ordno);
+        echo json_encode($result);
+        mysqli_close($db);
+        return;
+    }
+
     else {
         $result['rslt'] = FAIL;
         $result['reason'] = INVALID_ACTION;
@@ -201,7 +216,7 @@
                 return $result;
             }
             $mtcdObj = $tfacObj;
-            $tstObj = $facObj;
+            $tstObj = $ffacObj;
         }
         else {
             $result['rslt'] = "fail";
@@ -524,6 +539,280 @@
         $result['rows'] = $cktconObj->rows;
         $result["rslt"] = SUCCESS;
         $result["reason"] = "MAINTENANCE RESORE - " . "SUCCESSFUL";
+        return $result;
+    }
+    
+    function maintTest($userObj, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tstfac) {
+        
+        $result['log'] = "ACTION = MTC_TEST | CKID = $ckid | CLS = $cls | ADSR = $adsr | TKTNO = $tktno | MLO = $mlo | PROT = $prot | CTYP = $ctyp | FAC = $ffac | TESTFAC = $tstfac";
+
+		if ($userObj->grpObj->maint != "Y") {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:PERMISSION DENIED";
+			$result['reason'] = "MAINTENANCE TEST - " . 'PERMISSION DENIED';
+			return $result;
+        }
+        
+        if($tktno === "") {
+            $result["rslt"] = 'fail';
+            $result['jeop'] = "SP5:MISSING TKTNO";
+			$result["reason"] = "MAINTENANCE TEST - " . "MISSING TKTNO";
+			return $result;
+        }
+
+        //--------------------check the facs info----------------------
+		//the ffac must exist in DB 
+		$ffacObj = new FAC($ffac);
+		if ($ffacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";
+			$result['reason'] = "MAINTENANCE TEST - " . "FAC: " . $ffac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the ffac must have port mapped
+        if ($ffacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";
+			$result['reason'] = "MAINTENANCE TEST - " . "FAC: " . $ffac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        // the tstfac must exist in DB
+        $tstfacObj = new FAC($tstfac);
+		if ($tstfacObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP2:FAC IS INVALID";
+			$result['reason'] = "MAINTENANCE TEST - " . "FAC: " . $tstfac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the tstfac must have port mapped
+        if ($tstfacObj->port_id == 0) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP3:FAC IS UNQ";
+			$result['reason'] = "MAINTENANCE TEST - " . "FAC: " . $tstfac . " IS NOT MAPPED TO A PORT";
+			return $result;
+        }
+
+        //---------------------check tbus table---------------------
+        //from ffac, get nodeId, then check tbus
+        $node = $ffacObj->portObj->node;
+        $tb = $ffacObj->portObj->ptyp;
+        $tbusObj = new TBUS();
+        $tbusObj->checkAvailable($node, $tb);
+        if($tbusObj->rslt == 'fail') {
+            $result['rslt'] = $tbusObj->rslt;
+            $result['jeop'] = "SP5:$tbusObj->reason";
+            $result['reason'] = $tbusObj->reason;
+            return $result;
+        }
+        
+        if(count($tbusObj->rows) > 0){
+            $result['rslt'] = 'fail';
+            $rows = $tbusObj->rows;
+            $zport = $rows[0]['zport'];
+            $port = $rows[0]['port'];
+            $result['jeop'] = "SP5:TEST BUS IS BUSY AT $zport and $port";
+            $result['reason'] = "MAIN TEST - TEST BUS IS BUSY AT $zport and $port";
+            return $result;
+        }
+        
+        //-----------------------check ckt info-----------------------------
+        //the ckid must exist in DB
+		$cktObj = new CKT($ckid);
+		if ($cktObj->rslt == FAIL) {
+            $result['rslt'] = 'fail';
+            $result['jeop'] = "SP5:".$cktObj->reason;
+			$result['reason'] = "MAINTENANCE TEST - " . $cktObj->reason;
+			return $result;
+        }
+
+        //verify if MTCD fac is on the right CKTCON
+        $cktconObj = new CKTCON($ffacObj->portObj->cktcon);
+        if ($cktconObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:UNABLE TO LOCATE CKTCON(" . $ffacObj->portObj->cktcon . ") OF MTCD FAC(" . $ffacObj->fac . ")";            
+            $result['reason'] = "MAINTENANCE TEST - " . "COULD NOT LOCATE CKTCON(" . $ffacObj->portObj->cktcon . ") OF MTCD FAC(" . $ffacObj->fac . ")";
+            return $result;
+        }
+
+        if ($cktconObj->loadIdx($ffacObj->portObj->con_idx) === FALSE) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:UNABLE TO LOCATE CKTCON(" . $cktconObj->con . ") IDX(" . $ffacObj->portObj->con_idx . ") OF MTCD FAC";            
+            $result['reason'] = "MAINTENANCE TEST - " . "COULD NOT LOCATE CKTCON(" . $cktconObj->con . ") IDX(" . $ffacObj->portObj->con_idx . ") OF MTCD FAC";
+            return $result;
+        }
+
+        if ($cktObj->ckid != $cktconObj->ckid) {
+            $result['rslt'] = "fail";
+            $result['jeop'] = "SP5:MTCD FAC " . $ffacObj->fac . " IS NOT ON CKID " . $cktObj->ckid;            
+            $result['reason'] = "MAINTENANCE TEST - " . "MTCD FAC " . $ffacObj->fac . " IS NOT ON CKID " . $cktObj->ckid;
+            return $result;
+        }
+
+        //-------------------------check SMS infor---------------------------
+        $fportObj = $ffacObj->portObj;
+        $tstportObj = $tstfacObj->portObj;
+        // validate state-event
+        $sms = new SMS($fportObj->psta, $fportObj->ssta, "MT_CONN");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$fportObj->psta.")";            
+            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            return $result;
+        }
+        $fportObj->npsta = $sms->npsta;
+        $fportObj->nssta = $sms->nssta;
+
+        $sms = new SMS($tstportObj->psta, $tstportObj->ssta, "MT_CONN");
+        if ($sms->rslt == FAIL) {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP3:FAC STATUS (".$tstportObj->psta.")";            
+            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            return $result;
+        }
+        $tstportObj->npsta = $sms->npsta;
+        $tstportObj->nssta = $sms->nssta;
+        
+
+        //-----------------------get relay info for tstport and fport----------------------------
+        $portExtract = explode('-', $fportObj->port);
+        $portConvert = ($portExtract[0]-1).".".$portExtract[2].".".($portExtract[1]-1).".".($portExtract[3]-1);
+        if($fportObj->ptyp == 'X')
+            $portTypeObj = new X($portConvert);
+        else
+            $portTypeObj = new Y($portConvert);
+
+        if($portTypeObj->rslt == 'fail') {
+            $result['rslt'] = FAIL;
+            $result['jeop'] = "SP5:$portTypeObj->reason";            
+            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            return $result;
+        }
+        //get relay for fport
+        $fd = $portTypeObj->d;
+        $fd_extract = explode('.', $fd);
+        if($fportObj->ptyp == 'X')
+            $frelay = "$fd_extract[1].$fd_extract[2]:$fd_extract[3].10";
+        else if($fportObj->ptyp == 'Y') {
+            $frelay = "$fd_extract[1].$fd_extract[2]:10.$fd_extract[3]";
+        }
+        //get relay for tstport
+        $tstportId = $tstportObj->pnum -1;
+        if($fportObj->ptyp == 'X') {
+            $tstrelay = "TB.X:0.$tstportId";
+        }
+        else if($fportObj->ptyp == 'Y') {
+            $tstrelay = "TB.Y:0.$tstportId";
+        }
+        //get row/col for relays 
+        $rcObj = new RC();
+        $rcObj->queryRC($frelay);
+        if($rcObj->rslt == 'fail') {
+            $result['rslt'] = $rcObj->rslt;
+            $result['jeop'] = "SP5:".$rcObj->reason;            
+            $result['reason'] = "MAINTENANCE TEST - " . $rcObj->reason;
+            return $result;
+        }
+        $frow = $rcObj->rows[0]['row'];
+        $fcol = $rcObj->rows[0]['col'];
+
+        $rcObj->queryRC($tstrelay);
+        if($rcObj->rslt == 'fail') {
+            $result['rslt'] = $rcObj->rslt;
+            $result['jeop'] = "SP5:".$rcObj->reason;            
+            $result['reason'] = "MAINTENANCE TEST - " . $rcObj->reason;
+            return $result;
+        }
+        $tstrow = $rcObj->rows[0]['row'];
+        $tstcol = $rcObj->rows[0]['col'];
+
+        //--------------------------Update database table-----------------------------
+        //Update to this poitn, every checking, prepared data are good
+        //Ready to update table
+
+        //add new testpath
+        $tbusObj->addTBus($node,$tb, $tstportObj->port, $fportObj->port);
+        if($tbusObj->rslt == 'fail') {
+            $result['rslt'] = $tbusObj->rslt;
+            $result['jeop'] = "SP5:".$tbusObj->reason;            
+            $result['reason'] = "MAINTENANCE TEST - " . $tbusObj->reason;
+            return $result;
+        }
+        //add new CON_IDX
+        $cktconObj->addIdx($cktObj->cktcon, $cktObj->id, $cktObj->ckid, "MAINT", "MAINT", $fportObj->id, $fportObj->port, 1, $tstportObj->id, $tstportObj->port, 1, 0);
+        if ($cktconObj->rslt != SUCCESS) {
+            $result['rslt'] = $cktconObj->rslt;
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+            $result['reason'] = "MAINTENANCE TEST - " . $cktconObj->reason;
+            return $result;
+        }
+        // update tbus id in cktconn
+        $cktconObj->updateTbus($tbusObj->id);
+        if ($cktconObj->rslt != SUCCESS) {
+            $result['rslt'] = $cktconObj->rslt;
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+            $result['reason'] = "MAINTENANCE TEST - " . $cktconObj->reason;
+            return $result;
+        }
+
+        //------------update PORT's PSTA----------------------
+        $fportObj->updPsta($fportObj->npsta, $fportObj->nssta, "-");
+		if ($fportObj->rslt != SUCCESS) {
+            $result['rslt'] = $fportObj->rslt;
+            $result['jeop'] = "SP5:".$fportObj->reason;            
+			$result['reason'] = "MAINTENANCE TEST - " . $fportObj->reason;
+			return $result;
+		}
+        //------------update PORT's CKT, CKTCON
+        $fportObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
+		if ($fportObj->rslt != SUCCESS) {
+            $result['rslt'] = $fportObj->rslt;
+            $result['jeop'] = "SP5:".$fportObj->reason;            
+			$result['reason'] = "MAINTENANCE TEST - " . $fportObj->reason;
+			return $result;
+        }   
+        //------------update PORT's PSTA
+        $tstportObj->updPsta($tstportObj->npsta, $tstportObj->nssta, "-");
+		if ($tstportObj->rslt != SUCCESS) {
+            $result['rslt'] = $tstportObj->rslt;
+            $result['jeop'] = "SP5:".$tstportObj->reason;            
+			$result['reason'] = "MAINTENANCE TEST - " . $tstportObj->reason;
+			return $result;
+		}
+        //------------update PORT's CKT
+        $tstportObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
+		if ($tstportObj->rslt != SUCCESS) {
+            $result['rslt'] = $tstportObj->rslt;
+            $result['jeop'] = "SP5:".$tstportObj->reason;            
+			$result['reason'] = "MAINTENANCE TEST - " . $tstportObj->reason;
+			return $result;
+        }
+        //------------update ticketNo
+        $cktObj->setTktno($tktno);
+        if ($cktObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:".$cktObj->reason;            
+            $result["reason"] = "MAINTENANCE TEST - " . $cktObj->reason;
+            return $result;
+        }
+        //------------------------create cmds-------------------------------
+		$cmdObj = new CMD();
+        //create cmd for fport......
+        //create cmd for zport.....
+        // ------------------------------------------------------------------
+        $cktconObj->queryCktConWithFac($cktconObj->con);
+        if ($cktconObj->rslt == FAIL) {
+            $result["rslt"] = FAIL;
+            $result['jeop'] = "SP5:".$cktconObj->reason;            
+            $result["reason"] = "MAINTENANCE TEST - " . $cktconObj->reason;
+            return $result;
+        }
+
+        $result['rows'] = $cktconObj->rows;
+        $result["rslt"] = SUCCESS;
+        $result["reason"] = "MAINTENANCE TEST - " . "SUCCESSFUL";
         return $result;
 	}
 

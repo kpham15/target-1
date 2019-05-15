@@ -78,7 +78,13 @@
 		return;
 	}
 
-	
+	if ($act == "queryTestFac") {
+		$result = queryTestFac($fac);
+		echo json_encode($result);
+		mysqli_close($db);
+		return;
+	}
+
 	if ($act == "ADD" ) {
 		if ($range == ""){
 			$result = addFac($fac, $ftyp, $ort, $spcfnc, $userObj);
@@ -374,6 +380,39 @@
 		$result['rows'] = $spcfncObj->rows;
 		return $result;
 	}
+
+	
+	function queryTestFac($fac) {
+		// the fac must exist in DB 
+		$facObj = new FAC($fac);
+		if ($facObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+			$result['reason'] = "FAC: " . $fac . " DOES NOT EXIST";
+			return $result;
+        }
+        
+        // the fac must have port mapped
+        if ($facObj->port_id == 0) {
+            $result['rslt'] = "fail";
+			$result['reason'] = "FAC: " . $fac . " IS NOT MAPPED TO A PORT";
+			return $result;
+		}
+		$node = $facObj->portObj->node;
+
+		$facObj->queryTestFacByNode($node);
+		if ($facObj->rslt == FAIL) {
+            $result['rslt'] = "fail";
+			$result['reason'] = $facObj->reason;
+			return $result;
+		}
+
+		$result['rslt'] = "success";
+		$result['reason'] = "TEST-FAC QUERIED";
+		$result['rows'] = $facObj->rows;
+		return $result;
+
+	}
+   	
 	
 
 ?>

@@ -28,7 +28,7 @@ class RC {
             }
             else {
                 $this->rslt = 'fail';
-                $this->reason = "RC: WRONG NUMBER OF ROWS RETURNED";
+                $this->reason = "THERE IS NO INFO OF ROW/COL FOR RELAY ($rel)";
             }
 
         }
