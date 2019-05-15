@@ -339,8 +339,9 @@
 				}
 
 			}
-			$mio = [$miox, $mioy];
-			$nodePsta[] = $mio ;
+			$nodePsta[] = [$miox, $mioy];
+			// $mio = [$miox, $mioy];
+			// $nodePsta[] = $mio ;
 			
 		}
 		$row['node_psta'] = $nodePsta;
