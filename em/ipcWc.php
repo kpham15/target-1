@@ -259,43 +259,32 @@
 		}
 		
 		// get number of nodes and loop to get alm stat for each node from t_alms
-		// push values into array 'node_alm'
-
+		// initialize arrays to be able to push
 		$row['node_alm'] = [];
-
-		for ($i = 0; $i < $wcObj->nodes; $i++) {
-
-			$node = $i + 1;
-			$almObj->queryAlmByNode($node);
-
-			if (count($almObj->rows) == 0) {
-				array_push($row['node_alm'], "NONE");
-			}
-			else {
-				array_push($row['node_alm'], $almObj->rows[0]['sev']);
-			}
-
-			
-		}
-
-		// initialize array
 		$row['node_stat'] = [];
 		$row['node_temp'] = [];
 		$row['node_volt'] = [];
 		$row['node_rack'] = [];
 
 		// get stat, temp, volt, rackID from t_nodes and push into intialized arrays
-		
-		for ($j = 0; $j < $wcObj->nodes; $j++) {
+		for ($i = 0; $i < $wcObj->nodes; $i++) {
 			
-			$node = $j + 1;
+			$node = $i + 1;
 			$nodeObj = new NODE($node);
 			array_push($row['node_stat'], $nodeObj->stat);
 			array_push($row['node_temp'], $nodeObj->temp);
 			array_push($row['node_volt'], $nodeObj->volt);
-			array_push($row['node_rack'], $nodeObj->rack);	
+			array_push($row['node_rack'], $nodeObj->rack);
+			
+			$almObj->queryAlmByNode($node);
+			if (count($almObj->rows) == 0) {
+				array_push($row['node_alm'], "NONE");
+			}
+			else {
+				array_push($row['node_alm'], $almObj->rows[0]['sev']);
+			}
 		}
-
+		
 		$unameObj = new USERS($uname);
 		if ($unameObj->rslt == 'success') {
 			$row['loginTime'] = $unameObj->login;
@@ -303,35 +292,69 @@
 		else {
 			$row['loginTime'] = '';
 		}
-
-		// $mxcObj = new MXC();
-		// $mxcObj->getStatByType('MIOX');
-		// $row['MIOX'] = $mxcObj->rows;
-
-		// $mxcObj = new MXC();
-		// $mxcObj->getStatByType('MIOY');
-		// $row['MIOY'] = $mxcObj->rows;
-
-		$row['MIOX'] = [];
 		
-		// gets status for MIOX
+		$row['node_info'] = array();
+
 		for ($k = 0; $k < $wcObj->nodes; $k++) {
-
-			$node = $k + 1;
-			$mxcObj = new MXC();
-			$mxcObj->getStatusByNodeType($node, "MIOX");
-			array_push($row['MIOX'], $mxcObj->rows);
-		}
-
-		$row['MIOY'] = [];
-
-		//gets status for MIOY
-		for ($m = 0; $m < $wcObj->nodes; $m++) {
 			
-			$node = $m + 1;
+			$node = $k + 1;
+			$nodeObj = new NODE($node);
+
 			$mxcObj = new MXC();
-			$mxcObj->getStatusByNodeType($node, "MIOY");
-			array_push($row['MIOY'], $mxcObj->rows);
+			$mxcObj->queryByNode($node);
+			
+			$noderows = $mxcObj->rows;
+
+			$nodeinfo = [
+				node_alm => '',
+				node_stat => $nodeObj->stat,
+				node_volt => $nodeObj->volt,
+				node_temp => $nodeObj->temp,
+				node_rack => $nodeObj->rack,
+				MIOX => [],
+				MIOY => []
+			];
+
+			$almObj->queryAlmByNode($node);
+			if (count($almObj->rows) == 0) {
+				$nodeinfo['node_alm'] = "NONE";
+			}
+			else {
+				$nodeinfo['node_alm'] = $almObj->rows[0]['sev'];
+			}
+
+			$miox_rows = array_filter($noderows, function($v) {
+				if ($v['type'] === 'MIOX') {
+					return true;
+				} else {
+					return false;
+				}
+			});
+			$mioy_rows = array_filter($noderows, function($v) {
+				if ($v['type'] === 'MIOY') {
+					return true;
+				} else {
+					return false;
+				}
+			});
+
+			usort($miox_rows, function($a, $b) {
+				if ($a['slot'] === $b['slot']) {
+					return 0;
+				} else if ($a['slot'] > $b['slot']) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
+
+			$miox = array_column($miox_rows, 'psta');
+			$mioy = array_column($mioy_rows, 'psta');
+
+			$nodeinfo['MIOX'] = $miox;
+			$nodeinfo['MIOY'] = $mioy;
+
+			array_push($row['node_info'], $nodeinfo);
 		}
 
 		$rows[] = $row;
