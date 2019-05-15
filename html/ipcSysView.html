@@ -2188,6 +2188,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
     if (sysview.nodeSide == "X") {
         sysview.nodeXActive = sysview.nodeIndex;
+        sysview.selectedNodeX = String(sysview.nodeXActive);
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
@@ -2202,6 +2203,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     }
     else {
         sysview.nodeYActive = sysview.nodeIndex;
+        sysview.selectedNodeY = String(sysview.nodeYActive);
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
