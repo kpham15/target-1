@@ -809,20 +809,20 @@ var sysview = {
 
 
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i]);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
         }
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i]);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
         }
 
         if ($("#main_currentUser").text() == "") {
             return;
         }
         
-        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1]) {
+        if (selectedMioXOldPsta != sysview.info['node' + selectedNodeX].mioX[sysview.mioXIndex - 1].psta) {
             sysview.queryX(sysview.partXNum);
         }
-        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1]) {
+        if (selectedMioYOldPsta != sysview.info['node' + selectedNodeY].mioY[sysview.mioYIndex - 1].psta) {
             sysview.queryY(sysview.partYNum);
         }
         
