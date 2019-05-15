@@ -542,13 +542,7 @@ var wc = {
 
                 // bind node menu here
                 sysview.bindNodeMenu();
-                sysview.bindMioMenu();
-                
-                for (k=0; k < sysview.nodes; k++) {
-                    var node = k + 1;
-                    sysview.updateMio(node, obj.rows[0]['MIOX'][k], obj.rows[0]['MIOY'][k])
-                }
-                
+                sysview.bindMioMenu();                
 
                 for (k=0; k < sysview.nodes; k++) {
                     var node = k + 1;
