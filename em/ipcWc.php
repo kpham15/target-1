@@ -259,26 +259,8 @@
 		}
 		
 		// get number of nodes and loop to get alm stat for each node from t_alms
-		// push values into array 'node_alm'
-
+		// initialize arrays to be able to push
 		$row['node_alm'] = [];
-
-		for ($i = 0; $i < $wcObj->nodes; $i++) {
-
-			$node = $i + 1;
-			$almObj->queryAlmByNode($node);
-
-			if (count($almObj->rows) == 0) {
-				array_push($row['node_alm'], "NONE");
-			}
-			else {
-				array_push($row['node_alm'], $almObj->rows[0]['sev']);
-			}
-
-			
-		}
-
-		// initialize array
 		$row['node_stat'] = [];
 		$row['node_temp'] = [];
 		$row['node_volt'] = [];
@@ -286,15 +268,36 @@
 
 		// get stat, temp, volt, rackID from t_nodes and push into intialized arrays
 		
-		for ($j = 0; $j < $wcObj->nodes; $j++) {
+		for ($i = 0; $i < $wcObj->nodes; $i++) {
 			
-			$node = $j + 1;
+			$node = $i + 1;
 			$nodeObj = new NODE($node);
 			array_push($row['node_stat'], $nodeObj->stat);
 			array_push($row['node_temp'], $nodeObj->temp);
 			array_push($row['node_volt'], $nodeObj->volt);
-			array_push($row['node_rack'], $nodeObj->rack);	
+			array_push($row['node_rack'], $nodeObj->rack);
+			
+			$almObj->queryAlmByNode($node);
+			if (count($almObj->rows) == 0) {
+				array_push($row['node_alm'], "NONE");
+			}
+			else {
+				array_push($row['node_alm'], $almObj->rows[0]['sev']);
+			}
 		}
+
+		// for ($i = 0; $i < $wcObj->nodes; $i++) {
+
+		// 	$node = $i + 1;
+		// 	$almObj->queryAlmByNode($node);
+
+		// 	if (count($almObj->rows) == 0) {
+		// 		array_push($row['node_alm'], "NONE");
+		// 	}
+		// 	else {
+		// 		array_push($row['node_alm'], $almObj->rows[0]['sev']);
+		// 	}
+		// }
 
 		$unameObj = new USERS($uname);
 		if ($unameObj->rslt == 'success') {
