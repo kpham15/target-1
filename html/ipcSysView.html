@@ -2273,6 +2273,10 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     sysview.nodeActive = $(this).attr('id');
     sysview.nodeIndex = parseInt(sysview.nodeActive.slice(13));
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
+
+    console.log(sysview.nodeActive)
+    console.log(sysview.nodeIndex)
+    console.log(sysview.nodeSide)
     if (sysview.nodeSide == "X") {
         sysview.nodeXActive = sysview.nodeIndex;
         sysview.selectedNodeX = String(sysview.nodeXActive);
