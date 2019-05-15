@@ -2197,7 +2197,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + selectedNodeX].mioX[i].psta);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeX].mioX[i].psta);
         }
     }
     else {
@@ -2211,7 +2211,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + selectedNodeY].mioY[i].psta);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info['node' + sysview.selectedNodeY].mioY[i].psta);
         }
 
     }
