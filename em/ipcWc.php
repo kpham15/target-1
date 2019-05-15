@@ -316,7 +316,7 @@
 		// $row['MIOY'] = $mxcObj->rows;
 
 
-		$row['node_psta'] = [];
+		// $row['node_psta'] = [];
 		
 		// gets status for MIOX
 		$nodePsta = [];
