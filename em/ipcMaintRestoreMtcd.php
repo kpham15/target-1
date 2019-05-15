@@ -235,7 +235,7 @@
             $mtcdObj = $tfacObj->portObj;
             $tstObj = $ffacObj->portObj;
         }
-        echo 'bbbbb';
+
         // now, process the MTC_RESTORE
         // check if TEST PATH using dedicated test port or not
 		// if yes, then delete tbus path
@@ -243,7 +243,6 @@
 		if($tstObj->ssta == 'TST_SF' || $tstObj->ssta == 'TST_UAS') {
 			//get tbus path id
             $tbpath_id = $cktconObj->tbus;
-            print_r($tbpath_id);
 			$tbusObj = new TBUS();
 			$tbusObj->deleteTBpath($tbpath_id);
 			if($tbusObj->rslt == 'fail') {

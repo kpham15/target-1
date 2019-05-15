@@ -62,7 +62,6 @@ class TBUS {
         global $db;
 
         $qry = "DELETE FROM t_tbus WHERE id=$id";
-        echo $qry;
         $res = $db->query($qry);
         if(!$res) {
             $this->rslt = 'fail';

@@ -439,6 +439,7 @@ class CKTCON {
                 $this->fport = $this->rows[$i]['fport'];
                 $this->tport = $this->rows[$i]['tport'];
                 $this->path = $this->rows[$i]['path'];
+                $this->tbus = $this->rows[$i]['tbus'];
                 return $this->idx;
             }
         }
