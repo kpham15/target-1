@@ -248,7 +248,10 @@
                 }
             }
             
-            $qry = "INSERT INTO t_facs VALUES(0,'$fac','$ftyp','$ort','$spcfnc','',0)";
+            // $qry = "INSERT INTO t_facs VALUES(0,'$fac','$ftyp','$ort','$spcfnc','',0)";
+
+            $qry = "INSERT INTO t_facs (fac, ftyp, ort, spcnfc) ";
+            $qry .= " VALUES ('$fac', '$ftyp', '$ort', '$spcfnc')";
             $res = $db->query($qry);
             if (!$res) {
                 $this->rslt = FAIL;
