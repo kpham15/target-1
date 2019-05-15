@@ -1657,34 +1657,45 @@ var sysview = {
                 console.log($(this).attr('id'));
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
+                        console.log(1);
                         return;
                     }
                     else {
                         $(this).addClass("addBGColor");
+                        console.log(2);
+
                     }
                 }
                 else {
                     if ($(this).attr('id') == sysview.nodeYActiveId) {
+                        console.log(3);
                         return;
+
                     }
                     else {
                         $(this).addClass("addBGColor");
+                        console.log(4);
+
                     }
                 }
             }, function() {
                 if ($(this).parent().hasClass(".sysview_nodeX")) {
                     if ($(this).attr('id') == sysview.nodeXActiveId) {
+                        console.log(5);                        
                         return;
                     }
                     else {
+                        console.log(6);                        
                         $(this).removeClass("addBGColor");
                     }
                 }
                 else {
                     if ($(this).attr('id') == sysview.nodeYActiveId) {
+                        console.log(7);                        
                         return;
                     }
                     else {
+                        console.log(8);
                         $(this).removeClass("addBGColor");
                     }
                 }
