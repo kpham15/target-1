@@ -793,6 +793,8 @@ var sysview = {
 
         sysview.queryX(sysview.partXNum);
         sysview.queryY(sysview.partYNum);
+
+        sysview.hoverEvent.node();
     },
 
     updateMio: function(node, mioX, mioY) {
@@ -1635,6 +1637,46 @@ var sysview = {
         for(var i=0; i<actArray.length; i++) {
             var actVariable = actArray[i];
             sysview[actVariable].addClass('disableAction');
+        }
+    },
+
+    hoverEvent: {
+        node: function() {
+            $(".sysview_nodeX button, .sysview_nodeY button").hover(function() {
+                if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
+                        return;
+                    }
+                    else {
+                        $(this).addClass("addBGColor");
+                    }
+                }
+                else {
+                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
+                        return;
+                    }
+                    else {
+                        $(this).addClass("addBGColor");
+                    }
+                }
+            }, function() {
+                if ($(this).parent().hasClass(".sysview_nodeX") == ".sysview_nodeX") {
+                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeXActive) {
+                        return;
+                    }
+                    else {
+                        $(this).removeClass("addBGColor");
+                    }
+                }
+                else {
+                    if (this.id.slice(this.id.indexOf("_") + 6) == sysview.nodeYActive) {
+                        return;
+                    }
+                    else {
+                        $(this).removeClass("addBGColor");
+                    }
+                }
+            });
         }
     }
 }
