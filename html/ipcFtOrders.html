@@ -1426,4 +1426,28 @@ ftOrd.submitBtn.on("click", function() {
         }
     }
 });
+
+ftOrd.action.change(function() {
+    if (ftOrd.action.val() == "PROCESS_ORDER") {
+        ftOrd.ordForm.addClass("addBGColor");
+        ftOrd.cktForm.removeClass("addBGColor");
+		ftOrd.facForm.removeClass("addBGColor");
+    }
+	else if (ftOrd.action.val() == "PROCESS_CKT") {
+		ftOrd.cktForm.addClass("addBGColor");
+		ftOrd.ordForm.removeClass("addBGColor");
+		ftOrd.facForm.removeClass("addBGColor");
+    }
+	else if (ftOrd.action.val() == "PROCESS_FAC") {
+        ftOrd.facForm.addClass("addBGColor");
+		ftOrd.ordForm.removeClass("addBGColor");
+        ftOrd.cktForm.removeClass("addBGColor");
+    }
+    else if (ftOrd.action.val() == "FETCH_FT_ORDERS") {
+		ftOrd.ordForm.removeClass("addBGColor");
+        ftOrd.cktForm.removeClass("addBGColor");
+		ftOrd.facForm.removeClass("addBGColor");
+    }
+});
+
 </script>
