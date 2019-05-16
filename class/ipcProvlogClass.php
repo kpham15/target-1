@@ -64,18 +64,8 @@
 			global $db;
 
             // $qry = "INSERT INTO t_provlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$ordno', '$mlo', NOW(), $dd, $fdd,'$act', '$result')" ;
-            $qry = "INSERT INTO 
-					t_provlog 
-					(user, ckid, cls, adsr, prot, 
-					ordno, tktno, dd, fdd, mlo, 
-					action, result, ctyp, ffac, fport, 
-					tfac, tport) 
-					VALUES 
-					('$user', '$ckid', '$cls', '$adsr', '$prot', 
-					'$ordno', '$tktno', '$dd', '$fdd', '$mlo', 
-					'$act', '$reason', '$ctyp', '$ffac', '$fport', 
-					'$tfac','$tport')";
-
+            $qry = "INSERT INTO t_provlog (user, ckid, cls, adsr, prot, ordno, tktno, dd, fdd, mlo, action, result, ctyp, ffac, fport, tfac, tport) ";
+            $qry .= " VALUES ('$user','$ckid','$cls','$adsr','$prot','$ordno', '$tktno', '$dd', '$fdd', '$mlo','$act','$reason','$ctyp','$ffac','$fport','$tfac','$tport')";
 			$res = $db->query($qry);
 			if (!$res) {
 				$this->rslt = "fail";

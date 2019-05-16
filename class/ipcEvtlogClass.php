@@ -24,16 +24,7 @@
 			global $db;
 			
 			$this->reason = $this->input . "\n" . $rslt . ": " . $msg;
-			// $qry = "INSERT INTO t_evtlog VALUES(0,'$this->user','$this->fnc','$this->evt','$rslt','$this->reason',now())";
-
-			$qry - "INSERT INTO
-					t_evtlog 
-					(user, fnc, evt, rslt, detail, 
-					time) 
-					VALUES 
-					('$this->user', '$this->fnc', '$this->evt', '$rslt', '$this->reason', 
-					now())";
-
+			$qry = "INSERT INTO t_evtlog VALUES(0,'$this->user','$this->fnc','$this->evt','$rslt','$this->reason',now())";
 			$res = $db->query($qry);
 			if (!$res) {
 				$this->rslt = "fail";
@@ -108,14 +99,7 @@
 			global $db;
 			
 			$this->log .= $log;
-			$qry = "INSERT INTO 
-					t_evtlog 
-					(user, evt, fnc, task, rslt, 
-					detail, time) 
-					VALUES 
-					('$this->user', '$this->evt', '$this->fnc', '$this->task', '$rslt', 
-					'$this->log', now())";
-
+			$qry = "INSERT INTO t_evtlog (user,evt,fnc,task,rslt,detail,time) VALUES('$this->user','$this->evt','$this->fnc', '$this->task', '$rslt','$this->log',now())";
 			$res = $db->query($qry);
 			if (!$res) {
 				$this->rslt = "fail";

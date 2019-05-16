@@ -68,18 +68,8 @@
 		$fdd = !empty($fdd) ? "'$fdd'" : "NULL";
 
 		// $qry = "INSERT INTO t_maintlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$mlo', NOW(),$dd, $fdd,'$act', '$result')" ;
-		$qry = "INSERT INTO 
-				t_maintlog 
-				(user, tktno, mlo, ckid, cls, 
-				adsr, prot, dd, fdd, action, 
-				ctyp, ffac, fport, tfac, tport, 
-				result) 
-				VALUES 
-				('$user', '$tktno', '$mlo', '$ckid', '$cls',
-				'$adsr', '$prot', '$dd', '$fdd', '$act',
-				'$ctyp', '$ffac', '$fport', '$tfac', '$tport', 
-				'$result')";
-				
+		$qry = "INSERT INTO t_maintlog (user, tktno, mlo, ckid, cls, adsr, prot, dd, fdd, action, ctyp, ffac, fport, tfac, tport, result) ";
+		$qry .= " VALUES ('$user','$tktno','$mlo','$ckid','$cls','$adsr','$prot','$dd','$fdd','$act','$ctyp','$ffac','$fport','$tfac','$tport','$result')";
 		$res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";

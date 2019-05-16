@@ -59,11 +59,7 @@ class CMD {
     public function addCmd($node, $ackid, $cmd) {
         global $db;
          
-        $qry = "INSERT INTO 
-                t_cmdque 
-                (time, node, ackid, stat, cmd) 
-                VALUES
-                (now(), $node, '$ackid', 'NEW', '$cmd')";
+        $qry = "INSERT INTO t_cmdque (time,node,ackid,stat,cmd) VALUES(now(),$node, '$ackid', 'NEW','$cmd')";
 
         $res = $db->query($qry);
         if (!$res) {
