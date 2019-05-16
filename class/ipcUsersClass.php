@@ -339,7 +339,7 @@ class USERS {
         
         $qry = "INSERT INTO t_users 
                 (uname, lname, fname, mi, ssn, title, tel, email, stat, pw, pwdate, pwcnt, grp, ugrp, login, lastlogin) 
-                VALUES ('$uname', '$lname', '$fname', '$mi', '$ssn', '$title', '$tel', '$email', 'INACTIVE', '$pw', 'now()', 0, '$grpId', '$ugrp', null, 'now()'";
+                VALUES ('$uname', '$lname', '$fname', '$mi', '$ssn', '$title', '$tel', '$email', 'INACTIVE', '$pw', now(), 0, '$grpId', '$ugrp', null, now()";
 
         $res = $db->query($qry);
         if (!$res) {
