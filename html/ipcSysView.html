@@ -820,10 +820,10 @@ var sysview = {
             return;
         }
         
-        if (sysview.selectedMioXOldPsta != sysview.info[sysview.nodeXActive - 1].mioX[sysview.mioXIndex - 1]) {
+        if (sysview.selectedMioXOldPsta != sysview.info[sysview.nodeXActive - 1].MIOX[sysview.mioXIndex - 1]) {
             sysview.queryX(sysview.partXNum);
         }
-        if (sysview.selectedMioYOldPsta != sysview.info[sysview.nodeYActive - 1].mioY[sysview.mioYIndex - 1]) {
+        if (sysview.selectedMioYOldPsta != sysview.info[sysview.nodeYActive - 1].MIOY[sysview.mioYIndex - 1]) {
             sysview.queryY(sysview.partYNum);
         }
         
@@ -2283,7 +2283,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info[sysview.nodeXActive - 1].mioX[i]);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info[sysview.nodeXActive - 1].MIOX[i]);
         }
     }
     else {
@@ -2298,7 +2298,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info[sysview.nodeYActive - 1].mioY[i]);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info[sysview.nodeYActive - 1].MIOY[i]);
         }
 
     }
