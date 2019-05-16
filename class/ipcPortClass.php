@@ -569,10 +569,8 @@ class PORT {
     public function updatePortStatByNodeSlot($node, $slot, $ptyp, $evt) {
         global $db;
 
-
         for ($pnum = 1; $pnum <= 50; $pnum++) {
             $port = $node . '-' . $slot . '-' . $ptyp . '-' . $pnum;
-
             $this->loadPort($port);
             $smsObj = new SMS($this->psta, $this->ssta, $evt);
             if ($smsObj->rslt == SUCCESS) {

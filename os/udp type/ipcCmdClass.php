@@ -128,8 +128,6 @@ class CMD {
         $this->rslt = 'success';
         $this->reason = 'CMD CREATED SUCCESSFULLY';
         return true;
-
-
     }
 
     public function createTestPathCmd($act, $portId, $node, $row, $col) {
