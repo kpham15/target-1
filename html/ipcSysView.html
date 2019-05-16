@@ -663,6 +663,7 @@ var sysview = {
     highlightedMioShelf: "",
     activeMioX:      "",
     activeMioY:      "",
+    mioStatPicked: [],
 
     //add actions in the list below here as members
     actRefresh:     $("#sysview_act_refresh"),
@@ -1338,26 +1339,41 @@ var sysview = {
             else if (sysview.highlightedMioPtyp == "MIOY") {
                 sysview.highlightedMioShelf = "2";
             }
+
+            sysview.mioStatPicked = sysview.info[sysview.nodeXActive-1][sysview.highlightedMioPtyp][sysview.highlightedMio-1];
+
             // remove previous css class
             $(".sysview_mioActList > li").removeClass();
             $(".sysview_mioActList > li").off('mouseenter mouseleave');;
 
-            sysview.actRefresh.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actLockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actUnlockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actViewPath.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
+            if (sysview.mioStatPicked == "INS") {
+                sysview.activeAct(['REFRESH', 'LOCK CARD', 'VIEW PATH']);
+                sysview.deactiveAct(['UNLOCK CARD']);
+            }
+            else if (sysview.mioStatPicked == "LCK") {
+                sysview.activeAct(['UNLOCK CARD', 'VIEW PATH']);
+                sysview.deactiveAct(['REFRESH', 'LOCK CARD']);
+            }
+            else if (sysview.mioStatPicked == "OOS") {
+                sysview.activeAct(['VIEW PATH']);
+                sysview.deactiveAct(['REFRESH', 'LOCK CARD', 'UNLOCK CARD']);
+            }
+            // sysview.actRefresh.hover(
+            //     function () {$(this).addClass('activeAction')},
+            //     function () {$(this).removeClass('activeAction')},
+            // )
+            // sysview.actLockCard.hover(
+            //     function () {$(this).addClass('activeAction')},
+            //     function () {$(this).removeClass('activeAction')},
+            // )
+            // sysview.actUnlockCard.hover(
+            //     function () {$(this).addClass('activeAction')},
+            //     function () {$(this).removeClass('activeAction')},
+            // )
+            // sysview.actViewPath.hover(
+            //     function () {$(this).addClass('activeAction')},
+            //     function () {$(this).removeClass('activeAction')},
+            // )
 
             sysview.showMenu('mioMenu',e);  
         });
