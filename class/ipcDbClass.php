@@ -25,7 +25,7 @@ class DB {
         $dbUser = $parseDbString[2];
         $dbPw = $parseDbString[3];
 
-        print_r($parseDbString);
+        var_dump($dbUser);
         
 
         // $this->host = "localhost";
