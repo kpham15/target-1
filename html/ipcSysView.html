@@ -2040,7 +2040,7 @@ var sysviewMxcModal = {
             else {
                 alert(obj.reason);
                 sysviewMxcModal.modal.modal('hide');
-                var ptyp = obj.rows.type.slice(2);
+                var ptyp = obj.rows.type.slice(3);
                 console.log(ptyp);
                 $("#sysview_mio" + ptyp + obj.rows.slot + "_psta").text(obj.rows.psta);
                 sysview.queryX(sysview.partXNum);
