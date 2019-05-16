@@ -23,7 +23,7 @@ class DB {
         $dbHost = $parseDbString[0];
         $dbName = $parseDbString[1];
         $dbUser = $parseDbString[2];
-        $dbPw = $parseDbString[3];
+        $dbPw = substr($parseDbString[3], 0, -1);
 
         var_dump($dbPw);
         
