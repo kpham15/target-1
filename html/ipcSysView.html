@@ -2167,20 +2167,26 @@ var sysviewNodeModal = {
 }
 
 
-
+// Handles when a node icon is clicked on either the X or Y side
 $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function() {
 
     //Add border to the row
     $(this).addClass("addBGColor"); //add class selected to current clicked row
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
 
+    // Saves the id of icon clicked
     sysview.nodeActive = $(this).attr('id');
+    // Saves the node index of the icon clicked
     sysview.nodeIndex = parseInt(sysview.nodeActive.slice(13));
+    // Saves the side that the icon clicked was on
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
 
+    // Will execute code based on the side of the clicked node icon
     if (sysview.nodeSide == "X") {
         sysview.nodeXActiveId = $(this).attr('id');
         sysview.nodeXActive = sysview.nodeIndex;
+
+        // Resets the formatting active X MIO icon
         sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
@@ -2189,6 +2195,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioX1.siblings().removeClass("activeMioStyle");
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
+        // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info[sysview.nodeXActive - 1].MIOX[i]);
         }
@@ -2196,6 +2203,8 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     else {
         sysview.nodeYActiveId = $(this).attr('id');
         sysview.nodeYActive = sysview.nodeIndex;
+
+        // Resets the formatting active Y MIO icon
         sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
@@ -2204,6 +2213,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioY1.siblings().removeClass("activeMioStyle");
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
+        // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioYPsta.length; i++) {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info[sysview.nodeYActive - 1].MIOY[i]);
         }
@@ -2217,7 +2227,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     
 });
 
-
+// Handles when an "MIO" icon is clicked
 $(document).on("click",".sysview_mio button",function() {
 
     //Add border to the row
@@ -2226,8 +2236,13 @@ $(document).on("click",".sysview_mio button",function() {
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
     $(this).siblings().removeClass( "activeMioStyle" ); //remove class selected from rest of the rows  
 
+    // Extracts ptyp from the ID of the icon clicked
     var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
     ptyp = ptyp.slice(0, 1);
+
+    // Updates variables to save the current MIO type and Index
+    // Will query ports on appropriate side using the "part" number saved
+    // Will save the clicked MIO as the active MIO of each side (X / Y)
     if (ptyp == "X") {
         sysview.mioType = "X";
         sysview.mioXIndex = parseInt(this.id.slice(this.id.indexOf("_") + 5));
@@ -2241,11 +2256,14 @@ $(document).on("click",".sysview_mio button",function() {
         sysview.activeMioY = $(this).attr('id');
     }
     //change XY to default
+    // Not sure if this is needed anymore
     sysview.xy = 'x';
     sysview.x.addClass("addBGColor");
     sysview.x.siblings().removeClass("addBGColor");
 });
 
+
+// Handles when a "part" icon is clicked on either the X or Y side
 $(document).on("click",".sysview_part a",function() {
 
     //Add border to the row
@@ -2273,7 +2291,7 @@ $(document).on("click",".sysview_part a",function() {
 sysviewModal.modal.on("hidden.bs.modal", sysviewModal.clearForm);
 
 
-// HERE WE WILL ADD ACTIONS FOR THE NODE MENU 
+// Handles when a menu item is clicked on the Node right click menu
 $(".sysview_nodeActList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
@@ -2332,7 +2350,8 @@ $(".sysview_nodeActList > li").click(function(){
     }
 });
 
-// HERE WE WILL ADD ACTIONS FOR THE MIO MENU
+
+// Handles when a menu item is clicked on the MIO right click menu
 $(".sysview_mioActList > li").click(function(){
 
     if ($(this).text() == 'REFRESH') {
@@ -2364,7 +2383,7 @@ $(".sysview_mioActList > li").click(function(){
     }
 });
 
-// HERE WE WILL ADD ACTIONS FOR THE PORT MENU
+// Handles when a menu item is clicked on a port right click menu
 $(".sysview_actList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
