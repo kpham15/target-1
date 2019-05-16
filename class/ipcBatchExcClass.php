@@ -56,8 +56,12 @@ class BATCH {
 
         // $qry = "INSERT INTO t_batch VALUES ('0','$user','$fileName','$fileContent',now())";
         
-        $qry = "INSERT INTO t_batch (user, filename, content, date) ";
-        $qry .= " VALUES ('$user', '$fileName', '$fileContent', '$date')";
+        $qry = "INSERT INTO 
+        t_batch 
+        (user, filename, content, date) 
+        VALUES 
+        ('$user', '$fileName', '$fileContent', '$date')";
+        
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = "fail";
