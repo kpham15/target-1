@@ -669,25 +669,6 @@ var sysview = {
     actViewPath:    $("#sysview_act_viewPath"),
 
     start: function() {
-
-        // for(i=0; i<wc.nodes; i++) {
-        //     var n = i+1;
-        //     $('#sysview_n' + n + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" + rows[i].temp + "  |  " + rows[i].volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " + rows[i].rack + "</div></div>");
-        //     $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
-        //     if (rows[i].alm == "MAJ") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#F75A00");
-        //     }
-        //     else if (rows[i].alm == "MIN") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
-        //     }
-        //     else if (rows[i].alm == "CRI") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
-        //     }
-        //     else if (rows[i].alm == "NONE") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
-        //     }
-        // }
-            
         var b = [];
         var c = [];
         sysview.nodeXId = [];
@@ -828,82 +809,7 @@ var sysview = {
         }
         
     },
-    
-    // refreshPage: function() {
-    //     sysview.queryNodes();
-        
-    //     var interval = setInterval(function() {
-    //         if ($('.active.tab-pane').is("#sysview")) {
-    //             sysview.queryNodes();
-    //         }
-    //         else {
-    //             clearInterval(interval);
-    //         }
-    //     }, 10000)
-    // },
 
-    // queryNodes: function() {
-
-    //     $.post(ipcDispatch,
-    //     {
-    //         api:    "ipcNode",
-    //         act:	"queryAll",
-    //         user:	$("#main_currentUser").text()
-    //     },
-    //     function (data, status) {
-    //         var obj = JSON.parse(data);
-    //         if (obj.rslt  ==  "fail") {
-    //             alert(obj.reason);
-    //         }
-    //         else {
-    //             var len = obj.rows.length;
-    //             var rows = obj.rows;
-    //             sysview.node = rows;
-    //             var a=[];
-    //             for (i=0; i<len; i++) {
-    //                 a.push('<button id="sysview_n'+rows[i].node+'_btn">a</button>')
-    //             }
-
-    //             sysview.nodeList.html(a.join(""));
-
-
-    //             for(i=0; i<len; i++) {
-    //                 $('#sysview_n' + rows[i].node + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" + rows[i].temp + "  |  " + rows[i].volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " + rows[i].rack + "</div></div>");
-    //                 $('#sysview_n' + rows[i].node + '_btn').addClass("addNodeStyle");
-    //                 if (rows[i].alm == "MAJ") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#F75A00");
-    //                 }
-    //                 else if (rows[i].alm == "MIN") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#FFFF00");
-    //                 }
-    //                 else if (rows[i].alm == "CRI") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#FF0000");
-    //                 }
-    //                 else if (rows[i].alm == "NONE") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#7BC63E");
-    //                 }
-    //             }
-    //             if(sysview.nodeIndex != 0)
-    //                 $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
-                    
-    //             //// run the first load of the tab
-    //             if(sysview.firstLoad && len > 0) {
-    //                 $('#sysview_n' + rows[0].node + '_btn').addClass("addBorder");
-    //                 $('#sysview_n' + rows[0].node + '_btn').siblings().removeClass("addBorder");
-    //                 sysview.nodeIndex = rows[0].node;
-    //                 sysview.mioIndex = 1;
-    //                 sysview.mio1.addClass("addBGColor")
-    //                 sysview.mio1.siblings().removeClass("addBGColor")
-    //                 sysview.xy = 'x';
-    //                 sysview.x.addClass("addBGColor")
-    //                 sysview.x.siblings().removeClass("addBGColor")
-    //                 sysview.query();
-    //                 sysview.firstLoad = false;
-    //             }
-    //         }
-    //     });
-    // },
-    
     queryX: function(part) {
     
         $.post(ipcDispatch,
@@ -1084,17 +990,17 @@ var sysview = {
                 alert(obj.reason);
             }
             else {
-                if(obj.rows.length == 0) {
+                if (obj.rows.length == 0) {
                     alert('No connection information')
                     return;
                 }
                 sysview.ckidRows = obj.rows;
-                if(type == 'CKID') {
+                if (type == 'CKID') {
                     sysview.ckidRows = obj.rows;
                     sysviewModal.modal.modal();
                     sysviewModal.startShowConn();
                 }
-                else if(type == 'MTC_DISCON') {
+                else if (type == 'MTC_DISCON') {
                     var idx = sysview.portPicked.con_idx;
                 
                     var connId = sysview.ckidRows.findIndex(x => x.idx === idx);
@@ -1115,7 +1021,7 @@ var sysview = {
                     maintModal.modal.modal();
                 }
 
-                else if(type == 'MTC_CONN') {
+                else if (type == 'MTC_CONN') {
                     var idx = sysview.portPicked.con_idx;
                 
                     var connId = sysview.ckidRows.findIndex(x => x.idx === idx);
@@ -1251,6 +1157,7 @@ var sysview = {
     },
 
     createPortY: function(part) {
+
         if (part == 1) {
             var startIndex = 0;
             var endIndex = 25;
@@ -1260,6 +1167,7 @@ var sysview = {
             var endIndex = 50;
         }
 
+        // Creates port icons on Y side
         var a =[];
         for (var i = startIndex; i < endIndex; i++) {
             var port = sysview.portY[i].node + '-' + sysview.portY[i].slot + '-' + sysview.portY[i].ptyp + '-' + sysview.portY[i].pnum;
@@ -1271,18 +1179,6 @@ var sysview = {
         }
     
         sysview.rightPort.html(a.join(""));
-        
-    
-        // a = [];
-        // for (var i = sysview.port.length/2; i < sysview.port.length; i++) {
-        //     var port = sysview.port[i].node + '-' + sysview.port[i].slot + '-' + sysview.port[i].ptyp + '-' + sysview.port[i].pnum;
-
-        //     a.push('<button type="button" id="sysview_' + sysview.xy + sysview.port[i].id + '">&nbsp<div style="float:left">' + port + '</div><div style="float:right">' + sysview.port[i].psta + '</div><br>&nbsp' + sysview.port[i].fac + '<br>&nbsp' + sysview.port[i].ckid + '</button>')
-        //     $(document).on("click","#sysview_" + sysview.xy + sysview.port[i].id,function() {
-                
-        //     })
-        // }
-        // sysview.rightPort.html(a.join(""));
     
 
         for (var i = 0; i < sysview.portY.length; i++) { 
