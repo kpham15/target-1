@@ -671,14 +671,15 @@ var sysview = {
     actViewPath:    $("#sysview_act_viewPath"),
 
     start: function() {
-        var b = [];
-        var c = [];
-        sysview.nodeXId = [];
-        sysview.nodeYId = [];
-
+        
         // run the first load of the tab
-        for (var i = 0; i < wc.nodes; i++) {
-            if (sysview.firstLoad && wc.nodes > 0) {
+        if (sysview.firstLoad && wc.nodes > 0) {
+            var b = [];
+            var c = [];
+            sysview.nodeXId = [];
+            sysview.nodeYId = [];
+
+            for (var i = 0; i < wc.nodes; i++) {
 
                 var n = i + 1;
 
@@ -689,50 +690,51 @@ var sysview = {
                 c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
                                 
             }
+
+            sysview.nodeIndex = 1;
+            sysview.nodeXActive = 1;
+            sysview.nodeYActive = 1;
+            sysview.firstLoad = false;
+            sysview.nodeX.html(b.join(""));
+            sysview.nodeY.html(c.join(""));
+            sysview.nodeXId.push(sysview.nodeX.children());
+            sysview.nodeYId.push(sysview.nodeY.children());
+    
+            sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
+            sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
+    
+            $("#sysview_nodeX1").addClass("addBGColor");
+            $("#sysview_nodeX1").addClass("addNodeBorder");
+            $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
+            $("#sysview_nodeX1").siblings().removeClass("addBGColor");
+            $("#sysview_nodeY1").addClass("addBGColor");
+            $("#sysview_nodeY1").addClass("addNodeBorder");
+            $("#sysview_nodeY1").siblings().addClass("addNodeBorder");
+            $("#sysview_nodeY1").siblings().removeClass("addBGColor");
+            sysview.mioXIndex = 1;
+            sysview.mioYIndex = 1;
+            sysview.mioX1.addClass("addBGColor");
+            sysview.mioX1.addClass("activeMioStyle");
+            sysview.mioX1.siblings().removeClass("addBGColor");
+            sysview.mioX1.siblings().removeClass("activeMioStyle");
+            sysview.activeMioX = sysview.mioX1.attr('id');
+            sysview.mioY1.addClass("addBGColor");
+            sysview.mioY1.addClass("activeMioStyle");
+            sysview.mioY1.siblings().removeClass("addBGColor");
+            sysview.mioY1.siblings().removeClass("activeMioStyle");
+            sysview.activeMioY = sysview.mioY1.attr('id');
+            sysview.xy = 'x';
+            sysview.part1X.addClass("addBorder");
+            sysview.part1X.siblings().removeClass("addBorder");
+            sysview.part1Y.addClass("addBorder");
+            sysview.part1Y.siblings().removeClass("addBorder");
+            sysview.queryX(sysview.partXNum);
+            sysview.queryY(sysview.partYNum);
+    
+            sysview.hoverEvent.node();
+            sysview.hoverEvent.mio();
         }
         
-        sysview.nodeIndex = 1;
-        sysview.nodeXActive = 1;
-        sysview.nodeYActive = 1;
-        sysview.firstLoad = false;
-        sysview.nodeX.html(b.join(""));
-        sysview.nodeY.html(c.join(""));
-        sysview.nodeXId.push(sysview.nodeX.children());
-        sysview.nodeYId.push(sysview.nodeY.children());
-
-        sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
-        sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
-
-        $("#sysview_nodeX1").addClass("addBGColor");
-        $("#sysview_nodeX1").addClass("addNodeBorder");
-        $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
-        $("#sysview_nodeX1").siblings().removeClass("addBGColor");
-        $("#sysview_nodeY1").addClass("addBGColor");
-        $("#sysview_nodeY1").addClass("addNodeBorder");
-        $("#sysview_nodeY1").siblings().addClass("addNodeBorder");
-        $("#sysview_nodeY1").siblings().removeClass("addBGColor");
-        sysview.mioXIndex = 1;
-        sysview.mioYIndex = 1;
-        sysview.mioX1.addClass("addBGColor");
-        sysview.mioX1.addClass("activeMioStyle");
-        sysview.mioX1.siblings().removeClass("addBGColor");
-        sysview.mioX1.siblings().removeClass("activeMioStyle");
-        sysview.activeMioX = sysview.mioX1.attr('id');
-        sysview.mioY1.addClass("addBGColor");
-        sysview.mioY1.addClass("activeMioStyle");
-        sysview.mioY1.siblings().removeClass("addBGColor");
-        sysview.mioY1.siblings().removeClass("activeMioStyle");
-        sysview.activeMioY = sysview.mioY1.attr('id');
-        sysview.xy = 'x';
-        sysview.part1X.addClass("addBorder");
-        sysview.part1X.siblings().removeClass("addBorder");
-        sysview.part1Y.addClass("addBorder");
-        sysview.part1Y.siblings().removeClass("addBorder");
-        sysview.queryX(sysview.partXNum);
-        sysview.queryY(sysview.partYNum);
-
-        sysview.hoverEvent.node();
-        sysview.hoverEvent.mio();
     },
 
     updateNode: function(nodeInfo) {
