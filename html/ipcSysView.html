@@ -1347,16 +1347,16 @@ var sysview = {
             $(".sysview_mioActList > li").off('mouseenter mouseleave');;
 
             if (sysview.mioStatPicked == "INS") {
-                sysview.activeAct(['REFRESH', 'LOCK CARD', 'VIEW PATH']);
-                sysview.deactiveAct(['UNLOCK CARD']);
+                sysview.activeAct(['actRefresh', 'actLockCard', 'actViewPath']);
+                sysview.deactiveAct(['actUnlockCard']);
             }
             else if (sysview.mioStatPicked == "LCK") {
-                sysview.activeAct(['UNLOCK CARD', 'VIEW PATH']);
-                sysview.deactiveAct(['REFRESH', 'LOCK CARD']);
+                sysview.activeAct(['actUnlockCard', 'actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard']);
             }
             else if (sysview.mioStatPicked == "OOS") {
-                sysview.activeAct(['VIEW PATH']);
-                sysview.deactiveAct(['REFRESH', 'LOCK CARD', 'UNLOCK CARD']);
+                sysview.activeAct(['actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard', 'actUnlockCard']);
             }
             // sysview.actRefresh.hover(
             //     function () {$(this).addClass('activeAction')},
