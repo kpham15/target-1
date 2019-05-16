@@ -61,7 +61,7 @@ class BATCH {
         (user, filename, content, date) 
         VALUES 
         ('$user', '$fileName', '$fileContent', '$date')";
-        
+
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = "fail";
@@ -77,8 +77,12 @@ class BATCH {
             $cmd_id = $i+1;
             // $qry = "INSERT INTO t_bats VALUES ('0','$batch_id','$cmd_id','$commandArray[$i]')";
 
-            $qry = "INSERT INTO t_bats (batch_id, cmd_id, cmd) ";
-            $qry .= " VALUES ('$batch_id', '$cmd_id', $commandArray[$i]')";
+            $qry = "INSERT INTO 
+            t_bats 
+            (batch_id, cmd_id, cmd) 
+            VALUES 
+            ('$batch_id', '$cmd_id', $commandArray[$i]')";
+            
             // echo $qry.PHP_EOL;
             $res = $db->query($qry);
             if (!$res) {
