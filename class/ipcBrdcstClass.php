@@ -137,7 +137,16 @@ class BRDCST{
 			}
 		}
 		
-		$qry = "INSERT INTO t_brdcst VALUES (0,0,'" . $user . "','" . $owner . "','" . $owner_id . "', now(),'','', '" .  $sa . "','" .  $msg . "','" .  $detail . "')";
+        // $qry = "INSERT INTO t_brdcst VALUES (0,0,'" . $user . "','" . $owner . "','" . $owner_id . "', now(),'','', '" .  $sa . "','" .  $msg . "','" .  $detail . "')";
+        
+        $qry = "INSERT INTO 
+                t_brdcst 
+                (user, owner, owner_id, date, sa, 
+                msg, detail) 
+                VALUES 
+                ('$user', '$owner', '$owner_id', now(), '$sa', 
+                '$msg', '$detail')";
+        
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = "fail";
