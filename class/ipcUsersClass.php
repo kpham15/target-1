@@ -333,9 +333,26 @@ class USERS {
 		}
         $pw = encryptData($ssn);
 
-		$qry = "INSERT INTO t_users VALUES(0,'" . $uname . "','" . $lname . "','" . $fname . "','" . $mi . "','" . $ssn . "'";
-		$qry .= ",'','','','','" . $title . "','" . $tel . "','" . $email . "','INACTIVE','" . $pw . "'";
-		$qry .= ",now(),'','','','','','','','','','','',0,'','','" . $grpId . "', '$ugrp',null,now())"; 
+		// $qry = "INSERT INTO t_users VALUES(0,'" . $uname . "','" . $lname . "','" . $fname . "','" . $mi . "','" . $ssn . "'";
+        // $qry .= ",'','','','','" . $title . "','" . $tel . "','" . $email . "','INACTIVE','" . $pw . "'";
+        // $qry .= ",now(),'','','','','','','','','','','',0,'','','" . $grpId . "', '$ugrp',null,now())"; 
+        
+        $qry = "INSERT INTO t_users 
+                (uname, lname, fname, mi, ssn, 
+                addr, city, state, zip, title, 
+                tel, email, stat, pw, pwdate, 
+                pw0, t0, pw1, t1, pw2, 
+                t2, pw3, t3, pw4, t4, 
+                exp, pwcnt, supv, com, grp, 
+                ugrp, login, lastlogin) 
+                VALUES 
+                ('$uname', '$lname', '$fname', '$mi', '$ssn', 
+                '', '', '', '', '$title', 
+                '$tel', '$email', 'INACTIVE', '$pw', now(), 
+                '', '', '', '', '', 
+                '', '', '', '', '', 
+                '', 0, '', '', '$grpId',
+                 '$ugrp', null, now())";
 
         $res = $db->query($qry);
         if (!$res) {

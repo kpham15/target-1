@@ -215,6 +215,29 @@
             }
         }
 
+        public function queryTestFacByNode($node) {
+            global $db;
+            
+            $qry = "SELECT t_facs.fac, t_facs.port FROM t_facs left join t_ports on t_facs.port_id=t_ports.id WHERE t_ports.ptyp='Z' AND t_ports.psta='TST' AND t_ports.node='$node' ORDER BY fac";
+        
+            $res = $db->query($qry);
+            if (!$res) {
+                $this ->rslt    = FAIL;
+                $this->reason = mysqli_error($db);
+            }
+            else {
+                $rows = [];
+                if ($res->num_rows > 0) {
+                    while ($row = $res->fetch_assoc()) {
+                        $rows[] = $row;
+                    }
+                }
+                $this->rows = $rows;
+                $this->rslt = SUCCESS;
+                $this->reason = QUERY_MATCHED;
+            }
+        }
+
         
         public function add($fac, $ftyp, $ort, $spcfnc) {
             global $db;
@@ -248,7 +271,14 @@
                 }
             }
             
-            $qry = "INSERT INTO t_facs VALUES(0,'$fac','$ftyp','$ort','$spcfnc','',0)";
+            // $qry = "INSERT INTO t_facs VALUES(0,'$fac','$ftyp','$ort','$spcfnc','',0)";
+
+            $qry = "INSERT INTO 
+                    t_facs 
+                    (fac, ftyp, ort, spcnfc) 
+                    VALUES 
+                    ('$fac', '$ftyp', '$ort', '$spcfnc')";
+                    
             $res = $db->query($qry);
             if (!$res) {
                 $this->rslt = FAIL;
