@@ -378,8 +378,15 @@ function unlckMatrix($node, $shelf, $slot, $type, $userObj) {
             $result["reason"] = $mxcObj->reason;
             return $result;
         }
-        
-        $result['rows'] = $mxcObj->rows;
+
+        // creates array that includes node, slot, type, psta
+        $rows['node'] = $mxcObj->node;
+        $rows['slot'] = $mxcObj->slot;
+        $rows['type'] = $mxcObj->type;
+        $rows['psta'] = $mxcObj->psta;
+
+        // return in rows[node, slot, type, psta] instead of empty rows
+        $result['rows'] = $rows;
         $result["rslt"] = SUCCESS;
         $result["reason"] = "UNLOCK_MXC_SUCCESS";
         return $result;

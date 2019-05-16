@@ -2040,8 +2040,10 @@ var sysviewMxcModal = {
             else {
                 alert(obj.reason);
                 sysviewMxcModal.modal.modal('hide');
+                // extract type from returned type, (expecting MIO infront of type)
                 var ptyp = obj.rows.type.slice(3);
-                console.log(ptyp);
+
+                // Inserting new psta into appropriate MIO tab
                 $("#sysview_mio" + ptyp + obj.rows.slot + "_psta").text(obj.rows.psta);
                 sysview.queryX(sysview.partXNum);
                 sysview.queryY(sysview.partYNum);
