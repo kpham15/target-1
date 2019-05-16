@@ -44,8 +44,11 @@
 		public function log($user, $action, $port, $fac, $ftyp, $ort, $spcfnc, $result) {
 			global $db;
 
-            $qry = "INSERT INTO t_cfglog (user,action,port,fac,ftyp,ort,spcfnc, result ) values ('$user',
-            '$action','$port', '$fac', '$ftyp', '$ort', '$spcfnc', '$result')" ;
+            $qry = "INSERT INTO 
+					t_cfglog 
+					(user, action, port, fac, ftyp, ort, spcfnc, result) 
+					VALUES 
+					('$user', '$action', '$port', '$fac', '$ftyp', '$ort', '$spcfnc', '$result')" ;
 
 			$res = $db->query($qry);
 			if (!$res) {

@@ -248,8 +248,13 @@
 
             // setup new ckt
             // $qry = "INSERT INTO t_ckts values(0,'$ckid','$cls','$adsr','$prot','$ordno','$mlo',now(),0,'$stat')";
-            $qry = "INSERT INTO t_ckts (ckid, cls, adsr, prot, ordno, mlo, stat) ";
-            $qry .= " VALUES ('$ckid', '$cls', '$adsr', '$prot', '$ordno', '$mlo', '$stat')";
+            $qry = "INSERT INTO 
+                    t_ckts 
+                    (ckid, cls, adsr, prot, ordno, 
+                    mlo, stat) 
+                    VALUES 
+                    ('$ckid', '$cls', '$adsr', '$prot', '$ordno', 
+                    '$mlo', '$stat')";
             
             $res = $db->query($qry);
             if (!$res) {
