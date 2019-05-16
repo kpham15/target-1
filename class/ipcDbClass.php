@@ -15,8 +15,6 @@ class DB {
     public function __construct() {
 
         // obtain db info
-        // $file = __DIR__ . "/ipc-db.cfg";
-        //@TODO below is the directory 
         $file = __DIR__ . "/../../ipc-db.cfg";
         $dbString = file_get_contents($file);
         $parseDbString = explode(",", $dbString);
