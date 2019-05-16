@@ -25,11 +25,11 @@ class DB {
         $dbUser = $parseDbString[2];
         $dbPw = $parseDbString[3];
 
+        var_dump($dbPw);
         
         
         // $this->host = "localhost";
         $this->host = $dbHost;
-        var_dump($dbHost);
         // $this->dbname = "co5k"; $this->ui = "ninh"; $this->pw = "C0nsulta!!!";
         // $this->dbname = "co5k"; $this->ui = "ninh"; $this->pw = "c0nsulta";
         // $this->dbname = "co5k"; $this->ui = "root"; $this->pw = "Qaz!2345";
