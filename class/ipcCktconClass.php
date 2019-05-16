@@ -245,20 +245,7 @@ class CKTCON {
         $idx = $result['idx'];
 
         //$qry = "INSERT INTO t_cktcon VALUES(0,'$con','$ckt_id','$idx','$ctyp','$ctyp_o','$fp_id','$fp_n','$tp_id','$tp_n')";
-<<<<<<< HEAD
-        // $qry = "INSERT INTO t_cktcon VALUES(0, '$con', '$ckt_id', '$ckid', $idx, '$ctyp', '$ctyp_o', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
-        $qry = "INSERT INTO 
-                t_cktcon 
-                (con, ckt_id, ckid, idx, ctyp, 
-                ctyp_o, fp_id, fport, fp_n, tp_id, 
-                tport, tp_n, path) 
-                VALUES 
-                ('$con', $ckt_id, $ckid, '$idx', '$ctyp', 
-                '$ctyp_o', '$fp_id', '$fport', '$fp_n', '$tp_id', 
-                '$tport', '$tp_n', '$path')";
-=======
         $qry = "INSERT INTO t_cktcon (con,ckt_id,ckid,idx,ctyp,ctyp_o,fp_id,fport,fp_n,tp_id,tport,tp_n,path) VALUES('$con', '$ckt_id', '$ckid', $idx, '$ctyp', '$ctyp_o', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
->>>>>>> staging
 
         $res = $db->query($qry);
         if (!$res) {
