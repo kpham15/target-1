@@ -340,6 +340,6 @@ include "ipcProvConnect.php";
 		$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
 		return $result;
 	}
-   	
+	
 	
 ?>

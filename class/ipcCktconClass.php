@@ -22,6 +22,7 @@ class CKTCON {
     public $tport = '';
     public $tp_n = 0;
     public $path = 0;
+    public $tbus = 0;
     
     public $rslt = "";
     public $reason = "";
@@ -78,6 +79,7 @@ class CKTCON {
                 $this->fport = $this->rows[$i]['fport'];
                 $this->tport = $this->rows[$i]['tport'];
                 $this->path = $this->rows[$i]['path'];
+                $this->tbus = $this->rows[$i]['tbus'];
                 $this->rslt = SUCCESS;
                 $this->reason = "LOAD IDX";
                 return TRUE;
@@ -140,7 +142,6 @@ class CKTCON {
 		}
 		return;
     }
-
 
     public function queryCktConWithFac($cktcon) {
         global $db;
@@ -205,18 +206,7 @@ class CKTCON {
             return;
         }
         $con = $result["cktcon"];
-        
-        // $qry = "INSERT INTO t_cktcon VALUES (0, '$con', '$ckt_id', '$ckid', 1, '$ctyp', '$ctyp', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
-        $qry = "INSERT INTO 
-                t_cktcon 
-                (con, ckt_id, ckid, idx, ctyp, 
-                ctyp_o, fp_id, fport, fp_n, tp_id, 
-                tport, tp_n, path) 
-                VALUES 
-                ('$con', '$ckt_id', '$ckid', 1, '$ctyp', 
-                '$ctyp', '$fp_id', '$fport', '$fp_n', $tp_id', 
-                '$tport', '$tp_n', '$path')";
-
+        $qry = "INSERT INTO t_cktcon (con,ckt_id,ckid,idx,ctyp,ctyp_o,fp_id,fport,fp_n,tp_id,tport,tp_n,path) VALUES ('$con', '$ckt_id', '$ckid', 1, '$ctyp', '$ctyp', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = FAIL;
@@ -255,6 +245,7 @@ class CKTCON {
         $idx = $result['idx'];
 
         //$qry = "INSERT INTO t_cktcon VALUES(0,'$con','$ckt_id','$idx','$ctyp','$ctyp_o','$fp_id','$fp_n','$tp_id','$tp_n')";
+<<<<<<< HEAD
         // $qry = "INSERT INTO t_cktcon VALUES(0, '$con', '$ckt_id', '$ckid', $idx, '$ctyp', '$ctyp_o', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
         $qry = "INSERT INTO 
                 t_cktcon 
@@ -265,6 +256,9 @@ class CKTCON {
                 ('$con', $ckt_id, $ckid, '$idx', '$ctyp', 
                 '$ctyp_o', '$fp_id', '$fport', '$fp_n', '$tp_id', 
                 '$tport', '$tp_n', '$path')";
+=======
+        $qry = "INSERT INTO t_cktcon (con,ckt_id,ckid,idx,ctyp,ctyp_o,fp_id,fport,fp_n,tp_id,tport,tp_n,path) VALUES('$con', '$ckt_id', '$ckid', $idx, '$ctyp', '$ctyp_o', '$fp_id', '$fport', $fp_n, '$tp_id', '$tport', $tp_n, $path)";
+>>>>>>> staging
 
         $res = $db->query($qry);
         if (!$res) {
@@ -337,7 +331,6 @@ class CKTCON {
         $this->reason = 'UPDATE_CKTCON_CTYP';
     }
 
-
     public function updPath($con, $idx, $path) {
         global $db;
 
@@ -352,8 +345,6 @@ class CKTCON {
         $this->rslt = SUCCESS;
         $this->reason = "UPDATE_CKTCON_PATH";
     }
-
-    
 
     function getAvailCktcon() {
 		global $db;
@@ -378,7 +369,6 @@ class CKTCON {
         return $result;
 	}
 
-    
     function getAvailCktconIdx($con) {
 
         global $db;
@@ -462,10 +452,26 @@ class CKTCON {
                 $this->fport = $this->rows[$i]['fport'];
                 $this->tport = $this->rows[$i]['tport'];
                 $this->path = $this->rows[$i]['path'];
+                $this->tbus = $this->rows[$i]['tbus'];
                 return $this->idx;
             }
         }
         return 0;
+    }
+
+    public function updateTbus($tbusId){
+        global $db;
+
+        $qry = "UPDATE t_cktcon SET tbus='$tbusId' WHERE con='$this->con' AND idx='$this->idx'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt =  FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+        $this->tbus = $tbusId;
+        $this->rslt = SUCCESS;
+        $this->reason = 'TBUS UPDATED';
     }
 }   
 

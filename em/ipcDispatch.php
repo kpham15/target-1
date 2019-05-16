@@ -167,6 +167,9 @@ else if($api == 'ipcOrd') {
 else if($api == 'ipcTb') {
     include "ipcTb.php";
 }
+else if($api == 'ipcTbus') {
+    include "ipcTbus.php";
+}
 // else if($api == 'ipcAction') {
 //     include "ipcAction.php";
 // }

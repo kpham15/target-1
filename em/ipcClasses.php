@@ -48,6 +48,7 @@
     include "../class/ipcXClass.php";
     include "../class/ipcYClass.php";
     include "../class/ipcTbClass.php";
+    include "../class/ipcTbusClass.php";
     include "../class/jwt.php";
     include "../class/ipcViolationClass.php";
     include "../class/ipcCmdClass.php";

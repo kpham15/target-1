@@ -119,7 +119,6 @@ class BATCH {
         $this->reason = "Batch deleted successfully";
         
     }
-
 }
 
 
