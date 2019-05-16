@@ -669,25 +669,6 @@ var sysview = {
     actViewPath:    $("#sysview_act_viewPath"),
 
     start: function() {
-
-        // for(i=0; i<wc.nodes; i++) {
-        //     var n = i+1;
-        //     $('#sysview_n' + n + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" + rows[i].temp + "  |  " + rows[i].volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " + rows[i].rack + "</div></div>");
-        //     $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
-        //     if (rows[i].alm == "MAJ") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#F75A00");
-        //     }
-        //     else if (rows[i].alm == "MIN") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
-        //     }
-        //     else if (rows[i].alm == "CRI") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
-        //     }
-        //     else if (rows[i].alm == "NONE") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
-        //     }
-        // }
-            
         
         // run the first load of the tab
         if (sysview.firstLoad && wc.nodes > 0) {
@@ -707,7 +688,7 @@ var sysview = {
                 c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
                                 
             }
-            
+
             sysview.nodeIndex = 1;
             sysview.nodeXActive = 1;
             sysview.nodeYActive = 1;
