@@ -817,7 +817,7 @@ var sysview = {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
             user:	$("#main_currentUser").text(),
-            node:	sysview.nodeIndex,
+            node:	sysview.nodeXActive,
             slot:	sysview.mioXIndex,
             ptyp:	"x",
         },
@@ -845,7 +845,7 @@ var sysview = {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
             user:	$("#main_currentUser").text(),
-            node:	sysview.nodeIndex,
+            node:	sysview.nodeYActive,
             slot:	sysview.mioYIndex,
             ptyp:	"y",
         },
@@ -2187,7 +2187,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.nodeXActive = sysview.nodeIndex;
 
         // Resets the formatting active X MIO icon
-        sysview.mioType = "X";
+        // sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
         sysview.mioX1.addClass("activeMioStyle");
@@ -2205,7 +2205,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.nodeYActive = sysview.nodeIndex;
 
         // Resets the formatting active Y MIO icon
-        sysview.mioType = "Y";
+        // sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
         sysview.mioY1.addClass("activeMioStyle");
@@ -2244,13 +2244,13 @@ $(document).on("click",".sysview_mio button",function() {
     // Will query ports on appropriate side using the "part" number saved
     // Will save the clicked MIO as the active MIO of each side (X / Y)
     if (ptyp == "X") {
-        sysview.mioType = "X";
+        // sysview.mioType = "X";
         sysview.mioXIndex = parseInt(this.id.slice(this.id.indexOf("_") + 5));
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = $(this).attr('id');
     }
     else if (ptyp == "Y") {
-        sysview.mioType = "Y";
+        // sysview.mioType = "Y";
         sysview.mioYIndex = parseInt(this.id.slice(this.id.indexOf("_") + 5));
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = $(this).attr('id');
