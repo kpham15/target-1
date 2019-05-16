@@ -14,33 +14,15 @@ class DB {
     
     public function __construct() {
 
-        // $url = "";
-        // $file = fopen("ipc-db.cfg", "r");
-        // if ($file) {
-        //     while (($line = fgets($file)) !== false) {
-        //         // process the line read.
-        //         $lineExtract = explode(",", $line);
-        //         if ($lineExtract[0] == "localhost") {
-        //             $url = $lineExtract[0];
-        //             break;
-        //         }
-        //     }
-
-        // }
-            // fclose($file);
-
-        // echo "URL = $url";
+        // obtain db info
         $file = __DIR__ . "/ipc-db.cfg";
         $dbString = file_get_contents($file);
-        // echo "DBSTRING = $dbString";
-        // print_r('dbstring : ' . $dbString);
-        // var_dump($dbString);
         $parseDbString = explode(",", $dbString);
         $dbHost = $parseDbString[0];
         $dbName = $parseDbString[1];
         $dbUser = $parseDbString[2];
         $dbPw = $parseDbString[3];
-        // var_dump($dbPw);
+        
 
         // $this->host = "localhost";
         $this->host = $dbHost;
