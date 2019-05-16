@@ -1340,7 +1340,7 @@ var sysview = {
                 sysview.highlightedMioShelf = "2";
             }
 
-            sysview.mioStatPicked = sysview.info[sysview.nodeXActive-1][sysview.highlightedMioPtyp][sysview.highlightedMio-1];
+            sysview.mioStatPicked = $("#sysview_mio" + sysview.highlightedMioPtyp.slice(3,4) + sysview.highlightedMio + "_psta").text();
 
             // remove previous css class
             $(".sysview_mioActList > li").removeClass();
