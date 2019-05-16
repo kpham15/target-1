@@ -57,10 +57,10 @@ class BATCH {
         // $qry = "INSERT INTO t_batch VALUES ('0','$user','$fileName','$fileContent',now())";
         
         $qry = "INSERT INTO 
-        t_batch 
-        (user, filename, content, date) 
-        VALUES 
-        ('$user', '$fileName', '$fileContent', '$date')";
+                t_batch 
+                (user, filename, content, date) 
+                VALUES 
+                ('$user', '$fileName', '$fileContent', '$date')";
 
 		$res = $db->query($qry);
         if (!$res) {
@@ -78,10 +78,10 @@ class BATCH {
             // $qry = "INSERT INTO t_bats VALUES ('0','$batch_id','$cmd_id','$commandArray[$i]')";
 
             $qry = "INSERT INTO 
-            t_bats 
-            (batch_id, cmd_id, cmd) 
-            VALUES 
-            ('$batch_id', '$cmd_id', $commandArray[$i]')";
+                    t_bats 
+                    (batch_id, cmd_id, cmd) 
+                    VALUES 
+                    ('$batch_id', '$cmd_id', $commandArray[$i]')";
             
             // echo $qry.PHP_EOL;
             $res = $db->query($qry);

@@ -46,14 +46,14 @@ class ALMLOG {
 
 		// $qry = "INSERT INTO t_maintlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$mlo', NOW(),$dd, $fdd,'$act', '$result')" ;
 		$qry = "INSERT INTO 
-        t_almlog 
-        (almid, ack, sa, src, type, 
-        cond, sev, psta, ssta, remark, 
-        action, user, result) 
-        VALUES 
-        ('$almid', '$ack', '$sa', '$src', '$type',
-        '$cond', '$sev', '$psta', '$ssta', '$remark',
-        '$action', '$user', '$result')";
+                t_almlog 
+                (almid, ack, sa, src, type, 
+                cond, sev, psta, ssta, remark, 
+                action, user, result) 
+                VALUES 
+                ('$almid', '$ack', '$sa', '$src', '$type',
+                '$cond', '$sev', '$psta', '$ssta', '$remark',
+                '$action', '$user', '$result')";
 
 		$res = $db->query($qry);
 		if (!$res) {
