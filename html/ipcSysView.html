@@ -2040,6 +2040,9 @@ var sysviewMxcModal = {
             else {
                 alert(obj.reason);
                 sysviewMxcModal.modal.modal('hide');
+                var ptyp = obj.rows[0].type.slice(2);
+                console.log(ptyp);
+                $("#sysview_mio" + ptyp + obj.rows[0].slot + "_psta").text(obj.rows[0].psta);
                 sysview.queryX(sysview.partXNum);
                 sysview.queryY(sysview.partYNum);
             }
