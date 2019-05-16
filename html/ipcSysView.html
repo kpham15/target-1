@@ -2045,8 +2045,14 @@ var sysviewMxcModal = {
 
                 // Inserting new psta into appropriate MIO tab
                 $("#sysview_mio" + ptyp + obj.rows.slot + "_psta").text(obj.rows.psta);
-                sysview.queryX(sysview.partXNum);
-                sysview.queryY(sysview.partYNum);
+                
+                // Only update port side that is affected by LCK / UNLCK MXC
+                if (ptyp == "X") {
+                    sysview.queryX(sysview.partXNum);
+                }
+                else if (ptyp == "Y") {
+                    sysview.queryY(sysview.partYNum);
+                }
             }
         });
     }    
