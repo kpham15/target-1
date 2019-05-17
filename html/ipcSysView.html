@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <div class="sysview_node">
+    <div class="sysview_node" style="display: flex; align-items: center; justify-content: center">
         
     </div>
 
@@ -170,8 +170,9 @@
                         <label for="sysviewModal_facSearch_fac_txt">FAC: </label>
                         <input id="sysviewModal_facSearch_fac_txt" type="text" class="form-control" style="text-transform: uppercase">
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-4">
                         <button id="sysviewModal_facSearch_facSearch_btn" class="btn btn-primary">VIEW</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
                 </div>
             </div>
@@ -192,8 +193,9 @@
                         <label for="sysviewModal_ckidSearch_ckid_txt">CKID: </label>
                         <input id="sysviewModal_ckidSearch_ckid_txt" type="text" class="form-control" style="text-transform: uppercase">
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-4">
                         <button id="sysviewModal_ckidSearch_ckidSearch_btn" class="btn btn-primary">VIEW</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
                 </div>
             </div>
@@ -208,16 +210,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-2 modifyPadding">
+                    <div class="col-sm-1 modifyPadding">
                         <label for="sysviewMxcModal_node_txt">NODE</label>
                         <input class="form-control modifyPadding" type="text" id="sysviewMxcModal_node_txt" readonly>
                     </div>
-                    <div class="col-sm-2 modifyPadding">
+                    <div class="col-sm-1 modifyPadding">
                         <label for="sysviewMxcModal_shelf_txt">SHELF</label>
                         <input class="form-control modifyPadding" type="text" id="sysviewMxcModal_shelf_txt" readonly>
                         
                     </div>
-                    <div class="col-sm-2 modifyPadding">
+                    <div class="col-sm-1 modifyPadding">
                         <label for="sysviewMxcModal_slot_txt">SLOT</label>
                         <input class="form-control modifyPadding" type="text" id="sysviewMxcModal_slot_txt" readonly>
                     </div>
@@ -229,10 +231,9 @@
                         <label for="sysviewMxcModal_stat_txt">PORT STATUS</label>
                         <input class="form-control modifyPadding" type="text" id="sysviewMxcModal_stat_txt" readonly>
                     </div>
-    
-                    <!-- ------------------------------------------ -->
-                    <!-- <hr> -->
+                </div>
 
+                <div class="row">
                     <div class="col-sm-3 modifyPadding">
                         <label for="sysviewMxcModal_act_txt">ACTION</label>
                         <input type="text" class="form-control" id="sysviewMxcModal_act_txt" readonly>
@@ -258,11 +259,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-1">
                         <label for="sysviewModal_viewPath_node_txt">NODE: </label>
                         <input id="sysviewModal_viewPath_node_txt" type="text" class="form-control" style="text-transform: uppercase">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-1">
                         <label for="sysviewModal_viewPath_slot_txt">SLOT: </label>
                         <input id="sysviewModal_viewPath_slot_txt" type="text" class="form-control" style="text-transform: uppercase">
                     </div>
@@ -362,6 +363,7 @@
                         <div class="col-sm-6">
                             <input id="sysviewModal_ckid_txt" style="text-transform: uppercase" type="text" class="form-control">
                         </div>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
                     <div class="row" hidden>
                         <div class="col-sm-3">
@@ -457,17 +459,17 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-2 modifyPadding">
+                    <div class="col-sm-1 modifyPadding">
                         <label for="sysviewNodeModal_nodeId_num">NODE</label>
                         <input id="sysviewNodeModal_nodeId_num" type="number" class="form-control">
                     </div>
-                    <div class="col-sm-4 modifyPadding">
+                    <div class="col-sm-3 modifyPadding">
                         <label for="sysviewNodeModal_status_txt">CURRENT_STATUS</label>
                         <input id="sysviewNodeModal_status_txt" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4 modifyPadding">
+                    <div class="col-sm-3 modifyPadding">
                         <label for="sysviewNodeModal_act_txt">ACTION</label>
                         <input type="text" class="form-control" id="sysviewNodeModal_act_txt" readonly>
                     </div>
@@ -661,6 +663,7 @@ var sysview = {
     highlightedMioShelf: "",
     activeMioX:      "",
     activeMioY:      "",
+    mioStatPicked: [],
 
     //add actions in the list below here as members
     actRefresh:     $("#sysview_act_refresh"),
@@ -669,33 +672,15 @@ var sysview = {
     actViewPath:    $("#sysview_act_viewPath"),
 
     start: function() {
-
-        // for(i=0; i<wc.nodes; i++) {
-        //     var n = i+1;
-        //     $('#sysview_n' + n + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" + rows[i].temp + "  |  " + rows[i].volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " + rows[i].rack + "</div></div>");
-        //     $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
-        //     if (rows[i].alm == "MAJ") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#F75A00");
-        //     }
-        //     else if (rows[i].alm == "MIN") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
-        //     }
-        //     else if (rows[i].alm == "CRI") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
-        //     }
-        //     else if (rows[i].alm == "NONE") {
-        //         $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
-        //     }
-        // }
-            
-        var b = [];
-        var c = [];
-        sysview.nodeXId = [];
-        sysview.nodeYId = [];
-
+        
         // run the first load of the tab
-        for (var i = 0; i < wc.nodes; i++) {
-            if (sysview.firstLoad && wc.nodes > 0) {
+        if (sysview.firstLoad && wc.nodes > 0) {
+            var b = [];
+            var c = [];
+            sysview.nodeXId = [];
+            sysview.nodeYId = [];
+
+            for (var i = 0; i < wc.nodes; i++) {
 
                 var n = i + 1;
 
@@ -706,50 +691,51 @@ var sysview = {
                 c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
                                 
             }
+
+            sysview.nodeIndex = 1;
+            sysview.nodeXActive = 1;
+            sysview.nodeYActive = 1;
+            sysview.firstLoad = false;
+            sysview.nodeX.html(b.join(""));
+            sysview.nodeY.html(c.join(""));
+            sysview.nodeXId.push(sysview.nodeX.children());
+            sysview.nodeYId.push(sysview.nodeY.children());
+    
+            sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
+            sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
+    
+            $("#sysview_nodeX1").addClass("addBGColor");
+            $("#sysview_nodeX1").addClass("addNodeBorder");
+            $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
+            $("#sysview_nodeX1").siblings().removeClass("addBGColor");
+            $("#sysview_nodeY1").addClass("addBGColor");
+            $("#sysview_nodeY1").addClass("addNodeBorder");
+            $("#sysview_nodeY1").siblings().addClass("addNodeBorder");
+            $("#sysview_nodeY1").siblings().removeClass("addBGColor");
+            sysview.mioXIndex = 1;
+            sysview.mioYIndex = 1;
+            sysview.mioX1.addClass("addBGColor");
+            sysview.mioX1.addClass("activeMioStyle");
+            sysview.mioX1.siblings().removeClass("addBGColor");
+            sysview.mioX1.siblings().removeClass("activeMioStyle");
+            sysview.activeMioX = sysview.mioX1.attr('id');
+            sysview.mioY1.addClass("addBGColor");
+            sysview.mioY1.addClass("activeMioStyle");
+            sysview.mioY1.siblings().removeClass("addBGColor");
+            sysview.mioY1.siblings().removeClass("activeMioStyle");
+            sysview.activeMioY = sysview.mioY1.attr('id');
+            sysview.xy = 'x';
+            sysview.part1X.addClass("addBorder");
+            sysview.part1X.siblings().removeClass("addBorder");
+            sysview.part1Y.addClass("addBorder");
+            sysview.part1Y.siblings().removeClass("addBorder");
+            sysview.queryX(sysview.partXNum);
+            sysview.queryY(sysview.partYNum);
+    
+            sysview.hoverEvent.node();
+            sysview.hoverEvent.mio();
         }
         
-        sysview.nodeIndex = 1;
-        sysview.nodeXActive = 1;
-        sysview.nodeYActive = 1;
-        sysview.firstLoad = false;
-        sysview.nodeX.html(b.join(""));
-        sysview.nodeY.html(c.join(""));
-        sysview.nodeXId.push(sysview.nodeX.children());
-        sysview.nodeYId.push(sysview.nodeY.children());
-
-        sysview.nodeXActiveId = sysview.nodeXId[0].attr('id');
-        sysview.nodeYActiveId = sysview.nodeYId[0].attr('id');
-
-        $("#sysview_nodeX1").addClass("addBGColor");
-        $("#sysview_nodeX1").addClass("addNodeBorder");
-        $("#sysview_nodeX1").siblings().addClass("addNodeBorder");
-        $("#sysview_nodeX1").siblings().removeClass("addBGColor");
-        $("#sysview_nodeY1").addClass("addBGColor");
-        $("#sysview_nodeY1").addClass("addNodeBorder");
-        $("#sysview_nodeY1").siblings().addClass("addNodeBorder");
-        $("#sysview_nodeY1").siblings().removeClass("addBGColor");
-        sysview.mioXIndex = 1;
-        sysview.mioYIndex = 1;
-        sysview.mioX1.addClass("addBGColor");
-        sysview.mioX1.addClass("activeMioStyle");
-        sysview.mioX1.siblings().removeClass("addBGColor");
-        sysview.mioX1.siblings().removeClass("activeMioStyle");
-        sysview.activeMioX = sysview.mioX1.attr('id');
-        sysview.mioY1.addClass("addBGColor");
-        sysview.mioY1.addClass("activeMioStyle");
-        sysview.mioY1.siblings().removeClass("addBGColor");
-        sysview.mioY1.siblings().removeClass("activeMioStyle");
-        sysview.activeMioY = sysview.mioY1.attr('id');
-        sysview.xy = 'x';
-        sysview.part1X.addClass("addBorder");
-        sysview.part1X.siblings().removeClass("addBorder");
-        sysview.part1Y.addClass("addBorder");
-        sysview.part1Y.siblings().removeClass("addBorder");
-        sysview.queryX(sysview.partXNum);
-        sysview.queryY(sysview.partYNum);
-
-        sysview.hoverEvent.node();
-        sysview.hoverEvent.mio();
     },
 
     updateNode: function(nodeInfo) {
@@ -828,90 +814,15 @@ var sysview = {
         }
         
     },
-    
-    // refreshPage: function() {
-    //     sysview.queryNodes();
-        
-    //     var interval = setInterval(function() {
-    //         if ($('.active.tab-pane').is("#sysview")) {
-    //             sysview.queryNodes();
-    //         }
-    //         else {
-    //             clearInterval(interval);
-    //         }
-    //     }, 10000)
-    // },
 
-    // queryNodes: function() {
-
-    //     $.post(ipcDispatch,
-    //     {
-    //         api:    "ipcNode",
-    //         act:	"queryAll",
-    //         user:	$("#main_currentUser").text()
-    //     },
-    //     function (data, status) {
-    //         var obj = JSON.parse(data);
-    //         if (obj.rslt  ==  "fail") {
-    //             alert(obj.reason);
-    //         }
-    //         else {
-    //             var len = obj.rows.length;
-    //             var rows = obj.rows;
-    //             sysview.node = rows;
-    //             var a=[];
-    //             for (i=0; i<len; i++) {
-    //                 a.push('<button id="sysview_n'+rows[i].node+'_btn">a</button>')
-    //             }
-
-    //             sysview.nodeList.html(a.join(""));
-
-
-    //             for(i=0; i<len; i++) {
-    //                 $('#sysview_n' + rows[i].node + '_btn').html("<small>Node " + rows[i].node + "<br>" + rows[i].stat + "<br>" + "Alm: " + rows[i].alm + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" + rows[i].temp + "  |  " + rows[i].volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " + rows[i].rack + "</div></div>");
-    //                 $('#sysview_n' + rows[i].node + '_btn').addClass("addNodeStyle");
-    //                 if (rows[i].alm == "MAJ") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#F75A00");
-    //                 }
-    //                 else if (rows[i].alm == "MIN") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#FFFF00");
-    //                 }
-    //                 else if (rows[i].alm == "CRI") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#FF0000");
-    //                 }
-    //                 else if (rows[i].alm == "NONE") {
-    //                     $("#sysview_n" + rows[i].node + '_btn').css("background-color", "#7BC63E");
-    //                 }
-    //             }
-    //             if(sysview.nodeIndex != 0)
-    //                 $('#sysview_n' + sysview.nodeIndex + '_btn').addClass("addBorder");
-                    
-    //             //// run the first load of the tab
-    //             if(sysview.firstLoad && len > 0) {
-    //                 $('#sysview_n' + rows[0].node + '_btn').addClass("addBorder");
-    //                 $('#sysview_n' + rows[0].node + '_btn').siblings().removeClass("addBorder");
-    //                 sysview.nodeIndex = rows[0].node;
-    //                 sysview.mioIndex = 1;
-    //                 sysview.mio1.addClass("addBGColor")
-    //                 sysview.mio1.siblings().removeClass("addBGColor")
-    //                 sysview.xy = 'x';
-    //                 sysview.x.addClass("addBGColor")
-    //                 sysview.x.siblings().removeClass("addBGColor")
-    //                 sysview.query();
-    //                 sysview.firstLoad = false;
-    //             }
-    //         }
-    //     });
-    // },
-    
     queryX: function(part) {
     
         $.post(ipcDispatch,
         {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
-            user:	$("#main_currentUser").text(),
-            node:	sysview.nodeIndex,
+            user:   "SYSTEM",
+            node:	sysview.nodeXActive,
             slot:	sysview.mioXIndex,
             ptyp:	"x",
         },
@@ -938,8 +849,8 @@ var sysview = {
         {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
-            user:	$("#main_currentUser").text(),
-            node:	sysview.nodeIndex,
+            user:   "SYSTEM",
+            node:	sysview.nodeYActive,
             slot:	sysview.mioYIndex,
             ptyp:	"y",
         },
@@ -1084,17 +995,17 @@ var sysview = {
                 alert(obj.reason);
             }
             else {
-                if(obj.rows.length == 0) {
+                if (obj.rows.length == 0) {
                     alert('No connection information')
                     return;
                 }
                 sysview.ckidRows = obj.rows;
-                if(type == 'CKID') {
+                if (type == 'CKID') {
                     sysview.ckidRows = obj.rows;
                     sysviewModal.modal.modal();
                     sysviewModal.startShowConn();
                 }
-                else if(type == 'MTC_DISCON') {
+                else if (type == 'MTC_DISCON') {
                     var idx = sysview.portPicked.con_idx;
                 
                     var connId = sysview.ckidRows.findIndex(x => x.idx === idx);
@@ -1115,7 +1026,7 @@ var sysview = {
                     maintModal.modal.modal();
                 }
 
-                else if(type == 'MTC_CONN') {
+                else if (type == 'MTC_CONN') {
                     var idx = sysview.portPicked.con_idx;
                 
                     var connId = sysview.ckidRows.findIndex(x => x.idx === idx);
@@ -1251,6 +1162,7 @@ var sysview = {
     },
 
     createPortY: function(part) {
+
         if (part == 1) {
             var startIndex = 0;
             var endIndex = 25;
@@ -1260,6 +1172,7 @@ var sysview = {
             var endIndex = 50;
         }
 
+        // Creates port icons on Y side
         var a =[];
         for (var i = startIndex; i < endIndex; i++) {
             var port = sysview.portY[i].node + '-' + sysview.portY[i].slot + '-' + sysview.portY[i].ptyp + '-' + sysview.portY[i].pnum;
@@ -1271,18 +1184,6 @@ var sysview = {
         }
     
         sysview.rightPort.html(a.join(""));
-        
-    
-        // a = [];
-        // for (var i = sysview.port.length/2; i < sysview.port.length; i++) {
-        //     var port = sysview.port[i].node + '-' + sysview.port[i].slot + '-' + sysview.port[i].ptyp + '-' + sysview.port[i].pnum;
-
-        //     a.push('<button type="button" id="sysview_' + sysview.xy + sysview.port[i].id + '">&nbsp<div style="float:left">' + port + '</div><div style="float:right">' + sysview.port[i].psta + '</div><br>&nbsp' + sysview.port[i].fac + '<br>&nbsp' + sysview.port[i].ckid + '</button>')
-        //     $(document).on("click","#sysview_" + sysview.xy + sysview.port[i].id,function() {
-                
-        //     })
-        // }
-        // sysview.rightPort.html(a.join(""));
     
 
         for (var i = 0; i < sysview.portY.length; i++) { 
@@ -1440,26 +1341,25 @@ var sysview = {
             else if (sysview.highlightedMioPtyp == "MIOY") {
                 sysview.highlightedMioShelf = "2";
             }
+
+            sysview.mioStatPicked = $("#sysview_mio" + sysview.highlightedMioPtyp.slice(3,4) + sysview.highlightedMio + "_psta").text();
+
             // remove previous css class
             $(".sysview_mioActList > li").removeClass();
             $(".sysview_mioActList > li").off('mouseenter mouseleave');;
 
-            sysview.actRefresh.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actLockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actUnlockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actViewPath.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
+            if (sysview.mioStatPicked == "INS") {
+                sysview.activeAct(['actRefresh', 'actLockCard', 'actViewPath']);
+                sysview.deactiveAct(['actUnlockCard']);
+            }
+            else if (sysview.mioStatPicked == "LCK") {
+                sysview.activeAct(['actUnlockCard', 'actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard']);
+            }
+            else if (sysview.mioStatPicked == "OOS") {
+                sysview.activeAct(['actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard', 'actUnlockCard']);
+            }
 
             sysview.showMenu('mioMenu',e);  
         });
@@ -2021,7 +1921,7 @@ var sysviewModal_viewPath = {
             }
             else {
                 if (obj.rows.length == 0) {
-                    alert("NO PATH AVAILABLE FOR: <br>NODE: " + sysviewModal_viewPath.node.val() + "<br> SLOT: " + sysviewModal_viewPath.slot.val());
+                    alert("NO PATH FOUND ON " + sysview.highlightedMioPtyp + "-" + sysview.highlightedMio + " OF NODE-" + sysviewModal_viewPath.node.val());
                 }
                 else {
                     sysviewModal_viewPath.tbl.index = 0;
@@ -2144,8 +2044,19 @@ var sysviewMxcModal = {
             else {
                 alert(obj.reason);
                 sysviewMxcModal.modal.modal('hide');
-                sysview.queryX(sysview.partXNum);
-                sysview.queryY(sysview.partYNum);
+                // extract type from returned type, (expecting MIO infront of type)
+                var ptyp = obj.rows.type.slice(3);
+
+                // Inserting new psta into appropriate MIO tab
+                $("#sysview_mio" + ptyp + obj.rows.slot + "_psta").text(obj.rows.psta);
+                
+                // Only update port side that is affected by LCK / UNLCK MXC
+                if (ptyp == "X") {
+                    sysview.queryX(sysview.partXNum);
+                }
+                else if (ptyp == "Y") {
+                    sysview.queryY(sysview.partYNum);
+                }
             }
         });
     }    
@@ -2260,21 +2171,27 @@ var sysviewNodeModal = {
 }
 
 
-
+// Handles when a node icon is clicked on either the X or Y side
 $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function() {
 
     //Add border to the row
     $(this).addClass("addBGColor"); //add class selected to current clicked row
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
 
+    // Saves the id of icon clicked
     sysview.nodeActive = $(this).attr('id');
+    // Saves the node index of the icon clicked
     sysview.nodeIndex = parseInt(sysview.nodeActive.slice(13));
+    // Saves the side that the icon clicked was on
     sysview.nodeSide = sysview.nodeActive.slice(12,13);
 
+    // Will execute code based on the side of the clicked node icon
     if (sysview.nodeSide == "X") {
         sysview.nodeXActiveId = $(this).attr('id');
         sysview.nodeXActive = sysview.nodeIndex;
-        sysview.mioType = "X";
+
+        // Resets the formatting active X MIO icon
+        // sysview.mioType = "X";
         sysview.mioXIndex  = 1;
         sysview.mioX1.addClass("addBGColor");
         sysview.mioX1.addClass("activeMioStyle");
@@ -2282,6 +2199,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioX1.siblings().removeClass("activeMioStyle");
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = sysview.mioX1.attr('id');
+        // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioXPsta.length; i++) {
             $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info[sysview.nodeXActive - 1].MIOX[i]);
         }
@@ -2289,7 +2207,9 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     else {
         sysview.nodeYActiveId = $(this).attr('id');
         sysview.nodeYActive = sysview.nodeIndex;
-        sysview.mioType = "Y";
+
+        // Resets the formatting active Y MIO icon
+        // sysview.mioType = "Y";
         sysview.mioYIndex  = 1;
         sysview.mioY1.addClass("addBGColor");
         sysview.mioY1.addClass("activeMioStyle");
@@ -2297,6 +2217,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.mioY1.siblings().removeClass("activeMioStyle");
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = sysview.mioY1.attr('id');
+        // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioYPsta.length; i++) {
             $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info[sysview.nodeYActive - 1].MIOY[i]);
         }
@@ -2310,7 +2231,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
     
 });
 
-
+// Handles when an "MIO" icon is clicked
 $(document).on("click",".sysview_mio button",function() {
 
     //Add border to the row
@@ -2319,26 +2240,34 @@ $(document).on("click",".sysview_mio button",function() {
     $(this).siblings().removeClass( "addBGColor" ); //remove class selected from rest of the rows  
     $(this).siblings().removeClass( "activeMioStyle" ); //remove class selected from rest of the rows  
 
+    // Extracts ptyp from the ID of the icon clicked
     var ptyp = String(this.id.slice(this.id.indexOf("_") + 4));
     ptyp = ptyp.slice(0, 1);
+
+    // Updates variables to save the current MIO type and Index
+    // Will query ports on appropriate side using the "part" number saved
+    // Will save the clicked MIO as the active MIO of each side (X / Y)
     if (ptyp == "X") {
-        sysview.mioType = "X";
+        // sysview.mioType = "X";
         sysview.mioXIndex = parseInt(this.id.slice(this.id.indexOf("_") + 5));
         sysview.queryX(sysview.partXNum);
         sysview.activeMioX = $(this).attr('id');
     }
     else if (ptyp == "Y") {
-        sysview.mioType = "Y";
+        // sysview.mioType = "Y";
         sysview.mioYIndex = parseInt(this.id.slice(this.id.indexOf("_") + 5));
         sysview.queryY(sysview.partYNum);
         sysview.activeMioY = $(this).attr('id');
     }
     //change XY to default
+    // Not sure if this is needed anymore
     sysview.xy = 'x';
     sysview.x.addClass("addBGColor");
     sysview.x.siblings().removeClass("addBGColor");
 });
 
+
+// Handles when a "part" icon is clicked on either the X or Y side
 $(document).on("click",".sysview_part a",function() {
 
     //Add border to the row
@@ -2366,7 +2295,7 @@ $(document).on("click",".sysview_part a",function() {
 sysviewModal.modal.on("hidden.bs.modal", sysviewModal.clearForm);
 
 
-// HERE WE WILL ADD ACTIONS FOR THE NODE MENU 
+// Handles when a menu item is clicked on the Node right click menu
 $(".sysview_nodeActList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
@@ -2425,7 +2354,8 @@ $(".sysview_nodeActList > li").click(function(){
     }
 });
 
-// HERE WE WILL ADD ACTIONS FOR THE MIO MENU
+
+// Handles when a menu item is clicked on the MIO right click menu
 $(".sysview_mioActList > li").click(function(){
 
     if ($(this).text() == 'REFRESH') {
@@ -2457,7 +2387,7 @@ $(".sysview_mioActList > li").click(function(){
     }
 });
 
-// HERE WE WILL ADD ACTIONS FOR THE PORT MENU
+// Handles when a menu item is clicked on a port right click menu
 $(".sysview_actList > li").click(function(){
     if($(this).hasClass('disableAction')){
         return;
