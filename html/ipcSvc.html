@@ -1586,24 +1586,27 @@ var svcModal = {
 
 svc.findCkidBtn.click(function(){
     if (svc.tn_cbx.is(':checked')) {
-        var ckid = svc.ckid.val();
-        var telnum;
-        if ((telnum = getTN(ckid)) === false) {
-            var d = ckid.split('-');
-            if (d.length != 3 ||
-                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
-                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
-                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
-            {
-                alert ("CKID: INVALID TN FORMAT");
-                return;
+        // Does not check CKID format regardless of the whether the tn cbox is checked when the ckid is ""
+        if (svc.ckid.val() != "") {
+            var ckid = svc.ckid.val();
+            var telnum;
+            if ((telnum = getTN(ckid)) === false) {
+                var d = ckid.split('-');
+                if (d.length != 3 ||
+                    !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                    && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                    && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+                {
+                    alert ("CKID: INVALID TN FORMAT");
+                    return;
+                }
+                
+                telnum = ckid;
             }
-            
-            telnum = ckid;
+            svc.ckid.val(telnum);
         }
-        svc.ckid.val(telnum);
     }
-        svc.cktArea.show();
+    svc.cktArea.show();
     svc.ordArea.hide();
     svc.query.ckt('queryCkid');
 });
@@ -2026,15 +2029,19 @@ svc.act.change(function() {
         svcModal.modal.modal();
     }
     else if (svc.act.val()  ==  "DISCONNECT") {
-        // if (svc.cktId.val() == "" || svc.cktconId.val() == "") {
-		// 	alert("Please select a CKT from the LIST OF CKTs");
-		// 	svc.act.val("");
-		// }
-        // else 
-        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
-            alert("Please select a CON from the LIST OF CONNECTIONS");
-            svc.act.val("");
-		}
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (svc.cktId.val() == "" || svc.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                svc.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        else if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                svc.act.val("");
+            });
+        }
         else {
             svc.populateModal();
             svcModal.disableForm();
@@ -2047,10 +2054,18 @@ svc.act.change(function() {
         }
     }
     else if (svc.act.val()  ==  "CHANGE") {
-        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
-            alert("Please select a CON from the LIST OF CONNECTIONS");
-            svc.act.val("");
-            
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (svc.cktId.val() == "" || svc.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                svc.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        else if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                svc.act.val("");
+            });
         }
         else {
             svcModal.clearForm();
