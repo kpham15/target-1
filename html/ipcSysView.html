@@ -739,6 +739,9 @@ var sysview = {
     },
 
     updateNode: function(nodeInfo) {
+        if (sysview.firstLoad) {
+            return;
+        }
         var a = [];
         for (var i = 0; i < wc.nodes; i++) {
             var n = i+1;         
