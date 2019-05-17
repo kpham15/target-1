@@ -663,6 +663,7 @@ var sysview = {
     highlightedMioShelf: "",
     activeMioX:      "",
     activeMioY:      "",
+    mioStatPicked: [],
 
     //add actions in the list below here as members
     actRefresh:     $("#sysview_act_refresh"),
@@ -1340,26 +1341,25 @@ var sysview = {
             else if (sysview.highlightedMioPtyp == "MIOY") {
                 sysview.highlightedMioShelf = "2";
             }
+
+            sysview.mioStatPicked = $("#sysview_mio" + sysview.highlightedMioPtyp.slice(3,4) + sysview.highlightedMio + "_psta").text();
+
             // remove previous css class
             $(".sysview_mioActList > li").removeClass();
             $(".sysview_mioActList > li").off('mouseenter mouseleave');;
 
-            sysview.actRefresh.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actLockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actUnlockCard.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
-            sysview.actViewPath.hover(
-                function () {$(this).addClass('activeAction')},
-                function () {$(this).removeClass('activeAction')},
-            )
+            if (sysview.mioStatPicked == "INS") {
+                sysview.activeAct(['actRefresh', 'actLockCard', 'actViewPath']);
+                sysview.deactiveAct(['actUnlockCard']);
+            }
+            else if (sysview.mioStatPicked == "LCK") {
+                sysview.activeAct(['actUnlockCard', 'actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard']);
+            }
+            else if (sysview.mioStatPicked == "OOS") {
+                sysview.activeAct(['actViewPath']);
+                sysview.deactiveAct(['actRefresh', 'actLockCard', 'actUnlockCard']);
+            }
 
             sysview.showMenu('mioMenu',e);  
         });
