@@ -2329,6 +2329,19 @@ $(document).on("click","#maint_tblCktCon tr",function(){
 
 maint.act.change(function() {
     if (maint.act.val()  ==  "MTC_CONN") {
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (maint.cktId.val() == "" || maint.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                maint.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                maint.act.val("");
+            });
+        }
         maintModal.clearForm();
         maint.populateModal();
 
@@ -2349,6 +2362,19 @@ maint.act.change(function() {
         maintModal.modal.modal();
     }
     else if (maint.act.val()  ==  "MTC_RESTORE") {
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (maint.cktId.val() == "" || maint.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                maint.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                maint.act.val("");
+            });
+        }
         maintModal.clearForm();
         maint.populateModal();
         maintModal.reConForm.show();
@@ -2361,6 +2387,19 @@ maint.act.change(function() {
         maintModal.modal.modal();
     }
     else if (maint.act.val()  ==  "RESTORE_MTCD") {
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (maint.cktId.val() == "" || maint.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                maint.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                maint.act.val("");
+            });
+        }
         maintModal.clearForm();
         maint.populateModal();
         maintModal.reConForm.show();
@@ -2373,10 +2412,18 @@ maint.act.change(function() {
         maintModal.modal.modal();
     }
     else if (maint.act.val()  ==  "MTC_DISCON") {
-        
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (maint.cktId.val() == "" || maint.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                maint.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
         if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
-            alert("Please select a CON from the LIST OF CONNECTIONS");
-            maint.act.val("");
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                maint.act.val("");
+            });
         }
         else {
             maintModal.clearForm();
