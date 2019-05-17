@@ -2,74 +2,112 @@
     <h4>FLOW-THROUGH ORDERS</h4>
 
     <div class="col-sm-12">
-        <div class="col-sm-5" id="ftOrd_ord_form" style="border-radius: 4px">
-            <div class="row">
-                <div class="col-sm-3 modifyPaddingFtOrdCol1">
-                    <label for="ftOrd_ordno_txt">ORDNO:</label>
-                    <input style="text-transform: uppercase" type="text" id="ftOrd_ordno_txt" class="form-control">
+        <div class="col-sm-5">
+            <div class="row" id="ftOrd_ord_form" style="border-radius: 4px">
+                <div class="row">
+                    <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                        <label for="ftOrd_ordno_txt">ORDNO:</label>
+                        <input style="text-transform: uppercase" type="text" id="ftOrd_ordno_txt" class="form-control">
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                        <label for="ftOrd_ot_sel">OT:</label>
+                        <select id="ftOrd_ot_sel" class="form-control" style="font-size:12px">
+                            <option></option>
+                            <option>CD</option>
+                            <option>CH</option>
+                            <option>F</option>
+                            <option>NC</option>
+                            <option>T</option>
+                            <option>CIO</option>
+                            <option>LST</option>
+                            <option>MCT</option>
+                            <option>SET</option>
+                            <option>WAO</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                        <label for="ftOrd_wc_txt">WC:</label>
+                        <input style="text-transform: uppercase" type="text" id="ftOrd_wc_txt" class="form-control">
+                    </div>
+                    <div class="col-sm-1 modifyPaddingFtOrdCol1">
+                        <label for="ftOrd_pri_sel">PRI:</label>
+                        <select id="ftOrd_pri_sel" class="form-control" style="padding-left:0px; padding-right:0px">
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1" style="padding-left:0px; padding-right:2.50px">
+                        <label for="ftOrd_stat_txt">STAT:</label>
+                        <input style="text-transform: uppercase" type="text" id="ftOrd_stat_txt" class="form-control" style="font-size:12px">
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                        <button id="ftOrd_find1_btn" class="btn btn-primary">VIEW</button>
+                    </div>
                 </div>
-                <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                    <label for="ftOrd_ot_sel">OT:</label>
-                    <select id="ftOrd_ot_sel" class="form-control" style="font-size:12px">
-                        <option></option>
-                        <option>CD</option>
-                        <option>CH</option>
-                        <option>F</option>
-                        <option>NC</option>
-                        <option>T</option>
-                        <option>CIO</option>
-                        <option>LST</option>
-                        <option>MCT</option>
-                        <option>SET</option>
-                        <option>WAO</option>
-                    </select>
-                </div>
-                <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                    <label for="ftOrd_wc_txt">WC:</label>
-                    <input style="text-transform: uppercase" type="text" id="ftOrd_wc_txt" class="form-control">
-                </div>
-                <div class="col-sm-1 modifyPaddingFtOrdCol1">
-                    <label for="ftOrd_pri_sel">PRI:</label>
-                    <select id="ftOrd_pri_sel" class="form-control" style="padding-left:0px; padding-right:0px">
-                        <option></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <div class="col-sm-2 modifyPaddingFtOrdCol1" style="padding-left:0px; padding-right:2.50px">
-                    <label for="ftOrd_stat_txt">STAT:</label>
-                    <input style="text-transform: uppercase" type="text" id="ftOrd_stat_txt" class="form-control" style="font-size:12px">
-                </div>
-                <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                    <button id="ftOrd_find1_btn" class="btn btn-primary">VIEW</button>
+                    
+                <div class="row">
+                    <div class="col-sm-1 modifyPaddingFtOrdCol1" style="width: 9.33333333%">
+                        <label for="ftOrd_cdd_sel">CDD:</label>
+                        <select id="ftOrd_cdd_sel" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                            <option></option>
+                            <option>Y</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
+                        <label for="ftOrd_dd_date">DD:</label>
+                        <input type="date" id="ftOrd_dd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                    </div>
+                    <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
+                        <label for="ftOrd_fdd_date">FDD:</label>
+                        <input type="date" id="ftOrd_fdd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1" style="width: 20%">
+                        <label for="ftOrd_fdt_time">FDT:</label>
+                        <input type="time" id="ftOrd_fdt_time" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                    </div>
+                    <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                        <button id="ftOrd_find2_btn" class="btn btn-primary">VIEW</button>
+                    </div>
                 </div>
             </div>
-                
             <div class="row">
-                <div class="col-sm-1 modifyPaddingFtOrdCol1" style="width: 9.33333333%">
-                    <label for="ftOrd_cdd_sel">CDD:</label>
-                    <select id="ftOrd_cdd_sel" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                <div class="col-sm-5 modifyPaddingFtOrdCol1">
+                    <label for="ftOrd_action_sel">ACTION:</label>
+                    <select id="ftOrd_action_sel" class="form-control">
                         <option></option>
-                        <option>Y</option>
+                        <option>FETCH_FT_ORDERS</option>
+                        <option>PROCESS_ORDER</option>
+                        <option>PROCESS_CKT</option>
+                        <option>PROCESS_FAC</option>
                     </select>
                 </div>
-                <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
-                    <label for="ftOrd_dd_date">DD:</label>
-                    <input type="date" id="ftOrd_dd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
-                </div>
-                <div class="col-sm-3 modifyPaddingFtOrdCol1" style="width: 27%">
-                    <label for="ftOrd_fdd_date">FDD:</label>
-                    <input type="date" id="ftOrd_fdd_date" class="form-control" style="padding-left: 0px; padding-right: 0px">
-                </div>
-                <div class="col-sm-2 modifyPaddingFtOrdCol1" style="width: 20%">
-                    <label for="ftOrd_fdt_time">FDT:</label>
-                    <input type="time" id="ftOrd_fdt_time" class="form-control" style="padding-left: 0px; padding-right: 0px">
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <button id="ftOrd_submit_btn" class="btn btn-primary" style="width: 100%">SUBMIT</button>
                 </div>
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                    <button id="ftOrd_find2_btn" class="btn btn-primary">VIEW</button>
+                    <button id="ftOrd_clear_btn" class="btn btn-primary" style="width: 100%">CLEAR</button>
+                </div>
+
+                <div class="col-sm-2 modifyPaddingFtOrdCol1">
+                    <input type="text" hidden>
+                </div>
+
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_ordId_txt">ORD ID:</label>
+                    <input id="ftOrd_ordId_txt" type="text" class="form-control">
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_cktId_txt">CKT ID:</label>
+                    <input id="ftOrd_cktId_txt" type="text" class="form-control">
+                </div>
+                <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
+                    <label for="ftOrd_facId_txt">FAC ID:</label>
+                    <input id="ftOrd_facId_txt" type="text" class="form-control">
                 </div>
             </div>
+
     
         </div>
     
@@ -93,44 +131,6 @@
             </div>
         </div>
     
-    </div>
-
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-5 modifyPaddingFtOrdCol1">
-                <label for="ftOrd_action_sel">ACTION:</label>
-                <select id="ftOrd_action_sel" class="form-control">
-                    <option></option>
-                    <option>FETCH_FT_ORDERS</option>
-                    <option>PROCESS_ORDER</option>
-                    <option>PROCESS_CKT</option>
-                    <option>PROCESS_FAC</option>
-                </select>
-            </div>
-            <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                <button id="ftOrd_submit_btn" class="btn btn-primary" style="width: 100%">SUBMIT</button>
-            </div>
-            <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                <button id="ftOrd_clear_btn" class="btn btn-primary" style="width: 100%">CLEAR</button>
-            </div>
-
-            <div class="col-sm-2 modifyPaddingFtOrdCol1">
-                <input type="text" hidden>
-            </div>
-
-            <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
-                <label for="ftOrd_ordId_txt">ORD ID:</label>
-                <input id="ftOrd_ordId_txt" type="text" class="form-control">
-            </div>
-            <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
-                <label for="ftOrd_cktId_txt">CKT ID:</label>
-                <input id="ftOrd_cktId_txt" type="text" class="form-control">
-            </div>
-            <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
-                <label for="ftOrd_facId_txt">FAC ID:</label>
-                <input id="ftOrd_facId_txt" type="text" class="form-control">
-            </div>
-        </div>
     </div>
     
     <div class="col-sm-12" style="height: 200px">
