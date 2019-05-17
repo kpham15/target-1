@@ -1586,24 +1586,27 @@ var svcModal = {
 
 svc.findCkidBtn.click(function(){
     if (svc.tn_cbx.is(':checked')) {
-        var ckid = svc.ckid.val();
-        var telnum;
-        if ((telnum = getTN(ckid)) === false) {
-            var d = ckid.split('-');
-            if (d.length != 3 ||
-                !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
-                && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
-                && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
-            {
-                alert ("CKID: INVALID TN FORMAT");
-                return;
+        // Does not check CKID format regardless of the whether the tn cbox is checked when the ckid is ""
+        if (svc.ckid.val() != "") {
+            var ckid = svc.ckid.val();
+            var telnum;
+            if ((telnum = getTN(ckid)) === false) {
+                var d = ckid.split('-');
+                if (d.length != 3 ||
+                    !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                    && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                    && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+                {
+                    alert ("CKID: INVALID TN FORMAT");
+                    return;
+                }
+                
+                telnum = ckid;
             }
-            
-            telnum = ckid;
+            svc.ckid.val(telnum);
         }
-        svc.ckid.val(telnum);
     }
-        svc.cktArea.show();
+    svc.cktArea.show();
     svc.ordArea.hide();
     svc.query.ckt('queryCkid');
 });
