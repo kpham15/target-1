@@ -515,6 +515,11 @@ var wc = {
                 var time          = new Date(obj.rows[0].time).getTime() / 1000;
                 var idle_to       = login.user.idle_to * 60;
                 
+
+                console.log(loginTime);
+                console.log(time);
+
+                
                 if ((time-loginTime) > idle_to) {
                     logout();
                     return;
