@@ -3,8 +3,8 @@
 
     <div class="col-sm-12">
         <div class="col-sm-5">
-            <div class="row" id="ftOrd_ord_form" style="border-radius: 4px">
-                <div class="row">
+            <div class="row" style="border-radius: 4px">
+                <div class="row ftOrd_ord_form">
                     <div class="col-sm-3 modifyPaddingFtOrdCol1">
                         <label for="ftOrd_ordno_txt">ORDNO:</label>
                         <input style="text-transform: uppercase" type="text" id="ftOrd_ordno_txt" class="form-control">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                     
-                <div class="row">
+                <div class="row ftOrd_ord_form">
                     <div class="col-sm-1 modifyPaddingFtOrdCol1" style="width: 9.33333333%">
                         <label for="ftOrd_cdd_sel">CDD:</label>
                         <select id="ftOrd_cdd_sel" class="form-control" style="padding-left: 0px; padding-right: 0px">
@@ -420,7 +420,7 @@ var ftOrd = {
     action:         $("#ftOrd_action_sel"),
     submitBtn:      $("#ftOrd_submit_btn"),
     clearBtn:       $("#ftOrd_clear_btn"),
-    ordForm:        $("#ftOrd_ord_form"),
+    ordForm:        $(".ftOrd_ord_form"),
     // CKT FORM
     cttype:         $("#ftOrd_cttype_sel"),
     adsr:           $("#ftOrd_adsr_sel"),
