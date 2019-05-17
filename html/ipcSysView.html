@@ -821,7 +821,8 @@ var sysview = {
         {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
-            user:	$("#main_currentUser").text(),
+            // user:	$("#main_currentUser").text(),
+            user:   "SYSTEM",
             node:	sysview.nodeXActive,
             slot:	sysview.mioXIndex,
             ptyp:	"x",
@@ -849,7 +850,8 @@ var sysview = {
         {
             api:    "ipcPortmap",
             act:	"QUERYMIO",
-            user:	$("#main_currentUser").text(),
+            // user:	$("#main_currentUser").text(),
+            user:   "SYSTEM",
             node:	sysview.nodeYActive,
             slot:	sysview.mioYIndex,
             ptyp:	"y",
