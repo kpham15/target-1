@@ -2026,15 +2026,19 @@ svc.act.change(function() {
         svcModal.modal.modal();
     }
     else if (svc.act.val()  ==  "DISCONNECT") {
-        // if (svc.cktId.val() == "" || svc.cktconId.val() == "") {
-		// 	alert("Please select a CKT from the LIST OF CKTs");
-		// 	svc.act.val("");
-		// }
-        // else 
-        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
-            alert("Please select a CON from the LIST OF CONNECTIONS");
-            svc.act.val("");
-		}
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (svc.cktId.val() == "" || svc.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                svc.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        else if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                svc.act.val("");
+            });
+        }
         else {
             svc.populateModal();
             svcModal.disableForm();
@@ -2047,10 +2051,18 @@ svc.act.change(function() {
         }
     }
     else if (svc.act.val()  ==  "CHANGE") {
-        if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
-            alert("Please select a CON from the LIST OF CONNECTIONS");
-            svc.act.val("");
-            
+
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (svc.cktId.val() == "" || svc.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                svc.act.val("");
+            });
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        else if (svc.cktconIdx.val() == "" || svc.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                svc.act.val("");
+            });
         }
         else {
             svcModal.clearForm();
