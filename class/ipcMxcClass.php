@@ -256,6 +256,10 @@ class MXC {
             return;
         }
 
+        // Updates psta and ssta of the mxc class, this will allow api to call these values before returning rows to front end
+        $this->psta = $sms->npsta;
+        $this->ssta = $sms->nssta;
+
         // go through each port and update the psta/ssta in t_ports with npsta/nssta
         if ($this->type == 'MIOX') {
             $ptyp = 'X';
@@ -297,6 +301,10 @@ class MXC {
             $this->reason = mysqli_error($db);
             return;
         }
+
+        // Updates psta and ssta of the mxc class, this will allow api to call these values before returning rows to front end
+        $this->psta = $sms->npsta;
+        $this->ssta = $sms->nssta;
 
         // go through each port and update the psta/ssta in t_ports with npsta/nssta
         if ($this->type == 'MIOX') {
