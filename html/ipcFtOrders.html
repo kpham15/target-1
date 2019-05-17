@@ -1439,7 +1439,9 @@ ftOrd.action.change(function() {
             ftOrd.facForm.removeClass("addBGColor");
         }
         else {
-            alert("PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS");
+            alert("PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS", function() {
+                ftOrd.action.val("").change();
+            });
         }
     }
 	else if (ftOrd.action.val() == "PROCESS_CKT") {
@@ -1450,7 +1452,9 @@ ftOrd.action.change(function() {
             ftOrd.facForm.removeClass("addBGColor");
         }
         else {
-            alert("PLEASE SELECT A CKT FROM THE LIST OF CKTS");
+            alert("PLEASE SELECT A CKT FROM THE LIST OF CKTS", function() {
+                ftOrd.action.val("").change();
+            });
         }
     }
 	else if (ftOrd.action.val() == "PROCESS_FAC") {
@@ -1461,7 +1465,9 @@ ftOrd.action.change(function() {
             ftOrd.cktForm.removeClass("addBGColor");
         }
         else {
-            alert("PLEASE SELECT A FAC FROM THE LIST OF FACS");
+            alert("PLEASE SELECT A FAC FROM THE LIST OF FACS", function() {
+                ftOrd.action.val("").change();
+            });
         }
     }
     else if (ftOrd.action.val() == "FETCH_FT_ORDERS" || ftOrd.action.val() == "") {
