@@ -279,14 +279,14 @@
 			$noderows = $mxcObj->rows;
 
 			$nodeinfo = [
-				node => "$node",
-				node_alm => '',
-				node_stat => $nodeObj->stat,
-				node_volt => $nodeObj->volt,
-				node_temp => $nodeObj->temp,
-				node_rack => $nodeObj->rack,
-				MIOX => [],
-				MIOY => []
+				"node" => "$node",
+				"node_alm" => '',
+				"node_stat" => $nodeObj->stat,
+				"node_volt" => $nodeObj->volt,
+				"node_temp" => $nodeObj->temp,
+				"node_rack" => $nodeObj->rack,
+				"MIOX" => [],
+				"MIOY" => []
 			];
 
 			$almObj->queryAlmByNode($node);
