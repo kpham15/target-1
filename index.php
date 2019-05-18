@@ -2,11 +2,11 @@
 <?php
 	include 'indexFunc.php';
 	/// Read the config file to get the name of running folder
-	// if(basename(getcwd()) != readCfg("../bhd.cfg")) {
-	// 	echo '<h1>Permission Denied</h1>';
-	// 	return;
-	// }
-	// $folderList = getSwInfo();
+	if(basename(getcwd()) != readCfg("../bhd.cfg")) {
+		echo '<h1>Permission Denied</h1>';
+		return;
+	}
+	$folderList = getSwInfo();
 
 
 	///////////////////---------------------------//////////////////////
@@ -48,26 +48,26 @@
 	include './html/ipcAlm.html';
 	include './html/ipcUser.html';
 	include './html/ipcRef.html';
-	include './html/ipcNodeRef.html';
+	// include './html/ipcNodeRef.html';
 	include './html/ipcSearchAdmin.html';
 	include './html/ipcNodeAdmin.html';
 	include './html/ipcMxc.html';
-	include './html/ipcEvtLog.html';
+	// include './html/ipcEvtLog.html';
 	include './html/ipcBrdcst.html';
 	include './html/ipcBatchExc.html';
 	include './html/ipcOrd.html';
-	include './html/ipcSysAdmin.html';
+	// include './html/ipcSysAdmin.html';
 	include './html/ipcSysView.html';
 	include './html/ipcWc.html';
 	include './html/ipcBkup.html';
-	include './html/ipcNodeView.html';
+	// include './html/ipcNodeView.html';
 	include './html/ipcPath.html';
-	include './html/ipcTestPortBus.html';
+	// include './html/ipcTestPortBus.html';
 	include './html/ipcFtRelease.html';
 	include './html/ipcFtModTable.html';
 	include './html/ipcFtOrders.html';
-	include './html/ipcOverview.html';
-	include './html/ipcReports.html';
+	// include './html/ipcOverview.html';
+	// include './html/ipcReports.html';
 	include './html/ipcAlmReport.html';
 	include './html/ipcConfigReport.html';
 	include './html/ipcEventReport.html';
