@@ -57,10 +57,11 @@ class NODE {
                 $this->ipadr    = $rows[0]['ipadr'];
                 $this->gateway  = $rows[0]['gateway'];
                 $this->netmask  = $rows[0]['netmask'];
-				$this->ip_port  = $rows[0]['ip_port'];
-				$this->psta		= $rows[0]['psta'];
-				$this->ssta		= $rows[0]['ssta'];
-				$this->user		= $rows[0]['user'];
+                $this->ip_port  = $rows[0]['ip_port'];
+                // might not exist anymore
+				// $this->psta		= $rows[0]['psta'];
+				// $this->ssta		= $rows[0]['ssta'];
+				// $this->user		= $rows[0]['user'];
 
                 $this->pid      = $rows[0]['pid'];
                 $this->scan     = $rows[0]['scan'];
