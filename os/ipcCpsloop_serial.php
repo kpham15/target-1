@@ -1,5 +1,31 @@
 <?php
 
+// include 'ipcCpsClientClass.php';
+include 'ipcCpsClientSerialClass.php';
+include 'ipcCpsServerClass.php';
+
+set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+    // error was suppressed with the @-operator
+    if (0 === error_reporting()) {
+        return false;
+    }
+
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
+error_reporting(E_ALL);
+
+$localUrl = buildUrl();
+$node = $argv[1];
+$nodeStat = [
+    'fail_count'=>1,
+];
+
+//-------------------------Begin--------------------------------
+// define ERROR CODE
+const SOCKET_API_FAIL = 1;
+const SERIAL_CPS_HW_FAIL = 2;
+
 try {
     $serverExist = false;
     $clientExist = false;
@@ -8,7 +34,6 @@ try {
  
     serverSock: 
         //-------------to communicate with API (UDP type)-----------------
-
         echo "\ncreating UPD server.....\n";
         if($serverExist == false) {
             $cpsServerObj = new CPSSERVER("127.0.0.1", $argv[3]);
@@ -21,13 +46,15 @@ try {
             $serverExist = true;
         }
 
+       
+
     clientSock:
         // ------------create new connection to CPS HW  (TCP type)
         echo "\ncreating TCP client....\n";
         if($clientExist == false) {
-            $cpsClientObj = new CPSCLIENT($argv[2], $argv[3], 0, 500000);
+            $cpsClientObj = new CPSCLIENT('dev/ttyS10', 0, 500000);
             if($cpsClientObj->rslt == 'fail') {   
-                throw new Exception($cpsClientObj->rslt.":".$cpsClientObj->reason,SOCKET_CPS_HW_FAIL);
+                throw new Exception($cpsClientObj->rslt.":".$cpsClientObj->reason,SERIAL_CPS_HW_FAIL);
             }
             $clientExist = true;
         }
@@ -199,7 +226,7 @@ function processRsp($rsp, $node, $localUrl) {
 function sendReceiveCmd($clientObj, $cmd) {
     $clientObj->sendCommand($cmd);
     if($clientObj->rslt == 'fail') {
-        throw new Exception("fail: ".socket_strerror(socket_last_error($clientObj->socket)),SOCKET_CPS_HW_FAIL);
+        throw new Exception("fail: ".$clientObj->reason,SOCKET_CPS_HW_FAIL);
     }
 
     usleep(100000); 
@@ -208,7 +235,7 @@ function sendReceiveCmd($clientObj, $cmd) {
     while(1) {
         $clientObj->receiveRsp();
         if($clientObj->rslt == 'fail') {
-            throw new Exception("fail: ".socket_strerror(socket_last_error($clientObj->socket)),SOCKET_CPS_HW_FAIL);
+            throw new Exception("fail: ".$clientObj->reason,SERIAL_CPS_HW_FAIL);
         }
     
         if($clientObj->rsp === "") {
