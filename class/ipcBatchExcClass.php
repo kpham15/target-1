@@ -52,7 +52,16 @@ class BATCH {
     public function addBatch($user, $fileName, $fileContent) {
 		global $db;
 
-		$qry = "INSERT INTO t_batch VALUES ('0','$user','$fileName','$fileContent',now())";
+        $date = now();
+
+        // $qry = "INSERT INTO t_batch VALUES ('0','$user','$fileName','$fileContent',now())";
+        
+        $qry = "INSERT INTO 
+                t_batch 
+                (user, filename, content, date) 
+                VALUES 
+                ('$user', '$fileName', '$fileContent', '$date')";
+
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = "fail";
@@ -66,7 +75,14 @@ class BATCH {
         $commandArray = preg_split ('/$\R?^/m', $fileContent);
         for($i=0; $i < count($commandArray); $i++) {
             $cmd_id = $i+1;
-            $qry = "INSERT INTO t_bats VALUES ('0','$batch_id','$cmd_id','$commandArray[$i]')";
+            // $qry = "INSERT INTO t_bats VALUES ('0','$batch_id','$cmd_id','$commandArray[$i]')";
+
+            $qry = "INSERT INTO 
+                    t_bats 
+                    (batch_id, cmd_id, cmd) 
+                    VALUES 
+                    ('$batch_id', '$cmd_id', $commandArray[$i]')";
+            
             // echo $qry.PHP_EOL;
             $res = $db->query($qry);
             if (!$res) {

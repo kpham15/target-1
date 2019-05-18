@@ -127,6 +127,7 @@ function checkRunningFolder(){
 function displayReadMe($dir){
     $result['ver'] = readme($dir);
     $file = fopen($dir, "r");
+    $result['descr'] = "";
     if ($file) {
         while (($line = fgets($file)) !== false) {
             // process the line read.

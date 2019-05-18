@@ -3,7 +3,7 @@
 
     <div class="col-sm-12">
         <div class="col-sm-5">
-            <div class="row">
+            <div class="row ftOrd_ord_form" style="border-radius: 4px">
                 <div class="col-sm-3 modifyPaddingFtOrdCol1">
                     <label for="ftOrd_ordno_txt">ORDNO:</label>
                     <input style="text-transform: uppercase" type="text" id="ftOrd_ordno_txt" class="form-control">
@@ -44,9 +44,9 @@
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
                     <button id="ftOrd_find1_btn" class="btn btn-primary">VIEW</button>
                 </div>
+                    
             </div>
-                
-            <div class="row">
+            <div class="row ftOrd_ord_form" style="border-radius: 4px">
                 <div class="col-sm-1 modifyPaddingFtOrdCol1" style="width: 9.33333333%">
                     <label for="ftOrd_cdd_sel">CDD:</label>
                     <select id="ftOrd_cdd_sel" class="form-control" style="padding-left: 0px; padding-right: 0px">
@@ -70,9 +70,8 @@
                     <button id="ftOrd_find2_btn" class="btn btn-primary">VIEW</button>
                 </div>
             </div>
-    
             <div class="row">
-                <div class="col-sm-3 modifyPaddingFtOrdCol1">
+                <div class="col-sm-5 modifyPaddingFtOrdCol1">
                     <label for="ftOrd_action_sel">ACTION:</label>
                     <select id="ftOrd_action_sel" class="form-control">
                         <option></option>
@@ -88,11 +87,11 @@
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
                     <button id="ftOrd_clear_btn" class="btn btn-primary" style="width: 100%">CLEAR</button>
                 </div>
-    
+
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
                     <input type="text" hidden>
                 </div>
-    
+
                 <div class="col-sm-1 modifyPaddingFtOrdCol1" hidden>
                     <label for="ftOrd_ordId_txt">ORD ID:</label>
                     <input id="ftOrd_ordId_txt" type="text" class="form-control">
@@ -105,7 +104,7 @@
                     <label for="ftOrd_facId_txt">FAC ID:</label>
                     <input id="ftOrd_facId_txt" type="text" class="form-control">
                 </div>
-            </div>
+            </div>    
         </div>
     
         <div class="col-sm-7">
@@ -131,7 +130,7 @@
     </div>
     
     <div class="col-sm-12" style="height: 200px">
-        <div class="col-sm-5">
+        <div class="col-sm-5" id="ftOrd_ckt_form" style="border-radius: 4px">
             <div class="row">
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
                     <label class="control-label" for="ftOrd_cttype_sel">CTTYPE:</label>
@@ -322,7 +321,7 @@
     </div>
 
     <div class="col-sm-12" style="height: 200px">
-        <div class="col-sm-5">
+        <div class="col-sm-5" id="ftOrd_fac_form" style="border-radius: 4px">
             <div class="row">
                 <div class="col-sm-4 modifyPaddingFtOrdCol1">
                     <label class="control-label" for="ftOrd_facAct_sel">ACT:</label>
@@ -415,7 +414,7 @@ var ftOrd = {
     action:         $("#ftOrd_action_sel"),
     submitBtn:      $("#ftOrd_submit_btn"),
     clearBtn:       $("#ftOrd_clear_btn"),
-
+    ordForm:        $(".ftOrd_ord_form"),
     // CKT FORM
     cttype:         $("#ftOrd_cttype_sel"),
     adsr:           $("#ftOrd_adsr_sel"),
@@ -434,6 +433,7 @@ var ftOrd = {
     rAct:           $("#ftOrd_rAct_sel"),
     cktAct:         $("#ftOrd_cktAct_sel"),
     noscm:          $("#ftOrd_noscm_sel"),
+    cktForm:        $("#ftOrd_ckt_form"),
 
     // FAC FORM
     facAct:         $("#ftOrd_facAct_sel"),
@@ -444,6 +444,7 @@ var ftOrd = {
     tftyp:          $("#ftOrd_tftype_txt"),
     tfac:           $("#ftOrd_tfac_txt"),
     tfrloc:         $("#ftOrd_tfrloc_txt"),
+    facForm:        $("#ftOrd_fac_form"),
 
     //ARRAYS TO HOLD TABLE INFORMATION
     OrdRows:        [],
@@ -519,6 +520,9 @@ var ftOrd = {
         ftOrd.ordId.val("").change();
         ftOrd.cktId.val("").change();
         ftOrd.facId.val("").change();
+		ftOrd.ordForm.removeClass("addBGColor");
+        ftOrd.cktForm.removeClass("addBGColor");
+		ftOrd.facForm.removeClass("addBGColor");
     },
 
     clearCktForm: function() {
@@ -541,6 +545,7 @@ var ftOrd = {
         ftOrd.noscm.val("").change();
         ftOrd.cktId.val("").change();
         ftOrd.tblCkt.body.empty();
+        ftOrd.action.val("").change();
     },
 
     clearFacForm: function() {
@@ -553,7 +558,8 @@ var ftOrd = {
         ftOrd.tfac.val("").change();           
         ftOrd.tfrloc.val("").change();
         ftOrd.facId.val("").change();
-        ftOrd.tblFac.body.empty();   
+        ftOrd.tblFac.body.empty();
+        ftOrd.action.val("").change();
     },
 
     disableOrdR1: function() {
@@ -1424,4 +1430,52 @@ ftOrd.submitBtn.on("click", function() {
         }
     }
 });
+
+ftOrd.action.change(function() {
+    if (ftOrd.action.val() == "PROCESS_ORDER") {
+        //Check to see if an order has been selected in the ORD table
+        if (ftOrd.ordId.val() != "") {
+            ftOrd.ordForm.addClass("addBGColor");
+            ftOrd.cktForm.removeClass("addBGColor");
+            ftOrd.facForm.removeClass("addBGColor");
+        }
+        else {
+            alert("PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS", function() {
+                ftOrd.action.val("").change();
+            });
+        }
+    }
+	else if (ftOrd.action.val() == "PROCESS_CKT") {
+        //Check to see if a CKT has been selected in the CKT table
+        if (ftOrd.cktId.val() != "") {
+            ftOrd.cktForm.addClass("addBGColor");
+            ftOrd.ordForm.removeClass("addBGColor");
+            ftOrd.facForm.removeClass("addBGColor");
+        }
+        else {
+            alert("PLEASE SELECT A CKT FROM THE LIST OF CKTS", function() {
+                ftOrd.action.val("").change();
+            });
+        }
+    }
+	else if (ftOrd.action.val() == "PROCESS_FAC") {
+        //Check to see if a facility has been selected in the FAC table
+        if (ftOrd.facId.val() != "") {
+            ftOrd.facForm.addClass("addBGColor");
+            ftOrd.ordForm.removeClass("addBGColor");
+            ftOrd.cktForm.removeClass("addBGColor");
+        }
+        else {
+            alert("PLEASE SELECT A FAC FROM THE LIST OF FACS", function() {
+                ftOrd.action.val("").change();
+            });
+        }
+    }
+    else if (ftOrd.action.val() == "FETCH_FT_ORDERS" || ftOrd.action.val() == "") {
+		ftOrd.ordForm.removeClass("addBGColor");
+        ftOrd.cktForm.removeClass("addBGColor");
+		ftOrd.facForm.removeClass("addBGColor");
+    }
+});
+
 </script>
