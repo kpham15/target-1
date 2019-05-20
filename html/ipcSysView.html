@@ -695,7 +695,7 @@ var sysview = {
 
             for (var i = 0; i < wc.nodes; i++) {
                 var n = i+1;         
-                a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>');
+                a.push('<button style="border-radius: 4px" class="addNodeStyle"id="sysview_n' + n + '_btn">a</button>');
             }
             sysview.nodeList.html(a.join(""));
 
@@ -703,7 +703,7 @@ var sysview = {
                 var n = i + 1;
                 // Creates Big node buttons
 
-                $('#sysview_n' + n + '_btn').html("<small class='node-header addNodeStyle'>Node " 
+                $('#sysview_n' + n + '_btn').html("<small class='node-header'>Node " 
                     + n + "<br>" + sysview.node_info[i].node_stat 
                     + "<br>" + "Alm: " + sysview.node_info[i].node_alm 
                     + "</small> <div><div class='col-sm-6 node-temp-volt'>" 
