@@ -516,7 +516,7 @@ var sysview = {
 
     nodeASD: "",
 
-    info: [],
+    node_info: [],
 
     nodeXId:         [],
     nodeYId:         [],
@@ -687,6 +687,7 @@ var sysview = {
         
         // run the first load of the tab
         if (sysview.firstLoad && wc.nodes > 0) {
+            var a = [];
             var b = [];
             var c = [];
             sysview.nodeXId = [];
@@ -703,6 +704,39 @@ var sysview = {
                 c.push('<button class="btn addNodeBorder" style="width: 10%" id="sysview_nodeY' + n + '">NODE-' + n + '</button>')
                                 
             }
+
+            for (var i = 0; i < wc.nodes; i++) {
+                var n = i+1;         
+                a.push('<button style="border-radius: 4px" class="addNodeStyle"id="sysview_n' + n + '_btn">a</button>');
+            }
+            sysview.nodeList.html(a.join(""));
+
+            for (var i = 0; i < wc.nodes; i++) {
+                var n = i + 1;
+                // Creates Big node buttons
+
+                $('#sysview_n' + n + '_btn').html("<small class='node-header'>Node " 
+                    + n + "<br>" + sysview.node_info[i].node_stat 
+                    + "<br>" + "Alm: " + sysview.node_info[i].node_alm 
+                    + "</small> <div><div class='col-sm-6 node-temp-volt'>" 
+                        + sysview.node_info[i].node_temp + "  |  " 
+                        + sysview.node_info[i].node_volt + "</div><div class='col-sm-6 node-rack'> LOC: " 
+                            + sysview.node_info[i].node_rack + "</div></div>");
+
+                if (sysview.node_info[i].node_alm == "MAJ") {
+                    $("#sysview_n" + n + '_btn').addClass('nodeMajor');
+                }
+                else if (sysview.node_info[i].node_alm == "MIN") {
+                    $("#sysview_n" + n + '_btn').addClass("nodeMinor");
+                }
+                else if (sysview.node_info[i].node_alm == "CRI") {
+                    $("#sysview_n" + n + '_btn').addClass("nodeCritical");
+                }
+                else if (sysview.node_info[i].node_alm == "NONE") {
+                    $("#sysview_n" + n + '_btn').addClass("nodeNone");
+                }
+            }
+
 
             sysview.nodeIndex = 1;
             sysview.nodeXActive = 1;
@@ -744,58 +778,45 @@ var sysview = {
             sysview.queryX(sysview.partXNum);
             sysview.queryY(sysview.partYNum);
     
+            sysview.bindNodeMenu();
+            sysview.bindMioMenu();
             sysview.hoverEvent.node();
             sysview.hoverEvent.mio();
         }
         
     },
 
-    updateNode: function(nodeInfo) {
+    updateNode: function() {
         if (sysview.firstLoad) {
             return;
+        } else {
+            sysview.node_info.forEach(function(node) {
+                let node_header = 'Node ' + node.node + '<br>' + node.node_stat + '<br>Alm: ' + node.node_alm;
+                let node_temp_volt = node.node_temp + '  |  ' + node.node_volt;
+                let node_rack = 'LOC: ' + node.node_rack;
+
+                $('#sysview_n' + node.node + '_btn .node-header').html(node_header);
+                $('#sysview_n' + node.node + '_btn .node-temp-volt').text(node_temp_volt);
+                $('#sysview_n' + node.node + '_btn .node-rack').text(node_rack);
+
+                if (node.node_alm == "MAJ") {
+                    $("#sysview_n" + node.node + '_btn').attr('class', 'addNodeStyle nodeMajor')
+                }
+                else if (node.node_alm == "MIN") {
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeMinor");
+                }
+                else if (node.node_alm == "CRI") {
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeCritical");
+                }
+                else if (node.node_alm == "NONE") {
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeNone");
+                }
+
+
+                sysview.updateMio(node.node, node.MIOX, node.MIOY);
+            });
+
         }
-        var a = [];
-        for (var i = 0; i < wc.nodes; i++) {
-            var n = i+1;         
-            a.push('<button style="border-radius: 4px" id="sysview_n' + n + '_btn">a</button>');
-        }
-        sysview.nodeList.html(a.join(""));
-
-
-        for (var i = 0; i < wc.nodes; i++) {
-            var n = i + 1;
-            // Creates Big node buttons
-
-
-            $('#sysview_n' + n + '_btn').html("<small>Node " 
-                + n + "<br>" + nodeInfo[i].node_stat 
-                + "<br>" + "Alm: " + nodeInfo[i].node_alm 
-                + "</small> <div><div class='col-sm-6' style='text-align: left; font-size: 9px; margin-top: 5px; padding-left: 5px'>" 
-                    + nodeInfo[i].node_temp + "  |  " 
-                    + nodeInfo[i].node_volt + "</div><div class='col-sm-6' style='text-align: right; font-size: 9px; margin-top: 5px; padding-left: 0; padding-right: 5px'> LOC: " 
-                        + nodeInfo[i].node_rack + "</div></div>");
-
-            $('#sysview_n' + n + '_btn').addClass("addNodeStyle");
-            if (nodeInfo[i].node_alm == "MAJ") {
-                $("#sysview_n" + n + '_btn').css("background-color", "#ffa500");
-            }
-            else if (nodeInfo[i].node_alm == "MIN") {
-                $("#sysview_n" + n + '_btn').css("background-color", "#FFFF00");
-            }
-            else if (nodeInfo[i].node_alm == "CRI") {
-                $("#sysview_n" + n + '_btn').css("background-color", "#FF0000");
-            }
-            else if (nodeInfo[i].node_alm == "NONE") {
-                $("#sysview_n" + n + '_btn').css("background-color", "#7BC63E");
-            }
-            sysview.updateMio(n, nodeInfo[i].MIOX, nodeInfo[i].MIOY);
-        }
-
-
-        // bind node menu here
-        sysview.bindNodeMenu(nodeInfo);
-        sysview.bindMioMenu();
-
     },
 
     updateMio: function(node, mioX, mioY) {
@@ -821,10 +842,10 @@ var sysview = {
             return;
         }
         
-        if (sysview.selectedMioXOldPsta != sysview.info[sysview.nodeXActive - 1].MIOX[sysview.mioXIndex - 1]) {
+        if (sysview.selectedMioXOldPsta != sysview.node_info[sysview.nodeXActive - 1].MIOX[sysview.mioXIndex - 1]) {
             sysview.queryX(sysview.partXNum);
         }
-        if (sysview.selectedMioYOldPsta != sysview.info[sysview.nodeYActive - 1].MIOY[sysview.mioYIndex - 1]) {
+        if (sysview.selectedMioYOldPsta != sysview.node_info[sysview.nodeYActive - 1].MIOY[sysview.mioYIndex - 1]) {
             sysview.queryY(sysview.partYNum);
         }
         
@@ -1248,7 +1269,7 @@ var sysview = {
 
 
     // -----------------BIND MENU TO NODE-------------------
-    bindNodeMenu: function (nodeInfo){
+    bindNodeMenu: function (){
         $('.addNodeStyle').unbind('contextmenu');
         $('.addNodeStyle').bind("contextmenu",function(e){
             e.preventDefault();
@@ -1267,7 +1288,7 @@ var sysview = {
             // return;
 
             sysview.nodePicked = nodeId;
-            sysview.nodeStatPicked = nodeInfo[nodeIndex].node_stat;
+            sysview.nodeStatPicked = sysview.node_info[nodeIndex].node_stat;
             // console.log ("NODESTAT = " + sysview.nodeStatPicked);
             // console.log ("NODENUMBER = " +sysview.nodePicked);
             // return;
@@ -2223,7 +2244,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.activeMioX = sysview.mioX1.attr('id');
         // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioXPsta.length; i++) {
-            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.info[sysview.nodeXActive - 1].MIOX[i]);
+            $("#" + sysview.mioXPsta[i].attr('id')).text(sysview.node_info[sysview.nodeXActive - 1].MIOX[i]);
         }
     }
     else {
@@ -2241,7 +2262,7 @@ $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function()
         sysview.activeMioY = sysview.mioY1.attr('id');
         // Updates the psta on the MIO tabs
         for (i = 0; i < sysview.mioYPsta.length; i++) {
-            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.info[sysview.nodeYActive - 1].MIOY[i]);
+            $("#" + sysview.mioYPsta[i].attr('id')).text(sysview.node_info[sysview.nodeYActive - 1].MIOY[i]);
         }
 
     }

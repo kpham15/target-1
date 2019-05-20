@@ -306,6 +306,19 @@ button[disabled]{
   background-color: #EEEEEE;
 }
 
+.nodeMajor {
+  background-color: #ffa500;
+}
+.nodeMinor {
+  background-color: #ffff00;
+}
+.nodeCritical {
+  background-color: #ff0000;
+}
+.nodeNone {
+  background-color: #7bc63e;
+}
+
 .addNodeBorder {
   border-left: .5px black solid;
   border-right: .5px black solid;
@@ -333,6 +346,20 @@ button[disabled]{
 
 .addPortFontStyle div{
   font-size: 10px;
+}
+
+.node-temp-volt {
+  text-align: left;
+  font-size: 9px;
+  margin-top: 5px;
+  padding-left: 5px;
+}
+
+.node-rack {
+  text-align: right;
+  font-size: 9px;
+  margin-top: 5px;
+  padding-right: 5px;
 }
 /* --------------------RESTORE VIEW---------------------------- */
 
