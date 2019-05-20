@@ -6,6 +6,7 @@ class CPSCLIENT {
 
     public $rslt;
     public $reason;
+    public $rsp;
 
     public function __construct($sport,$baud, $bits, $stop, $parity, $timeoutSec, $timeoutUsec) {
         //Connect to serial port
@@ -29,9 +30,10 @@ class CPSCLIENT {
 
         //set timeout parameter
         $this->timeout = (float)$timeoutSec + ((float)$timeoutUsec/1000000);
+
     }
 
-    public function sendCmd($cmd) {
+    public function sendCommand($cmd) {
         //send cmd to CPS HW
         $write = dio_write($this->connect, $cmd, strlen($cmd));
         //this function returns # bytes written to descriptor
@@ -42,9 +44,29 @@ class CPSCLIENT {
         }
     }
 
-    
+    //waiting for data from HW with timeout. Do it 3 times to make sure that it 
+    // won't lose data
+    public function receiveRsp(){
+        $this->rsp = '';
+        //get response back from CPS HW
+        for ($i=0; $i<3; $i++) {
+            $rsp = $this->getData();
+            if ($rsp === "") {
+                // continue reading upto 3 timeouts
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+        $this->rslt = 'success';
+        $this->reason = 'receive successfully';
+        $this->rsp = $rsp;
+        return;
+    }
+
     //waiting for data from HW with timeout
-    public function receiveRsp() {
+    public function getData() {
         $rsp = '';
         $startTime = microtime(true);
         while((microtime(true) - $startTime) < $this->timeout) {
@@ -52,21 +74,10 @@ class CPSCLIENT {
             if(trim($data) == "")
                 continue;
             else {
-                while(1) {
-                    $rsp .= $data;
-                    usleep(100000);
-                    $data = dio_read($this->connect, 1024);
-                    if(trim($data) != ""){
-                        continue;
-                    }
-                    else break;
-                }
+                $rsp = $data;
                 break;
             }     
         }
-
-        $this->rslt = 'success';
-        $this->reason = 'receive successfully';
         return $rsp;
     }
 
