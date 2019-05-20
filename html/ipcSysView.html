@@ -781,23 +781,23 @@ var sysview = {
             sysview.node_info.forEach(function(node) {
                 let node_header = 'Node ' + node.node + '<br>' + node.node_stat + '<br>Alm: ' + node.node_alm;
                 let node_temp_volt = node.node_temp + '  |  ' + node.node_volt;
-                let node_rack = node.node_rack;
+                let node_rack = 'LOC: ' + node.node_rack;
 
                 $('#sysview_n' + node.node + '_btn .node-header').html(node_header);
                 $('#sysview_n' + node.node + '_btn .node-temp-volt').text(node_temp_volt);
                 $('#sysview_n' + node.node + '_btn .node-rack').text(node_rack);
 
                 if (node.node_alm == "MAJ") {
-                    $("#sysview_n" + node.node + '_btn').addClass('nodeMajor');
+                    $("#sysview_n" + node.node + '_btn').attr('class', 'addNodeStyle nodeMajor')
                 }
                 else if (node.node_alm == "MIN") {
-                    $("#sysview_n" + node.node + '_btn').addClass("nodeMinor");
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeMinor");
                 }
                 else if (node.node_alm == "CRI") {
-                    $("#sysview_n" + node.node + '_btn').addClass("nodeCritical");
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeCritical");
                 }
                 else if (node.node_alm == "NONE") {
-                    $("#sysview_n" + node.node + '_btn').addClass("nodeNone");
+                    $("#sysview_n" + node.node + '_btn').attr('class', "addNodeStyle nodeNone");
                 }
 
 
