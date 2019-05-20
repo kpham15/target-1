@@ -233,8 +233,6 @@ include "ipcProvConnect.php";
 	// -- Functions Section -- //
 	function queryCktconByCkid($ckid) {
 
-		$rows = [];
-
 		$cktconObj = new CKTCON();
 		$cktconObj->queryCktconByCkid($ckid);
 		if ($cktconObj->rslt == "fail") {
@@ -243,8 +241,10 @@ include "ipcProvConnect.php";
 			return $result;
 		}
 
-		$result['rows'] = $cktconObj->rows;
-		$cktconObjRows = $cktconObj->rows;
+		// needs to be array of obj
+		$row['cktcons'] = $cktconObj->rows;
+
+		// $cktconObjRows = $cktconObj->rows;
 		// print_r($cktconObjRows[0]['ctyp']);
 		// return;
 		// $row['ctyp'] = $cktconObjRows[0]['ctyp'];
@@ -261,11 +261,12 @@ include "ipcProvConnect.php";
 			$result['reason'] = "INVALID CKID for CKT";
 			return $result;
 		}
+		
 		$row['cls'] = $cktObj->cls;
 		$row['adsr'] = $cktObj->adsr;
 		$row['prot'] = $cktObj->prot;
 
-		// $result['rows'] = $row;
+		$result['rows'] = $row;
 		$result['rslt'] = SUCCESS;
 		$result['reason'] = "QUERY CKID SUCCESS";
 		return $result;
