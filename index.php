@@ -127,7 +127,7 @@
 
 <script>
 
-var folderSwList = <?php echo json_encode($folderList); ?>;
+// var folderSwList = <?php //echo json_encode($folderList); ?>; 
 
 //For Production
 //var logoimg = '<img src="./resources/telepath_logo.jpg" style="float:left" height="30px" width="180px">';               
