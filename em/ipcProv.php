@@ -157,11 +157,6 @@ include "ipcProvConnect.php";
 	}
 	
 	if ($act == "queryCktconByCkid") {
-		// $cktconObj = new CKTCON();
-		// $cktconObj->queryCktconByCkid($ckid);
-		// $result['rslt'] = $cktconObj->rslt;
-		// $result['reason'] = $cktconObj->reason;
-		// $result['rows'] = $cktconObj->rows;
 		$result = queryCktconByCkid($ckid);
 		echo json_encode($result);
 		mysqli_close($db);
