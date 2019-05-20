@@ -251,8 +251,6 @@ include "ipcProvConnect.php";
 			$result['rows'][$i]['prot'] = $cktObj->prot;
 		}
 		
-
-		
 		$result['rslt'] = SUCCESS;
 		$result['reason'] = "QUERY CKID SUCCESS";
 		return $result;
