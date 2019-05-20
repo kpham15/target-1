@@ -1835,7 +1835,7 @@ var sysviewModal_ckidSearch = {
     displayTbl: function(index) {   
         var startIndex=(index - 1) * 100;
         var stopIndex = index * 100;
-        var len = sysview.ckidRows.cktcons.length;
+        var len = sysview.ckidRows.length;
 
         if (len>=startIndex) {
             if (len < stopIndex) {
@@ -1844,14 +1844,14 @@ var sysviewModal_ckidSearch = {
             sysviewModal_ckidSearch.tbl.body.empty();
             var a = [];
             for (var i = startIndex; i < stopIndex; i++) {  
-                a.push('<tr> <td style="width:5%">'    + sysview.ckidRows.cktcons[i].idx  + '</td>');
-                a.push('<td style="width:10%">'        + sysview.ckidRows.cktcons[i].ctyp + '</td>');
-                a.push('<td style="width:10%">'        + sysview.ckidRows.cktcons[i].fport + '</td>');
-                a.push('<td style="width:10%">'        + sysview.ckidRows.cktcons[i].fpsta + '</td>');
-                a.push('<td style="width:22%">'        + sysview.ckidRows.cktcons[i].ffac + '</td>');
-                a.push('<td style="width:10%">'        + sysview.ckidRows.cktcons[i].tport + '</td>');
-                a.push('<td style="width:10%">'        + sysview.ckidRows.cktcons[i].tpsta + '</td>');
-                a.push('<td style="width:23%">'        + sysview.ckidRows.cktcons[i].tfac + '</td></tr>');
+                a.push('<tr> <td style="width:5%">'    + sysview.ckidRows[i].idx  + '</td>');
+                a.push('<td style="width:10%">'        + sysview.ckidRows[i].ctyp + '</td>');
+                a.push('<td style="width:10%">'        + sysview.ckidRows[i].fport + '</td>');
+                a.push('<td style="width:10%">'        + sysview.ckidRows[i].fpsta + '</td>');
+                a.push('<td style="width:22%">'        + sysview.ckidRows[i].ffac + '</td>');
+                a.push('<td style="width:10%">'        + sysview.ckidRows[i].tport + '</td>');
+                a.push('<td style="width:10%">'        + sysview.ckidRows[i].tpsta + '</td>');
+                a.push('<td style="width:23%">'        + sysview.ckidRows[i].tfac + '</td></tr>');
                 
             }
             sysviewModal_ckidSearch.tbl.body.html(a.join(""));

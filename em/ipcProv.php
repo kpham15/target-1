@@ -157,12 +157,12 @@ include "ipcProvConnect.php";
 	}
 	
 	if ($act == "queryCktconByCkid") {
-		// $cktconObj = new CKTCON();
-		// $cktconObj->queryCktconByCkid($ckid);
-		// $result['rslt'] = $cktconObj->rslt;
-		// $result['reason'] = $cktconObj->reason;
-		// $result['rows'] = $cktconObj->rows;
-		$result = queryCktconByCkid($ckid);
+		$cktconObj = new CKTCON();
+		$cktconObj->queryCktconByCkid($ckid);
+		$result['rslt'] = $cktconObj->rslt;
+		$result['reason'] = $cktconObj->reason;
+		$result['rows'] = $cktconObj->rows;
+		// $result = queryCktconByCkid($ckid);
 		echo json_encode($result);
 		mysqli_close($db);
 		return;
@@ -231,46 +231,35 @@ include "ipcProvConnect.php";
 	}
 
 	// -- Functions Section -- //
-	function queryCktconByCkid($ckid) {
+	// function queryCktconByCkid($ckid) {
 
-		$cktconObj = new CKTCON();
-		$cktconObj->queryCktconByCkid($ckid);
-		if ($cktconObj->rslt == "fail") {
-			$result['rslt'] = FAIL;
-			$result['reason'] = "INVALID CKID for CKTCON";
-			return $result;
-		}
+	// 	$cktconObj = new CKTCON();
+	// 	$cktconObj->queryCktconByCkid($ckid);
+	// 	if ($cktconObj->rslt == "fail") {
+	// 		$result['rslt'] = FAIL;
+	// 		$result['reason'] = "INVALID CKID for CKTCON";
+	// 		return $result;
+	// 	}
 
-		// needs to be array of obj
-		$row['cktcons'] = $cktconObj->rows;
+	// 	// needs to be array of obj
+	// 	$row['cktcons'] = $cktconObj->rows;
 
-		// $cktconObjRows = $cktconObj->rows;
-		// print_r($cktconObjRows[0]['ctyp']);
-		// return;
-		// $row['ctyp'] = $cktconObjRows[0]['ctyp'];
-		// $row['ffac'] = $cktconObjRows[0]['ffac'];
-		// $row['fport'] = $cktconObjRows[0]['fport'];
-		// $row['fpsta'] = $cktconObjRows[0]['fpsta'];
-		// $row['tfac'] = $cktconObjRows[0]['tfac'];
-		// $row['tport'] = $cktconObjRows[0]['tport'];
-		// $row['tpsta'] = $cktconObjRows[0]['tpsta'];
-
-		$cktObj = new CKT($ckid);
-		if ($cktObj->rslt == "fail") {
-			$result['rslt'] = FAIL;
-			$result['reason'] = "INVALID CKID for CKT";
-			return $result;
-		}
+	// 	$cktObj = new CKT($ckid);
+	// 	if ($cktObj->rslt == "fail") {
+	// 		$result['rslt'] = FAIL;
+	// 		$result['reason'] = "INVALID CKID for CKT";
+	// 		return $result;
+	// 	}
 		
-		$row['cls'] = $cktObj->cls;
-		$row['adsr'] = $cktObj->adsr;
-		$row['prot'] = $cktObj->prot;
+	// 	$row['cls'] = $cktObj->cls;
+	// 	$row['adsr'] = $cktObj->adsr;
+	// 	$row['prot'] = $cktObj->prot;
 
-		$result['rows'] = $row;
-		$result['rslt'] = SUCCESS;
-		$result['reason'] = "QUERY CKID SUCCESS";
-		return $result;
-	}
+	// 	$result['rows'] = $row;
+	// 	$result['rslt'] = SUCCESS;
+	// 	$result['reason'] = "QUERY CKID SUCCESS";
+	// 	return $result;
+	// }
 
 	function provUpdateCkt($user, $ckid, $cls, $adsr, $prot, $ordno, $mlo, $userObj) {
 
