@@ -1654,6 +1654,9 @@ var sysviewModal = {
     ptypMap:    $("#sysviewModal_ptyp_txt"),
     pstaMap:    $("#sysviewModal_psta_txt"),
 
+    cls:        $("#sysviewModal_cls_txt"),
+    adsr:       $("#sysviewModal_adsr_txt"),
+    prot:       $("#sysviewModal_prot_txt"),
 
     act:        $("#sysviewModal_act_txt"),
     submitBtn:  $("#sysviewModal_submit_btn"),
@@ -1882,7 +1885,9 @@ var sysviewModal_ckidSearch = {
                 sysviewModal.modal.modal();
                 sysviewModal.ckid.val(ckid);
                 sysviewModal.startShowConn();
-               
+                sysviewModal.cls.val(sysview.ckidRows[0].cls);
+                sysviewModal.adsr.val(sysview.ckidRows[0].adsr);
+                sysviewModal.prot.val(sysview.ckidRows[0].prot);               
             }
         });
 
