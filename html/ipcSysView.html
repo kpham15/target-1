@@ -19,7 +19,21 @@
         </div>
         <div>
             <!-- X -->
-            <div class="sysview_mio col-sm-12" style="border-top-left-radius: 4px; border-top-right-radius: 4px; border-right: 1px black solid; border-left: 1px black solid; height: 34px; padding-left: 0px; margin-left: 15px; padding-right: 0px; font-size: 0px; float: left; width: 95%"> 
+            <div class="sysview_mio col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="mioContextMenu active"><a href="#">MIOX-1</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-2</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-3</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-4</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-5</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-6</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-7</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-8</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-9</a></li>
+                    <li class="mioContextMenu" role="presentation"><a href="#">MIOX-10</a></li>
+                </ul>
+            </div>
+            <!-- <div class="sysview_mio col-sm-12" style="border-top-left-radius: 4px; border-top-right-radius: 4px; border-right: 1px black solid; border-left: 1px black solid; height: 34px; padding-left: 0px; margin-left: 15px; padding-right: 0px; font-size: 0px; float: left; width: 95%"> 
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX1"><div>MIOX-1</div><div id="sysview_mioX1_psta"></div></button>
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX2"><div>MIOX-2</div><div id="sysview_mioX2_psta"></div></button>
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX3"><div>MIOX-3</div><div id="sysview_mioX3_psta"></div></button>
@@ -30,7 +44,7 @@
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX8"><div>MIOX-8</div><div id="sysview_mioX8_psta"></div></button>
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX9"><div>MIOX-9</div><div id="sysview_mioX9_psta"></div></button>
                 <button class="btn addMioStyle" style="width: 10%; font-size: 10px" id="sysview_mioX10"><div>MIOX-10</div><div id="sysview_mioX10_psta"></div></button>
-            </div>
+            </div> -->
         </div>
         <div>
             <div>
@@ -1352,8 +1366,8 @@ var sysview = {
 
     // ----------------BIND MENU TO MIO-----------------
     bindMioMenu: function (){
-        $('.addMioStyle').unbind('contextmenu');
-        $('.addMioStyle').bind("contextmenu",function(e) {
+        $('.mioContextMenu').unbind('contextmenu');
+        $('.mioContextMenu').bind("contextmenu",function(e) {
             e.preventDefault();
             
             // Obtain the MIO # of the MIO right mouse clicked on
@@ -2496,7 +2510,7 @@ $(document).on('contextmenu click',function(evt){
     if($(evt.target).closest(".addNodeStyle").length ==0) {
         sysview.nodeMenu.hide();
     }
-    if($(evt.target).closest(".addMioStyle").length ==0) {
+    if($(evt.target).closest(".mioContextMenu").length ==0) {
         sysview.mioMenu.hide();
     }
 });
