@@ -243,7 +243,16 @@ include "ipcProvConnect.php";
 			return $result;
 		}
 
-		$row['cktconObj'] = $cktconObj->rows;
+		$cktconObjRows = $cktconObj->rows;
+		// print_r($cktconObjRows[0]['ctyp']);
+		// return;
+		$row['ctyp'] = $cktconObjRows[0]['ctyp'];
+		$row['ffac'] = $cktconObjRows[0]['ffac'];
+		$row['fport'] = $cktconObjRows[0]['fport'];
+		$row['fpsta'] = $cktconObjRows[0]['fpsta'];
+		$row['tfac'] = $cktconObjRows[0]['tfac'];
+		$row['tport'] = $cktconObjRows[0]['tport'];
+		$row['tpsta'] = $cktconObjRows[0]['tpsta'];
 
 		$cktObj = new CKT($ckid);
 		if ($cktObj->rslt == "fail") {
