@@ -241,9 +241,7 @@ include "ipcProvConnect.php";
 			return $result;
 		}
 
-		// $row['cktcons'] = $cktconObj->rows;
 		$result['rows'] = $cktconObj->rows;
-
 
 		$cktObj = new CKT($ckid);
 		if ($cktObj->rslt == "fail") {
@@ -253,19 +251,11 @@ include "ipcProvConnect.php";
 		}
 
 		for ($i=0; $i<count($result['rows']); $i++) {
-			// $row['cktcons'][$i]['cls'] = $cktObj->cls;
-			// $row['cktcons'][$i]['adsr'] = $cktObj->adsr;
-			// $row['cktcons'][$i]['prot'] = $cktObj->prot;
 			$result['rows'][$i]['cls'] = $cktObj->cls;
 			$result['rows'][$i]['adsr'] = $cktObj->adsr;
 			$result['rows'][$i]['prot'] = $cktObj->prot;
 		}
 		
-		// $row['cls'] = $cktObj->cls;
-		// $row['adsr'] = $cktObj->adsr;
-		// $row['prot'] = $cktObj->prot;
-
-		// $result['rows'] = $row;
 		$result['rslt'] = SUCCESS;
 		$result['reason'] = "QUERY CKID SUCCESS";
 		return $result;
