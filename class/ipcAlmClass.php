@@ -138,10 +138,10 @@ class ALMS {
 
         $qry = "INSERT INTO 
                 t_alms 
-                (almid, sa, src, type, cond, 
+                (almid, ack, sa, src, type, cond, 
                 sev, psta, ssta, remark, datetime) 
                 VALUES 
-                ('$almid', '$sa', '$src', '$type', '$cond', 
+                ('$almid', '', '$sa', '$src', '$type', '$cond', 
                 '$sev', '$psta', '$ssta', '$remark', '$now')";
 
         $res = $db->query($qry);
