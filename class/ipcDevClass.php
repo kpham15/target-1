@@ -58,7 +58,9 @@ class DEV {
                 $nodeArray = explode('-', $ackidArray[1]);
                 $this->node =  $nodeArray[0];
             }
-            else if (strpos($splitCmd[$i], "miox" || strpos($splitCmd[$i], "mioy") || strpos($splitCmd[$i], "mre")) !== false) {
+            else if (strpos($splitCmd[$i], "miox") !== false
+                  || strpos($splitCmd[$i], "mioy") !== false
+                  || strpos($splitCmd[$i], "mre") !== false) {
                 $pcbArray = explode('=', $splitCmd[$i]);
                 if (strlen($pcbArray[1]) !== 20) {
                     $this->rslt = FAIL;
