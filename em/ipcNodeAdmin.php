@@ -316,6 +316,8 @@ function updateNodeDevicesStatus($node, $device_status) {
     $newMioy = $parsedString['mioy'];
     $newMre = $parsedString['mre'];
     $newCps = $parsedString['cps'];
+    $result['reason'] = $newMre;
+    return $result;
 
     $currentMiox = $deviceObj->getMiox();
     $currentMioy = $deviceObj->getMioy();
