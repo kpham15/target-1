@@ -298,7 +298,7 @@ else {
 
 function updateNodeDevicesStatus($node, $device_status) {
     
-    $deviceObj = new DEV($device_status);
+    $deviceObj = new DEV($node);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
         $result['reason'] = $deviceObj->reason;
