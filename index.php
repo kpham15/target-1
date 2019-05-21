@@ -37,15 +37,13 @@
 	echo '<body>';	
 
 	// For production
-	include './html/ipcSvc.html';
-
 	include './html/ipcLogin.html';
 	include './html/ipcMainBegin.html';
 	include './html/ipcBulletinBoard.html';
 	include './html/ipcFac.html';
 	include './html/ipcPortmap.html';
 	include './html/ipcTestAccess.html';
-	// include './html/ipcSvc.html';
+	include './html/ipcSvc.html';
 	include './html/ipcMaint.html';
 	include './html/ipcAlm.html';
 	include './html/ipcUser.html';
