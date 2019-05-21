@@ -296,50 +296,54 @@ else {
 
 // LOCAL FUNCTIONS
 
-function updateNodeDevicesStatus($device_status) {
+function updateNodeDevicesStatus($node, $device_status) {
+    
     $deviceObj = new DEV($device_status);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
         $result['reason'] = $deviceObj->reason;
         return $result;
     }
-    $deviceObj->getDevicePcb('miox');
-    $miox = $deviceObj->rows[0]['pcb'];
+
+    $result['reason'] = $deviceObj->reason;
+
+    // $deviceObj->getDevicePcb('miox');
+    // $miox = $deviceObj->rows[0]['pcb'];
   
 
-    $deviceObj->getDevicePcb('mioy');
-    $mioy = $deviceObj->rows[0]['pcb'];
+    // $deviceObj->getDevicePcb('mioy');
+    // $mioy = $deviceObj->rows[0]['pcb'];
 
-    $deviceObj->getDevicePcb('mre');
-    $mre = $deviceObj->rows[0]['pcb'];
+    // $deviceObj->getDevicePcb('mre');
+    // $mre = $deviceObj->rows[0]['pcb'];
 
-    // $result['rslt'] = FAIL;
-    // $result['reason'] = $deviceObj->rows;
+    // // $result['rslt'] = FAIL;
+    // // $result['reason'] = $deviceObj->rows;
+    // // return $result;
+
+    // $deviceObj->updateDevicePcb('miox', $miox);
+    // if ($deviceObj->rslt == FAIL) {
+    //     $result['rslt'] = $deviceObj->rslt;
+    //     $result['reason'] = $deviceObj->reason;
+    //     return $result;
+    // }
+    // $deviceObj->updateDevicePcb('mioy', $mioy);
+    // if ($deviceObj->rslt == FAIL) {
+    //     $result['rslt'] = $deviceObj->rslt;
+    //     $result['reason'] = $deviceObj->reason;
+    //     return $result;
+    // }
+    // $deviceObj->updateDevicePcb('mre', $mre);
+    // if ($deviceObj->rslt == FAIL) {
+    //     $result['rslt'] = $deviceObj->rslt;
+    //     $result['reason'] = $deviceObj->reason;
+    //     return $result;
+    // }
+    // //@TODO add CPS check and update
+
+    // $result['rslt'] = SUCCESS;
+    // $result['reason'] = "UPDATE DEVICE SUCCESS";
     // return $result;
-
-    $deviceObj->updateDevicePcb('miox', $miox);
-    if ($deviceObj->rslt == FAIL) {
-        $result['rslt'] = $deviceObj->rslt;
-        $result['reason'] = $deviceObj->reason;
-        return $result;
-    }
-    $deviceObj->updateDevicePcb('mioy', $mioy);
-    if ($deviceObj->rslt == FAIL) {
-        $result['rslt'] = $deviceObj->rslt;
-        $result['reason'] = $deviceObj->reason;
-        return $result;
-    }
-    $deviceObj->updateDevicePcb('mre', $mre);
-    if ($deviceObj->rslt == FAIL) {
-        $result['rslt'] = $deviceObj->rslt;
-        $result['reason'] = $deviceObj->reason;
-        return $result;
-    }
-    //@TODO add CPS check and update
-
-    $result['rslt'] = SUCCESS;
-    $result['reason'] = "UPDATE DEVICE SUCCESS";
-    return $result;
 }
 // This function extract individual status from a combined status received from the CPS
 function filterNodeStatus($cmd) {
