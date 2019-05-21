@@ -26,7 +26,7 @@ function dev($device_status) {
 
 $device_status = "\$ackid=1-dev,status,devices,miox=11111111111111111111,mioy=11111111111111111111,mre=11111111111111111111,cps=11*";
 $resp = dev($device_status);
-print_r($resp->rslt);
+// print_r($resp->rslt);
 print_r($resp->reason);
 // $resp = almApi('\$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*');
 // echo $resp->rslt . ": " . $resp->reason . "\n";

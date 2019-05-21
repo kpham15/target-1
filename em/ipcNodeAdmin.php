@@ -294,7 +294,8 @@ function updateNodeDevicesStatus($device_status) {
     $deviceObj = new DEV($device_status);
     $mioxRow = $deviceObj->getDevicePcb('miox');
     $miox = $mioxRow[0]['pcb'];
-    echo "MIOX = $miox";
+    $result['rslt'] = FAIL;
+    $result['reason'] = "MIOX = $miox";
     return;
 
     $mioyRow = $deviceObj->getDevicePcb('mioy');
