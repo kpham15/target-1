@@ -28,6 +28,12 @@ class DEV {
             $this->rslt = SUCCESS;
             $this->reason = "SUCCESSFULLY PARSED DEVICE STRING";
         }
+        else {
+            $this->rslt = FAIL;
+            // $this->reason = "FAILED TO PARSE STRING";
+            $this->reason = $this->node;
+            return;
+        }
     
 
     
@@ -73,10 +79,7 @@ class DEV {
                 $this->cps = $cpsArray[1];
             }
         }
-
-
-
-
+        return FAIL;
     }
 
     public function getDevicePcb($device) {

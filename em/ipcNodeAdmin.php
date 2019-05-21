@@ -298,6 +298,11 @@ else {
 
 function updateNodeDevicesStatus($device_status) {
     $deviceObj = new DEV($device_status);
+    if ($deviceObj->rslt == FAIL) {
+        $result['rslt'] = $deviceObj->rslt;
+        $result['reason'] = $deviceObj->reason;
+        return $result;
+    }
     $deviceObj->getDevicePcb('miox');
     $miox = $deviceObj->rows[0]['pcb'];
   
