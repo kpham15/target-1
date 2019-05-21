@@ -853,7 +853,9 @@ var ftOrd = {
                 a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relcttype  + '</td>');
                 a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relctid    + '</td>');
                 a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relot      + '</td>');
-                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relact     + '</td></tr>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].relact     + '</td>');
+                a.push('<td style="display: none">'                                       + ftOrd.CktRows[i].stat       + '</td>');
+                a.push('</tr>');
             }
             ftOrd.tblCkt.body.html(a.join(""));
             // ftOrd.CktIndexLbl.text("From " + (startIndex + 1) + " to " + stopIndex + " out of " + ftOrd.tblCkt.maxIndex);
@@ -1246,6 +1248,7 @@ $(document).on("click", "#ftOrd_ckts_tbl tr", function() {
    ftOrd.rCtid.     val(dataRow[15]).change();
    ftOrd.rOt.       val(dataRow[16]).change();
    ftOrd.rAct.      val(dataRow[17]).change();   
+   ftOrd.cktStat.   val(dataRow[18]).change();
 
    ftOrd.cktId.val(dataRow[0]).change();
    ftOrd.clearFacForm();
