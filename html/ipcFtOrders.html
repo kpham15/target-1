@@ -38,7 +38,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2 modifyPaddingFtOrdCol1" style="padding-left:0px; padding-right:2.50px">
-                    <label for="ftOrd_stat_txt">STAT:</label>
+                    <label for="ftOrd_stat_txt">STATUS:</label>
                     <input style="text-transform: uppercase" type="text" id="ftOrd_stat_txt" class="form-control" style="font-size:12px">
                 </div>
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
@@ -79,6 +79,7 @@
                         <option>PROCESS_ORDER</option>
                         <option>PROCESS_CKT</option>
                         <option>PROCESS_FAC</option>
+                        <option>PROCESS_RELEASE</option>
                     </select>
                 </div>
                 <div class="col-sm-2 modifyPaddingFtOrdCol1">
@@ -294,6 +295,11 @@
                         <option>MDD</option>
                     </select>
                 </div>
+                <div class="col-sm-3 modifyPaddingFtOrdCol1" style="padding-left:0px; padding-right:2.50px">
+                    <label for="ftOrd_cktStat_txt">STATUS:</label>
+                    <input style="text-transform: uppercase" type="text" id="ftOrd_cktStat_txt" class="form-control" style="font-size:12px">
+                </div>
+                
             </div>
         </div>
     
@@ -434,6 +440,7 @@ var ftOrd = {
     cktAct:         $("#ftOrd_cktAct_sel"),
     noscm:          $("#ftOrd_noscm_sel"),
     cktForm:        $("#ftOrd_ckt_form"),
+    cktStat:        $("4ftOrd_cktStat_txt"),
 
     // FAC FORM
     facAct:         $("#ftOrd_facAct_sel"),
