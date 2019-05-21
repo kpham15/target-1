@@ -275,7 +275,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
-    $result = updateNodeDevicesStatus($node, $device_status);
+    $result = updateNodeDevicesStatus($device_status);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -290,7 +290,7 @@ else {
 
 // LOCAL FUNCTIONS
 
-function updateNodeDevicesStatus($node, $device_status) {
+function updateNodeDevicesStatus($device_status) {
     $deviceObj = new DEV($device_status);
     $mioxRow = $deviceObj->getDevicePcb('miox');
     $miox = $mioxRow[0]['pcb'];
