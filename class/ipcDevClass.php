@@ -54,10 +54,10 @@ class DEV {
         }
     }
 
-    private function parseDevString($devString) {
+    public function parseDevString($device_status) {
         //$ackid=1-dev,status,devices,miox=11111111111111111111,mioy=11111111111111111111,mre=11111111111111111111,cps=11*
 
-        $newCmd = substr($devString, 1, -1);
+        $newCmd = substr($device_status, 1, -1);
         $splitCmd = explode(',', $newCmd);
 
         ["ackid=1-dev","status","devices","miox=", "mioy=","mre=","cps="];
@@ -71,7 +71,7 @@ class DEV {
                 }
                 $ackidArray = explode('=', $splitCmd[$i]);
                 $nodeArray = explode('-', $ackidArray[1]);
-                $this->node =  $nodeArray[0];
+                $ackid =  $nodeArray[0];
             }
             else if (strpos($splitCmd[$i], "miox") !== false
                   || strpos($splitCmd[$i], "mioy") !== false
@@ -84,19 +84,29 @@ class DEV {
                 }
 
                 if ($pcbArray[0] == 'miox') {
-                    $this->miox = $pcbArray[1];
+                    $miox = $pcbArray[1];
                 } else if ($pcbArray[0] == 'mioy') {
-                    $this->mioy = $pcbArray[1];
+                    $mioy = $pcbArray[1];
                 } else if ($pcbArray[0] == 'mre') {
-                    $this->mre = $pcbArray[1];
+                    $mre = $pcbArray[1];
                 }
             }
             else if (strpos($splitCmd[$i], "cps") !== false) {
                 $cpsArray = explode('=', $splitCmd[$i]);
-                $this->cps = $cpsArray[1];
+                $cps = $cpsArray[1];
             }
         }
+
+        $parsedData = [
+            "node" => $ackid,
+            "miox" => $miox,
+            "mioy" => $mioy,
+            "mre" => $mre,
+            "cps" => $cps
+        ];
+        return $parsedData;
     }
+
 
     public function getDevicePcb($device) {
         global $db; 
