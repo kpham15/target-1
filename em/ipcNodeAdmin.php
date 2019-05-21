@@ -300,15 +300,17 @@ function updateNodeDevicesStatus($device_status) {
     $deviceObj = new DEV($device_status);
     $deviceObj->getDevicePcb('miox');
     $miox = $deviceObj->rows[0]['pcb'];
-    // $result['rslt'] = FAIL;
-    // $result['reason'] = $miox;
-    // return $result;
+  
 
     $deviceObj->getDevicePcb('mioy');
     $mioy = $deviceObj->rows[0]['pcb'];
 
     $deviceObj->getDevicePcb('mre');
     $mre = $deviceObj->rows[0]['pcb'];
+
+    // $result['rslt'] = FAIL;
+    $result['reason'] = $deviceObj->rows;
+    return $result;
 
     $deviceObj->updateDevicePcb('miox', $miox);
     if ($deviceObj->rslt == FAIL) {
