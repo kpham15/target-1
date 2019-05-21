@@ -13,6 +13,7 @@ class DEV {
     public $reason;
     public $rows;
 
+    // constucts and query based on node to fill member variables
 	public function __construct($node=NULL) {
         global $db;
 
@@ -105,6 +106,92 @@ class DEV {
             "cps" => $cps
         ];
         return $parsedData;
+    }
+
+    // get functions to return stored values
+
+    public function getMiox() {
+        return $this->miox;
+    }
+
+    public function getMioy() {
+        return $this->mioy;
+    }
+
+    public function getMre() {
+        return $this->mre;
+    }
+    public function getCps() {
+        return $this->cps;
+    }
+
+    // set functions to update t_devices
+
+    public function setMiox($newMiox) {
+          
+        $qry = "UPDATE t_devices SET miox='$newMiox' WHERE node='$this->node'";
+
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+
+        $this->rslt = SUCCESS;
+        $this->reason = "MIOX UPDATED";
+        return;
+    
+    }
+
+    public function setMioy($newMioy) {
+    
+        $qry = "UPDATE t_devices SET mioy='$newMioy' WHERE node='$this->node'";
+
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+
+        $this->rslt = SUCCESS;
+        $this->reason = "MIOY UPDATED";
+        return;
+        
+    }
+
+    public function setMre($newMre) {
+        
+        $qry = "UPDATE t_devices SET mre='$newMre' WHERE node='$this->node'";
+
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+
+        $this->rslt = SUCCESS;
+        $this->reason = "MRE UPDATED";
+        return;
+        
+    }
+
+    public function setCps($newCps) {
+        $qry = "UPDATE t_devices SET cps='$newCps' WHERE node='$this->node'";
+
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+
+        $this->rslt = SUCCESS;
+        $this->reason = "CPS UPDATED";
+        return;
+
     }
 
 

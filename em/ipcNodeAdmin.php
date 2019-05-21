@@ -298,6 +298,7 @@ else {
 
 function updateNodeDevicesStatus($node, $device_status) {
     
+    // construct device obj using node
     $deviceObj = new DEV($node);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
@@ -305,53 +306,99 @@ function updateNodeDevicesStatus($node, $device_status) {
         return $result;
     }
 
-    $result['reason'] = $deviceObj->parseDevString($device_status);
+    // extract miox, mioy, mre, cps
+    $parsedString = $deviceObj->parseDevString($device_status);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
         $result['reason'] = $deviceObj->reason;
         return $result;
     }
+    $newMiox = $parsedString['miox'];
+    $newMioy = $parsedString['mioy'];
+    $newMre = $parsedString['mre'];
+    $newCps = $parsedString['cps'];
 
+    $currentMiox = $deviceObj->getMiox();
+    $currentMioy = $deviceObj->getMioy();
+    $currentMre = $deviceObj->getMre();
+    $currentCps = $deviceObj->getCps();
+
+    $diffMiox = false;
+    $diffMioy = false;
+
+    if (strcmp($currentMiox, $newMiox) !== 0) {
+        $deviceObj->setMiox($newMiox);
+        $diffMiox = true;
+    }
+    
+    if (strcmp($currentMioy, $newMioy) !== 0) {
+        $deviceObj->setMioy($newMioy);
+        $diffMioy = true;
+    }
+
+    if (strcmp($currentMre, $newMre) !== 0) {
+        $deviceObj->setMre($newMre);
+    }
+
+    if (strcmp($currentCps, $newCps) !== 0) {
+        $deviceObj->setCps($newCps);
+    }
+
+    if ($diffMiox) {
+        $newMioxArray = str_split($newMiox, 2);
+        $currentMioxArray = str_split($currentMiox, 2);
+
+        $postReqObj = new POST_REQUEST();
+
+        for ($i = 0; $i < count($newMioxArray); $i++) {
+            if ($newMioxArray[$i] !== $currentMioxArray[$i]) {
+                $slot = $i + 1;
+                $url = 'ipcDispatch.php';
+                if (strpos($newMioxArray[$i], "0") !== false){
+                    //@TODO what should the user be? 'SYSTEM'?
+                    $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"1", "slot"=>$slot, "type"=>"MIOX");
+                    $postReqObj->asyncPostRequest($url, $params);
+                    //@TODO What happens if this fails?
+                }
+                else {
+                    $params = array("act"=>"insert", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"1", "slot"=>$slot, "type"=>"MIOX");
+                    $postReqObj->asyncPostRequest($url, $params);
+                    //@TODO Wat happens if this fails?
+                }
+            }
+        }
+    }
+
+    if ($diffMioy) {
+        $newMioyArray = str_split($newMioy, 2);
+        $currentMioyArray = str_split($currentMioy, 2);
+
+        $postReqObj = new POST_REQUEST();
+
+        for ($i = 0; $i < count($newMioyArray); $i++) {
+            if ($newMioyArray[$i] !== $currentMioyArray[$i]) {
+                $slot = $i + 1;
+                $url = 'ipcDispatch.php';
+                if (strpos($newMioyArray[$i], "0") !== false){
+                    //@TODO what should the user be? 'SYSTEM'?
+                    $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"2", "slot"=>$slot, "type"=>"MIOY");
+                    $postReqObj->asyncPostRequest($url, $params);
+                    //@TODO What happens if this fails?
+                }
+                else {
+                    $params = array("act"=>"insert", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"2", "slot"=>$slot, "type"=>"MIOY");
+                    $postReqObj->asyncPostRequest($url, $params);
+                    //@TODO Wat happens if this fails?
+                }
+            }
+        }
+    }
+
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "NODE DEVICES UPDATED";
     return $result;
-
-    // $deviceObj->getDevicePcb('miox');
-    // $miox = $deviceObj->rows[0]['pcb'];
-  
-
-    // $deviceObj->getDevicePcb('mioy');
-    // $mioy = $deviceObj->rows[0]['pcb'];
-
-    // $deviceObj->getDevicePcb('mre');
-    // $mre = $deviceObj->rows[0]['pcb'];
-
-    // // $result['rslt'] = FAIL;
-    // // $result['reason'] = $deviceObj->rows;
-    // // return $result;
-
-    // $deviceObj->updateDevicePcb('miox', $miox);
-    // if ($deviceObj->rslt == FAIL) {
-    //     $result['rslt'] = $deviceObj->rslt;
-    //     $result['reason'] = $deviceObj->reason;
-    //     return $result;
-    // }
-    // $deviceObj->updateDevicePcb('mioy', $mioy);
-    // if ($deviceObj->rslt == FAIL) {
-    //     $result['rslt'] = $deviceObj->rslt;
-    //     $result['reason'] = $deviceObj->reason;
-    //     return $result;
-    // }
-    // $deviceObj->updateDevicePcb('mre', $mre);
-    // if ($deviceObj->rslt == FAIL) {
-    //     $result['rslt'] = $deviceObj->rslt;
-    //     $result['reason'] = $deviceObj->reason;
-    //     return $result;
-    // }
-    // //@TODO add CPS check and update
-
-    // $result['rslt'] = SUCCESS;
-    // $result['reason'] = "UPDATE DEVICE SUCCESS";
-    // return $result;
 }
+
 // This function extract individual status from a combined status received from the CPS
 function filterNodeStatus($cmd) {
     $dataArray = [];
