@@ -22,12 +22,12 @@ class DEV {
             return;
         }
 
-       $qry = "SELECT * FROM t_devices WHERE node = '$node'";
-       $res = $db->query($qry);
-       if (!$res) {
-        $this->rslt    = FAIL;
-        $this->reason  = mysqli_error($db);
-        return;
+        $qry = "SELECT * FROM t_devices WHERE node = '$node'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt    = FAIL;
+            $this->reason  = mysqli_error($db);
+            return;
         }
         else {
             $rows = [];
