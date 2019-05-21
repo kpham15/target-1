@@ -1491,6 +1491,26 @@ ftOrd.action.change(function() {
         ftOrd.cktForm.removeClass("addBGColor");
 		ftOrd.facForm.removeClass("addBGColor");
     }
+    else if (ftOrd.action.val() == "PROCESS_RELEASE") {
+        if (ftOrd.ordId.val() == "" || ftOrd.ordId.val() == 0) {
+            alert("Please select an ORDER from the LIST OF ORDERS", function() {
+                ftOrd.action.val("").change();
+            });
+        }
+        else if (ftOrd.cktId.val() == "" || ftOrd.cktId.val() == 0) {
+            alert("Please select a CKT from the LIST OF CKTS", function() {
+                ftOrd.action.val("").change();
+            });
+        }
+        else {
+            if (ftOrd.cktStat.val() !==  "PENDING") {
+                alert("CKT STATUS MUST BE PENDING", function() {
+                    ftOrd.action.val("").change();
+                });
+            }
+            console.log("Reached point for posting to api");
+        }
+    }
 });
 
 </script>
