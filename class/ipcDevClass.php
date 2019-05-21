@@ -137,8 +137,17 @@ class DEV {
             return;
         }
         else {
+            if ($device == "miox") {
+                $newPcb = $this->miox;
+            }
+            else if ($device == "mioy") {
+                $newPcb = $this->mioy;
+            }
+            else if ($device == "mre") {
+                $newPcb = $this->mre;
+            }
 
-            $qry = "UPDATE t_devices SET pcb='$pcb' WHERE node='$this->node' AND device='$device'";
+            $qry = "UPDATE t_devices SET pcb='$newPcb' WHERE node='$this->node' AND device='$device'";
 
             $res = $db->query($qry);
             if (!$res) {
