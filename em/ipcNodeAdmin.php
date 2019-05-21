@@ -71,6 +71,11 @@ if (isset($_POST['cmd'])) {
     $cmd = $_POST['cmd'];
 }
 
+$device_status = "";
+if (isset($_POST['device_status'])) {
+    $device_status = $_POST['device_status'];
+}
+
 
 
 // $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "NODE ADMINISTRATION", $act, $_POST);
