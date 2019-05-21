@@ -275,7 +275,13 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
-    $result = updateNodeDevicesStatus($device_status);
+    try{
+        $result = updateNodeDevicesStatus($device_status);
+    }
+    catch(Throwable $e) {
+        $result['rslt'] = FAIL;
+        $result['reason'] = $e->getMessage();
+    }
     echo json_encode($result);
     mysqli_close($db);
     return;
