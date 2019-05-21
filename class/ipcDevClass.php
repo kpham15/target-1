@@ -148,13 +148,13 @@ class DEV {
         if (strlen($newMiox) !== 20) {
             $this->rslt = FAIL;
             $this->reason = "MIOX STRING IS NOT 20 CHARACTERS";
-            return;
+            return false;
         }
         
         if (preg_match('/[^0-1]+/', $newMiox) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MIOY HAS INVALID CHARACTERS";
-            return;
+            return false;
         }
           
         $qry = "UPDATE t_devices SET miox='$newMiox' WHERE node='$this->node'";
@@ -163,12 +163,12 @@ class DEV {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
-            return;
+            return true;
         }
 
         $this->rslt = SUCCESS;
         $this->reason = "MIOX UPDATED";
-        return;
+        return true;
     
     }
 
@@ -178,13 +178,13 @@ class DEV {
         if (strlen($newMiox) !== 20) {
             $this->rslt = FAIL;
             $this->reason = "MIOY STRING IS NOT 20 CHARACTERS";
-            return;
+            return false;
         }
 
         if (preg_match('/[^0-1]+/', $newMioy) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MIOY HAS INVALID CHARACTERS";
-            return;
+            return false;
         }
     
         $qry = "UPDATE t_devices SET mioy='$newMioy' WHERE node='$this->node'";
@@ -193,12 +193,12 @@ class DEV {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
-            return;
+            return true;
         }
 
         $this->rslt = SUCCESS;
         $this->reason = "MIOY UPDATED";
-        return;
+        return true;
         
     }
 
@@ -208,13 +208,13 @@ class DEV {
         if (strlen($newMre) !== 20) {
             $this->rslt = FAIL;
             $this->reason = "MRE STRING IS NOT 20 CHARACTERS";
-            return;
+            return false;
         }
 
         if (preg_match('/[^0-1]+/', $newMre) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MRE HAS INVALID CHARACTERS";
-            return;
+            return false;
         }
         
         $qry = "UPDATE t_devices SET mre='$newMre' WHERE node='$this->node'";
@@ -223,28 +223,28 @@ class DEV {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
-            return;
+            return true;
         }
 
         $this->rslt = SUCCESS;
         $this->reason = "MRE UPDATED";
-        return;
+        return true;
         
     }
 
     public function setCps($newCps) {
         global $db;
 
-        if (strlen($newCps) !== 20) {
+        if (strlen($newCps) !== 2) {
             $this->rslt = FAIL;
             $this->reason = "CPS STRING IS NOT 20 CHARACTERS";
-            return;
+            return false;
         }
 
         if (preg_match('/[^0-1]+/', $newCps) == 1) {
             $this->rslt = FAIL;
             $this->reason = "CPS HAS INVALID CHARACTERS";
-            return;
+            return false;
         }
 
         $qry = "UPDATE t_devices SET cps='$newCps' WHERE node='$this->node'";
@@ -253,12 +253,12 @@ class DEV {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
-            return;
+            return true;
         }
 
         $this->rslt = SUCCESS;
         $this->reason = "CPS UPDATED";
-        return;
+        return true;
 
     }
 }
