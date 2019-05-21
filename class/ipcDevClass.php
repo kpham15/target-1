@@ -14,14 +14,8 @@ class DEV {
     public $rows;
 
     // constucts and query based on node to fill member variables
-	public function __construct($node=NULL) {
+	public function __construct($node) {
         global $db;
-
-        if ($node === NULL) {
-            $this->rslt = FAIL;
-            $this->reason = "MISSING NODE";
-            return;
-        }
 
         $qry = "SELECT * FROM t_devices WHERE node = '$node'";
         $res = $db->query($qry);
@@ -183,7 +177,7 @@ class DEV {
 
     public function setCps($newCps) {
         global $db;
-        
+
         $qry = "UPDATE t_devices SET cps='$newCps' WHERE node='$this->node'";
 
         $res = $db->query($qry);
