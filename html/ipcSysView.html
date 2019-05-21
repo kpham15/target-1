@@ -189,13 +189,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <label for="sysviewModal_ckidSearch_ckid_txt">CKID: </label>
                         <input id="sysviewModal_ckidSearch_ckid_txt" type="text" class="form-control" style="text-transform: uppercase">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <button id="sysviewModal_ckidSearch_ckidSearch_btn" class="btn btn-primary">VIEW</button>
-                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">CLOSE</button>
                     </div>
                 </div>
             </div>
@@ -359,11 +359,23 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <label for="sysviewModal_ckid_txt">CKID: </label>
-                        </div>
-                        <div class="col-sm-6">
                             <input id="sysviewModal_ckid_txt" style="text-transform: uppercase" type="text" class="form-control">
                         </div>
-                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        <div class="col-sm-2">
+                            <label for="sysviewModal_cls_txt">CLS: </label>
+                            <input id="sysviewModal_cls_txt" type="text" class="form-control" style="text-transform: uppercase">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="sysviewModal_adsr_txt">ADSR: </label>
+                            <input id="sysviewModal_adsr_txt" type="text" class="form-control" style="text-transform: uppercase">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="sysviewModal_prot_txt">PROT: </label>
+                            <input id="sysviewModal_prot_txt" type="text" class="form-control" style="text-transform: uppercase">
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                        </div>
                     </div>
                     <div class="row" hidden>
                         <div class="col-sm-3">
@@ -1663,11 +1675,16 @@ var sysviewModal = {
     ptypMap:    $("#sysviewModal_ptyp_txt"),
     pstaMap:    $("#sysviewModal_psta_txt"),
 
+    cls:        $("#sysviewModal_cls_txt"),
+    adsr:       $("#sysviewModal_adsr_txt"),
+    prot:       $("#sysviewModal_prot_txt"),
 
     act:        $("#sysviewModal_act_txt"),
     submitBtn:  $("#sysviewModal_submit_btn"),
 
     connections: $("#sysviewModal_connections"),
+
+
 
     startShowConn: function() {
         sysviewModal.showConn.show();
@@ -1889,7 +1906,9 @@ var sysviewModal_ckidSearch = {
                 sysviewModal.modal.modal();
                 sysviewModal.ckid.val(ckid);
                 sysviewModal.startShowConn();
-               
+                sysviewModal.cls.val(sysview.ckidRows[0].cls);
+                sysviewModal.adsr.val(sysview.ckidRows[0].adsr);
+                sysviewModal.prot.val(sysview.ckidRows[0].prot);               
             }
         });
 
