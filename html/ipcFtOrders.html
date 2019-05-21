@@ -1189,8 +1189,27 @@ var ftOrd = {
                 alert(obj.rslt);
             }
         });
-    }
+    },
 
+    processRelease: function() {
+        $.post(ipcDispatch,
+        {
+            api:        "ipcFtOrd",
+            user:	    $("#main_currentUser").text(),        
+            act:        "PROCESS_RELEASE",
+            ordno:      ftOrd.ordno.val().toUpperCase(),
+            ctid:       ftOrd.ctid.val().toUpperCase(),
+        },
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                alert(obj.rslt);
+            }
+        });
+    },
 
 }
 
@@ -1444,6 +1463,9 @@ ftOrd.submitBtn.on("click", function() {
             alert("SELECT FROM THE LIST OF CKT FACILITIES");
         }
     }
+    else if (ftOrd.action.val() == "PROCESS_RELEASE") {
+        ftOrd.processRelease();
+    }
 });
 
 ftOrd.action.change(function() {
@@ -1508,7 +1530,7 @@ ftOrd.action.change(function() {
                     ftOrd.action.val("").change();
                 });
             }
-            console.log("Reached point for posting to api");
+            // console.log("Reached point for posting to api");
         }
     }
 });
