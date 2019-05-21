@@ -296,7 +296,7 @@ function updateNodeDevicesStatus($device_status) {
     $miox = $mioxRow[0]['pcb'];
     $result['rslt'] = FAIL;
     $result['reason'] = "MIOX = $miox";
-    return;
+    return $result;
 
     $mioyRow = $deviceObj->getDevicePcb('mioy');
     $mioy = $mioyRow[0]['pcb'];
