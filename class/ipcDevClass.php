@@ -128,6 +128,7 @@ class DEV {
     // set functions to update t_devices
 
     public function setMiox($newMiox) {
+        global $db;
           
         $qry = "UPDATE t_devices SET miox='$newMiox' WHERE node='$this->node'";
 
@@ -145,6 +146,7 @@ class DEV {
     }
 
     public function setMioy($newMioy) {
+        global $db;
     
         $qry = "UPDATE t_devices SET mioy='$newMioy' WHERE node='$this->node'";
 
@@ -162,6 +164,7 @@ class DEV {
     }
 
     public function setMre($newMre) {
+        global $db;
         
         $qry = "UPDATE t_devices SET mre='$newMre' WHERE node='$this->node'";
 
@@ -179,6 +182,8 @@ class DEV {
     }
 
     public function setCps($newCps) {
+        global $db;
+        
         $qry = "UPDATE t_devices SET cps='$newCps' WHERE node='$this->node'";
 
         $res = $db->query($qry);
