@@ -276,7 +276,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
 }
 if ($act == "updateNodeDevicesStatus") {
     try{
-        $result = updateNodeDevicesStatus($device_status);
+        $result = updateNodeDevicesStatus($node, $device_status);
 
     }
     catch (Throwable $e){
