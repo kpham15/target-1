@@ -269,6 +269,12 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     mysqli_close($db);
     return;
 }
+if ($act == "updateNodeDevicesStatus") {
+    $result = updateNodeDevicesStatus($node, $device_status);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
 else {
 	$result["rslt"] = 'fail';
 	$result["reason"] = "This action is under development!";
@@ -278,6 +284,42 @@ else {
 }
 
 // LOCAL FUNCTIONS
+
+function updateNodeDevicesStatus($node, $device_status) {
+    $deviceObj = new DEV($device_status);
+    $mioxRow = $deviceObj->getDevicePcb('miox');
+    $miox = $mioxRow[0]['pcb'];
+
+    $mioyRow = $deviceObj->getDevicePcb('mioy');
+    $mioy = $mioyRow[0]['pcb'];
+
+    $mreRow = $deviceObj->getDevicePcb('mre');
+    $mre = $mreRow[0]['pcb'];
+
+    $deviceObj->updateDevicePcb('miox', $miox);
+    if ($deviceObj->rslt == FAIL) {
+        $result['rslt'] = $deviceObj->rslt;
+        $result['reason'] = $deviceObj->reason;
+        return $result;
+    }
+    $deviceObj->updateDevicePcb('mioy', $mioy);
+    if ($deviceObj->rslt == FAIL) {
+        $result['rslt'] = $deviceObj->rslt;
+        $result['reason'] = $deviceObj->reason;
+        return $result;
+    }
+    $deviceObj->updateDevicePcb('mre', $mre);
+    if ($deviceObj->rslt == FAIL) {
+        $result['rslt'] = $deviceObj->rslt;
+        $result['reason'] = $deviceObj->reason;
+        return $result;
+    }
+    //@TODO add CPS check and update
+
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "UPDATE DEVICE SUCCESS";
+    return $result;
+}
 // This function extract individual status from a combined status received from the CPS
 function filterNodeStatus($cmd) {
     $dataArray = [];
