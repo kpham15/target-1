@@ -385,16 +385,16 @@
 	function queryTestFac($fac) {
 		// the fac must exist in DB 
 		$facObj = new FAC($fac);
-		if ($facObj->rslt == FAIL) {
+		if ($fac == '' || $facObj->rslt == FAIL) {
             $result['rslt'] = "fail";
-			$result['reason'] = "FAC: " . $fac . " DOES NOT EXIST";
+			$result['reason'] = "FFAC: " . $fac . " DOES NOT EXIST";
 			return $result;
         }
         
         // the fac must have port mapped
         if ($facObj->port_id == 0) {
             $result['rslt'] = "fail";
-			$result['reason'] = "FAC: " . $fac . " IS NOT MAPPED TO A PORT";
+			$result['reason'] = "FFAC: " . $fac . " IS NOT MAPPED TO A PORT";
 			return $result;
 		}
 		$node = $facObj->portObj->node;
