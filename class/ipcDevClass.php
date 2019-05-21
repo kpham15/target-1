@@ -175,7 +175,7 @@ class DEV {
     public function setMioy($newMioy) {
         global $db;
 
-        if (strlen($newMiox) !== 20) {
+        if (strlen($newMioy) !== 20) {
             $this->rslt = FAIL;
             $this->reason = "MIOY STRING IS NOT 20 CHARACTERS";
             return false;
