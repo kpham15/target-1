@@ -2,6 +2,7 @@
 //because this program needs to read /dev/ttyUSB file => www-data user need to be put in group: dialout
 // cmd structure to run this program:
 // php ipcCpsloopSerial_receiveRsp.php node sport
+
 include 'ipcCpsClientSerialClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
@@ -44,17 +45,17 @@ try {
             }
             $clientExist = true;
         }
-    
     echo "start listening:\n";   
+
     //listening for cmd from api
     while(1) {
         //get the starting time 
         $startTime = microtime(true);
         while(microtime(true) - $startTime <5) {
             //receive reply from HW
-            $rsp = $cpsClientObj->receiveRsp();
+            $rsp = receiveRsp($cpsClientObj);
             if($rsp !== '') {
-                echo "Begin of rsp:\n".$rsp."\nEnd of rsp\n";
+                echo $rsp;
                 // processRsp($rsp, $node, $localUrl);
                 // if($lostConn > 0) 
                 //     $lostConn = 0;
@@ -91,6 +92,7 @@ catch (Throwable $t)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
+
 ///////---------------------------End of socket area----------------------//////////
 //////////-------------------supporting function---------------------//////////////
 

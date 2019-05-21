@@ -1,5 +1,5 @@
 <?php
-class CPSCLIENT {
+class COMPORT {
     public $sport;
     public $connect;
     public $timeout;
