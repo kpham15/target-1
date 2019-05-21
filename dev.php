@@ -1,6 +1,5 @@
 <?php
 
-//HI
 function dev($node, $device_status) {
 
     // the URL to post to which API (Its almost always going to be Dispatch)
@@ -25,7 +24,7 @@ function dev($node, $device_status) {
 // $resp = almApi('\$ackid=1-CPS,status,current=1239mA,voltage=45678mV*');
 // echo $resp->rslt . ": " . $resp->reason . "\n";
 $node = "1";
-$device_status = "\$ackid=1-dev,status,devices,miox=00000000000000000000,mioy=00000000000000000000,mre=00000000000000000000,cps=11*";
+$device_status = "\$ackid=1-dev,status,devices,miox=11111111111111111111,mioy=11111111111111111111,mre=11111111111111111111,cps=11*";
 $resp = dev($node, $device_status);
 // print_r($resp->rslt);
 print_r($resp->reason);
