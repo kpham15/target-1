@@ -81,11 +81,11 @@ class DEV {
 
     public function getDevicePcb($device) {
         global $db; 
-        
+
         $qry = "SELECT pcb FROM t_devices where node = '$this->node' AND device = '$device'";
 
         $res = $db->query($qry);
-        if (!res) {
+        if (!$res) {
             $this->rslt = FAIL;
             $this->reason = mysqli_error($db);
             $this->rows = [];
