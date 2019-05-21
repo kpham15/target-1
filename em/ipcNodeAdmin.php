@@ -326,6 +326,7 @@ function updateNodeDevicesStatus($node, $device_status) {
     $diffMiox = false;
     $diffMioy = false;
 
+    // compare strings and set flags for if different
     if (strcmp($currentMiox, $newMiox) !== 0) {
         $deviceObj->setMiox($newMiox);
         $diffMiox = true;
@@ -344,6 +345,7 @@ function updateNodeDevicesStatus($node, $device_status) {
         $deviceObj->setCps($newCps);
     }
 
+    // insert or remove cards based on slot after compare pairs of numbers
     if ($diffMiox) {
         $newMioxArray = str_split($newMiox, 2);
         $currentMioxArray = str_split($currentMiox, 2);
