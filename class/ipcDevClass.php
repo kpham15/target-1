@@ -31,7 +31,7 @@ class DEV {
         else {
             $this->rslt = FAIL;
             // $this->reason = "FAILED TO PARSE STRING";
-            $this->reason = $this->node;
+            $this->reason = $this->node . "," . $this->miox . "," . $this->mioy . "," . $this->mre;
             return;
         }
     
