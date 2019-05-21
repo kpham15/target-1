@@ -78,7 +78,7 @@ class DEV {
                     return;
                 }
 
-                if (preg_match('/^[0-1]+/', $pcbArray[1]) == 1) {
+                if (preg_match('/[^0-1]+/', $pcbArray[1]) == 1) {
                     $this->rslt = FAIL;
                     $this->reason = "CHARACTERS OTHER THAN 0 OR 1 IN MATRIX STRING";
                     return;                    
@@ -102,7 +102,7 @@ class DEV {
                     return;
                 }
 
-                if (preg_match('/^[0-1]+/', $cpsArray[1]) == 1) {
+                if (preg_match('/[^0-1]+/', $cpsArray[1]) == 1) {
                     $this->rslt = FAIL;
                     $this->reason = "CHARACTERS OTHER THAN 0 OR 1 IN CPS STRING";
                     return;
@@ -151,7 +151,7 @@ class DEV {
             return;
         }
         
-        if (preg_match('/^[0-1]+/', $newMiox) == 1) {
+        if (preg_match('/[^0-1]+/', $newMiox) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MIOY HAS INVALID CHARACTERS";
             return;
@@ -181,7 +181,7 @@ class DEV {
             return;
         }
 
-        if (preg_match('/^[0-1]+/', $newMioy) == 1) {
+        if (preg_match('/[^0-1]+/', $newMioy) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MIOY HAS INVALID CHARACTERS";
             return;
@@ -211,7 +211,7 @@ class DEV {
             return;
         }
 
-        if (preg_match('/^[0-1]+/', $newMre) == 1) {
+        if (preg_match('/[^0-1]+/', $newMre) == 1) {
             $this->rslt = FAIL;
             $this->reason = "MRE HAS INVALID CHARACTERS";
             return;
@@ -241,7 +241,7 @@ class DEV {
             return;
         }
 
-        if (preg_match('/^[0-1]+/', $newCps) == 1) {
+        if (preg_match('/[^0-1]+/', $newCps) == 1) {
             $this->rslt = FAIL;
             $this->reason = "CPS HAS INVALID CHARACTERS";
             return;
