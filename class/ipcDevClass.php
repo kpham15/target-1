@@ -74,21 +74,42 @@ class DEV {
                 $pcbArray = explode('=', $splitCmd[$i]);
                 if (strlen($pcbArray[1]) !== 20) {
                     $this->rslt = FAIL;
-                    $this->reason = "PCB IS NOT 20 CHARACTERS";
+                    $this->reason = "MATRIX STRING IS NOT 20 CHARACTERS";
                     return;
                 }
 
-                if ($pcbArray[0] == 'miox') {
-                    $miox = $pcbArray[1];
-                } else if ($pcbArray[0] == 'mioy') {
-                    $mioy = $pcbArray[1];
-                } else if ($pcbArray[0] == 'mre') {
-                    $mre = $pcbArray[1];
+                if (preg_match('/^[0-1]+/', $pcbArray[1]) == 1) {
+                    $this->rslt = FAIL;
+                    $this->reason = "CHARACTERS OTHER THAN 0 OR 1 IN MATRIX STRING";
+                    return;                    
                 }
+                else {
+                    if ($pcbArray[0] == 'miox') {
+                        $miox = $pcbArray[1];
+                    } else if ($pcbArray[0] == 'mioy') {
+                        $mioy = $pcbArray[1];
+                    } else if ($pcbArray[0] == 'mre') {
+                        $mre = $pcbArray[1];
+                    }
+                }
+
             }
             else if (strpos($splitCmd[$i], "cps") !== false) {
                 $cpsArray = explode('=', $splitCmd[$i]);
-                $cps = $cpsArray[1];
+                if (strlen($cpsArray[1]) !== 2) {
+                    $this->rslt = FAIL;
+                    $this->reason = "CPS STRING IS NOT 2 CHARACTERS";
+                    return;
+                }
+
+                if (preg_match('/^[0-1]+/', $cpsArray[1]) == 1) {
+                    $this->rslt = FAIL;
+                    $this->reason = "CHARACTERS OTHER THAN 0 OR 1 IN CPS STRING";
+                    return;
+                }
+                else {
+                    $cps = $cpsArray[1];
+                }
             }
         }
 
@@ -123,6 +144,18 @@ class DEV {
 
     public function setMiox($newMiox) {
         global $db;
+
+        if (strlen($newMiox) !== 20) {
+            $this->rslt = FAIL;
+            $this->reason = "MIOX STRING IS NOT 20 CHARACTERS";
+            return;
+        }
+        
+        if (preg_match('/^[0-1]+/', $newMiox) == 1) {
+            $this->rslt = FAIL;
+            $this->reason = "MIOY HAS INVALID CHARACTERS";
+            return;
+        }
           
         $qry = "UPDATE t_devices SET miox='$newMiox' WHERE node='$this->node'";
 
@@ -141,6 +174,18 @@ class DEV {
 
     public function setMioy($newMioy) {
         global $db;
+
+        if (strlen($newMiox) !== 20) {
+            $this->rslt = FAIL;
+            $this->reason = "MIOY STRING IS NOT 20 CHARACTERS";
+            return;
+        }
+
+        if (preg_match('/^[0-1]+/', $newMioy) == 1) {
+            $this->rslt = FAIL;
+            $this->reason = "MIOY HAS INVALID CHARACTERS";
+            return;
+        }
     
         $qry = "UPDATE t_devices SET mioy='$newMioy' WHERE node='$this->node'";
 
@@ -159,6 +204,18 @@ class DEV {
 
     public function setMre($newMre) {
         global $db;
+
+        if (strlen($newMre) !== 20) {
+            $this->rslt = FAIL;
+            $this->reason = "MRE STRING IS NOT 20 CHARACTERS";
+            return;
+        }
+
+        if (preg_match('/^[0-1]+/', $newMre) == 1) {
+            $this->rslt = FAIL;
+            $this->reason = "MRE HAS INVALID CHARACTERS";
+            return;
+        }
         
         $qry = "UPDATE t_devices SET mre='$newMre' WHERE node='$this->node'";
 
@@ -178,6 +235,18 @@ class DEV {
     public function setCps($newCps) {
         global $db;
 
+        if (strlen($newCps) !== 20) {
+            $this->rslt = FAIL;
+            $this->reason = "CPS STRING IS NOT 20 CHARACTERS";
+            return;
+        }
+
+        if (preg_match('/^[0-1]+/', $newCps) == 1) {
+            $this->rslt = FAIL;
+            $this->reason = "CPS HAS INVALID CHARACTERS";
+            return;
+        }
+
         $qry = "UPDATE t_devices SET cps='$newCps' WHERE node='$this->node'";
 
         $res = $db->query($qry);
@@ -192,100 +261,6 @@ class DEV {
         return;
 
     }
-
-
-    public function getDevicePcb($device) {
-        global $db; 
-
-        $qry = "SELECT pcb FROM t_devices where node = '$this->node' AND device = '$device'";
-
-        $res = $db->query($qry);
-        if (!$res) {
-            $this->rslt = FAIL;
-            $this->reason = mysqli_error($db);
-            $this->rows = [];
-        }
-        else {
-            $rows = [];
-            if ($res->num_rows > 0) {
-                while ($row = $res->fetch_assoc()) {
-                    $rows[] = $row;
-                }    
-            }
-            else {
-                $this->rslt = FAIL;
-                $this->reason = "NO PCB FOUND";
-                return;
-            }
-            $this->rows = $rows;
-            $this->rslt = SUCCESS;
-            $this->reason = "DEVICE PCB RETRIEVED";
-            return;
-        }
-    }
-
-    private function compareDevicePcb($device, $pcb) {
-        if ($device == 'miox') {
-            if (strcmp($this->miox, $pcb) !== 0) {
-                return false;
-            }
-        }
-        else if ($device == 'mioy') {
-            if (strcmp($this->mioy, $pcb) !== 0) {
-                return false;
-            }
-        }
-        else if ($device == 'mre') {
-            if (strcmp($this->mre, $pcb) !== 0) {
-                return false;
-            }
-        }
-        else if ($device == 'cps') {
-            if (strcmp($this->cps, $pcb) !== 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function updateDevicePcb($device, $pcb) {
-        global $db;
-        
-        if ($this->compareDevicePcb($device, $pcb)) {
-            $this->rslt = FAIL;
-            $this->reason = $device . " - PCB STRINGS ARE THE SAME";
-            return;
-        }
-        else {
-            if ($device == "miox") {
-                $newPcb = $this->miox;
-            }
-            else if ($device == "mioy") {
-                $newPcb = $this->mioy;
-            }
-            else if ($device == "mre") {
-                $newPcb = $this->mre;
-            }
-
-            $qry = "UPDATE t_devices SET pcb='$newPcb' WHERE node='$this->node' AND device='$device'";
-
-            $res = $db->query($qry);
-            if (!$res) {
-                $this->rslt   = FAIL;
-                $this->reason = mysqli_error($db);
-                return;
-            }
-
-            $this->rslt = SUCCESS;
-            $this->reason = "PCB UPDATED";
-            return;
-        }
-
-    }
-
-
-
-
 }
 
 
