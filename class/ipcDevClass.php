@@ -9,24 +9,48 @@ class DEV {
     private $mre = "";
     private $cps = "";
 
-    public $nodes = 0;
-
     public $rslt;
     public $reason;
     public $rows;
 
-	public function __construct($devString = NULL) {
+	public function __construct($node=NULL) {
         global $db;
 
-        if ($devString === NULL) {
+        if ($node === NULL) {
             $this->rslt = FAIL;
-            $this->reason = "MISSING DEVICE STRING";
+            $this->reason = "MISSING NODE";
             return;
         }
 
-        if ($this->parseDevString($devString) !== FAIL) {
-            $this->rslt = SUCCESS;
-            $this->reason = "SUCCESSFULLY PARSED DEVICE STRING";
+       $qry = "SELECT * FROM t_devices WHERE node = '$node'";
+       $res = $db->query($qry);
+       if (!$res) {
+        $this->rslt    = FAIL;
+        $this->reason  = mysqli_error($db);
+        return;
+        }
+        else {
+            $rows = [];
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                $this->id      = $rows[0]["id"];
+                $this->node    = $rows[0]["node"];
+                $this->miox    = $rows[0]["miox"];
+                $this->mioy    = $rows[0]["mioy"];
+                $this->mre     = $rows[0]["mre"];
+                $this->cps     = $rows[0]["cps"];
+            
+                $this->rslt    = SUCCESS;
+                $this->reason  = "DEVICE CONSTRUCTED";
+                
+            }
+            else {
+                $this->rslt    = FAIL;
+                $this->reason  = "INVALID NODE";
+            }
+            $this->rows = $rows;
         }
     }
 
