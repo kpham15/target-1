@@ -51,6 +51,10 @@
 					<i class="nav-icon cui-speedometer"></i> IPC Overview
 					</a> <br>
                 -->
+                    <a id="menu_sysview2" data-toggle="pill" class="nav-link" href="#sysview2">
+                        <i class="nav-icon cui-speedometer">System View V2</i>
+                    </a>
+
                     <a id="menu_sysview" data-toggle="pill" class="nav-link" href="#sysview">
 					<i class="nav-icon cui-speedometer"></i> System View
                     </a> <br>
@@ -329,6 +333,7 @@ var mB = {
     path:           $("#menu_path"),
     batch:          $("#menu_batch"),
     sysview:        $("#menu_sysview"),
+    sysview2:       $("#menu_sysview2"),
     nodeview:       $("#menu_nodeview"),
     mxStg:          $("#menu_mxStg"),
     bkup:           $("#menu_bkup"),
@@ -627,6 +632,13 @@ mB.sysview.click(function() {
         sysview.start();
     // }
     // sysviewSession = true;
+});
+// click event for sysview2 page
+mB.sysview2.click(function() {
+    if ($('.active.tab-pane').is('#sysview2')) {
+        mB.menu.hide();
+    }
+    // sysview2.start();
 });
 
 // var nodeviewSession = false;

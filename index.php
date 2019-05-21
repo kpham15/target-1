@@ -58,6 +58,7 @@
 	include './html/ipcOrd.html';
 	// include './html/ipcSysAdmin.html';
 	include './html/ipcSysView.html';
+	include './html/ipcSysViewV2.html';
 	include './html/ipcWc.html';
 	include './html/ipcBkup.html';
 	// include './html/ipcNodeView.html';
