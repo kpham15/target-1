@@ -400,7 +400,7 @@ $(document).on("click", "#nodeOpe_tbl tr", function() {
 });
 
 // Modal Event Handler
-nodeOpeModal.modal.on("hidden.bs.modal", nodeOpe.start());
+nodeOpeModal.modal.on("hidden.bs.modal", nodeOpe.start);
 
 nodeOpeModal.submitBtn.on("click", function() {
     nodeOpeModal.query(nodeOpeModal.act.val());
