@@ -236,12 +236,12 @@ var nodeOpe = {
 
                 ];
                 nodeOpe.tblRows = obj.rows;
-                nodeOpe.displayTable();
+                nodeOpe.displayTable(nodeOpe.tbl.index);
             // }
         });
     },
 
-    displayTable: function() {
+    displayTable: function(index) {
         var startIndex= (index - 1) * 100;
         var stopIndex = index * 100;
         var len = nodeOpe.tblRows.length;
