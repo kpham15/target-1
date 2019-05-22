@@ -1,89 +1,140 @@
 <div class="wrapper"> 
   <!-- Sidebar Holder -->
   <nav id="sidebar">
-    <div class="sidebar-header">
-      <h3>Intelligent Provisioning Center</h3>
-        </div>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#">
-                    System View
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-briefcase"></i>
-                    About
-                </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-duplicate"></i>
-                    Pages
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-link"></i>
-                    Portfolio
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-paperclip"></i>
-                    FAQ
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-send"></i>
-                    Contact
-                </a>
-            </li>
+    <ul class="list-unstyled components">
+      <!-- System View Navigation Link -->
+      <li class="active">
+          <a href="#">
+              System View
+          </a>
+      </li>
+      <!-- Bulletin Board Navigation Link -->
+      <li>
+        <a href="#">
+          Bulletin Board
+        </a>
+      </li>
+      <!-- Configuration Submenu -->
+      <li>
+        <a href="#configSubmenu" data-toggle="collapse" aria-expanded="false">
+          Configuration
+        </a>
+        <ul class="collapse list-unstyled" id="configSubmenu">
+          <li><a href="#">Setup Wire Center</a></li>
+          <li><a href="#">Setup Facilities</a></li>
+          <li><a href="#">Setup Port Mapping</a></li>
+          <li><a href="#">Setup Test Accesses</a></li>
         </ul>
-    </nav>
+      </li>
+      <!-- Provisioning Submenu -->
+      <li>
+        <a href="provSubmenu" data-toggle="collapse" aria-expanded="false">
+          Provisioning
+        </a>
+        <ul class="collapse list-unstyled" id="provSubmenu">
+          <li><a href="#">Setup Service Connection</a></li>
+          <li><a href="#">Batch Execution</a></li>
+          <li><a href="#">FT Orders</a></li>
+        </ul>
+      </li>
+      <!-- Maintenance Submenu -->
+      <li>
+        <a href="maintSubmenu" data-toggle="collapse" aria-expanded="false">
+          Maintenance
+        </a>
+        <ul class="collapse list-unstyled" id="maintSubmenu">
+          <li><a href="#">Setup Maintenance Connection</a></li>
+          <li><a href="#">Lock/Unlock Matrix Cards and Nodes</a></li>
+          <li><a href="#">Alarm Administration</a></li>
+          <li><a href="#">Path Administration</a></li>
+        </ul>
+      </li>
+      <!-- User Administration Submenu -->
+      <li>
+        <a href="userSubmenu" data-toggle="collapse" aria-expanded="false">
+          User Administration
+        </a>
+        <ul class="collapse list-unstyled" id="userSubmenu">
+          <li><a href="#">Setup Users</a></li>
+          <li><a href="#">Broadcast Notification</a></li>
+        </ul>
+      </li>
+      <!-- IPC Administration Submenu -->
+      <li>
+        <a href="ipcAdminSubmenu" data-toggle="collapse" aria-expanded="false">
+          IPC Administration
+        </a>
+        <ul class="collapse list-unstyled" id="ipcAdminSubmenu">
+          <li><a href="#">IPC References</a></li>
+          <li><a href="#">Node Administration</a></li>
+          <li><a href="#">Setup Help/Search</a></li>
+          <li><a href="#">Software Update</a></li>
+          <li><a href="#">Event Report</a></li>
+        </ul>
+      </li>
+      <!-- Flow-Through Administration Submenu -->
+      <li>
+        <a href="ftSubmenu" data-toggle="collapse" aria-expanded="false">
+          Flow-Through Administration
+        </a>
+        <ul class="collapse list-unstyled" id="ftSubmenu">
+          <li><a href="#">FT Release Table</a></li>
+          <li><a href="#">FT Modification Table</a></li>
+        </ul>
+      </li>
+      <!-- Reports Submenu -->
+      <li>
+        <a href="reportSubmenu" data-toggle="collapse" aria-expanded="false">
+          Reports
+        </a>
+        <ul class="collapse list-unstyled" id="reportSubmenu">
+          <li><a href="#">Configuration Report</a></li>
+          <li><a href="#">Maintenance Report</a></li>
+          <li><a href="#">Alarm Report</a></li>
+          <li><a href="#">Provisioning Report</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
     <!-- Page Content Holder -->
-    <div id="body-content">
+  <div id="body-content">
 
-        <nav id="top-navbar" class="navbar navbar-default">
-            <div class="container-fluid">
+    <nav id="top-navbar" class="navbar navbar-default">
+      <div class="container-fluid">
 
-                <div class="navbar-header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                        <span>&#9776;</span>
-                    </button>
+        <div class="navbar-header">
+          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+            <span>&#9776;</span>
+          </button>
 
-                    <h2>Intelligent Provisioning Center</h2>
-                </div>
-            </div>
-        </nav>
-
-        <div class="content">
-          <h2>Collapsible Sidebar Using Bootstrap 3</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  
-          <div class="line"></div>
-  
-          <h2>Lorem Ipsum Dolor</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  
-          <div class="line"></div>
-  
-          <h2>Lorem Ipsum Dolor</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  
-          <div class="line"></div>
-  
-          <h3>Lorem Ipsum Dolor</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h2>Intelligent Provisioning Center</h2>
         </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <h2>Collapsible Sidebar Using Bootstrap 3</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <div class="line"></div>
+
+      <h2>Lorem Ipsum Dolor</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <div class="line"></div>
+
+      <h2>Lorem Ipsum Dolor</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <div class="line"></div>
+
+      <h3>Lorem Ipsum Dolor</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
+  </div>
 </div>
 
 <script type="text/javascript">
