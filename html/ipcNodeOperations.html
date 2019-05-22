@@ -246,13 +246,13 @@ var nodeOpe = {
     },
 
     displayTable: function(index) {
-        var startIndex= (index - 1) * 100;
+        var startIndex = (index - 1) * 100;
         var stopIndex = index * 100;
         var len = nodeOpe.tblRows.length;
     
-        if (len>=startIndex) {
+        if (len >= startIndex) {
             if (len < stopIndex) {
-                stopIndex=len;
+                stopIndex = len;
             }            
             nodeOpe.tbl.body.empty();
             var a = [];
@@ -260,7 +260,7 @@ var nodeOpe = {
             {  
                 a.push('<tr>');
                 a.push('<td style="display: none">'     + nodeOpe.tblRows[i].id              + '</td>');
-                a.push('<td style="width:10%">'          + nodeOpe.tblRows[i].node            + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].node            + '</td>');
                 a.push('<td style="width:15%">'         + nodeOpe.tblRows[i].rack            + '</td>');
                 a.push('<td style="width:65%">'         + nodeOpe.tblRows[i].serial_number   + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].psta            + '</td>');
