@@ -38,7 +38,7 @@ class CPSS {
                     array_push($this->serial_no, $rows[$i]['serial_no']);
                     array_push($this->psta,      $rows[$i]['psta']);
                     array_push($this->ssta,      $rows[$i]['ssta']);
-                    array_push($this->device,    $rows[$i]['device']);
+                    array_push($this->device,    $rows[$i]['dev']);
                 }
             }
             else {
