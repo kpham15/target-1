@@ -51,7 +51,7 @@ class CPSS {
 
 }
 
-Class CPS {
+class CPS {
     public $node        = "";
     public $serial_no   = "";
     public $psta        = "";
