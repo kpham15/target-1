@@ -1100,8 +1100,7 @@ function startNode($node, $nodeObj, $userObj) {
     }
     
     // start cpsloop & get it's process ID
-    // chdir("../os");
-    chdir("../os/v2_1program");
+    chdir("../os");
 
     $ipadr = $nodeObj->ipadr;
     $port = $nodeObj->ip_port;
