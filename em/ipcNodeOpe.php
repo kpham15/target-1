@@ -55,7 +55,7 @@ if ($act == "STOP") {
 }
 
 if ($act == "UPDATE RACK") {
-    $result = updateRack($node, $device)
+    $result = updateRack($node, $device);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
