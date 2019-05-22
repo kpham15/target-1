@@ -344,7 +344,7 @@ var nodeOpeModal = {
 // Event Handlers
 nodeOpe.act.change(function() {
     if (nodeOpe.act.val() != "") {
-        if (nodeOpe.nodeId.val() == "") {
+        if (nodeOpe.nodeId == "") {
             alert("Please select a NODE from the LIST OF NODES");
             nodeOpe.act.val("").change();
         }
