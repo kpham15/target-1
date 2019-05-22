@@ -84,6 +84,36 @@ class CMD {
         return true;
     }
 
+    public function sendDiscoverCmd($node, $device) {
+        $cmd = "\$status,source=uuid,device=$device,ackid=$node-bkpln*";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        return true;
+
+    }
+
+    public function sendStartCmd($node) {
+        $cmd = "start";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        return true;
+
+    }
+
+    public function sendStopCmd($node) {
+        $cmd = "stop";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        return true;
+
+    }
+
 
     public function sendCmd($cmd, $node) {
         //create socket UDP

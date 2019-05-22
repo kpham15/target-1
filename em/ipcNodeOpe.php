@@ -41,18 +41,26 @@ if ($act == "DISCOVER") {
 
 
 if ($act == "START") {
-    $result = start($node, $device);
+    $result = start($node);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
 }
 
 if ($act == "STOP") {
-    $result = stop($node, $device);
+    $result = stop($node);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
 }
+
+if ($act == "DISCOVERED") {
+    $result = discovered($node, $serial_no, $device);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 
 if ($act == "UPDATE RACK") {
     $result = updateRack($node, $device);
@@ -77,8 +85,57 @@ function queryAll() {
     return $result;
 }
 
-function discover() {
-    $udpObj = new UDP();
+function discover($node, $device) {
+    $cmdObj = new CMD();
+    $cmdObj->sendDiscoverCmd($node, $device);
+    if ($cmdObj->rslt == "fail") {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return;
+    }
+    $result['rslt'] = $cmdObj->rslt;
+    $result['reason'] = $cmdObj->reason;
+    return $result;
+}
+
+function start($node) {
+    $cmdObj = new CMD();
+    $cmdObj->sendStartCmd($node);
+    if ($cmdObj->rslt == "fail") {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return;
+    }
+    $result['rslt'] = $cmdObj->rslt;
+    $result['reason'] = $cmdObj->reason;
+    return $result;
+}
+
+function stop($node) {
+    $cmdObj = new CMD();
+    $cmdObj->sendStopCmd($node);
+    if ($cmdObj->rslt == "fail") {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return;
+    }
+    $result['rslt'] = $cmdObj->rslt;
+    $result['reason'] = $cmdObj->reason;
+    return $result;
+}
+
+function discovered($node, $serial_no, $device) {
+    $cpssObj = new CPSS();
+    if (in_array($serial_no, $cpssObj->serial_no)) {
+        // b) if already exists then send UDP->msg($node,$device,STOP)
+        $result = stop($node);
+        return $result;
+    }
+    else {
+        // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
+        
+    }
+    
 }
 
 ?>
