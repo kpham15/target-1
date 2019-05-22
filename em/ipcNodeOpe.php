@@ -77,5 +77,8 @@ function queryAll() {
     return $result;
 }
 
+function discover() {
+    $udpObj = new UDP();
+}
 
 ?>
