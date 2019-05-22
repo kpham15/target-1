@@ -245,6 +245,9 @@ var nodeOpeModal = {
                     alert("No Record Found");  
                     return;
                 }
+                alert(`${nodeOpeModal.act.val()} - SUCCESS`, function() {
+                    nodeOpeModal.modal.modal('hide');
+                });
                 nodeOpe.tblRows = obj.rows;
                 nodeOpe.displayTable();
             }
@@ -313,5 +316,9 @@ $(document).on("click", "#nodeOpe_tbl tr", function() {
 
 // Modal Event Handler
 nodeOpeModal.modal.on("hidden.bs.modal", nodeOpe.clearForm);
+
+nodeOpeModal.submitBtn.on("click", function() {
+    nodeOpeModal.query(nodeOpeModal.act.val());
+});
 
 </script>
