@@ -146,10 +146,10 @@ var nodeOpe = {
     
         function(data, status) {
             var obj = JSON.parse(data);
-            if (obj.rslt == "fail") {
-                alert(obj.reason);
-            } 
-            else {
+            // if (obj.rslt == "fail") {
+            //     alert(obj.reason);
+            // } 
+            // else {
                 if (obj.rows.length === 0) {
                     alert("No Record Found");  
                     return;
@@ -237,7 +237,7 @@ var nodeOpe = {
                 ];
                 nodeOpe.tblRows = obj.rows;
                 nodeOpe.displayTable();
-            }
+            // }
         });
     },
 
