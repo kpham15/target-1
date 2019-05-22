@@ -76,6 +76,9 @@ class RSP {
                     if(stripos($ackid,'cps') !== false) {
                         $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsStatus','node'=>$node,'cmd'=>"$rspArray[$i]"]);
                     }
+                    else if(stripos($ackid,'dev') !== false) {
+                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateNodeDevicesStatus','node'=>$node,'device_status'=>"$rspArray[$i]"]);
+                    }
                 }
             }
            

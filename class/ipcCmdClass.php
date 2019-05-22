@@ -1,14 +1,14 @@
 <?php
-set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
-    // error was suppressed with the @-operator
-    if (0 === error_reporting()) {
-        return false;
-    }
+// set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+//     // error was suppressed with the @-operator
+//     if (0 === error_reporting()) {
+//         return false;
+//     }
 
-    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-});
+//     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+// });
 
-error_reporting(E_ALL);
+// error_reporting(E_ALL);
 
 class CMD {
 
@@ -55,6 +55,7 @@ class CMD {
             $ackid = "path-$node-$pathId";
             $cmd = "\$command,action=$act". $rcs.",ackid=$ackid*";
             $this->sendCmd($cmd, $node);
+            if($this->rslt == 'fail') return;
         }
 
         $this->rslt = 'success';
@@ -64,20 +65,20 @@ class CMD {
 
     }
 
-    public function sendTestedPortCmd($act, $portId, $node, $row, $col) {                
-        $ackid = "TP-$node-$portId";
-        $cmd = "\$command,action=$act,row=$row,col=$col,ackid=$ackid*";
+    public function sendTestedPortCmd($act,$node,$col,$row) {  
+        $cmd = "\$command,action=$act,col=$col,row=$row,ackid=$node-TBX*";
         $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;
     }
 
     
-    public function sendZPortCmd($act, $portId, $node) {                
-        $ackid = "TP-$node-$portId";
-        $cmd = "\$command,action=$act,bus=x,tap=$portId,ackid=tb-$node-tbus*";
+    public function sendZPortCmd($act, $portId, $node) {
+        $cmd = "\$command,action=$act,bus=x,tap=$portId,ackid=$node-TAP*";
         $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;

@@ -32,7 +32,7 @@ $serial_timeoutUsec = 500000;
 
 $RDWR_interval = 200000;
 
-$lostConn = 0;
+$lostConn = 3;
 
 //-------------------------Begin--------------------------------
 // define ERROR CODE
@@ -75,6 +75,12 @@ try {
         // If not receive any response from HW, increase the fail_count. If fail_count = 3, consider that HW communication is broken 
         echo "\nCPS loop sends the status cmd:\n";
         $rsp = $comPortObj->sendCmd("\$status,source=all,ackid=$node-cps*");
+        if($comPortObj->rslt == 'fail') {   
+            throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
+        }
+
+        echo "\nCPS loop sends the device status cmd:\n";
+        $rsp = $comPortObj->sendCmd("\$status,source=devices,ackid=$node-dev**");
         if($comPortObj->rslt == 'fail') {   
             throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
         }
@@ -142,10 +148,14 @@ catch (Throwable $t)
         sleep(5);
         goto serverSock;
     }
-
     else if($t->getCode() == SERIAL_CPS_HW_FAIL) {
         // If errorCode = 2, that means socket to HW is broken, close the socket and create a new one
         $comPortObj->endConnection();
+        $clientExist = false;
+        sleep(5);
+        goto clientSock;
+    }
+    else if(strpos($t->getMessage(),'cannot open file') !== false) {
         $clientExist = false;
         sleep(5);
         goto clientSock;

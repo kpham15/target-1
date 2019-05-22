@@ -807,7 +807,10 @@
         //------------------------create cmds-------------------------------
 		$cmdObj = new CMD();
         //create cmd for fport......
+        $cmdObj->sendTestedPortCmd('close',$node,$fcol,$frow);
         //create cmd for zport.....
+        $cmdObj->sendZPortCmd('connect',$tstportObj->pnum, $node);
+
         // ------------------------------------------------------------------
         $cktconObj->queryCktConWithFac($cktconObj->con);
         if ($cktconObj->rslt == FAIL) {
