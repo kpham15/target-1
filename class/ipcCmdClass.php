@@ -84,14 +84,22 @@ class CMD {
         return true;
     }
 
-    public function sendDiscoverCmd($node) {
+    public function sendDiscoverCmd($node, $device) {
+        $cmd = "act=discover,device=$device";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        return true;
+    }
+
+    public function sendQueryBackplaneId($node) {
         $cmd = "\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;
-
     }
 
     public function sendStartCmd($node) {

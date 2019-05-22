@@ -33,7 +33,7 @@ if ($act == "queryAll") {
 }
 
 if ($act == "DISCOVER") {
-    $result = discover($node);
+    $result = discover($node, $device);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -85,14 +85,16 @@ function queryAll() {
     return $result;
 }
 
-function discover($node) {
+function discover($node, $device) {
     $cmdObj = new CMD();
-    $cmdObj->sendDiscoverCmd($node);
+
+    $cmdObj->sendDiscoverCmd($node, $device);
     if ($cmdObj->rslt == "fail") {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
         return;
     }
+    $cmdObj->sendQueryBackplaneId($node);
     $result['rslt'] = $cmdObj->rslt;
     $result['reason'] = $cmdObj->reason;
     return $result;
