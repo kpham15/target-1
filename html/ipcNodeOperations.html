@@ -155,7 +155,7 @@ var nodeOpe = {
             //         return;
             //     }
                 // @todo remember to remove test code
-                nodeOpe.tblRows = [
+                obj.rows = [
                     {
                         id: "1",
                         node: "1",
@@ -235,7 +235,11 @@ var nodeOpe = {
                     },
 
                 ];
-                // nodeOpe.tblRows = obj.rows;
+                nodeOpe.tblRows = obj.rows;
+                nodeOpe.tbl.index=0;
+                var len = nodeOpe.tblRows.length; 
+                nodeOpe.tbl.maxIndex = Math.ceil(len/25.0);
+                nodeOpe.tbl.index++;
                 nodeOpe.displayTable(nodeOpe.tbl.index);
             // }
         });
