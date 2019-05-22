@@ -15,8 +15,8 @@ if($api =='ipcConfirm') {
     return;
 }
 
-print_r($api);
-return;
+echo $api;
+
 
 $user = '';
 if (isset($_POST['user'])) {
