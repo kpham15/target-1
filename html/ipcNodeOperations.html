@@ -301,10 +301,10 @@ var nodeOpeModal = {
 
         // Modal should have read-only fields, excepts for action UPDATE RACK, the field RACK is not read-only
         if (nodeOpeModal.act.val() == "UPDATE RACK") {
-            nodeOpeModal.rack.prop('disabled', false);
+            nodeOpeModal.rack.prop('readonly', false);
         }
         else {
-            nodeOpeModal.rack.prop('disabled', true);
+            nodeOpeModal.rack.prop('readonly', true);
         }
     },
       
