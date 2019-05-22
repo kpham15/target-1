@@ -19,19 +19,18 @@
 
         <div class="row">
             <div class="col-sm-4 modifyPadding">
-                <label for="nodeAdmin_act_sel">ACTION</label>
-                <select class="form-control" id="nodeAdmin_act_sel">
+                <label for="nodeOpe_act_sel">ACTION</label>
+                <select class="form-control" id="nodeOpe_act_sel">
                     <option></option>
-                    <option>DISCOVER_NODE</option>
-                    <option>ASSIGN_NODE_IP</option>
-                    <option>UNASSIGN_NODE</option>
-                    <option>START_NODE</option>
-                    <option>STOP_NODE</option>
-                    <option>UPDATE_NETWORK</option>
-                    <option>UPDATE_RACK</option>
+                    <option>DISCOVER</option>
+                    <option>START</option>
+                    <option>STOP</option>
+                    <option>UPDATE RACK</option>
                 </select>
             </div>
-            <button id="nodeOpe_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            <div class="col-sm-8 modifyPadding">
+                <button id="nodeOpe_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            </div>
         </div>
     </div>
 
@@ -61,53 +60,45 @@
 
     
 </div>
-<!-- 
-<div id="nodeAdminModal" class="modal fade" role="dialog">
+
+<div id="nodeOpeModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">NODE ADMINISTRATION</h5>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-3 modifyPadding">
-                            <label for="nodeAdminModal_ipadr_txt">IP_ADDRESS</label>
-                            <input id="nodeAdminModal_ipadr_txt" type="text" class="form-control">
-                    </div>
-        
-                    <div class="col-sm-3 modifyPadding">
-                        <label for="nodeAdminModal_gateway_txt">GATEWAY</label>
-                        <input id="nodeAdminModal_gateway_txt" type="text" class="form-control">
-                    </div>
-        
-                    <div class="col-sm-3 modifyPadding">
-                        <label for="nodeAdminModal_netmask_txt">NETMASK</label>
-                        <input id="nodeAdminModal_netmask_txt" type="text" class="form-control">
-                    </div>
 
+                <div class="row">
                     <div class="col-sm-2 modifyPadding">
-                        <label for="nodeAdminModal_port_num">IP_PORT</label>
-                        <input id="nodeAdminModal_port_num" type="number" class="form-control">
+                        <label for="nodeOpeModal_node_txt">NODE</label>
+                        <input id="nodeOpeModal_node_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeOpeModal_rack_txt">RACK</label>
+                        <input id="nodeOpeModal_rack_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-7 modifyPadding">
+                        <label for="nodeOpeModal_serialNum_txt">SERIAL NUMBER</label>
+                        <input id="nodeOpeModal_serialNum_txt" type="text" class="form-control" readonly>
                     </div>
                 </div>
-                <h3 id="nodeAdminModal_instruct_txt" style="text-align: center"></h3>
+
                 <div class="row">
                     <div class="col-sm-4 modifyPadding">
-                        <label for="nodeAdminModal_act_txt">ACTION</label>
-                        <input type="text" class="form-control" id="nodeAdminModal_act_txt" readonly>
+                        <label for="nodeOpeModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="nodeOpeModal_act_txt" readonly>
                     </div>
-
                     <div class="col-sm-8 modifyPadding">
-                        <button id="nodeAdminModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button id="nodeOpeModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
                         <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
-
                 </div>
 
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <script>
 
