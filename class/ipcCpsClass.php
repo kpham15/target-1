@@ -19,6 +19,7 @@ class CPSS {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
+            return;
         }
         else {
             $rows = [];
