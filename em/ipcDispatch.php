@@ -119,6 +119,9 @@ else if($api =='ipcMxc') {
 else if($api =='ipcNodeAdmin') {
     include "ipcNodeAdmin.php";
 }
+else if ($api == 'ipcNodeOpe') {
+    include "ipcNodeOpe.php";
+}
 else if($api =='ipcOpt') {
     include "ipcOpt.php";
 }
