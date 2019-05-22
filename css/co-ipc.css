@@ -659,11 +659,16 @@ i, span {
 }
 
 #sidebar {
+  /* display: none; @TODO remove comment when auth is connected */ 
   min-width: 250px;
   max-width: 250px;
   background: #7386D5;
   color: #fff;
   transition: all 0.3s;
+}
+
+#sidebarCollapse {
+  /* display: none; @TODO remove comment when auth is connected*/
 }
 
 #sidebar.active {
@@ -801,6 +806,10 @@ a.article, a.article:hover {
 
 .content {
   padding: 20px;
+}
+
+#top-navbar {
+  height: 125px;
 }
 
 
