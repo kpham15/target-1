@@ -84,8 +84,8 @@ class CMD {
         return true;
     }
 
-    public function sendDiscoverCmd($node, $device) {
-        $cmd = "\$status,source=uuid,device=$device,ackid=$node-bkpln*";
+    public function sendDiscoverCmd($node) {
+        $cmd = "\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
