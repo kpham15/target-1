@@ -1,0 +1,123 @@
+<div id="nodeOpe" class="tab-pane fade in">
+    <h4>NODE ADMINISTRATION</h4>
+    <div class='row'>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-2 modifyPadding">
+                    <label for="nodeOpe_node_txt">NODE</label>
+                    <input id="nodeOpe_node_txt" type="text" class="form-control">
+                </div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="nodeOpe_rack_txt">RACK</label>
+                    <input id="nodeOpe_rack_txt" type="text" class="form-control">
+                </div>
+                
+                <div class="col-sm-2 modifyPadding">
+                    <label for="nodeOpe_serialNum_txt">SERIAL NUMBER</label>
+                    <input style="text-transform: uppercase" id="nodeOpe_serialNum_txt" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 modifyPadding">
+                    <label for="nodeAdmin_act_sel">ACTION</label>
+                    <select class="form-control" id="nodeAdmin_act_sel">
+                        <option></option>
+                        <option>DISCOVER_NODE</option>
+                        <option>ASSIGN_NODE_IP</option>
+                        <option>UNASSIGN_NODE</option>
+                        <option>START_NODE</option>
+                        <option>STOP_NODE</option>
+                        <option>UPDATE_NETWORK</option>
+                        <option>UPDATE_RACK</option>
+                    </select>
+                </div>
+                <button id="nodeOpe_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            </div>
+        </div>
+
+
+        <div class="col-sm-8">
+            <div>
+                <label>LIST OF NODES:</label>
+    
+                <div style="width:100%" class="panel panel-default">
+                    <table class="table table-fixed">
+                        <thead style = "width:100%; padding-right:15px;">
+                            <tr>
+                                <th style="width:5%">NODE</th>
+                                <th style="width:15%">RACK</th>
+                                <th style="width:70%">SERIAL NUMBER</th>
+                                <th style="width:10%">PSTA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="nodeOpe_tbl">
+        
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+<!-- 
+<div id="nodeAdminModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">NODE ADMINISTRATION</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3 modifyPadding">
+                            <label for="nodeAdminModal_ipadr_txt">IP_ADDRESS</label>
+                            <input id="nodeAdminModal_ipadr_txt" type="text" class="form-control">
+                    </div>
+        
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeAdminModal_gateway_txt">GATEWAY</label>
+                        <input id="nodeAdminModal_gateway_txt" type="text" class="form-control">
+                    </div>
+        
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeAdminModal_netmask_txt">NETMASK</label>
+                        <input id="nodeAdminModal_netmask_txt" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeAdminModal_port_num">IP_PORT</label>
+                        <input id="nodeAdminModal_port_num" type="number" class="form-control">
+                    </div>
+                </div>
+                <h3 id="nodeAdminModal_instruct_txt" style="text-align: center"></h3>
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="nodeAdminModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="nodeAdminModal_act_txt" readonly>
+                    </div>
+
+                    <div class="col-sm-8 modifyPadding">
+                        <button id="nodeAdminModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script>
+
+var nodeOpe = {
+    
+    start: function() {
+
+    },
+}
+
+</script>
