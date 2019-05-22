@@ -1,4 +1,14 @@
 <?php
+// set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+//     // error was suppressed with the @-operator
+//     if (0 === error_reporting()) {
+//         return false;
+//     }
+
+//     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+// });
+
+// error_reporting(E_ALL);
 
 class CMD {
 
@@ -11,87 +21,7 @@ class CMD {
     }
     
 
-    public function getCmdList() {
-        global $db;
-        
-        $this->rows = [];
-        $qry = "SELECT * FROM t_cmdque WHERE stat <> 'COMPL'";
-        $res = $db->query($qry);
-        if (!$res) {
-            $this->rslt = "fail";
-            $this->reason = mysqli_error($db);
-        }
-        else {
-            $rows = [];
-            $this->rslt = "success";
-            $this->reason = "QUERY_SUCCESS";
-            if ($res->num_rows > 0) {
-                while ($row = $res->fetch_assoc()) {
-                    $rows[] = $row;
-                }
-            }
-            $this->rows = $rows;
-        }
-        
-    }
-
-    public function deleteCmd($ackid) {
-        global $db;
-         
-        $qry = "DELETE FROM t_cmdque WHERE ackid = $ackid";
-        $res = $db->query($qry);
-        if (!$res) {
-            $this->rslt = "fail";
-            $this->reason = mysqli_error($db);
-            return;
-        }
-        if (mysqli_affected_rows($db) > 0) {
-            $this->rslt = "success";
-            $this->reason = 'CMD DELETED';
-        }
-        else {
-            $this->rslt = 'fail';
-            $this->reason = 'INVALID ACKID';
-        }
-        
-    }
-
-    public function addCmd($node, $ackid, $cmd) {
-        global $db;
-         
-        $qry = "INSERT INTO 
-                t_cmdque 
-                (time, node, ackid, stat, cmd) 
-                VALUES
-                (now(), $node, '$ackid', 'NEW', '$cmd')";
-
-        $res = $db->query($qry);
-        if (!$res) {
-            $this->rslt = "fail";
-            $this->reason = mysqli_error($db);
-            return;
-        }
-
-        $this->rslt = "success";
-        $this->reason = 'CMD INSERTED';
-    }
-
-    public function updCmd($ackid, $stat, $rsp) {
-        global $db;
-         
-        $qry = "UPDATE t_cmdque SET stat = '$stat', rsp = '$rsp' WHERE ackid = '$ackid'";
-        $res = $db->query($qry);
-        if (!$res) {
-            $this->rslt = "fail";
-            $this->reason = mysqli_error($db);
-            return;
-        }
-
-        $this->rslt = "success";
-        $this->reason = 'CMD UPDATED';
-    }
-
-    public function createCmd($act, $pathId, $path) {
+    public function sendPathCmd($act, $pathId, $path) {
         global $db;
 
         $rcArray = []; //to store row,col string for each node;
@@ -116,37 +46,62 @@ class CMD {
             if(!isset($rcArray[$node])) {
                 $rcArray[$node] = ""; //initialize key/value before append value to it
             }
-            $rcArray[$node] .= ",ROW=$row,COL=$col";
+            $rcArray[$node] .= ",row=$row,col=$col";
 
         }
 
         //create cmd and add cmd into t_cmdque
         foreach ($rcArray as $node => $rcs) {
-            $act_upper = strtoupper($act);
-            $ackid = "PATH-$node-$pathId";
-            $cmd = "\$COMMAND,ACTION=$act_upper". $rcs.",ACKID=$ackid*";
-
-            $this->addCmd($node,$ackid,$cmd); //Do we need to check error of this query
+            $ackid = "path-$node-$pathId";
+            $cmd = "\$command,action=$act". $rcs.",ackid=$ackid*";
+            $this->sendCmd($cmd, $node);
+            if($this->rslt == 'fail') return;
         }
 
         $this->rslt = 'success';
-        $this->reason = 'CMD CREATED SUCCESSFULLY';
+        $this->reason = 'SEND PATH CMD SUCCESSFULLY';
         return true;
 
 
     }
 
-    public function createTestPathCmd($act, $portId, $node, $row, $col) {
-                
-        $act_upper = strtoupper($act);
-        $ackid = "TP-$node-$portId";
-        $cmd = "\$COMMAND,ACTION=$act_upper,ROW=$row,COL=$col,ACKID=$ackid*";
-
-        $this->addCmd($node,$ackid,$cmd); //Do we need to check error of this query
+    public function sendTestedPortCmd($act,$node,$col,$row) {  
+        $cmd = "\$command,action=$act,col=$col,row=$row,ackid=$node-TBX*";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
         $this->rslt = 'success';
-        $this->reason = 'TEST CONN CMD CREATED SUCCESSFULLY';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;
     }
+
+    
+    public function sendZPortCmd($act, $portId, $node) {
+        $cmd = "\$command,action=$act,bus=x,tap=$portId,ackid=$node-TAP*";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        return true;
+    }
+
+
+    public function sendCmd($cmd, $node) {
+        //create socket UDP
+        $socket = socket_create(AF_INET, SOCK_DGRAM, 0);
+        if($socket === false) {
+            $this->rslt = 'fail';
+            $this->reason = 'CAN NOT CREATE UDP SOCKET';
+            return;
+        }
+        socket_set_nonblock ($socket);
+        $ip_port = 9000 + $node;
+        $sendCmd = socket_sendto($socket,$cmd, 1024,0, '127.0.0.1', $ip_port);
+        if($sendCmd === false) {
+            $this->rslt = 'fail';
+            $this->reason = 'CAN NOT SEND CMD';
+            return;
+        }
+    } 
 
 }
 
