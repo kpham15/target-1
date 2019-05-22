@@ -389,7 +389,7 @@ $(document).on("click", "#nodeOpe_tbl tr", function() {
         .get();
 
     //Populate the information
-    nodeOpe.nodeId.val(dataRow[0]);
+    nodeOpe.nodeId = (dataRow[0]);
     nodeOpe.node.val(dataRow[1]);
     nodeOpe.rack.val(dataRow[2]);
     nodeOpe.serialNum.val(dataRow[3]);
