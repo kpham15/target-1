@@ -49,8 +49,10 @@
                         <tr>
                             <th style="width:10%">NODE</th>
                             <th style="width:15%">RACK</th>
-                            <th style="width:65%">SERIAL NUMBER</th>
+                            <th style="width:45%">SERIAL NUMBER</th>
                             <th style="width:10%">PSTA</th>
+                            <th style="width:10%">SSTA</th>
+                            <th style="width:10%">DEVICE</th>
                         </tr>
                     </thead>
                     <tbody id="nodeOpe_tbl" style="height: 410px">
@@ -263,8 +265,10 @@ var nodeOpe = {
                 a.push('<td style="display: none">'     + nodeOpe.tblRows[i].id              + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].node            + '</td>');
                 a.push('<td style="width:15%">'         + nodeOpe.tblRows[i].rack            + '</td>');
-                a.push('<td style="width:65%">'         + nodeOpe.tblRows[i].serial_number   + '</td>');
+                a.push('<td style="width:45%">'         + nodeOpe.tblRows[i].serial_number   + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].psta            + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].ssta            + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].device          + '</td>');
                 a.push('</tr>');
             }
             nodeOpe.tbl.body.html(a.join(""));
