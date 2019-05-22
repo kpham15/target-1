@@ -153,7 +153,7 @@ class DEV {
         
         if (preg_match('/[^0-1]+/', $newMiox) == 1) {
             $this->rslt = FAIL;
-            $this->reason = "MIOY HAS INVALID CHARACTERS";
+            $this->reason = "MIOX HAS INVALID CHARACTERS";
             return false;
         }
           
@@ -237,7 +237,7 @@ class DEV {
 
         if (strlen($newCps) !== 2) {
             $this->rslt = FAIL;
-            $this->reason = "CPS STRING IS NOT 20 CHARACTERS";
+            $this->reason = "CPS STRING IS NOT 2 CHARACTERS";
             return false;
         }
 
