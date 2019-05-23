@@ -33,11 +33,6 @@
 	echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
 
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
-
-	echo '<script src="./bower_components/jquery/dist/jquery.min.js"></script>';
-	echo '<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
-	echo '<script src="./plugins/iCheck/icheck.min.js"></script>';
-	echo '<script src="./dist/js/adminlte.min.js"></script>';
 	echo '</head>';
 
 
