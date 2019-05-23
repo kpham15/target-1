@@ -1,4 +1,4 @@
-<div id="nav-wrapper" class="wrapper">
+<div id="nav-wrapper" class="wrapper" style="display: none;">
 
   <!-- Main Header -->
   <header class="main-header">

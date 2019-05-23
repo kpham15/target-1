@@ -135,7 +135,7 @@ $(document).ready(function() {
 	if ($("#main_currentUser").text() == '')
 	{
 		$('body').addClass('login-page');
-		$('#nav-wrapper').hide();
+		// $('#nav-wrapper').hide();
 		$('#login-page').show();
 		// $("#mainPage").hide();
 		// $("#login").show();
