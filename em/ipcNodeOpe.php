@@ -182,6 +182,7 @@ function discovered($node, $serial_no, $device, $userObj) {
 
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
+        // send message 3 to udp
         $result = stop($node, $userObj);
         return $result;
     }
@@ -205,7 +206,9 @@ function discovered($node, $serial_no, $device, $userObj) {
 
         // update psta and ssta, write serial number to t_cps, start the cps
         $cpsObj->setCpsStatus($newPsta, $newSsta);
+        // if success
         $cpsObj->setSerialNo($serial_no);
+        // call message 2
         $result = start($node, $userObj);
 
         
