@@ -88,6 +88,11 @@ function queryAll() {
 function discover($node, $device) {
 
     // add user permission for ipcAdmin
+    if ($userObj->grpObj->ipcadm != "Y") {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'Permission Denied';
+        return $result;
+    }
 
 
     $cmdObj = new CMD();
@@ -107,6 +112,11 @@ function discover($node, $device) {
 function start($node) {
 
     // permissions check here
+    if ($userObj->grpObj->ipcadm != "Y") {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'Permission Denied';
+        return $result;
+    }
     // smsObj check psta/ssta if it is in correct state
 
     $cmdObj = new CMD();
