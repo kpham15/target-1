@@ -165,16 +165,17 @@ function start($node, $userObj) {
         return $result;
     }
 
+    $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
-    $cmdObj->sendStartCmd($node);
+    $cmdObj->sendCmd($cmd, $node);    
     if ($cmdObj->rslt == "fail") {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
         return;
     }
-    $result['rslt'] = $cmdObj->rslt;
-    $result['reason'] = $cmdObj->reason;
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "START COMMAND SENT SUCCESSFULLY";
     return $result;
 }
 
@@ -187,16 +188,18 @@ function stop($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
+    $cpsObj = new CPS($node);
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
 
     $cmdObj = new CMD();
-    $cmdObj->sendStopCmd($node);
+    $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
         return;
     }
-    $result['rslt'] = $cmdObj->rslt;
-    $result['reason'] = $cmdObj->reason;
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "STOP COMMAND SENT SUCCESSFULLY";
     return $result;
 }
 
