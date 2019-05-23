@@ -1,4 +1,6 @@
 ﻿
+
+
 <?php
 	include 'indexFunc.php';
 	/// Read the config file to get the name of running folder
@@ -23,11 +25,19 @@
 	echo '<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">';
 	echo '<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">';
 	echo '<link rel="stylesheet" href="./bower_components/Ionicons/css/ionicons.min.css">';
+
 	echo '<link rel="stylesheet" href="./dist/css/AdminLTE.min.css">';
-	echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+	echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
 	echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
+	echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
+
+	echo '<script src="./bower_components/jquery/dist/jquery.min.js"></script>';
+	echo '<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
+	echo '<script src="./plugins/iCheck/icheck.min.js"></script>';
+	echo '<script src="./dist/js/adminlte.min.js"></script>';
 	echo '</head>';
 
 
@@ -71,7 +81,9 @@
 	
 
 	echo '</body>';
-	echo '</html>';	
+	echo '</html>';
+	
+	include './js/functions.js';
 ?>
 
  <script src="./js/ipcOpt.js"></script>
@@ -81,6 +93,7 @@
  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
  <script src="./plugins/iCheck/icheck.min.js"></script>
+ <script src="./dist/js/adminlte.min.js"></script>
 
 <script>
 
@@ -141,6 +154,11 @@ else
 	$("#login").hide();
 	// $("#mainPage").show();
 	mB.start();
+}
+
+function loginSuccess() {
+	$('body').attr('class','hold-transition skin-blue sidebar-mini');
+	$('body').load('pages/starter.html');
 }
 
 });

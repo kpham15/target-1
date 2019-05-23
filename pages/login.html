@@ -1,18 +1,18 @@
 <div class="login-box">
   <div class="login-logo">
-    <a href="index.html"><b>Telepath</b>Networks Inc.</a>
+    <a><b>Telepath</b>Networks Inc.</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="index.html" method="post">
+    <form>
       <div class="form-group has-feedback">
-        <input type="username" class="form-control" placeholder="Username">
+        <input id="login_username" type="username" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input id="login_password_input" type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -25,7 +25,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
@@ -47,4 +47,145 @@
       increaseArea: '20%' /* optional */
     });
   });
+
+
+  var keyId = "";
+  var login = {
+    // User Data
+    user : {
+      fname: "",
+      mi: "",
+      lname: "",
+      grp: 0,
+      ugrp: "",
+      loginTime: "",
+      idle_to: ""
+    },
+
+    // jQuery Selectors
+    username:       $('#login_username'),
+    password:       $('#login_password_input'),
+    loginBtn:       $('#login_btn'),
+
+
+    // General Functions
+    getSwVersion: function() {
+      $.post("../indexFunc.php", { act: "queryReadMe" }, function(data, status) {
+        // @TODO create a function in the sidebar/header to call that updates the software version and descriptions
+        // var obj = JSON.parse(data);
+        // login.swVersion.text('Version: ' + obj.ver);
+        // mB.versionDescr.val(obj.descr);
+        // mB.versionLbl.text('Version: ' + obj.ver);
+      });
+    },
+
+    submitLogin: function() {
+      keyId = "";
+      $.post(ipcDispatch, {
+        api:"ipcConfirm",
+        act: "confirm"
+      }, function(data, status) {
+        var obj = JSON.parse(data);
+
+        if (obj.rslt == 'fail') {
+          alert(obj.reason);
+        } else {
+          keyId = obj.key;
+
+          if (keyId == '') {
+            alert("Confirm key is not available yet");
+            return;
+          }
+          login.postUserPassword();
+        }
+      });
+    },
+
+    postUserPassword: function() {
+      // @TODO checks for user registration
+      // if (login.newpassword.val() == '' && login.newpassword.val() === login.confirmPassword.val()) {
+      //   alert("New password and confirm password should be the same");
+      // }
+
+      $.post(ipcDispatch,
+      {
+        api: "ipcLogin",
+        act: "login",
+        user: login.username.val(),
+        pw: encode(login.password.val()),
+        // newPw: encode(login.newpassword.val())
+      }, function(data, status) {
+        var obj = JSON.parse(data);
+        if (obj.rslt == "fail") {
+          alert(obj.reason);
+        } else {
+          $("#main_currentUser").text(obj.rows[0].uname);
+
+          // @TODO add user name to profile area in sidebar/header nav
+          // $('#main_userFLname').text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
+          login.user.fname = obj.rows[0].fname;
+          login.user.mi = obj.rows[0].mi;
+          login.user.lname = obj.rows[0].lname;
+          login.user.grp = obj.rows[0].grp;
+          login.user.ugrp = obj.rows[0].ugrp;
+          login.user.idle_to = obj.rows[0].user_idle_to;
+          login.username.val("");
+          login.password.val("");
+          // login.newpassword.val("");
+
+          // @TODO find out what these do
+          // opt.query('queryOpt');
+          // bulletinBoard.query('query');
+          // brdcstModal.loadOwner();
+          // mB.start();
+        }
+      });
+    }
+  }
+
+  // ================ Click Events ================= //
+
+  login.loginBtn.click(function(e) {
+    e.preventDefault();
+    
+    login.submitLogin();
+  });
+
+  // @TODO create register user/first login functionality
+
+
+  // ================ Encode Password ================= //
+  function encode(data) {
+    var header = {
+      "alg": "HS256",
+      "typ": "JWT"
+    };
+
+    var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+    var encodedHeader = base64url(stringifiedHeader);
+
+    var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+    var encodedData = base64url(stringifiedData);
+
+    var signature = encodedHeader + "." + encodedData;
+    signature = CryptoJs.HmacSHA256(signature, keyId);
+    signature = base64url(signature);
+    return encodedHeader + "." + encodedData + "." + signature;
+  }
+
+  function base64url(source) {
+    // Encode in classical base64
+    encodedSource = CryptoJS.enc.Base64.stringify(source);
+
+    // Remove padding equal characters
+    encodedSource = encodedSource.replace(/=+$/, '');
+    
+    // Replace characters according to base64url specifications
+    encodedSource = encodedSource.replace(/\+/g, '-');
+    encodedSource = encodedSource.replace(/\//g, '-');
+
+    return encodedSource;
+  }
+
+  // @TODO call looping wc.getHeaderInfo() after logging in.
 </script>
