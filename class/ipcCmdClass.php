@@ -84,8 +84,8 @@ class CMD {
         return true;
     }
 
-    public function sendComPort($node, $com_port) {
-        $cmd = "com_port=$com_port";
+    public function sendComPort($node, $device) {
+        $cmd = "device=$com_port";
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') 
             return false;
