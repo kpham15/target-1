@@ -55,7 +55,7 @@ if ($act == "STOP") {
 }
 
 if ($act == "DISCOVERED") {
-    $result = discovered($node, $serial_no, $device);
+    $result = discovered($node, $serial_no, $device, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -171,12 +171,12 @@ function stop($node, $userObj) {
     return $result;
 }
 
-function discovered($node, $serial_no, $device) {
+function discovered($node, $serial_no, $device, $userObj) {
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
-        $result = stop($node);
+        $result = stop($node, $userObj);
         return $result;
     }
     else {
@@ -195,6 +195,7 @@ function discovered($node, $serial_no, $device) {
         // update psta and ssta, write serial number to t_cps
         $cpsObj->setCpsStatus($newPsta, $newSsta);
         $cpsObj->setSerialNo($serial_no);
+        $result = start($node, $userObj);
 
         
         return $result;
