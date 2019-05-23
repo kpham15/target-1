@@ -18,6 +18,12 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <!-- Navbar Left Menu -->
+      <div class="navbar-custom-menu" style="float:leftl">
+        <ul class="nav navbar-nav">
+          <p class="navbar-text">Intelligent Provisioning Center</p>
+        </ul>
+      </div>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
