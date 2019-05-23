@@ -147,7 +147,7 @@ $(document).ready(function() {
 
 	if ($("#main_currentUser").text() == '')
 	{
-		$('body').addClass('hold-transition login-page');
+		$('body').addClass('login-page');
 		$('#starter-page').hide();
 		$('#login-page').show();
 		// $("#mainPage").hide();
