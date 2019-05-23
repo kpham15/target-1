@@ -94,15 +94,33 @@ function discover($node, $device, $userObj) {
         return $result;
     }
 
+    $cpsObj = new CPS($node);
+    $psta = $cpsObj->psta;
+    $ssta = $cpsObj->ssta;
 
-    $cmdObj = new CMD();
-
-    $cmdObj->sendDiscoverCmd($node, $device);
-    if ($cmdObj->rslt == "fail") {
-        $result['rslt'] = $cmdObj->rslt;
-        $result['reason'] = $cmdObj->reason;
-        return;
+    $evt = "DISCV_CPS";
+    // test sms
+    $smsObj = new SMS($psta, $ssta, $evt);
+    if ($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
     }
+
+    // formulate msg #1
+    $msg = "inst=$evt,node=$node,dev=$device,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+
+    // call function to send UDP message
+
+
+    // $cmdObj = new CMD();
+
+    // $cmdObj->sendDiscoverCmd($node, $device);
+    // if ($cmdObj->rslt == "fail") {
+    //     $result['rslt'] = $cmdObj->rslt;
+    //     $result['reason'] = $cmdObj->reason;
+    //     return;
+    // }
     // $cmdObj->sendQueryBackplaneId($node);
     $result['rslt'] = $cmdObj->rslt;
     $result['reason'] = $cmdObj->reason;
