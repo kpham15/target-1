@@ -61,7 +61,7 @@ if ($act == "STOP") {
 }
 
 if ($act == "DISCOVERED") {
-    $result = discovered($node, $hwString);
+    $result = discovered($node, $hwRsp);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -215,6 +215,7 @@ function discovered($node, $hwRsp) {
     $serialNumArray = explode("=", $newHwStringArray[3]);
     // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
     $serialNum = $serialNumArray[1];
+   
      
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
@@ -268,7 +269,7 @@ function discovered($node, $hwRsp) {
             return $result;
         }
         // if success
-        $cpsObj->setSerialNo($serial_no);
+        $cpsObj->setSerialNo($serialNum);
         if ($cpsObj->rslt == FAIL) {
             $result['rslt'] = $cpsObj->rslt;
             $result['reason'] = $cpsObj->reason;
@@ -277,6 +278,7 @@ function discovered($node, $hwRsp) {
         // call message 2
 
         $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL) {
