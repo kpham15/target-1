@@ -2,6 +2,9 @@
 class CPSSERVER {
     public $socket;
     public $connect;
+    public $timeoutSec;
+    public $timeoutUsec;
+
     public $rslt;
     public $code;
     public $reason;
@@ -22,13 +25,19 @@ class CPSSERVER {
             $this->reason = "Could not bind to socket ".$ip_addr.":".$ip_port;
             return;
         }
+        $this->timeoutSec = $timeoutSec;
+        $this->timeoutUsec = $timeoutUsec;
+       
+        echo "\nServer $ip_addr is listening on port $ip_port!\n";
+    }
+
+    public function setNonBlock() {
         socket_set_nonblock ($this->socket);
         //set timeout for the server
-        if($timeoutSec != 0 || $timeoutUsec != 0) {
-            socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => $timeoutSec, 'usec' => $timeoutUsec));
-            socket_set_option($this->socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => $timeoutSec, 'usec' => $timeoutUsec));
+        if($this->timeoutSec != 0 || $this->timeoutUsec != 0) {
+            socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => $this->timeoutSec, 'usec' => $this->timeoutUsec));
+            socket_set_option($this->socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => $this->timeoutSec, 'usec' => $this->timeoutUsec));
         }
-        echo "\nServer $ip_addr is listening on port $ip_port!\n";
     }
 
     public function endConnection() {

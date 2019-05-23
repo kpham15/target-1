@@ -1,6 +1,6 @@
 <?php
 class COMPORT {
-    public $sport;
+    public $com_port;
     public $connect;
     public $timeout;
     public $RD_interval = 100000;
@@ -8,17 +8,23 @@ class COMPORT {
     public $rslt;
     public $reason;
 
-    public function __construct($sport,$baud, $bits, $stop, $parity, $timeoutSec, $timeoutUsec) {
+    public function __construct($com_port,$baud, $bits, $stop, $parity, $timeoutSec, $timeoutUsec) {
+        if($com_port == NULL) {
+            $this->rslt = 'fail';
+            $this->reason = "MISSING COM_PORT INFO";
+            return;
+        }
+          
         //Connect to serial port
-        $connect = dio_open($sport, O_RDWR | O_NOCTTY | O_NONBLOCK);
+        $connect = dio_open($com_port, O_RDWR | O_NOCTTY | O_NONBLOCK);
         if($connect === false) {
             $this->rslt = 'fail';
-            $this->reason = "UNABLE TO CREATE CONNECTION TO PORT ($sport)";
+            $this->reason = "UNABLE TO CREATE CONNECTION TO PORT ($com_port)";
             return;
         }
         //if successfully connected
         $this->connect = $connect;
-        $this->sport = $sport;
+        $this->com_port = $com_port;
 
         //configure the connnection's parameters
         dio_tcsetattr($this->connect, array(

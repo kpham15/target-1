@@ -1,0 +1,414 @@
+<div id="nodeOpe" class="tab-pane fade in">
+    <h4>NODES OPERATIONS</h4>
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-2 modifyPadding">
+                <label for="nodeOpe_node_txt">NODE</label>
+                <input id="nodeOpe_node_txt" type="text" class="form-control" readonly>
+            </div>
+            <div class="col-sm-3 modifyPadding">
+                <label for="nodeOpe_rack_txt">RACK</label>
+                <input id="nodeOpe_rack_txt" type="text" class="form-control" readonly>
+            </div>
+            
+            <div class="col-sm-7 modifyPadding">
+                <label for="nodeOpe_serialNum_txt">SERIAL NUMBER</label>
+                <input style="text-transform: uppercase" id="nodeOpe_serialNum_txt" type="text" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 modifyPadding">
+                <label for="nodeOpe_act_sel">ACTION</label>
+                <select class="form-control" id="nodeOpe_act_sel">
+                    <option></option>
+                    <option>DISCOVER</option>
+                    <option>START</option>
+                    <option>STOP</option>
+                    <option>UPDATE RACK</option>
+                </select>
+            </div>
+            <div class="col-sm-8 modifyPadding">
+                <button id="nodeOpe_clear_btn" type="button" class="btn btn-primary">Clear</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-8">
+        <div class="col-sm-12">
+            <label>LIST OF NODES:</label>
+            <div style="float: right">
+                <label id="nodeOpe_index_lbl"></label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div style="width:100%" class="panel panel-default">
+                <table class="table table-fixed">
+                    <thead style = "width:100%; padding-right:15px;">
+                        <tr>
+                            <th style="width:10%">NODE</th>
+                            <th style="width:15%">RACK</th>
+                            <th style="width:45%">SERIAL NUMBER</th>
+                            <th style="width:10%">PSTA</th>
+                            <th style="width:10%">SSTA</th>
+                            <th style="width:10%">DEVICE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nodeOpe_tbl" style="height: 410px">
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<div id="nodeOpeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">NODE ADMINISTRATION</h5>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeOpeModal_node_txt">NODE</label>
+                        <input id="nodeOpeModal_node_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-3 modifyPadding">
+                        <label for="nodeOpeModal_rack_txt">RACK</label>
+                        <input id="nodeOpeModal_rack_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-7 modifyPadding">
+                        <label for="nodeOpeModal_serialNum_txt">SERIAL NUMBER</label>
+                        <input id="nodeOpeModal_serialNum_txt" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 modifyPadding">
+                        <label for="nodeOpeModal_act_txt">ACTION</label>
+                        <input type="text" class="form-control" id="nodeOpeModal_act_txt" readonly>
+                    </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button id="nodeOpeModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+var nodeOpe = {
+    node:       $("#nodeOpe_node_txt"),
+    rack:       $("#nodeOpe_rack_txt"),
+    serialNum:  $("#nodeOpe_serialNum_txt"),
+    act:        $("#nodeOpe_act_sel"),
+    clearBtn:   $("#nodeOpe_clear_btn"),
+    indexLbl:   $("#nodeOpe_index_lbl"),
+    
+    nodeId:     "",
+
+    tblRows:    [],
+
+    tbl: {
+        body:       $("#nodeOpe_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+    
+    // Member Functions
+    start: function() {
+        nodeOpe.clearForm();
+        nodeOpe.query("queryAll");
+    },
+
+    clearForm: function() {
+        nodeOpe.node.val("").change();
+        nodeOpe.rack.val("").change();
+        nodeOpe.serialNum.val("").change();
+        nodeOpe.act.val("").change();
+        nodeOpe.nodeId = "";
+        nodeOpe.indexLbl.text("");
+    },
+      
+    query: function(action) {
+        $.post(ipcDispatch, 
+        {
+            api:  "ipcNodeOpe",
+            act:  action,
+            user: $("#main_currentUser").text(),
+        },
+    
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                // @todo remember to remove test code
+                // obj.rows = [
+                //     {
+                //         id: "1",
+                //         node: "1",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "2",
+                //         node: "2",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "3",
+                //         node: "3",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "4",
+                //         node: "4",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "5",
+                //         node: "5",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "6",
+                //         node: "6",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "7",
+                //         node: "7",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "8",
+                //         node: "8",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "9",
+                //         node: "9",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "10",
+                //         node: "10",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+                //     {
+                //         id: "11",
+                //         node: "11",
+                //         rack: "RR110.1",
+                //         serial_number: "12345678912345678900",
+                //         psta: "INS",
+                //     },
+
+                // ];
+
+                nodeOpe.tblRows = obj.rows;
+                nodeOpe.tbl.index = 0;
+                var len = nodeOpe.tblRows.length; 
+                nodeOpe.tbl.maxIndex = Math.ceil(len/25.0);
+                nodeOpe.tbl.index++;
+                nodeOpe.displayTable(nodeOpe.tbl.index);
+            }
+        });
+    },
+
+    displayTable: function(index) {
+        var startIndex = (index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = nodeOpe.tblRows.length;
+    
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;
+            }            
+            nodeOpe.tbl.body.empty();
+            var a = [];
+            for (var i = 0; i < stopIndex; i++) 
+            {  
+                a.push('<tr>');
+                a.push('<td style="display: none">'     + nodeOpe.tblRows[i].id              + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].node            + '</td>');
+                a.push('<td style="width:15%">'         + nodeOpe.tblRows[i].rack            + '</td>');
+                a.push('<td style="width:45%">'         + nodeOpe.tblRows[i].serial_number   + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].psta            + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].ssta            + '</td>');
+                a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].device          + '</td>');
+                a.push('</tr>');
+            }
+            nodeOpe.tbl.body.html(a.join(""));
+            if (len == 0) {
+                nodeOpe.indexLbl.text("(total:" + len + ")");
+            }
+            else {
+                nodeOpe.indexLbl.text((startIndex + 1) + " - " + stopIndex + " (total:" + len + ")");
+            }
+        }
+    },
+
+}
+
+var nodeOpeModal = {
+    modal:      $("#nodeOpeModal"),
+    node:       $("#nodeOpeModal_node_txt"),
+    rack:       $("#nodeOpeModal_rack_txt"),
+    serialNum:  $("#nodeOpeModal_serialNum_txt"),
+    act:        $("#nodeOpeModal_act_txt"),
+    submitBtn:  $("#nodeOpeModal_submit_btn"),
+
+    clearForm: function() {
+        nodeOpeModal.node.val("").change();
+        nodeOpeModal.rack.val("").change();
+        nodeOpeModal.serialNum.val("").change();
+        nodeOpeModal.act.val("").change();
+    },
+
+    populateModal: function() {
+        nodeOpeModal.node.val(nodeOpe.node.val()).change();
+        nodeOpeModal.rack.val(nodeOpe.rack.val()).change();
+        nodeOpeModal.serialNum.val(nodeOpe.serialNum.val()).change();
+        nodeOpeModal.act.val(nodeOpe.act.val()).change();
+
+        // Modal should have read-only fields, excepts for action UPDATE RACK, the field RACK is not read-only
+        if (nodeOpeModal.act.val() == "UPDATE RACK") {
+            nodeOpeModal.rack.prop('readonly', false);
+        }
+        else {
+            nodeOpeModal.rack.prop('readonly', true);
+        }
+    },
+      
+    query: function(action) {
+        $.post(ipcDispatch, 
+        {
+            api:        "ipcNodeOpe",
+            act:        action,
+            user:       $("#main_currentUser").text(),
+            node:       nodeOpeModal.node.val(),
+            rack:       nodeOpeModal.rack.val(),
+            serial_no:  nodeOpeModal.serialNum.val(),
+            
+        },
+    
+        function(data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt == "fail") {
+                alert(obj.reason);
+            } 
+            else {
+                if (obj.rows.length === 0) {
+                    alert("No Record Found");  
+                    return;
+                }
+                alert(`${nodeOpeModal.act.val()} - SUCCESS`, function() {
+                    nodeOpeModal.modal.modal('hide');
+                });
+                nodeOpe.tblRows = obj.rows;
+                nodeOpe.displayTable();
+            }
+        });
+    },
+    
+}
+
+// Event Handlers
+nodeOpe.act.change(function() {
+    if (nodeOpe.act.val() != "") {
+        if (nodeOpe.nodeId == "") {
+            alert("Please select a NODE from the LIST OF NODES");
+            nodeOpe.act.val("").change();
+        }
+        else {
+            if (nodeOpe.act.val() == "DISCOVER") {
+                nodeOpeModal.modal.modal();
+                nodeOpeModal.clearForm();
+                nodeOpeModal.populateModal();
+            }
+            else if (nodeOpe.act.val() == "START") {
+                nodeOpeModal.modal.modal();
+                nodeOpeModal.clearForm();
+                nodeOpeModal.populateModal();
+
+            }
+            else if (nodeOpe.act.val() == "STOP") {
+                nodeOpeModal.modal.modal();
+                nodeOpeModal.clearForm();
+                nodeOpeModal.populateModal();
+
+            }
+            else if (nodeOpe.act.val() == "UPDATE RACK") {
+                nodeOpeModal.modal.modal();
+                nodeOpeModal.clearForm();
+                nodeOpeModal.populateModal();
+
+            }
+        }
+    }
+});
+
+nodeOpe.clearBtn.on("click", function() {
+    nodeOpe.start();
+});
+
+$(document).on("click", "#nodeOpe_tbl tr", function() {
+    var dataRow = $(this)
+        .children("td")
+        .map(function() {
+        return $(this).text();
+        })
+        .get();
+
+    //Populate the information
+    nodeOpe.nodeId = (dataRow[0]);
+    nodeOpe.node.val(dataRow[1]);
+    nodeOpe.rack.val(dataRow[2]);
+    nodeOpe.serialNum.val(dataRow[3]);
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass("addColor"); //remove class selected from rest of the rows
+});
+
+// Modal Event Handler
+nodeOpeModal.modal.on("hidden.bs.modal", nodeOpe.start);
+
+nodeOpeModal.submitBtn.on("click", function() {
+    nodeOpeModal.query(nodeOpeModal.act.val());
+});
+
+</script>

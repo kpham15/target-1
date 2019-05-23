@@ -154,11 +154,7 @@ include "ipcProvConnect.php";
 	}
 	
 	if ($act == "queryCktconByCkid") {
-		$cktconObj = new CKTCON();
-		$cktconObj->queryCktconByCkid($ckid);
-		$result['rslt'] = $cktconObj->rslt;
-		$result['reason'] = $cktconObj->reason;
-		$result['rows'] = $cktconObj->rows;
+		$result = queryCktconByCkid($ckid);
 		echo json_encode($result);
 		mysqli_close($db);
 		return;
@@ -227,6 +223,36 @@ include "ipcProvConnect.php";
 	}
 
 	// -- Functions Section -- //
+	function queryCktconByCkid($ckid) {
+
+		$cktObj = new CKT($ckid);
+		if ($cktObj->rslt == "fail") {
+			$result['rslt'] = FAIL;
+			$result['reason'] = "INVALID CKID for CKT";
+			return $result;
+		}
+
+		$cktconObj = new CKTCON();
+		$cktconObj->queryCktconByCkid($ckid);
+		if ($cktconObj->rslt == "fail") {
+			$result['rslt'] = FAIL;
+			$result['reason'] = "INVALID CKID for CKTCON";
+			return $result;
+		}
+
+		$result['rows'] = $cktconObj->rows;
+
+		for ($i=0; $i<count($result['rows']); $i++) {
+			$result['rows'][$i]['cls'] = $cktObj->cls;
+			$result['rows'][$i]['adsr'] = $cktObj->adsr;
+			$result['rows'][$i]['prot'] = $cktObj->prot;
+		}
+		
+		$result['rslt'] = SUCCESS;
+		$result['reason'] = "QUERY CKID SUCCESS";
+		return $result;
+	}
+
 	function provUpdateCkt($user, $ckid, $cls, $adsr, $prot, $ordno, $mlo, $userObj) {
 
 		$result['log'] = "ACTION = UPDATE_CKT";

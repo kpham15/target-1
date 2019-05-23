@@ -10,7 +10,7 @@
 	
 //Initialize expected inputs
 
-include '../os/v2_1program/ipcComPortClass.php';
+include '../os/ipcComPortClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -283,13 +283,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
-    try{
-        $result = updateNodeDevicesStatus($node, $device_status);
-
-    }
-    catch (Throwable $e){
-        $result['reason'] = $e->getMessage();
-    }
+    $result = updateNodeDevicesStatus($node, $device_status);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -336,21 +330,45 @@ function updateNodeDevicesStatus($node, $device_status) {
 
     // compare strings and set flags for if different
     if (strcmp($currentMiox, $newMiox) !== 0) {
-        $deviceObj->setMiox($newMiox);
-        $diffMiox = true;
+        if ($deviceObj->setMiox($newMiox)) {
+            if ($deviceObj->rslt === FAIL) {
+                $result['rslt'] = $deviceObj->rslt;
+                $result['reason'] = $deviceObj->reason;
+                return $result;
+            }
+            $diffMiox = true;
+        }
     }
     
     if (strcmp($currentMioy, $newMioy) !== 0) {
-        $deviceObj->setMioy($newMioy);
-        $diffMioy = true;
+        if ($deviceObj->setMioy($newMioy)) {
+            if ($deviceObj->rslt === FAIL) {
+                $result['rslt'] = $deviceObj->rslt;
+                $result['reason'] = $deviceObj->reason;
+                return $result;
+            }
+            $diffMioy = true;
+        }
     }
 
     if (strcmp($currentMre, $newMre) !== 0) {
-        $deviceObj->setMre($newMre);
+        if ($deviceObj->setMre($newMre)) {
+            if ($deviceObj->rslt === FAIL) {
+                $result['rslt'] = $deviceObj->rslt;
+                $result['reason'] = $deviceObj->reason;
+                return $result;
+            }
+        }
     }
 
     if (strcmp($currentCps, $newCps) !== 0) {
-        $deviceObj->setCps($newCps);
+        if ($deviceObj->setCps($newCps)) {
+            if ($deviceObj->rslt === FAIL) {
+                $result['rslt'] = $deviceObj->rslt;
+                $result['reason'] = $deviceObj->reason;
+                return $result;
+            }
+        }
     }
 
     // insert or remove cards based on slot after compare pairs of numbers
