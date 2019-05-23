@@ -20,7 +20,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 1</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -36,7 +36,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 2</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -52,7 +52,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 3</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -68,7 +68,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 4</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -84,7 +84,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 5</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -100,7 +100,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 6</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -116,7 +116,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 7</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -132,7 +132,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 8</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -148,7 +148,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 9</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -164,7 +164,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 10</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>
@@ -180,7 +180,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green" style="width:20px;"></i></span>
 
-            <div class="info-box-content">
+            <div class="node-box-content info-box-content">
               <span class="info-box-text">Node 11</span>
               <span class="info-box-text">OFL</span>
               <span class="info-box-text">68C | 465V</span>

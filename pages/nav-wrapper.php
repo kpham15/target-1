@@ -21,6 +21,14 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <!-- Wire Center Information -->
+          <p class="navbar-text">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-danger btn-xs">CRITICAL</button></p>
+          <p class="navbar-text">WCN:VERIZON</p>
+          <p class="navbar-text">WCC:VZN</p>
+          <p class="navbar-text">NPANXX:949222</p>
+          <p class="navbar-text">FRMID:FK1</p>
+          <p class="navbar-text">IPC: (INS) 05-22-2019 16:46 CDT</p>
+          
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->

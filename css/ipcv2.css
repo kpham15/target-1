@@ -1,0 +1,41 @@
+.node-box-content {
+  margin-left: 20px !important;
+}
+.port-grid .info-box-text {
+  font-size: 16px !important;
+}
+.port-grid .info-box {
+  width:20%; 
+  float:left; 
+  margin-bottom:0;
+  padding:10px;
+  border:1px solid #ddd !important;
+  color: #fff !important;
+}
+.mio-tabs .btn-group {
+  margin-bottom: 10px;
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+  border-left-color: #aaa;
+  border-right-color: #aaa;
+}
+.nav-tabs-custom>.nav-tabs.node-tabs {
+  border-bottom-color: #aaa;
+}
+.nav.navbar-nav .navbar-text {
+  color: #FFF;
+}
+#alarm-header-icon {
+  display: inline;
+  width: auto;
+}
+.nav.node-tabs>li>a {
+  padding: 8px;
+}
+.node-status-row {
+  display: flex;
+}
+.node-box {
+  width: 9%;
+  margin-right: 8px;
+}
