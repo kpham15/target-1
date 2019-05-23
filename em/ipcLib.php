@@ -304,6 +304,8 @@ function decryptData($data) {
         if($data == "")
             return "";
         $serverKey = createKey();
+        echo $serverKey;
+        echo $data;
         return JWT::decode($data, $serverKey, array('HS256'));
     }
     catch (Exception $e) {
