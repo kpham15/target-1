@@ -174,6 +174,12 @@ function stop($node, $userObj) {
 function discovered($node, $serial_no, $device, $userObj) {
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
+    if ($cpssObj->rslt == FAIL) {
+        $result['rslt'] = $cpssObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $result = stop($node, $userObj);
@@ -188,11 +194,16 @@ function discovered($node, $serial_no, $device, $userObj) {
         
         // get nspta and nssta from sms obj
         $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, $evt);
+        if ($smsObj->rslt == FAIL) {
+            $result['rslt'] = $smsObj->rslt;
+            $result['reason'] = $smsObj->reason;
+            return $result;
+        }
 
         $newPsta = $smsObj->npsta;
         $newSsta = $smsObj->nssta;
 
-        // update psta and ssta, write serial number to t_cps
+        // update psta and ssta, write serial number to t_cps, start the cps
         $cpsObj->setCpsStatus($newPsta, $newSsta);
         $cpsObj->setSerialNo($serial_no);
         $result = start($node, $userObj);
