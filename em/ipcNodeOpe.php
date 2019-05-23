@@ -121,7 +121,7 @@ function discover($node, $device, $userObj) {
     }
 
     // formulate msg #1
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$device,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -134,6 +134,7 @@ function discover($node, $device, $userObj) {
 
     $result['rslt'] = SUCCESS;
     $result['reason'] = "DISCOVER CPS SUCCESS";
+    $result['rows'] = [];
     return $result;
 }
 
@@ -145,7 +146,8 @@ function start($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    // smsObj check psta/ssta if it is in correct state
+    
+    // construct cpsObj to get current psta/ssta of CPS
     $cpsObj = new CPS($node);
     if ($cpsObj->rslt == FAIL) {
         $result['rslt'] = $cpsObj->rslt;
@@ -158,6 +160,7 @@ function start($node, $userObj) {
 
     $evt = "DISCV_CPS";
 
+    // sms check psta/ssta if it is in correct state
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
         $result['rslt'] = $smsObj->rslt;
@@ -165,7 +168,9 @@ function start($node, $userObj) {
         return $result;
     }
 
-    $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+    // update t_cps psta/ssta with npsta/nssta???
+
+    $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);    
@@ -176,6 +181,7 @@ function start($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "START COMMAND SENT SUCCESSFULLY";
+    $result['rows'] = [];
     return $result;
 }
 
@@ -189,7 +195,7 @@ function stop($node, $userObj) {
         return $result;
     }
     $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
@@ -200,6 +206,7 @@ function stop($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "STOP COMMAND SENT SUCCESSFULLY";
+    $result['rows'] = [];
     return $result;
 }
 
@@ -229,7 +236,7 @@ function discovered($node, $hwRsp) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
+        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
@@ -277,7 +284,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
 
-        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);

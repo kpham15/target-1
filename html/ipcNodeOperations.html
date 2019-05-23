@@ -345,11 +345,11 @@ var nodeOpeModal = {
                 alert(obj.reason);
             } 
             else {
-                if (obj.rows.length === 0) {
-                    alert("No Record Found");  
-                    return;
-                }
-                alert(`${nodeOpeModal.act.val()} - SUCCESS`, function() {
+                // if (obj.rows.length === 0) {
+                //     alert("No Record Found");  
+                //     return;
+                // }
+                alert(obj.reason, function() {
                     nodeOpeModal.modal.modal('hide');
                 });
                 nodeOpe.tblRows = obj.rows;
