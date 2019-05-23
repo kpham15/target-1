@@ -36,14 +36,14 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa-info-circle"></i>
             </a>
+            <ul class="dropdown-menu">
+              <li class="header">Wire Center Information</li>
+              <li>WCN: VERIZON</li>
+              <li>WCC: VZN</li>
+              <li>NPANXX: 949222</li>
+              <li>FRMID: FK1</li>
+            </ul>
           </li>
-          <ul class="dropdown-menu">
-            <li class="header">Wire Center Information</li>
-            <li>WCN: VERIZON</li>
-            <li>WCC: VZN</li>
-            <li>NPANXX: 949222</li>
-            <li>FRMID: FK1</li>
-          </ul>
           
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
