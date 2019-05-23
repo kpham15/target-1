@@ -133,7 +133,7 @@ function discover($node, $device, $userObj) {
     }
 
     $result['rslt'] = SUCCESS;
-    $result['reason'] = "DISCOVER CPS SUCCESS";
+    $result['reason'] = "DISCOVER COMMAND SENT";
     $result['rows'] = [];
     return $result;
 }
