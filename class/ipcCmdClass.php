@@ -90,6 +90,7 @@ class CMD {
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        $this->sendQueryBackplaneId($node);
         return true;
     }
 
@@ -109,7 +110,6 @@ class CMD {
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;
-
     }
 
     public function sendStopCmd($node) {
@@ -119,7 +119,6 @@ class CMD {
         $this->rslt = 'success';
         $this->reason = 'SEND TEST CMD SUCCESSFULLY';
         return true;
-
     }
 
 

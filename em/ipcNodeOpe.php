@@ -86,6 +86,10 @@ function queryAll() {
 }
 
 function discover($node, $device) {
+
+    // add user permission for ipcAdmin
+
+
     $cmdObj = new CMD();
 
     $cmdObj->sendDiscoverCmd($node, $device);
@@ -94,13 +98,17 @@ function discover($node, $device) {
         $result['reason'] = $cmdObj->reason;
         return;
     }
-    $cmdObj->sendQueryBackplaneId($node);
+    // $cmdObj->sendQueryBackplaneId($node);
     $result['rslt'] = $cmdObj->rslt;
     $result['reason'] = $cmdObj->reason;
     return $result;
 }
 
 function start($node) {
+
+    // permissions check here
+    // smsObj check psta/ssta if it is in correct state
+
     $cmdObj = new CMD();
     $cmdObj->sendStartCmd($node);
     if ($cmdObj->rslt == "fail") {
@@ -127,6 +135,7 @@ function stop($node) {
 }
 
 function discovered($node, $serial_no, $device) {
+    // serial number must not exist in system
     $cpssObj = new CPSS();
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
