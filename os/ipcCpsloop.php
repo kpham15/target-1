@@ -126,11 +126,15 @@ try {
                     }
                 }
                 else if($udpMsgArr['inst'] == 'START_CPS') {
-                    if($udpMsgArr['node'] == $node && $com_port == $udpMsgArr['dev']) {
+                    if($udpMsgArr['node'] == $node) {
+                        $com_port = $udpMsgArr['dev'];
+                        $connectHw = true;
                         $start_mode = true;
                         $statusCmd = $udpMsgArr['cmd'];
+                        if($clientExist) $comPortObj->endConnection();
+                        $clientExist = false;
                         $buf = '';
-                        goto startSendCmd;
+                        goto clientSock;
                     }
                 }
                 else if($udpMsgArr['inst'] == 'STOP_CPS') {

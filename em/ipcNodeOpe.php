@@ -165,7 +165,7 @@ function start($node, $userObj) {
         return $result;
     }
 
-    $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+    $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);    
@@ -189,7 +189,7 @@ function stop($node, $userObj) {
         return $result;
     }
     $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
@@ -229,7 +229,7 @@ function discovered($node, $hwRsp) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
+        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
@@ -277,7 +277,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
 
-        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
