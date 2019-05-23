@@ -117,7 +117,7 @@ function discover($node, $device, $userObj) {
     }
 
     // formulate msg #1
-    $cmd = "inst=$evt,node=$node,dev=$device,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$device,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
