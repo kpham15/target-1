@@ -145,7 +145,8 @@ function start($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    // smsObj check psta/ssta if it is in correct state
+    
+    // construct cpsObj to get current psta/ssta of CPS
     $cpsObj = new CPS($node);
     if ($cpsObj->rslt == FAIL) {
         $result['rslt'] = $cpsObj->rslt;
@@ -158,6 +159,7 @@ function start($node, $userObj) {
 
     $evt = "DISCV_CPS";
 
+    // sms check psta/ssta if it is in correct state
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
         $result['rslt'] = $smsObj->rslt;
@@ -176,6 +178,7 @@ function start($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "START COMMAND SENT SUCCESSFULLY";
+    $result['rows'] = 1;
     return $result;
 }
 
@@ -200,6 +203,7 @@ function stop($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "STOP COMMAND SENT SUCCESSFULLY";
+    $result['rows'] = 1;
     return $result;
 }
 
