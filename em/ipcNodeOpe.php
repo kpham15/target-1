@@ -74,6 +74,42 @@ if ($act == "CPS_STATUS") {
 	return;
 }
 
+if ($act == "CPS_ON") {
+    $result = cps_on($node, $cmd);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+if ($act == "updateCpsCom") {
+    $nodeObj = new NODE($node);
+    if ($nodeObj->rslt != SUCCESS) {
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
+    }
+    else {
+        $cmdExtract = explode('-',$cmd);
+    
+        if ($cmdExtract[1] === 'ONLINE') {
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
+        }
+        else {
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
+        }
+    
+        if ($sms->rslt === SUCCESS) {
+            $nodeObj->updatePsta($sms->npsta, $sms->nssta);
+        }
+        
+        $result = updateCpsCom($cmd, $userObj);
+    }
+    
+
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+
 
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
@@ -83,6 +119,40 @@ if ($act == "CPS_STATUS") {
 // }
 
 // functions area
+
+function cps_on($node, $cmd) {
+    // create cps to get data for psta/ssta
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    // check if psta/ssta is in right status
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, 'CPS_ON');
+    if ($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    // if correct stat
+    // update sms psta/ssta
+    $cpsObj->updatePsta($smsObj->npsta, $smsObj->ssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    // post to nodeapi to update node cps stats
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin", "node"=>$node, "cmd"=>"$node-ONLINE"];
+    $postReqObj->asyncPostRequest($url, $params);
+
+}
 
 function queryAll() {
     $cpssObj = new CPSS();
@@ -253,7 +323,7 @@ function discovered($node, $hwRsp) {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
         // @TODO AM I USING THE CORRECT EVT HERE FOR SMS??
-        $evt = "DISCV_CPS";
+        $evt = "CPS_ON";
         // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
         
@@ -475,6 +545,91 @@ function updateCpsTemp($cmd) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "TEMP ALARM UPDATE SUCCESS";
+    return $result;
+}
+
+function updateCpsCom($cmd,$userObj) {
+    //-------check user permission--------------
+        // if ($userObj->grpObj->ipcadm != "Y") {
+        //     $result['rslt'] = 'fail';
+        //     $result['reason'] = 'Permission Denied';
+        //     return $result;
+        // }
+    ///////////////////////////////////////////////
+    
+
+    /**
+     * 1) $nodeObj = new NODE($node);
+     * 2) If $node exists then $nodeObj->updateCOM($com)
+     */
+    $cmdExtract = explode('-',$cmd);
+    $node = $cmdExtract[0];
+    $com = $cmdExtract[1];
+    $nodeId = $node+1;
+
+    $nodeObj = new NODE($nodeId);
+    if ($nodeObj->rslt != FAIL) {
+        $nodeObj->updateCOM($com);
+        if ($nodeObj->rslt == FAIL) {
+            $result['rslt'] = $nodeObj->rslt;
+            $result['reason'] = $nodeObj->reason;
+            return $result;
+        }
+    }
+    /**
+     * 3) If not exist then do nothing (return)
+     */
+    else {
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
+        return $result;
+    }
+    /**
+     * 4) If $com == "OFFLINE" then create new alarm where:
+     *      almid='$node-CPS-C', 
+     *      sev=MAJ, 
+     *      sa=N, 
+     *      src=EQUIP, 
+     *      type=COMMUNICATION, 
+     *      cond= COMMUNICATION, 
+     *      remark=CPS: OFFLINE
+     */
+    if ($com == "OFFLINE") {
+        $almid = $node . "-CPS-C";
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) == 0) {
+            $src    = "EQUIP";
+            $type   = "COMMUNICATION";
+            $cond   = "COMMUNICATION";
+            $sev    = "MAJ";
+            $sa     = "N";
+            $remark = "CPS: OFFLINE";
+			$almObj->newAlm($almid, $src, $type, $cond, $sev, $sa, $remark);
+            if ($almObj->rslt == "fail") {
+				$result["rslt"]   = $almObj->rslt;
+				$result["reason"] = $almObj->reason;
+				return $result;
+			}
+        }
+    }
+    /**
+     * 6) If $com == "ONLINE" then send SYS-CLR alarm
+     */
+    if ($com == "ONLINE") {
+        $almid = $node."-CPS-C";
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) > 0) {
+            $remark = $almid . " : SYSTEM CLEAR ALARM";
+            $almObj->sysClr($almid, $remark);
+            if ($almObj->rslt == FAIL) {
+				$result['rslt']   = $almObj->rslt;
+				$result['reason'] = $almObj->reason;
+				return $result;
+			}
+        }
+    }
+    $result['rslt'] = $almObj->rslt;
+    $result['reason'] = $almObj->reason;
     return $result;
 }
 
