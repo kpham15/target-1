@@ -22,6 +22,10 @@ if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
 $device = "ttyUSB0";
+$hwRsp = "";
+if (isset($_POST['hwRsp'])) {
+    $hwRsp = $_POST['hwRsp'];
+}
         
 
 // dispatch to functions
@@ -196,13 +200,13 @@ function stop($node, $userObj) {
     return $result;
 }
 
-function discovered($node, $hwString) {
+function discovered($node, $hwRsp) {
 
     // parse hwString
     
     // $ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
     // UUID is serial number for now
-    $newHwString = substr($hwString, 1, -1);
+    $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
     // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
     $serialNumArray = explode("=", $newHwStringArray[3]);
