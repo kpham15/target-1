@@ -55,7 +55,7 @@ if ($act == "STOP") {
 }
 
 if ($act == "DISCOVERED") {
-    $result = discovered($node, $serial_no, $device, $hwString, $userObj);
+    $result = discovered($node, $hwString);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -186,7 +186,19 @@ function stop($node, $userObj) {
     return $result;
 }
 
-function discovered($node, $serial_no, $device, $hwString, $userObj) {
+function discovered($node, $hwString) {
+
+    // parse hwString
+    // looks like this:
+    // $ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
+    // UUID is serial number for now
+    $newHwString = substr($hwString, 1, -1);
+    $newHwStringArray = explode(",", $newHwString);
+    // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
+    $serialNumArray = explode("=", $newHwStringArray[3]);
+    // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
+    $serialNum = $serialNumArray[1];
+     
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -195,7 +207,7 @@ function discovered($node, $serial_no, $device, $hwString, $userObj) {
         return $result;
     }
 
-    if (in_array($serial_no, $cpssObj->serial_no)) {
+    if (in_array($serialNum, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         // send message 3 to udp
         $cmd = "inst=STOP_CPS,node=$node,dev=$device";
