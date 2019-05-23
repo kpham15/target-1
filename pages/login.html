@@ -55,16 +55,6 @@
 
   var keyId = "";
   var login = {
-    // User Data
-    user : {
-      fname: "",
-      mi: "",
-      lname: "",
-      grp: 0,
-      ugrp: "",
-      loginTime: "",
-      idle_to: ""
-    },
 
     // jQuery Selectors
     username:       $('#login_username'),
@@ -128,12 +118,12 @@
 
           // @TODO add user name to profile area in sidebar/header nav
           // $('#main_userFLname').text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
-          login.user.fname = obj.rows[0].fname;
-          login.user.mi = obj.rows[0].mi;
-          login.user.lname = obj.rows[0].lname;
-          login.user.grp = obj.rows[0].grp;
-          login.user.ugrp = obj.rows[0].ugrp;
-          login.user.idle_to = obj.rows[0].user_idle_to;
+          user.fname = obj.rows[0].fname;
+          user.mi = obj.rows[0].mi;
+          user.lname = obj.rows[0].lname;
+          user.grp = obj.rows[0].grp;
+          user.ugrp = obj.rows[0].ugrp;
+          user.idle_to = obj.rows[0].user_idle_to;
           login.username.val("");
           login.password.val("");
           // login.newpassword.val("");

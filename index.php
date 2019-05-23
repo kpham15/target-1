@@ -21,22 +21,11 @@
 	echo '<title>Intelligent Provisioning Center</title>';
 	echo '<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">';
 
-	// Stylesheets
-	echo '<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">';
-	echo '<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">';
-	echo '<link rel="stylesheet" href="./bower_components/Ionicons/css/ionicons.min.css">';
-
-	echo '<link rel="stylesheet" href="./dist/css/AdminLTE.min.css">';
-	echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
-	echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
-
-	echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+	include './js/dependencies.php';
 
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
 	echo '</head>';
 
-
-	
 	echo '<body>';	
 	echo '<label style="display:none" id="main_currentUser"></label>';
 
@@ -80,10 +69,8 @@
 	// include './html/ipcMainEnd.html';
 	
 	
-	// include './js/dependencies.php';
 	include './js/functions.php';
-
-
+	include './js/variables.php';
 	
 	echo '</body>';
 	echo '</html>';
