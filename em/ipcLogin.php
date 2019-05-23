@@ -81,7 +81,7 @@
                 $result["reason"]   = "INVALID USER";
                 return $result;
             }
-
+            echo $userObj->pw;
             // Lock user if login pw fail count more than 3 times
             if (decryptData($pw) != decryptData($userObj->pw)) {
                 if($userObj->ugrp != 'ADMIN') {
