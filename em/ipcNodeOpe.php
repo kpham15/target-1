@@ -26,7 +26,11 @@ $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
-        
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
 
 // dispatch to functions
 

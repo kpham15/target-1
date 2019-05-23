@@ -27,7 +27,7 @@ $resp = dev($cmd);
 // print_r($resp->rslt);
 print_r($resp->reason);
 // $resp = almApi('\$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*');
-echo $resp->rslt . ": " . $resp->reason . "\n";
+// echo $resp->rslt . ": " . $resp->reason . "\n";
 
 
 ?>
