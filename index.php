@@ -42,8 +42,8 @@
 
 
 	//IPCv2
-	include './pages/login.html';
 	include './pages/starter.html';
+	include './pages/login.html';
 
 	// For production
 	// include './html/ipcLogin.html';
@@ -81,10 +81,6 @@
 	
 	
 	// include './js/dependencies.php';
-	echo '<script src="./bower_components/jquery/dist/jquery.min.js"></script>';
-	echo '<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
-	echo '<script src="./plugins/iCheck/icheck.min.js"></script>';
-	echo '<script src="./dist/js/adminlte.min.js"></script>';
 	include './js/functions.php';
 
 
