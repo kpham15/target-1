@@ -55,7 +55,7 @@ if ($act == "STOP") {
 }
 
 if ($act == "DISCOVERED") {
-    $result = discovered($node, $serial_no, $device, $userObj);
+    $result = discovered($node, $serial_no, $device, $hwString, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -111,19 +111,16 @@ function discover($node, $device, $userObj) {
     $cmd = "inst=$evt,node=$node,dev=$device,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
 
     // call function to send UDP message
+    $cmdObj = new CMD();
+    $cmdObj->sendCmd($cmd, $node);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
 
-
-    // $cmdObj = new CMD();
-
-    // $cmdObj->sendDiscoverCmd($node, $device);
-    // if ($cmdObj->rslt == "fail") {
-    //     $result['rslt'] = $cmdObj->rslt;
-    //     $result['reason'] = $cmdObj->reason;
-    //     return;
-    // }
-    // $cmdObj->sendQueryBackplaneId($node);
-    $result['rslt'] = $cmdObj->rslt;
-    $result['reason'] = $cmdObj->reason;
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "DISCOVER CPS SUCCESS";
     return $result;
 }
 
@@ -189,7 +186,7 @@ function stop($node, $userObj) {
     return $result;
 }
 
-function discovered($node, $serial_no, $device, $userObj) {
+function discovered($node, $serial_no, $device, $hwString, $userObj) {
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -201,7 +198,17 @@ function discovered($node, $serial_no, $device, $userObj) {
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         // send message 3 to udp
-        $result = stop($node, $userObj);
+        $cmd = "inst=STOP_CPS,node=$node,dev=$device";
+        $cmdObj = new CMD();
+        $cmdObj->sendCmd($cmd, $node);
+        if ($cmdObj->rslt == FAIL)         {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
+
+        $result['rslt'] = FAIL;
+        $result['reason'] = "SERIAL NUMBER ALREADY EXISTS IN SYSTEM";
         return $result;
     }
     else {
@@ -227,7 +234,7 @@ function discovered($node, $serial_no, $device, $userObj) {
         // if success
         $cpsObj->setSerialNo($serial_no);
         // call message 2
-        $result = start($node, $userObj);
+        
 
         
         return $result;
