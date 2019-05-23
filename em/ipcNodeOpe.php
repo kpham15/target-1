@@ -282,22 +282,23 @@ function discovered($node, $hwString) {
 
     }
 
-    function updateCpsStatus($cmd) {
-    
-        // checks what type of $cmd is being sent
-        if (strpos($cmd, "voltage") !== false){
-            $result = updateCpsVolt($cmd);
-            return $result;
-        }
-        else if (strpos($cmd, "temperature") !== false) {
-            $result = updateCpsTemp($cmd);
-            return $result;
-        }
-    }
 
 }
 
 
+
+function updateCpsStatus($cmd) {
+    
+    // checks what type of $cmd is being sent
+    if (strpos($cmd, "voltage") !== false){
+        $result = updateCpsVolt($cmd);
+        return $result;
+    }
+    else if (strpos($cmd, "temperature") !== false) {
+        $result = updateCpsTemp($cmd);
+        return $result;
+    }
+}
 
 // function called by updateAlm in case string contains voltage only
 // str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
