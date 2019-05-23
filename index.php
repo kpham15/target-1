@@ -83,7 +83,7 @@
 	echo '</body>';
 	echo '</html>';
 	
-	include './js/functions.js';
+	include './js/functions.php';
 ?>
 
  <script src="./js/ipcOpt.js"></script>
