@@ -4,5 +4,8 @@
 		$('body').attr('class','skin-blue sidebar-mini');
 		$('#login-page').hide();
 		$('#starter-page').show();
+
+		$('#top-nav-user-name, #profile-dropdown-user-name, #sidebar-user-name').text(user.fname + ' ' + user.lname);
+		$('#profile-dropdown-user-group').text(user.ugrp);
 	}
 </script>
