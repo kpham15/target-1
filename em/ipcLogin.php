@@ -81,10 +81,7 @@
                 $result["reason"]   = "INVALID USER";
                 return $result;
             }
-            echo $pw."\n";
-            echo $userObj->pw."\n";
-            echo 'bac'.decryptData($pw);
-            echo 'dddd'.decryptData($userObj->pw);
+
             // Lock user if login pw fail count more than 3 times
             if (decryptData($pw) != decryptData($userObj->pw)) {
                 if($userObj->ugrp != 'ADMIN') {
@@ -100,7 +97,7 @@
                 $result["reason"]   = "INVALID PW";
                 return $result;
             }
-            echo "go here";
+
             // Deny if user is currently LOCKED or DISABLED
             if ($userObj->stat == "LOCKED" || $userObj->stat == "DISABLED") {
                 $result['rslt'] = FAIL;

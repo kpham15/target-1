@@ -307,7 +307,7 @@ function decryptData($data) {
         return JWT::decode($data, $serverKey, array('HS256'));
     }
     catch (Exception $e) {
-        throw new Exception($e->getMessage(), 100);
+        throw new Exception("UNABLE TO DECODE INFORMATION!", 100);
     }
 }
 
