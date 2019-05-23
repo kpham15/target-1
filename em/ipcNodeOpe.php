@@ -33,7 +33,7 @@ if ($act == "queryAll") {
 }
 
 if ($act == "DISCOVER") {
-    $result = discover($node, $device);
+    $result = discover($node, $device, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -41,14 +41,14 @@ if ($act == "DISCOVER") {
 
 
 if ($act == "START") {
-    $result = start($node);
+    $result = start($node, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
 }
 
 if ($act == "STOP") {
-    $result = stop($node);
+    $result = stop($node, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -85,7 +85,7 @@ function queryAll() {
     return $result;
 }
 
-function discover($node, $device) {
+function discover($node, $device, $userObj) {
 
     // add user permission for ipcAdmin
     if ($userObj->grpObj->ipcadm != "Y") {
@@ -109,7 +109,7 @@ function discover($node, $device) {
     return $result;
 }
 
-function start($node) {
+function start($node, $userObj) {
 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
@@ -131,7 +131,15 @@ function start($node) {
     return $result;
 }
 
-function stop($node) {
+function stop($node, $userObj) {
+
+    // permissions check here
+    if ($userObj->grpObj->ipcadm != "Y") {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'Permission Denied';
+        return $result;
+    }
+
     $cmdObj = new CMD();
     $cmdObj->sendStopCmd($node);
     if ($cmdObj->rslt == "fail") {
