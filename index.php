@@ -31,7 +31,7 @@
 
 
 	//IPCv2
-	include './pages/starter.html';
+	include './pages/nav-wrapper.php';
 	include './pages/login.html';
 
 	// For production
@@ -135,7 +135,7 @@ $(document).ready(function() {
 	if ($("#main_currentUser").text() == '')
 	{
 		$('body').addClass('login-page');
-		$('#starter-page').hide();
+		$('#nav-wrapper').hide();
 		$('#login-page').show();
 		// $("#mainPage").hide();
 		// $("#login").show();
