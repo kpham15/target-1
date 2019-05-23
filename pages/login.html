@@ -168,7 +168,7 @@
     var encodedData = base64url(stringifiedData);
 
     var signature = encodedHeader + "." + encodedData;
-    signature = CryptoJs.HmacSHA256(signature, keyId);
+    signature = CryptoJS.HmacSHA256(signature, keyId);
     signature = base64url(signature);
     return encodedHeader + "." + encodedData + "." + signature;
   }
