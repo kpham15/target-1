@@ -79,11 +79,12 @@
 	// include './html/ipcSwUpdate.html';
 	// include './html/ipcMainEnd.html';
 	
-
+	
+	include './js/dependencies.php';
+	include './js/functions.php';
 	echo '</body>';
 	echo '</html>';
 	
-	include './js/functions.php';
 ?>
 
  <script src="./js/ipcOpt.js"></script>
