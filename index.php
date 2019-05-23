@@ -44,8 +44,11 @@
 	
 	echo '<body>';	
 	echo '<label style="display:none" id="main_currentUser"></label>';
-	echo '<div id="main-body">';
-	echo '</div>';
+
+
+	//IPCv2
+	include './pages/login.html';
+	include './pages/starter.html';
 
 	// For production
 	// include './html/ipcLogin.html';
@@ -139,16 +142,17 @@ $(document).ready(function() {
 	if ($("#main_currentUser").text() == '')
 	{
 		$('body').addClass('hold-transition login-page');
-		$('#main-body').load('pages/login.html');
+		$('#starter-page').hide();
+		$('#login-page').show();
 		// $("#mainPage").hide();
 		// $("#login").show();
 		// login.start();
 	}
 	else
 	{
-		$("#login").hide();
+		// $("#login").hide();
 		// $("#mainPage").show();
-		mB.start();
+		// mB.start();
 	}
 
 });
