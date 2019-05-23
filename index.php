@@ -44,6 +44,8 @@
 	
 	echo '<body>';	
 	echo '<label style="display:none" id="main_currentUser"></label>';
+	echo '<div id="main-body">';
+	echo '</div>';
 
 	// For production
 	// include './html/ipcLogin.html';
@@ -82,6 +84,7 @@
 	
 	include './js/dependencies.php';
 	include './js/functions.php';
+	
 	echo '</body>';
 	echo '</html>';
 	
@@ -136,7 +139,7 @@ $(document).ready(function() {
 	if ($("#main_currentUser").text() == '')
 	{
 		$('body').addClass('hold-transition login-page');
-		$('body').load('pages/login.html');
+		$('#main-body').load('pages/login.html');
 		// $("#mainPage").hide();
 		// $("#login").show();
 		// login.start();
