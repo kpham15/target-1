@@ -63,6 +63,13 @@ if ($act == "DISCOVERED") {
 	return;
 }
 
+if ($act == "CPS_STATUS") {
+    $result = updateCpsStatus($cmd);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
@@ -264,7 +271,181 @@ function discovered($node, $hwString) {
         return $result;
 
     }
+
+    function updateCpsStatus($cmd) {
     
+        // checks what type of $cmd is being sent
+        if (strpos($cmd, "voltage") !== false){
+            $result = updateCpsVolt($cmd);
+            return $result;
+        }
+        else if (strpos($cmd, "temperature") !== false) {
+            $result = updateCpsTemp($cmd);
+            return $result;
+        }
+    }
+
+}
+
+
+
+// function called by updateAlm in case string contains voltage only
+// str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
+function updateCpsVolt($cmd) {
+    // filters data brought from $cmd and extracts voltage values
+    $newCmd = substr($cmd, 1, -1);
+    $splitCmd = explode(',', $newCmd);
+    $ackid = explode('=',$splitCmd[0]);
+    $newAckid = $ackid[1];
+    $volt1 = explode('=',$splitCmd[2]);
+    $volt2 = explode('=',$splitCmd[3]);
+    $volt3 = explode('=',$splitCmd[4]);
+    $volt4 = explode('=',$splitCmd[5]);
+
+    sscanf($volt1[1], "%d%s", $volt1Val, $volt1Unit);
+    sscanf($volt2[1], "%d%s", $volt2Val, $volt2Unit);
+    sscanf($volt3[1], "%d%s", $volt3Val, $volt3Unit);
+    sscanf($volt4[1], "%d%s", $volt4Val, $volt4Unit);
+
+    // get lowest and highest values from volt
+    $volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
+    $volt_low = min($volt1Val, $volt2Val, $volt3Val, $volt4Val);
+    
+    // put units back onto volt values to prepare sending to t_nodes
+    $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
+    $newVolt_low = round((int)($volt_low/1000)) . 'V';
+
+    // extract node number from cmd
+    $nodeArray = explode('-', $newAckid[0]);
+    $nodeNumber = $nodeArray[0];
+    $newNodeNumber = $nodeNumber + 1;
+    $nodeObj = new NODE($newNodeNumber);
+    if($nodeObj->rslt == 'fail') {
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
+        return $result;
+    }
+
+    // write to t_nodes the volt_hi by default or the voltage that is out of range
+    if ($volt_low < 42000) {
+        $nodeObj->updateVolt($newVolt_low);
+    }
+    else{
+        $nodeObj->updateVolt($newVolt_hi);
+    }
+
+    // makes new alm if voltage is out of range
+    if (($volt_hi > 52000) || ($volt_low < 42000)) {
+        $almid = $newAckid . '-V';
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) == 0) {
+            $src = 'POWER';
+            $almtype = 'VOLTAGE';
+            $cond = 'VOLTAGE OUT-OF-RANGE';
+            $sa = 'N';
+            $sev = 'MIN';
+            $remark = $almid . ' : ' . $cond;
+            $almObj = new ALMS();
+            $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+            //logError if failed here
+        }
+    }
+
+    // sys-clr alm if voltage is in range
+    if (($volt_hi <= 46000) && ($volt_low >= 42000)) {
+        $almid = $newAckid . '-V';
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) !== 0) {
+            $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : VOLTAGE IN-RANGE';
+            $almObj->sysClr($almid, $remark);
+            //logError if failed here
+        }
+    }
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "VOLTAGE ALARM UPDATE SUCCESS";
+    return $result;
+}
+
+// function called by updateAlm in case string contains temp only
+// str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
+function updateCpsTemp($cmd) {
+
+    // filters data brought from $cmd and extracts temp values
+    $newCmd = substr($cmd, 1, -1);
+    $splitCmd = explode(',', $newCmd);
+    $ackid = explode('=', $splitCmd[0]);
+    $newAckid = $ackid[1];
+    $zeroBase = explode('-', $newAckid);
+    $oneBase = $zeroBase[0] + 1;
+    // puts back together 1-cps
+    $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
+    $temp1 = explode('=',$splitCmd[3]);
+    $temp2 = explode('=',$splitCmd[4]);
+    $temp3 = explode('=',$splitCmd[5]);
+    $temp4 = explode('=',$splitCmd[6]);
+
+    sscanf($temp1[1], "%d%s", $temp1Val, $temp1Unit);
+    sscanf($temp2[1], "%d%s", $temp2Val, $temp2Unit);
+    sscanf($temp3[1], "%d%s", $temp3Val, $temp3Unit);
+    sscanf($temp4[1], "%d%s", $temp4Val, $temp4Unit);
+
+    $temp_hi = max($temp1Val, $temp2Val, $temp3Val, $temp4Val);
+
+    // combine temp value and unit to send to t_nodes
+    $newTemp_hi = $temp_hi . $temp1Unit;
+    
+    // extract node number from cmd
+    $nodeArray = explode('-', $newAckid[0]);
+    $nodeNumber = $nodeArray[0];
+    $newNodeNumber = $nodeNumber + 1;
+    $nodeObj = new NODE($newNodeNumber);
+    if($nodeObj->rslt == 'fail') {
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
+        return $result;
+    }
+    
+    // update t_nodes w/ highest temp
+    $nodeObj->updateTemp($newTemp_hi);
+
+    // makes new alm if temp is out of range
+    if ($temp_hi > 66) {
+        $almid = $newAckid . '-T';
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) == 0) {
+            $src = 'POWER';
+            $almtype = 'TEMPERATURE';
+            $cond = 'TEMPERATURE OUT-OF-RANGE';
+            $sa = 'N';
+            $sev = 'MIN';
+            $remark = $almid . ' : ' . $cond;
+            $almObj = new ALMS();
+            $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+            if ($almObj->rslt == 'fail') {
+                $result["rslt"] = "fail";
+                $result["reason"] = "Fail to create alarm";
+                return $result;
+            }
+        }
+    }
+
+    // sys-clr alm if temp is in range
+    if ($temp_hi < 66) {
+        $almid = $newAckid . '-T';
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) !== 0) {
+            $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : TEMPERATURE IN-RANGE';
+            $almObj->sysClr($almid, $remark);
+            if ($almObj->rslt == 'fail') {
+                $result["rslt"] = "fail";
+                $result["reason"] = "Fail to clear alarm";
+                return $result;
+            }
+        }
+    }
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "TEMP ALARM UPDATE SUCCESS";
+    return $result;
 }
 
 ?>
