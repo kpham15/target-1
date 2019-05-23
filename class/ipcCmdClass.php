@@ -84,6 +84,48 @@ class CMD {
         return true;
     }
 
+    public function sendComPort($node, $com_port) {
+        $cmd = "com_port=$com_port";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') 
+            return false;
+        $this->rslt = 'success';
+        $this->reason = 'SEND COMPORT SUCCESSFULLY';
+        return true;
+    }
+
+    public function sendDiscoverCmd($node, $com_port) {
+        $sendPort = $this->sendComPort($node,$com_port);
+        if(!$sendPort)
+            return false;
+        
+        usleep(200000);
+        $cmd = "\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND DISCOVER CMD SUCCESSFULLY';
+        return true;
+    }
+
+    public function sendStartCmd($node) {
+        $cmd = "start";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND START CMD SUCCESSFULLY';
+        return true;
+    }
+
+    public function sendStopCmd($node) {
+        $cmd = "stop";
+        $this->sendCmd($cmd, $node);
+        if($this->rslt == 'fail') return;
+        $this->rslt = 'success';
+        $this->reason = 'SEND STOP CMD SUCCESSFULLY';
+        return true;
+    }
+
 
     public function sendCmd($cmd, $node) {
         //create socket UDP

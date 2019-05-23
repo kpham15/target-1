@@ -35,6 +35,7 @@ $RDWR_interval = 200000;
 
 $lostConn = 3;
 
+$connectHw = false;
 $start_mode = false;
 
 //-------------------------Begin--------------------------------
@@ -62,7 +63,7 @@ try {
     clientSock:
         // ------------create new connection to CPS HW  (serial type)
         echo "\ncreating serial client....\n";
-        if($clientExist == false) {
+        if($clientExist == false && $com_port != NULL) {
             $comPortObj = new COMPORT($com_port,$baud, $bits, $stop, $parity, $serial_timeoutSec, $serial_timeoutUsec);
             if($comPortObj->rslt == 'fail') {   
                 throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
@@ -79,7 +80,7 @@ try {
     
     startSendCmd:
     while(1) {
-        if($start_mode) {
+        if($connectHw) {
             //------Send the status cmd and device cmd to HW-------
             echo "\nCPS loop sends the status cmd:\n";
             $rsp = $comPortObj->sendCmd("\$status,source=all,ackid=$node-cps*");
@@ -116,18 +117,25 @@ try {
                 echo "\n===CMD receive from API: ".$cmd."\n";
                 if($cmd == 'start') {
                     $start_mode = true;
-                    goto startSendCmd;
                 }
                 else if($cmd == 'stop') {
                     return;
                 }
-
-                   
-                
-                $comPortObj->sendCmd($cmd);
-                if($comPortObj->rslt == 'fail') {   
-                    throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
+                else if(strpos($cmd,'com_port=') !== false) {
+                    $dataExtract = explode('=',$cmd);
+                    $com_port = $dataExtract[1];
+                    $connectHw = true;
+                    goto clientSock;
                 }
+                else {
+                    if($connectHw) {
+                        $comPortObj->sendCmd($cmd);
+                        if($comPortObj->rslt == 'fail') {   
+                            throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
+                        }
+                    }  
+                }
+                   
                 $buf = '';
             }
             usleep($RDWR_interval);
@@ -136,14 +144,15 @@ try {
             //if response exists, process the response and update cps connection status
             $rsp = $comPortObj->receiveRsp();
             if($rsp !== '') {
-                $rspObj->processRsp($rsp, $node);
+                if($start_mode)
+                    $rspObj->processRsp($rsp, $node);
                 if($cpsAlive == false) $cpsAlive = true;
             }
         }
 
 
 
-        if($start_mode) {
+        if($connectHw) {
             //when 5sec expires, check the cps communication status. Send post-request to API to declare alarm if needed
             // If receive a response from HW, reset the lostConn = 0, and process the response
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
