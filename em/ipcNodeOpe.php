@@ -282,6 +282,8 @@ function discovered($node, $hwRsp) {
             return $result;
         }
 
+        $result['rslt'] = SUCCESS;
+        $result['reason'] = $cpsObj->reason;
         
         return $result;
 
