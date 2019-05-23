@@ -84,22 +84,27 @@ class CMD {
         return true;
     }
 
-    public function sendDiscoverCmd($node, $device) {
-        $cmd = "act=discover,device=$device";
+    public function sendComPort($node, $com_port) {
+        $cmd = "com_port=$com_port";
         $this->sendCmd($cmd, $node);
-        if($this->rslt == 'fail') return;
+        if($this->rslt == 'fail') 
+            return false;
         $this->rslt = 'success';
-        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
-        $this->sendQueryBackplaneId($node);
+        $this->reason = 'SEND COMPORT SUCCESSFULLY';
         return true;
     }
 
-    public function sendQueryBackplaneId($node) {
+    public function sendDiscoverCmd($node, $com_port) {
+        $sendPort = $this->sendComPort($node,$com_port);
+        if(!$sendPort)
+            return false;
+        
+        usleep(200000);
         $cmd = "\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
-        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        $this->reason = 'SEND DISCOVER CMD SUCCESSFULLY';
         return true;
     }
 
@@ -108,7 +113,7 @@ class CMD {
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
-        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        $this->reason = 'SEND START CMD SUCCESSFULLY';
         return true;
     }
 
@@ -117,7 +122,7 @@ class CMD {
         $this->sendCmd($cmd, $node);
         if($this->rslt == 'fail') return;
         $this->rslt = 'success';
-        $this->reason = 'SEND TEST CMD SUCCESSFULLY';
+        $this->reason = 'SEND STOP CMD SUCCESSFULLY';
         return true;
     }
 
