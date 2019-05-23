@@ -134,6 +134,7 @@ function discover($node, $device, $userObj) {
 
     $result['rslt'] = SUCCESS;
     $result['reason'] = "DISCOVER CPS SUCCESS";
+    $result['rows'] = [];
     return $result;
 }
 
@@ -180,7 +181,7 @@ function start($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "START COMMAND SENT SUCCESSFULLY";
-    $result['rows'] = 1;
+    $result['rows'] = [];
     return $result;
 }
 
@@ -205,7 +206,7 @@ function stop($node, $userObj) {
     }
     $result['rslt'] = SUCCESS;
     $result['reason'] = "STOP COMMAND SENT SUCCESSFULLY";
-    $result['rows'] = 1;
+    $result['rows'] = [];
     return $result;
 }
 
