@@ -145,7 +145,7 @@ function start($node, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "START_NODE";
+    $evt = "DISCV_CPS";
 
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
