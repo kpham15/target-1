@@ -55,7 +55,7 @@ class DEV {
         $newCmd = substr($device_status, 1, -1);
         $splitCmd = explode(',', $newCmd);
 
-        ["ackid=1-dev","status","devices","miox=", "mioy=","mre=","cps="];
+        // ["ackid=1-dev","status","devices","miox=", "mioy=","mre=","cps="];
 
         for ($i = 0; $i < count($splitCmd); $i++) {
             if (strpos($splitCmd[$i], "ackid") !== false) {

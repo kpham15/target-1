@@ -161,11 +161,11 @@
                     <a id="menu_nodeAdmin" data-toggle="pill" class="nav-link" href="#nodeAdmin">
                     <i class="nav-icon cui-speedometer"></i> Node Administration
                     </a><br>
-                <!--
-                    <a id="menu_nodeRef" data-toggle="pill" class="nav-link" href="#nodeRef">
-                    <i class="nav-icon cui-speedometer"></i> Node Reference
-                    </a><br>  
-                -->    
+    
+                    <a id="menu_nodeOpe" data-toggle="pill" class="nav-link" href="#nodeOpe">
+                    <i class="nav-icon cui-speedometer"></i> Node Operations
+                    </a><br>
+
                     <a id="menu_searchAdmin" data-toggle="pill" class="nav-link" href="#searchAdmin">
                     <i class="nav-icon cui-speedometer"></i> Setup Help/Search
                     </a><br>
@@ -343,6 +343,7 @@ var mB = {
     provReport:     $("#menu_provReport"),
     eventReport:    $("#menu_eventReport"),
     testAccess:     $("#menu_testAccess"),
+    nodeOpe:        $("#menu_nodeOpe"),
 
     menu:           $("#menu"),
     displayMenu:    $("#displayMenu"),
@@ -379,6 +380,17 @@ mB.testAccess.click(function() {
         testAccess.start();
     }
     testAccessSession = true;
+});
+
+var nodeOpeSession = false;
+mB.nodeOpe.click(function() {
+    if ($('.active.tab-pane').is("#nodeOpe")) {
+        mB.menu.hide();
+    }
+    if (nodeOpeSession === false) {
+        nodeOpe.start();
+    }
+    nodeOpeSession = true;
 });
 
 var eventReportSession = false;

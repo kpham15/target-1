@@ -704,14 +704,14 @@
         else if($fportObj->ptyp == 'Y') {
             $frelay = "$fd_extract[1].$fd_extract[2]:10.$fd_extract[3]";
         }
-        //create relay format for tstport
-        $tstPortNum = $tstportObj->pnum -1;
-        if($fportObj->ptyp == 'X') {
-            $tstrelay = "TB.X:0.$tstPortNum";
-        }
-        else if($fportObj->ptyp == 'Y') {
-            $tstrelay = "TB.Y:0.$tstPortNum";
-        }
+        // //create relay format for tstport
+        // $tstPortNum = $tstportObj->pnum -1;
+        // if($fportObj->ptyp == 'X') {
+        //     $tstrelay = "TB.X:0.$tstPortNum";
+        // }
+        // else if($fportObj->ptyp == 'Y') {
+        //     $tstrelay = "TB.Y:0.$tstPortNum";
+        // }
 
         //get row/col for relays 
         $rcObj = new RC();
@@ -725,15 +725,15 @@
         $frow = $rcObj->rows[0]['row'];
         $fcol = $rcObj->rows[0]['col'];
 
-        $rcObj->queryRC($tstrelay);
-        if($rcObj->rslt == 'fail') {
-            $result['rslt'] = $rcObj->rslt;
-            $result['jeop'] = "SP5:".$rcObj->reason;            
-            $result['reason'] = "MAINTENANCE TEST - " . $rcObj->reason;
-            return $result;
-        }
-        $tstrow = $rcObj->rows[0]['row'];
-        $tstcol = $rcObj->rows[0]['col'];
+        // $rcObj->queryRC($tstrelay);
+        // if($rcObj->rslt == 'fail') {
+        //     $result['rslt'] = $rcObj->rslt;
+        //     $result['jeop'] = "SP5:".$rcObj->reason;            
+        //     $result['reason'] = "MAINTENANCE TEST - " . $rcObj->reason;
+        //     return $result;
+        // }
+        // $tstrow = $rcObj->rows[0]['row'];
+        // $tstcol = $rcObj->rows[0]['col'];
 
         //--------------------------Update database table-----------------------------
         //Up to this poitn, all checking processes are good , needed data is prepared
@@ -807,7 +807,10 @@
         //------------------------create cmds-------------------------------
 		$cmdObj = new CMD();
         //create cmd for fport......
+        $cmdObj->sendTestedPortCmd('close',$node,$fcol,$frow);
         //create cmd for zport.....
+        $cmdObj->sendZPortCmd('connect',$tstportObj->pnum, $node);
+
         // ------------------------------------------------------------------
         $cktconObj->queryCktConWithFac($cktconObj->con);
         if ($cktconObj->rslt == FAIL) {

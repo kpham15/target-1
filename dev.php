@@ -1,12 +1,12 @@
 <?php
 
-function dev($node, $device_status) {
+function discovered($node, $hwRsp) {
 
     // the URL to post to which API (Its almost always going to be Dispatch)
     // Array that would POST to the API as if it were from front end GUI
     // 'act' is the dispatch function being called
     $url = "http://localhost/workspaces/kris/em/ipcDispatch.php";
-    $data = array('api' => "ipcNodeAdmin", 'user'=>'system', 'act' => 'updateNodeDevicesStatus', 'node' => $node, 'device_status' => $device_status);
+    $data = array('api' => "ipcNodeOpe", 'user'=>'system', 'act' => 'DISCOVERED', 'node' => $node, 'hwRsp' => $hwRsp);
 
     $options = array(
         'http' => array(
@@ -24,8 +24,8 @@ function dev($node, $device_status) {
 // $resp = almApi('\$ackid=1-CPS,status,current=1239mA,voltage=45678mV*');
 // echo $resp->rslt . ": " . $resp->reason . "\n";
 $node = "1";
-$device_status = "\$ackid=1-dev,status,devices,miox=01111111111111111111,mioy=11111111111111111110,mre=11111111111111111111,cps=11*";
-$resp = dev($node, $device_status);
+$hwRsp = "\$ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*";
+$resp = discovered($node, $hwRsp);
 // print_r($resp->rslt);
 print_r($resp->reason);
 // $resp = almApi('\$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*');

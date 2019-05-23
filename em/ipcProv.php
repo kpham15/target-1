@@ -6,11 +6,9 @@
     Copyright: BHD SOLUTIONS, LLC @ 2018
 */  
 
-
 include "ipcProvDisconnect.php";
 include "ipcProvConnect.php";
 // -- Initialize inputs -- //
-
 	$act = "";
 	if (isset($_POST['act'])) {
 		$act = $_POST['act'];
@@ -110,7 +108,6 @@ include "ipcProvConnect.php";
     if (isset($_POST['newtport'])) {
 		$newtport = $_POST['newtport'];
 	}
-
 
 	$tktno = "";
 	if (isset($_POST['tktno'])) {
