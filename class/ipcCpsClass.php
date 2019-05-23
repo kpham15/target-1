@@ -94,6 +94,36 @@ class CPS {
         }
     }
 
+    public function setCpsStatus($psta, $ssta) {
+        global $db;
+
+        $qry = "UPDATE t_cps SET psta='$psta', ssta='$ssta' WHERE node='$this->node'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $this->rslt = SUCCESS;
+            $this->reason = "CPS STATUS UPDATED";
+        }
+    }
+
+    public function setSerialNo($serial_no) {
+        global $db;
+
+        $qry = "UPDATE t_cps SET serial_no='$serial_no' WHERE node='$this->node'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $this->rslt = SUCCESS;
+            $this->reason = "SERIAL NUMBER UPDATED";
+        }
+    }
+
 
 }
 

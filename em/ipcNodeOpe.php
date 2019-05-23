@@ -62,12 +62,12 @@ if ($act == "DISCOVERED") {
 }
 
 
-if ($act == "UPDATE RACK") {
-    $result = updateRack($node, $device);
-    echo json_encode($result);
-	mysqli_close($db);
-	return;
-}
+// if ($act == "UPDATE RACK") {
+//     $result = updateRack($node, $device);
+//     echo json_encode($result);
+// 	mysqli_close($db);
+// 	return;
+// }
 
 // functions area
 
@@ -118,6 +118,25 @@ function start($node, $userObj) {
         return $result;
     }
     // smsObj check psta/ssta if it is in correct state
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $psta = $cpsObj->psta;
+    $ssta = $cpsObj->ssta;
+
+    $evt = "START_NODE";
+
+    $smsObj = new SMS($psta, $ssta, $evt);
+    if ($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+
 
     $cmdObj = new CMD();
     $cmdObj->sendStartCmd($node);
@@ -164,13 +183,21 @@ function discovered($node, $serial_no, $device) {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
         $evt = "DISCOVER_NODE";
+        // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
+        
+        // get nspta and nssta from sms obj
         $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, $evt);
 
         $newPsta = $smsObj->npsta;
         $newSsta = $smsObj->nssta;
 
+        // update psta and ssta, write serial number to t_cps
         $cpsObj->setCpsStatus($newPsta, $newSsta);
+        $cpsObj->setSerialNo($serial_no);
+
+        
+        return $result;
 
     }
     
