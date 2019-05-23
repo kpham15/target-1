@@ -227,7 +227,7 @@
   <div id="main-section-content" class="content-wrapper">
     
     <?php include 'system-view.php'; ?>
-    
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -326,8 +326,8 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Slimscroll -->
-<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
