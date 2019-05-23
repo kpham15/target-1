@@ -85,7 +85,7 @@
     // // $evtLog = new EVTLOG($user, "SVCCONN", $act, $input);
     
     // $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, $_POST);
-    $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, '');
+    // $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, '');
 
 	// $provLog = new PROVLOG();
 

@@ -2447,6 +2447,20 @@ maint.act.change(function() {
         }
     }
     else if (maint.act.val()  ==  "MTC_TEST") {
+        // IF A ROW HAS NOT BEEN SELECTED FROM TBLCKT
+        if (maint.cktId.val() == "" ) {
+            alert("Please select a CKT from the LIST OF CKTs", function() {
+                maint.act.val("");
+            });
+            return;
+        }
+        // IF A ROW HAS BEEN SELECTED IN TBLCKT BUT NOT IN TBLCKTCON
+        if (maint.cktconIdx.val() == "" || maint.cktconIdx.val() == 0) {
+            alert("Please select a CON from the LIST OF CONNECTIONS", function() {
+                maint.act.val("");
+            });
+            return;
+        }
         maintModal.clearForm();
         maint.populateModal();
 

@@ -22,7 +22,7 @@ try{
     socket_set_option($clientSocket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 0, 'usec' => 500000));
     socket_set_option($clientSocket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 0, 'usec' => 500000));
             
-    $cmd = "\$STATUS,SOURCE=ALL,ACKID=".$argv[1]."-CPS-API*";
+    $cmd = "\$command,action=disconnect,bus=x,tap=1,ackid=1-tbus*";
     echo "\nSending....$cmd\n";
     $sendCmd = socket_sendto($clientSocket,$cmd, 1024,0, '127.0.0.1', $argv[2]);
     if($sendCmd === false) {

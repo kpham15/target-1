@@ -15,6 +15,7 @@
     include "../class/ipcCktClass.php";
     include "../class/ipcCktconClass.php";
     include "../class/ipcConstantClass.php";
+    include "../class/ipcCpsClass.php";
     include "../class/ipcDbClass.php";
     include "../class/ipcDebugClass.php";
     include "../class/ipcDevClass.php";

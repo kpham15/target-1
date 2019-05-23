@@ -10,7 +10,7 @@
 	
 //Initialize expected inputs
 
-include '../os/ipcCpsClientClass.php';
+include '../os/ipcComPortClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -185,20 +185,28 @@ if ($act == "STOP_NODE") {
 }
 
 if ($act == "updateCpsCom") {
-    $cmdExtract = explode('-',$cmd);
-    
-    if ($cmdExtract[1] === 'ONLINE') {
-        $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
+    $nodeObj = new NODE($node);
+    if ($nodeObj->rslt != SUCCESS) {
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
     }
     else {
-        $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
-    }
-
-    if ($sms->rslt === SUCCESS) {
-        $nodeObj->updatePsta($sms->npsta, $sms->nssta);
+        $cmdExtract = explode('-',$cmd);
+    
+        if ($cmdExtract[1] === 'ONLINE') {
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
+        }
+        else {
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
+        }
+    
+        if ($sms->rslt === SUCCESS) {
+            $nodeObj->updatePsta($sms->npsta, $sms->nssta);
+        }
+        
+        $result = updateCpsCom($cmd, $userObj);
     }
     
-    $result = updateCpsCom($cmd, $userObj);
 
     echo json_encode($result);
     mysqli_close($db);
@@ -1098,7 +1106,6 @@ function updateRack($rack, $nodeObj, $userObj) {
     return $result;
 }
 
-
 // starts the cpsLoop. gets pid and updates table with pid
 function startNode($node, $nodeObj, $userObj) {
     
@@ -1116,7 +1123,8 @@ function startNode($node, $nodeObj, $userObj) {
     $ipadr = $nodeObj->ipadr;
     $port = $nodeObj->ip_port;
 
-    $command = "php ipcCpsloop.php $node $ipadr $port > /dev/null 2>&1 & echo $!";
+    // $command = "php ipcCpsloop.php $node $ipadr $port > /dev/null 2>&1 & echo $!";
+    $command = "php ipcCpsloop.php 1 9001 '/dev/ttyUSB0' > /dev/null 2>&1 & echo $!";
 
     $pid = exec($command, $output);
 
