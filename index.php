@@ -20,12 +20,12 @@
 	echo '<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">';
 
 	// Stylesheets
-	echo '<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">';
-	echo '<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">';
-	echo '<link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">';
-	echo '<link rel="stylesheet" href="../dist/css/AdminLte.min.css">';
-	echo '<link rel="stylesheet" href="../plugins/iCheck/square/blue.css">';
-	echo '<link rel="stylesheet" href="../dist/css/fonts.css">';
+	echo '<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">';
+	echo '<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">';
+	echo '<link rel="stylesheet" href="./bower_components/Ionicons/css/ionicons.min.css">';
+	echo '<link rel="stylesheet" href="./dist/css/AdminLte.min.css">';
+	echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+	echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
 	echo '</head>';
@@ -78,9 +78,9 @@
  <script src="./js/hmac-sha256.js"></script>
  <script src="./js/enc-base64-min.js"></script>
 
- <script src="../bower_compoennts/jquery/dist/jquery.min.js"></script>
- <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
- <script src="../plugins/iCheck/icheck.min.js"></script>
+ <script src="./bower_compoennts/jquery/dist/jquery.min.js"></script>
+ <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="./plugins/iCheck/icheck.min.js"></script>
 
 <script>
 
