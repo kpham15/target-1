@@ -94,8 +94,19 @@ class CPS {
         }
     }
 
-    public function setCpsStatus($psta, $ssta) {
+    public function setPsta($psta, $ssta) {
         global $db;
+
+        if ($psta == "") {
+            $this->rslt = FAIL;
+            $this->reason = "INVALID PSTA";
+            return;
+        }
+        if ($ssta == "") {
+            $this->rslt = FAIL;
+            $this->reason = "INVALID SSTA";
+            return;
+        }
 
         $qry = "UPDATE t_cps SET psta='$psta', ssta='$ssta' WHERE node='$this->node'";
         $res = $db->query($qry);
