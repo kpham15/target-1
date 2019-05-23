@@ -24,10 +24,11 @@ function dev($cmd) {
 // echo $resp->rslt . ": " . $resp->reason . "\n";
 $cmd = "\$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*";
 $resp = dev($cmd);
-// print_r($resp->rslt);
 print_r($resp->reason);
-// $resp = almApi('\$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*');
-// echo $resp->rslt . ": " . $resp->reason . "\n";
+
+$cmd = "\$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*";
+$resp = dev($cmd);
+print_r($resp->reason);
 
 
 ?>
