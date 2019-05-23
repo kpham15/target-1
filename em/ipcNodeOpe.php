@@ -191,7 +191,7 @@ function stop($node, $userObj) {
 function discovered($node, $hwString) {
 
     // parse hwString
-    // looks like this:
+    
     // $ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
     // UUID is serial number for now
     $newHwString = substr($hwString, 1, -1);
@@ -211,8 +211,9 @@ function discovered($node, $hwString) {
 
     if (in_array($serialNum, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
+        $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,node=$node,dev=$device";
+        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->device";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
