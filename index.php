@@ -141,25 +141,20 @@ var ipcDispatch = "./em/ipcDispatch.php";
 
 $(document).ready(function() {
 
-if ($("#main_currentUser").text() == '')
-{
-	$('body').addClass('hold-transition login-page');
-	$('body').load('pages/login.html');
-	// $("#mainPage").hide();
-	// $("#login").show();
-	// login.start();
-}
-else
-{
-	$("#login").hide();
-	// $("#mainPage").show();
-	mB.start();
-}
-
-function loginSuccess() {
-	$('body').attr('class','hold-transition skin-blue sidebar-mini');
-	$('body').load('pages/starter.html');
-}
+	if ($("#main_currentUser").text() == '')
+	{
+		$('body').addClass('hold-transition login-page');
+		$('body').load('pages/login.html');
+		// $("#mainPage").hide();
+		// $("#login").show();
+		// login.start();
+	}
+	else
+	{
+		$("#login").hide();
+		// $("#mainPage").show();
+		mB.start();
+	}
 
 });
 
