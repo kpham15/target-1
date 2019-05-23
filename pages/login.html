@@ -82,7 +82,7 @@
     submitLogin: function() {
       keyId = "";
       $.post(ipcDispatch, {
-        api:"ipcConfirm",
+        api: "ipcConfirm",
         act: "confirm"
       }, function(data, status) {
         var obj = JSON.parse(data);
@@ -113,7 +113,7 @@
         act: "login",
         user: login.username.val(),
         pw: encode(login.password.val()),
-        // newPw: encode(login.newpassword.val())
+        newPw: encode("")
       }, function(data, status) {
         var obj = JSON.parse(data);
         if (obj.rslt == "fail") {
