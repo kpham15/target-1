@@ -229,6 +229,7 @@ function discovered($node, $hwString) {
     else {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
+        // @TODO AM I USING THE CORRECT EVT HERE FOR SMS??
         $evt = "DISCOVER_NODE";
         // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
@@ -249,7 +250,15 @@ function discovered($node, $hwString) {
         // if success
         $cpsObj->setSerialNo($serial_no);
         // call message 2
-        
+
+        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        $cmdObj = new CMD();
+        $cmdObj->sendCmd($cmd, $node);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
 
         
         return $result;
