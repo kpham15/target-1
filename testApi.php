@@ -22,7 +22,7 @@ function dev($cmd) {
 
 
 // echo $resp->rslt . ": " . $resp->reason . "\n";
-$cmd = "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*";
+$cmd = "\$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*";
 $resp = dev($cmd);
 // print_r($resp->rslt);
 print_r($resp->reason);
