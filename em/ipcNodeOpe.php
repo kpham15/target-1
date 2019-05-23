@@ -18,8 +18,10 @@ if (isset($_POST['serial_no']))
     $serial_no = $_POST['serial_no'];
 
 $device = "";
-if (isset($_POST['device']))
+if (isset($_POST['device'])) {
     $device = $_POST['device'];
+}
+$device = "ttyUSB0";
         
 
 // dispatch to functions
