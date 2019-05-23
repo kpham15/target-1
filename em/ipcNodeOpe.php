@@ -152,7 +152,7 @@ function start($node, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "START_NODE";
+    $evt = "DISCV_CPS";
 
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
@@ -237,7 +237,7 @@ function discovered($node, $hwString) {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
         // @TODO AM I USING THE CORRECT EVT HERE FOR SMS??
-        $evt = "DISCOVER_NODE";
+        $evt = "DISCV_CPS";
         // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
         
@@ -253,9 +253,19 @@ function discovered($node, $hwString) {
         $newSsta = $smsObj->nssta;
 
         // update psta and ssta, write serial number to t_cps, start the cps
-        $cpsObj->setCpsStatus($newPsta, $newSsta);
+        $cpsObj->setPsta($newPsta, $newSsta);
+        if ($cpsObj->rslt == FAIL) {
+            $result['rslt'] = $cpsObj->rslt;
+            $result['reason'] = $cpsObj->reason;
+            return $result;
+        }
         // if success
         $cpsObj->setSerialNo($serial_no);
+        if ($cpsObj->rslt == FAIL) {
+            $result['rslt'] = $cpsObj->rslt;
+            $result['reason'] = $cpsObj->reason;
+            return $result;
+        }
         // call message 2
 
         $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->device,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
