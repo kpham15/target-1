@@ -136,7 +136,7 @@ function discover($node, $device, $userObj) {
     $result['reason'] = "DISCOVER CPS SUCCESS";
     return $result;
 }
-// @TODO NEED TO FIX FUNCTION SO IT WORKS LIKE DISCOVERED
+
 function start($node, $userObj) {
 
     // permissions check here
@@ -179,7 +179,7 @@ function start($node, $userObj) {
     return $result;
 }
 
-// @TODO NEED TO FIX FUNCTION SO IT WORKS LIKE DISCOVERED
+
 function stop($node, $userObj) {
 
     // permissions check here
