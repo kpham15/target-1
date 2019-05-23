@@ -34,14 +34,16 @@
           <!-- Wire Center Information dropdown -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa-info-circle"></i>
+              <i class="fa fa-info-circle"></i>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Wire Center Information</li>
-              <li>WCN: VERIZON</li>
-              <li>WCC: VZN</li>
-              <li>NPANXX: 949222</li>
-              <li>FRMID: FK1</li>
+              <div style="padding: 7px 10px;">
+                <li>WCN: VERIZON</li>
+                <li>WCC: VZN</li>
+                <li>NPANXX: 949222</li>
+                <li>FRMID: FK1</li>
+              </div>
             </ul>
           </li>
           
