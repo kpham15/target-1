@@ -153,7 +153,7 @@ function stop($node, $userObj) {
 }
 
 function discovered($node, $serial_no, $device) {
-    // serial number must not exist in system
+    // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if (in_array($serial_no, $cpssObj->serial_no)) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
@@ -162,7 +162,16 @@ function discovered($node, $serial_no, $device) {
     }
     else {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
-        
+
+        $evt = "DISCOVER_NODE";
+        $cpsObj = new CPS($node);
+        $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, $evt);
+
+        $newPsta = $smsObj->npsta;
+        $newSsta = $smsObj->nssta;
+
+        $cpsObj->setCpsStatus($newPsta, $newSsta);
+
     }
     
 }
