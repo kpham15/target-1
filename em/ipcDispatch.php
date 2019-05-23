@@ -3,7 +3,6 @@ include "./ipcClasses.php";
 
 $root_dir = '/var/www/html/target-1/UPDATE';
 
-
 /* Initialize expected inputs */
 $api = '';
 if (isset($_POST['api'])) {
@@ -118,6 +117,9 @@ else if($api =='ipcMxc') {
 }
 else if($api =='ipcNodeAdmin') {
     include "ipcNodeAdmin.php";
+}
+else if ($api == 'ipcNodeOpe') {
+    include "ipcNodeOpe.php";
 }
 else if($api =='ipcOpt') {
     include "ipcOpt.php";
