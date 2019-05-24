@@ -1,11 +1,13 @@
 <script>
-	// =============== General Purpose Functions ============== //
-	function loginSuccess() {
-		$('body').attr('class','skin-blue sidebar-mini fixed');
-		$('#login-page').hide();
-		$('#nav-wrapper').show();
+	$(document).ready(function() {
 
-		$('#top-nav-user-name, #profile-dropdown-user-name, #sidebar-user-name').text(user.fname + ' ' + user.lname);
-		$('#profile-dropdown-user-group').text(user.ugrp);
-	}
+		// =============== General Purpose Functions ============== //
+		function loginSuccess() {
+			$('body').attr('class','skin-blue sidebar-mini fixed');
+			$('#login-page').hide();
+			$('#nav-wrapper').show();
+	
+			updateUsername();
+		}
+	});
 </script>

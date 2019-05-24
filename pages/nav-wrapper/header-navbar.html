@@ -195,10 +195,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.user-footer a').click(function(e) {
-      e.preventDefault();
-
-      console.log('profile click');
-    });
+    
+    function updateUsername() {
+      $('#top-nav-user-name, #profile-dropdown-user-name, #sidebar-user-name').text(user.fname + ' ' + user.lname);
+			$('#profile-dropdown-user-group').text(user.ugrp);
+    }
   });
 </script>
