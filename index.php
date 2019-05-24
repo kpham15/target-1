@@ -31,7 +31,7 @@
 
 
 	//IPCv2
-	include './pages/nav-wrapper.php';
+	include './pages/nav-wrapper/nav-wrapper.php';
 	include './pages/login.html';
 
 	// For production
