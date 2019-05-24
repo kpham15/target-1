@@ -658,8 +658,6 @@ function exec_cmd($cmd) {
     $cmdArray = explode("=", $cmd);
     $ackIdArray = explode("-", $cmdArray[1]);
     $node = $ackIdArray[0];
-    $api = $ackIdArray[1];
-    $act = $ackIdArray[2];
 
     // create cpsObj to get comport and serialnum
     $cpsObj = new CPS($node);
