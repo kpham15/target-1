@@ -21,12 +21,13 @@
 			},
 			dataType: 'json',
 			success: function(data, status) {
-				var obj = JSON.stringify(data);
+				var obj = JSON.parse(data);
+				console.log(obj);
 				if (obj.rslt == "fail") {
 					alert(obj.reason);
 				} 
 				else {
-					console.log('obj');
+					console.log('obj.rslt');
 					console.log(obj.rslt);
 					let nodeInfo = obj.rows[0].node_info;
 					console.log('nodeinfo');
