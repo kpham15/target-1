@@ -87,6 +87,13 @@ if ($act == "CPS_OFF") {
 	return;
 }
 
+if ($act == "RCV_HW_RESPONSE") {
+    $result = processHwResp($cmd);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
 //     echo json_encode($result);
