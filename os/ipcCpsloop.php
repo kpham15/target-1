@@ -184,14 +184,14 @@ try {
                 if($lostConn > 0 && $lostConn < 3)
                     $lostConn = 0; 
                 else if($lostConn >= 3) {
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-ONLINE"]);         
+                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
                     $lostConn = 0;
                 }
             }
             else {
                 $lostConn++;
                 if(($lostConn % 3) == 0) 
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-OFFLINE"]);
+                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
             
             }
             //go back and send status command again

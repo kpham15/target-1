@@ -80,35 +80,13 @@ if ($act == "CPS_ON") {
 	mysqli_close($db);
 	return;
 }
-
-if ($act == "updateCpsCom") {
-    $nodeObj = new NODE($node);
-    if ($nodeObj->rslt != SUCCESS) {
-        $result['rslt'] = $nodeObj->rslt;
-        $result['reason'] = $nodeObj->reason;
-    }
-    else {
-        $cmdExtract = explode('-',$cmd);
-    
-        if ($cmdExtract[1] === 'ONLINE') {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
-        }
-        else {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
-        }
-    
-        if ($sms->rslt === SUCCESS) {
-            $nodeObj->updatePsta($sms->npsta, $sms->nssta);
-        }
-        
-        $result = updateCpsCom($cmd, $userObj);
-    }
-    
-
+if ($act == "CPS_OFF") {
+    $result = cps_off($node, $cmd);
     echo json_encode($result);
-    mysqli_close($db);
-    return;
+	mysqli_close($db);
+	return;
 }
+
 
 
 // if ($act == "UPDATE RACK") {
@@ -139,7 +117,7 @@ function cps_on($node, $cmd) {
     
     // if correct stat
     // update sms psta/ssta
-    $cpsObj->updatePsta($smsObj->npsta, $smsObj->ssta);
+    $cpsObj->updatePsta($smsObj->npsta, $smsObj->nssta);
     if ($cpsObj->rslt == FAIL) {
         $result['rslt'] = $cpsObj->rslt;
         $result['reason'] = $cpsObj->reason;
@@ -148,8 +126,42 @@ function cps_on($node, $cmd) {
 
     // post to nodeapi to update node cps stats
     $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch";
+    $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin", "node"=>$node, "cmd"=>"$node-ONLINE"];
+    $postReqObj->asyncPostRequest($url, $params);
+
+}
+
+function cps_off($node, $cmd) {
+    // create cps to get data for psta/ssta
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    // check if psta/ssta is in right status
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, 'CPS_OFF');
+    if ($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    // if correct stat
+    // update sms psta/ssta
+    $cpsObj->updatePsta($smsObj->npsta, $smsObj->nssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    // post to nodeapi to update node cps stats
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin", "node"=>$node, "cmd"=>"$node-OFFLINE"];
     $postReqObj->asyncPostRequest($url, $params);
 
 }
@@ -181,7 +193,7 @@ function discover($node, $device, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "DISCV_CPS";
+    $evt = "CPS_ON";
     // test sms
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
@@ -228,7 +240,7 @@ function start($node, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "DISCV_CPS";
+    $evt = "CPS_ON";
 
     // sms check psta/ssta if it is in correct state
     $smsObj = new SMS($psta, $ssta, $evt);
