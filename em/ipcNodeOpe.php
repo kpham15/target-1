@@ -87,13 +87,6 @@ if ($act == "CPS_OFF") {
 	return;
 }
 
-if ($act == "RCV_HW_RESPONSE") {
-    $result = processHwResp($cmd);
-    echo json_encode($result);
-	mysqli_close($db);
-	return;
-}
-
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
 //     echo json_encode($result);
@@ -282,9 +275,30 @@ function stop($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
+    $cpsObj = new CPS($node);
+
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, "CPS_STOP");
+    if($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
@@ -566,33 +580,6 @@ function updateCpsTemp($cmd) {
     return $result;
 }
 
-function processHwResp($hwRsp) {
-    // remove $ and * from string
-    $hwRsp = substr($hwRsp, 1, -1);
-    // divide string into sections
-    $hwRspArray = explode(',', $hwRsp);
-    // create ackid array to obtain ackid value
-    $ackidArray = explode("=", $hwRspArray[0]);
-    $ackid = $ackidArray[1];
-    // parse ackid value to obtain node, api, apiAct
-    $parsedAckid = explode('-', $ackid);
-    $node = $parsedAckid[0];
-    $api = $parsedAckid[1];
-    $apiAct = $parsedAckid[2];
-    
-    // Obtain full api string from constant and api action from constant
-    $api = apiAndActArray[$api]['API'];
-    $apiAct = apiAndActArray[$api][$apiAct];
 
-    // post to nodeapi to update node cps stats
-    $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "cmd"=>$hwRsp];
-    $postReqObj->syncPostRequest($url, $params);
-    return json_decode($postReqObj->reply);
-
-
-    
-}
 
 ?>
