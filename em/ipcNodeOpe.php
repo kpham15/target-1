@@ -218,7 +218,7 @@ function discover($node, $device, $userObj) {
 
     // formulate msg #1
     // this cmd will be sent back to be parsed. the ackid must be the NEXT ACT and API
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-CPS-DCVD*";
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-cps-dcvd*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -438,9 +438,9 @@ function updateCpsStatus($hwRsp) {
 
 // function called by updateAlm in case string contains voltage only
 // str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
-function updateCpsVolt($cmd) {
+function updateCpsVolt($hwRsp) {
     // filters data brought from $cmd and extracts voltage values
-    $newCmd = substr($cmd, 1, -1);
+    $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=',$splitCmd[0]);
     $newAckid = $ackid[1];
