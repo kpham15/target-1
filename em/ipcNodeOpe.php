@@ -314,7 +314,7 @@ function stop($node, $userObj) {
         return $result;
     }
     
-    $cmd = "inst=STOP_CPS,node=$node,serial_no=$serial_no";
+    $cmd = "inst=STOP_CPS,serial_no=$serial_no";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
