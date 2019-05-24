@@ -21,15 +21,15 @@
       <!-- Navbar Left Menu -->
       <div class="navbar-custom-menu" style="float:leftl">
         <ul class="nav navbar-nav">
-          <p class="navbar-text">Intelligent Provisioning Center</p>
+          <p class="navbar-text" style="margin-top: 10px; margin-bottom: 0;">Intelligent Provisioning Center</p>
         </ul>
       </div>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Wire Center Information -->
-          <p class="navbar-text">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-danger btn-xs">CRITICAL</button></p>
-          <p class="navbar-text">IPC: (INS) 05-22-2019 16:46 CDT</p>
+          <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-danger btn-xs">CRITICAL</button></p>
+          <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (INS) 05-22-2019 16:46 CDT</p>
 
           <!-- Wire Center Information dropdown -->
           <li class="dropdown notifications-menu">
