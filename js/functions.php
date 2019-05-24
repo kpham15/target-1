@@ -21,7 +21,7 @@
 			},
 			dataType: 'json',
 			success: function(data, status) {
-				var obj = JSON.parse(data);
+				var obj = JSON.stringify(data);
 				console.log(obj);
 				if (obj.rslt == "fail") {
 					alert(obj.reason);
