@@ -198,7 +198,30 @@
     $('#top-nav-user-name, #profile-dropdown-user-name, #sidebar-user-name').text(user.fname + ' ' + user.lname);
     $('#profile-dropdown-user-group').text(user.ugrp);
   }
-  
+
+  function updateHeaderInfo(data) {
+    let alarmText = '';
+    let alarmColor = '';
+
+    if (data.sev === 'CRI') {
+      alarmText = 'CRITICAL';
+      alarmColor = 'btn-danger';
+    } else if (data.sev === 'MAJ') {
+      alarmText = 'MAJOR';
+      alarmColor = 'bg-major';
+    } else if (data.sev === 'MIN') {
+      alarmText = 'MINOR';
+      alarmColor = 'bg-minor';
+    } else if (data.sev === 'NONE') {
+      alarmText = 'NONE';
+      alarmColor = 'btn-success';
+    }
+
+    $('#alarm-header-icon').text(alarmText);
+    $('#alarm-header-icon').attr('class','btn btn-block btn-xs');
+    $('#alarm-header.icon').addClass(alarmColor);
+  }
+
   $(document).ready(function() {
     
   });

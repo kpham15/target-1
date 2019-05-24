@@ -1,3 +1,12 @@
+/* ============ IPC Alarm Colors ============ */
+.bg-major {
+  background-color: #ff7700 !important;
+}
+.bg-minor {
+  background-color: #ffd509 !important;
+}
+/* ============ END IPC Alarm Colors ============ */
+
 /* ============ Node Status Section CSS ============= */
 .node-status-row {
   display: flex;
