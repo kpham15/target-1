@@ -6,7 +6,7 @@
 		$('#nav-wrapper').show();
 
 		updateUsername();
-		systemInfoInterval = setInterval(getSystemInfo(), 10000);
+		systemInfoInterval = setInterval(getSystemInfo, 10000);
 	}
 
 	function getSystemInfo() {
