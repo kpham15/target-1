@@ -27,7 +27,7 @@
 				} 
 				else {
 					console.log('obj');
-					console.log(obj);
+					console.log(obj.rows);
 					let nodeInfo = obj.rows[0].node_info;
 					console.log('nodeinfo');
 					console.log(nodeInfo);
