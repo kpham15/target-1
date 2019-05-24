@@ -87,6 +87,12 @@ if ($act == "CPS_OFF") {
 	return;
 }
 
+if ($act == "PROCESS_HW_RSP") {
+    $result = processHwResp($node, $hwRsp);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
 //     echo json_encode($result);
@@ -202,7 +208,8 @@ function discover($node, $device, $userObj) {
     }
 
     // formulate msg #1
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+    // this cmd will be sent back to be parsed. the ackid must be the NEXT ACT and API
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-CPS-DCVD*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -502,6 +509,8 @@ function updateCpsVolt($cmd) {
 // str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
 function updateCpsTemp($cmd) {
 
+    
+
     // filters data brought from $cmd and extracts temp values
     $newCmd = substr($cmd, 1, -1);
     $splitCmd = explode(',', $newCmd);
@@ -580,6 +589,37 @@ function updateCpsTemp($cmd) {
     return $result;
 }
 
+function processHwResp($hwRsp) {
 
+    // $ackid=1-CPS-DCV,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
+
+    // remove $ and * from string
+    $hwRsp = substr($hwRsp, 1, -1);
+    // divide string into sections
+    $hwRspArray = explode(',', $hwRsp);
+    // create ackid array to obtain ackid value
+    $ackidArray = explode("=", $hwRspArray[0]);
+    $ackid = $ackidArray[1];
+    // parse ackid value to obtain node, api, apiAct
+    $parsedAckid = explode('-', $ackid);
+    $node = $parsedAckid[0];
+    $api = $parsedAckid[1];
+    $apiAct = $parsedAckid[2];
+    
+    // Obtain full api string from constant and api action from constant
+    $api = apiAndActArray[$api]['API'];
+    $apiAct = apiAndActArray[$api][$apiAct];
+
+    // post to nodeapi to update node cps stats
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "cmd"=>$hwRsp];
+    //@TODO Maybe need asyncPostRequest here? Sync for debugging
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
+
+
+    
+}
 
 ?>

@@ -185,6 +185,7 @@ if ($act == "STOP_NODE") {
 }
 
 if ($act == "updateCpsCom") {
+    
     $nodeObj = new NODE($node);
     if ($nodeObj->rslt != SUCCESS) {
         $result['rslt'] = $nodeObj->rslt;
@@ -194,6 +195,7 @@ if ($act == "updateCpsCom") {
         $cmdExtract = explode('-',$cmd);
     
         if ($cmdExtract[1] === 'ONLINE') {
+            
             $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'CPS_ON');
         }
         else {
@@ -727,6 +729,7 @@ function updateCpsCom($cmd,$userObj) {
      * 1) $nodeObj = new NODE($node);
      * 2) If $node exists then $nodeObj->updateCOM($com)
      */
+    
     $cmdExtract = explode('-',$cmd);
     $node = $cmdExtract[0];
     $com = $cmdExtract[1];
