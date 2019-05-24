@@ -21,7 +21,7 @@
 	echo '<title>Intelligent Provisioning Center</title>';
 	echo '<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">';
 
-	include './js/dependencies.php';
+	require './js/dependencies.php';
 
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
 	echo '</head>';
@@ -31,8 +31,8 @@
 
 
 	//IPCv2
-	include './pages/nav-wrapper/nav-wrapper.php';
-	include './pages/login.html';
+	require './pages/nav-wrapper/nav-wrapper.php';
+	require './pages/login.html';
 
 	// For production
 	// include './html/ipcLogin.html';
@@ -69,8 +69,8 @@
 	// include './html/ipcMainEnd.html';
 	
 	
-	include './js/functions.php';
-	include './js/variables.php';
+	require './js/functions.php';
+	require './js/variables.php';
 	
 	echo '</body>';
 	echo '</html>';
