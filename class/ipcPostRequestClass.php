@@ -75,7 +75,7 @@ class POST_REQUEST {
         // echo $out."\n";
         fwrite($fp, $out);
         while (!feof($fp)) {
-            $this->reply = fgets($fp, 1024);
+            $this->reply .= fgets($fp, 1024);
         }
         fclose($fp);
     }
