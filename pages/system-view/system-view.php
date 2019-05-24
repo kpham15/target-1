@@ -21,37 +21,38 @@
 
     <div class="row">
       <div class="col-md-6">
-        <div class="nav-tabs-custom">
+        <div id="node-x-table" class="nav-tabs-custom" shelf="x">
+          <?php include __DIR__ . "/node-x-table.html"; ?>
           <ul class="nav nav-tabs node-tabs">
             <li class="active">
               <a href="#nodex1" data-toggle="tab">Node 1</a>
             </li>
             <li>
-              <a href="#nodex2" data-toggle="tab">Node 2</a>
+              <a href="#nodex1" data-toggle="tab">Node 2</a>
             </li>
             <li>
-              <a href="#nodex3" data-toggle="tab">Node 3</a>
+              <a href="#nodex1" data-toggle="tab">Node 3</a>
             </li>
             <li>
-              <a href="#nodex4" data-toggle="tab">Node 4</a>
+              <a href="#nodex1" data-toggle="tab">Node 4</a>
             </li>
             <li>
-              <a href="#nodex5" data-toggle="tab">Node 5</a>
+              <a href="#nodex1" data-toggle="tab">Node 5</a>
             </li>
             <li>
-              <a href="#nodex6" data-toggle="tab">Node 6</a>
+              <a href="#nodex1" data-toggle="tab">Node 6</a>
             </li>
             <li>
-              <a href="#nodex7" data-toggle="tab">Node 7</a>
+              <a href="#nodex1" data-toggle="tab">Node 7</a>
             </li>
             <li>
-              <a href="#nodex8" data-toggle="tab">Node 8</a>
+              <a href="#nodex1" data-toggle="tab">Node 8</a>
             </li>
             <li>
-              <a href="#nodex9" data-toggle="tab">Node 9</a>
+              <a href="#nodex1" data-toggle="tab">Node 9</a>
             </li>
             <li>
-              <a href="#nodex10" data-toggle="tab">Node 10</a>
+              <a href="#nodex1" data-toggle="tab">Node 10</a>
             </li>
           </ul>
           <div class="tab-content mio-tabs">
@@ -438,7 +439,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="nav-tabs-custom">
+        <div id="node-y-table" class="nav-tabs-custom" shelf="y">
           <ul class="nav nav-tabs node-tabs">
             <li class="active">
               <a href="#nodey1" data-toggle="tab">Node 1</a>
