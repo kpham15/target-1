@@ -68,7 +68,7 @@ if ($act == "DISCOVERED") {
 }
 
 if ($act == "CPS_STATUS") {
-    $result = updateCpsStatus($cmd);
+    $result = updateCpsStatus($hwRsp);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -291,9 +291,30 @@ function stop($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
+    $cpsObj = new CPS($node);
+
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, "CPS_STOP");
+    if($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
@@ -381,7 +402,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
 
-        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
@@ -403,15 +424,15 @@ function discovered($node, $hwRsp) {
 
 
 
-function updateCpsStatus($cmd) {
+function updateCpsStatus($hwRsp) {
     
-    // checks what type of $cmd is being sent
-    if (strpos($cmd, "voltage") !== false){
-        $result = updateCpsVolt($cmd);
+    // checks what type of $hwRsp is being sent
+    if (strpos($hwRsp, "voltage") !== false){
+        $result = updateCpsVolt($hwRsp);
         return $result;
     }
-    else if (strpos($cmd, "temperature") !== false) {
-        $result = updateCpsTemp($cmd);
+    else if (strpos($hwRsp, "temperature") !== false) {
+        $result = updateCpsTemp($hwRsp);
         return $result;
     }
 }
@@ -445,7 +466,7 @@ function updateCpsVolt($cmd) {
     // extract node number from cmd
     $nodeArray = explode('-', $newAckid[0]);
     $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
+    $newNodeNumber = $nodeNumber;
     $nodeObj = new NODE($newNodeNumber);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
@@ -497,17 +518,15 @@ function updateCpsVolt($cmd) {
 // str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
 function updateCpsTemp($cmd) {
 
-    
-
     // filters data brought from $cmd and extracts temp values
     $newCmd = substr($cmd, 1, -1);
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=', $splitCmd[0]);
     $newAckid = $ackid[1];
-    $zeroBase = explode('-', $newAckid);
-    $oneBase = $zeroBase[0] + 1;
-    // puts back together 1-cps
-    $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
+    // $zeroBase = explode('-', $newAckid);
+    // $oneBase = $zeroBase[0] + 1;
+    // // puts back together 1-cps
+    // $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
     $temp1 = explode('=',$splitCmd[3]);
     $temp2 = explode('=',$splitCmd[4]);
     $temp3 = explode('=',$splitCmd[5]);
@@ -526,7 +545,7 @@ function updateCpsTemp($cmd) {
     // extract node number from cmd
     $nodeArray = explode('-', $newAckid[0]);
     $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
+    $newNodeNumber = $nodeNumber;
     $nodeObj = new NODE($newNodeNumber);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
@@ -577,28 +596,27 @@ function updateCpsTemp($cmd) {
     return $result;
 }
 
-function processHwResp($hwRsp) {
-
-    // $ackid=1-CPS-DCV,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
+function processHwResp($node, $hwRsp) {
 
     // remove $ and * from string
-    $hwRsp = substr($hwRsp, 1, -1);
+    $rsp = substr($hwRsp, 1, -1);
     // divide string into sections
-    $hwRspArray = explode(',', $hwRsp);
+    $hwRspArray = explode(',', $rsp);
     // create ackid array to obtain ackid value
     $ackidArray = explode("=", $hwRspArray[0]);
     $ackid = $ackidArray[1];
     // parse ackid value to obtain node, api, apiAct
     $parsedAckid = explode('-', $ackid);
     $node = $parsedAckid[0];
-    $api = $parsedAckid[1];
-    $apiAct = $parsedAckid[2];
-    
+    $api_key = $parsedAckid[1];
+    $apiAct_key = $parsedAckid[2];
+
     // Obtain full api string from constant and api action from constant
-    $api = apiAndActArray[$api]['API'];
-    $apiAct = apiAndActArray[$api][$apiAct];
+    $api = apiAndActArray[$api_key]['api'];
+    $apiAct = apiAndActArray[$api_key][$apiAct_key];
 
     // post to nodeapi to update node cps stats
+    
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "cmd"=>$hwRsp];

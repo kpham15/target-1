@@ -105,18 +105,19 @@
 
     
     const apiAndActArray = [
-        "CPS" => [
-            "API"   => "ipcNodeOpe",
-            "DCV"   => "DISCOVER",
-            "DCVD"  => "DISCOVERED",
-            "STOP"  => "STOP",
-            "ON"    => "CPS_ON",
-            "OFF"   => "CPS_OFF",
+        "cps" => [
+            "api"   => "ipcNodeOpe",
+            "dcv"   => "DISCOVER",
+            "dcvd"  => "DISCOVERED",
+            "stop"  => "STOP",
+            "on"    => "CPS_ON",
+            "off"   => "CPS_OFF",
+            "csta"  => "CPS_STATUS"
         ],
-        "NADM" => [
-            "API"   => "ipcNodeAdmin",
-            "UPDC"  => "updateCpsCom",
-            "UNDS"  => "updateNodeDevicesStatus",
+        "nadm" => [
+            "api"   => "ipcNodeAdmin",
+            "updc"  => "updateCpsCom",
+            "unds"  => "updateNodeDevicesStatus",
         ]
     ];
 
