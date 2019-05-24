@@ -10,4 +10,6 @@
     loginTime: '',
     idle_to: ''
   }
+
+  var systemInfoInterval = 0;
 </script>

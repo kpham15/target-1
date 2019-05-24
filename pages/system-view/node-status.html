@@ -10,10 +10,32 @@
     nodeInfo.forEach(function(node) {
       if ($('.node-box[node_id='+node.node+']').length > 0) {
         console.log('already exists');
+        updateNodeBox(node);
       } else {
         createNodeBox(node);
       }
     })
+  }
+
+  function updateNodeBox(node) {
+    $('[node_id="'+node.node+'"] .node-box-stat').text(node.node_stat);
+    $('[node_id="'+node.node+'"] .node-box-temp-volt').text(node.node_temp + ' | ' + node.node_volt);
+    $('[node_id="'+node.node+'"] .node-box-rack').text(node.node_rack);
+    $('[node_id="'+node.node+'"] .node-box-alm').text(node.node_alm);
+
+    let almColor = '';
+
+    if (node.node_alm === 'CRI') {
+      almColor = 'bg-red';
+    } else if (node.node_alm === 'MAJ') {
+      almColor = 'bg-orange';
+    } else if (node.node_alm === 'MIN') {
+      almColor = 'bg-yellow';
+    } else if (node.node_alm === 'NONE') {
+      almColor = 'bg-green';
+    }
+
+    $('[node_id='+node.node+'] .info-box-icon').attr('class', 'info-box-icon ' + almColor);
   }
 
   function createNodeBox(node) {
@@ -28,6 +50,7 @@
                             node.node_temp + ' | ' + node.node_volt +
                           '</span>' +
                           '<span class="info-box-text node-box-rack">' + node.node_rack + '</span>' +
+                          '<span class="node-box-alm" style="display:none;">'+node.node_alm+'</span>' +
                         '</div>' +
                       '</div>' +
                     '</div>';
