@@ -19,9 +19,9 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Left Menu -->
-      <div class="navbar-custom-menu" style="float:leftl">
+      <div class="navbar-custom-menu" style="float:left">
         <ul class="nav navbar-nav">
-          <p class="navbar-text" style="margin-top: 10px; margin-bottom: 0;">Intelligent Provisioning Center</p>
+          <p class="navbar-text" style="margin-top: 10px; margin-bottom: 0;font-size: 20px;">Intelligent Provisioning Center</p>
         </ul>
       </div>
       <!-- Navbar Right Menu -->
