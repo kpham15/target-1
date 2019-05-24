@@ -17,7 +17,7 @@
 				"api":        "ipcWc",
 				"act":        "getHeader",
 				"user":       "SYSTEM",
-				"uname":			user.uname
+				"uname":			"ninh"
 			},
 			dataType: 'json',
 			success: function(data, status) {
