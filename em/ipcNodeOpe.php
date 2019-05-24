@@ -54,7 +54,7 @@ if ($act == "START") {
 }
 
 if ($act == "STOP") {
-    $result = stop($node, $userObj);
+    $result = stop($node, $serial_no, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -298,7 +298,7 @@ function stop($node, $userObj) {
         return $result;
     }
     
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
+    $cmd = "inst=STOP_CPS,serial_no=$serial_no";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
