@@ -275,9 +275,30 @@ function stop($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
+    $cpsObj = new CPS($node);
+
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, "CPS_STOP");
+    if($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta, "CPS_STOP");
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
