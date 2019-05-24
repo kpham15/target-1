@@ -422,8 +422,6 @@ function discovered($node, $hwRsp) {
 
 }
 
-
-
 function updateCpsStatus($hwRsp) {
     
     // checks what type of $hwRsp is being sent
@@ -619,7 +617,7 @@ function processHwResp($node, $hwRsp) {
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "cmd"=>$hwRsp];
+    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "hwRsp"=>$hwRsp];
     //@TODO Maybe need asyncPostRequest here? Sync for debugging
     $postReqObj->syncPostRequest($url, $params);
     return json_decode($postReqObj->reply);
