@@ -93,6 +93,15 @@ if ($act == "PROCESS_HW_RSP") {
 	mysqli_close($db);
 	return;
 }
+
+if ($act == "CONNECT_TBX_TAP1") {
+    // $result = processHwResp($node, $hwRsp);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
 //     echo json_encode($result);
