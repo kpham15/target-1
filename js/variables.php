@@ -1,6 +1,7 @@
 <script>
   // Current User Information
   var user = {
+    uname: '',
     fname: '',
     mi: '',
     lname: '',
