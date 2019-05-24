@@ -9,7 +9,6 @@
   function updateNodeStatus(nodeInfo) {
     nodeInfo.forEach(function(node) {
       if ($('.node-box[node_id='+node.node+']').length > 0) {
-        console.log('already exists');
         updateNodeBox(node);
       } else {
         createNodeBox(node);
