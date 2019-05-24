@@ -402,7 +402,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
 
-        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
+        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,serial_no=$serialNum,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
