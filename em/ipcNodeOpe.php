@@ -515,10 +515,10 @@ function updateCpsVolt($hwRsp) {
 
 // function called by updateAlm in case string contains temp only
 // str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
-function updateCpsTemp($cmd) {
+function updateCpsTemp($hwRsp) {
 
     // filters data brought from $cmd and extracts temp values
-    $newCmd = substr($cmd, 1, -1);
+    $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=', $splitCmd[0]);
     $newAckid = $ackid[1];
