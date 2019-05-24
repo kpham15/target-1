@@ -10,7 +10,7 @@
   <div id="main-section-content" class="content-wrapper">
     
     <!-- Includes for all the content pages -->
-    <?php include __DIR__ . '/../system-view.php'; ?>
+    <?php include __DIR__ . '/../system-view/system-view.php'; ?>
 
     <!-- /.content -->
   </div>
