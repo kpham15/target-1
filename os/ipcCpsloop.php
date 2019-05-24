@@ -92,6 +92,7 @@ try {
        
        
         //initialize the cps connection status to default
+        
         $cpsAlive = false;
         //get the starting time before go into 5sec-window
         $startTime = microtime(true);
@@ -170,6 +171,7 @@ try {
                     $rspObj->processRsp($rsp, $node);
                     if($cpsAlive == false) $cpsAlive = true;
                 }
+            
             }
            
         }
@@ -180,6 +182,7 @@ try {
             //when 5sec expires, check the cps communication status. Send post-request to API to declare alarm if needed
             // If receive a response from HW, reset the lostConn = 0, and process the response
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
+            echo "\nlostconn:".$lostConn."\n";
             if($cpsAlive == true) {
                 if($lostConn > 0 && $lostConn < 3)
                     $lostConn = 0; 
@@ -190,8 +193,7 @@ try {
             }
             else {
                 $lostConn++;
-                if(($lostConn % 3) == 0) 
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
+                $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
             
             }
             //go back and send status command again
@@ -213,15 +215,22 @@ catch (Throwable $t)
     }
     else if($t->getCode() == SERIAL_CPS_HW_FAIL) {
         // If errorCode = 2, that means socket to HW is broken, close the socket and create a new one
-        $comPortObj->endConnection();
-        $clientExist = false;
-        // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+        if($clientExist == true) {
+            $comPortObj->endConnection();
+            $clientExist = false;
+        }
+        $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+        $lostConn = 3;
         sleep(5);
         goto clientSock;
     }
-    else if(strpos($t->getMessage(),'cannot open file') !== false) {
-        $clientExist = false;
-        // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+    else if(strpos($t->getMessage(),'cannot open file') !== false || strpos($t->getMessage(),'cannot write data to file descriptor') !== false) {
+        if($clientExist == true) {
+            $comPortObj->endConnection();
+            $clientExist = false;
+        }
+        $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
+        $lostConn = 3;
         sleep(5);
         goto clientSock;
     }
