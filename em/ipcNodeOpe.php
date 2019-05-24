@@ -283,7 +283,7 @@ function start($node, $userObj) {
 }
 
 
-function stop($node, $userObj) {
+function stop($node, $serial_no, $userObj) {
 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
