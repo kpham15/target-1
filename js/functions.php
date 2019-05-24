@@ -21,19 +21,12 @@
 			},
 			dataType: 'json',
 			success: function(data, status) {
-				console.log(data);
-				var obj = JSON.stringify(data);
-				console.log(obj);
-				if (obj.rslt == "fail") {
+				if (data.rslt == "fail") {
 					alert(obj.reason);
 				} 
 				else {
-					console.log('obj.rslt');
-					console.log(obj.rslt);
-					let nodeInfo = obj.rows[0].node_info;
-					console.log('nodeinfo');
-					console.log(nodeInfo);
-					// updateNodeStatus(nodeInfo);
+					let nodeInfo = data.rows[0].node_info;
+					updateNodeStatus(nodeInfo);
 				}
 			}
 		});
