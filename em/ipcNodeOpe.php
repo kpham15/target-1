@@ -45,7 +45,7 @@ if ($act == "DISCOVER") {
 	return;
 }
 
-
+// not being used on the front end
 if ($act == "START") {
     $result = start($node, $userObj);
     echo json_encode($result);
@@ -235,6 +235,7 @@ function discover($node, $device, $userObj) {
     return $result;
 }
 
+// not being used on the front end
 function start($node, $userObj) {
 
     // permissions check here
@@ -400,7 +401,7 @@ function discovered($node, $hwRsp) {
             return $result;
         }
         // call message 2
-
+        // requires instruction and serial number
         $cmd = "inst=START_CPS,,serial_no=$serialNum,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
