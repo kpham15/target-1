@@ -202,7 +202,7 @@ function discover($node, $device, $userObj) {
     }
 
     // formulate msg #1
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-CPS-DCV*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -315,6 +315,7 @@ function stop($node, $userObj) {
 function discovered($node, $hwRsp) {
 
     // parse hwString
+    // inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-CPS-DCV*
     
     // $ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
     // UUID is serial number for now
