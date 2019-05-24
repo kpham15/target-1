@@ -114,6 +114,7 @@
             "OFF"   => "CPS_OFF",
         ],
         "NADM" => [
+            "API"   => "ipcNodeAdmin",
             "UPDC"  => "updateCpsCom",
             "UNDS"  => "updateNodeDevicesStatus",
         ]

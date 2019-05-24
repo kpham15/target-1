@@ -559,6 +559,33 @@ function updateCpsTemp($cmd) {
     return $result;
 }
 
+function processHwResp($hwRsp) {
+    // remove $ and * from string
+    $hwRsp = substr($hwRsp, 1, -1);
+    // divide string into sections
+    $hwRspArray = explode(',', $hwRsp);
+    // create ackid array to obtain ackid value
+    $ackidArray = explode("=", $hwRspArray[0]);
+    $ackid = $ackidArray[1];
+    // parse ackid value to obtain node, api, apiAct
+    $parsedAckid = explode('-', $ackid);
+    $node = $parsedAckid[0];
+    $api = $parsedAckid[1];
+    $apiAct = $parsedAckid[2];
+    
+    // Obtain full api string from constant and api action from constant
+    $api = apiAndActArray[$api]['API'];
+    $apiAct = apiAndActArray[$api][$apiAct];
 
+    // post to nodeapi to update node cps stats
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "cmd"=>$hwRsp];
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
+
+
+    
+}
 
 ?>
