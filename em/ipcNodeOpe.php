@@ -54,7 +54,7 @@ if ($act == "START") {
 }
 
 if ($act == "STOP") {
-    $result = stop($node, $userObj);
+    $result = stop($node, $serial_no, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -314,7 +314,7 @@ function stop($node, $userObj) {
         return $result;
     }
     
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
+    $cmd = "inst=STOP_CPS,node=$node,serial_no=$serial_no";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
@@ -354,7 +354,7 @@ function discovered($node, $hwRsp) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
+        $cmd = "inst=STOP_CPS,serial_no=$serialNum";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
@@ -370,7 +370,6 @@ function discovered($node, $hwRsp) {
     else {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
-        // @TODO AM I USING THE CORRECT EVT HERE FOR SMS??
         $evt = "CPS_ON";
         // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
