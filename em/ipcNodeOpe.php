@@ -114,7 +114,7 @@ if ($act == "CONNECT_TBX_TAP1") {
 }
 
 if ($act == "EXEC") {
-    $result = exec_cmd($cmd);
+    $result = exec_cmd($node, $cmd);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -649,7 +649,7 @@ function processHwResp($node, $hwRsp) {
     
 }
 
-function exec_cmd($cmd) {
+function exec_cmd($node, $cmd) {
     // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
     // will receive string from APIs like this: 
     // cmd  =  ACKID=$node-api-act
