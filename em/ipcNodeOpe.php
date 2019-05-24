@@ -291,7 +291,7 @@ function stop($node, $userObj) {
         return $result;
     }
     
-    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta, "CPS_STOP");
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
     if ($cpsObj->rslt == FAIL) {
         $result['rslt'] = $cpsObj->rslt;
         $result['reason'] = $cpsObj->reason;
