@@ -230,7 +230,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Navigation</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>System View</span></a></li>
+        <li class="active"><a href="#"><i class="glyphicon glyphicon-th"></i> <span>System View</span></a></li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
