@@ -70,7 +70,7 @@
   <div id="main-section-content" class="content-wrapper">
     
     <!-- Includes for all the content pages -->
-    <?php include '../system-view.php'; ?>
+    <?php include 'system-view.php'; ?>
 
     <!-- /.content -->
   </div>
