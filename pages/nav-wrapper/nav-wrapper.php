@@ -1,16 +1,16 @@
 <div id="nav-wrapper" class="wrapper" style="display: none;">
 
   <!-- Main Header -->
-  <?php include 'header-navbar.html'; ?>
+  <?php include __DIR__ . '/header-navbar.html'; ?>
 
   <!-- Left side column sidebar -->
-  <?php include 'sidebar-nav.html'; ?>
+  <?php include __DIR__ . '/sidebar-nav.html'; ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div id="main-section-content" class="content-wrapper">
     
     <!-- Includes for all the content pages -->
-    <?php include '../system-view.php'; ?>
+    <?php include __DIR__ . '../system-view.php'; ?>
 
     <!-- /.content -->
   </div>
