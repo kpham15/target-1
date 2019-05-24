@@ -26,7 +26,7 @@
 					alert(obj.reason);
 				} 
 				else {
-					console.log('success');
+					console.log(obj);
 				}
 			}
 		});
