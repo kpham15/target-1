@@ -59,37 +59,17 @@
             <div class="tab-pane active" id="nodex1">
               <div class="container-fluid">
                 <div class="row">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary active">
-                      <input type="radio" checked>MIOX-1
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-2
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-3
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-4
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-5
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-6
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-7
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-8
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-9
-                    </label>
-                    <label class="btn btn=primary">
-                      <input type="radio">MIOX-10
-                    </label>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">MIOX-1</button>
+                    <button type="button" class="btn btn-default">MIOX-2</button>
+                    <button type="button" class="btn btn-default">MIOX-3</button>
+                    <button type="button" class="btn btn-default">MIOX-4</button>
+                    <button type="button" class="btn btn-default">MIOX-5</button>
+                    <button type="button" class="btn btn-default">MIOX-6</button>
+                    <button type="button" class="btn btn-default">MIOX-7</button>
+                    <button type="button" class="btn btn-default">MIOX-8</button>
+                    <button type="button" class="btn btn-default">MIOX-9</button>
+                    <button type="button" class="btn btn-default">MIOX-10</button>
                   </div>
                 </div>
                 <div class="row">
