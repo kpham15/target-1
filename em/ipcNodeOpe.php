@@ -101,6 +101,13 @@ if ($act == "CONNECT_TBX_TAP1") {
 	return;
 }
 
+if ($act == "EXEC") {
+    $result = exec_cmd($cmd);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
@@ -624,6 +631,36 @@ function processHwResp($node, $hwRsp) {
 
 
     
+}
+
+function exec_cmd($cmd) {
+    // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
+    // will receive string like this: ACKID=$node-api-act
+    
+    // get node from cmd
+    $cmdArray = explode("=", $cmd);
+    $ackIdArray = explode("-", $cmdArray[1]);
+    $node = $ackIdArray[0];
+    $api = $ackIdArray[1];
+    $act = $ackIdArray[2];
+
+    // create cpsObj to get comport and serialnum
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $newCmd = "inst=EXEC,$node,$cpsObj->dev,$cpsObj->serial_no";
+
+    $cmdObj = new CMD();
+    $cmdObj->sendCmd($newCmd, $node);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
 }
 
 ?>
