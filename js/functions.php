@@ -26,8 +26,12 @@
 					alert(obj.reason);
 				} 
 				else {
+					console.log('obj');
+					console.log(obj);
 					let nodeInfo = obj.rows[0].node_info;
-					updateNodeStatus(nodeInfo);
+					console.log('nodeinfo');
+					console.log(nodeInfo);
+					// updateNodeStatus(nodeInfo);
 				}
 			}
 		});
