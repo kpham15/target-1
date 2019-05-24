@@ -27,8 +27,6 @@
 	echo '</head>';
 
 	echo '<body>';	
-	echo '<label style="display:none" id="main_currentUser"></label>';
-
 
 	//IPCv2
 	include './pages/nav-wrapper/nav-wrapper.php';
@@ -132,7 +130,7 @@ var ipcDispatch = "./em/ipcDispatch.php";
 
 $(document).ready(function() {
 
-	if ($("#main_currentUser").text() == '')
+	if (user.uname == '')
 	{
 		$('body').addClass('login-page');
 		// $('#nav-wrapper').hide();

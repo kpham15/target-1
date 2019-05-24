@@ -114,10 +114,10 @@
           if (obj.rslt == "fail") {
             alert(obj.reason);
           } else {
-            $("#main_currentUser").text(obj.rows[0].uname);
-  
+            
             // @TODO add user name to profile area in sidebar/header nav
             // $('#main_userFLname').text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
+            user.uname = obj.rows[0].uname;
             user.fname = obj.rows[0].fname;
             user.mi = obj.rows[0].mi;
             user.lname = obj.rows[0].lname;
