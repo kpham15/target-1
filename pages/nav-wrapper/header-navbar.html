@@ -25,7 +25,7 @@
       <ul class="nav navbar-nav">
         <!-- Wire Center Information -->
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs"></button></p>
-        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> CDT</p>
+        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
 
         <!-- Wire Center Information dropdown -->
         <li class="dropdown notifications-menu">
@@ -226,6 +226,12 @@
     $('#header-wcc').text(data.wcc);
     $('#header-npanxx').text(data.npanxx);
     $('#header-frmid').text(data.frmid);
+    $('#header-ipcstat').text(data.ipcstat);
+    
+    let time = moment(data.time);
+
+    $('#header-time').text(moment().format('MM-DD-YYYY HH:mm'));
+    $('#header-timezone').text(data.tzone);
   }
 
   $(document).ready(function() {
