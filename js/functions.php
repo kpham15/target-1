@@ -27,7 +27,7 @@
 				else {
 					let nodeInfo = data.rows[0].node_info;
 					updateNodeStatus(nodeInfo);
-					updateHeaderInfo(data);
+					updateHeaderInfo(data.rows[0]);
 				}
 			}
 		});
