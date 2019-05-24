@@ -22,10 +22,22 @@ if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
 $device = "ttyUSB0";
+
 $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
+
+$resp_string = "";
+if (isset($_POST['resp_string'])) {
+    $resp_string = $_POST['resp_string'];
+}
+
         
 
 // dispatch to functions
@@ -103,6 +115,13 @@ if ($act == "CONNECT_TBX_TAP1") {
 
 if ($act == "EXEC") {
     $result = exec_cmd($cmd);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+if ($act == "EXEC_RESP") {
+    $result = exec_resp($resp_string);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -409,7 +428,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
         // requires instruction and serial number
-        $cmd = "inst=START_CPS,,serial_no=$serialNum,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
+        $cmd = "inst=START_CPS,sn=$serialNum,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
@@ -423,10 +442,7 @@ function discovered($node, $hwRsp) {
         $result['reason'] = $cpsObj->reason;
         
         return $result;
-
     }
-
-
 }
 
 function updateCpsStatus($hwRsp) {
@@ -635,7 +651,8 @@ function processHwResp($node, $hwRsp) {
 
 function exec_cmd($cmd) {
     // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
-    // will receive string like this: ACKID=$node-api-act
+    // will receive string from APIs like this: 
+    // cmd  =  ACKID=$node-api-act
     
     // get node from cmd
     $cmdArray = explode("=", $cmd);
@@ -652,7 +669,7 @@ function exec_cmd($cmd) {
         return $result;
     }
 
-    $newCmd = "inst=EXEC,$node,$cpsObj->dev,$cpsObj->serial_no";
+    $newCmd = "inst=EXEC,$node,$cpsObj->dev,$cpsObj->serial_no,$cmd";
 
     $cmdObj = new CMD();
     $cmdObj->sendCmd($newCmd, $node);
@@ -661,6 +678,21 @@ function exec_cmd($cmd) {
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
+}
+
+function exec_resp($resp_string) {
+    // nodeOpe->exec_resp() will parse the $resp_string for ackid and post to API-ACT extracted from ackid.
+
+    // $resp_string will look like ??
+
+
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node];
+    //@TODO Maybe need asyncPostRequest here? Sync for debugging
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
+
 }
 
 ?>
