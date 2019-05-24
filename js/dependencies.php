@@ -8,9 +8,9 @@
   echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
-  echo '<link rel="stylesheet" href="./css/ipcv2.css">';
-
   echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+  
+  echo '<link rel="stylesheet" href="./css/ipcv2.css">';
 
   echo '<script src="bower_components/jquery/dist/jquery.min.js"></script>';
   echo '<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';

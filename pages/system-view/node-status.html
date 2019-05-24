@@ -31,6 +31,7 @@
   }
 
   function createNodeBox(node) {
+    // HTML template for node box
     let nodeBox =  '<div class="node-box" node_id="'+node.node+'">' +
                       '<div class="info-box">' +
                         '<span class="info-box-icon"></span>' +
@@ -45,7 +46,23 @@
                       '</div>' +
                     '</div>';
 
+    // Append node box to html body
     $('.node-status-row').append(nodeBox);
+
+    // Add color to status bar depending on alarm state
+    let almColor = '';
+
+    if (node.node_alm === 'CRI') {
+      almColor = 'bg-red';
+    } else if (node.node_alm === 'MAJ') {
+      almColor = 'bg-orange';
+    } else if (node.node_alm === 'MIN') {
+      almColor = 'bg-yellow';
+    } else if (node.node_alm === 'NONE') {
+      almColor = 'bg-green';
+    }
+
+    $('[node_id='+node.node+'] .info-box-icon').addClass(almColor);
     return;
   }
 
