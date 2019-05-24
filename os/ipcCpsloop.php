@@ -34,11 +34,12 @@ $RDWR_interval = 200000;
 
 $lostConn = 3;
 
-$connectHw = false;
+$discover_mode = false;
 $start_mode = false;
 
 $statusCmd = '';
 $cpsCmd='';
+$sn='';
 
 //-------------------------Begin--------------------------------
 // define ERROR CODE
@@ -117,7 +118,7 @@ try {
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
                         $com_port = $udpMsgArr['dev'];
-                        $connectHw = true;
+                        $discover_mode = true;
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
                         echo "cmd changed to:".$udpMsgArr['cmd'];
@@ -127,9 +128,9 @@ try {
                     }
                 }
                 else if($udpMsgArr['inst'] == 'START_CPS') {
-                    if($udpMsgArr['node'] == $node) {
-                        $com_port = $udpMsgArr['dev'];
-                        $connectHw = true;
+                    if($udpMsgArr['sn'] == $sn) {
+                        // $com_port = $udpMsgArr['dev'];
+                        $discover_mode = true;
                         $start_mode = true;
                         $statusCmd = $udpMsgArr['cmd'];
                         if($clientExist) $comPortObj->endConnection();
@@ -139,10 +140,10 @@ try {
                     }
                 }
                 else if($udpMsgArr['inst'] == 'STOP_CPS') {
-                    if($udpMsgArr['node'] == $node && $com_port == $udpMsgArr['dev']) {
+                    if($udpMsgArr['sn'] == $sn ) {
                         $com_port = '';
                         $comPortObj->endConnection();
-                        $connectHw = false;
+                        $discover_mode = false;
                         $start_mode = false;
                         $buf = '';
                         goto clientSock;
@@ -150,7 +151,7 @@ try {
                 }   
             }
 
-            if($connectHw) {
+            if($discover_mode) {
                 if($cpsCmd != '') {
                     $comPortObj->sendCmd($cpsCmd);
                     if($comPortObj->rslt == 'fail') {   
@@ -165,9 +166,19 @@ try {
 
             //receive response from HW. 
             //if response exists, process the response and update cps connection status
-            if($connectHw) {
+            if($discover_mode) {
                 $rsp = $comPortObj->receiveRsp();
+
                 if($rsp !== '') {
+                    //serial number is retrieved in discover_mode, not in start_mode
+                    if($start_mode == false) {
+                        echo "go get sn:\n";
+                        $sn = $rspObj->getUuid($rsp);
+                        if($sn != '') {
+                            echo "\nSerial number: $sn\n";
+                        }
+                    }
+                   
                     $rspObj->processRsp($rsp, $node);
                     if($cpsAlive == false) $cpsAlive = true;
                 }
@@ -264,6 +275,8 @@ function processUDPmsg($buf) {
             $data['node'] = $paraExtract[1];
         else if($paraExtract[0] == 'dev') 
             $data['dev'] = $paraExtract[1];
+        else if($paraExtract[0] == 'sn') 
+            $data['sn'] = $paraExtract[1];
     }
     $data['cmd']= $cmdString;
     return $data;

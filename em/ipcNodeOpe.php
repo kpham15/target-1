@@ -225,7 +225,7 @@ function discover($node, $device, $userObj) {
 
     // formulate msg #1
     // this cmd will be sent back to be parsed. the ackid must be the NEXT ACT and API
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-cps-dcvd*";
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,sn=,cmd=\$status,source=uuid,device=backplane,ackid=$node-cps-dcvd*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -322,7 +322,7 @@ function stop($node, $serial_no, $userObj) {
         return $result;
     }
     
-    $cmd = "inst=STOP_CPS,serial_no=$serial_no";
+    $cmd = "inst=STOP_CPS,sn=$serial_no";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
@@ -362,7 +362,7 @@ function discovered($node, $hwRsp) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,serial_no=$serialNum";
+        $cmd = "inst=STOP_CPS,sn=$serialNum";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
@@ -409,7 +409,7 @@ function discovered($node, $hwRsp) {
         }
         // call message 2
         // requires instruction and serial number
-        $cmd = "inst=START_CPS,,serial_no=$serialNum,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
+        $cmd = "inst=START_CPS,sn=$serialNum,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);

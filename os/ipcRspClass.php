@@ -91,6 +91,31 @@ class RSP {
            
         }
     }
+
+    public function getUuid($rsp) {
+        $sn = '';
+        $data = preg_replace("/(\r\n|\n|\r)/",'',$rsp);
+        if(strpos($data,'uuid=') !== false) {
+            preg_match_all("/\\$.*?\*/", $data, $searchArray);
+            $rspArray = $searchArray[0];
+            print_r($rspArray);
+            for($i=0; $i<count($rspArray); $i++) {
+                $len = strlen($rspArray[$i]);
+                if($rspArray[$i] !== '' && $rspArray[$i][0] == '$' && $rspArray[$i][$len-1] == '*') {
+                    if(stripos($rspArray[$i],'uuid=') !== false) {
+                        echo "\nProcess this response to get sn:".$rspArray[$i]."\n";
+                        $newHwString = substr($rspArray[$i], 1, -1);
+                        $newHwStringArray = explode(",", $newHwString);
+                        $serialNumArray = explode("=", $newHwStringArray[3]);
+                        $sn = $serialNumArray[1];
+                    }
+                }
+               
+            }
+        }
+
+        return $sn; 
+    }
     
 }
 
