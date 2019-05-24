@@ -17,7 +17,7 @@
 				"api":        "ipcWc",
 				"act":        "getHeader",
 				"user":       "SYSTEM",
-				"uname":			"ninh"
+				"uname":			user.uname
 			},
 			dataType: 'json',
 			success: function(data, status) {
@@ -26,7 +26,8 @@
 					alert(obj.reason);
 				} 
 				else {
-					console.log(obj);
+					let nodeInfo = obj.rows[0].node_info;
+					updateNodeStatus(nodeInfo);
 				}
 			}
 		});

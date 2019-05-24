@@ -181,6 +181,35 @@
 </div>
 
 <script type="text/javascript">
+  function updateNodeStatus(nodeInfo) {
+    nodeInfo.forEach(function(node) {
+      if ($('.node-box[node_id='+node.node+']').length > 0) {
+        console.log('already exists');
+      } else {
+        createNodeBox(node);
+      }
+    })
+  }
+
+  function createNodeBox(node) {
+    let nodeBox =  '<div class="node-box" node_id="'+node.node+'">' +
+                      '<div class="info-box">' +
+                        '<span class="info-box-icon"></span>' +
+                        '<div class="node-box-content info-box-content">' +
+                          '<span class="info-box-text node-box-name">Node ' + node.node + '</span>' +
+                          '<span class="info-box-text node-box-stat">' + node.node_stat + '</span>' +
+                          '<span class="info-box-text node-box-temp-volt">' +
+                            node.node_temp + ' | ' + node.node_volt +
+                          '</span>' +
+                          '<span class="info-box-text node-box-rack">' + node.node_rack + '</span>' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>';
+
+    $('.node-status-row').append(nodeBox);
+    return;
+  }
+
   $(document).ready(function() {
 
   });

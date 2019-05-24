@@ -1,6 +1,19 @@
+/* ============ Node Status Section CSS ============= */
+.node-status-row {
+  display: flex;
+}
+.node-box {
+  width: 9%;
+  margin-right: 8px;
+}
+.node-box .info-box-icon {
+  width: 20px;
+}
 .node-box-content {
   margin-left: 20px !important;
 }
+/* ============ END Node Status Section CSS ============ */
+
 .port-grid .info-box-text {
   font-size: 16px !important;
 }
@@ -31,11 +44,4 @@
 }
 .nav.node-tabs>li>a {
   padding: 8px;
-}
-.node-status-row {
-  display: flex;
-}
-.node-box {
-  width: 9%;
-  margin-right: 8px;
 }
