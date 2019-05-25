@@ -23,38 +23,6 @@
       <div class="col-md-6">
         <div id="node-x-table" class="nav-tabs-custom">
           <?php include __DIR__ . "/node-x-table.html"; ?>
-          <ul class="nav nav-tabs node-tabs">
-            <li class="active">
-              <a href="#nodex1" data-toggle="tab">Node 1</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 2</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 3</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 4</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 5</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 6</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 7</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 8</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 9</a>
-            </li>
-            <li>
-              <a href="#nodex1" data-toggle="tab">Node 10</a>
-            </li>
-          </ul>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodex1">
               <div class="container-fluid">
