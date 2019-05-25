@@ -407,39 +407,8 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div id="node-y-table" class="nav-tabs-custom" shelf="y">
-          <ul class="nav nav-tabs node-tabs">
-            <li class="active">
-              <a href="#nodey1" data-toggle="tab">Node 1</a>
-            </li>
-            <li>
-              <a href="#nodey2" data-toggle="tab">Node 2</a>
-            </li>
-            <li>
-              <a href="#nodey3" data-toggle="tab">Node 3</a>
-            </li>
-            <li>
-              <a href="#nodey4" data-toggle="tab">Node 4</a>
-            </li>
-            <li>
-              <a href="#nodey5" data-toggle="tab">Node 5</a>
-            </li>
-            <li>
-              <a href="#nodey6" data-toggle="tab">Node 6</a>
-            </li>
-            <li>
-              <a href="#nodey7" data-toggle="tab">Node 7</a>
-            </li>
-            <li>
-              <a href="#nodey8" data-toggle="tab">Node 8</a>
-            </li>
-            <li>
-              <a href="#nodey9" data-toggle="tab">Node 9</a>
-            </li>
-            <li>
-              <a href="#nodey10" data-toggle="tab">Node 10</a>
-            </li>
-          </ul>
+        <div id="node-y-table" class="nav-tabs-custom">
+          <?php include __DIR__ . "/node-y-table.html"; ?>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodey1">
               <div class="container-fluid">

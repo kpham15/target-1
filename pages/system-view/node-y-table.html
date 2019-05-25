@@ -1,10 +1,10 @@
-<ul id="node-x-tabs" class="nav nav-tabs node-tabs">
+<ul id="node-y-tabs" class="nav nav-tabs node-tabs">
 </ul>
 
 <script type="text/javascript">
-  function updateNodeXTables() {
+  function updateNodeYTables() {
     nodeInfo.forEach(function(node) {
-      if ($('#node-x-tabs .node-tab[node_id="'+node.node+'"]').length > 0) {
+      if ($('#node-y-tabs .node-tab[node_id="'+node.node+'"]').length > 0) {
         return;
       } else {
         createNodeTab(node);
@@ -19,11 +19,11 @@
                   '</li>';
 
     // Append node tab to html body
-    $('#node-x-tabs').append(nodeTab);
+    $('#node-y-tabs').append(nodeTab);
 
     // Check if first load and set first node to active if true
     if (firstLoad) {
-      $('#node-x-tabs .node-tab[node_id="1"]').addClass('active');
+      $('#node-y-tabs .node-tab[node_id="1"]').addClass('active');
     }
 
     return;
