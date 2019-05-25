@@ -4,7 +4,7 @@
 <script type="text/javascript">
   function updateNodeTables() {
     nodeInfo.forEach(function(node) {
-      if ($('.node-tab[node_id='+node.node+']').length > 0) {
+      if ($('.node-tab[node_id="'+node.node+'"]').length > 0) {
         return;
       } else {
         createNodeTab(node);
