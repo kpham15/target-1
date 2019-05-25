@@ -21,7 +21,7 @@
 
     <div class="row">
       <div class="col-md-6">
-        <div id="node-x-table" class="nav-tabs-custom" shelf="x">
+        <div id="node-x-table" class="nav-tabs-custom">
           <?php include __DIR__ . "/node-x-table.html"; ?>
           <ul class="nav nav-tabs node-tabs">
             <li class="active">

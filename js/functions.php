@@ -26,9 +26,12 @@
 					alert(obj.reason);
 				} 
 				else {
-					let nodeInfo = data.rows[0].node_info;
-					updateNodeStatus(nodeInfo);
+					nodeInfo = data.rows[0].node_info;
+					updateNodeStatus();
+					updateNodeTables();
 					updateHeaderInfo(data.rows[0]);
+
+					firstLoad = false;
 				}
 			}
 		});

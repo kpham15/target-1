@@ -1,4 +1,7 @@
 <script>
+  // Interval loop for querying systme information
+  var systemInfoInterval = 0;
+
   // Current User Information
   var user = {
     uname: '',
@@ -10,6 +13,10 @@
     loginTime: '',
     idle_to: ''
   }
+  
+  // Node information for System View
+  var nodeInfo = [];
 
-  var systemInfoInterval = 0;
+  // Flag for first startup
+  var firstLoad = true;
 </script>

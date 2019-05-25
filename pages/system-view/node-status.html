@@ -6,14 +6,14 @@
 </div>
 
 <script type="text/javascript">
-  function updateNodeStatus(nodeInfo) {
+  function updateNodeStatus() {
     nodeInfo.forEach(function(node) {
       if ($('.node-box[node_id='+node.node+']').length > 0) {
         updateNodeBox(node);
       } else {
         createNodeBox(node);
       }
-    })
+    });
   }
 
   function updateNodeBox(node) {
