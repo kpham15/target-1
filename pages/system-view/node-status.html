@@ -25,13 +25,13 @@
     let almColor = '';
 
     if (node.node_alm === 'CRI') {
-      almColor = 'bg-red';
+      almColor = 'bg-critical';
     } else if (node.node_alm === 'MAJ') {
       almColor = 'bg-major';
     } else if (node.node_alm === 'MIN') {
       almColor = 'bg-minor';
     } else if (node.node_alm === 'NONE') {
-      almColor = 'bg-green';
+      almColor = 'bg-no-alarm';
     }
 
     $('[node_id='+node.node+'] .info-box-icon').attr('class', 'info-box-icon ' + almColor);
@@ -61,13 +61,13 @@
     let almColor = '';
 
     if (node.node_alm === 'CRI') {
-      almColor = 'bg-red';
+      almColor = 'bg-critical';
     } else if (node.node_alm === 'MAJ') {
       almColor = 'bg-major';
     } else if (node.node_alm === 'MIN') {
       almColor = 'bg-minor';
     } else if (node.node_alm === 'NONE') {
-      almColor = 'bg-green';
+      almColor = 'bg-no-alarm';
     }
 
     $('[node_id='+node.node+'] .info-box-icon').addClass(almColor);
