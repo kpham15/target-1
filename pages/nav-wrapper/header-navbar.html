@@ -205,7 +205,7 @@
 
     if (data.sev === 'CRI') {
       alarmText = 'CRITICAL';
-      alarmColor = 'btn-danger';
+      alarmColor = 'bg-red';
     } else if (data.sev === 'MAJ') {
       alarmText = 'MAJOR';
       alarmColor = 'bg-major';
@@ -214,7 +214,7 @@
       alarmColor = 'bg-minor';
     } else if (data.sev === 'NONE') {
       alarmText = 'NONE';
-      alarmColor = 'btn-success';
+      alarmColor = 'bg-green';
     }
 
     $('#alarm-header-icon').text(alarmText);
