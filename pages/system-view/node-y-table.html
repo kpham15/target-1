@@ -7,12 +7,12 @@
       if ($('#node-y-tabs .node-tab[node_id="'+node.node+'"]').length > 0) {
         return;
       } else {
-        createNodeTab(node);
+        createNodeYTab(node);
       }
     });
   }
 
-  function createNodeTab(node) {
+  function createNodeYTab(node) {
     // HTML template for node tab
     let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
                     '<a href="#nodex" data-toggle="tab">Node '+node.node+'</a>' +
