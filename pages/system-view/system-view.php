@@ -126,7 +126,7 @@
 
   function createMioBtn(index, ptyp) {
     let slot = index + 1;
-    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot'" ptyp="'+ptyp+'">MIO'+ptyp.toUpperCase()+'-'+slot+'</button>'
+    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'">MIO'+ptyp.toUpperCase()+'-'+slot+'</button>'
   }
 
   function createNodeTabs(node) {
