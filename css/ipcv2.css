@@ -4,6 +4,10 @@
   margin: auto;
   text-align: left;
 }
+
+#login-title {
+  line-height: 50%;
+}
 /* ============ END Login Page ===============*/
 
 /* ============ IPC Alarm Colors ============ */
