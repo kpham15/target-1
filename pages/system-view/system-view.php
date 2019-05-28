@@ -444,7 +444,7 @@
     }
 
     for (let i = 1; i <= 25; i++) {
-      let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'"'>' +
+      let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'">' +
                       '<div class="info-box-text">' +
                         '-' +
                         '<span class="pull-right">-</span>' +
