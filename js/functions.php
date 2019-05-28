@@ -5,7 +5,7 @@
 		updateUsername();
 		updateNodeStatus();
 		updateHeaderInfo();
-		sysViewStartup();
+		sysviewStartup();
 	}
 
 	function loginSuccess() {
