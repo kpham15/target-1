@@ -22,11 +22,16 @@ if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
 $device = "ttyUSB0";
+
 $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
-        
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
 
 // dispatch to functions
 
@@ -122,6 +127,15 @@ if ($act == "VIEW CMD") {
     mysqli_close($db);
     return;
 }
+
+else {
+	$result["rslt"] = 'fail';
+	$result["reason"] = "This action is under development!";
+	echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 // functions area
 function view_cmd($node) {
     $cmdObj = new CMD();
@@ -642,6 +656,7 @@ function exec_resp($node, $hwRsp, $userObj) {
 
     // post to nodeapi to update node cps stats
     $cmdObj = new CMD($ackid);
+
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
@@ -657,19 +672,19 @@ function exec_resp($node, $hwRsp, $userObj) {
             return $result;
         }
     }
-
-    
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "hwRsp"=>$hwRsp];
     //@TODO Maybe need asyncPostRequest here? Sync for debugging
     $postReqObj->syncPostRequest($url, $params);
+    
     return json_decode($postReqObj->reply);
 
 }
 
 function exec_cmd($node, $cmd, $userObj) {
+ 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -688,13 +703,14 @@ function exec_cmd($node, $cmd, $userObj) {
     $api = $ackIdArray[1];
     $act = $ackIdArray[2];
 
+
     $cmdObj = new CMD($ackId);
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
-    
+    echo "cmdque: $cmdObj->rslt:$cmdObj->reason";
     if ($cmdObj->reason == "ACKID NOT FOUND") {
         $cmdObj->addCmd($node, $ackid, $cmd);
         if ($cmdObj->rslt == FAIL) {
@@ -713,7 +729,7 @@ function exec_cmd($node, $cmd, $userObj) {
         }
     }
 
-
+    echo "go into cps check:";
     // create cpsObj to get comport and serialnum
     $cpsObj = new CPS($node);
     if ($cpsObj->rslt == FAIL) {
@@ -732,7 +748,7 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
 
-    $result['rslt'] = SUCCESS;
+    $result['rslt'] =   SUCCESS;
     $result['reason'] = "CMD IS IN PROGRESS";
     return $result;
 }
