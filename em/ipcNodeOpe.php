@@ -108,14 +108,6 @@ if ($act == "EXEC_CMD") {
 	return;
 }
 
-
-// if ($act == "UPDATE RACK") {
-//     $result = updateRack($node, $device);
-//     echo json_encode($result);
-// 	mysqli_close($db);
-// 	return;
-// }
-
 // functions area
 
 function cps_on($node) {
