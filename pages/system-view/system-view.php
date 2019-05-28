@@ -100,47 +100,58 @@
 <script type="text/javascript">
   function sysviewStartup() {
     nodeInfo.forEach(function(node) {
-      if ($('#node-x-table .node-tab[node_id="'+node.node+'"]').length === 0) {
-        let nodeXTab = createNodeTabs(node, 'x');
-        $('#node-x-tabs').append(nodeXTab);
-      }
+      let nodeTab = createNodeTabs(node);
+      $('.node-tabs').append(nodeTab);
+      // if ($('#node-x-table .node-tab[node_id="'+node.node+'"]').length === 0) {
+      //   let nodeXTab = createNodeTabs(node, 'x');
+      //   $('#node-x-tabs').append(nodeXTab);
+      // }
 
-      if ($('#node-y-table .node-tab[node_id="'+node.node+'"]').length === 0) {
-        let nodeYTab = createNodeTabs(node, 'y');
-        $('#node-y-tabs').append(nodeYTab);
-      }
+      // if ($('#node-y-table .node-tab[node_id="'+node.node+'"]').length === 0) {
+      //   let nodeYTab = createNodeTabs(node, 'y');
+      //   $('#node-y-tabs').append(nodeYTab);
+      // }
     });
+    $('.node-tab[node_id="1"]').addClass('active');
+    // $('#node-y-table .node-tab[node_id="1"]').addClass('active');
 
-    if ($('#node-x-tabs').children().length > 0) {
-      $('#node-x-table .node-tab[node_id="1"]').addClass('active');
-    }
-    if ($('#node-y-tabs').children().length > 0) {
-      $('#node-y-table .node-tab[node_id="1"]').addClass('active');
-    }
+    $('#node-x-tabs>li>a').attr('href','#nodex');
+    $('#node-y-tabs>li>a').attr('href','#nodey');
+
+    // if ($('#node-x-tabs').children().length > 0) {
+    // }
+    // if ($('#node-y-tabs').children().length > 0) {
+    // }
 
     for (let i = 1; i <= 25; i++) {
-      let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'">' +
-                      '<div class="info-box-text">' +
-                        '-' +
-                        '<span class="pull-right">-</span>' +
-                      '</div>' +
-                      '<div class="info-box-text">' +
-                        '-' +
-                        '<span class="pull-right">-</span>' +
-                      '</div>' +
-                      '<div class="info-box-text text-center">' +
-                        '-' +
-                      '</div>'
-                    '</div>';
+      let portBox = createPortBox();
 
       $('.port-grid').append(portBox);
     }
   }
 
-  function createNodeTabs(node, ptyp) {
+  function createPortBox() {
+    let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'">' +
+                    '<div class="info-box-text">' +
+                      '-' +
+                      '<span class="pull-right">-</span>' +
+                    '</div>' +
+                    '<div class="info-box-text">' +
+                      '-' +
+                      '<span class="pull-right">-</span>' +
+                    '</div>' +
+                    '<div class="info-box-text text-center">' +
+                      '-' +
+                    '</div>'
+                  '</div>';
+
+    return portBox;
+  }
+
+  function createNodeTabs(node) {
     // HTML template for node tab
     let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
-                    '<a href="#node'+ptyp+'" data-toggle="tab">Node '+node.node+'</a>' +
+                    '<a href="#" data-toggle="tab">Node '+node.node+'</a>' +
                   '</li>';
 
     // Return html string
