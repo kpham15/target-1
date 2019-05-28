@@ -93,11 +93,13 @@
     // Create MIO buttons according to data from first node (the initial active node)
     let node1 = nodeInfo.findIndex(node => node.node === '1');
     nodeInfo[node1].MIOX.forEach(function(psta, i) {
-      let mioBtn = createMioXBtn(psta, i);
+      let mioBtn = createMioBtn(psta, i, 'x');
       $('#miox-btn-group').append(mioBtn);
     });
-    let mioYBtn = createMioBtn(mio, i, 'y');
-    $('#mioy-btn-group').append(mioYBtn);
+    nodeInfo[node1].MIOY.forEach(function(psta, i) {
+      let mioBtn = createMioBtn(psta, i, 'y');
+      $('#mioy-btn-group').append(mioYBtn);
+    });
     $('.mio-btn[slot="1"]').addClass('active');
     
     // Create port grid template
@@ -125,9 +127,9 @@
     return portBox;
   }
 
-  function createMioXBtn(psta, index) {
+  function createMioBtn(psta, index, ptyp) {
     let slot = index + 1;
-    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="x"><p>MIOX-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button>';
+    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'"><p>MIO'+ptyp.toUpperCase()+'-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button>';
 
     return mioBtn;
   }
