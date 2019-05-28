@@ -22,7 +22,9 @@
     <div class="row">
       <div class="col-md-6">
         <div id="node-x-table" class="nav-tabs-custom">
-          <?php include __DIR__ . "/node-table.html"; ?>
+          <ul id="node-x-tabs" class="nav nav-tabs node-tabs">
+            <!-- Node tabs for X side created dynamically -->
+          </ul>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodex1">
               <div class="container-fluid">
@@ -408,7 +410,9 @@
       </div>
       <div class="col-md-6">
         <div id="node-y-table" class="nav-tabs-custom">
-          <?php include __DIR__ . "/node-table.html"; ?>
+          <ul id="node-y-tabs" class="nav nav-tabs node-tabs">
+            <!-- Node tabs for Y side created dynamically -->
+          </ul>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodey1">
               <div class="container-fluid">
