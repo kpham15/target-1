@@ -27,18 +27,17 @@
 				"user":       "SYSTEM",
 				"uname":			user.uname
 			},
-			dataType: 'json',
-			success: function(data, status) {
-				let res = data.rows[0];
+			dataType: 'json'
+		}).done(function(data) {
+			let res = data.rows[0];
 
-				if (data.rslt == "fail") {
-					alert(obj.reason);
-				} 
-				else {
-					nodeInfo = res.node_info;
-					delete res.node_info;
-					wcInfo = res;
-				}
+			if (data.rslt == "fail") {
+				alert(obj.reason);
+			} 
+			else {
+				nodeInfo = res.node_info;
+				delete res.node_info;
+				wcInfo = res;
 			}
 		});
 	}
