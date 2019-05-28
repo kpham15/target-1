@@ -613,14 +613,25 @@ function exec_resp($node, $hwRsp, $userObj) {
     $rsp = substr($hwRsp, 1, -1);
     // divide string into sections
     $hwRspArray = explode(',', $rsp);
+
+    foreach($hwRspArray as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackid = $paraExtract[1];
+            $node = $cmdArray[0];
+            $api_key = $cmdArray[1];
+            $apiAct_key = $cmdArray[2];
+        }
+    }
     // create ackid array to obtain ackid value
-    $ackidArray = explode("=", $hwRspArray[0]);
-    $ackid = $ackidArray[1];
+    // $ackidArray = explode("=", $hwRspArray[0]);
+    // $ackid = $ackidArray[1];
     // parse ackid value to obtain node, api, apiAct
-    $parsedAckid = explode('-', $ackid);
-    $node = $parsedAckid[0];
-    $api_key = $parsedAckid[1];
-    $apiAct_key = $parsedAckid[2];
+    // $parsedAckid = explode('-', $ackid);
+    // $node = $parsedAckid[0];
+    // $api_key = $parsedAckid[1];
+    // $apiAct_key = $parsedAckid[2];
 
     // Obtain full api string from constant and api action from constant
     $api = apiAndActArray[$api_key]['api'];
