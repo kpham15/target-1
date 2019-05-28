@@ -606,6 +606,7 @@ function exec_resp($node, $hwRsp, $userObj) {
     // divide string into sections
     $hwRspArray = explode(',', $rsp);
 
+    // go through array and search for ackid, node, api and apiAction
     foreach($hwRspArray as $parameter) {
         $paraExtract = explode("=", $parameter);
         if ($paraExtract[0] == "ackid") {
@@ -616,15 +617,7 @@ function exec_resp($node, $hwRsp, $userObj) {
             $apiAct_key = $cmdArray[2];
         }
     }
-    // create ackid array to obtain ackid value
-    // $ackidArray = explode("=", $hwRspArray[0]);
-    // $ackid = $ackidArray[1];
-    // parse ackid value to obtain node, api, apiAct
-    // $parsedAckid = explode('-', $ackid);
-    // $node = $parsedAckid[0];
-    // $api_key = $parsedAckid[1];
-    // $apiAct_key = $parsedAckid[2];
-
+  
     // Obtain full api string from constant and api action from constant
     $api = apiAndActArray[$api_key]['api'];
     $apiAct = apiAndActArray[$api_key][$apiAct_key];
@@ -637,6 +630,7 @@ function exec_resp($node, $hwRsp, $userObj) {
         return $result;
     }
 
+    // find the ackid in t_cmdque and update with stat 'COMPL'
     if ($cmdObj->reason == "ACKID FOUND") {
         $stat = "COMPL";
         $cmdObj->updCmd($stat, $rsp);
@@ -684,6 +678,7 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
     
+    // if ackid doesnt exist, add to t_cmdque, it already exists, update stat to PENDING
     if ($cmdObj->reason == "ACKID NOT FOUND") {
         $cmdObj->addCmd($node, $ackid, $cmd);
         if ($cmdObj->rslt == FAIL) {
