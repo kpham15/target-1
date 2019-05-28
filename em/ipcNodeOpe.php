@@ -344,12 +344,17 @@ function discovered($node, $hwRsp) {
     // UUID is serial number for now
     $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
+
+    foreach($newHwStringArray as $parameter) {
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'uuid') 
+            $serialNum = $paraExtract[1];
+    }
     // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
-    $serialNumArray = explode("=", $newHwStringArray[3]);
+    // $serialNumArray = explode("=", $newHwStringArray[3]);
     // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
-    $serialNum = $serialNumArray[1];
-   
-     
+    // $serialNum = $serialNumArray[1];
+      
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
