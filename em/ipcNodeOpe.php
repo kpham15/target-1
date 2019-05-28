@@ -628,7 +628,7 @@ function exec_resp($node, $hwRsp, $userObj) {
     //@TODO Maybe need asyncPostRequest here? Sync for debugging
     $postReqObj->syncPostRequest($url, $params);
     return json_decode($postReqObj->reply);
-    
+
 }
 
 function exec_cmd($node, $cmd, $userObj) {
