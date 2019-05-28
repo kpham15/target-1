@@ -813,6 +813,7 @@
       if ($('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeXTab = createNodeTabs(node, 'x');
         $('#node-x-table .node-tabs').append(nodeXTab);
+        console.log(nodeXTab);
       }
 
       if ($('#node-y-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
