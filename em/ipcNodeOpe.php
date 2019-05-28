@@ -108,14 +108,6 @@ if ($act == "EXEC_CMD") {
 	return;
 }
 
-
-// if ($act == "UPDATE RACK") {
-//     $result = updateRack($node, $device);
-//     echo json_encode($result);
-// 	mysqli_close($db);
-// 	return;
-// }
-
 // functions area
 
 function cps_on($node) {
@@ -344,12 +336,17 @@ function discovered($node, $hwRsp) {
     // UUID is serial number for now
     $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
+
+    foreach($newHwStringArray as $parameter) {
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'uuid') 
+            $serialNum = $paraExtract[1];
+    }
     // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
-    $serialNumArray = explode("=", $newHwStringArray[3]);
+    // $serialNumArray = explode("=", $newHwStringArray[3]);
     // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
-    $serialNum = $serialNumArray[1];
-   
-     
+    // $serialNum = $serialNumArray[1];
+      
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -608,15 +605,19 @@ function exec_resp($node, $hwRsp, $userObj) {
     $rsp = substr($hwRsp, 1, -1);
     // divide string into sections
     $hwRspArray = explode(',', $rsp);
-    // create ackid array to obtain ackid value
-    $ackidArray = explode("=", $hwRspArray[0]);
-    $ackid = $ackidArray[1];
-    // parse ackid value to obtain node, api, apiAct
-    $parsedAckid = explode('-', $ackid);
-    $node = $parsedAckid[0];
-    $api_key = $parsedAckid[1];
-    $apiAct_key = $parsedAckid[2];
 
+    // go through array and search for ackid, node, api and apiAction
+    foreach($hwRspArray as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackid = $paraExtract[1];
+            $node = $cmdArray[0];
+            $api_key = $cmdArray[1];
+            $apiAct_key = $cmdArray[2];
+        }
+    }
+  
     // Obtain full api string from constant and api action from constant
     $api = apiAndActArray[$api_key]['api'];
     $apiAct = apiAndActArray[$api_key][$apiAct_key];
@@ -629,6 +630,7 @@ function exec_resp($node, $hwRsp, $userObj) {
         return $result;
     }
 
+    // find the ackid in t_cmdque and update with stat 'COMPL'
     if ($cmdObj->reason == "ACKID FOUND") {
         $stat = "COMPL";
         $cmdObj->updCmd($stat, $rsp);
@@ -676,6 +678,7 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
     
+    // if ackid doesnt exist, add to t_cmdque, it already exists, update stat to PENDING
     if ($cmdObj->reason == "ACKID NOT FOUND") {
         $cmdObj->addCmd($node, $ackid, $cmd);
         if ($cmdObj->rslt == FAIL) {
