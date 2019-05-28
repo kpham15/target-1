@@ -800,17 +800,23 @@
 <script type="text/javascript">
   function sysviewStartup() {
     nodeInfo.forEach(function(node) {
-      if ($('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+      if ($('#node-x-table .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeXTab = createNodeTabs(node, 'x');
         $('#node-x-table .node-tabs').append(nodeXTab);
-        console.log(nodeXTab);
       }
 
-      if ($('#node-y-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+      if ($('#node-y-table .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeYTab = createNodeTabs(node, 'y');
         $('#node-y-table .node-tabs').append(nodeYTab);
       }
     });
+
+    if ($('#node-x-table .node-tabs').children().length > 0) {
+      $('#node-x-table .node-tab[node_id="1"]').addClass('active');
+    }
+    if ($('#node-y-table .node-tabs').children().length > 0) {
+      $('#node-y-table .node-tab[node_id="1"]').addClass('active');
+    }
   }
 
   function createNodeTabs(node, ptyp) {
