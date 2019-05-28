@@ -30,16 +30,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div id="miox-btn-group" class="mio-btn-group btn-group">
-                    <button type="button" class="btn btn-default active">MIOX-1</button>
-                    <button type="button" class="btn btn-default">MIOX-2</button>
-                    <button type="button" class="btn btn-default">MIOX-3</button>
-                    <button type="button" class="btn btn-default">MIOX-4</button>
-                    <button type="button" class="btn btn-default">MIOX-5</button>
-                    <button type="button" class="btn btn-default">MIOX-6</button>
-                    <button type="button" class="btn btn-default">MIOX-7</button>
-                    <button type="button" class="btn btn-default">MIOX-8</button>
-                    <button type="button" class="btn btn-default">MIOX-9</button>
-                    <button type="button" class="btn btn-default">MIOX-10</button>
+                    <!-- MIO buttons created dynamically -->
                   </div>
                 </div>
                 <div class="row">
@@ -66,16 +57,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div id="mioy-btn-group" class="mio-btn-group btn-group">
-                    <button type="button" class="btn btn-default active">MIOY-1</button>
-                    <button type="button" class="btn btn-default">MIOY-2</button>
-                    <button type="button" class="btn btn-default">MIOY-3</button>
-                    <button type="button" class="btn btn-default">MIOY-4</button>
-                    <button type="button" class="btn btn-default">MIOY-5</button>
-                    <button type="button" class="btn btn-default">MIOY-6</button>
-                    <button type="button" class="btn btn-default">MIOY-7</button>
-                    <button type="button" class="btn btn-default">MIOY-8</button>
-                    <button type="button" class="btn btn-default">MIOY-9</button>
-                    <button type="button" class="btn btn-default">MIOY-10</button>
+                    <!-- MIO buttons created dynamically -->
                   </div>
                 </div>
                 <div class="row">
