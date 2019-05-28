@@ -98,7 +98,7 @@
     });
     nodeInfo[node1].MIOY.forEach(function(psta, i) {
       let mioBtn = createMioBtn(psta, i, 'y');
-      $('#mioy-btn-group').append(mioYBtn);
+      $('#mioy-btn-group').append(mioBtn);
     });
     $('.mio-btn[slot="1"]').addClass('active');
     
