@@ -508,6 +508,19 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="col-sm-3">
+                        <label for="sysviewCmdModal_ackid_txt">ACKID</label>
+                        <input id="sysviewCmdModal_ackid_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-7">
+                        <label for="sysviewCmdModal_cmd_txt">CMD</label>
+                        <input id="sysviewCmdModal_cmd_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="sysviewCmdModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <table class="table table-fixed">
@@ -2248,6 +2261,10 @@ var sysviewNodeModal = {
 var sysviewCmdModal = {
 
     modal:      $("#sysviewCmdModal"),
+    ackid:      $("#sysviewCmdModal_ackid_txt"),
+    cmd:        $("#sysviewCmdModal_cmd_txt"),
+    act:        $("#sysviewCmdModal_act_txt"),
+    submitBtn:  $("#sysviewCmdModal_submit_btn"),
 
     tblRows:    [],
     tbl: {
@@ -2278,7 +2295,35 @@ var sysviewCmdModal = {
                 sysviewCmdModal.tbl.index++;
                 //put data into an array so that we can populate table in cmdModal
                 sysviewCmdModal.displayTable(sysviewCmdModal.tbl.index);
+                sysviewCmdModal.act.val("VIEW CMD");
                 sysviewCmdModal.modal.modal();
+            }
+        });
+    },
+
+    exec_cmd: function() {
+
+        $.post(ipcDispatch,
+        {
+            api:    "ipcNodeOpe",
+            act:    'exec_cmd',
+            user:   "SYSTEM",
+            node:   sysview.nodePicked,
+            cmd:    sysviewCmdModal.cmd.val(),
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                alert(obj.reason, function() {
+                    sysviewCmdModal.modal.modal('hide');
+                    setTimeout(function() {
+                        $("#alertLayer").hide();
+                        sysviewCmdModal.viewCmd();
+                    }, 5000);
+                }, false);
             }
         });
     },
@@ -2696,4 +2741,17 @@ sysviewModal_viewPath.viewBtn.click(function() {
     sysviewModal_viewPath.queryByNode();
 });
 
+// SysviewCmdModal table
+$(document).on('click', "#sysviewCmdModal_tbl tr", function() {
+    var dataRow = $(this).children('td').map(function() {
+        return $(this).text();
+    }).get();
+
+    sysviewCmdModal.ackid.val(dataRow[0]);
+    sysviewCmdModal.cmd.val(dataRow[1]);
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
 </script>
