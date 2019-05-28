@@ -518,6 +518,7 @@
                     </div>
                     <div class="col-sm-2">
                         <button id="sysviewCmdModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
                 </div>
                 <div class="row">
@@ -527,7 +528,8 @@
                                 <thead style="width: 100%; padding-right: 15px">
                                     <tr>
                                         <th style="width: 15%">ACKID</th>
-                                        <th style="width: 85%">CMD</th>
+                                        <th style="width: 70%">CMD</th>
+                                        <th style="width: 15%">STAT</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sysviewCmdModal_table">
@@ -2342,7 +2344,8 @@ var sysviewCmdModal = {
             for (var i = startIndex; i < stopIndex; i++) {  
                 a.push('<tr>');
                 a.push('<td style="width:15%">'    + sysviewCmdModal.tblRows[i].ackid  + '</td>');
-                a.push('<td style="width:85%">'        + sysviewCmdModal.tblRows[i].cmd + '</td>');
+                a.push('<td style="width:70%">'    + sysviewCmdModal.tblRows[i].cmd    + '</td>');
+                a.push('<td style="width:15%">'    + sysviewCmdModal.tblRows[i].stat   + '</td>');
                 a.push('</tr>');
                 
             }
