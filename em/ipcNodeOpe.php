@@ -116,7 +116,26 @@ if ($act == "EXEC_CMD") {
 // 	return;
 // }
 
+if ($act == "VIEW CMD") {
+    $result = view_cmd($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
 // functions area
+function view_cmd($node) {
+    $cmdObj = new CMD();
+    $cmdObj->getCmdList($node);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "VIEW CMD SUCCESS";
+    $result['rows'] = $cmdObj->rows;
+    return $result;
+}
 
 function cps_on($node) {
     // create cps to get data for psta/ssta
