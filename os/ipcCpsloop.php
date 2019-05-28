@@ -120,7 +120,10 @@ try {
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
                         $com_port = $udpMsgArr['dev'];
+                        if($clientExist)
+                            $comPortObj->endConnection();
                         $discover_mode = true;
+                        $start_mode = false;
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
                         echo "cmd changed to:".$udpMsgArr['cmd'];
