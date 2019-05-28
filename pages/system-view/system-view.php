@@ -810,12 +810,12 @@
 
   $(document).ready(function() {
     nodeInfo.forEach(function(node) {
-      if ('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+      if ($('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeXTab = createNodeTabs(node, 'x');
         $('#node-x-table .node-tabs').append(nodeXTab);
       }
 
-      if ('#node-y-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+      if ($('#node-y-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeYTab = createNodeTabs(node, 'y');
         $('#node-y-table .node-tabs').append(nodeYTab);
       }
