@@ -1,23 +1,40 @@
 <?php
 
 class DEBUG{
-    public $debugFile;
-    public $logString;
+    public $enable = 0;
     public $rslt;
     public $reason;
 
     public function __construct($mode=NULL){
 
-        // if (!file_exists('../report')) {
-        //     mkdir('../report', 0777, true);
-        // }
-        // $this->debugFile = fopen("../report/debugLog.txt", "a");
+        if (!file_exists('../../ipc-debug.cfg ')) {
+            $this->rslt = 'fail';
+            $this->reason = "FILE IPC-DEBUG.CFG DOES NOT EXIST";
+            return;
+        }
+        $enable = 0;
+        $debugFile = fopen("../../ipc-debug.cfg", "r");
+        if (!$debugFile) {
+            $this->rslt = 'fail';
+            $this->reason = "OPEN_LOGFILE_FAIL";
+            return;
+        }
+        
+        if ($debugFile) {
+            while (($line = fgets($file)) !== false) {
+                // process the line read.
+                $enable = trim($line);
+                if($enable != '') break;
+            }
+        
+            fclose($file);
+        }
+        else {
 
-        // if (!$this->debugFile) {
-        //     $this->rslt = 'fail';
-        //     $this->reason = "OPEN_LOGFILE_FAIL";
-        //     return;
-        // }
+        }
+        $this->enable = $enable;
+
+
         $this->rslt = 'success';
         $this->reason = "OPEN_LOGFILE_SUCCESS";
 
