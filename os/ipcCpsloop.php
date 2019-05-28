@@ -1,7 +1,6 @@
 <?php
 //because this program needs to read /dev/ttyUSB file => www-data user need to be put in the group: dialout
-//cmd structure to run this program:
-//php ipcCpsloop.php node ip_port com_port
+//cmd structure to run this program: php ipcCpsloop.php node ip_port
 include 'ipcComPortClass.php';
 include 'ipcCpsServerClass.php';
 include 'ipcRspClass.php';
@@ -19,7 +18,6 @@ error_reporting(E_ALL);
 $node = $argv[1];
 $ip_port = $argv[2];
 $com_port = '';
-// $com_port = $argv[3];
 
 $baud = 115200;
 $bits = 8;
@@ -114,29 +112,30 @@ try {
             if($udpMsg !== '') {
                 echo "\n===CMD receive from API: ".$udpMsg."\n";
                 $udpMsgArr = processUDPmsg($udpMsg);
-                echo "convert updmsg to array:\n";print_r($udpMsgArr);echo "\n";
+                echo "Convert updmsg to array:\n";print_r($udpMsgArr);echo "\n";
                 if (array_key_exists("cmd",$udpMsgArr))
                     $cpsCmd .= $udpMsgArr['cmd'];
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
                         $com_port = $udpMsgArr['dev'];
+                        if($clientExist) {
+                            $comPortObj->endConnection();
+                            $clientExist = false;
+                        }
                         $discover_mode = true;
+                        $start_mode = false;
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
-                        echo "cmd changed to:".$udpMsgArr['cmd'];
+                        $cpsCmd .= $udpMsgArr['cmd'];
+                        echo "Cmd changed to:".$udpMsgArr['cmd'];
                         $buf = '';
                         goto clientSock;
                     }
                 }
                 else if($udpMsgArr['inst'] == 'START_CPS') {
-                    if($udpMsgArr['sn'] == $sn) {
-                        // $com_port = $udpMsgArr['dev'];
-                        $discover_mode = true;
+                    if($sn != '' && $udpMsgArr['sn'] == $sn) {
                         $start_mode = true;
                         $statusCmd = $udpMsgArr['cmd'];
-                        if($clientExist) 
-                            $comPortObj->endConnection();
-                        $clientExist = false;
                         $buf = '';
                         goto clientSock;
                     }
@@ -144,10 +143,15 @@ try {
                 else if($udpMsgArr['inst'] == 'STOP_CPS') {
                     if($udpMsgArr['sn'] == $sn ) {
                         $com_port = '';
-                        $comPortObj->endConnection();
+                        $sn = '';
+                        if($clientExist) {
+                            $comPortObj->endConnection();
+                            $clientExist = false;
+                        }
                         $discover_mode = false;
                         $start_mode = false;
                         $buf = '';
+                        $cpsCmd = '';
                         goto clientSock;
                     }
                 }   
@@ -170,13 +174,14 @@ try {
             //if response exists, process the response and update cps connection status
             if($discover_mode) {
                 $rsp = $comPortObj->receiveRsp();
-
                 if($rsp !== '') {
+                    //if there is a response from HW, create post-request CPS-ON to API, and reset lostConn=0
                     $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
                     $lostConn = 0;
+                    if($cpsAlive == false) $cpsAlive = true;
+
                     //serial number is retrieved in discover_mode, not in start_mode
                     if($start_mode == false) {
-                        echo "go get sn:\n";
                         $sn = $rspObj->getUuid($rsp);
                         if($sn != '') {
                             echo "\nSerial number: $sn\n";
@@ -184,7 +189,6 @@ try {
                     }
                    
                     $rspObj->processRsp($rsp, $node);
-                    if($cpsAlive == false) $cpsAlive = true;
                 }
             
             }
@@ -195,18 +199,8 @@ try {
 
         if($start_mode) {
             //when 5sec expires, check the cps communication status. Send post-request to API to declare alarm if needed
-            // If receive a response from HW, reset the lostConn = 0, and process the response
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
             echo "\nlostconn:".$lostConn."\n";
-            // if($cpsAlive == true) {
-            //     if($lostConn > 0 && $lostConn < 3)
-            //         $lostConn = 0; 
-            //     else if($lostConn >= 3) {
-            //         $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
-            //         $lostConn = 0;
-            //     }
-            // }
-            // else 
             if($cpsAlive !== true) {
                 $lostConn++;
                 if($lostConn >=3)

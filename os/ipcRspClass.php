@@ -46,10 +46,10 @@ class RSP {
     
         if (isset($content)) 
             $out.= $content;
-
+        echo $out."\n";
         fwrite($fp, $out);
         ///this part should be commented out when checking process is finished
-        echo $out."\n";
+        $result="";
         while (!feof($fp)) {
             print_r(fgets($fp, 1024));
         }
@@ -73,18 +73,7 @@ class RSP {
                     echo "\nProcessing:".$rspArray[$i]."\n";
                     $ackid = $this->getAckid($rspArray[$i]);
                     if(trim($ackid) != '')
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'PROCESS_HW_RSP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
-
-                    // //create post-request to APIs
-                    // if(stripos($ackid,'cps') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'updateCpsStatus','node'=>$node,'cmd'=>"$rspArray[$i]"]);
-                    // }
-                    // else if(stripos($ackid,'dev') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateNodeDevicesStatus','node'=>$node,'device_status'=>"$rspArray[$i]"]);
-                    // }
-                    // else if(stripos($ackid,'bkpln') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'DISCOVERED','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
-                    // }
+                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
 
                 }
             }
