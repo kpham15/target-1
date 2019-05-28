@@ -81,27 +81,28 @@
 
 <script type="text/javascript">
   function sysviewStartup() {
+    // Create the Node tabs according to amount of nodes
     nodeInfo.forEach(function(node) {
       let nodeTab = createNodeTabs(node);
       $('.node-tabs').append(nodeTab);
     });
     $('.node-tab[node_id="1"]').addClass('active');
-
     $('#node-x-tabs>li>a').attr('href','#nodex');
     $('#node-y-tabs>li>a').attr('href','#nodey');
 
+    // Create MIO buttons according to data from first node (the initial active node)
     let node1 = nodeInfo.findIndex(node => node.node === '1');
-    nodeInfo[node1].MIOX.forEach(function(mio, i) {
-      let mioXBtn = createMioBtn(i, 'x');
-      let mioYBtn = createMioBtn(i, 'y');
-      $('#miox-btn-group').append(mioXBtn);
-      $('#mioy-btn-group').append(mioYBtn);
+    nodeInfo[node1].MIOX.forEach(function(psta, i) {
+      let mioBtn = createMioXBtn(psta, i);
+      $('#miox-btn-group').append(mioBtn);
     });
+    let mioYBtn = createMioBtn(mio, i, 'y');
+    $('#mioy-btn-group').append(mioYBtn);
     $('.mio-btn[slot="1"]').addClass('active');
     
+    // Create port grid template
     for (let i = 1; i <= 25; i++) {
       let portBox = createPortBox(i);
-
       $('.port-grid').append(portBox);
     }
   }
@@ -124,12 +125,14 @@
     return portBox;
   }
 
-  function createMioBtn(index, ptyp) {
+  function createMioXBtn(psta, index) {
     let slot = index + 1;
-    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'">MIO'+ptyp.toUpperCase()+'-'+slot+'</button>';
+    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="x"><p>MIOX-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button>';
 
     return mioBtn;
   }
+
+  function createMioYBtn(mio. index)
 
   function createNodeTabs(node) {
     // HTML template for node tab
