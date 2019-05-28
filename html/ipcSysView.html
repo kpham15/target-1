@@ -1345,7 +1345,7 @@ var sysview = {
             $(".sysview_nodeActList > li").off('mouseenter mouseleave');;
             
             if (sysview.nodeStatPicked == "OOS") {
-                sysview.activeAct(['actDiscover','actStartNode']);
+                sysview.activeAct(['actDiscover','actStartNode','actViewCmd']);
                 sysview.deactiveAct(['actLockNode','actUnlockNode','actViewAlm','actStopNode','actFindFac','actFindCkid'])
                 // sysview.actDiscover.hover(
                 //     function () {$(this).addClass('activeAction')},
@@ -1362,7 +1362,7 @@ var sysview = {
                 
             }
             else if (sysview.nodeStatPicked == "INS") {
-                sysview.activeAct(['actLockNode','actStopNode','actViewAlm','actFindFac','actFindCkid'])
+                sysview.activeAct(['actLockNode','actStopNode','actViewAlm','actFindFac','actFindCkid','actViewCmd'])
                 sysview.deactiveAct(['actDiscover','actStartNode','actUnlockNode'])
                 // sysview.actLockNode.hover(
                 //     function () {$(this).addClass('activeAction')},
@@ -1384,7 +1384,7 @@ var sysview = {
                 // sysview.actStartNode.addClass('disableAction');
             }
             else if (sysview.nodeStatPicked == "UAS") {
-                sysview.activeAct(['actDiscover'])
+                sysview.activeAct(['actDiscover','actViewCmd'])
                 // sysview.actStopNode.addClass('disableAction');
                 sysview.deactiveAct(['actStartNode','actLockNode','actUnlockNode','actViewAlm','actStopNode','actFindFac','actFindCkid'])
                 // sysview.actDiscover.hover(
@@ -1398,7 +1398,7 @@ var sysview = {
                 // sysview.actStopNode.addClass('disableAction');
             }
             else if (sysview.nodeStatPicked == "LCK") {
-                sysview.activeAct(['actUnlockNode'])
+                sysview.activeAct(['actUnlockNode','actViewCmd'])
                 sysview.deactiveAct(['actStartNode', 'actLockNode', 'actDiscover', 'actViewAlm', 'actStopNode'])
             }
 
