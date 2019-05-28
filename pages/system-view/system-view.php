@@ -26,7 +26,7 @@
             <!-- Node tabs for X side created dynamically -->
           </ul>
           <div id="mio-x-table" class="tab-content mio-tabs">
-            <div class="tab-pane active" id="nodex1">
+            <div class="tab-pane active" id="nodex">
               <div class="container-fluid">
                 <div class="row">
                   <div class="btn-group">
@@ -62,7 +62,7 @@
             <!-- Node tabs for Y side created dynamically -->
           </ul>
           <div id="mio-y-table" class="tab-content mio-tabs">
-            <div class="tab-pane active" id="nodey1">
+            <div class="tab-pane active" id="nodey">
               <div class="container-fluid">
                 <div class="row">
                   <div class="btn-group">
