@@ -73,7 +73,7 @@ class RSP {
                     echo "\nProcessing:".$rspArray[$i]."\n";
                     $ackid = $this->getAckid($rspArray[$i]);
                     if(trim($ackid) != '')
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'PROCESS_HW_RSP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
+                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
 
                 }
             }

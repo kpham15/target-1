@@ -87,8 +87,8 @@ if ($act == "CPS_OFF") {
 	return;
 }
 
-if ($act == "PROCESS_HW_RSP") {
-    $result = processHwResp($node, $hwRsp);
+if ($act == "EXEC_RESP") {
+    $result = exec_resp($node, $hwRsp, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -101,8 +101,8 @@ if ($act == "CONNECT_TBX_TAP1") {
 	return;
 }
 
-if ($act == "EXEC") {
-    $result = exec_cmd($cmd);
+if ($act == "EXEC_CMD") {
+    $result = exec_cmd($node, $cmd, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -601,7 +601,7 @@ function updateCpsTemp($hwRsp) {
     return $result;
 }
 
-function processHwResp($node, $hwRsp) {
+function exec_resp($node, $hwRsp, $userObj) {
 
     // remove $ and * from string
     $rsp = substr($hwRsp, 1, -1);
@@ -628,12 +628,17 @@ function processHwResp($node, $hwRsp) {
     //@TODO Maybe need asyncPostRequest here? Sync for debugging
     $postReqObj->syncPostRequest($url, $params);
     return json_decode($postReqObj->reply);
-
-
     
 }
 
-function exec_cmd($cmd) {
+function exec_cmd($node, $cmd, $userObj) {
+    // permissions check here
+    if ($userObj->grpObj->ipcadm != "Y") {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'Permission Denied';
+        return $result;
+    }
+
     // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
     // will receive string like this: ACKID=$node-api-act
     

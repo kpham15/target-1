@@ -19,8 +19,7 @@ class DEBUG{
             $this->reason = "OPEN_LOGFILE_FAIL";
             return;
         }
-        
-        if ($debugFile) {
+        else {
             while (($line = fgets($file)) !== false) {
                 // process the line read.
                 $enable = trim($line);
@@ -29,22 +28,11 @@ class DEBUG{
         
             fclose($file);
         }
-        else {
-
-        }
         $this->enable = $enable;
-
-
         $this->rslt = 'success';
-        $this->reason = "OPEN_LOGFILE_SUCCESS";
+        $this->reason = "DEBUG CONSTRUCTED";
 
     }
-
-    // public function getSizeOfLogFile(){
-        
-    //     return filesize("../report/debugLog.txt");
-
-    // }
 
     public function logPostRequestInfo($filename,$variableArray) {
         $this->logString = "-----------------------\n".date("Y-m-d H:i:s")." ".$filename.": ";

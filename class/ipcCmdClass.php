@@ -11,15 +11,108 @@
 // error_reporting(E_ALL);
 
 class CMD {
+    public $id;
+    public $time;
+    public $node;
+    public $ackid;
+    public $stat;
+    public $cmd;
+    public $rsp;
 
     public $rslt;
     public $reason;
     public $rows;
     
-    public function __construct() {
+    public function __construct($ackid=NULL) {
+        if($ackid == NULL) {
+            return;
+        }
+        $qry = "SELECT * FROM t_cmdque WHERE ackid = '$ackid' LIMIT 1";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+            return;
+        }
+        else {
+            $rows = [];
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                $this->rslt     = SUCCESS;
+                $this->reason   = "ACKID FOUND";
+              
+                $this->id   = $rows[0]['id'];
+                $this->time   = $rows[0]['time'];
+                $this->node   = $rows[0]['node'];
+                $this->ackid   = $rows[0]['ackid'];
+                $this->stat   = $rows[0]['stat'];
+                $this->cmd   = $rows[0]['cmd'];
+                $this->rsp   = $rows[0]['rsp'];
+
+            }
+            else {
+                $this->rslt   = FAIL;
+                $this->reason = "ACKID NOT FOUND";
+                $this->rows   = $rows;
+            }
+        }
 
     }
     
+    public function updateStat($stat) {
+        global $db;
+
+        $qry = "UPDATE t_cmdque SET stat='$stat' WHERE ackid='$this->ackid'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = FAIL;
+            $this->reason = mysqli_error($db);
+            return false;
+        }
+        else {
+            $this->stat = $stat;
+            $this->rslt = SUCCESS;
+            $this->reason = 'STAT UPDATED';
+            return true;
+        }
+    }
+
+    public function addCmd($node, $ackid, $cmd) {
+        global $db;
+
+        if ($node == '') {
+            $this->rslt = FAIL;
+            $this->reason = "INVALID NODE";
+            return false;
+        }
+        if ($ackid == '') {
+            $this->rslt = FAIL;
+            $this->reason = "MISSING ACKID";
+            return false;
+        }
+
+        if ($cmd == '') {
+            $this->rslt = FAIL;
+            $this->reason = "MISSING CMD";
+            return false;
+        }
+    
+        $qry = "INSERT INTO t_cmdque (time, node, ackid, stat, cmd) VALUES (now(), '$node', '$ackid', 'PENDING', $cmd)";
+                
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = FAIL;
+            $this->reason = mysqli_error($db);
+            return false;
+        }
+        else {
+            $this->rslt = SUCCESS;
+            $this->reason = 'CMD ADDED';
+            return true;
+        }
+    }
 
     public function sendPathCmd($act, $pathId, $path) {
         global $db;
@@ -74,7 +167,6 @@ class CMD {
         return true;
     }
 
-    
     public function sendZPortCmd($act, $portId, $node) {
         $cmd = "\$command,action=$act,bus=x,tap=$portId,ackid=$node-TAP*";
         $this->sendCmd($cmd, $node);
@@ -94,37 +186,7 @@ class CMD {
         return true;
     }
 
-    public function sendDiscoverCmd($node, $com_port) {
-        $sendPort = $this->sendComPort($node,$com_port);
-        if(!$sendPort)
-            return false;
-        
-        usleep(200000);
-        $cmd = "\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
-        $this->sendCmd($cmd, $node);
-        if($this->rslt == 'fail') return;
-        $this->rslt = 'success';
-        $this->reason = 'SEND DISCOVER CMD SUCCESSFULLY';
-        return true;
-    }
 
-    public function sendStartCmd($node) {
-        $cmd = "start";
-        $this->sendCmd($cmd, $node);
-        if($this->rslt == 'fail') return;
-        $this->rslt = 'success';
-        $this->reason = 'SEND START CMD SUCCESSFULLY';
-        return true;
-    }
-
-    public function sendStopCmd($node) {
-        $cmd = "stop";
-        $this->sendCmd($cmd, $node);
-        if($this->rslt == 'fail') return;
-        $this->rslt = 'success';
-        $this->reason = 'SEND STOP CMD SUCCESSFULLY';
-        return true;
-    }
 
 
     public function sendCmd($cmd, $node) {
