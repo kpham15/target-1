@@ -148,7 +148,9 @@
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn' , function() {
       let ptyp = $(this).attr('ptyp');
-      console.log(ptyp);
+
+      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
+      $(this).button('toggle');
     });
   });
 </script>
