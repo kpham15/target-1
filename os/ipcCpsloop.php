@@ -120,26 +120,30 @@ try {
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
                         $com_port = $udpMsgArr['dev'];
-                        if($clientExist)
+                        if($clientExist) {
                             $comPortObj->endConnection();
+                            $clientExist = false;
+                        }
                         $discover_mode = true;
                         $start_mode = false;
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
+                        
                         echo "cmd changed to:".$udpMsgArr['cmd'];
                         $buf = '';
                         goto clientSock;
                     }
                 }
                 else if($udpMsgArr['inst'] == 'START_CPS') {
-                    if($udpMsgArr['sn'] == $sn) {
+                    if($sn != '' && $udpMsgArr['sn'] == $sn) {
                         // $com_port = $udpMsgArr['dev'];
                         $discover_mode = true;
                         $start_mode = true;
                         $statusCmd = $udpMsgArr['cmd'];
-                        if($clientExist) 
+                        if($clientExist) {
                             $comPortObj->endConnection();
-                        $clientExist = false;
+                            $clientExist = false;
+                        }
                         $buf = '';
                         goto clientSock;
                     }
@@ -147,10 +151,15 @@ try {
                 else if($udpMsgArr['inst'] == 'STOP_CPS') {
                     if($udpMsgArr['sn'] == $sn ) {
                         $com_port = '';
-                        $comPortObj->endConnection();
+                        $sn = '';
+                        if($clientExist) {
+                            $comPortObj->endConnection();
+                            $clientExist = false;
+                        }
                         $discover_mode = false;
                         $start_mode = false;
                         $buf = '';
+                        $cpsCmd = '';
                         goto clientSock;
                     }
                 }   
@@ -167,28 +176,32 @@ try {
             }  
 
             $buf = '';
-            usleep($RDWR_interval);
+            // usleep($RDWR_interval);
 
             //receive response from HW. 
             //if response exists, process the response and update cps connection status
+            // echo 'listen again';
             if($discover_mode) {
                 $rsp = $comPortObj->receiveRsp();
+                echo "\n from hw: $rsp \n";
+                // if($rsp !== '') {
+                //     $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+                //     $lostConn = 0;
+                //     if($cpsAlive == false) $cpsAlive = true;
 
-                if($rsp !== '') {
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
-                    $lostConn = 0;
-                    //serial number is retrieved in discover_mode, not in start_mode
-                    if($start_mode == false) {
-                        echo "go get sn:\n";
-                        $sn = $rspObj->getUuid($rsp);
-                        if($sn != '') {
-                            echo "\nSerial number: $sn\n";
-                        }
-                    }
+                //     //serial number is retrieved in discover_mode, not in start_mode
+                //     if($start_mode == false) {
+                //         echo "go get sn:\n";
+                //         $sn = $rspObj->getUuid($rsp);
+                //         if($sn != '') {
+                //             echo "\nSerial number: $sn\n";
+                //         }
+                //         echo 'get out';
+                //     }
                    
-                    $rspObj->processRsp($rsp, $node);
-                    if($cpsAlive == false) $cpsAlive = true;
-                }
+                //     $rspObj->processRsp($rsp, $node);
+                // }
+                echo 'done 5s, again';
             
             }
            
