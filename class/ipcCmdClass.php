@@ -257,6 +257,8 @@ class CMD {
             $this->reason = 'CAN NOT SEND CMD';
             return;
         }
+        $this->rslt = 'success';
+        $this->reason = 'CMD SENT';
     } 
 
 }

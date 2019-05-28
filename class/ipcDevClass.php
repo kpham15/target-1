@@ -59,7 +59,7 @@ class DEV {
 
         for ($i = 0; $i < count($splitCmd); $i++) {
             if (strpos($splitCmd[$i], "ackid") !== false) {
-                if (strpos($splitCmd[$i], "dev") == false) {
+                if (strpos($splitCmd[$i], "unds") == false) {
                     $this->rslt = FAIL;
                     $this->reason = "INVALID ACKID";
                     return;
