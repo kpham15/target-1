@@ -133,6 +133,35 @@ class CMD {
         }
     }
 
+    public function getCmdList($node) {
+        global $db;
+
+        $qry = "SELECT * FROM t_cmdque WHERE node='$node'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt   = FAIL;
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $rows = [];
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                $this->rslt         = SUCCESS;
+                $this->reason       = QUERY_MATCHED;
+                $this->rows         = $rows;
+            }
+            else {
+                $this->rslt   = FAIL;
+                $this->reason = "NO CMD FOUND";
+                $this->rows   = $rows;
+            }
+        }
+
+    }
+
+    
     public function sendPathCmd($act, $pathId, $path) {
         global $db;
 
