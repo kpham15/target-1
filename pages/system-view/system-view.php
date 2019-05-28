@@ -99,29 +99,16 @@
 
 <script type="text/javascript">
   function sysviewStartup() {
+    console.log('test');
     nodeInfo.forEach(function(node) {
       let nodeTab = createNodeTabs(node);
       $('.node-tabs').append(nodeTab);
-      // if ($('#node-x-table .node-tab[node_id="'+node.node+'"]').length === 0) {
-      //   let nodeXTab = createNodeTabs(node, 'x');
-      //   $('#node-x-tabs').append(nodeXTab);
-      // }
-
-      // if ($('#node-y-table .node-tab[node_id="'+node.node+'"]').length === 0) {
-      //   let nodeYTab = createNodeTabs(node, 'y');
-      //   $('#node-y-tabs').append(nodeYTab);
-      // }
     });
     $('.node-tab[node_id="1"]').addClass('active');
-    // $('#node-y-table .node-tab[node_id="1"]').addClass('active');
 
     $('#node-x-tabs>li>a').attr('href','#nodex');
     $('#node-y-tabs>li>a').attr('href','#nodey');
 
-    // if ($('#node-x-tabs').children().length > 0) {
-    // }
-    // if ($('#node-y-tabs').children().length > 0) {
-    // }
 
     for (let i = 1; i <= 25; i++) {
       let portBox = createPortBox(i);
