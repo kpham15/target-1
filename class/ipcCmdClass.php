@@ -53,12 +53,31 @@ class CMD {
 
             }
             else {
-                $this->rslt   = FAIL;
+                $this->rslt   = SUCCESS;
                 $this->reason = "ACKID NOT FOUND";
                 $this->rows   = $rows;
             }
         }
 
+    }
+
+    public function updCmd($stat, $rsp) {
+        global $db;
+
+        $qry = "UPDATE t_cmdque SET stat='$stat', rsp='$rsp' WHERE ackid='$this->ackid'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = FAIL;
+            $this->reason = mysqli_error($db);
+            return false;
+        }
+        else {
+            $this->stat = $stat;
+            $this->rsp = $rsp;
+            $this->rslt = SUCCESS;
+            $this->reason = 'CMD UPDATED';
+            return true;
+        }
     }
     
     public function updateStat($stat) {

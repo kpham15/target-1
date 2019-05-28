@@ -603,6 +603,7 @@ function updateCpsTemp($hwRsp) {
 
 function exec_resp($node, $hwRsp, $userObj) {
 
+    // use cpsloop example foreach processUDPmsg
     // remove $ and * from string
     $rsp = substr($hwRsp, 1, -1);
     // divide string into sections
@@ -621,6 +622,24 @@ function exec_resp($node, $hwRsp, $userObj) {
     $apiAct = apiAndActArray[$api_key][$apiAct_key];
 
     // post to nodeapi to update node cps stats
+    $cmdObj = new CMD($ackid);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+
+    if ($cmdObj->reason == "ACKID FOUND") {
+        $stat = "COMPL";
+        $cmdObj->updCmd($stat, $rsp);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
+    }
+
+    
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
@@ -645,9 +664,36 @@ function exec_cmd($node, $cmd, $userObj) {
     // get node from cmd
     $cmdArray = explode("=", $cmd);
     $ackIdArray = explode("-", $cmdArray[1]);
+    $ackid = $cmdArray[1];
     $node = $ackIdArray[0];
     $api = $ackIdArray[1];
     $act = $ackIdArray[2];
+
+    $cmdObj = new CMD($ackId);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+    
+    if ($cmdObj->reason == "ACKID NOT FOUND") {
+        $cmdObj->addCmd($node, $ackid, $cmd);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
+    }
+    else {
+        $stat = "PENDING";
+        $cmdObj->updateStat($stat);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
+    }
+
 
     // create cpsObj to get comport and serialnum
     $cpsObj = new CPS($node);
@@ -666,6 +712,12 @@ function exec_cmd($node, $cmd, $userObj) {
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
+
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "CMD IS IN PROGRESS";
+    return $result;
 }
+
+
 
 ?>
