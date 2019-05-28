@@ -124,14 +124,14 @@
     // }
 
     for (let i = 1; i <= 25; i++) {
-      let portBox = createPortBox();
+      let portBox = createPortBox(i);
 
       $('.port-grid').append(portBox);
     }
   }
 
-  function createPortBox() {
-    let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'">' +
+  function createPortBox(gridNum) {
+    let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+gridNum+'">' +
                     '<div class="info-box-text">' +
                       '-' +
                       '<span class="pull-right">-</span>' +
