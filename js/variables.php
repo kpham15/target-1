@@ -19,4 +19,7 @@
 
   // Wire Center Information
   var wcInfo = {};
+
+  // First load boolean
+  var firstload = true;
 </script>

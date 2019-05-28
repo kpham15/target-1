@@ -14,7 +14,6 @@
 		$('#nav-wrapper').show();
 
 		getSystemInfo();
-		startup();
 	}
 
 	function getSystemInfo() {
@@ -38,6 +37,12 @@
 				nodeInfo = res.node_info;
 				delete res.node_info;
 				wcInfo = res;
+			}
+
+			// check if first time loading information
+			if (firstload) {
+				startup();
+				firstload = false;
 			}
 		});
 	}
