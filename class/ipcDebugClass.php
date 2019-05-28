@@ -70,19 +70,6 @@ class DEBUG{
         // fclose($this->debugFile);
     }
 
-    public function log($string) {
-        // if $this->enable = 0 then return
-        if ($this->enable == 0) {
-            return;
-        }
-        else if ($this->enable == 1) {
-            // prefix string with date/time
-            $this->logString = "-----------------------\n".date("Y-m-d H:i:s")." ".$filename.": ";
-            
-            // append string to report/debug.log
-
-        }
-    }
 }
 
 
