@@ -199,20 +199,20 @@
     $('#profile-dropdown-user-group').text(user.ugrp);
   }
 
-  function updateHeaderInfo(data) {
+  function updateHeaderInfo() {
     let alarmText = '';
     let alarmColor = '';
 
-    if (data.sev === 'CRI') {
+    if (wcInfo.sev === 'CRI') {
       alarmText = 'CRITICAL';
       alarmColor = 'bg-critical';
-    } else if (data.sev === 'MAJ') {
+    } else if (wcInfo.sev === 'MAJ') {
       alarmText = 'MAJOR';
       alarmColor = 'bg-major';
-    } else if (data.sev === 'MIN') {
+    } else if (wcInfo.sev === 'MIN') {
       alarmText = 'MINOR';
       alarmColor = 'bg-minor';
-    } else if (data.sev === 'NONE') {
+    } else if (wcInfo.sev === 'NONE') {
       alarmText = 'NONE';
       alarmColor = 'bg-no-alarm';
     }
@@ -222,16 +222,16 @@
     $('#alarm-header-icon').addClass(alarmColor);
 
 
-    $('#header-wcn').text(data.wcname);
-    $('#header-wcc').text(data.wcc);
-    $('#header-npanxx').text(data.npanxx);
-    $('#header-frmid').text(data.frmid);
-    $('#header-ipcstat').text(data.ipcstat);
+    $('#header-wcn').text(wcInfo.wcname);
+    $('#header-wcc').text(wcInfo.wcc);
+    $('#header-npanxx').text(wcInfo.npanxx);
+    $('#header-frmid').text(wcInfo.frmid);
+    $('#header-ipcstat').text(wcInfo.ipcstat);
     
-    let time = moment(data.time);
+    let time = moment(wcInfo.time);
 
     $('#header-time').text(moment().format('MM-DD-YYYY HH:mm'));
-    $('#header-timezone').text(data.tzone);
+    $('#header-timezone').text(wcInfo.tzone);
   }
 
   $(document).ready(function() {

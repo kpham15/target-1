@@ -17,6 +17,6 @@
   // Node information for System View
   var nodeInfo = [];
 
-  // Flag for first startup
-  var firstLoad = true;
+  // Wire Center Information
+  var wcInfo = {};
 </script>

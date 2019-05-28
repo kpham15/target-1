@@ -5,9 +5,8 @@
 		$('#login-page').hide();
 		$('#nav-wrapper').show();
 
-		updateUsername();
 		getSystemInfo();
-		systemInfoInterval = setInterval(getSystemInfo, 10000);
+		startup();
 	}
 
 	function getSystemInfo() {
@@ -22,17 +21,25 @@
 			},
 			dataType: 'json',
 			success: function(data, status) {
+				let res = data.rows[0];
+
 				if (data.rslt == "fail") {
 					alert(obj.reason);
 				} 
 				else {
-					nodeInfo = data.rows[0].node_info;
-					updateNodeStatus();
-					updateHeaderInfo(data.rows[0]);
-
-					firstLoad = false;
+					nodeInfo = res.node_info;
+					delete res.node_info;
+					wcInfo = res;
 				}
 			}
 		});
+
+		function startup() {
+			systemInfoInterval = setInterval(getSystemInfo, 10000);
+			updateUsername();
+			updateNodeStatus();
+			updateHeaderInfo();
+			sysViewStartup();
+		}
 	}
 </script>

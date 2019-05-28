@@ -798,17 +798,7 @@
 </div>
 
 <script type="text/javascript">
-  function createNodeTabs(node, ptyp) {
-    // HTML template for node tab
-    let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
-                    '<a href="#node'+ptyp+'" data-toggle="tab">Node '+node.node+'</a>' +
-                  '</li>';
-
-    // Return html string
-    return nodeTab;
-  }
-
-  $(document).ready(function() {
+  function sysviewStartup() {
     nodeInfo.forEach(function(node) {
       if ($('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
         let nodeXTab = createNodeTabs(node, 'x');
@@ -821,5 +811,18 @@
         $('#node-y-table .node-tabs').append(nodeYTab);
       }
     });
+  }
+
+  function createNodeTabs(node, ptyp) {
+    // HTML template for node tab
+    let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
+                    '<a href="#node'+ptyp+'" data-toggle="tab">Node '+node.node+'</a>' +
+                  '</li>';
+
+    // Return html string
+    return nodeTab;
+  }
+
+  $(document).ready(function() {
   });
 </script>
