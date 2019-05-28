@@ -145,5 +145,10 @@
   }
 
   $(document).ready(function() {
+    // Click event for MIO buttons
+    $('.mio-btn').click(function() {
+      let ptyp = $(this).attr('ptyp');
+      console.log(ptyp);
+    });
   });
 </script>
