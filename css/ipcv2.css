@@ -1,3 +1,10 @@
+/* ============ Login Page ============== */
+.login-logo {
+  width: 180px;
+  margin: auto;
+}
+/* ============ END Login Page ===============*/
+
 /* ============ IPC Alarm Colors ============ */
 .bg-critical {
   background-color: #dd4b39 !important;
