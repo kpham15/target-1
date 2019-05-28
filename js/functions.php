@@ -1,5 +1,13 @@
 <script>
 	// =============== General Purpose Functions ============== //
+	function startup() {
+		systemInfoInterval = setInterval(getSystemInfo, 10000);
+		updateUsername();
+		updateNodeStatus();
+		updateHeaderInfo();
+		sysViewStartup();
+	}
+
 	function loginSuccess() {
 		$('body').attr('class','skin-blue sidebar-mini fixed');
 		$('#login-page').hide();
@@ -33,13 +41,5 @@
 				}
 			}
 		});
-
-		function startup() {
-			systemInfoInterval = setInterval(getSystemInfo, 10000);
-			updateUsername();
-			updateNodeStatus();
-			updateHeaderInfo();
-			sysViewStartup();
-		}
 	}
 </script>
