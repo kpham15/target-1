@@ -134,8 +134,6 @@
     return mioBtn;
   }
 
-  function createMioYBtn(mio. index)
-
   function createNodeTabs(node) {
     // HTML template for node tab
     let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
