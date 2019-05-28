@@ -520,6 +520,9 @@
                         <button id="sysviewCmdModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
                         <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
                     </div>
+                    <div hidden>
+                        <input id="sysviewCmdModal_stat_txt">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -2270,6 +2273,7 @@ var sysviewCmdModal = {
     ackid:      $("#sysviewCmdModal_ackid_txt"),
     cmd:        $("#sysviewCmdModal_cmd_txt"),
     act:        $("#sysviewCmdModal_act_txt"),
+    stat:       $("#sysviewCmdModal_stat_txt"),
     submitBtn:  $("#sysviewCmdModal_submit_btn"),
 
     tblRows:    [],
@@ -2756,9 +2760,19 @@ $(document).on('click', "#sysviewCmdModal_tbl tr", function() {
 
     sysviewCmdModal.ackid.val(dataRow[0]);
     sysviewCmdModal.cmd.val(dataRow[1]);
+    sysviewCmdModal.stat.val(dataRow[2]);
 
     //Add color to the row
     $(this).addClass("addColor"); //add class selected to current clicked row
     $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+sysviewCmdModal.submitBtn.click(function() {
+    if (sysviewCmdModal.stat.val() == "PENDING") {
+        sysviewCmdModal.exec_cmd();
+    }
+    else {
+        alert("STAT MUST BE PENDING");
+    }
 });
 </script>
