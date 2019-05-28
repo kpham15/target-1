@@ -665,11 +665,16 @@ function exec_cmd($node, $cmd, $userObj) {
     
     // get node from cmd
     $cmdArray = explode("=", $cmd);
-    $ackIdArray = explode("-", $cmdArray[1]);
-    $ackid = $cmdArray[1];
-    $node = $ackIdArray[0];
-    $api = $ackIdArray[1];
-    $act = $ackIdArray[2];
+    foreach($cmdArray as $parameter) {
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'ackid') 
+            $ackid = $paraExtract[1];
+    }
+    // $ackIdArray = explode("-", $cmdArray[1]);
+    // $ackid = $cmdArray[1];
+    // $node = $ackIdArray[0];
+    // $api = $ackIdArray[1];
+    // $act = $ackIdArray[2];
 
     $cmdObj = new CMD($ackId);
     if ($cmdObj->rslt == FAIL) {
