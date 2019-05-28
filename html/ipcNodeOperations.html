@@ -7,9 +7,13 @@
                 <input id="nodeOpe_node_txt" type="text" class="form-control" readonly>
             </div>
             <div class="col-sm-3 modifyPadding">
+                <label for="nodeOpe_device_txt">DEVICE</label>
+                <input id="nodeOpe_device_txt" type="text" class="form-control" readonly>
+            </div>
+            <!-- <div class="col-sm-3 modifyPadding">
                 <label for="nodeOpe_rack_txt">RACK</label>
                 <input id="nodeOpe_rack_txt" type="text" class="form-control" readonly>
-            </div>
+            </div> -->
             
             <div class="col-sm-7 modifyPadding">
                 <label for="nodeOpe_serialNum_txt">SERIAL NUMBER</label>
@@ -23,9 +27,9 @@
                 <select class="form-control" id="nodeOpe_act_sel">
                     <option></option>
                     <option>DISCOVER</option>
-                    <option>START</option>
+                    <!-- <option>START</option> -->
                     <option>STOP</option>
-                    <option>UPDATE RACK</option>
+                    <!-- <option>UPDATE RACK</option> -->
                 </select>
             </div>
             <div class="col-sm-8 modifyPadding">
@@ -48,8 +52,8 @@
                     <thead style = "width:100%; padding-right:15px;">
                         <tr>
                             <th style="width:10%">NODE</th>
-                            <th style="width:15%">RACK</th>
-                            <th style="width:45%">SERIAL NUMBER</th>
+                            <!-- <th style="width:15%">RACK</th> -->
+                            <th style="width:60%">SERIAL NUMBER</th>
                             <th style="width:10%">PSTA</th>
                             <th style="width:10%">SSTA</th>
                             <th style="width:10%">DEVICE</th>
@@ -77,10 +81,14 @@
                         <label for="nodeOpeModal_node_txt">NODE</label>
                         <input id="nodeOpeModal_node_txt" type="text" class="form-control" readonly>
                     </div>
-                    <div class="col-sm-3 modifyPadding">
+                    <div class="col-sm-2 modifyPadding">
+                        <label for="nodeOpeModal_device_txt">DEVICE</label>
+                        <input id="nodeOpeModal_device_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <!-- <div class="col-sm-3 modifyPadding">
                         <label for="nodeOpeModal_rack_txt">RACK</label>
                         <input id="nodeOpeModal_rack_txt" type="text" class="form-control" readonly>
-                    </div>
+                    </div> -->
                     <div class="col-sm-7 modifyPadding">
                         <label for="nodeOpeModal_serialNum_txt">SERIAL NUMBER</label>
                         <input id="nodeOpeModal_serialNum_txt" type="text" class="form-control" readonly>
@@ -107,7 +115,8 @@
 
 var nodeOpe = {
     node:       $("#nodeOpe_node_txt"),
-    rack:       $("#nodeOpe_rack_txt"),
+    // rack:       $("#nodeOpe_rack_txt"),
+    device:     $("#nodeOpe_device_txt"),
     serialNum:  $("#nodeOpe_serialNum_txt"),
     act:        $("#nodeOpe_act_sel"),
     clearBtn:   $("#nodeOpe_clear_btn"),
@@ -131,7 +140,8 @@ var nodeOpe = {
 
     clearForm: function() {
         nodeOpe.node.val("").change();
-        nodeOpe.rack.val("").change();
+        nodeOpe.device.val("").change();
+        // nodeOpe.rack.val("").change();
         nodeOpe.serialNum.val("").change();
         nodeOpe.act.val("").change();
         nodeOpe.nodeId = "";
@@ -264,8 +274,8 @@ var nodeOpe = {
                 a.push('<tr>');
                 a.push('<td style="display: none">'     + nodeOpe.tblRows[i].id              + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].node            + '</td>');
-                a.push('<td style="width:15%">'         + nodeOpe.tblRows[i].rack            + '</td>');
-                a.push('<td style="width:45%">'         + nodeOpe.tblRows[i].serial_no       + '</td>');
+                // a.push('<td style="width:15%">'         + nodeOpe.tblRows[i].rack            + '</td>');
+                a.push('<td style="width:60%">'         + nodeOpe.tblRows[i].serial_no       + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].psta            + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].ssta            + '</td>');
                 a.push('<td style="width:10%">'         + nodeOpe.tblRows[i].dev             + '</td>');
@@ -286,31 +296,34 @@ var nodeOpe = {
 var nodeOpeModal = {
     modal:      $("#nodeOpeModal"),
     node:       $("#nodeOpeModal_node_txt"),
-    rack:       $("#nodeOpeModal_rack_txt"),
+    device:     $("#nodeOpeModal_device_txt"),
+    // rack:       $("#nodeOpeModal_rack_txt"),
     serialNum:  $("#nodeOpeModal_serialNum_txt"),
     act:        $("#nodeOpeModal_act_txt"),
     submitBtn:  $("#nodeOpeModal_submit_btn"),
 
     clearForm: function() {
         nodeOpeModal.node.val("").change();
-        nodeOpeModal.rack.val("").change();
+        nodeOpeModal.device.val("").change();
+        // nodeOpeModal.rack.val("").change();
         nodeOpeModal.serialNum.val("").change();
         nodeOpeModal.act.val("").change();
     },
 
     populateModal: function() {
         nodeOpeModal.node.val(nodeOpe.node.val()).change();
-        nodeOpeModal.rack.val(nodeOpe.rack.val()).change();
+        nodeOpeModal.device.val(nodeOpe.device.val()).change();
+        // nodeOpeModal.rack.val(nodeOpe.rack.val()).change();
         nodeOpeModal.serialNum.val(nodeOpe.serialNum.val()).change();
         nodeOpeModal.act.val(nodeOpe.act.val()).change();
 
         // Modal should have read-only fields, excepts for action UPDATE RACK, the field RACK is not read-only
-        if (nodeOpeModal.act.val() == "UPDATE RACK") {
-            nodeOpeModal.rack.prop('readonly', false);
-        }
-        else {
-            nodeOpeModal.rack.prop('readonly', true);
-        }
+        // if (nodeOpeModal.act.val() == "UPDATE RACK") {
+        //     nodeOpeModal.rack.prop('readonly', false);
+        // }
+        // else {
+        //     nodeOpeModal.rack.prop('readonly', true);
+        // }
     },
       
     query: function(action) {
@@ -320,7 +333,8 @@ var nodeOpeModal = {
             act:        action,
             user:       $("#main_currentUser").text(),
             node:       nodeOpeModal.node.val(),
-            rack:       nodeOpeModal.rack.val(),
+            device:     nodeOpeModal.device.val(),
+            // rack:       nodeOpeModal.rack.val(),
             serial_no:  nodeOpeModal.serialNum.val(),
             
         },
@@ -331,11 +345,11 @@ var nodeOpeModal = {
                 alert(obj.reason);
             } 
             else {
-                if (obj.rows.length === 0) {
-                    alert("No Record Found");  
-                    return;
-                }
-                alert(`${nodeOpeModal.act.val()} - SUCCESS`, function() {
+                // if (obj.rows.length === 0) {
+                //     alert("No Record Found");  
+                //     return;
+                // }
+                alert(obj.reason, function() {
                     nodeOpeModal.modal.modal('hide');
                 });
                 nodeOpe.tblRows = obj.rows;
@@ -371,12 +385,12 @@ nodeOpe.act.change(function() {
                 nodeOpeModal.populateModal();
 
             }
-            else if (nodeOpe.act.val() == "UPDATE RACK") {
-                nodeOpeModal.modal.modal();
-                nodeOpeModal.clearForm();
-                nodeOpeModal.populateModal();
+            // else if (nodeOpe.act.val() == "UPDATE RACK") {
+            //     nodeOpeModal.modal.modal();
+            //     nodeOpeModal.clearForm();
+            //     nodeOpeModal.populateModal();
 
-            }
+            // }
         }
     }
 });
@@ -396,8 +410,9 @@ $(document).on("click", "#nodeOpe_tbl tr", function() {
     //Populate the information
     nodeOpe.nodeId = (dataRow[0]);
     nodeOpe.node.val(dataRow[1]);
-    nodeOpe.rack.val(dataRow[2]);
-    nodeOpe.serialNum.val(dataRow[3]);
+    // nodeOpe.rack.val(dataRow[2]);
+    nodeOpe.serialNum.val(dataRow[2]);
+    nodeOpe.device.val(dataRow[5])
 
     //Add color to the row
     $(this).addClass("addColor"); //add class selected to current clicked row

@@ -14,9 +14,9 @@ class COMPORT {
             $this->reason = "MISSING COM_PORT INFO";
             return;
         }
-          
+
         //Connect to serial port
-        $connect = dio_open($com_port, O_RDWR | O_NOCTTY | O_NONBLOCK);
+        $connect = dio_open("/dev/$com_port", O_RDWR | O_NOCTTY | O_NONBLOCK);
         if($connect === false) {
             $this->rslt = 'fail';
             $this->reason = "UNABLE TO CREATE CONNECTION TO PORT ($com_port)";
