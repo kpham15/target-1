@@ -29,7 +29,7 @@
             <div class="tab-pane active" id="nodex">
               <div class="container-fluid">
                 <div class="row">
-                  <div class="btn-group">
+                  <div id="miox-btn-group" class="mio-btn-group btn-group">
                     <button type="button" class="btn btn-default active">MIOX-1</button>
                     <button type="button" class="btn btn-default">MIOX-2</button>
                     <button type="button" class="btn btn-default">MIOX-3</button>
@@ -65,7 +65,7 @@
             <div class="tab-pane active" id="nodey">
               <div class="container-fluid">
                 <div class="row">
-                  <div class="btn-group">
+                  <div id="mioy-btn-group" class="mio-btn-group btn-group">
                     <button type="button" class="btn btn-default active">MIOY-1</button>
                     <button type="button" class="btn btn-default">MIOY-2</button>
                     <button type="button" class="btn btn-default">MIOY-3</button>
@@ -99,7 +99,6 @@
 
 <script type="text/javascript">
   function sysviewStartup() {
-    console.log('test');
     nodeInfo.forEach(function(node) {
       let nodeTab = createNodeTabs(node);
       $('.node-tabs').append(nodeTab);
@@ -109,7 +108,15 @@
     $('#node-x-tabs>li>a').attr('href','#nodex');
     $('#node-y-tabs>li>a').attr('href','#nodey');
 
-
+    let node1 = nodeInfo.findIndex(node => node.node === '1');
+    nodeInfo[node1].MIOX.forEach(function(mio, i) {
+      let mioXBtn = createMioBtn(i, 'x');
+      let mioYBtn = createMioBtn(i, 'y');
+      $('#miox-btn-group').append(mioXBtn);
+      $('#mioy-btn-group').append(mioYBtn);
+    });
+    $('.mio-btn[slot="1"]').addClass('active');
+    
     for (let i = 1; i <= 25; i++) {
       let portBox = createPortBox(i);
 
@@ -133,6 +140,11 @@
                   '</div>';
 
     return portBox;
+  }
+
+  function createMioBtn(index, ptyp) {
+    let slot = index + 1;
+    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot'" ptyp="'+ptyp+'">MIO'+ptyp.toUpperCase()+'-'+slot+'</button>'
   }
 
   function createNodeTabs(node) {
