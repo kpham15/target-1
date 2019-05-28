@@ -443,8 +443,8 @@
       $('#node-y-table .node-tab[node_id="1"]').addClass('active');
     }
 
-    for (let i = 0; i < 25; i++) {
-      let portBox = '<div class="info-box bg-gray-active disabled">' +
+    for (let i = 1; i <= 25; i++) {
+      let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+i+'"'>' +
                       '<div class="info-box-text">' +
                         '-' +
                         '<span class="pull-right">-</span>' +
