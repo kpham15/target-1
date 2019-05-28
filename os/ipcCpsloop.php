@@ -26,7 +26,7 @@ $bits = 8;
 $stop = 1;
 $parity = 0;
 
-$udp_timeoutSec = 2;
+$udp_timeoutSec = 0;
 $udp_timeoutUsec = 0;
 $serial_timeoutSec = 0;
 $serial_timeoutUsec = 500000;
