@@ -39,7 +39,7 @@
                     <button type="button" class="btn btn-default">26-50</button>
                   </div>
                 </div>
-                <div id="x-port-grid" class="row port-grid">
+                <div id="x-port-grid" class="row port-grid" ptyp="x">
                   <!-- Port boxes created dynamically -->
                 </div>
               </div>
@@ -66,7 +66,7 @@
                     <button type="button" class="btn btn-default">26-50</button>
                   </div>
                 </div>
-                <div id="y-port-grid" class="row port-grid">
+                <div id="y-port-grid" class="row port-grid" ptyp="y">
                   <!-- Port boxes created dynamically -->
                 </div>
               </div>
@@ -87,6 +87,10 @@
       $('.node-tabs').append(nodeTab);
     });
     $('.node-tab[node_id="1"]').addClass('active');
+
+    // @TODO
+    // Might need to add this bit of code to updates of nodes
+    // if node information can change and affect tabs
     $('#node-x-tabs>li>a').attr('href','#nodex');
     $('#node-y-tabs>li>a').attr('href','#nodey');
 
@@ -107,6 +111,50 @@
       let portBox = createPortBox(i);
       $('.port-grid').append(portBox);
     }
+
+    // Query for initial X & Y port info
+    queryAndUpdatePorts(1, 1, 'x');
+    queryAndUpdatePorts(1, 1, 'y');
+  }
+
+  function queryAndUpdatePorts(node, slot, ptyp) {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        "api":      "ipcPortmap",
+        "act":      "QUERYMIO",
+        "user":     "SYSTEM",
+        "node":     node,
+        "slot":     slot,
+        "ptyp":     ptyp
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {};
+
+      if (data.rslt == "fail") {
+        modal.title = data.rslt;
+        modal.body = data.reason;
+        modal.type = 'danger';
+        modalHandler(modal);
+      } else {
+        if (ptyp === 'x') {
+          portX = res;
+        } else if (ptyp === 'y') {
+          portY = res;
+        }
+
+        updatePortRangeBtns(ptyp);
+      }
+    });
+  }
+
+  function updatePortRangeBtns(ptyp) {
+    console.log(ptyp);
+    console.log(portX);
+    return;
   }
 
   function createPortBox(gridNum) {

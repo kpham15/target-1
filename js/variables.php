@@ -20,6 +20,10 @@
   // Wire Center Information
   var wcInfo = {};
 
+  // Port data
+  var portX = [];
+  var portY = [];
+
   // First load boolean
   var firstload = true;
 </script>
