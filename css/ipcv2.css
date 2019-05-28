@@ -25,7 +25,7 @@
 }
 /* ============ END IPC Alarm Colors ============ */
 
-/* ============ Node Status Section CSS ============= */
+/* ============ Sysview Page CSS ============= */
 .node-status-row {
   display: flex;
 }
@@ -39,7 +39,11 @@
 .node-box-content {
   margin-left: 20px !important;
 }
-/* ============ END Node Status Section CSS ============ */
+.info-box.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+/* ============ END Sysview Page CSS ============ */
 
 .port-grid .info-box-text {
   font-size: 16px !important;
