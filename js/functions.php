@@ -28,8 +28,6 @@
 				else {
 					nodeInfo = data.rows[0].node_info;
 					updateNodeStatus();
-					updateNodeXTables();
-					updateNodeYTables();
 					updateHeaderInfo(data.rows[0]);
 
 					firstLoad = false;

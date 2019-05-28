@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-6">
         <div id="node-x-table" class="nav-tabs-custom">
-          <?php include __DIR__ . "/node-x-table.html"; ?>
+          <?php include __DIR__ . "/node-table.html"; ?>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodex1">
               <div class="container-fluid">
@@ -408,7 +408,7 @@
       </div>
       <div class="col-md-6">
         <div id="node-y-table" class="nav-tabs-custom">
-          <?php include __DIR__ . "/node-y-table.html"; ?>
+          <?php include __DIR__ . "/node-table.html"; ?>
           <div class="tab-content mio-tabs">
             <div class="tab-pane active" id="nodey1">
               <div class="container-fluid">
@@ -796,3 +796,29 @@
   </section>
   <!-- /.content -->
 </div>
+
+<script type="text/javascript">
+  function createNodeTabs(node, ptyp) {
+    // HTML template for node tab
+    let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
+                    '<a href="#node'+ptyp+'" data-toggle="tab">Node '+node.node+'</a>' +
+                  '</li>';
+
+    // Return html string
+    return nodeTab;
+  }
+
+  $(document).ready(function() {
+    nodeInfo.forEach(function(node) {
+      if ('#node-x-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+        let nodeXTab = createNodeTabs(node, 'x');
+        $('#node-x-table .node-tabs').append(nodeXTab);
+      }
+
+      if ('#node-y-table .node-tabs .node-tab[node_id="'+node.node+'"]').length === 0) {
+        let nodeYTab = createNodeTabs(node, 'y');
+        $('#node-y-table .node-tabs').append(nodeYTab);
+      }
+    });
+  });
+</script>
