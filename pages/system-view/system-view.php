@@ -146,7 +146,7 @@
 
   $(document).ready(function() {
     // Click event for MIO buttons
-    $('.mio-btn').click(function() {
+    $(document).on('click', '.mio-btn' , function() {
       let ptyp = $(this).attr('ptyp');
       console.log(ptyp);
     });
