@@ -508,11 +508,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <label for="sysviewCmdModal_ackid_txt">ACKID</label>
                         <input id="sysviewCmdModal_ackid_txt" type="text" class="form-control" readonly>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-8">
                         <label for="sysviewCmdModal_cmd_txt">CMD</label>
                         <input id="sysviewCmdModal_cmd_txt" type="text" class="form-control" readonly>
                     </div>
@@ -527,9 +527,9 @@
                             <table class="table table-fixed">
                                 <thead style="width: 100%; padding-right: 15px">
                                     <tr>
-                                        <th style="width: 15%">ACKID</th>
-                                        <th style="width: 70%">CMD</th>
-                                        <th style="width: 15%">STAT</th>
+                                        <th style="width: 10%">ACKID</th>
+                                        <th style="width: 80%">CMD</th>
+                                        <th style="width: 10%">STAT</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sysviewCmdModal_tbl">
@@ -2343,9 +2343,9 @@ var sysviewCmdModal = {
             var a = [];
             for (var i = startIndex; i < stopIndex; i++) {  
                 a.push('<tr>');
-                a.push('<td style="width:15%">'    + sysviewCmdModal.tblRows[i].ackid  + '</td>');
-                a.push('<td style="width:70%">'    + sysviewCmdModal.tblRows[i].cmd    + '</td>');
-                a.push('<td style="width:15%">'    + sysviewCmdModal.tblRows[i].stat   + '</td>');
+                a.push('<td style="width:10%">'    + sysviewCmdModal.tblRows[i].ackid  + '</td>');
+                a.push('<td style="width:80%">'    + sysviewCmdModal.tblRows[i].cmd    + '</td>');
+                a.push('<td style="width:10%">'    + sysviewCmdModal.tblRows[i].stat   + '</td>');
                 a.push('</tr>');
                 
             }
