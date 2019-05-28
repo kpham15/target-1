@@ -50,7 +50,24 @@ class DEV {
     }
 
     public function parseDevString($device_status) {
-        //$ackid=1-dev,status,devices,miox=11111111111111111111,mioy=11111111111111111111,mre=11111111111111111111,cps=11*
+
+        // OLD STRING WITH OLD REQUIREMENT
+        //$ackid=1-dev,
+        //status,
+        //devices,
+        //miox=11111111111111111111,
+        //mioy=11111111111111111111,
+        //mre=11111111111111111111,
+        //cps=11*
+
+        
+        // NEW STRING WITH NEW REQUIREMENTS
+        //$ackid=1-nadm-unds,
+        //status,devices,
+        //miox=11111111111111111111,
+        //mioy=11111111111111111111,
+        //mre=11111111111111111111,
+        //cps=11*
 
         $newCmd = substr($device_status, 1, -1);
         $splitCmd = explode(',', $newCmd);
@@ -59,7 +76,7 @@ class DEV {
 
         for ($i = 0; $i < count($splitCmd); $i++) {
             if (strpos($splitCmd[$i], "ackid") !== false) {
-                if (strpos($splitCmd[$i], "dev") == false) {
+                if (strpos($splitCmd[$i], "unds") == false) {
                     $this->rslt = FAIL;
                     $this->reason = "INVALID ACKID";
                     return;
