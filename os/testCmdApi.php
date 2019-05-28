@@ -23,15 +23,9 @@ try{
     socket_set_option($clientSocket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 0, 'usec' => 500000));
             
     // $cmd = "\$command,action=disconnect,bus=x,tap=1,ackid=1-tbus*";
-<<<<<<< HEAD
     $cmd = "inst=DISCV_CPS,node=1,dev=ttyUSB0,sn=,cmd=\$status,source=uuid,device=backplane,ackid=1-cps-dcvd*";
     // $cmd = "inst=START_CPS,sn=IAMAMIOXUUIDTHATYOUCANTDECODE,cmd=\$status,source=all,ackid=1-CPS*\$status,source=devices,ackid=1-nadm-unds*";
     // $cmd = "inst=STOP_CPS,sn=IAMAMIOXUUIDTHATYOUCANTDECODE";
-=======
-    // $cmd = "inst=DISCV_CPS,node=1,dev=ttyUSB0,sn=,cmd=\$status,source=uuid,device=backplane,ackid=1-cps-dcvd*";
-    // $cmd = "inst=START_CPS,sn=IAMAMIOXUUIDTHATYOUCANTDECODE,cmd=\$status,source=all,ackid=1-CPS*\$status,source=devices,ackid=1-nadm-unds*";
-    $cmd = "inst=STOP_CPS,sn=IAMAMIOXUUIDTHATYOUCANTDECODE";
->>>>>>> thanh
 
 
     echo "\nSending....$cmd\n";
