@@ -29,6 +29,14 @@ if ($dbObj->rslt == "fail") {
 }
 $db = $dbObj->con;
 
+$debugObj = new DEBUG();
+if ($debugObj->rslt == "fail") {
+    $result["rslt"] = "fail";
+    $result["reason"] = $debugObj->reason;
+    echo json_encode($result);
+    return;
+}
+
 
 // validate login user
     $userObj = new USERS($user);
