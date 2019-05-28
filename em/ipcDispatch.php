@@ -30,12 +30,7 @@ if ($dbObj->rslt == "fail") {
 $db = $dbObj->con;
 
 $debugObj = new DEBUG();
-if ($debugObj->rslt == "fail") {
-    $result["rslt"] = "fail";
-    $result["reason"] = $debugObj->reason;
-    echo json_encode($result);
-    return;
-}
+
 
 
 // validate login user
@@ -48,6 +43,7 @@ if ($debugObj->rslt == "fail") {
         $vioObj = new VIO();
         $vioObj->setUnameViolation();
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
