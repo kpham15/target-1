@@ -115,6 +115,8 @@ try {
                 echo "\n===CMD receive from API: ".$udpMsg."\n";
                 $udpMsgArr = processUDPmsg($udpMsg);
                 echo "convert updmsg to array:\n";print_r($udpMsgArr);echo "\n";
+                if (array_key_exists("cmd",$udpMsgArr))
+                    $cpsCmd .= $udpMsgArr['cmd'];
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
                         $com_port = $udpMsgArr['dev'];
@@ -122,7 +124,6 @@ try {
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
                         echo "cmd changed to:".$udpMsgArr['cmd'];
-                        $cpsCmd .= $udpMsgArr['cmd'];
                         $buf = '';
                         goto clientSock;
                     }
@@ -133,7 +134,8 @@ try {
                         $discover_mode = true;
                         $start_mode = true;
                         $statusCmd = $udpMsgArr['cmd'];
-                        if($clientExist) $comPortObj->endConnection();
+                        if($clientExist) 
+                            $comPortObj->endConnection();
                         $clientExist = false;
                         $buf = '';
                         goto clientSock;
@@ -170,6 +172,8 @@ try {
                 $rsp = $comPortObj->receiveRsp();
 
                 if($rsp !== '') {
+                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+                    $lostConn = 0;
                     //serial number is retrieved in discover_mode, not in start_mode
                     if($start_mode == false) {
                         echo "go get sn:\n";
@@ -194,17 +198,19 @@ try {
             // If receive a response from HW, reset the lostConn = 0, and process the response
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
             echo "\nlostconn:".$lostConn."\n";
-            if($cpsAlive == true) {
-                if($lostConn > 0 && $lostConn < 3)
-                    $lostConn = 0; 
-                else if($lostConn >= 3) {
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
-                    $lostConn = 0;
-                }
-            }
-            else {
+            // if($cpsAlive == true) {
+            //     if($lostConn > 0 && $lostConn < 3)
+            //         $lostConn = 0; 
+            //     else if($lostConn >= 3) {
+            //         $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+            //         $lostConn = 0;
+            //     }
+            // }
+            // else 
+            if($cpsAlive !== true) {
                 $lostConn++;
-                $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
+                if($lostConn >=3)
+                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
             
             }
             //go back and send status command again
