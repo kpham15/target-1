@@ -29,9 +29,13 @@
 			dataType: 'json'
 		}).done(function(data) {
 			let res = data.rows[0];
+			let modal = {};
 
 			if (data.rslt == "fail") {
-				alert(obj.reason);
+				modal.title = data.rslt;
+				modal.body = data.reason;
+				modal.type = 'danger';
+				modalHandler(modal);
 			} 
 			else {
 				nodeInfo = res.node_info;

@@ -87,14 +87,23 @@
           act: "confirm"
         }, function(data, status) {
           var obj = JSON.parse(data);
+          let modal = {}
   
           if (obj.rslt == 'fail') {
-            alert(obj.reason);
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
+            modalHandler(modal);
+
           } else {
             keyId = obj.key;
   
             if (keyId == '') {
-              alert("Confirm key is not available yet");
+              modal.title = 'KEY EMPTY';
+              modal.body = 'Confirm key is not available yet';
+              modal.type = 'warning';
+              modalHandler(modal);
+
               return;
             }
             login.postUserPassword();
@@ -117,8 +126,13 @@
           newPw: encode(login.newpassword.val())
         }, function(data, status) {
           var obj = JSON.parse(data);
+          let modal = {};
+
           if (obj.rslt == "fail") {
-            alert(obj.reason);
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
+            modalHandler(modal);
           } else {
             
             // @TODO add user name to profile area in sidebar/header nav

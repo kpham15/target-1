@@ -11,7 +11,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -33,7 +33,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -55,7 +55,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -77,7 +77,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -99,7 +99,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -121,10 +121,56 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline confirm-btn">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+<script typ="text/javascript">
+  function modalHandler(modalInfo) {
+    let modalType = "default";
+    let modalSize = "";
+    let modalConfirm = false;
+    let modalTitle = "";
+    let modalBody = "";
+
+    if (modalInfo.hasOwnProperty('type')) {
+      modalType = modalInfo.type;
+    }
+    if (modalInfo.hasOwnProperty('size')) {
+      modalInfo = modalInfo.size;
+    }
+    if (modalInfo.hasOwnProperty('confirm')) {
+      modalConfirm = modalInfo.confirm;
+    }
+    if (modalInfo.hasOwnProperty('title')) {
+      modalTitle = modalInfo.title;
+    }
+    if (modalInfo.hasOwnProperty('body')) {
+      modalBody = modalInfo.body;
+    }
+
+    switch(modalSize) {
+      case "sm":
+        $('.modal-dialog').attr('class','modal-dialog modal-sm');
+        break;
+      case "lg":
+        $('.modal-dialog').attr('class','modal-dialog modal-lg');
+        break;
+      default:
+        $('.modal-dialog').attr('class','modal-dialog');
+    } 
+
+    if (modalConfirm) {
+      $('.modal-footer .confirm-btn').show();
+    }
+
+    $('.modal-title').text(modalTitle);
+    $('.modal-body > p').text(modalBody);
+
+    $('#modal-'+modalType).modal('show');
+  }
+</script>

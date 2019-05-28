@@ -10,6 +10,12 @@
 }
 /* ============ END Login Page ===============*/
 
+/* ============= Modal Styling ============== */
+.modal-footer .confirm-btn {
+  display: none;
+}
+/* ============= END Modal Styling =============*/
+
 /* ============ IPC Alarm Colors ============ */
 .bg-critical {
   background-color: #dd4b39 !important;
