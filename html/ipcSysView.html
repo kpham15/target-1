@@ -310,6 +310,7 @@
         <li id='sysview_act_stopNode'>STOP_NODE</li>
         <li id='sysview_act_findFac'>FIND FAC</li>
         <li id='sysview_act_findCkid'>FIND CKID</li>
+        <li id='sysview_act_viewCmd'>VIEW CMD</li>
     </ul>
 </div>
 
@@ -497,6 +498,36 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL FOR CMD -->
+<div id="sysviewCmdModal" class="modal fade" rode="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SYSTEM VIEW: VIEW CMD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <table class="table table-fixed">
+                                <thead style="width: 100%; padding-right: 15px">
+                                    <tr>
+                                        <th style="width: 15%">ACKID</th>
+                                        <th style="width: 85%">CMD</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sysviewCmdModal_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
     
 <script>
@@ -664,6 +695,7 @@ var sysview = {
     actStopNode:    $("#sysview_act_stopNode"),
     actFindFac:     $("#sysview_act_findFac"),
     actFindCkid:    $("#sysview_act_findCkid"),
+    actViewCmd:     $("#sysview_act_viewCmd"),
     nodePicked:     [],
     nodeStatPicked: [],
     nodesArray:     [],
@@ -2213,7 +2245,69 @@ var sysviewNodeModal = {
 
 }
 
+var sysviewCmdModal = {
 
+    modal:      $("#sysviewCmdModal"),
+
+    tblRows:    [],
+    tbl: {
+        body:       $("#sysviewCmdModal_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    viewCmd: function(action) {
+
+        $.post(ipcDispatch,
+        {
+            api:    "ipcNodeOpe",
+            act:    'VIEW CMD',
+            user:   "SYSTEM",
+            node:   sysview.nodePicked,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                sysviewCmdModal.tbl.index = 0;
+                sysviewCmdModal.tblRows = obj.rows;
+                var len = sysviewCmdModal.tblRows.length;
+                sysviewCmdModal.tbl.maxIndex = Math.ceil(len/25.0);
+                sysviewCmdModal.tbl.index++;
+                //put data into an array so that we can populate table in cmdModal
+                sysviewCmdModal.displayTable(sysviewCmdModal.tbl.index);
+                sysviewCmdModal.modal.modal();
+            }
+        });
+    },
+
+    displayTbl: function(index) {   
+        var startIndex=(index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = sysviewCmdModal.tblRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;   
+            }         
+            sysviewCmdModal.tbl.body.empty();
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {  
+                a.push('<tr>');
+                a.push('<td style="width:15%">'    + sysviewCmdModal.tblRows[i].ackid  + '</td>');
+                a.push('<td style="width:85%">'        + sysviewCmdModal.tblRows[i].cmd + '</td>');
+                a.push('</tr>');
+                
+            }
+            sysviewCmdModal.tbl.body.html(a.join(""));
+        } 
+    },
+
+    
+
+}
 // Handles when a node icon is clicked on either the X or Y side
 $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function() {
 
@@ -2392,7 +2486,9 @@ $(".sysview_nodeActList > li").click(function(){
         }
         else if($(this).text() == 'FIND CKID') {
             sysviewModal_ckidSearch.modal.modal();
-            
+        }
+        else if ($(this).text() == 'VIEW CMD') {
+            sysviewCmdModal.viewCmd();
         }
     }
 });
