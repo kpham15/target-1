@@ -70,18 +70,19 @@
   $(document).ready(function() {
     $('#example').dataTable({
       "processing": true,
-      "ajax": {
-        "type": "POST",
-        "url": ipcDispatch,
-        "data": {
-          "api":    "ipcProv",
-          "act":    "queryCktconByCkid",
-          "user":   'SYSTEM',
-          "ckid":   '555-555-5555'
-        },
-        "dataType": 'json',
-        "dataSrc": 'rows',
-      },
+      "data": [],
+      // "ajax": {
+      //   "type": "POST",
+      //   "url": ipcDispatch,
+      //   "data": {
+      //     "api":    "ipcProv",
+      //     "act":    "queryCktconByCkid",
+      //     "user":   'SYSTEM',
+      //     "ckid":   '555-555-5555'
+      //   },
+      //   "dataType": 'json',
+      //   "dataSrc": 'rows',
+      // },
       "columns": [
         {"data":"ctyp"},
         {"data":"fport"},
