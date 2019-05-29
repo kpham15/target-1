@@ -64,6 +64,21 @@
   // }
 
   $(document).ready(function() {
+    $('#example').dataTable({
+      "ajax": {
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          "api":    "ipcProv",
+          "act":    "queryCktconByCkid",
+          "user":   user.user,
+          "ckid":   ckid
+        },
+        dataType: 'json',
+        dataSrc: 'rows'
+      }
+    });
+    
     $(document).on('click', '#find-ckid-btn', function() {
       $('#ckid-modal').modal('toggle');
     });
