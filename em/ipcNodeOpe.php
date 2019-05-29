@@ -647,7 +647,7 @@ function exec_resp($node, $hwRsp, $userObj) {
     }
     
     // check if serial_no is the same as number in database
-    if ($cpsObj->serial_no != '' && $cpsObj->serial_no !== $serial_no) {
+    if ($cpsObj->serial_no != '-' && $cpsObj->serial_no != '' && $cpsObj->serial_no !== $serial_no) {
         // create alarm here "almid=node-cps-sn"
         $almid = "$node-cps-$serial_no";
         // check if alm with this almid already exists, if no, create a new one
