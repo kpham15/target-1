@@ -248,7 +248,7 @@
 
   function createPortBox(gridNum) {
     let portBox = '<div class="dropdown port-box info-box bg-gray-active disabled" grid_num="'+gridNum+'">' +
-                    '<button data-toggle="dropdown">' +
+                    '<button data-toggle="dropdown" id="dropdown'+gridNum+'">' +
                       '<div class="info-box-text">' +
                         '<span class="port-num">-</span>' +
                         '<span class="port-psta pull-right">-</span>' +
@@ -261,7 +261,7 @@
                         '<span class="port-ckid">-</span>' +
                       '</div>' +
                     '</button>' +
-                    '<ul class="dropdown-menu">' +
+                    '<ul class="dropdown-menu" aria-labelledby="dropdown'+gridNum+'">' +
                       '<li><a>Item 1</a></li>' +
                       '<li><a>Item 2</a></li>' +
                       '<li><a>Item 3</a></li>' +
@@ -319,8 +319,8 @@
     });
 
     // Click events for Port Box Dropdowns
-    $(document).on('click', '.port-box button', function() {
-      $(this).dropdown('toggle');
-    });
+    // $(document).on('click', '.port-box button', function() {
+    //   $(this).dropdown('toggle');
+    // });
   });
 </script>
