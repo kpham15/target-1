@@ -293,7 +293,7 @@
 			$nodeinfo = [
 				"node" => "$node",
 				"node_alm" => '',
-				"node_stat" => $nodeObj->stat,
+				"node_stat" => $nodeObj->psta,
 				"node_volt" => $nodeObj->volt,
 				"node_temp" => $nodeObj->temp,
 				"node_rack" => $nodeObj->rack,

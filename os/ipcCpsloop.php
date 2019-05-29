@@ -1,9 +1,14 @@
 <?php
+
+//change working dir to the file location
+chdir(__DIR__);
+
 //because this program needs to read /dev/ttyUSB file => www-data user need to be put in the group: dialout
 //cmd structure to run this program: php ipcCpsloop.php node ip_port
 include 'ipcComPortClass.php';
 include 'ipcCpsServerClass.php';
 include 'ipcRspClass.php';
+include '../class/ipcDebugClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -48,11 +53,13 @@ try {
     $serverExist = false;
     $clientExist = false;
     $rspObjExist = false;
- 
+
+    $debugObj = new DEBUG();
+    $debugObj->log("\n-----------------BEGIN OF CPSLOOP-----------------\n");
     serverSock: 
         //-------------to communicate with API (UDP type)-----------------
         if($serverExist == false) {
-            echo "\ncreating UPD server.....\n";
+            $debugObj->log("\ncreating UPD server.....\n");
             $cpsServerObj = new CPSSERVER("127.0.0.1", $ip_port, $udp_timeoutSec, $udp_timeoutUsec);
             if($cpsServerObj->rslt == 'fail') {   
                 throw new Exception($cpsServerObj->rslt.": ".$cpsServerObj->reason,SOCKET_API_FAIL);
@@ -64,7 +71,7 @@ try {
     clientSock:
         // ------------create new connection to CPS HW  (serial type)
         if($clientExist == false && $com_port != null) {
-            echo "\ncreating serial client....\n";
+            $debugObj->log("\ncreating serial client....\n");
             $comPortObj = new COMPORT($com_port,$baud, $bits, $stop, $parity, $serial_timeoutSec, $serial_timeoutUsec);
             if($comPortObj->rslt == 'fail') {   
                 throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
@@ -82,7 +89,7 @@ try {
     while(1) {
         if($start_mode && $statusCmd != '') {
             //------Send the status cmd and device cmd to HW-------
-            echo "\nCPS loop sends the status cmd:\n";
+            $debugObj->log("\nCPS loop sends the status cmd:\n");
             $rsp = $comPortObj->sendCmd($statusCmd);
             if($comPortObj->rslt == 'fail') {   
                 throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
@@ -110,10 +117,10 @@ try {
             $udpMsg = trim($buf);
             $udpMsgArr=[];
             if($udpMsg !== '') {
-                echo "\n===CMD receive from API: ".$udpMsg."\n";
+                $debugObj->log("\n===CMD receive from API: ".$udpMsg."\n");
                 $udpMsgArr = processUDPmsg($udpMsg);
-                echo "Convert updmsg to array:\n";print_r($udpMsgArr);echo "\n";
-                if (array_key_exists("cmd",$udpMsgArr))
+                $debugObj->log("Convert updmsg to array:\n".print_r($udpMsgArr,true)."\n");
+                if ($discover_mode && array_key_exists("cmd",$udpMsgArr))
                     $cpsCmd .= $udpMsgArr['cmd'];
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
@@ -127,7 +134,7 @@ try {
                         //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
                         $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
                         $cpsCmd .= $udpMsgArr['cmd'];
-                        echo "Cmd changed to:".$udpMsgArr['cmd'];
+                        $debugObj->log("Cmd changed to:".$udpMsgArr['cmd']);
                         $buf = '';
                         goto clientSock;
                     }
@@ -174,17 +181,14 @@ try {
             //if response exists, process the response and update cps connection status
             if($discover_mode) {
                 $rsp = $comPortObj->receiveRsp();
-                if($rsp !== '') {
-                    //if there is a response from HW, create post-request CPS-ON to API, and reset lostConn=0
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+                if($rsp !== '') {        
                     $lostConn = 0;
-                    if($cpsAlive == false) $cpsAlive = true;
-
+                    $cpsAlive = true;
                     //serial number is retrieved in discover_mode, not in start_mode
                     if($start_mode == false) {
                         $sn = $rspObj->getUuid($rsp);
                         if($sn != '') {
-                            echo "\nSerial number: $sn\n";
+                            $debugObj->log("\nSerial number: $sn\n");
                         }
                     }
                    
@@ -200,7 +204,7 @@ try {
         if($start_mode) {
             //when 5sec expires, check the cps communication status. Send post-request to API to declare alarm if needed
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
-            echo "\nlostconn:".$lostConn."\n";
+            $debugObj->log("\nlostconn:".$lostConn."\n");
             if($cpsAlive !== true) {
                 $lostConn++;
                 if($lostConn >=3)
@@ -215,7 +219,7 @@ try {
 }
 catch (Throwable $t)
 {   
-    echo "\n".$t->getMessage()."\n";
+    $debugObj->log("\n".$t->getMessage()."\n");
 
     if($t->getCode() == SOCKET_API_FAIL) {
         // If errorCode = 1, that means socket to API is broken. Close the socket and create a new one

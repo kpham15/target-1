@@ -21,12 +21,18 @@ $device = "";
 if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
+//@TODO this device will need to be removed when the hardware comes in
 $device = "ttyUSB0";
+
 $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
-        
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
 
 // dispatch to functions
 
@@ -118,14 +124,6 @@ if ($act == "EXEC_CMD") {
 	return;
 }
 
-
-// if ($act == "UPDATE RACK") {
-//     $result = updateRack($node, $device);
-//     echo json_encode($result);
-// 	mysqli_close($db);
-// 	return;
-// }
-
 if ($act == "VIEW CMD") {
     $result = view_cmd($node);
     echo json_encode($result);
@@ -133,6 +131,15 @@ if ($act == "VIEW CMD") {
     $debugObj->close();
     return;
 }
+
+else {
+	$result["rslt"] = 'fail';
+	$result["reason"] = "This action is under development!";
+	echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 // functions area
 function view_cmd($node) {
     $cmdObj = new CMD();
@@ -253,7 +260,6 @@ function discover($node, $device, $userObj) {
         return $result;
     }
 
-    // formulate msg #1
     // this cmd will be sent back to be parsed. the ackid must be the NEXT ACT and API
     $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,sn=,cmd=\$status,source=uuid,device=backplane,ackid=$node-cps-dcvd*";
 
@@ -274,7 +280,6 @@ function discover($node, $device, $userObj) {
 
 // not being used on the front end
 function start($node, $userObj) {
-
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -304,7 +309,6 @@ function start($node, $userObj) {
     }
 
     // update t_cps psta/ssta with npsta/nssta???
-
     $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
@@ -319,7 +323,6 @@ function start($node, $userObj) {
     $result['rows'] = [];
     return $result;
 }
-
 
 function stop($node, $serial_no, $userObj) {
 
@@ -367,19 +370,17 @@ function stop($node, $serial_no, $userObj) {
 }
 
 function discovered($node, $hwRsp) {
-
-    // parse hwString
-    
     // $ackid=1-bkpln,status,device=miox(0),uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*
-    // UUID is serial number for now
+    // UUID is serial number for now, extract uuid from string
     $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
-    // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
-    $serialNumArray = explode("=", $newHwStringArray[3]);
-    // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
-    $serialNum = $serialNumArray[1];
-   
-     
+
+    foreach($newHwStringArray as $parameter) {
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'uuid') 
+            $serialNum = $paraExtract[1];
+    }
+
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -451,12 +452,8 @@ function discovered($node, $hwRsp) {
 
         $result['rslt'] = SUCCESS;
         $result['reason'] = $cpsObj->reason;
-        
         return $result;
-
     }
-
-
 }
 
 function updateCpsStatus($hwRsp) {
@@ -558,10 +555,7 @@ function updateCpsTemp($hwRsp) {
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=', $splitCmd[0]);
     $newAckid = $ackid[1];
-    // $zeroBase = explode('-', $newAckid);
-    // $oneBase = $zeroBase[0] + 1;
-    // // puts back together 1-cps
-    // $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
+ 
     $temp1 = explode('=',$splitCmd[3]);
     $temp2 = explode('=',$splitCmd[4]);
     $temp3 = explode('=',$splitCmd[5]);
@@ -633,43 +627,90 @@ function updateCpsTemp($hwRsp) {
 
 function exec_resp($node, $hwRsp, $userObj) {
 
+    cps_on($node);
     // use cpsloop example foreach processUDPmsg
     // remove $ and * from string
     $rsp = substr($hwRsp, 1, -1);
+
     // divide string into sections
     $hwRspArray = explode(',', $rsp);
-    // create ackid array to obtain ackid value
-    $ackidArray = explode("=", $hwRspArray[0]);
-    $ackid = $ackidArray[1];
-    // parse ackid value to obtain node, api, apiAct
-    $parsedAckid = explode('-', $ackid);
-    $node = $parsedAckid[0];
-    $api_key = $parsedAckid[1];
-    $apiAct_key = $parsedAckid[2];
 
+    // go through array and search for serial_no, ackid, node, api and apiAction
+    foreach($hwRspArray as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackid = $paraExtract[1];
+            $nodeExtract = $cmdArray[0];
+            $api_key = $cmdArray[1];
+            $apiAct_key = $cmdArray[2];
+        }
+        else if ($paraExtract[0] == "backplane") {
+            $serial_no = $paraExtract[1];
+        }
+    }
+
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    // check if serial_no is the same as number in database
+    if ($cpsObj->serial_no != '-' && $cpsObj->serial_no != '' && $cpsObj->serial_no !== $serial_no) {
+        // create alarm here "almid=node-cps-sn"
+        $almid = "$node-cps-$serial_no";
+        // check if alm with this almid already exists, if no, create a new one
+        $almObj = new ALMS($almid);
+        if (count($almObj->rows) == 0) {
+            $src = 'EQUIP';
+            $almtype = 'COMMUNICATION';
+            $cond = 'COMMUNICATION';
+            $sa = 'N';
+            $sev = 'MAJ';
+            $remark = 'INCORRECT BACKPLANE SERIAL NUMBER';
+            $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+        }
+        
+        // send stop UDP:stop
+        $cmd = "inst=STOP_CPS,sn=$serial_no";
+        $cmdObj = new CMD();
+        $cmdObj->sendCmd($cmd, $node);
+        if ($cmdObj->rslt == "fail") {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return;
+        }
+        
+        $result['rslt'] = FAIL;
+        $result['reason'] = "INCORRECT BACKPLANE SERIAL NUMBER";
+        return $result;
+    }
+  
     // Obtain full api string from constant and api action from constant
     $api = apiAndActArray[$api_key]['api'];
     $apiAct = apiAndActArray[$api_key][$apiAct_key];
 
     // post to nodeapi to update node cps stats
     $cmdObj = new CMD($ackid);
+
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
 
+    // find the ackid in t_cmdque and update with stat 'COMPL'
     if ($cmdObj->reason == "ACKID FOUND") {
         $stat = "COMPL";
-        $cmdObj->updCmd($stat, $rsp);
+        $cmdObj->updCmd($stat, $hwRsp);
         if ($cmdObj->rslt == FAIL) {
             $result['rslt'] = $cmdObj->rslt;
             $result['reason'] = $cmdObj->reason;
             return $result;
         }
     }
-
-    
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
@@ -681,6 +722,7 @@ function exec_resp($node, $hwRsp, $userObj) {
 }
 
 function exec_cmd($node, $cmd, $userObj) {
+ 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -690,14 +732,18 @@ function exec_cmd($node, $cmd, $userObj) {
 
     // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
     // will receive string like this: ACKID=$node-api-act
-    
-    // get node from cmd
-    $cmdArray = explode("=", $cmd);
-    $ackIdArray = explode("-", $cmdArray[1]);
-    $ackid = $cmdArray[1];
-    $node = $ackIdArray[0];
-    $api = $ackIdArray[1];
-    $act = $ackIdArray[2];
+    $cmdStr = substr($cmd, 1, -1);
+    // divide string into sections
+    $cmdExtract = explode(',', $cmdStr);
+    // go through array and search for ackid, node, api and apiAction
+    $ackId = null;
+    foreach($cmdExtract as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackId = $paraExtract[1];
+        }
+    }
 
     $cmdObj = new CMD($ackId);
     if ($cmdObj->rslt == FAIL) {
@@ -705,7 +751,7 @@ function exec_cmd($node, $cmd, $userObj) {
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
-    
+
     if ($cmdObj->reason == "ACKID NOT FOUND") {
         $cmdObj->addCmd($node, $ackid, $cmd);
         if ($cmdObj->rslt == FAIL) {
@@ -714,7 +760,7 @@ function exec_cmd($node, $cmd, $userObj) {
             return $result;
         }
     }
-    else {
+    else if ($cmdObj->reason == "ACKID FOUND"){
         $stat = "PENDING";
         $cmdObj->updateStat($stat);
         if ($cmdObj->rslt == FAIL) {
@@ -723,7 +769,11 @@ function exec_cmd($node, $cmd, $userObj) {
             return $result;
         }
     }
-
+    else {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'INVALID ACKID';
+        return $result;
+    }
 
     // create cpsObj to get comport and serialnum
     $cpsObj = new CPS($node);
@@ -733,9 +783,8 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
 
-    $newCmd = "inst=EXEC,$node,$cpsObj->dev,$cpsObj->serial_no";
+    $newCmd = "inst=EXEC,node=$node,dev=$cpsObj->dev,sn=$cpsObj->serial_no,cmd=$cmd";
 
-    $cmdObj = new CMD();
     $cmdObj->sendCmd($newCmd, $node);
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
@@ -743,7 +792,7 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
 
-    $result['rslt'] = SUCCESS;
+    $result['rslt'] =   SUCCESS;
     $result['reason'] = "CMD IS IN PROGRESS";
     return $result;
 }

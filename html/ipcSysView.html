@@ -2292,7 +2292,7 @@ var sysviewCmdModal = {
         {
             api:    "ipcNodeOpe",
             act:    'VIEW CMD',
-            user:   "SYSTEM",
+            user:   $('#main_currentUser').text(),
             node:   sysview.nodePicked,
         },
         function (data, status) {
@@ -2319,8 +2319,8 @@ var sysviewCmdModal = {
         $.post(ipcDispatch,
         {
             api:    "ipcNodeOpe",
-            act:    'exec_cmd',
-            user:   "SYSTEM",
+            act:    'EXEC_CMD',
+            user:   $('#main_currentUser').text(),
             node:   sysview.nodePicked,
             cmd:    sysviewCmdModal.cmd.val(),
         },
@@ -2336,7 +2336,7 @@ var sysviewCmdModal = {
                         $("#alertLayer").hide();
                         sysviewCmdModal.viewCmd();
                     }, 5000);
-                }, false);
+                }, true);
             }
         });
     },
