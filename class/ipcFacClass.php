@@ -20,7 +20,7 @@
         
         
         public function __construct($fac=NULL) {
-            global $db;
+            global $db, $debugObj;
 
             if ($fac == NULL) {
                 $this->rslt = SUCCESS;
@@ -32,6 +32,7 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -76,6 +77,7 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -102,6 +104,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -128,6 +131,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -155,6 +159,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -178,6 +183,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -201,6 +207,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -224,6 +231,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $rows = [];
@@ -283,6 +291,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
                 return false;
             }
             else {
@@ -360,6 +369,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 $this->rslt = SUCCESS;
@@ -396,6 +406,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
             }
             else {
                 if (mysqli_affected_rows($db) > 0) {
@@ -417,6 +428,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
+                $debugObj->log($this->reason);
                 return false;
             }
             else {

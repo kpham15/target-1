@@ -161,7 +161,7 @@
 		$result['log'] = "ACTION = ADD | FAC = $fac | FTYP = $ftyp | ORT = $ort | SPCFNC = $spcfnc";
 		if ($userObj->grpObj->portmap != "Y") {
 			$result['rslt'] = 'fail';
-         $result['reason'] = 'Permission Denied';
+         	$result['reason'] = 'Permission Denied';
 			return $result;
 		}
 
