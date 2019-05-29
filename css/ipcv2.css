@@ -102,4 +102,7 @@
 .nav-tabs-custom .port-box.dropdown.open>a:focus {
   color: inherit;
 }
+.sysview-actions-row {
+  margin-bottom: 15px;
+}
 /* ============ END Sysview Page CSS ============ */
