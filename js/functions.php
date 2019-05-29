@@ -41,6 +41,9 @@
 				nodeInfo = res.node_info;
 				delete res.node_info;
 				wcInfo = res;
+
+				updateNodeStatus();
+				updateHeaderInfo();				
 			}
 
 			// check if first time loading information
