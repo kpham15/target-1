@@ -29,6 +29,9 @@ if ($dbObj->rslt == "fail") {
 }
 $db = $dbObj->con;
 
+$debugObj = new DEBUG();
+
+
 
 // validate login user
     $userObj = new USERS($user);
@@ -40,6 +43,7 @@ $db = $dbObj->con;
         $vioObj = new VIO();
         $vioObj->setUnameViolation();
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
