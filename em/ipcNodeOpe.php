@@ -663,14 +663,17 @@ function exec_resp($node, $hwRsp, $userObj) {
         }
         
         // send stop UDP:stop
-        $cmd = "inst=STOP_CPS,sn=$serial_no";
-        $cmdObj = new CMD();
-        $cmdObj->sendCmd($cmd, $node);
-        if ($cmdObj->rslt == "fail") {
-            $result['rslt'] = $cmdObj->rslt;
-            $result['reason'] = $cmdObj->reason;
-            return;
-        }
+        // $cmd = "inst=STOP_CPS,sn=$serial_no";
+        // $cmdObj = new CMD();
+        // $cmdObj->sendCmd($cmd, $node);
+        // if ($cmdObj->rslt == "fail") {
+        //     $result['rslt'] = $cmdObj->rslt;
+        //     $result['reason'] = $cmdObj->reason;
+        //     return;
+        // }
+
+        stop($node, $cpsObj->serial_no, $userObj);
+        
         
         $result['rslt'] = FAIL;
         $result['reason'] = "INCORRECT BACKPLANE SERIAL NUMBER";
