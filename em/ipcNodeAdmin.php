@@ -383,7 +383,6 @@ function updateNodeDevicesStatus($node, $hwRsp) {
                 $slot = $i + 1;
                 $url = 'ipcDispatch.php';
                 if (strpos($newMioxArray[$i], "0") !== false){
-                    //@TODO what should the user be? 'SYSTEM'?
                     $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"1", "slot"=>$slot, "type"=>"MIOX");
                     $postReqObj->asyncPostRequest($url, $params);
                     //@TODO What happens if this fails?
@@ -408,7 +407,6 @@ function updateNodeDevicesStatus($node, $hwRsp) {
                 $slot = $i + 1;
                 $url = 'ipcDispatch.php';
                 if (strpos($newMioyArray[$i], "0") !== false){
-                    //@TODO what should the user be? 'SYSTEM'?
                     $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"2", "slot"=>$slot, "type"=>"MIOY");
                     $postReqObj->asyncPostRequest($url, $params);
                     //@TODO What happens if this fails?
