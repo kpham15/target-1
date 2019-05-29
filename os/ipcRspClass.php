@@ -74,7 +74,8 @@ class RSP {
                     echo "\nProcessing:".$rspArray[$i]."\n";
                     $ackid = $this->getAckid($rspArray[$i]);
                     if(trim($ackid) != '') {
-                        $rspArray[$i] = substr($rspArray[$i],0,strlen($rspArray[$i])-1)."uuid=IAMAMIOXUUIDTHATYOUCANTDECODE*";  
+                        $rspArray[$i] = substr($rspArray[$i],0,strlen($rspArray[$i])-1).",backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*";  
+                        echo "\nrsp changed to:$rspArray[$i]\n";
                         $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
                     }
                 }
