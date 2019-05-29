@@ -62,27 +62,10 @@
 </div>
 
 <script type="text/javascript">
-  function queryCkid(ckid) {
-    $.ajax({
-      type: 'POST',
-      url: ipcDispatch,
-      data: {
-        "api":      "ipcProv",
-        "act":      "queryCktconByCkid",
-        "user":     user.user,
-        "ckid":     ckid
-      },
-      dataType: 'json'
-    }).done(function(data) {
-      let res = data.rows;
-      
-      datatable.clear().draw();
-      datatable.rows.add(res); // Add new data
-      datatable.columns.adjust().draw(); // Redraw the DataTable
-    });
-  }
 
   $(document).ready(function() {
+
+    // Initialize datatable
     var datatable = $('#ckid-table').dataTable({
       "data": [],
       // "ajax": {
@@ -107,7 +90,31 @@
         {"data":"tfac"},
       ]
     });
+
+
+    // Functions
+    function queryCkid(ckid) {
+      $.ajax({
+        type: 'POST',
+        url: ipcDispatch,
+        data: {
+          "api":      "ipcProv",
+          "act":      "queryCktconByCkid",
+          "user":     user.user,
+          "ckid":     ckid
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        
+        datatable.clear().draw();
+        datatable.rows.add(res); // Add new data
+        datatable.columns.adjust().draw(); // Redraw the DataTable
+      });
+    }
     
+
+    // Click Events
     $(document).on('click', '#find-ckid-btn', function() {
       $('#ckid-modal').modal('toggle');
     });
