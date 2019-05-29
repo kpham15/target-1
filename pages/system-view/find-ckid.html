@@ -108,8 +108,11 @@
         let res = data.rows;
         
         datatable.clear().draw();
+        console.log('after clear');
         datatable.rows.add(res); // Add new data
+        console.log('after row add');
         datatable.columns.adjust().draw(); // Redraw the DataTable
+        console.log('after adjust');
       });
     }
     
