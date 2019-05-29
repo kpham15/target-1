@@ -60,6 +60,7 @@ if ($act  ==  "query") {
     // $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -72,6 +73,7 @@ if ($act == "queryMatrix") {
     // $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -80,6 +82,7 @@ if ($act  ==  "lck") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -88,6 +91,7 @@ if ($act == "lck_node") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 
 }
@@ -97,6 +101,7 @@ if ($act  ==  "unlck") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -105,6 +110,7 @@ if ($act  ==  "unlck_node") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -113,6 +119,7 @@ if ($act == "insert") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -121,6 +128,7 @@ if ($act == "remove") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -128,6 +136,7 @@ if ($act == "updateNodeMxc") {
     $result = updateNodeMxc($slotBitmask, $node);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -136,6 +145,7 @@ if ($act == "VIEW_PORT_STATUS") {
     // $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -146,6 +156,7 @@ else {
     // $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

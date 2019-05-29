@@ -58,6 +58,7 @@ if ($act == "findOrder") {
     $result = findOrder($ordno, $ot, $wc, $pri, $stat);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -65,6 +66,7 @@ if ($act == "findOrderByDD") {
     $result = findOrderByDD($cdd, $dd, $fdd, $fdt);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

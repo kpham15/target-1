@@ -54,6 +54,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -68,6 +69,7 @@
         $result = addFtModTable($ot, $pri, $cdd, $noscm, $rtype, $processingfile, $ftmodtableObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -75,6 +77,7 @@
         $result = deleteFtModTable($id, $ot, $pri, $cdd, $noscm, $rtype, $processingfile, $ftmodtableObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -82,6 +85,7 @@
         $result = updateFtModTable($id, $ot, $pri, $cdd, $noscm, $rtype, $processingfile, $ftmodtableObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }

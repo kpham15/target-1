@@ -35,6 +35,7 @@ if ($act == "queryAll") {
 	$result = queryAll();	
 	echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -42,6 +43,7 @@ if ($act == "DISCOVER") {
     $result = discover($node, $device, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -50,6 +52,7 @@ if ($act == "START") {
     $result = start($node, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -57,6 +60,7 @@ if ($act == "STOP") {
     $result = stop($node, $serial_no, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -71,6 +75,7 @@ if ($act == "CPS_STATUS") {
     $result = updateCpsStatus($hwRsp);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -78,12 +83,14 @@ if ($act == "CPS_ON") {
     $result = cps_on($node);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 if ($act == "CPS_OFF") {
     $result = cps_off($node);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -91,6 +98,7 @@ if ($act == "EXEC_RESP") {
     $result = exec_resp($node, $hwRsp, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -98,6 +106,7 @@ if ($act == "CONNECT_TBX_TAP1") {
     // $result = processHwResp($node, $hwRsp);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -105,6 +114,7 @@ if ($act == "EXEC_CMD") {
     $result = exec_cmd($node, $cmd, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -120,6 +130,7 @@ if ($act == "VIEW CMD") {
     $result = view_cmd($node);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 // functions area

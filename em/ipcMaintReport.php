@@ -46,12 +46,14 @@
 		$result = queryMaintlog($uname, $tktno, $action, $fromDate, $toDate, $userObj);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "queryTkt") {
 		$result = queryTkt($tktno);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
     else {

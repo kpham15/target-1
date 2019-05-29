@@ -96,6 +96,7 @@ if ($act == "queryAll") {
     $result = queryAll($nodeObj, $userObj);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -110,6 +111,7 @@ if ($act == "UPDATE_NETWORK") {
     $result = updateNetwork($node, $ipadr, $gw, $netmask, $port, $nodeObj, $userObj);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -125,6 +127,7 @@ if ($act == "UPDATE_RACK") {
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -132,6 +135,7 @@ if ($act == "updateCpsStatus") {
     $result = updateCpsStatus($cmd, $userObj);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -156,6 +160,7 @@ if ($act == "START_NODE") {
     }
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -181,6 +186,7 @@ if ($act == "STOP_NODE") {
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -212,6 +218,7 @@ if ($act == "updateCpsCom") {
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -238,6 +245,7 @@ if ($act == "DISCOVER_NODE") {
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -261,6 +269,7 @@ if ($act == "ASSIGN_NODE_IP") {
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 if ($act == "UNASSIGN_NODE") { // @TODO may change act name
@@ -282,12 +291,14 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
 
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
     $result = updateNodeDevicesStatus($node, $device_status);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else {
@@ -295,6 +306,7 @@ else {
 	$result["reason"] = "This action is under development!";
 	echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 

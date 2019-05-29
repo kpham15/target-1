@@ -41,11 +41,12 @@
 		$result = queryCfglog($action, $uname, $fromDate, $toDate, $userObj);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
     }
     else {
         $result["rslt"]   = "fail";
-		$result["reason"] = "Invalid action!";
+				$result["reason"] = "Invalid action!";
         echo json_encode($result);
         mysqli_close($db);
         $debugObj->close();

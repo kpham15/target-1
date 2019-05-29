@@ -88,6 +88,7 @@ if ($act == "") {
     $result = queryOrd($ordno);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -95,6 +96,7 @@ if ($act == "queryOrd") {
     $result = queryOrd($ordno);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -102,6 +104,7 @@ if ($act == "queryCkt") {
     $result = queryCkt($ordno);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -109,6 +112,7 @@ if ($act == "queryFac") {
     $result = queryFac($ctid, $ordno);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -116,6 +120,7 @@ if ($act == "PROCESS_CONNECTION") {
     $result = processConnection($ordno, $mlo, $ctid, $cls, $adsr, $prot, $ctyp, $ffacid, $tfacid, $op);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -123,6 +128,7 @@ if ($act == "PROCESS_ORD") {
     $result = processOrd($ordno);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -130,6 +136,7 @@ if ($act == "PROCESS_CKT") {
     $result = processCkt($ordno, $ctid);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -146,6 +153,7 @@ if ($act == "FETCH_FT_ORDERS") {
     }
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

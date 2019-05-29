@@ -41,6 +41,7 @@ if ($act == 'QUERY')
     $result = queryBatch($filename);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else if ($act == "ADD") {
@@ -48,6 +49,7 @@ else if ($act == "ADD") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else if ($act == "DELETE") {
@@ -55,12 +57,14 @@ else if ($act == "DELETE") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else if ($act == "QUERYBATS"){
     $result = queryBats($id);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else {
@@ -69,6 +73,7 @@ else {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

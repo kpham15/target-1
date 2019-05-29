@@ -78,6 +78,7 @@
 		$result = queryPathByNode($pathObj, $node, $slot);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     
@@ -85,6 +86,7 @@
 		$result = queryPathByFac($pathObj, $fac);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     
@@ -92,6 +94,7 @@
 		$result = queryPathByPort($pathObj, $port);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     
@@ -99,6 +102,7 @@
 		$result = queryPathsByCkid($pathObj, $ckid);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     else {

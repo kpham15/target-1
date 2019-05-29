@@ -44,6 +44,7 @@
 		$result = queryEventlog($uname, $evt, $fnc, $task, $fromDate, $toDate);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 

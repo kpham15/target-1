@@ -76,6 +76,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	
@@ -87,6 +88,7 @@
 		$result['rows'] = $brdcstObj->rows;
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
    
@@ -95,6 +97,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 		
     }
@@ -104,6 +107,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     
@@ -112,6 +116,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	else {
@@ -119,6 +124,7 @@
 		$result["reason"] = "Invalid ACTION";
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
+        $debugObj->close();
 		return;
 	}
 

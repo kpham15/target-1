@@ -108,6 +108,7 @@
 		$evtLog->log($result["rslt"], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -122,6 +123,7 @@
         $result = addFtRelease($sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop, $ftreleaseObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -129,6 +131,7 @@
         $result = deleteFtRelease($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop, $ftreleaseObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -136,6 +139,7 @@
         $result = updateFtRelease($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop, $ftreleaseObj);
         $evtLog->log($result["rslt"], $result['reason']);
 		mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }

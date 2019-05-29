@@ -24,6 +24,7 @@
 		$result = addFoms();
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     else {
@@ -31,6 +32,7 @@
         $result["reason"] = "This action is under development!";
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
 

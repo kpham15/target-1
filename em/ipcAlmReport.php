@@ -47,6 +47,7 @@ if ($act == "query" || $act == "VIEW REPORT") {
     $result = queryAlmlog($uname, $action, $sev, $source, $fromDate, $toDate, $userObj);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -55,6 +56,7 @@ else {
     $result["reason"] = "Invalid ACTION";
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

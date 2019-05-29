@@ -65,6 +65,7 @@ if ($almObj->rslt == "fail") {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -80,6 +81,7 @@ if ($act == "query") {
 	$result["rows"]   = $almObj->rows;
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -89,6 +91,7 @@ if ($act == "ACK") {
 	//$almLog->log($id, $ack, $almObj->sa, $src, $almObj->type, $cond, $almObj->sev, $almObj->psta, $almObj->ssta, $remark, $act, $user, $almObj->rslt.'-'.$almObj->reason);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -98,6 +101,7 @@ if ($act == "UN-ACK") {
 	//$almLog->log($id, $ack, $almObj->sa, $src, $almObj->type, $cond, $almObj->sev, $almObj->psta, $almObj->ssta, $remark, $act, $user, $almObj->rslt.'-'.$almObj->reason);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -107,6 +111,7 @@ if ($act == "CLR") {
 	//$almLog->log($id, $ack, $almObj->sa, $src, $almObj->type, $cond, $almObj->sev, $almObj->psta, $almObj->ssta, $remark, $act, $user, $almObj->rslt.'-'.$almObj->reason);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -115,6 +120,7 @@ if ($act == "REPORT") {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -123,6 +129,7 @@ if ($act == "CREATE") {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -132,6 +139,7 @@ else {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
