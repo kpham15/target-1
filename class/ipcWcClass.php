@@ -442,8 +442,27 @@ class WC {
     public function getWCTime() {
         global $db;
 
-            $time = new DateTime("now", new DateTimeZone($this->tzone));
-            $this->time = $time;
+		// establish ipc_time
+		date_default_timezone_set("UTC");
+		$utc_tz = date_default_timezone_get();
+		$utc_t = time();
+		$ipc_tz_offset = $this->tz * 3600;
+		$ipc_t = $utc_t + ($this->tz * 3600);
+
+		$secondSundayInMarch = date("d-M-Y", strtotime("second sunday " . date('Y') . "-03"));
+		$firstSundayInNovember = date("d-M-Y", strtotime("first sunday " . date('Y') . "-11"));
+		$dst_begin_t = strtotime($secondSundayInMarch) + $ipc_tz_offset;
+		$dst_end_t = strtotime($firstSundayInNovember) + $ipc_tz_offset;
+
+		$ipc_tzone = $this->tzone;
+		if ($ipc_t > $dst_begin_t && $ipc_t < $dst_end_t) {
+			if (date('I', $ipc_t) == 0) {
+				$ipc_t = $ipc_t + 3600;
+				$ipc_tzone = substr_replace($this->tzone,"DT",-2);
+			}
+		}
+		$ipc_time = date("Y-m-d_H:i:s", $ipc_t);
+        return $ipc_time;
     }
 
 /**

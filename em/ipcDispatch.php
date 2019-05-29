@@ -75,6 +75,9 @@ if($api =='ipcAlm') {
 else if($api =='ipcAlmReport') {
     include "ipcAlmReport.php";
 }
+else if($api =='coQueryBkup') {
+    include "coQueryBkup.php";
+}
 else if($api =='ipcBatchExc') {
     include "ipcBatchExc.php";
 }
