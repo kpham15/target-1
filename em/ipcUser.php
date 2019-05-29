@@ -347,7 +347,7 @@
 		if($userObj->uname == $targetUserObj->uname) {
 			// only admins can change their own names
 			if ($userObj->grp < 2)
-				$targetUserObj->updUser($lname, $fname, $mi, "", $tel, $email, "", $targetUserObj->ugrp);
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp);
 				// other users cannot change their names
 			else {
 				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
