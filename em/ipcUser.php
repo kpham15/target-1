@@ -345,7 +345,7 @@
 		
 		// user can update his/her own tel,email
 		if($userObj->uname == $targetUserObj->uname) {
-			$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
+			$targetUserObj->updUser($lname, $fname, $mi, "", $tel, $email, "", $targetUserObj->ugrp);
 		}
 		else {
 			// ADMIN and SUPERVISOR user can update other users in lower ugrp
