@@ -24,7 +24,11 @@ class CMD {
     public $rows;
     
     public function __construct($ackid=NULL) {
+        global $db;
+
         if($ackid == NULL) {
+            $this->rslt   = SUCCESS;
+            $this->reason = "CMD CONSTRUCTED";
             return;
         }
         $qry = "SELECT * FROM t_cmdque WHERE ackid = '$ackid' LIMIT 1";
@@ -253,6 +257,8 @@ class CMD {
             $this->reason = 'CAN NOT SEND CMD';
             return;
         }
+        $this->rslt = 'success';
+        $this->reason = 'CMD SENT';
     } 
 
 }

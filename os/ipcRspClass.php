@@ -51,8 +51,9 @@ class RSP {
         ///this part should be commented out when checking process is finished
         $result="";
         while (!feof($fp)) {
-            print_r(fgets($fp, 1024));
+            $result = fgets($fp, 1024);
         }
+        echo "\nResponse from API:".$result."\n";
         //---------------------
         fclose($fp);
     }

@@ -22,11 +22,16 @@ if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
 $device = "ttyUSB0";
+
 $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
-        
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
 
 // dispatch to functions
 
@@ -108,7 +113,6 @@ if ($act == "EXEC_CMD") {
 	return;
 }
 
-
 // if ($act == "UPDATE RACK") {
 //     $result = updateRack($node, $device);
 //     echo json_encode($result);
@@ -122,6 +126,15 @@ if ($act == "VIEW CMD") {
     mysqli_close($db);
     return;
 }
+
+else {
+	$result["rslt"] = 'fail';
+	$result["reason"] = "This action is under development!";
+	echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
 // functions area
 function view_cmd($node) {
     $cmdObj = new CMD();
@@ -263,7 +276,6 @@ function discover($node, $device, $userObj) {
 
 // not being used on the front end
 function start($node, $userObj) {
-
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -293,7 +305,6 @@ function start($node, $userObj) {
     }
 
     // update t_cps psta/ssta with npsta/nssta???
-
     $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
@@ -308,7 +319,6 @@ function start($node, $userObj) {
     $result['rows'] = [];
     return $result;
 }
-
 
 function stop($node, $serial_no, $userObj) {
 
@@ -651,6 +661,7 @@ function exec_resp($node, $hwRsp, $userObj) {
 
     // post to nodeapi to update node cps stats
     $cmdObj = new CMD($ackid);
+
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
         $result['reason'] = $cmdObj->reason;
@@ -660,15 +671,13 @@ function exec_resp($node, $hwRsp, $userObj) {
     // find the ackid in t_cmdque and update with stat 'COMPL'
     if ($cmdObj->reason == "ACKID FOUND") {
         $stat = "COMPL";
-        $cmdObj->updCmd($stat, $rsp);
+        $cmdObj->updCmd($stat, $hwRsp);
         if ($cmdObj->rslt == FAIL) {
             $result['rslt'] = $cmdObj->rslt;
             $result['reason'] = $cmdObj->reason;
             return $result;
         }
     }
-
-    
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
@@ -680,6 +689,7 @@ function exec_resp($node, $hwRsp, $userObj) {
 }
 
 function exec_cmd($node, $cmd, $userObj) {
+ 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -689,19 +699,18 @@ function exec_cmd($node, $cmd, $userObj) {
 
     // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
     // will receive string like this: ACKID=$node-api-act
-    
-    // get node from cmd
-    $cmdArray = explode("=", $cmd);
-    foreach($cmdArray as $parameter) {
-        $paraExtract = explode('=',$parameter);
-        if($paraExtract[0] == 'ackid') 
-            $ackid = $paraExtract[1];
+    $cmdStr = substr($cmd, 1, -1);
+    // divide string into sections
+    $cmdExtract = explode(',', $cmdStr);
+    // go through array and search for ackid, node, api and apiAction
+    $ackId = null;
+    foreach($cmdExtract as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackId = $paraExtract[1];
+        }
     }
-    // $ackIdArray = explode("-", $cmdArray[1]);
-    // $ackid = $cmdArray[1];
-    // $node = $ackIdArray[0];
-    // $api = $ackIdArray[1];
-    // $act = $ackIdArray[2];
 
     $cmdObj = new CMD($ackId);
     if ($cmdObj->rslt == FAIL) {
@@ -709,8 +718,7 @@ function exec_cmd($node, $cmd, $userObj) {
         $result['reason'] = $cmdObj->reason;
         return $result;
     }
-    
-    // if ackid doesnt exist, add to t_cmdque, it already exists, update stat to PENDING
+
     if ($cmdObj->reason == "ACKID NOT FOUND") {
         $cmdObj->addCmd($node, $ackid, $cmd);
         if ($cmdObj->rslt == FAIL) {
@@ -719,7 +727,7 @@ function exec_cmd($node, $cmd, $userObj) {
             return $result;
         }
     }
-    else {
+    else if ($cmdObj->reason == "ACKID FOUND"){
         $stat = "PENDING";
         $cmdObj->updateStat($stat);
         if ($cmdObj->rslt == FAIL) {
@@ -728,7 +736,11 @@ function exec_cmd($node, $cmd, $userObj) {
             return $result;
         }
     }
-
+    else {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'INVALID ACKID';
+        return $result;
+    }
 
     // create cpsObj to get comport and serialnum
     $cpsObj = new CPS($node);
@@ -738,9 +750,8 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
 
-    $newCmd = "inst=EXEC,$node,$cpsObj->dev,$cpsObj->serial_no";
+    $newCmd = "inst=EXEC,node=$node,dev=$cpsObj->dev,sn=$cpsObj->serial_no,cmd=$cmd";
 
-    $cmdObj = new CMD();
     $cmdObj->sendCmd($newCmd, $node);
     if ($cmdObj->rslt == FAIL) {
         $result['rslt'] = $cmdObj->rslt;
@@ -748,7 +759,7 @@ function exec_cmd($node, $cmd, $userObj) {
         return $result;
     }
 
-    $result['rslt'] = SUCCESS;
+    $result['rslt'] =   SUCCESS;
     $result['reason'] = "CMD IS IN PROGRESS";
     return $result;
 }

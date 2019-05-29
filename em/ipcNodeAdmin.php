@@ -76,8 +76,6 @@ if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
 
-
-
 // $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "NODE ADMINISTRATION", $act, $_POST);
 
 // $nodeObj = new NODE($node);
@@ -301,7 +299,6 @@ else {
 // LOCAL FUNCTIONS
 
 function updateNodeDevicesStatus($node, $hwRsp) {
-    
     // construct device obj using node
     $deviceObj = new DEV($node);
     if ($deviceObj->rslt == FAIL) {
@@ -317,6 +314,7 @@ function updateNodeDevicesStatus($node, $hwRsp) {
         $result['reason'] = $deviceObj->reason;
         return $result;
     }
+
     $newMiox = $parsedString['miox'];
     $newMioy = $parsedString['mioy'];
     $newMre = $parsedString['mre'];
@@ -341,7 +339,7 @@ function updateNodeDevicesStatus($node, $hwRsp) {
             $diffMiox = true;
         }
     }
-    
+
     if (strcmp($currentMioy, $newMioy) !== 0) {
         if ($deviceObj->setMioy($newMioy)) {
             if ($deviceObj->rslt === FAIL) {

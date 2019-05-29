@@ -113,7 +113,7 @@ try {
                 echo "\n===CMD receive from API: ".$udpMsg."\n";
                 $udpMsgArr = processUDPmsg($udpMsg);
                 echo "Convert updmsg to array:\n";print_r($udpMsgArr);echo "\n";
-                if (array_key_exists("cmd",$udpMsgArr))
+                if ($discover_mode && array_key_exists("cmd",$udpMsgArr))
                     $cpsCmd .= $udpMsgArr['cmd'];
                 if($udpMsgArr['inst'] == 'DISCV_CPS') {
                     if($udpMsgArr['node'] == $node) {
