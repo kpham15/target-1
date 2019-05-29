@@ -84,7 +84,6 @@
 
   $(document).ready(function() {
     var datatable = $('#ckid-table').dataTable({
-      "processing": true,
       "data": [],
       // "ajax": {
       //   "type": "POST",
@@ -114,11 +113,12 @@
     });
 
     $(document).on('click', '#find-ckid-submit', function() {
-      if ( !$('#ckid-input input').val() ) {
+      let ckid = $('#ckid-input input').val();
+      if ( !ckid ) {
         $('#ckid-input .help-block').text('Missing value for CKID');
         $('#ckid-input').addClass('has-error');
       } else {
-
+        queryCkid(ckid);
       }
     });
   });
