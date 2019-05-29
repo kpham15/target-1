@@ -319,7 +319,7 @@
     });
 
     // Click events for Port Box Dropdowns
-    $(document).on('click', '.port-box a', function() {
+    $(document).on('click', '.port-box button', function() {
       $(this).dropdown('toggle');
     });
   });
