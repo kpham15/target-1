@@ -166,8 +166,6 @@
           return false;
         }
       });
-      console.log(portX);
-      console.log(portArray);
     } else if (ptyp === 'y') {
       portArray = portY.filter(function(port) {
         if (port.pnum >= 1+calculated && port.pnum <= 25+calculated) {
