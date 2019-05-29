@@ -151,7 +151,62 @@
   }
 
   function updatePortGrid(ptyp) {
-    console.log($('.port-range-btn[index="0"]'));
+    let index = $('.port-range-btn.active').attr('index');
+    let calculated = 25*index;
+    let portArray = [];
+    let color = '';
+
+    
+    if (ptyp === 'x') {
+      portArray = portX.filter(function(port) {
+        if (port.pnum > 1+calculated && port.pnum < 25+calculated) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    } else if (ptyp === 'y') {
+      portArray = portY.filter(function(port) {
+        if (port.pnum > 1+calculated && port.pnum < 25+calculated) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+    
+    portArray.forEach(function(port) {
+      let gridNum = port.pnum - calculated;
+      let selector = $('.port-box[grid_num="'+gridNum+'"]');
+      
+      switch(port.psta) {
+        case "SF":
+          color = 'bg-aqua';
+          break;
+        case "LCK":
+          color = 'bg-critical';
+          break;
+        case "CONN":
+          color = 'bg-green';
+          break;
+        case "MTCD":
+          color = 'bg-minor';
+          break;
+        default:
+          color = 'bg-gray-active';
+      }
+
+      selector.removeClass(function(i, className) {
+        return (className.match (/(^|\s)bg-\S+/g) || []).join(' ');
+      });
+      selector.removeClass('disabled');
+      selector.addClass(color);
+      selector.find('.port-num').text(port.port);
+      selector.find('.port-psta').text(port.psta);
+      selector.find('.fac-num').text(port.fac);
+      selector.find('.fac-type').text(port.ftyp);
+      selector.find('.port-ckid').text(port.ckid);
+    });
   }
 
   function updatePortRangeBtns(ptyp) {
@@ -192,17 +247,17 @@
   }
 
   function createPortBox(gridNum) {
-    let portBox = '<div class="info-box bg-gray-active disabled" grid_num="'+gridNum+'">' +
+    let portBox = '<div class="port-box info-box bg-gray-active disabled" grid_num="'+gridNum+'">' +
                     '<div class="info-box-text">' +
-                      '-' +
-                      '<span class="pull-right">-</span>' +
+                      '<span class="port-num">-</span>' +
+                      '<span class="port-psta pull-right">-</span>' +
                     '</div>' +
                     '<div class="info-box-text">' +
-                      '-' +
-                      '<span class="pull-right">-</span>' +
+                      '<span class="fac-num">-</span>' +
+                      '<span class="fac-type pull-right">-</span>' +
                     '</div>' +
                     '<div class="info-box-text text-center">' +
-                      '-' +
+                      '<span class="port-ckid">-</span>' +
                     '</div>'
                   '</div>';
 
