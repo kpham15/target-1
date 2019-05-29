@@ -640,9 +640,9 @@ function exec_resp($node, $hwRsp, $userObj) {
     // check if serial_no is the same as number in database
     $cpsObj = new CPS($node);
     if ($cpsObj->serial_no !== $serial_no) {
-        // create alarm here almid=node-cps-sn
+        // create alarm here "almid=node-cps-sn"
         $almid = "$node-cps-$serial_no";
-        // check if alm with this almid already exists
+        // check if alm with this almid already exists, if no, create a new one
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'EQUIP';
