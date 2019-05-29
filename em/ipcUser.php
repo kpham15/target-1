@@ -345,7 +345,13 @@
 		
 		// user can update his/her own tel,email
 		if($userObj->uname == $targetUserObj->uname) {
-			$targetUserObj->updUser($lname, $fname, $mi, "", $tel, $email, "", $targetUserObj->ugrp);
+			// only admins can change their own names
+			if ($userObj->ugrp < 1)
+				$targetUserObj->updUser($lname, $fname, $mi, "", $tel, $email, "", $targetUserObj->ugrp);
+				// other users cannot change their names
+			else {
+				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
+			}
 		}
 		else {
 			// ADMIN and SUPERVISOR user can update other users in lower ugrp
