@@ -291,25 +291,24 @@
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn', function() {
       let ptyp = $(this).attr('ptyp');
-      let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
-      let slot = $(this).attr('slot');
 
       $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
 
-      queryAndUpdatePorts(node, slot, ptyp);
     });
 
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
       let ptyp = $(this).attr('ptyp');
+      let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
+      let slot = $('.mio-btn.active[ptyp="'+ptyp+'"]').attr('slot');
 
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
-      updatePortGrid(ptyp);
+      queryAndUpdatePorts(node, slot, ptyp);
     });
   });
 </script>
