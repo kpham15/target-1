@@ -157,20 +157,17 @@
     	
    
 	function addFac($fac, $ftyp, $ort, $spcfnc, $userObj) {
-		global $debugObj;
 
 		$result['log'] = "ACTION = ADD | FAC = $fac | FTYP = $ftyp | ORT = $ort | SPCFNC = $spcfnc";
 		if ($userObj->grpObj->portmap != "Y") {
 			$result['rslt'] = 'fail';
-			 $result['reason'] = 'Permission Denied';
-			 $debugObj->log($result['reason']);
+         $result['reason'] = 'Permission Denied';
 			return $result;
 		}
 
         if ($fac == "") {
             $result['rslt'] = FAIL;
 			$result['reason'] = "INVALID_FAC";
-			$debugObj->log($result['reason']);
             return $result;
         }
         
@@ -178,7 +175,6 @@
         if ($facObj->rslt == SUCCESS) {
             $result['rslt'] = FAIL;
 			$result['reason'] = "FAC_ALREADY_EXIST";
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -186,7 +182,6 @@
         if ($facObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
 			$result['reason'] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -194,7 +189,6 @@
         if ($facObj->rslt == FAIL) {
             $result["rslt"] = "fail";
 			$result["reason"] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -206,12 +200,10 @@
 
 
 	function addFacs($fac, $ftyp, $ort, $spcfnc, $range, $userObj){
-		global $debugObj;
 
 		if ($userObj->grpObj->portmap != "Y") {
 			$result['rslt'] = 'fail';
-         	$result['reason'] = 'Permission Denied';
-			 $debugObj->log($result['reason']);
+         $result['reason'] = 'Permission Denied';
 			return $result;
 		}
 
@@ -257,7 +249,6 @@
 			if ($rangeFac > $maxRange) {
 				$result["rslt"] = "fail";
 				$result["reason"] = "The range is too big. The maximum range is ".$maxRange."!";
-				$debugObj->log($result['reason']);
 			}
 			else {
 				for ($i=0; $i < $rangeFac ; $i++) {
@@ -282,12 +273,10 @@
 
 
 	function updateFac($fac, $ftyp, $ort, $spcfnc,$userObj) {
-		global $debugObj;
 
 		if ($userObj->grpObj->portmap != "Y") {
 			$result['rslt'] = 'fail';
         	$result['reason'] = 'Permission Denied';
-			$debugObj->log($result['reason']);
 			return $result;
 		}
 
@@ -295,7 +284,6 @@
         if ($facObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
 			$result['reason'] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -303,7 +291,6 @@
         if ($facObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
 			$result['reason'] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -311,7 +298,6 @@
         if ($facObj->rslt == FAIL) {
             $result["rslt"] = "fail";
 			$result["reason"] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -336,20 +322,17 @@
 
 	
 	function deleteFac($fac, $userObj) {
-		global $debugObj;
 
 		$result['log'] = "ACTION = DELETE | FAC = $fac";
 		if ($userObj->grpObj->portmap != "Y") {
 			$result['rslt'] = 'fail';
-         	$result['reason'] = 'Permission Denied';
-			 $debugObj->log($result['reason']);
+         $result['reason'] = 'Permission Denied';
 			return $result;
 		}
 
 		if ($fac == "") {
 			$result["rslt"] = "fail";
 			$result["reason"] = "Missing FAC";
-			$debugObj->log($result['reason']);
 			return $result;
 		}
         
@@ -357,7 +340,6 @@
         if ($facObj->rslt == FAIL) {
             $result["rslt"] = "fail";
 			$result["reason"] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
         
@@ -366,7 +348,6 @@
         if ($facObj->rslt == FAIL) {
             $result["rslt"] = "fail";
 			$result["reason"] = $facObj->reason;
-			$debugObj->log($result['reason']);
             return $result;
         }
 
@@ -412,13 +393,11 @@
 
 	
 	function queryTestFac($fac) {
-		global $debugObj;
 		// the fac must exist in DB 
 		$facObj = new FAC($fac);
 		if ($fac == '' || $facObj->rslt == FAIL) {
             $result['rslt'] = "fail";
 			$result['reason'] = "FFAC: " . $fac . " DOES NOT EXIST";
-			$debugObj->log($result['reason']);
 			return $result;
         }
         
@@ -426,7 +405,6 @@
         if ($facObj->port_id == 0) {
             $result['rslt'] = "fail";
 			$result['reason'] = "FFAC: " . $fac . " IS NOT MAPPED TO A PORT";
-			$debugObj->log($result['reason']);
 			return $result;
 		}
 		$node = $facObj->portObj->node;
@@ -435,7 +413,6 @@
 		if ($facObj->rslt == FAIL) {
             $result['rslt'] = "fail";
 			$result['reason'] = $facObj->reason;
-			$debugObj->log($result['reason']);
 			return $result;
 		}
 
