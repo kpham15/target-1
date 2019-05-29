@@ -34,9 +34,8 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default active">1-25</button>
-                    <button type="button" class="btn btn-default">26-50</button>
+                  <div class="btn-group port-range-btns" ptyp="x">
+                    <!-- Port range buttons created dynamically -->
                   </div>
                 </div>
                 <div id="x-port-grid" class="row port-grid" ptyp="x">
@@ -61,9 +60,8 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default active">1-25</button>
-                    <button type="button" class="btn btn-default">26-50</button>
+                  <div class="btn-group port-range-btns" ptyp="y">
+                    <!-- Port range buttons created dynamically -->
                   </div>
                 </div>
                 <div id="y-port-grid" class="row port-grid" ptyp="y">
@@ -152,8 +150,37 @@
   }
 
   function updatePortRangeBtns(ptyp) {
-    console.log(ptyp);
-    console.log(portX);
+    let amount = Math.ceil(portX.length / 25);
+    let portBtns = $('.port-range-btns[ptyp="'+ptyp+'"]');
+    let html = '';
+
+    if (portBtns.children().length > 0) {
+      if (portBtns.children().length > amount) {
+        amount = portBtns.children().length - amount;
+        for (let i = 0; i < amount; i++) {
+          portBtns.children().last().remove();
+        }
+      } else if (portBtns.children().length < amount) {
+        for (let i = portBtns.children().length; i <= amount; i++) {
+          let calculated = 25*i;
+          html = '<button type="button" class="btn btn-default port-range-btn" ptyp="'+ptyp+'" index="'+i+'">'+
+                    (1+calculated) + '-' + (25+calculated) +
+                  '</button>';
+          
+          portBtns.append(html);
+        }
+      }
+    } else {
+      for (let i = 1; i <= amount; i++) {
+        let calculated = 25*i;
+        html = '<button type="button" class="btn btn-default port-range-btn" ptyp="'+ptyp+'" index="'+i+'">'+
+                    (1+calculated) + '-' + (25+calculated) +
+                  '</button>';
+
+        portBtns.append(html);
+      }
+    }
+    
     return;
   }
 
