@@ -151,7 +151,7 @@
 
   function updatePortGrid(ptyp) {
     let grid = $('.port-grid[ptyp="'+ptyp+'"]');
-    let index = $('.port-range-btn.active').attr('index');
+    let index = $('.port-range-btn.active[ptyp="'+ptyp+'"]').attr('index');
     let calculated = 25*index;
     let portArray = [];
     let color = '';
