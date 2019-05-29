@@ -145,8 +145,13 @@
         }
 
         updatePortRangeBtns(ptyp);
+        updatePortGrid(ptyp);
       }
     });
+  }
+
+  function updatePortGrid(ptyp) {
+    console.log($('.port-range-btn[index="0"]'));
   }
 
   function updatePortRangeBtns(ptyp) {
