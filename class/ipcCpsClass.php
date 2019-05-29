@@ -114,11 +114,12 @@ class CPS {
         if (!$res) {
             $this->rslt   = FAIL;
             $this->reason = mysqli_error($db);
+            return;
         }
-        else {
-            $this->rslt = SUCCESS;
-            $this->reason = "CPS STATUS UPDATED";
-        }
+        
+        $this->rslt = SUCCESS;
+        $this->reason = "CPS STATUS UPDATED";
+       
     }
 
     public function setSerialNo($serial_no) {

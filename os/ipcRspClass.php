@@ -46,13 +46,14 @@ class RSP {
     
         if (isset($content)) 
             $out.= $content;
-
+        echo $out."\n";
         fwrite($fp, $out);
         ///this part should be commented out when checking process is finished
-        echo $out."\n";
+        $result="";
         while (!feof($fp)) {
-            print_r(fgets($fp, 1024));
+            $result = fgets($fp, 1024);
         }
+        echo "\nResponse from API:".$result."\n";
         //---------------------
         fclose($fp);
     }
@@ -72,21 +73,38 @@ class RSP {
                 if(stripos($rspArray[$i],'$ackid') !== false) {
                     echo "\nProcessing:".$rspArray[$i]."\n";
                     $ackid = $this->getAckid($rspArray[$i]);
-                    //create post-request to APIs
-                    if(stripos($ackid,'cps') !== false) {
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'updateCpsStatus','node'=>$node,'cmd'=>"$rspArray[$i]"]);
-                    }
-                    else if(stripos($ackid,'dev') !== false) {
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateNodeDevicesStatus','node'=>$node,'device_status'=>"$rspArray[$i]"]);
-                    }
-                    else if(stripos($ackid,'bkpln') !== false) {
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'DISCOVERED','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
-                    }
+                    if(trim($ackid) != '')
+                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
 
                 }
             }
            
         }
+    }
+
+    public function getUuid($rsp) {
+        $sn = '';
+        $data = preg_replace("/(\r\n|\n|\r)/",'',$rsp);
+        if(strpos($data,'uuid=') !== false) {
+            preg_match_all("/\\$.*?\*/", $data, $searchArray);
+            $rspArray = $searchArray[0];
+            print_r($rspArray);
+            for($i=0; $i<count($rspArray); $i++) {
+                $len = strlen($rspArray[$i]);
+                if($rspArray[$i] !== '' && $rspArray[$i][0] == '$' && $rspArray[$i][$len-1] == '*') {
+                    if(stripos($rspArray[$i],'uuid=') !== false) {
+                        echo "\nProcess this response to get sn:".$rspArray[$i]."\n";
+                        $newHwString = substr($rspArray[$i], 1, -1);
+                        $newHwStringArray = explode(",", $newHwString);
+                        $serialNumArray = explode("=", $newHwStringArray[3]);
+                        $sn = $serialNumArray[1];
+                    }
+                }
+               
+            }
+        }
+
+        return $sn; 
     }
     
 }

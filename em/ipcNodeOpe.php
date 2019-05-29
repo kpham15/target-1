@@ -22,11 +22,16 @@ if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
 $device = "ttyUSB0";
+
 $hwRsp = "";
 if (isset($_POST['hwRsp'])) {
     $hwRsp = $_POST['hwRsp'];
 }
-        
+
+$cmd = "";
+if (isset($_POST['cmd'])) {
+    $cmd = $_POST['cmd'];
+}
 
 // dispatch to functions
 
@@ -45,7 +50,7 @@ if ($act == "DISCOVER") {
 	return;
 }
 
-
+// not being used on the front end
 if ($act == "START") {
     $result = start($node, $userObj);
     echo json_encode($result);
@@ -54,7 +59,7 @@ if ($act == "START") {
 }
 
 if ($act == "STOP") {
-    $result = stop($node, $userObj);
+    $result = stop($node, $serial_no, $userObj);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -68,51 +73,84 @@ if ($act == "DISCOVERED") {
 }
 
 if ($act == "CPS_STATUS") {
-    $result = updateCpsStatus($cmd);
+    $result = updateCpsStatus($hwRsp);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
 }
 
 if ($act == "CPS_ON") {
-    $result = cps_on($node, $cmd);
+    $result = cps_on($node);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+if ($act == "CPS_OFF") {
+    $result = cps_off($node);
     echo json_encode($result);
 	mysqli_close($db);
 	return;
 }
 
-if ($act == "updateCpsCom") {
-    $nodeObj = new NODE($node);
-    if ($nodeObj->rslt != SUCCESS) {
-        $result['rslt'] = $nodeObj->rslt;
-        $result['reason'] = $nodeObj->reason;
-    }
-    else {
-        $cmdExtract = explode('-',$cmd);
-    
-        if ($cmdExtract[1] === 'ONLINE') {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
-        }
-        else {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
-        }
-    
-        if ($sms->rslt === SUCCESS) {
-            $nodeObj->updatePsta($sms->npsta, $sms->nssta);
-        }
-        
-        $result = updateCpsCom($cmd, $userObj);
-    }
-    
+if ($act == "EXEC_RESP") {
+    $result = exec_resp($node, $hwRsp, $userObj);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
 
+if ($act == "CONNECT_TBX_TAP1") {
+    // $result = processHwResp($node, $hwRsp);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+if ($act == "EXEC_CMD") {
+    $result = exec_cmd($node, $cmd, $userObj);
+    echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+// if ($act == "UPDATE RACK") {
+//     $result = updateRack($node, $device);
+//     echo json_encode($result);
+// 	mysqli_close($db);
+// 	return;
+// }
+
+if ($act == "VIEW CMD") {
+    $result = view_cmd($node);
     echo json_encode($result);
     mysqli_close($db);
     return;
 }
 
-// functions area
+else {
+	$result["rslt"] = 'fail';
+	$result["reason"] = "This action is under development!";
+	echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
 
-function cps_on($node, $cmd) {
+// functions area
+function view_cmd($node) {
+    $cmdObj = new CMD();
+    $cmdObj->getCmdList($node);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+    $result['rslt'] = SUCCESS;
+    $result['reason'] = "VIEW CMD SUCCESS";
+    $result['rows'] = $cmdObj->rows;
+    return $result;
+}
+
+function cps_on($node) {
     // create cps to get data for psta/ssta
     $cpsObj = new CPS($node);
     if ($cpsObj->rslt == FAIL) {
@@ -131,7 +169,41 @@ function cps_on($node, $cmd) {
     
     // if correct stat
     // update sms psta/ssta
-    $cpsObj->updatePsta($smsObj->npsta, $smsObj->ssta);
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    // post to nodeapi to update node cps stats
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin",'act'=>'updateCpsCom',"node"=>$node, "cmd"=>"$node-ONLINE"];
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
+
+}
+
+function cps_off($node) {
+    // create cps to get data for psta/ssta
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    // check if psta/ssta is in right status
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, 'CPS_OFF');
+    if ($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    // if correct stat
+    // update sms psta/ssta
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
     if ($cpsObj->rslt == FAIL) {
         $result['rslt'] = $cpsObj->rslt;
         $result['reason'] = $cpsObj->reason;
@@ -140,9 +212,10 @@ function cps_on($node, $cmd) {
 
     // post to nodeapi to update node cps stats
     $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch";
-    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin", "node"=>$node, "cmd"=>"$node-ONLINE"];
-    $postReqObj->asyncPostRequest($url, $params);
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeAdmin",'act'=>'updateCpsCom', "node"=>$node, "cmd"=>"$node-OFFLINE"];
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
 
 }
 
@@ -173,7 +246,7 @@ function discover($node, $device, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "DISCV_CPS";
+    $evt = "CPS_ON";
     // test sms
     $smsObj = new SMS($psta, $ssta, $evt);
     if ($smsObj->rslt == FAIL) {
@@ -183,7 +256,8 @@ function discover($node, $device, $userObj) {
     }
 
     // formulate msg #1
-    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=uuid,device=backplane,ackid=$node-bkpln*";
+    // this cmd will be sent back to be parsed. the ackid must be the NEXT ACT and API
+    $cmd = "inst=DISCV_CPS,node=$node,dev=$cpsObj->dev,sn=,cmd=\$status,source=uuid,device=backplane,ackid=$node-cps-dcvd*";
 
     // call function to send UDP message
     $cmdObj = new CMD();
@@ -200,8 +274,8 @@ function discover($node, $device, $userObj) {
     return $result;
 }
 
+// not being used on the front end
 function start($node, $userObj) {
-
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -220,7 +294,7 @@ function start($node, $userObj) {
     $psta = $cpsObj->psta;
     $ssta = $cpsObj->ssta;
 
-    $evt = "DISCV_CPS";
+    $evt = "CPS_ON";
 
     // sms check psta/ssta if it is in correct state
     $smsObj = new SMS($psta, $ssta, $evt);
@@ -231,7 +305,6 @@ function start($node, $userObj) {
     }
 
     // update t_cps psta/ssta with npsta/nssta???
-
     $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
 
     $cmdObj = new CMD();
@@ -247,8 +320,7 @@ function start($node, $userObj) {
     return $result;
 }
 
-
-function stop($node, $userObj) {
+function stop($node, $serial_no, $userObj) {
 
     // permissions check here
     if ($userObj->grpObj->ipcadm != "Y") {
@@ -256,9 +328,30 @@ function stop($node, $userObj) {
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-    $cpsObj = new CPS($node);
-    $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
 
+    $cpsObj = new CPS($node);
+
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $smsObj = new SMS($cpsObj->psta, $cpsObj->ssta, "CPS_STOP");
+    if($smsObj->rslt == FAIL) {
+        $result['rslt'] = $smsObj->rslt;
+        $result['reason'] = $smsObj->reason;
+        return $result;
+    }
+    
+    $cpsObj->setPsta($smsObj->npsta, $smsObj->nssta);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+    
+    $cmd = "inst=STOP_CPS,sn=$serial_no";
     $cmdObj = new CMD();
     $cmdObj->sendCmd($cmd, $node);
     if ($cmdObj->rslt == "fail") {
@@ -280,12 +373,17 @@ function discovered($node, $hwRsp) {
     // UUID is serial number for now
     $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
+
+    foreach($newHwStringArray as $parameter) {
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'uuid') 
+            $serialNum = $paraExtract[1];
+    }
     // ["ackid=1-bkpln","status","device=miox(0)","uuid=IAMAMIOXUUIDTHATYOUCANTDECODE"];
-    $serialNumArray = explode("=", $newHwStringArray[3]);
+    // $serialNumArray = explode("=", $newHwStringArray[3]);
     // ["uuid","IAMAMIOXUUIDTHATYOUCANTDECODE"]
-    $serialNum = $serialNumArray[1];
-   
-     
+    // $serialNum = $serialNumArray[1];
+      
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -298,7 +396,7 @@ function discovered($node, $hwRsp) {
         // b) if already exists then send UDP->msg($node,$device,STOP)
         $cpsObj = new CPS($node);
         // send message 3 to udp
-        $cmd = "inst=STOP_CPS,node=$node,dev=$cpsObj->dev";
+        $cmd = "inst=STOP_CPS,sn=$serialNum";
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
         if ($cmdObj->rslt == FAIL)         {
@@ -314,7 +412,6 @@ function discovered($node, $hwRsp) {
     else {
         // a) if $serial_no not exist in t_cps then update CPS->psta/ssta with npsta/nssta obtained from SMS
 
-        // @TODO AM I USING THE CORRECT EVT HERE FOR SMS??
         $evt = "CPS_ON";
         // gets psta and ssta to create smsObj
         $cpsObj = new CPS($node);
@@ -345,8 +442,8 @@ function discovered($node, $hwRsp) {
             return $result;
         }
         // call message 2
-
-        $cmd = "inst=START_CPS,node=$node,dev=$cpsObj->dev,cmd=\$status,source=all,ackid=$node-CPS*\$status,source=devices,ackid=$node-dev*";
+        // requires instruction and serial number
+        $cmd = "inst=START_CPS,sn=$serialNum,cmd=\$status,source=all,ackid=$node-cps-csta*\$status,source=devices,ackid=$node-nadm-unds*";
         
         $cmdObj = new CMD();
         $cmdObj->sendCmd($cmd, $node);
@@ -366,26 +463,24 @@ function discovered($node, $hwRsp) {
 
 }
 
-
-
-function updateCpsStatus($cmd) {
+function updateCpsStatus($hwRsp) {
     
-    // checks what type of $cmd is being sent
-    if (strpos($cmd, "voltage") !== false){
-        $result = updateCpsVolt($cmd);
+    // checks what type of $hwRsp is being sent
+    if (strpos($hwRsp, "voltage") !== false){
+        $result = updateCpsVolt($hwRsp);
         return $result;
     }
-    else if (strpos($cmd, "temperature") !== false) {
-        $result = updateCpsTemp($cmd);
+    else if (strpos($hwRsp, "temperature") !== false) {
+        $result = updateCpsTemp($hwRsp);
         return $result;
     }
 }
 
 // function called by updateAlm in case string contains voltage only
 // str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
-function updateCpsVolt($cmd) {
+function updateCpsVolt($hwRsp) {
     // filters data brought from $cmd and extracts voltage values
-    $newCmd = substr($cmd, 1, -1);
+    $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=',$splitCmd[0]);
     $newAckid = $ackid[1];
@@ -410,7 +505,7 @@ function updateCpsVolt($cmd) {
     // extract node number from cmd
     $nodeArray = explode('-', $newAckid[0]);
     $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
+    $newNodeNumber = $nodeNumber;
     $nodeObj = new NODE($newNodeNumber);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
@@ -460,17 +555,17 @@ function updateCpsVolt($cmd) {
 
 // function called by updateAlm in case string contains temp only
 // str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
-function updateCpsTemp($cmd) {
+function updateCpsTemp($hwRsp) {
 
     // filters data brought from $cmd and extracts temp values
-    $newCmd = substr($cmd, 1, -1);
+    $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
     $ackid = explode('=', $splitCmd[0]);
     $newAckid = $ackid[1];
-    $zeroBase = explode('-', $newAckid);
-    $oneBase = $zeroBase[0] + 1;
-    // puts back together 1-cps
-    $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
+    // $zeroBase = explode('-', $newAckid);
+    // $oneBase = $zeroBase[0] + 1;
+    // // puts back together 1-cps
+    // $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
     $temp1 = explode('=',$splitCmd[3]);
     $temp2 = explode('=',$splitCmd[4]);
     $temp3 = explode('=',$splitCmd[5]);
@@ -489,7 +584,7 @@ function updateCpsTemp($cmd) {
     // extract node number from cmd
     $nodeArray = explode('-', $newAckid[0]);
     $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
+    $newNodeNumber = $nodeNumber;
     $nodeObj = new NODE($newNodeNumber);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
@@ -540,89 +635,135 @@ function updateCpsTemp($cmd) {
     return $result;
 }
 
-function updateCpsCom($cmd,$userObj) {
-    //-------check user permission--------------
-        // if ($userObj->grpObj->ipcadm != "Y") {
-        //     $result['rslt'] = 'fail';
-        //     $result['reason'] = 'Permission Denied';
-        //     return $result;
-        // }
-    ///////////////////////////////////////////////
-    
+function exec_resp($node, $hwRsp, $userObj) {
 
-    /**
-     * 1) $nodeObj = new NODE($node);
-     * 2) If $node exists then $nodeObj->updateCOM($com)
-     */
-    $cmdExtract = explode('-',$cmd);
-    $node = $cmdExtract[0];
-    $com = $cmdExtract[1];
-    $nodeId = $node+1;
+    // use cpsloop example foreach processUDPmsg
+    // remove $ and * from string
+    $rsp = substr($hwRsp, 1, -1);
+    // divide string into sections
+    $hwRspArray = explode(',', $rsp);
 
-    $nodeObj = new NODE($nodeId);
-    if ($nodeObj->rslt != FAIL) {
-        $nodeObj->updateCOM($com);
-        if ($nodeObj->rslt == FAIL) {
-            $result['rslt'] = $nodeObj->rslt;
-            $result['reason'] = $nodeObj->reason;
+    // go through array and search for ackid, node, api and apiAction
+    foreach($hwRspArray as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackid = $paraExtract[1];
+            $node = $cmdArray[0];
+            $api_key = $cmdArray[1];
+            $apiAct_key = $cmdArray[2];
+        }
+    }
+  
+    // Obtain full api string from constant and api action from constant
+    $api = apiAndActArray[$api_key]['api'];
+    $apiAct = apiAndActArray[$api_key][$apiAct_key];
+
+    // post to nodeapi to update node cps stats
+    $cmdObj = new CMD($ackid);
+
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+
+    // find the ackid in t_cmdque and update with stat 'COMPL'
+    if ($cmdObj->reason == "ACKID FOUND") {
+        $stat = "COMPL";
+        $cmdObj->updCmd($stat, $hwRsp);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
             return $result;
         }
     }
-    /**
-     * 3) If not exist then do nothing (return)
-     */
-    else {
-        $result['rslt'] = $nodeObj->rslt;
-        $result['reason'] = $nodeObj->reason;
+    
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "hwRsp"=>$hwRsp];
+    //@TODO Maybe need asyncPostRequest here? Sync for debugging
+    $postReqObj->syncPostRequest($url, $params);
+    return json_decode($postReqObj->reply);
+
+}
+
+function exec_cmd($node, $cmd, $userObj) {
+ 
+    // permissions check here
+    if ($userObj->grpObj->ipcadm != "Y") {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'Permission Denied';
         return $result;
     }
-    /**
-     * 4) If $com == "OFFLINE" then create new alarm where:
-     *      almid='$node-CPS-C', 
-     *      sev=MAJ, 
-     *      sa=N, 
-     *      src=EQUIP, 
-     *      type=COMMUNICATION, 
-     *      cond= COMMUNICATION, 
-     *      remark=CPS: OFFLINE
-     */
-    if ($com == "OFFLINE") {
-        $almid = $node . "-CPS-C";
-        $almObj = new ALMS($almid);
-        if (count($almObj->rows) == 0) {
-            $src    = "EQUIP";
-            $type   = "COMMUNICATION";
-            $cond   = "COMMUNICATION";
-            $sev    = "MAJ";
-            $sa     = "N";
-            $remark = "CPS: OFFLINE";
-			$almObj->newAlm($almid, $src, $type, $cond, $sev, $sa, $remark);
-            if ($almObj->rslt == "fail") {
-				$result["rslt"]   = $almObj->rslt;
-				$result["reason"] = $almObj->reason;
-				return $result;
-			}
+
+    // nodeOpe->exec() will send UDP->msg[inst=EXEC,node,comport,serial_no,cmd] to cpsLoop
+    // will receive string like this: ACKID=$node-api-act
+    $cmdStr = substr($cmd, 1, -1);
+    // divide string into sections
+    $cmdExtract = explode(',', $cmdStr);
+    // go through array and search for ackid, node, api and apiAction
+    $ackId = null;
+    foreach($cmdExtract as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $cmdArray = explode("-", $paraExtract[1]);
+            $ackId = $paraExtract[1];
         }
     }
-    /**
-     * 6) If $com == "ONLINE" then send SYS-CLR alarm
-     */
-    if ($com == "ONLINE") {
-        $almid = $node."-CPS-C";
-        $almObj = new ALMS($almid);
-        if (count($almObj->rows) > 0) {
-            $remark = $almid . " : SYSTEM CLEAR ALARM";
-            $almObj->sysClr($almid, $remark);
-            if ($almObj->rslt == FAIL) {
-				$result['rslt']   = $almObj->rslt;
-				$result['reason'] = $almObj->reason;
-				return $result;
-			}
+
+    $cmdObj = new CMD($ackId);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+
+    if ($cmdObj->reason == "ACKID NOT FOUND") {
+        $cmdObj->addCmd($node, $ackid, $cmd);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
         }
     }
-    $result['rslt'] = $almObj->rslt;
-    $result['reason'] = $almObj->reason;
+    else if ($cmdObj->reason == "ACKID FOUND"){
+        $stat = "PENDING";
+        $cmdObj->updateStat($stat);
+        if ($cmdObj->rslt == FAIL) {
+            $result['rslt'] = $cmdObj->rslt;
+            $result['reason'] = $cmdObj->reason;
+            return $result;
+        }
+    }
+    else {
+        $result['rslt'] = 'fail';
+        $result['reason'] = 'INVALID ACKID';
+        return $result;
+    }
+
+    // create cpsObj to get comport and serialnum
+    $cpsObj = new CPS($node);
+    if ($cpsObj->rslt == FAIL) {
+        $result['rslt'] = $cpsObj->rslt;
+        $result['reason'] = $cpsObj->reason;
+        return $result;
+    }
+
+    $newCmd = "inst=EXEC,node=$node,dev=$cpsObj->dev,sn=$cpsObj->serial_no,cmd=$cmd";
+
+    $cmdObj->sendCmd($newCmd, $node);
+    if ($cmdObj->rslt == FAIL) {
+        $result['rslt'] = $cmdObj->rslt;
+        $result['reason'] = $cmdObj->reason;
+        return $result;
+    }
+
+    $result['rslt'] =   SUCCESS;
+    $result['reason'] = "CMD IS IN PROGRESS";
     return $result;
 }
+
+
 
 ?>

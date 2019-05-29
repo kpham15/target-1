@@ -310,6 +310,7 @@
         <li id='sysview_act_stopNode'>STOP_NODE</li>
         <li id='sysview_act_findFac'>FIND FAC</li>
         <li id='sysview_act_findCkid'>FIND CKID</li>
+        <li id='sysview_act_viewCmd'>VIEW CMD</li>
     </ul>
 </div>
 
@@ -497,6 +498,61 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL FOR CMD -->
+<div id="sysviewCmdModal" class="modal fade" rode="dialog">
+    <div class="modal-dialog" style="margin: 200; width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SYSTEM VIEW: VIEW CMD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="sysviewCmdModal_ackid_txt">ACKID</label>
+                        <input id="sysviewCmdModal_ackid_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-sm-10">
+                        <label for="sysviewCmdModal_cmd_txt">CMD</label>
+                        <input id="sysviewCmdModal_cmd_txt" type="text" class="form-control" readonly>
+                    </div>
+                    <div hidden>
+                        <input id="sysviewCmdModal_stat_txt">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button id="sysviewCmdModal_submit_btn" type="button" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>LIST OF CMDS:</label>
+                    </div>
+                    <br>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <table class="table table-fixed">
+                                <thead style="width: 100%; padding-right: 15px">
+                                    <tr>
+                                        <th style="width: 10%">ACKID</th>
+                                        <th style="width: 80%">CMD</th>
+                                        <th style="width: 10%">STAT</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sysviewCmdModal_tbl">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
     
 <script>
@@ -664,6 +720,7 @@ var sysview = {
     actStopNode:    $("#sysview_act_stopNode"),
     actFindFac:     $("#sysview_act_findFac"),
     actFindCkid:    $("#sysview_act_findCkid"),
+    actViewCmd:     $("#sysview_act_viewCmd"),
     nodePicked:     [],
     nodeStatPicked: [],
     nodesArray:     [],
@@ -1298,7 +1355,7 @@ var sysview = {
             $(".sysview_nodeActList > li").off('mouseenter mouseleave');;
             
             if (sysview.nodeStatPicked == "OOS") {
-                sysview.activeAct(['actDiscover','actStartNode']);
+                sysview.activeAct(['actDiscover','actStartNode','actViewCmd']);
                 sysview.deactiveAct(['actLockNode','actUnlockNode','actViewAlm','actStopNode','actFindFac','actFindCkid'])
                 // sysview.actDiscover.hover(
                 //     function () {$(this).addClass('activeAction')},
@@ -1315,7 +1372,7 @@ var sysview = {
                 
             }
             else if (sysview.nodeStatPicked == "INS") {
-                sysview.activeAct(['actLockNode','actStopNode','actViewAlm','actFindFac','actFindCkid'])
+                sysview.activeAct(['actLockNode','actStopNode','actViewAlm','actFindFac','actFindCkid','actViewCmd'])
                 sysview.deactiveAct(['actDiscover','actStartNode','actUnlockNode'])
                 // sysview.actLockNode.hover(
                 //     function () {$(this).addClass('activeAction')},
@@ -1337,7 +1394,7 @@ var sysview = {
                 // sysview.actStartNode.addClass('disableAction');
             }
             else if (sysview.nodeStatPicked == "UAS") {
-                sysview.activeAct(['actDiscover'])
+                sysview.activeAct(['actDiscover','actViewCmd'])
                 // sysview.actStopNode.addClass('disableAction');
                 sysview.deactiveAct(['actStartNode','actLockNode','actUnlockNode','actViewAlm','actStopNode','actFindFac','actFindCkid'])
                 // sysview.actDiscover.hover(
@@ -1351,7 +1408,7 @@ var sysview = {
                 // sysview.actStopNode.addClass('disableAction');
             }
             else if (sysview.nodeStatPicked == "LCK") {
-                sysview.activeAct(['actUnlockNode'])
+                sysview.activeAct(['actUnlockNode','actViewCmd'])
                 sysview.deactiveAct(['actStartNode', 'actLockNode', 'actDiscover', 'actViewAlm', 'actStopNode'])
             }
 
@@ -2213,7 +2270,103 @@ var sysviewNodeModal = {
 
 }
 
+var sysviewCmdModal = {
 
+    modal:      $("#sysviewCmdModal"),
+    ackid:      $("#sysviewCmdModal_ackid_txt"),
+    cmd:        $("#sysviewCmdModal_cmd_txt"),
+    act:        $("#sysviewCmdModal_act_txt"),
+    stat:       $("#sysviewCmdModal_stat_txt"),
+    submitBtn:  $("#sysviewCmdModal_submit_btn"),
+
+    tblRows:    [],
+    tbl: {
+        body:       $("#sysviewCmdModal_tbl"),
+        index:      0,
+        maxIndex:   0,
+    },
+
+    viewCmd: function(action) {
+
+        $.post(ipcDispatch,
+        {
+            api:    "ipcNodeOpe",
+            act:    'VIEW CMD',
+            user:   $('#main_currentUser').text(),
+            node:   sysview.nodePicked,
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                sysviewCmdModal.tbl.index = 0;
+                sysviewCmdModal.tblRows = obj.rows;
+                var len = sysviewCmdModal.tblRows.length;
+                sysviewCmdModal.tbl.maxIndex = Math.ceil(len/25.0);
+                sysviewCmdModal.tbl.index++;
+                //put data into an array so that we can populate table in cmdModal
+                sysviewCmdModal.displayTbl(sysviewCmdModal.tbl.index);
+                sysviewCmdModal.act.val("VIEW CMD");
+                sysviewCmdModal.modal.modal();
+            }
+        });
+    },
+
+    exec_cmd: function() {
+
+        $.post(ipcDispatch,
+        {
+            api:    "ipcNodeOpe",
+            act:    'EXEC_CMD',
+            user:   $('#main_currentUser').text(),
+            node:   sysview.nodePicked,
+            cmd:    sysviewCmdModal.cmd.val(),
+        },
+        function (data, status) {
+            var obj = JSON.parse(data);
+            if (obj.rslt  ==  "fail") {
+                alert(obj.reason);
+            }
+            else {
+                alert(obj.reason, function() {
+                    sysviewCmdModal.modal.modal('hide');
+                    setTimeout(function() {
+                        $("#alertLayer").hide();
+                        sysviewCmdModal.viewCmd();
+                    }, 5000);
+                }, true);
+            }
+        });
+    },
+
+    displayTbl: function(index) {   
+        var startIndex=(index - 1) * 100;
+        var stopIndex = index * 100;
+        var len = sysviewCmdModal.tblRows.length;
+
+        if (len >= startIndex) {
+            if (len < stopIndex) {
+                stopIndex = len;   
+            }         
+            sysviewCmdModal.tbl.body.empty();
+            var a = [];
+            for (var i = startIndex; i < stopIndex; i++) {  
+                a.push('<tr>');
+                a.push('<td style="width:10%">'    + sysviewCmdModal.tblRows[i].ackid  + '</td>');
+                a.push('<td style="width:80%">'    + sysviewCmdModal.tblRows[i].cmd    + '</td>');
+                a.push('<td style="width:10%">'    + sysviewCmdModal.tblRows[i].stat   + '</td>');
+                a.push('</tr>');
+                
+            }
+            sysviewCmdModal.tbl.body.html(a.join(""));
+        } 
+    },
+
+    
+
+}
 // Handles when a node icon is clicked on either the X or Y side
 $(document).on("click",".sysview_nodeX button, .sysview_nodeY button",function() {
 
@@ -2392,7 +2545,9 @@ $(".sysview_nodeActList > li").click(function(){
         }
         else if($(this).text() == 'FIND CKID') {
             sysviewModal_ckidSearch.modal.modal();
-            
+        }
+        else if ($(this).text() == 'VIEW CMD') {
+            sysviewCmdModal.viewCmd();
         }
     }
 });
@@ -2600,4 +2755,27 @@ sysviewModal_viewPath.viewBtn.click(function() {
     sysviewModal_viewPath.queryByNode();
 });
 
+// SysviewCmdModal table
+$(document).on('click', "#sysviewCmdModal_tbl tr", function() {
+    var dataRow = $(this).children('td').map(function() {
+        return $(this).text();
+    }).get();
+
+    sysviewCmdModal.ackid.val(dataRow[0]);
+    sysviewCmdModal.cmd.val(dataRow[1]);
+    sysviewCmdModal.stat.val(dataRow[2]);
+
+    //Add color to the row
+    $(this).addClass("addColor"); //add class selected to current clicked row
+    $(this).siblings().removeClass( "addColor" ); //remove class selected from rest of the rows  
+});
+
+sysviewCmdModal.submitBtn.click(function() {
+    if (sysviewCmdModal.stat.val() == "PENDING") {
+        sysviewCmdModal.exec_cmd();
+    }
+    else {
+        alert("STAT MUST BE PENDING");
+    }
+});
 </script>
