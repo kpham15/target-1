@@ -16,13 +16,17 @@
         <table id="example" class="table" style="width:100%;">
           <thead>
             <tr>
-              <th>ctyp</th>
-              <th>ffac</th>
-              <th>fport</th>
-              <th>fpsta</th>
-              <th>tfac</th>
-              <th>tport</th>
-              <th>tpsta</th>
+              <th rowspan="2">CONTYP</th>
+              <th colspan="3">FROM(X):</th>
+              <th colspan="3">TO(Y):</th>
+            </tr>
+            <tr>
+              <th>PORT</th>
+              <th>PSTA</th>
+              <th>FAC(X)</th>
+              <th>PORT</th>
+              <th>PSTA</th>
+              <th>FAC(Y)</th>
             </tr>
           </thead>
         </table>
@@ -80,12 +84,12 @@
       },
       "columns": [
         {"data":"ctyp"},
-        {"data":"ffac"},
         {"data":"fport"},
         {"data":"fpsta"},
-        {"data":"tfac"},
+        {"data":"ffac"},
         {"data":"tport"},
         {"data":"tpsta"}
+        {"data":"tfac"},
       ]
     });
     
