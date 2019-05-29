@@ -135,6 +135,7 @@ if ($act == "VIEW CMD") {
 }
 // functions area
 function view_cmd($node) {
+    global $debugObj;
     $debugObj->log("I HAVE SUCCESSFULLY LOGGED UPON VIEW_CMD");
     $cmdObj = new CMD();
     $cmdObj->getCmdList($node);
