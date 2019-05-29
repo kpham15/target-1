@@ -14,6 +14,7 @@
         $result['reason'] = $optObj->reason;
         $result['rows'] = $optObj->rows;
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         
     }
@@ -23,6 +24,7 @@
         $result['reason'] = $ortObj->reason;
         $result['rows'] = $ortObj->rows;
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         
     }
@@ -32,6 +34,7 @@
         $result['reason'] = $spcfncObj->reason;
         $result['rows'] = $spcfncObj->rows;
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         
     }
@@ -41,6 +44,7 @@
         $result['reason'] = $ftypObj->reason;
         $result['rows'] = $ftypObj->rows;
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);     
     }
     

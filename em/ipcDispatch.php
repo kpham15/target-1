@@ -64,6 +64,7 @@ if ($userObj->uname != 'SYSTEM') {
     if ($result['rslt'] == 'fail') {
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
 }

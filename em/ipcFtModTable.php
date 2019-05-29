@@ -60,6 +60,7 @@
     if ($act == "query") {
         $result = queryFtModTable($ot, $pri, $cdd, $noscm, $rtype, $processingfile, $ftmodtableObj);
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -89,6 +90,7 @@
         $result["reason"] = "ACTION " . $act . " is under development or not supported";
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
 

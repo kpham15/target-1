@@ -51,12 +51,14 @@
 		$result = queryProvlog($uname, $action, $ordno, $ckid, $fromDate, $toDate, $userObj);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "queryOrd") {
 		$result = queryOrd($ordno);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
     else {
@@ -64,6 +66,7 @@
 		$result["reason"] = "Invalid action!";
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return; 
     }
 

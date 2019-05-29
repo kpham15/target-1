@@ -69,6 +69,7 @@
         $maintLog->log($user, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $ordno);
 		echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
 	}
 	

@@ -35,24 +35,28 @@
 		$result = searchItem($item, $userObj);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "ADD") {
 		$result = addSearchItem($userObj,$item,$descr);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "UPDATE") {
 		$result = updateSearchItem($userObj, $item,$descr);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "DELETE") {
 		$result = deleteSearchItem($userObj, $item);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	
@@ -61,6 +65,7 @@
 		$result["reason"] = "This action is under development!";
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 

@@ -47,6 +47,7 @@ if ($act == "queryTBpath") {
     $result = queryTBpath($fac);
 	echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 
@@ -56,6 +57,7 @@ else {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+    $debugObj->close();
 	return;
 }
 

@@ -95,6 +95,7 @@
 		// In this case, $db is reused multiple times before close
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
         mysqli_close($db);
+        $debugObj->close();
 		echo json_encode($result);
 		return;
 	}
@@ -103,6 +104,7 @@
 		$result = updateFac($fac, $ftyp, $ort, $spcfnc,$userObj);
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
 		return;
 	}
@@ -111,6 +113,7 @@
 		$result = deleteFac($fac, $userObj);
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
 		return;
 	}
@@ -118,6 +121,7 @@
 	if ($act == "queryFtyp") {
 		$result = queryFtyp();
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
 		return;
 	}
@@ -125,6 +129,7 @@
 	if ($act == "queryOrt") {
 		$result = queryOrt();
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
 		return;
 	}
@@ -132,6 +137,7 @@
 	if ($act == "querySpcfnc") {
 		$result = querySpcfnc();
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
 		return;
 	}

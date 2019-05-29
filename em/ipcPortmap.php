@@ -79,6 +79,7 @@
         $result = pmQueryPort($port, $psta, $ptyp);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -86,6 +87,7 @@
         $result = pmQueryFac($fac);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "findCkid") {
@@ -100,6 +102,7 @@
         $result['rows'] = ($portObj->rows);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
     // Introduce CfgLog obj for MAP and UNMAP action
@@ -110,6 +113,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result['reason']);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "UNMAP") {
@@ -118,6 +122,7 @@
         $evtLog->log($result["rslt"], $result['log'] . " | " . $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "QUERYMIO") {
@@ -128,6 +133,7 @@
         $result['rows'] = ($portObj->rows);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     //Demo
@@ -137,6 +143,7 @@
         $evtLog->log($result["rslt"], $result['log'] . " | " . $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     if ($act == "SET_DF") {
@@ -145,6 +152,7 @@
         $evtLog->log($result["rslt"], $result['log'] . " | " . $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
     if ($act == "SET_SF") {
@@ -153,6 +161,7 @@
         $evtLog->log($result["rslt"], $result['log'] . " | " . $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
     }
 	else {
@@ -161,6 +170,7 @@
         $evtLog->log($result["rslt"], $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 

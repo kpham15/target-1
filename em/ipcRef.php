@@ -113,6 +113,7 @@ if ($refObj->rslt != SUCCESS) {
     $evtLog->log($result["rslt"], $result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -122,6 +123,7 @@ if ($action == "query") {
     $result = queryRefs($refObj);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -130,6 +132,7 @@ if ($action == "update") {
     $evtLog->log($result["rslt"], $result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -138,6 +141,7 @@ if ($action == "reset") {
     $evtLog->log($result["rslt"], $result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

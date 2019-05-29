@@ -48,6 +48,7 @@
 		$result["reason"] = "Invalid action!";
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return; 
     }
 

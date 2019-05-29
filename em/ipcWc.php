@@ -119,6 +119,7 @@
 		$evtLog->log($result["rslt"], $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
     }
 
@@ -130,6 +131,7 @@
         $result["rows"] = $wcObj->rows;
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 	
@@ -138,6 +140,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -147,6 +150,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
     
@@ -155,6 +159,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -163,6 +168,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -171,6 +177,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -178,6 +185,7 @@
 		$result = getWCHeader($wcObj);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -185,6 +193,7 @@
 		$result = getWCTimeZone($wcObj);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 
@@ -192,6 +201,7 @@
 		$result = getAlmStat();
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}	
 	
@@ -199,6 +209,7 @@
 		$result = getHeader($wcObj, $uname);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 	else {
@@ -207,6 +218,7 @@
 		$evtLog->log($result["rslt"],$result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 	

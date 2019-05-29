@@ -72,6 +72,7 @@
 		$result['reason'] = $userObj->reason;
 		$evtLog->log($result["rslt"], $result["reason"]);
         mysqli_close($db);
+		$debugObj->close();
 		echo json_encode($result);
 		return;
 	}
@@ -83,6 +84,7 @@
         $evtLog->log($result["rslt"], $result["reason"]);
         echo json_encode($result);
         mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -91,6 +93,7 @@
 	if ($result['rslt'] == 'fail') {
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 	
@@ -120,6 +123,7 @@
 		$result['rows'] = getBrdcstOwners($targetUserObj->rows);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -130,6 +134,7 @@
         $result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -140,6 +145,7 @@
 		$result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);
         echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 	
@@ -150,6 +156,7 @@
         $result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
 		return;
 	}
 	
@@ -160,6 +167,7 @@
         $result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 	
@@ -170,6 +178,7 @@
         $result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 	
@@ -178,6 +187,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -190,6 +200,7 @@
 
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -198,6 +209,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -206,6 +218,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -214,6 +227,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -222,6 +236,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -230,6 +245,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -238,6 +254,7 @@
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 
@@ -247,6 +264,7 @@
 		$evtLog->log($result["rslt"], $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
+		$debugObj->close();
         return;
 	}
 	

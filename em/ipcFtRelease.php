@@ -114,6 +114,7 @@
     if ($act == "query") {
         $result = queryFtRelease($sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop, $ftreleaseObj);
         mysqli_close($db);
+        $debugObj->close();
         echo json_encode($result);
         return;
     }
@@ -143,6 +144,7 @@
         $result["reason"] = "ACTION " . $act . " is under development or not supported";
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
    

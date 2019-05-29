@@ -62,6 +62,7 @@ if ($act == "query") {
 	$result["rows"]   = $tbObj->rows;
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -69,6 +70,7 @@ if ($act == "UPDATE") {
 	$result = setTpName($tp, $node, $name, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -76,6 +78,7 @@ if ($act == "CONNECT") {
 	$result = connectTb($tp, $node,$port, $tbx, $tby, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -83,6 +86,7 @@ if ($act == "DISCONNECT") {
 	$result = disconnectTb($tp, $node,$port, $tbx, $tby, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -90,6 +94,7 @@ if ($act == "DSP-50ms single tone") {
 	$result = dsp50msST($tp, $node,$port, $tbx, $tby, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -97,6 +102,7 @@ if ($act == "DSP-50ms dual tone") {
 	$result = dsp50msDT($tp, $node,$port, $tbx, $tby, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -104,6 +110,7 @@ if ($act == "DSP-50ms dual tone") {
 // 	$result = dspFST($tp, $node,$port, $tbx, $tby, $userObj);
 // 	echo json_encode($result);
 // 	mysqli_close($db);
+	// $debugObj->close();
 // 	return;
 // }
 
@@ -111,6 +118,7 @@ if ($act == "DSP-50ms dual tone") {
 // 	$result = dspFDT($tp, $node,$port, $tbx, $tby, $userObj);
 // 	echo json_encode($result);
 // 	mysqli_close($db);
+	// $debugObj->close();
 // 	return;
 // }
 
@@ -118,6 +126,7 @@ if ($act == "DSP-stop single/dual tone") {
 	$result = dspStopTone($tp, $node,$port, $tbx, $tby, $userObj);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 
@@ -127,6 +136,7 @@ else {
 	$evtLog->log($result["rslt"], $result["reason"]);
 	echo json_encode($result);
 	mysqli_close($db);
+	$debugObj->close();
 	return;
 }
 

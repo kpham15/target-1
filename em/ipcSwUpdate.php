@@ -32,6 +32,7 @@ if ($act == "UPLOAD SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 
@@ -40,6 +41,7 @@ if ($act == "INSTALL UPDATE SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "RUN CURRENT SW") {
@@ -47,6 +49,7 @@ if ($act == "RUN CURRENT SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "RUN UPDATE SW") {
@@ -54,6 +57,7 @@ if ($act == "RUN UPDATE SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "RUN DEFAULT SW") {
@@ -61,6 +65,7 @@ if ($act == "RUN DEFAULT SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "APPLY UPDATE SW") {
@@ -68,6 +73,7 @@ if ($act == "APPLY UPDATE SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "APPLY DEFAULT SW") {
@@ -75,6 +81,7 @@ if ($act == "APPLY DEFAULT SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 if ($act == "SET DEFAULT SW") {
@@ -82,6 +89,7 @@ if ($act == "SET DEFAULT SW") {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 else {
@@ -90,6 +98,7 @@ else {
     $evtLog->log($result["rslt"],$result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
+    $debugObj->close();
     return;
 }
 

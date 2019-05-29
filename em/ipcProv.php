@@ -132,6 +132,7 @@ include "ipcProvConnect.php";
 		$result['rows'] = $cktObj->rows;
         echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -139,6 +140,7 @@ include "ipcProvConnect.php";
 	// 	$result = provQueryOrd($ordno, $mlo);
 	// 	echo json_encode($result);
 	// 	mysqli_close($db);
+        // $debugObj->close();
 	// 	return;
 	// }
 	
@@ -150,6 +152,7 @@ include "ipcProvConnect.php";
 		$result['rows'] = $cktconObj->rows;
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	
@@ -157,6 +160,7 @@ include "ipcProvConnect.php";
 		$result = queryCktconByCkid($ckid);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -172,6 +176,7 @@ include "ipcProvConnect.php";
 		$result['rows'] = $facObj->rows;
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 
@@ -181,6 +186,7 @@ include "ipcProvConnect.php";
 		$provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 	if ($act == "CONNECT") {
@@ -190,6 +196,7 @@ include "ipcProvConnect.php";
         $provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
 	}
 
@@ -200,6 +207,7 @@ include "ipcProvConnect.php";
 		$provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
 	}
 	
@@ -210,6 +218,7 @@ include "ipcProvConnect.php";
         $provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $newffac, $newfport, $newtfac, $newtport, $result['reason'], $tktno);
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
 
@@ -219,6 +228,7 @@ include "ipcProvConnect.php";
 		$evtLog->log($result['rslt'], $result['reason']);
 		echo json_encode($result);
 		mysqli_close($db);
+        $debugObj->close();
 		return;
 	}
 

@@ -141,6 +141,7 @@ if ($act == "FETCH_FT_ORDERS") {
         $res['reason'] = $e->getMessage();
         echo json_encode($res);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
     echo json_encode($result);
