@@ -161,7 +161,7 @@
           portBtns.children().last().remove();
         }
       } else if (portBtns.children().length < amount) {
-        for (let i = portBtns.children().length; i <= amount; i++) {
+        for (let i = portBtns.children().length-1; i < amount; i++) {
           let calculated = 25*i;
           html = '<button type="button" class="btn btn-default port-range-btn" ptyp="'+ptyp+'" index="'+i+'">'+
                     (1+calculated) + '-' + (25+calculated) +
@@ -171,7 +171,7 @@
         }
       }
     } else {
-      for (let i = 1; i <= amount; i++) {
+      for (let i = 0; i < amount; i++) {
         let calculated = 25*i;
         html = '<button type="button" class="btn btn-default port-range-btn" ptyp="'+ptyp+'" index="'+i+'">'+
                     (1+calculated) + '-' + (25+calculated) +
