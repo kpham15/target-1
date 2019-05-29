@@ -1181,3 +1181,11 @@ Connection: Close
 user=SYSTEM&api=ipcNodeOpe&act=EXEC_RESP&node=1&hwRsp=%24ackid%3D1-nadm-unds%2Cstatus%2Cdevices%2Cmiox%3D11111111111111111111%2Cmioy%3D11111111111111111111%2Cmre%3D11111111111111111111%2Ccps%3D11%2Cbackplane%3DIAMAMIOXUUIDTHATYOUCANTDECODE%2A
 
 Response from API:{"rslt":"success","reason":"NODE DEVICES UPDATED"}
+
+-----------------BEGIN OF CPSLOOP-----------------
+
+creating UPD server.....
+
+-----------------BEGIN OF CPSLOOP-----------------
+
+creating UPD server.....
