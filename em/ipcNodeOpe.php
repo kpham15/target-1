@@ -637,6 +637,7 @@ function updateCpsTemp($hwRsp) {
 
 function exec_resp($node, $hwRsp, $userObj) {
 
+    cps_on($node);
     // use cpsloop example foreach processUDPmsg
     // remove $ and * from string
     $rsp = substr($hwRsp, 1, -1);

@@ -176,7 +176,7 @@ try {
                 $rsp = $comPortObj->receiveRsp();
                 if($rsp !== '') {
                     //if there is a response from HW, create post-request CPS-ON to API, and reset lostConn=0
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+                    // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
                     $lostConn = 0;
                     if($cpsAlive == false) $cpsAlive = true;
 
