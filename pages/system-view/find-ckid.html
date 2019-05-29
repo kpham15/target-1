@@ -131,6 +131,8 @@
         $('#ckid-input').addClass('has-error');
       } else {
         queryCkid(ckid);
+        $('#ckid-input .help-block').text('');
+        $('#ckid-input').removeClass('has-error');
       }
     });
   });
