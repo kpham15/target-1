@@ -13,63 +13,61 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="container-fluid">
-      <!-- Find CKID Section -->
-      <?php include __DIR__ . "/find-ckid.html"; ?>
+    <!-- Find CKID Section -->
+    <?php include __DIR__ . "/find-ckid.html"; ?>
 
-      <!-- Node Status Section -->
-      <?php include __DIR__ . "/node-status.html"; ?>
+    <!-- Node Status Section -->
+    <?php include __DIR__ . "/node-status.html"; ?>
 
-      <!-- =========================================================== -->
+    <!-- =========================================================== -->
 
-      <div class="row">
-        <div class="col-md-6">
-          <div id="node-x-table" class="nav-tabs-custom">
-            <ul id="node-x-tabs" class="nav nav-tabs node-tabs" ptyp="x">
-              <!-- Node tabs for X side created dynamically -->
-            </ul>
-            <div id="mio-x-table" class="tab-content mio-tabs">
-              <div class="tab-pane active" id="nodex">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div id="miox-btn-group" class="mio-btn-group btn-group">
-                      <!-- MIO buttons created dynamically -->
-                    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="node-x-table" class="nav-tabs-custom">
+          <ul id="node-x-tabs" class="nav nav-tabs node-tabs" ptyp="x">
+            <!-- Node tabs for X side created dynamically -->
+          </ul>
+          <div id="mio-x-table" class="tab-content mio-tabs">
+            <div class="tab-pane active" id="nodex">
+              <div class="container-fluid">
+                <div class="row">
+                  <div id="miox-btn-group" class="mio-btn-group btn-group">
+                    <!-- MIO buttons created dynamically -->
                   </div>
-                  <div class="row">
-                    <div class="btn-group port-range-btns" ptyp="x">
-                      <!-- Port range buttons created dynamically -->
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="btn-group port-range-btns" ptyp="x">
+                    <!-- Port range buttons created dynamically -->
                   </div>
-                  <div id="x-port-grid" class="row port-grid" ptyp="x">
-                    <!-- Port boxes created dynamically -->
-                  </div>
+                </div>
+                <div id="x-port-grid" class="row port-grid" ptyp="x">
+                  <!-- Port boxes created dynamically -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div id="node-y-table" class="nav-tabs-custom">
-            <ul id="node-y-tabs" class="nav nav-tabs node-tabs" ptyp="y">
-              <!-- Node tabs for Y side created dynamically -->
-            </ul>
-            <div id="mio-y-table" class="tab-content mio-tabs">
-              <div class="tab-pane active" id="nodey">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div id="mioy-btn-group" class="mio-btn-group btn-group">
-                      <!-- MIO buttons created dynamically -->
-                    </div>
+      </div>
+      <div class="col-md-6">
+        <div id="node-y-table" class="nav-tabs-custom">
+          <ul id="node-y-tabs" class="nav nav-tabs node-tabs" ptyp="y">
+            <!-- Node tabs for Y side created dynamically -->
+          </ul>
+          <div id="mio-y-table" class="tab-content mio-tabs">
+            <div class="tab-pane active" id="nodey">
+              <div class="container-fluid">
+                <div class="row">
+                  <div id="mioy-btn-group" class="mio-btn-group btn-group">
+                    <!-- MIO buttons created dynamically -->
                   </div>
-                  <div class="row">
-                    <div class="btn-group port-range-btns" ptyp="y">
-                      <!-- Port range buttons created dynamically -->
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="btn-group port-range-btns" ptyp="y">
+                    <!-- Port range buttons created dynamically -->
                   </div>
-                  <div id="y-port-grid" class="row port-grid" ptyp="y">
-                    <!-- Port boxes created dynamically -->
-                  </div>
+                </div>
+                <div id="y-port-grid" class="row port-grid" ptyp="y">
+                  <!-- Port boxes created dynamically -->
                 </div>
               </div>
             </div>
