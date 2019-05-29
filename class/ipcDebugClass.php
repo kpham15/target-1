@@ -34,7 +34,7 @@
                 return;
             }
 
-            fwrite($this->debugFile, "-----------------------\n" . $string);
+            fwrite($this->debugFile, "\n-----------------------\n" . $string);
 
         }
 
