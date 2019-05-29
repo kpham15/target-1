@@ -160,7 +160,7 @@
     
     if (ptyp === 'x') {
       portArray = portX.filter(function(port) {
-        if (port.pnum > 1+calculated && port.pnum < 25+calculated) {
+        if (port.pnum >= 1+calculated && port.pnum <= 25+calculated) {
           return true;
         } else {
           return false;
