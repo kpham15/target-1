@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-6">
         <div id="node-x-table" class="nav-tabs-custom">
-          <ul id="node-x-tabs" class="nav nav-tabs node-tabs">
+          <ul id="node-x-tabs" class="nav nav-tabs node-tabs" ptyp="x">
             <!-- Node tabs for X side created dynamically -->
           </ul>
           <div id="mio-x-table" class="tab-content mio-tabs">
@@ -48,7 +48,7 @@
       </div>
       <div class="col-md-6">
         <div id="node-y-table" class="nav-tabs-custom">
-          <ul id="node-y-tabs" class="nav nav-tabs node-tabs">
+          <ul id="node-y-tabs" class="nav nav-tabs node-tabs" ptyp="y">
             <!-- Node tabs for Y side created dynamically -->
           </ul>
           <div id="mio-y-table" class="tab-content mio-tabs">
@@ -80,17 +80,16 @@
 <script type="text/javascript">
   function sysviewStartup() {
     // Create the Node tabs according to amount of nodes
-    nodeInfo.forEach(function(node) {
-      let nodeTab = createNodeTabs(node);
-      $('.node-tabs').append(nodeTab);
-    });
-    $('.node-tab[node_id="1"]').addClass('active');
-
     // @TODO
     // Might need to add this bit of code to updates of nodes
     // if node information can change and affect tabs
-    $('#node-x-tabs>li>a').attr('href','#nodex');
-    $('#node-y-tabs>li>a').attr('href','#nodey');
+    nodeInfo.forEach(function(node) {
+      let nodeXTab = createNodeTabs(node, 'x');
+      let nodeYTab = createNodeTabs(node, 'y');
+      $('#node-x-tabs').append(nodeXTab);
+      $('#node-y-tabs').append(nodeYTab);
+    });
+    $('.node-tab[node_id="1"]').addClass('active');
 
     // Create MIO buttons according to data from first node (the initial active node)
     let node1 = nodeInfo.findIndex(node => node.node === '1');
@@ -272,10 +271,10 @@
     return mioBtn;
   }
 
-  function createNodeTabs(node) {
+  function createNodeTabs(node, ptyp) {
     // HTML template for node tab
-    let nodeTab = '<li class="node-tab" node_id="'+node.node+'">' +
-                    '<a href="#" data-toggle="tab">Node '+node.node+'</a>' +
+    let nodeTab = '<li class="node-tab" node_id="'+node.node+'" ptyp="'+ptyp+'">' +
+                    '<a href="#node'+ptyp+'" data-toggle="tab">Node '+node.node+'</a>' +
                   '</li>';
 
     // Return html string
@@ -283,12 +282,34 @@
   }
 
   $(document).ready(function() {
-    // Click event for MIO buttons
-    $(document).on('click', '.mio-btn' , function() {
+    // Click event for Node Tabs
+    $(document).on('click', '.node-tab', function() {
       let ptyp = $(this).attr('ptyp');
+      $('.mio-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+    });
+
+    // Click event for MIO buttons
+    $(document).on('click', '.mio-btn', function() {
+      let ptyp = $(this).attr('ptyp');
+      let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
+      let slot = $(this).attr('slot');
 
       $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
+
+      $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+
+      queryAndUpdatePorts(node, slot, ptyp);
+    });
+
+    // Click event for Port range buttons
+    $(document).on('click', '.port-range-btn', function() {
+      let ptyp = $(this).attr('ptyp');
+
+      $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
+      $(this).button('toggle');
+
+      updatePortGrid(ptyp);
     });
   });
 </script>
