@@ -114,13 +114,6 @@ if ($act == "EXEC_CMD") {
 	return;
 }
 
-// if ($act == "UPDATE RACK") {
-//     $result = updateRack($node, $device);
-//     echo json_encode($result);
-// 	mysqli_close($db);
-// 	return;
-// }
-
 if ($act == "VIEW CMD") {
     $result = view_cmd($node);
     echo json_encode($result);
@@ -448,12 +441,8 @@ function discovered($node, $hwRsp) {
 
         $result['rslt'] = SUCCESS;
         $result['reason'] = $cpsObj->reason;
-        
         return $result;
-
     }
-
-
 }
 
 function updateCpsStatus($hwRsp) {
@@ -627,7 +616,6 @@ function updateCpsTemp($hwRsp) {
 
 function exec_resp($node, $hwRsp, $userObj) {
 
-    
     // remove $ and * from string
     $rsp = substr($hwRsp, 1, -1);
 
