@@ -13,7 +13,8 @@ class DEBUG{
             $this->enable = $str;
         }
     
-        if ($this->enable == '1') {
+        if ($str == '1') {
+            $this->enable = $str;
             $this->debugFile =  fopen("../report/debug.log", "a");
         }
         
