@@ -179,6 +179,8 @@
 
         portBtns.append(html);
       }
+
+      $('.port-range-btn[index="0"]').addClass('active');
     }
     
     return;
