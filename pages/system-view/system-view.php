@@ -152,7 +152,9 @@
 
   function updatePortGrid(ptyp) {
     let index = $('.port-range-btn.active').attr('index');
+    console.log('index: '+index)
     let calculated = 25*index;
+    console.log('calculated: '+calculated);
     let portArray = [];
     let color = '';
 
