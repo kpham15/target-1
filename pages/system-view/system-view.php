@@ -201,11 +201,11 @@
       });
       grid.find(selector).removeClass('disabled');
       grid.find(selector).addClass(color);
-      grid.find(selector+' .port-num').text(port.port);
-      grid.find(selector+' .port-psta').text(port.psta);
-      grid.find(selector+' .fac-num').text(port.fac);
-      grid.find(selector+' .fac-type').text(port.ftyp);
-      grid.find(selector+' .port-ckid').text(port.ckid);
+      grid.find(selector+' .port-num').text(port.port === '' ? '-' : port.port);
+      grid.find(selector+' .port-psta').text(port.psta === '' ? '-' : port.psta);
+      grid.find(selector+' .fac-num').text(port.fac === '' ? '-' : port.fac);
+      grid.find(selector+' .fac-type').text(port.ftyp === '' ? '-' : port.ftyp);
+      grid.find(selector+' .port-ckid').text(port.ckid === '' ? '-' : port.ckid);
     });
   }
 
