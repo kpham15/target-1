@@ -174,12 +174,9 @@ try {
             //if response exists, process the response and update cps connection status
             if($discover_mode) {
                 $rsp = $comPortObj->receiveRsp();
-                if($rsp !== '') {
-                    //if there is a response from HW, create post-request CPS-ON to API, and reset lostConn=0
-                    // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_ON','node'=>$node]);         
+                if($rsp !== '') {        
                     $lostConn = 0;
                     if($cpsAlive == false) $cpsAlive = true;
-
                     //serial number is retrieved in discover_mode, not in start_mode
                     if($start_mode == false) {
                         $sn = $rspObj->getUuid($rsp);

@@ -13,7 +13,6 @@ if ($file) {
             break;
         }
     }
-
     fclose($file);
 }
 $nodeNum = (int)$nodeNum;
