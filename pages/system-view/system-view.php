@@ -151,10 +151,9 @@
   }
 
   function updatePortGrid(ptyp) {
+    let grid = $('.port-grid[ptyp="'+ptyp+'"]');
     let index = $('.port-range-btn.active').attr('index');
-    console.log('index: '+index)
     let calculated = 25*index;
-    console.log('calculated: '+calculated);
     let portArray = [];
     let color = '';
 
@@ -179,7 +178,7 @@
     
     portArray.forEach(function(port) {
       let gridNum = port.pnum - calculated;
-      let selector = $('.port-box[grid_num="'+gridNum+'"]');
+      let selector = '.port-box[grid_num="'+gridNum+'"]';
       
       switch(port.psta) {
         case "SF":
@@ -198,16 +197,16 @@
           color = 'bg-gray-active';
       }
 
-      selector.removeClass(function(i, className) {
+      grid.find(selector).removeClass(function(i, className) {
         return (className.match (/(^|\s)bg-\S+/g) || []).join(' ');
       });
-      selector.removeClass('disabled');
-      selector.addClass(color);
-      selector.find('.port-num').text(port.port);
-      selector.find('.port-psta').text(port.psta);
-      selector.find('.fac-num').text(port.fac);
-      selector.find('.fac-type').text(port.ftyp);
-      selector.find('.port-ckid').text(port.ckid);
+      grid.find(selector).removeClass('disabled');
+      grid.find(selector).addClass(color);
+      grid.find(selector+' .port-num').text(port.port);
+      grid.find(selector+' .port-psta').text(port.psta);
+      grid.find(selector+' .fac-num').text(port.fac);
+      grid.find(selector+' .fac-type').text(port.ftyp);
+      grid.find(selector+' .port-ckid').text(port.ckid);
     });
   }
 
