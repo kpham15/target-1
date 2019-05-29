@@ -320,6 +320,7 @@
 
     // Click events for Port Box Dropdowns
     $(document).on('click', '.port-box .dropdown', function() {
+      console.log('dropdown');
       $(this).dropdown('toggle');
     });
   });
