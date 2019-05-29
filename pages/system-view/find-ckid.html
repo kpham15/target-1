@@ -106,6 +106,7 @@
         dataType: 'json'
       }).done(function(data) {
         let res = data.rows;
+        console.log(res);
         
         datatable.clear().draw();
         console.log('after clear');
