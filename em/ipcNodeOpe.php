@@ -21,6 +21,7 @@ $device = "";
 if (isset($_POST['device'])) {
     $device = $_POST['device'];
 }
+//@TODO this device will need to be removed when the hardware comes in
 $device = "ttyUSB0";
 
 $hwRsp = "";
