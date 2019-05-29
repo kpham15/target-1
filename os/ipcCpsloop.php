@@ -1,9 +1,14 @@
 <?php
+
+//change working dir to the file location
+chdir(__DIR__);
+
 //because this program needs to read /dev/ttyUSB file => www-data user need to be put in the group: dialout
 //cmd structure to run this program: php ipcCpsloop.php node ip_port
 include 'ipcComPortClass.php';
 include 'ipcCpsServerClass.php';
 include 'ipcRspClass.php';
+include '../class/ipcDebugClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -48,6 +53,8 @@ try {
     $serverExist = false;
     $clientExist = false;
     $rspObjExist = false;
+
+    $debugObj = new DEBUG();
  
     serverSock: 
         //-------------to communicate with API (UDP type)-----------------
