@@ -346,7 +346,7 @@
 		// user can update his/her own tel,email
 		if($userObj->uname == $targetUserObj->uname) {
 			// only admins can change their own names
-			if ($userObj->grp < 1)
+			if ($userObj->grp < 2)
 				$targetUserObj->updUser($lname, $fname, $mi, "", $tel, $email, "", $targetUserObj->ugrp);
 				// other users cannot change their names
 			else {
