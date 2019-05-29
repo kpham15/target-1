@@ -13,7 +13,7 @@
         <h4 class="modal-title">Find CKID</h4>
       </div>
       <div class="modal-body">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <table id="example" class="table">
           <thead>
             <tr>
               <th>ctyp</th>
@@ -65,18 +65,29 @@
 
   $(document).ready(function() {
     $('#example').dataTable({
+      "processing": true,
+      "serverSide": true,
       "ajax": {
-        type: "POST",
-        url: ipcDispatch,
-        data: {
+        "type": "POST",
+        "url": ipcDispatch,
+        "data": {
           "api":    "ipcProv",
           "act":    "queryCktconByCkid",
           "user":   user.user,
           "ckid":   '555-555-5555'
         },
-        dataType: 'json',
-        dataSrc: 'rows'
-      }
+        "dataType": 'json',
+        "dataSrc": 'rows',
+      },
+      "columns": [
+        {"data":"ctyp"},
+        {"data":"ffac"},
+        {"data":"fport"},
+        {"data":"fpsta"},
+        {"data":"tfac"},
+        {"data":"tport"},
+        {"data":"tpsta"}
+      ]
     });
     
     $(document).on('click', '#find-ckid-btn', function() {
