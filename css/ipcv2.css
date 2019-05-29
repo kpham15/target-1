@@ -10,6 +10,26 @@
 }
 /* ============ END Login Page ===============*/
 
+/* ============ Nav Header Styling ============== */
+  .nav-tabs-custom>.nav-tabs>li.active>a {
+    border-left-color: #aaa;
+    border-right-color: #aaa;
+  }
+  .nav-tabs-custom>.nav-tabs.node-tabs {
+    border-bottom-color: #aaa;
+  }
+  .nav.navbar-nav .navbar-text {
+    color: #FFF;
+  }
+  #alarm-header-icon {
+    display: inline;
+    width: auto;
+  }
+  .nav.node-tabs>li>a {
+    padding: 8px;
+  }
+/* ============ END Nav Header Styling =============== */
+
 /* ============= Modal Styling ============== */
 .modal-footer .confirm-btn {
   display: none;
@@ -53,8 +73,6 @@
   margin: 0;
   line-height: 100%;
 }
-/* ============ END Sysview Page CSS ============ */
-
 .port-grid .info-box-text {
   font-size: 16px !important;
 }
@@ -69,20 +87,10 @@
 .mio-tabs .btn-group {
   margin-bottom: 10px;
 }
-.nav-tabs-custom>.nav-tabs>li.active>a {
-  border-left-color: #aaa;
-  border-right-color: #aaa;
+.port-box {
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
-.nav-tabs-custom>.nav-tabs.node-tabs {
-  border-bottom-color: #aaa;
-}
-.nav.navbar-nav .navbar-text {
-  color: #FFF;
-}
-#alarm-header-icon {
-  display: inline;
-  width: auto;
-}
-.nav.node-tabs>li>a {
-  padding: 8px;
-}
+/* ============ END Sysview Page CSS ============ */
