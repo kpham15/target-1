@@ -247,19 +247,17 @@
   }
 
   function createPortBox(gridNum) {
-    let portBox = '<div class="dropdown">' +
-                    '<div class="port-box info-box bg-gray-active disabled" grid_num="'+gridNum+'" data-toggle="dropdown">' +
-                      '<div class="info-box-text">' +
-                        '<span class="port-num">-</span>' +
-                        '<span class="port-psta pull-right">-</span>' +
-                      '</div>' +
-                      '<div class="info-box-text">' +
-                        '<span class="fac-num">-</span>' +
-                        '<span class="fac-type pull-right">-</span>' +
-                      '</div>' +
-                      '<div class="info-box-text text-center">' +
-                        '<span class="port-ckid">-</span>' +
-                      '</div>' +
+    let portBox = '<div class="port-box info-box bg-gray-active disabled" grid_num="'+gridNum+'" data-toggle="dropdown">' +
+                    '<div class="info-box-text">' +
+                      '<span class="port-num">-</span>' +
+                      '<span class="port-psta pull-right">-</span>' +
+                    '</div>' +
+                    '<div class="info-box-text">' +
+                      '<span class="fac-num">-</span>' +
+                      '<span class="fac-type pull-right">-</span>' +
+                    '</div>' +
+                    '<div class="info-box-text text-center">' +
+                      '<span class="port-ckid">-</span>' +
                     '</div>' +
                     '<ul class="dropdown-menu">' +
                       '<li>Item 1</li>' +
