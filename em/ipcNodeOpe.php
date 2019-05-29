@@ -649,7 +649,8 @@ function exec_resp($node, $hwRsp, $userObj) {
     // check if serial_no is the same as number in database
     if ($cpsObj->serial_no != '-' && $cpsObj->serial_no != '' && $cpsObj->serial_no !== $serial_no) {
         // create alarm here "almid=node-cps-sn"
-        $almid = "$node-cps-$serial_no";
+        // is serial_no from db or from parsed data??
+        $almid = "$node-cps-sn";
         // check if alm with this almid already exists, if no, create a new one
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
@@ -658,7 +659,7 @@ function exec_resp($node, $hwRsp, $userObj) {
             $cond = 'COMMUNICATION';
             $sa = 'N';
             $sev = 'MAJ';
-            $remark = 'INCORRECT BACKPLANE SERIAL NUMBER';
+            $remark = 'SERIAL NUMBER IN CONFLICT || EXPECTED: ' . $cpsObj->serial_no . " || INPUT: " . $serial_no;
             $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
         }
         
@@ -671,12 +672,13 @@ function exec_resp($node, $hwRsp, $userObj) {
         //     $result['reason'] = $cmdObj->reason;
         //     return;
         // }
-
+        
+        // use existing function that has checks and updates psta/ssta for this node
         stop($node, $cpsObj->serial_no, $userObj);
         
         
         $result['rslt'] = FAIL;
-        $result['reason'] = "INCORRECT BACKPLANE SERIAL NUMBER";
+        $result['reason'] = "SERIAL NUMBER IN CONFLICT";
         return $result;
     }
   
