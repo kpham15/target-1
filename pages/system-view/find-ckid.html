@@ -5,7 +5,7 @@
 </div>
 
 <div class="modal fade" id="ckid-modal">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog" style="transition: width 0.7s;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -13,16 +13,31 @@
         <h4 class="modal-title">Find CKID</h4>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
+              <th>ctyp</th>
+              <th>ffac</th>
+              <th>fport</th>
+              <th>fpsta</th>
+              <th>tfac</th>
+              <th>tport</th>
+              <th>tpsta</th>
+            </tr>
+          </thead>
+        </table>
+        
+        <!-- <form>
+          <div id="ckid-input" class="form-group">
             <label>CKID Number</label>
             <input type="text" class="form-control" placeholder="555-555-5555"/>
+            <span class="help-block"></span>
           </div>
-        </form>
+        </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary confirm-btn">Confirm</button>
+        <button id="find-ckid-submit" type="button" class="btn btn-primary">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -31,9 +46,35 @@
 </div>
 
 <script type="text/javascript">
+  // function queryCkid(ckid) {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: ipcDispatch,
+  //     data: {
+  //       "api":      "ipcProv",
+  //       "act":      "queryCktconByCkid",
+  //       "user":     user.user,
+  //       "ckid":     ckid
+  //     },
+  //     dataType: 'json'
+  //   }).done(function(data) {
+  //     let res = data.rows;
+      
+  //   });
+  // }
+
   $(document).ready(function() {
     $(document).on('click', '#find-ckid-btn', function() {
       $('#ckid-modal').modal('toggle');
+    });
+
+    $(document).on('click', '#find-ckid-submit', function() {
+      if ( !$('#ckid-input input').val() ) {
+        $('#ckid-input .help-block').text('Missing value for CKID');
+        $('#ckid-input').addClass('has-error');
+      } else {
+
+      }
     });
   });
 </script>

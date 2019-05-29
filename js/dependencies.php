@@ -6,6 +6,7 @@
 
   echo '<link rel="stylesheet" href="./dist/css/AdminLTE.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
+  echo '<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
   echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
@@ -18,6 +19,8 @@
   echo '<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>';
   echo '<script>$.widget.bridge("uibutton", $.ui.button);</script>';
   echo '<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
+  echo '<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>';
+  echo '<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>'
   echo '<script src="bower_components/raphael/raphael.min.js"></script>';
   echo '<script src="bower_components/morris.js/morris.min.js"></script>';
   echo '<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>';
