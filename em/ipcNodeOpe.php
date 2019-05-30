@@ -459,22 +459,39 @@ function updateCpsStatus($hwRsp) {
 }
 
 // function called by updateAlm in case string contains voltage only
-// str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
+// str looks like this "$ackid=1-cps-csta,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsVolt($hwRsp) {
     // filters data brought from $cmd and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
-    $ackid = explode('=',$splitCmd[0]);
-    $newAckid = $ackid[1];
-    $volt1 = explode('=',$splitCmd[2]);
-    $volt2 = explode('=',$splitCmd[3]);
-    $volt3 = explode('=',$splitCmd[4]);
-    $volt4 = explode('=',$splitCmd[5]);
 
-    sscanf($volt1[1], "%d%s", $volt1Val, $volt1Unit);
-    sscanf($volt2[1], "%d%s", $volt2Val, $volt2Unit);
-    sscanf($volt3[1], "%d%s", $volt3Val, $volt3Unit);
-    sscanf($volt4[1], "%d%s", $volt4Val, $volt4Unit);
+    foreach($splitCmd as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $ackid = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage1") {
+            $volt1 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage2") {
+            $volt2 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage3") {
+            $volt3 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage4") {
+            $volt4 = $paraExtract[1];
+        }
+    }
+
+    // extract node from ackid
+    $ackidArray = explode("-", $ackid);
+    $node = $ackidArray[0];
+ 
+    sscanf($volt1, "%d%s", $volt1Val, $volt1Unit);
+    sscanf($volt2, "%d%s", $volt2Val, $volt2Unit);
+    sscanf($volt3, "%d%s", $volt3Val, $volt3Unit);
+    sscanf($volt4, "%d%s", $volt4Val, $volt4Unit);
 
     // get lowest and highest values from volt
     $volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
@@ -576,8 +593,8 @@ function updateCpsTemp($hwRsp) {
     $ackidArray = explode("-", $ackid);
     $node = $ackidArray[0];
 
-    $result['reason'] = "node=$node||ackid=$ackid||temp1val=$temp1Val||temp2val=$temp2Val||temp3val=$temp3Val||temp4val=$temp4Val||tempUnit=$temp1Unit";
-    return $result;
+    // $result['reason'] = "node=$node||ackid=$ackid||temp1val=$temp1Val||temp2val=$temp2Val||temp3val=$temp3Val||temp4val=$temp4Val||tempUnit=$temp1Unit";
+    // return $result;
 
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
@@ -599,8 +616,6 @@ function updateCpsTemp($hwRsp) {
 
     // obtain temp_max from refObj
     $tempMax = $refObj->ref[0]['temp_max'];
-    // $result['reason'] = "TEMPMAX = $tempMax || TEMPHI = $temp_hi || NEWACKID = $newAckid";
-    // return $result;
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {
