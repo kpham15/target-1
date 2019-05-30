@@ -497,6 +497,9 @@ function updateCpsVolt($hwRsp) {
     $volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
     $volt_low = min($volt1Val, $volt2Val, $volt3Val, $volt4Val);
     
+    $newVolt_hiVal = round((int)($volt_hi/1000));
+    $newVolt_lowVal = round((int)($volt_low/1000));
+       
     // put units back onto volt values to prepare sending to t_nodes
     $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
     $newVolt_low = round((int)($volt_low/1000)) . 'V';
@@ -513,6 +516,9 @@ function updateCpsVolt($hwRsp) {
     $voltRangeArray = explode("-", $voltRange);
     $minVolt = $voltRangeArray[0];
     $maxVolt = $voltRangeArray[1];
+
+    $result['reason'] = "NVHV=$newVolt_hiVal||NVLV=$newVolt_lowVal||MINVOLT=$minVolt||MAXVOLT=$maxVolt";
+    return $result;
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
