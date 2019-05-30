@@ -513,6 +513,7 @@ function updateCpsVolt($hwRsp) {
 
     $voltRange = $refObj->ref[0]['volt_range'];
     $result['reason'] = "VOLTRANGE = $voltRange";
+    return $result;
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
