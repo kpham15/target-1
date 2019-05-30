@@ -50,12 +50,10 @@
                     $this ->setPortObj();
                     $this ->rslt    = "success";
                     $this ->reason  = "FACILITY EXIST";
-                    $debugObj->log(get_class($this) . "->" . __FUNCTION__ . " : " . $this->reason);
                 }
                 else {
                     $this ->rslt    = "fail";
                     $this ->reason  = "FACILITY DOES NOT EXIST";
-                    $debugObj->log(get_class($this) . "->" . __FUNCTION__ . " : " . $this->reason);
                 }
                 $this->rows = $rows;
             }
