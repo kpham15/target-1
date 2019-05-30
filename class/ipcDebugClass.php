@@ -15,7 +15,6 @@
         
             if ($this->enable == '1') {
                 $this->debugFile =  fopen("../report/debug.log", "a");
-                fwrite($this->debugFile, date("Y-m-d H:i:s") . "    ");
             }
             
             $this->rslt = 'success';
@@ -35,7 +34,7 @@
                 return;
             }
 
-            fwrite($this->debugFile, $string . "\n-----------------------\n");
+            fwrite($this->debugFile, date("Y-m-d H:i:s") . "    " . $string . "\n-----------------------\n");
 
         }
 
