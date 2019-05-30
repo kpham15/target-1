@@ -59,6 +59,7 @@
 
 /* ============ Sysview Page CSS ============= */
 .node-status-row {
+  margin-top: 10px;
   display: flex;
 }
 .node-box {
