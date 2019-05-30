@@ -31,14 +31,14 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">Navigation</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active menu-item">
+      <li class="active menu-item" page_id="system-view-page">
         <a href="#">
           <i class="glyphicon glyphicon-th"></i>
           <span>System View</span>
         </a>
       </li>
 
-      <li class="menu-item">
+      <li class="menu-item" page_id="newpage">
         <a href="#">
           <i class="glyphicon glyphicon-th"></i>
           <span>New Page</span>
@@ -64,7 +64,12 @@
 
 <script type="text/javascript">
   $('.menu-item').click(function() {
+    let pageId = $(this).attr('page_id');
+
     $('.menu-item').removeClass('active');
     $(this).addClass('active');
+
+    $('.content-page').removeClass('active-page');
+    $('#'+pageId).addClass('active-page');
   });
 </script>
