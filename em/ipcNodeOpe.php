@@ -574,8 +574,19 @@ function updateCpsTemp($hwRsp) {
     // update t_nodes w/ highest temp
     $nodeObj->updateTemp($newTemp_hi);
 
+    
+    $refObj = new REF();
+    if ($refObj->rslt == FAIL) {
+        $result['rslt'] = $refObj->rslt;
+        $result['reason'] = $refObj->reason;
+        return $result;
+    }
+
+    // obtain temp_max from refObj
+    $tempMax = $refObj->ref[0]['temp_max'];
+
     // makes new alm if temp is out of range
-    if ($temp_hi > 66) {
+    if ($temp_hi > $tempMax) {
         $almid = $newAckid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
@@ -596,7 +607,7 @@ function updateCpsTemp($hwRsp) {
     }
 
     // sys-clr alm if temp is in range
-    if ($temp_hi < 66) {
+    if ($temp_hi < $tempMax) {
         $almid = $newAckid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
