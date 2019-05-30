@@ -40,6 +40,8 @@
   }
 
   function createMsgOwners(data) {
+    console.log('create msg owners');
+    console.log(data);
     var a = [];
     a.push('<option value=""></option>');
     
