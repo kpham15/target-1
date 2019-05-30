@@ -511,11 +511,11 @@ function updateCpsVolt($hwRsp) {
     $voltRange = $refObj->ref[0]['volt_range'];
     
     $voltRangeArray = explode("-", $voltRange);
-    $volt_low = $voltRangeArray[0];
-    $volt_hi = $voltRangeArray[1];
+    $minVolt = $voltRangeArray[0];
+    $maxVolt = $voltRangeArray[1];
 
-    $result['reason'] = "VLOW=$volt_low||VHI=$volt_hi";
-    return $result;
+    // right now low is 40
+    // hi is 50
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
