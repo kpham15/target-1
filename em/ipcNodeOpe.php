@@ -501,6 +501,9 @@ function updateCpsVolt($hwRsp) {
     $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
     $newVolt_low = round((int)($volt_low/1000)) . 'V';
 
+    $result['reason'] = "voltHi=$volt_hi||voltLow=$volt_low||nVH=$newVolt_hi||nVL=$newVolt_low";
+    return $result;
+
     // extract node number from cmd
     $nodeArray = explode('-', $newAckid[0]);
     $nodeNumber = $nodeArray[0];
