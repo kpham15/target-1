@@ -25,7 +25,7 @@
   
       <!-- View Button -->
       <div class="col-md-2">
-        <button id="view-brdcst" class="btn btn-primary btn-block btn-flat">
+        <button type="button" id="view-brdcst" class="btn btn-primary btn-block btn-flat">
           View
         </button>
       </div>
@@ -41,14 +41,14 @@
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
-            <option value="delete">DELETE`</option>
+            <option value="delete">DELETE</option>
           </select>
         </div>
       </div>
 
       <!-- Clear Button -->
       <div class="col-md-2">
-        <button class="btn btn-primary btn-block btn-flat">
+        <button type="button" class="btn btn-primary btn-block btn-flat">
           Clear
         </button>
       </div>
@@ -91,11 +91,16 @@ $(document).ready(function() {
     queryBrdcst();
   });
 
+  // ACTION Change listener
   $('#brdcst-action').change(function() {
     let value = $(this).val();
+    let currDate = moment(new Date()).format('MM-DD-YYYY');
 
     if (value === 'add') {
       $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+
+      $('#brdcst-modal-date').val(currDate);
+      $('#brdcst-modal-action').val('ADD');
 
       $('#brdcst-modal').modal('show');
     } else if (value === 'update') {
