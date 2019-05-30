@@ -13,46 +13,47 @@
 </div>
 
 <script type="text/javascript">
+  var brdcstDatatable = $('#brdcst-table').DataTable({
+    "data": [],
+    "columns": [
+      {"data":"sa"},
+      {"data":"owner"},
+      {"data":"msg"},
+      {
+        "data":"date",
+        "render": function(data) {
+          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+
+          return date;
+        }
+      }
+    ],
+    "order": [[ 3, "desc" ]]
+  });
+
+  function queryBrdcst() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        "api":      "ipcBroadcast",
+        "act":      "query",
+        "user":     user.uname,
+        "grp":      user.grp,
+        "ugrp":     user.ugrp
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      brdcstDatatable.clear().draw();
+      brdcstDatatable.rows.add(res);
+      brdcstDatatable.columns.adjust().draw();
+    });
+  }
 
   $(document).ready(function() {
     // Initialize Datatable
-    var datatable = $('#brdcst-table').DataTable({
-      "data": [],
-      "columns": [
-        {"data":"sa"},
-        {"data":"owner"},
-        {"data":"msg"},
-        {
-          "data":"date",
-          "render": function(data) {
-            let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
-
-            return date;
-          }
-        }
-      ]
-    });
-
-    function queryBrdcst() {
-      $.ajax({
-        type: 'POST',
-        url: ipcDispatch,
-        data: {
-          "api":      "ipcBroadcast",
-          "act":      "query",
-          "user":     user.uname,
-          "grp":      user.grp,
-          "ugrp":     user.ugrp
-        },
-        dataType: 'json'
-      }).done(function(data) {
-        let res = data.rows;
-
-        datatable.clear().draw();
-        datatable.rows.add(res);
-        datatable.columns.adjust().draw();
-      });
-    }
 
     $('#view-brdcst').click(function(e) {
       e.preventDefault();
