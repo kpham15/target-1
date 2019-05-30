@@ -8,6 +8,9 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div id="main-section-content" class="content-wrapper">
+
+    <!-- Node Status Section -->
+    <?php include __DIR__ . "/node-status.html"; ?>
     
     <!-- Includes for all the content pages -->
     <?php include __DIR__ . '/../system-view/system-view.php'; ?>

@@ -16,9 +16,6 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
 
-    <!-- Node Status Section -->
-    <?php include __DIR__ . "/node-status.html"; ?>
-
     <!-- =========================================================== -->
 
     <div class="row">
