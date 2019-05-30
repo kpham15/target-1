@@ -53,7 +53,7 @@
       a.push(html);
     });
 
-    $('#brdcst-modal-owner').html(a.join(''));
+    $('#brdcst-modal-msgowner').html(a.join(''));
   }
   
   function clearErrors() {
