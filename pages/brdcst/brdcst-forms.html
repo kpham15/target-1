@@ -107,8 +107,11 @@ $(document).ready(function() {
 
       $('#brdcst-modal').modal('show');
     }
-
-    
   });
+
+  $('#brdcst-modal').on('hidden.bs.modal', function (e) {
+    $('.brdcst-modal-field').prop('disabled', true);
+  });
+})
 });
 </script>
