@@ -22,7 +22,14 @@
         {"data":"sa"},
         {"data":"owner"},
         {"data":"msg"},
-        {"data":"date"}
+        {
+          "data":"date",
+          "render": function(data) {
+            let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+
+            return date;
+          }
+        }
       ]
     });
 
