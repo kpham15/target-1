@@ -517,7 +517,7 @@ function updateCpsVolt($hwRsp) {
     $minVolt = $voltRangeArray[0];
     $maxVolt = $voltRangeArray[1];
 
-    $result['reason'] = "newVolt_hiVal=$newVolt_hiVal||maxVolt=$maxVolt";
+    $result['reason'] = "newVolt_hiVal=$newVolt_hiVal||maxVolt=$maxVolt||newVolt_minVal=$newVolt_lowVal||minVolt=$minVolt";
     return $result;
    
     $nodeObj = new NODE($node);
