@@ -34,7 +34,7 @@
                 return;
             }
 
-            fwrite($this->debugFile, date("Y-m-d H:i:s") . "    " . $string . "\n-----------------------\n");
+            fwrite($this->debugFile, date("Y-m-d H:i:s") . "\n \n" . $string . "\n-----------------------\n");
 
         }
 
