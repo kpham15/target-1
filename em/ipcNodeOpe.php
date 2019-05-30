@@ -529,9 +529,12 @@ function updateCpsVolt($hwRsp) {
         $nodeObj->updateVolt($newVolt_hi);
     }
 
+    $result['reason'] = "NVH=$newVolt_hi||maxV=$maxVolt||NVL=$newVolt_low||minV=$minVolt";
+    return $result;
+
     // makes new alm if voltage is out of range
-    if (($volt_hi > $maxVolt) || ($volt_low < $minVolt)) {
-        $almid = $ackid . '-V';
+    if (($newVolt_hi > $maxVolt) || ($newVolt_low < $minVolt)) {
+        $almid = $newAckid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -547,8 +550,8 @@ function updateCpsVolt($hwRsp) {
     }
 
     // sys-clr alm if voltage is in range
-    if (($volt_hi <= $maxVolt) && ($volt_low >= $minVolt)) {
-        $almid = $ackid . '-V';
+    if (($newVolt_hi <= $maxVolt) && ($newVolt_low >= $minVolt)) {
+        $almid = $newAckid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : VOLTAGE IN-RANGE';
@@ -628,7 +631,7 @@ function updateCpsTemp($hwRsp) {
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {
-        $almid = $ackid . '-T';
+        $almid = $newAckid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -649,7 +652,7 @@ function updateCpsTemp($hwRsp) {
 
     // sys-clr alm if temp is in range
     if ($temp_hi < $tempMax) {
-        $almid = $ackid . '-T';
+        $almid = $newAckid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : TEMPERATURE IN-RANGE';
