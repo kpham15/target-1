@@ -48,7 +48,7 @@
 
       <!-- Clear Button -->
       <div class="col-md-2">
-        <button type="button" class="btn btn-primary btn-block btn-flat">
+        <button id="brdcst-form-clear" type="button" class="btn btn-primary btn-block btn-flat">
           Clear
         </button>
       </div>
@@ -111,6 +111,10 @@ $(document).ready(function() {
 
   $('#brdcst-modal').on('hidden.bs.modal', function (e) {
     $('.brdcst-modal-field').prop('disabled', true);
+  });
+
+  $('#brdcst-form-clear').click(function() {
+    $('.brdcst-form-input').val('');
   });
 });
 </script>
