@@ -1,12 +1,13 @@
 <!-- Forms -->
 <div class="col-md-5">
-  <div class="row">
-    <form id="brdcst-form">
+  <form id="brdcst-form">
+    <!-- Top Row -->
+    <div class="row">
       <!-- MSG OWNER -->
       <div class="col-md-4">
         <div class="form-group">
           <label>MSG OWNER</label>
-          <input type="text" class="form-control" placeholder="Enter ..." disabled="">
+          <input type="text" class="form-control" disabled="">
         </div>
       </div>
   
@@ -28,6 +29,56 @@
           View
         </button>
       </div>
-    </form>
-  </div>
+    </div>
+
+    <!-- Middle Row -->
+    <div class="row">
+      <!-- Action Dropdown -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select class="form-control">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE`</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Clear Button -->
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-block btn-flat">
+          Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="row">
+      <!-- Message Title -->
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>MESSAGE TITLE</label>
+          <input type="text" class="form-control" disabled="">
+        </div>
+      </div>
+      
+      <!-- Date field -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>DATE</label>
+          <input type="text" class="form-control" disable="">
+        </div>
+      </div>
+
+      <!-- Messsage Details -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>MESSAGE DETAILS</label>
+          <textarea class="form-control" rows="3" disabled=""></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
