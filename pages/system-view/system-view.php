@@ -1,4 +1,4 @@
-<div id="system-view-page">
+<div id="system-view-page" class="content-page">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>

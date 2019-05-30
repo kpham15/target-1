@@ -31,8 +31,14 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">Navigation</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="#"><i class="glyphicon glyphicon-th"></i> <span>System View</span></a></li>
-      <li>
+      <li class="active menu-item">
+        <a href="#">
+          <i class="glyphicon glyphicon-th"></i>
+          <span>System View</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
         <a href="#">
           <i class="glyphicon glyphicon-th"></i>
           <span>New Page</span>
@@ -55,3 +61,10 @@
   </section>
   <!-- /.sidebar -->
 </aside>
+
+<script type="text/javascript">
+  $('.menu-item').click(function() {
+    $('.menu-item').removeClass('active');
+    $(this).addClass('active');
+  });
+</script>
