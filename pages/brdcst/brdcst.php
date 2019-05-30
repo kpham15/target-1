@@ -1,4 +1,4 @@
-<div id="brdcst-page" class="content-page active-page" style="display:none;">
+<div id="brdcst-page" class="content-page" style="display:none;">
   <div class="container-fluid">
     
     <!-- Brdcst Forms -->
