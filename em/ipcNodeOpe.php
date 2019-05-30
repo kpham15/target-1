@@ -529,9 +529,6 @@ function updateCpsVolt($hwRsp) {
         $nodeObj->updateVolt($newVolt_hi);
     }
 
-    // $result['reason'] = "NVH=$newVolt_hi||maxV=$maxVolt||NVL=$newVolt_low||minV=$minVolt||ackid=$ackid||NACKID=$newAckid";
-    // return $result;
-
     // makes new alm if voltage is out of range
     if (($newVolt_hi > $maxVolt) || ($newVolt_low < $minVolt)) {
         $almid = $ackid . '-V';
