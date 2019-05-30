@@ -11,3 +11,10 @@
     <?php include __DIR__ . '/brdcst-modals.html'; ?>
   </div>
 </div>
+
+<script type="text/javascript">
+  function clearErrors() {
+    $('.help-block').text('');
+    $('.form-group').removeClass('has-error');
+  }
+</script>
