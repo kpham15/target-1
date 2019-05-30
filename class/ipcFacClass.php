@@ -32,7 +32,7 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -77,7 +77,7 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -104,7 +104,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -131,7 +131,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -159,7 +159,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -183,7 +183,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -207,7 +207,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -231,7 +231,7 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -291,7 +291,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
                 return false;
             }
             else {
@@ -369,7 +369,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 $this->rslt = SUCCESS;
@@ -406,7 +406,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
             }
             else {
                 if (mysqli_affected_rows($db) > 0) {
@@ -428,7 +428,7 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+                $debugObj->log(basename(__FILE__) . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
                 return false;
             }
             else {

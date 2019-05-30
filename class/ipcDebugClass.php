@@ -36,6 +36,12 @@
 
             fwrite($this->debugFile, date("Y-m-d H:i:s") . "\n \n" . $string . "\n-----------------------\n");
 
+            // sample string for debugging classes
+            // $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \$qry = " . $qry . "\n reason = " . $this->reason);
+
+            // sample string for debugging API
+            // Will need to make global variable $debugObj inside whichever function that is being debugged. 
+            // $debugObj->log(__FILE__ . "->" . __FUNCTION__ . " : \n \ **INPUT STRING HERE**);
         }
 
         
