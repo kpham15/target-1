@@ -3,6 +3,9 @@
   <form id="brdcst-form">
     <!-- Top Row -->
     <div class="row">
+      <!-- Hidden ID field -->
+      <input id="brdcst-form-id" type="hidden" class="brdcst-form-input" />
+
       <!-- MSG OWNER -->
       <div class="col-md-4">
         <div class="form-group">
@@ -34,7 +37,7 @@
     <!-- Middle Row -->
     <div class="row">
       <!-- Action Dropdown -->
-      <div class="col-md-3">
+      <div class="col-md-6">
         <div class="form-group">
           <label>ACTION</label>
           <select id="brdcst-form-action" class="form-control brdcst-form-input">
@@ -43,6 +46,7 @@
             <option value="update">UPDATE</option>
             <option value="delete">DELETE</option>
           </select>
+          <span class="help-block"></span>
         </div>
       </div>
 
@@ -91,6 +95,7 @@ $(document).ready(function() {
     let value = $(this).val();
     let currDate = moment(new Date()).format('MM-DD-YYYY');
 
+    // ADD Action
     if (value === 'add') {
       $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
@@ -98,11 +103,21 @@ $(document).ready(function() {
       $('#brdcst-modal-action').val('ADD');
 
       $('#brdcst-modal').modal('show');
-    } else if (value === 'update') {
+    }
+    // UPDATE Action
+    else if (value === 'update') {
+      if ( !$('#brdcst-form-id').val() || $('#brdcst-form-id').val() === '') {
+        $(this).sibling('.help-block').text('Please select a MSG from the LIST OF NOTIFICATIONS');
+        $(this).parent('form-group').addClass('has-error');
+        return;
+      }
+
       $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
       $('#brdcst-modal').modal('show');
-    } else if (value === 'delete') {
+    }
+    // DELETE Action
+    else if (value === 'delete') {
       $('#brdcst-modal-details').prop('disabled', false);
 
       $('#brdcst-modal').modal('show');

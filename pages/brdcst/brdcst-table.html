@@ -65,6 +65,7 @@
     $(document).on('click', '#brdcst-table tbody tr', function() {
       let data = datatable.row(this).data();
 
+      $('#brdcst-form-id').val(data.id);
       $('#brdcst-form-msgowner').val(data.owner);
       $('#brdcst-form-sa').val(data.sa);
       $('#brdcst-form-msgtitle').val(data.msg);
