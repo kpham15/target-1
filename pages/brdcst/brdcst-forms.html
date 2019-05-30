@@ -91,18 +91,20 @@ $(document).ready(function() {
     queryBrdcst();
   });
 
-  // $('#brdcst-action').change(function() {
-  //   let value = $(this).val();
+  $('#brdcst-action').change(function() {
+    let value = $(this).val();
 
-  //   if (value === 'add') {
+    if (value === 'add') {
+      $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
-  //   } else if (value === 'update') {
+      $('#brdcst-modal').modal('show');
+    } else if (value === 'update') {
       
-  //   } else if (value === 'delete') {
+    } else if (value === 'delete') {
       
-  //   }
+    }
 
     
-  // });
+  });
 });
 </script>
