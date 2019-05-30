@@ -13,14 +13,44 @@
 </div>
 
 <script type="text/javascript">
-  // Initialize Datatable
-  var datatable = $('#brdcst-table').DataTable({
-    "data": [],
-    "columns": [
-      {"data":"sa"},
-      {"data":"owner"},
-      {"data":"msg"},
-      {"data":"date"}
-    ]
+
+  $(document).ready(function() {
+    // Initialize Datatable
+    var datatable = $('#brdcst-table').DataTable({
+      "data": [],
+      "columns": [
+        {"data":"sa"},
+        {"data":"owner"},
+        {"data":"msg"},
+        {"data":"date"}
+      ]
+    });
+
+    function queryBrdcst() {
+      $.ajax({
+        type: 'POST',
+        url: ipcDispatch,
+        data: {
+          "api":      "ipcBroadcast",
+          "act":      "query",
+          "user":     user.uname,
+          "grp":      user.grp,
+          "ugrp":     user.ugrp
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        datatable.clear().draw();
+        datatable.rows.add(res);
+        datatabke.columns.adjust().draw();
+      });
+    }
+
+    $('#view-brdcst').click(function(e) {
+      e.preventDefault();
+
+      queryBrdcst();
+    });
   });
 </script>
