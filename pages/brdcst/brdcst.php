@@ -6,5 +6,8 @@
 
     <!-- Brdcst Table -->
     <?php include __DIR__ . '/brdcst-table.html'; ?>
+
+    <!-- Brdcst Modals -->
+    <?php include __DIR__ . '/brdcst-modals.html'; ?>
   </div>
 </div>

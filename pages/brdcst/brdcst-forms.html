@@ -37,7 +37,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>ACTION</label>
-          <select class="form-control">
+          <select id="brdcst-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -82,3 +82,15 @@
     </div>
   </form>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#view-brdcst').click(function(e) {
+    e.preventDefault();
+
+    queryBrdcst();
+  });
+
+  $('#')
+});
+</script>
