@@ -58,6 +58,9 @@
       e.preventDefault();
 
       queryBrdcst();
+
+      $('.help-block').text('');
+      $('.form-group').removeClass('has-error');
     });
 
 
@@ -71,6 +74,9 @@
       $('#brdcst-form-msgtitle').val(data.msg);
       $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
       $('#brdcst-form-details').val(data.detail);
+
+      $('.help-block').text('');
+      $('.form-group').removeClass('has-error');
     });
   });
 </script>

@@ -125,11 +125,14 @@ $(document).ready(function() {
   });
 
   $('#brdcst-modal').on('hidden.bs.modal', function (e) {
-    $('.brdcst-modal-field').prop('disabled', true);
+    $('.brdcst-modal-field').prop('disabled', true).val('');
   });
 
   $('#brdcst-form-clear').click(function() {
     $('.brdcst-form-input').val('');
+
+    $('.help-block').text('');
+    $('.form-group').removeClass('has-error');
   });
 });
 </script>
