@@ -461,7 +461,7 @@ function updateCpsStatus($hwRsp) {
 // function called by updateAlm in case string contains voltage only
 // str looks like this "$ackid=1-cps-csta,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsVolt($hwRsp) {
-    // filters data brought from $cmd and extracts voltage values
+    // filters data brought from $hwRsp and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
 
@@ -513,9 +513,6 @@ function updateCpsVolt($hwRsp) {
     $voltRangeArray = explode("-", $voltRange);
     $minVolt = $voltRangeArray[0];
     $maxVolt = $voltRangeArray[1];
-
-    // right now min is 40
-    // max is 50
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
