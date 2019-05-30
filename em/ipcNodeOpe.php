@@ -501,14 +501,20 @@ function updateCpsVolt($hwRsp) {
     $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
     $newVolt_low = round((int)($volt_low/1000)) . 'V';
 
-    $result['reason'] = "voltHi=$volt_hi||voltLow=$volt_low||nVH=$newVolt_hi||nVL=$newVolt_low";
-    return $result;
+    // $result['reason'] = "voltHi=$volt_hi||voltLow=$volt_low||nVH=$newVolt_hi||nVL=$newVolt_low";
+    // return $result;
 
-    // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber;
-    $nodeObj = new NODE($newNodeNumber);
+    $refObj = new REF();
+    if ($refObj->rslt == FAIL) {
+        $result['rslt'] = $refObj->rslt;
+        $result['reason'] = $refObj->reason;
+        return $result;
+    }
+
+    $voltRange = $refObj->ref[0]['volt_range'];
+    $result['reason'] = "VOLTRANGE = $voltRange";
+   
+    $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
         $result['reason'] = $nodeObj->reason;
