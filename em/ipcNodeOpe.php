@@ -584,6 +584,8 @@ function updateCpsTemp($hwRsp) {
 
     // obtain temp_max from refObj
     $tempMax = $refObj->ref[0]['temp_max'];
+    // $result['reason'] = "TEMPMAX = $tempMax || TEMPHI = $temp_hi || NEWACKID = $newAckid";
+    // return $result;
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {
