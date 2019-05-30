@@ -64,7 +64,12 @@
     // Click events on table rows
     $(document).on('click', '#brdcst-table tbody tr', function() {
       let data = datatable.row(this).data();
-      console.log(data);
+
+      $('#brdcst-form-msgowner').val(data.owner);
+      $('#brdcst-form-sa').val(data.sa);
+      $('#brdcst-form-msgtitle').val(data.msg);
+      $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
+      $('#brdcst-form-details').val(data.detail);
     });
   });
 </script>

@@ -7,7 +7,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>MSG OWNER</label>
-          <input type="text" class="form-control" disabled="">
+          <input id="brdcst-form-msgowner" type="text" class="form-control brdcst-form-input" disabled="">
         </div>
       </div>
   
@@ -15,10 +15,10 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>SA</label>
-          <select class="form-control">
+          <select id="brdcst-form-sa" class="form-control brdcst-form-input">
             <option value=""></option>
-            <option value="y">Y</option>
-            <option value="n">N</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
           </select>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="brdcst-action" class="form-control">
+          <select id="brdcst-form-action" class="form-control brdcst-form-input">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -60,7 +60,7 @@
       <div class="col-md-8">
         <div class="form-group">
           <label>MESSAGE TITLE</label>
-          <input type="text" class="form-control" disabled="">
+          <input id="brdcst-form-msgtitle" type="text" class="form-control brdcst-form-input" disabled="">
         </div>
       </div>
       
@@ -68,7 +68,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>DATE</label>
-          <input type="text" class="form-control" disabled="">
+          <input id="brdcst-form-date" type="text" class="form-control brdcst-form-input" disabled="">
         </div>
       </div>
 
@@ -76,7 +76,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>MESSAGE DETAILS</label>
-          <textarea class="form-control" rows="5" disabled=""></textarea>
+          <textarea id="brdcst-form-details" class="form-control brdcst-form-input" rows="5" disabled=""></textarea>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
 $(document).ready(function() {
 
   // ACTION Change listener
-  $('#brdcst-action').change(function() {
+  $('#brdcst-form-action').change(function() {
     let value = $(this).val();
     let currDate = moment(new Date()).format('MM-DD-YYYY');
 
