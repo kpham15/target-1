@@ -27,7 +27,7 @@
                 return;
             }
             
-            $qry = "SELECT * FROM t_fa WHERE fac='$fac' LIMIT 1";
+            $qry = "SELECT * FROM t_facs WHERE fac='$fac' LIMIT 1";
             $res = $db->query($qry);
             if (!$res) {
                 $this->rslt     = FAIL;
