@@ -32,7 +32,9 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -77,7 +79,8 @@
             if (!$res) {
                 $this->rslt     = FAIL;
                 $this->reason   = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -104,7 +107,8 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -131,7 +135,9 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
+                
             }
             else {
                 $rows = [];
@@ -159,7 +165,8 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -183,7 +190,8 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -207,7 +215,8 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -231,7 +240,8 @@
             if (!$res) {
                 $this ->rslt    = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $rows = [];
@@ -291,7 +301,8 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
                 return false;
             }
             else {
@@ -369,7 +380,8 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 $this->rslt = SUCCESS;
@@ -406,7 +418,8 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
             }
             else {
                 if (mysqli_affected_rows($db) > 0) {
@@ -428,7 +441,8 @@
             if (!$res) {
                 $this->rslt = FAIL;
                 $this->reason = mysqli_error($db);
-                $debugObj->log(var_dump(debug_backtrace()) . "\n reason = " . $this->reason);
+                $debug_backtrace = debug_backtrace();
+                $debugObj->log($debug_backtrace . "\n reason = " . $this->reason);
                 return false;
             }
             else {
