@@ -1,15 +1,15 @@
 <div id="system-view-page" class="content-page active-page" style="display:none;">
   <!-- Content Header (Page header) -->
-  <section class="content-header">
+  <!-- <section class="content-header">
     <h1>
-      System View
+      System View -->
       <!-- <small>Preview page</small> -->
-    </h1>
+    <!-- </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">System View</li>
     </ol>
-  </section>
+  </section> -->
 
   <!-- Main content -->
   <section class="content">
