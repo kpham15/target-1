@@ -1,6 +1,6 @@
 <!-- Table -->
 <div class="col-md-7">
-  <table id="brdcst-table" class="table" style="width:100%;">
+  <table id="brdcst-table" class="table table-striped table-bordered table-hover box" style="width:100%;">
     <thead>
       <tr>
         <th>SA</th>
@@ -46,5 +46,11 @@
         datatable.columns.adjust().draw();
       });
     }
+
+    $('#view-brdcst').click(function(e) {
+      e.preventDefault();
+
+      queryBrdcst();
+    });
   });
 </script>
