@@ -107,8 +107,8 @@ $(document).ready(function() {
     // UPDATE Action
     else if (value === 'update') {
       if ( !$('#brdcst-form-id').val() || $('#brdcst-form-id').val() === '') {
-        $(this).siblings('.help-block').text('Please select a MSG from the LIST OF NOTIFICATIONS');
-        $(this).parent('form-group').addClass('has-error');
+        $(this).siblings('.help-block').text('Select msg from table.');
+        $(this).parent('.form-group').addClass('has-error');
         return;
       }
 
