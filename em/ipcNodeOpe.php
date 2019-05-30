@@ -529,12 +529,12 @@ function updateCpsVolt($hwRsp) {
         $nodeObj->updateVolt($newVolt_hi);
     }
 
-    $result['reason'] = "NVH=$newVolt_hi||maxV=$maxVolt||NVL=$newVolt_low||minV=$minVolt";
-    return $result;
+    // $result['reason'] = "NVH=$newVolt_hi||maxV=$maxVolt||NVL=$newVolt_low||minV=$minVolt||ackid=$ackid||NACKID=$newAckid";
+    // return $result;
 
     // makes new alm if voltage is out of range
     if (($newVolt_hi > $maxVolt) || ($newVolt_low < $minVolt)) {
-        $almid = $newAckid . '-V';
+        $almid = $ackid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -551,7 +551,7 @@ function updateCpsVolt($hwRsp) {
 
     // sys-clr alm if voltage is in range
     if (($newVolt_hi <= $maxVolt) && ($newVolt_low >= $minVolt)) {
-        $almid = $newAckid . '-V';
+        $almid = $ackid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : VOLTAGE IN-RANGE';
@@ -605,9 +605,6 @@ function updateCpsTemp($hwRsp) {
     $ackidArray = explode("-", $ackid);
     $node = $ackidArray[0];
 
-    // $result['reason'] = "node=$node||ackid=$ackid||temp1val=$temp1Val||temp2val=$temp2Val||temp3val=$temp3Val||temp4val=$temp4Val||tempUnit=$temp1Unit";
-    // return $result;
-
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
@@ -631,7 +628,7 @@ function updateCpsTemp($hwRsp) {
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {
-        $almid = $newAckid . '-T';
+        $almid = $ackid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -652,7 +649,7 @@ function updateCpsTemp($hwRsp) {
 
     // sys-clr alm if temp is in range
     if ($temp_hi < $tempMax) {
-        $almid = $newAckid . '-T';
+        $almid = $ackid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : TEMPERATURE IN-RANGE';
