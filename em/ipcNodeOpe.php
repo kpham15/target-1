@@ -536,24 +536,36 @@ function updateCpsVolt($hwRsp) {
 }
 
 // function called by updateAlm in case string contains temp only
-// str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
+// str looks like this "$ackid=1-cps-csta,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsTemp($hwRsp) {
 
     // filters data brought from $cmd and extracts temp values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
-    $ackid = explode('=', $splitCmd[0]);
-    $newAckid = $ackid[1];
- 
-    $temp1 = explode('=',$splitCmd[3]);
-    $temp2 = explode('=',$splitCmd[4]);
-    $temp3 = explode('=',$splitCmd[5]);
-    $temp4 = explode('=',$splitCmd[6]);
 
-    sscanf($temp1[1], "%d%s", $temp1Val, $temp1Unit);
-    sscanf($temp2[1], "%d%s", $temp2Val, $temp2Unit);
-    sscanf($temp3[1], "%d%s", $temp3Val, $temp3Unit);
-    sscanf($temp4[1], "%d%s", $temp4Val, $temp4Unit);
+    foreach($splitCmd as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $ackid = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone1") {
+            $temp1 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone2") {
+            $temp2 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone3") {
+            $temp3 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone4") {
+            $temp4 = $paraExtract[1];
+        }
+    }
+
+    sscanf($temp1, "%d%s", $temp1Val, $temp1Unit);
+    sscanf($temp2, "%d%s", $temp2Val, $temp2Unit);
+    sscanf($temp3, "%d%s", $temp3Val, $temp3Unit);
+    sscanf($temp4, "%d%s", $temp4Val, $temp4Unit);
 
     $temp_hi = max($temp1Val, $temp2Val, $temp3Val, $temp4Val);
 
@@ -561,10 +573,13 @@ function updateCpsTemp($hwRsp) {
     $newTemp_hi = $temp_hi . $temp1Unit;
     
     // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber;
-    $nodeObj = new NODE($newNodeNumber);
+    $ackidArray = explode("-", $ackid);
+    $node = $ackidArray[0];
+
+    $result['reason'] = "node=$node||ackid=$ackid||temp1val=$temp1Val||temp2val=$temp2Val||temp3val=$temp3Val||temp4val=$temp4Val||tempUnit=$temp1Unit";
+    return $result;
+
+    $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
         $result['reason'] = $nodeObj->reason;
