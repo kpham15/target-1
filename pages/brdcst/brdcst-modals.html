@@ -79,8 +79,61 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button id="brdcst-modal-submit" type="button" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#brdcst-modal-submit').click(function() {
+      let action = $('#brdcst-modal-action').val();
+      let id = $('#brdcst-form-id').val();
+      let msg = $('#brdcst-modal-msgtitle').val();
+      let owner = $('#brdcst-modal-msgowner').text();
+      let ownerId = $('#brdcst-modal-msgowner').val();
+      let sa = $('#brdcst-modal-sa').val();
+      let detail = $('#brdcst-modal-detail').val();
+
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          "api":      "ipcBroadcast",
+          "act":      action,
+          "user":     user.uname,
+          "id":       id,
+          "uname":    user.uname,
+          "msg":      msg,
+          "owner":    'NINH V NGUYEN',
+          "owner_id": 'ninh',
+          "grp":      user.grp,
+          "ugrp":     user.ugrp,
+          "sa":       sa,
+          "detail":   detail
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason,
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = 'danger'
+          modalHandler(modal);
+        } else {
+          $('#brdcst-form-clear').trigger('click');
+          $('#brdcst-modal').modal('hide');
+          
+          queryBrdcst();
+          
+          modal.type = "success";
+          modalHandler(modal);
+        }
+      });
+    });
+  });
+</script>
