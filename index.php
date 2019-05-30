@@ -49,27 +49,6 @@
 
 var folderSwList = <?php echo json_encode($folderList); ?>;
 
-// $(document).ready(function() {
-// 	wc.wcAlmStat();
-// 	wc.wcTime();
-// 	wc.wcHeaderInfo();
-	
-// 	if ($("#main_currentUser").text() == '')
-// 	{
-// 		//$("#warning").show();
-// 		$("#login").show();
-// 		$("#mainPage").hide();
-
-// 	}
-// 	else
-// 	{
-// 		//$("#warning").hide();
-// 		$("#login").hide();
-// 		$("#mainPage").show();
-// 	}
-
-// });
-
 var ipcDispatch = "./em/ipcDispatch.php";
 
 
