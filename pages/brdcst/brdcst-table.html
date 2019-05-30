@@ -53,25 +53,27 @@
     });
   }
 
-  // Click events on table rows
-  $(document).on('click', '#brdcst-table tbody tr', function() {
-    let data = datatable.row(this).data();
-
-    $('#brdcst-form-id').val(data.id);
-    $('#brdcst-form-msgowner').val(data.owner);
-    $('#brdcst-form-sa').val(data.sa);
-    $('#brdcst-form-msgtitle').val(data.msg);
-    $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
-    $('#brdcst-form-details').val(data.detail);
-
-    clearErrors();
-  });
-
   $(document).ready(function() {
+
     $('#view-brdcst').click(function(e) {
       e.preventDefault();
 
       queryBrdcst();
+
+      clearErrors();
+    });
+
+
+    // Click events on table rows
+    $(document).on('click', '#brdcst-table tbody tr', function() {
+      let data = brdcstDatatable.row(this).data();
+
+      $('#brdcst-form-id').val(data.id);
+      $('#brdcst-form-msgowner').val(data.owner);
+      $('#brdcst-form-sa').val(data.sa);
+      $('#brdcst-form-msgtitle').val(data.msg);
+      $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
+      $('#brdcst-form-details').val(data.detail);
 
       clearErrors();
     });
