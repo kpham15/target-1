@@ -99,9 +99,13 @@ $(document).ready(function() {
 
       $('#brdcst-modal').modal('show');
     } else if (value === 'update') {
-      
+      $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+
+      $('#brdcst-modal').modal('show');
     } else if (value === 'delete') {
-      
+      $('#brdcst-modal-details').prop('disabled', false);
+
+      $('#brdcst-modal').modal('show');
     }
 
     
