@@ -52,5 +52,12 @@
 
       queryBrdcst();
     });
+
+
+    // Click events on table rows
+    $('#brdcst-table tbody tr').click(function() {
+      let data = datatable.row(this).data();
+      console.log(data);
+    });
   });
 </script>
