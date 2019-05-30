@@ -13,7 +13,7 @@
 </div>
 
 <script type="text/javascript">
-  function loadOwner() {
+  function loadOwners() {
     $.ajax({
       type: 'POST',
       url: ipcDispatch,
