@@ -514,8 +514,8 @@ function updateCpsVolt($hwRsp) {
     $minVolt = $voltRangeArray[0];
     $maxVolt = $voltRangeArray[1];
 
-    // right now low is 40
-    // hi is 50
+    // right now min is 40
+    // max is 50
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
@@ -525,7 +525,7 @@ function updateCpsVolt($hwRsp) {
     }
 
     // write to t_nodes the volt_hi by default or the voltage that is out of range
-    if ($volt_low < 42000) {
+    if ($volt_low < $minVolt) {
         $nodeObj->updateVolt($newVolt_low);
     }
     else{
@@ -533,7 +533,7 @@ function updateCpsVolt($hwRsp) {
     }
 
     // makes new alm if voltage is out of range
-    if (($volt_hi > 52000) || ($volt_low < 42000)) {
+    if (($volt_hi > $maxVolt) || ($volt_low < $minVolt)) {
         $almid = $newAckid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
@@ -550,7 +550,7 @@ function updateCpsVolt($hwRsp) {
     }
 
     // sys-clr alm if voltage is in range
-    if (($volt_hi <= 46000) && ($volt_low >= 42000)) {
+    if (($volt_hi <= $maxVolt) && ($volt_low >= $minVolt)) {
         $almid = $newAckid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
