@@ -4,11 +4,11 @@
      <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          References
+          IPC References
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">References</li>
+          <li class="active">IPC References</li>
         </ol>
       </section>
 
