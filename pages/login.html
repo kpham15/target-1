@@ -26,7 +26,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input id="login-remember" type="checkbox"> Remember Me
             </label>
           </div>
         </div>
@@ -50,7 +50,7 @@
 <script>
   $(document).ready(function() {
 
-    $('input').iCheck({
+    $('#login-remember').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' /* optional */
