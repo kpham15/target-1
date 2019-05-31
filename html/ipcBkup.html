@@ -1,20 +1,22 @@
 <div id="bkup" class="tab-pane fade in">
-    <h4>BACKUP / RESTORE</h4>
+    <h4>DATABASE BACKUP</h4>
 
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <div class="col-sm-12 modifyPadding">
+                <div>
                 <div class="col-sm-3 modifyPadding">
                     <label for="bkup_user_txt">USER</label>
                     <input type="text" class="form-control" id="bkup_user_txt" readonly>
                 </div>
-                <div class="col-sm-9 modifyPadding">
-                    <label for="bkup_name_txt">BACKUP FILE NAME</label>
+                <div class="col-sm-7 modifyPadding">
+                    <label for="bkup_name_txt">DB BACKUP FILE NAME</label>
                     <input type="text" class="form-control" id="bkup_name_txt" readonly>
                 </div>
-
-                <div class="col-sm-2 modifyPadding">
-                    <label for="bkup_type_txt">TYPE</label>
+                </div>
+                <div>
+                <div class="col-sm-3 modifyPadding">
+                    <label for="bkup_type_txt">BACKUP TYPE</label>
                     <input type="text" class="form-control" id="bkup_type_txt" readonly>
                 </div>
 
@@ -22,7 +24,7 @@
                     <label for="bkup_date">DATE</label>
                     <input type="datetime" class="form-control" id="bkup_date" readonly>
                 </div>
-
+                </div>
                 <!-- <div class="col-sm-12 modifyPadding">
                     <label for="bkup_detail_txt">DETAILS</label>
                     <textarea id="bkup_detail_txt" class="form-group" style="width:100%; min-height: 100px;" readonly></textarea>
@@ -33,24 +35,26 @@
                 <select id="bkup_act_sel" class="form-control">
                     <option value=""></option>
                     <option value="MANUAL">BACKUP MANUALLY</option>
-                    <option value="UPLOAD">UPLOAD BACKUP FILE</option>
                     <option value="DELETE">DELETE BACKUP FILE</option>
+                    <!--
+                    <option value="UPLOAD">UPLOAD BACKUP FILE</option>
                     <option value="RESTORE">RESTORE DATABASE</option>
+                    -->
                 </select>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="number" id="bkup_id_num" style="width:50px;">
 
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <div class="col-sm-12">
                 <div style="float:left;">
-                    <b>LIST OF BACKUPs:</b>
+                    <b>LIST OF DATABASE BACKUP FILES:</b>
                 </div>
                 <div style="float:right;">
                     <a id="bkup_previous">Previous</a> |
                     <a id="bkup_next">Next</a>
-                    &nbsp&nbsp&nbsp
+                    &nbsp;&nbsp;&nbsp;
                     <label id="bkup_index_lbl"></label>
                 </div>
 
@@ -61,10 +65,10 @@
                         <thead>
                             <tr>
                                 <th style="width:15%">USER</th>
-                                <th style="width:20%">FNAME</th>
-                                <th style="width:15%">TYPE</th>
-                                <th style="width:20%">PATH</th>
-                                <th style="width:30%">DATE</th>
+                                <th style="width:35%">DB BACKUP FILE</th>
+                                <th style="width:15%">BACKUP TYPE</th>
+                                <th style="width:20%">DOWNLOAD LINK</th>
+                                <th style="width:15%">DATE</th>
                             </tr>
                         </thead>
                         <tbody id="bkup_tbl">
@@ -81,13 +85,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">BACKUP</h5>
+                <h5 class="modal-title">DATABASE BACKUP</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <label id="bkupModal_instruction_lbl">LET'S PRESS THE SUBMIT BUTTON TO START THE ACTION</label>
+                    <label id="bkupModal_instruction_lbl">DATABASE BACKUP</label>
                     <div id="bkupModal_upload" class="col-sm-12 modifyPadding">
-                        <h4>CHOOSE THE BACKUP FILE FILE FROM YOUR COMPUTER:</h4>
+                        <h4>CHOOSE A DB BACKUP FILE FROM YOUR COMPUTER:</h4>
                         <div class="col-xs-4">
                             <div class="form-group">
                                 <input type="file" data-icon="false" id="bkupModal_file" accept=".sql">
@@ -196,10 +200,10 @@ var bkup = {
           for (var i = 0; i < stopIndex; i++) {
             a.push('<tr> <td style="display:none">' + bkup.tblRows[i].id + "</td>");
             a.push('<td style="width:15%">' + bkup.tblRows[i].user + "</td>");
-            a.push('<td style="width:20%">' + bkup.tblRows[i].dbfile + "</td>");
+            a.push('<td style="width:35%">' + bkup.tblRows[i].dbfile + "</td>");
             a.push('<td style="width:15%">' + bkup.tblRows[i].bktyp + "</td>");
-            a.push('<td style="width:20%"><a href="' + bkup.tblRows[i].dbpath +'" download>Download</a></td>');
-            a.push('<td style="width:30%">' + bkup.tblRows[i].date + "</td></tr>");
+            a.push('<td style="width:20%"><a href="' + window.location.href + bkup.tblRows[i].dbpath +'" download>Download</a></td>');
+            a.push('<td style="width:15%">' + bkup.tblRows[i].date + "</td></tr>");
           }
           bkup.tbl.body.html(a.join(""));
           bkup.indexLbl.text("From " + (startIndex + 1) + " to " + stopIndex);
@@ -209,8 +213,9 @@ var bkup = {
     // Ajax Functions
     query: function(action) {
         
-        $.post(coQueryBkup,
-        {     
+        $.post(ipcDispatch,
+        {
+            api:        "coQueryBkup",
             act:        action,
             user:       $("#main_currentUser").text(),
         },
@@ -301,8 +306,9 @@ var bkupModal = {
                 }
               },500);
         }
-        $.post(coQueryBkup,
+        $.post(ipcDispatch,
         {     
+            api:        "coQueryBkup",
             act:        action,
             user:       $("#main_currentUser").text(),
             id:         bkup.id.val(),
@@ -317,7 +323,7 @@ var bkupModal = {
 
             var obj = JSON.parse(data);
             if (obj.rslt == "fail") {
-                alarm(obj.reason);
+                alert(obj.reason);
             }
             else {
                 //Disable the submit button
@@ -326,12 +332,12 @@ var bkupModal = {
                 if(action != "RESTORE") {
                     if (obj.rows.length === 0) {
                         if (action != "query") {
-                            alarm("No Record Found");
+                            alert("No Record Found");
                             return;
                         }
                     }
                     else {
-                        alarm(obj.rslt);
+                        alert(obj.rslt);
                        
                         bkup.tblRows = obj.rows;
                         var len = bkup.tblRows.length;
@@ -354,7 +360,7 @@ var bkupModal = {
                     }
                 }
                 else {
-                    alarm(obj.rslt);
+                    alert(obj.rslt);
                     
                 }
               
@@ -371,17 +377,18 @@ var bkupModal = {
         }
         var file= document.getElementById('bkupModal_file').files[0];
         if (file.size > 2097152) {
-            alarm("The file should be lower than 2MB");
+            alert("The file should be lower than 2MB");
         }
         else {
             var data = new FormData();
+            data.append("api","coQueryBkup")
             data.append("user",$("#main_currentUser").text())
             data.append("act","UPLOAD")
             data.append("file",file)   
 
 
             $.post({
-                url: coQueryBkup,
+                url: ipcDispatch,
                 data: data,
                 processData: false,
                 contentType: false,
@@ -410,7 +417,7 @@ var bkupModal = {
                         bkupModal.date.val(bkup.tblRows[len-1].date);
                         // bkupModal.detail.val(bkup.tblRows[len-1].detail)
                         bkupModal.link.html('<a href="http://192.168.1.252/IPC_FrontEnd' + bkup.tblRows[len-1].dbpath +'" download>Download</a>');
-                        alarm(obj.rslt);
+                        alert(obj.rslt);
 
                         bkupModal.bkinfo.show("slow");
 

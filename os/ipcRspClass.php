@@ -21,17 +21,19 @@ class RSP {
     }
 
     public function getAckid($rsp) {
+        global $debugObj;
         $rspExtract = substr($rsp,1,-1);
         $rspExtract = explode(',',$rspExtract);
         $ackid = explode('=', $rspExtract[0])[1];
-        echo "\nackid received:$ackid\n";
+        $debugObj->log("\nackid received:$ackid\n");
         return $ackid;
     }
     
     // this function is to build and send a post request in required format 
     public function asyncPostRequest($params){
+        global $debugObj;
         $targetUrl = $this->url."/ipcDispatch.php";
-        echo "\nurl API:".$targetUrl."\n";
+        $debugObj->log("\nurl API:".$targetUrl."\n");
         $content = http_build_query($params);
         $parts = parse_url($targetUrl);
         $fp = fsockopen($parts['host'],
@@ -46,13 +48,14 @@ class RSP {
     
         if (isset($content)) 
             $out.= $content;
-
+            $debugObj->log($out."\n");
         fwrite($fp, $out);
         ///this part should be commented out when checking process is finished
-        echo $out."\n";
+        $result="";
         while (!feof($fp)) {
-            print_r(fgets($fp, 1024));
+            $result = fgets($fp, 1024);
         }
+        $debugObj->log("\nResponse from API:".$result."\n");
         //---------------------
         fclose($fp);
     }
@@ -61,31 +64,25 @@ class RSP {
     // it extracts the ackid, to know where to send the post request
     // only process the response in the format: $.....*
     public function processRsp($rsp, $node) {
-
+        global $debugObj;
         $rsp = preg_replace("/(\r\n|\n|\r)/",'',$rsp);
         preg_match_all("/\\$.*?\*/", $rsp, $searchArray);
         $rspArray = $searchArray[0];
-        print_r($rspArray);
+
+        $debugObj->log(print_r($rspArray,true));
         for($i=0; $i<count($rspArray); $i++) {
             $len = strlen($rspArray[$i]);
             if($rspArray[$i] !== '' && $rspArray[$i][0] == '$' && $rspArray[$i][$len-1] == '*') {
                 if(stripos($rspArray[$i],'$ackid') !== false) {
-                    echo "\nProcessing:".$rspArray[$i]."\n";
+
+                    $debugObj->log("\nProcessing:".$rspArray[$i]."\n");
                     $ackid = $this->getAckid($rspArray[$i]);
-                    if(trim($ackid) != '')
-                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'PROCESS_HW_RSP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
-
-                    // //create post-request to APIs
-                    // if(stripos($ackid,'cps') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'updateCpsStatus','node'=>$node,'cmd'=>"$rspArray[$i]"]);
-                    // }
-                    // else if(stripos($ackid,'dev') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateNodeDevicesStatus','node'=>$node,'device_status'=>"$rspArray[$i]"]);
-                    // }
-                    // else if(stripos($ackid,'bkpln') !== false) {
-                    //     $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'DISCOVERED','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
-                    // }
-
+                    if(trim($ackid) != '') {
+                        $rspArray[$i] = substr($rspArray[$i],0,strlen($rspArray[$i])-1).",backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*";  
+                        
+                        $debugObj->log("\nrsp changed to:$rspArray[$i]\n");
+                        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rspArray[$i]"]);
+                    }
                 }
             }
            
@@ -93,17 +90,20 @@ class RSP {
     }
 
     public function getUuid($rsp) {
+        global $debugObj;
         $sn = '';
         $data = preg_replace("/(\r\n|\n|\r)/",'',$rsp);
         if(strpos($data,'uuid=') !== false) {
             preg_match_all("/\\$.*?\*/", $data, $searchArray);
             $rspArray = $searchArray[0];
-            print_r($rspArray);
+
+            $debugObj->log(print_r($rspArray,true));
             for($i=0; $i<count($rspArray); $i++) {
                 $len = strlen($rspArray[$i]);
                 if($rspArray[$i] !== '' && $rspArray[$i][0] == '$' && $rspArray[$i][$len-1] == '*') {
                     if(stripos($rspArray[$i],'uuid=') !== false) {
-                        echo "\nProcess this response to get sn:".$rspArray[$i]."\n";
+
+                        $debugObj->log("\nProcess this response to get sn:".$rspArray[$i]."\n");
                         $newHwString = substr($rspArray[$i], 1, -1);
                         $newHwStringArray = explode(",", $newHwString);
                         $serialNumArray = explode("=", $newHwStringArray[3]);

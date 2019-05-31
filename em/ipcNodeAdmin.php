@@ -71,12 +71,10 @@ if (isset($_POST['cmd'])) {
     $cmd = $_POST['cmd'];
 }
 
-$device_status = "";
-if (isset($_POST['device_status'])) {
-    $device_status = $_POST['device_status'];
+$hwRsp = "";
+if (isset($_POST['hwRsp'])) {
+    $hwRsp = $_POST['hwRsp'];
 }
-
-
 
 // $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "NODE ADMINISTRATION", $act, $_POST);
 
@@ -285,7 +283,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
-    $result = updateNodeDevicesStatus($node, $device_status);
+    $result = updateNodeDevicesStatus($node, $hwRsp);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -300,8 +298,7 @@ else {
 
 // LOCAL FUNCTIONS
 
-function updateNodeDevicesStatus($node, $device_status) {
-    
+function updateNodeDevicesStatus($node, $hwRsp) {
     // construct device obj using node
     $deviceObj = new DEV($node);
     if ($deviceObj->rslt == FAIL) {
@@ -311,12 +308,13 @@ function updateNodeDevicesStatus($node, $device_status) {
     }
 
     // extract miox, mioy, mre, cps
-    $parsedString = $deviceObj->parseDevString($device_status);
+    $parsedString = $deviceObj->parseDevString($hwRsp);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
         $result['reason'] = $deviceObj->reason;
         return $result;
     }
+
     $newMiox = $parsedString['miox'];
     $newMioy = $parsedString['mioy'];
     $newMre = $parsedString['mre'];
@@ -341,7 +339,7 @@ function updateNodeDevicesStatus($node, $device_status) {
             $diffMiox = true;
         }
     }
-    
+
     if (strcmp($currentMioy, $newMioy) !== 0) {
         if ($deviceObj->setMioy($newMioy)) {
             if ($deviceObj->rslt === FAIL) {
