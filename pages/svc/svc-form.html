@@ -1,0 +1,218 @@
+<div class='col-md-4'>
+    <form class='svc-form'>
+        <!-- First row -->
+        <div class='row'>
+            <div class="col-sm-6 " style="padding:2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_ckid_txt">CKID</label>
+                    <label for="svc_tn_cbx">TN:</label>
+                    <input type="checkbox" id="svc_tn_cbx" checked>
+                    <div id="svc_ckid">
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="svc_ckid_txt" placeholder="123-456-7890">
+                    </div>
+                </div>
+            </div>
+                
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_cls_sel">CLS</label>
+                    <select class="form-control" id="svc_cls_sel" style="padding:2px 0 0 0">
+                        <option></option>
+                        <option>BUS</option>
+                        <option>RES</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_adsr_sel">ADSR</label>
+                    <select class="form-control" id="svc_adsr_sel" style="padding:2px 0 0 0">
+                        <option>N</option>
+                        <option>Y</option>
+                    </select>
+                </div>  
+            </div>   
+        
+            
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <button id="svc_findCkid_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+
+        <!-- Second row -->
+        <div class="row">
+            <div class="col-sm-6 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_ordno_txt">ORDNO</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_ordno_txt">
+                </div>
+            </div>
+            
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_mlo_sel">MLO</label>
+                    <select class="form-control" id="svc_mlo_sel" style="padding:2px 0 0 0">
+                        <option>N</option>
+                        <option>Y</option>
+                    </select>
+                </div>
+            </div> 
+        
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_prot_sel">PROT</label>
+                    <select class="form-control" id="svc_prot_sel" style="padding:2px 0 0 0">
+                        <option></option>
+                        <option>SSM</option>
+                        <option>SSP</option>
+                    </select>
+                </div>
+            </div>
+        
+            <!--<div class="col-sm-1 " style="padding: 2px 2px 2px 2px;">-->
+                <!--<label for="svc_date_date">DATE</label>-->
+                <input type="hidden" class="form-control" id="svc_date_date" readonly>
+            <!--</div>--> 
+            
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <button id="svc_findOrd_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+            </div> 
+        </div>
+
+        <!-- Third row-->
+        <div class="row">
+            <div class="col-sm-5 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_dd_date">DD</label>
+                    <input type="date" class="form-control" id="svc_dd_date">
+                </div>
+            </div>
+            <div class="col-sm-5 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_fdd_date">FDD</label>
+                    <input type="date" class="form-control" id="svc_fdd_date">
+                </div>
+            </div>
+        </div>  
+        
+        <!-- Fourth row -->
+        <div class="row">
+            <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_ctyp_sel">CONTYP</label>
+                    <select class="form-control" id="svc_ctyp_sel" style="padding:2px 0 0 0">
+                        <option></option>
+                        <option>GEN</option>
+                        <option>LPBK</option>
+                        <option>MLPT</option>
+                    </select>
+                </div>
+            </div>  
+
+            <div class="col-sm-5 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_ffac_txt" style="float:left">FAC(X):</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <a id="svc_ffacSearch_btn" style="height: 25px">Search</a>
+                    <input style="text-transform: uppercase" type="text" class ="form-control" id="svc_ffac_txt">
+                    <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                        <label for="svc_portX_txt">PORT(X):</label>
+                    </div>
+                    <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="svc_portX_txt">
+                    </div>
+                </div>
+            </div> 
+            <div class="col-sm-5 " style="padding: 2px 2px 2px 2px;">
+                <div class="form-group">
+                    <label for="svc_tfac_txt" style="float:left">FAC(Y):</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <a id="svc_tfacSearch_btn" style="height: 25px">Search</a>
+                    <input style="text-transform: uppercase" type="text" class ="form-control" id="svc_tfac_txt">
+                    <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
+                        <label for="svc_portY_txt">PORT(Y):</label>
+                    </div>
+                    <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
+                        <input style="text-transform: uppercase" type="text" class="form-control" id="svc_portY_txt">
+                    </div>
+                </div>
+            </div> 
+
+            <div id="svc_facSearch" class="col-sm-12 " style="padding: 2px 2px 2px 2px;" style="display:none; background-color:#eff5ff;padding:0px; border: solid lightgray 1px;  ">
+                <div class="col-sm-6 " style="padding: 2px 2px 2px 2px;">
+                    <label for="svc_fac_txt">FAC</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_fac_txt">
+                </div>
+                <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                    <label for="svc_port_txt">PORT</label>
+                    <input style="text-transform: uppercase" type="text" class="form-control" id="svc_port_txt">
+                </div>
+                <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                    <label for="svc_psta_sel">PSTA</label>
+                    <select class="form-control" id="svc_psta_sel">
+                        <option></option>
+                        <option>MTCD</option>
+                        <option>RS</option>
+                        <option>TST</option>
+                        <option>SF</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 " style="padding: 2px 2px 2px 2px;">
+                    <button id= "svc_facSearch_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
+                    <!--<button id= "svc_facClose_btn" class="btn btn-primary">Close</button>-->
+                </div>
+    
+                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">FAC</th>
+                                <th style="width:20%">PSTA</th>
+                                <th style="width:30%">PORT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svc_tblFac" style="height:180px;">
+                        </tbody>
+                    </table>
+                    <div style="float:right;">
+                        <a id="svc_previousFac">Previous</a> |
+                        <a id="svc_nextFac">Next</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <label id="svc_indexFac_lbl"></label>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+        <!-- Last row -->
+        <div class="row">
+            <div class="col-sm-3 " style="padding: 2px 2px 2px 2px;"> 
+                <div class="form-group">
+                    <label for="svc_act_sel">ACTION</label>    
+                    <select class="form-control" id="svc_act_sel" style="padding:2px 0 0 0" >
+                        <option></option>
+                        <option>UPDATE_CKT</option>
+                        <option>CONNECT</option>
+                        <option>DISCONNECT</option>
+                        <option>CHANGE</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-sm-8 " style="padding: 2px 2px 2px 2px;">
+                <button id="svc_clear_btn" type="button" class="btn btn-primary" style="margin-top:25px;">Clear</button>
+                <!-- 3 input fields to be hidden after testing -->
+                <input id="svc_cktId_num" type="hidden" style="width:50px">
+                <input id="svc_cktconId_num" type="hidden" style="width:50px">
+                <input id="svc_cktconIdx_num" type="hidden" style="width:50px">
+            
+                <!-- <br> -->
+                <!-- <label id="checkProvInfor" style="color:red"></label> -->
+            </div>
+        </div>
+
+    </form>
+
+</div>
