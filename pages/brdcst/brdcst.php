@@ -1,6 +1,17 @@
 <div id="brdcst-page" class="content-page" style="display:none;">
   <div class="container-fluid">
     
+     <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Broadcast Notifications
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Broadcast Notifications</li>
+        </ol>
+      </section>
+    
     <!-- Brdcst Forms -->
     <?php include __DIR__ . '/brdcst-forms.html'; ?>
 
