@@ -152,12 +152,14 @@
             loginSuccess();
   
 
+            // loads options for ftyp, ort, spcfnc selection fields in setup facility
             loadOptions("queryFtyp", "ftyp", $("#fac-form-ftyp"));
             loadOptions("queryFtyp", "ftyp", $("#fac-modal-ftyp"));
             loadOptions("queryOrt", "ort", $("#fac-form-ort"));
             loadOptions("queryOrt", "ort", $("#fac-modal-ort"));
             loadOptions("querySpcfnc", "spcfnc", $("#fac-form-spcfnc"));
             loadOptions("querySpcfnc", "spcfnc", $("#fac-modal-spcfnc"));
+            
             // @TODO find out what these do
             // opt.query('queryOpt');
             // bulletinBoard.query('query');
