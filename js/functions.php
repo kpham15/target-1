@@ -62,7 +62,7 @@
 	}
 
 	function clearErrors() {
-    $('.help-block').text('');
+    $('span.help-block').remove();
     $('.form-group').removeClass('has-error');
   }
 </script>
