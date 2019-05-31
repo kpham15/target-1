@@ -9,7 +9,7 @@
   echo '<link rel="stylesheet" href="./bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
-  echo '<link rel="stylesheet" href="./plugins/iCheck/square/blue.css">';
+  echo '<link rel="stylesheet" href="./plugins/iCheck/all.css">';
   
   echo '<link rel="stylesheet" href="./css/ipcv2.css">';
 
