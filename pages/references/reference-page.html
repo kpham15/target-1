@@ -320,6 +320,37 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	// Click event for submit button
+	$(document).ready(function() {
+    $('#reference-page-submit').click(function() {
+      let action = $('#reference-page-action').val();
+      
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          "api":      "ipcRef",
+          "action":   'query',
+          "user":     user.uname,
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason,
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = 'danger'
+          modalHandler(modal);
+        } else {
+          
+        }
+      });
+    });
+  });
+
 	// Click event for refresh button
 	$('#reference-page-refresh').click(function(e) {
 		e.preventDefault();
