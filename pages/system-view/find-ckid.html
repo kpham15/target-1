@@ -119,7 +119,7 @@
     $('#tn-check').iCheck({
       checkboxClass: 'icheckbox_square-blue'
     });
-    $('#tn-check').click(function() {
+    $('#tn-check').on('ifToggled', function(){
       $('.ckid-num').toggle();
     });
   });
