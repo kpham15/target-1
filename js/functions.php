@@ -55,7 +55,8 @@
 	}
 
 	function inputError(selector, string) {
-		selector.siblings('.help-block').text(string);
+		let helpBlock = '<span class="help-block">'+string+'</span>';
+		selector.parent('.form-group').append(helpBlock);
 		selector.parent('.form-group').addClass('has-error');
 		return;
 	}
