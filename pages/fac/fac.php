@@ -14,6 +14,9 @@
 
     <!-- Fac Forms -->
     <?php include __DIR__ . '/fac-forms.html'; ?>
+
+    <!-- Fac Table -->
+    <?php include __DIR__ . '/fac-table.html'; ?>
     
   </div>
 </div>
