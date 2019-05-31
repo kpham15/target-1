@@ -29,7 +29,7 @@
   function loadFtyps() {
     $.ajax({
       type: 'POST',
-      url: ipcDispatch,
+      url: "./em/ipcDispatch.php",
       data: {
         api: "ipcOpt",
         act: "queryFtyp",
