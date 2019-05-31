@@ -269,8 +269,8 @@ function queryReferences() {
 		dataType: 'json'
 	}).done(function(data) {
 		let res = data.rows;
-		console.log("CKID=" + res[0].auto_ckid);
-		$('#reference-page-autockid').val(res.auto_ckid);
+		// console.log("CKID=" + res[0].auto_ckid);
+		$('#reference-page-autockid').val(res[0].auto_ckid);
 		// displayRefs(res);
 	});
 }
