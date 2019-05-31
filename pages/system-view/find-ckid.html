@@ -49,7 +49,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -107,7 +106,7 @@
     });
 
     $(document).on('click', '#find-ckid-submit', function() {
-      let ckid = $('#tn-check').prop('checked') ? $('#ckid-input-tn').val() : $('#ckid-input').val();
+      let ckid = ($('#tn-check').prop('checked')) ? $('#ckid-input-tn').val() : $('#ckid-input').val();
       if ( !ckid ) {
         inputError($('.ckid-num'), 'Missing value for CKID');
       } else {
@@ -121,7 +120,7 @@
       checkboxClass: 'icheckbox_square-blue'
     });
     $('#tn-check').click(function() {
-
+      $('.ckid-num').toggle();
     });
   });
 </script>
