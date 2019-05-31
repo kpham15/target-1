@@ -53,4 +53,16 @@
 			}
 		});
 	}
+
+	function inputError(selector, string) {
+		let helpBlock = '<span class="help-block">'+string+'</span>';
+		selector.closest('.form-group').append(helpBlock);
+		selector.closest('.form-group').addClass('has-error');
+		return;
+	}
+
+	function clearErrors() {
+    $('span.help-block').remove();
+    $('.form-group').removeClass('has-error');
+  }
 </script>
