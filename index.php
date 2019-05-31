@@ -31,7 +31,7 @@
 	//IPCv2
 	include './pages/nav-wrapper/nav-wrapper.php';
 	include './pages/login.html';
-	include './pages/modals.php';
+	include './pages/modals.html';
 	
 	include './js/functions.php';
 	include './js/variables.php';
