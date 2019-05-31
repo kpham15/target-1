@@ -272,35 +272,29 @@ function queryReferences() {
 	}).done(function(data) {
 		let res = data.rows;
 		
-		$('#reference-page-almarchive').val(res[0].alm_archv);
-		$('#reference-page-almdelete').val(res[0].alm_del);
-		$('#reference-page-autockid').val(res[0].auto_ckid);
-		$('#reference-page-autoordno').val(res[0].auto_ordno);
-		$('#reference-page-brdcstdel').val(res[0].brdcst_del);
-		$('#reference-page-cfgarchive').val(res[0].cfg_archv);
-		$('#reference-page-cfgdelete').val(res[0].cfg_del);
-		$('#reference-page-dateformat').val(res[0].date_format);
-		$('#reference-page-maintarchive').val(res[0].maint_archv);
-		$('#reference-page-maintdelete').val(res[0].maint_del);
-		$('#reference-page-mtcrestore').val(res[0].mtc_restore);
-		$('#reference-page-provarchive').val(res[0].prov_archv);
-		$('#reference-page-provdelete').val(res[0].prov_del);
-		$('#reference-page-pwalert').val(res[0].pw_alert);
-		$('#reference-page-pwage').val(res[0].pw_expire);
-		$('#reference-page-pwrepeat').val(res[0].pw_repeat);
-		$('#reference-page-pwreuse').val(res[0].pw_reuse);
-		
-
-
-
-
-		// displayRefs(res);
+		displayRefs(res);
 	});
 }
 
-// function displayRefs(data) {
-// 	$('#reference-page-pwage').val(data);
-// }
+function displayRefs(data) {
+	$('#reference-page-almarchive').val(data[0].alm_archv);
+	$('#reference-page-almdelete').val(data[0].alm_del);
+	$('#reference-page-autockid').val(data[0].auto_ckid);
+	$('#reference-page-autoordno').val(data[0].auto_ordno);
+	$('#reference-page-brdcstdel').val(data[0].brdcst_del);
+	$('#reference-page-cfgarchive').val(data[0].cfg_archv);
+	$('#reference-page-cfgdelete').val(data[0].cfg_del);
+	$('#reference-page-dateformat').val(data[0].date_format);
+	$('#reference-page-maintarchive').val(data[0].maint_archv);
+	$('#reference-page-maintdelete').val(data[0].maint_del);
+	$('#reference-page-mtcrestore').val(data[0].mtc_restore);
+	$('#reference-page-provarchive').val(data[0].prov_archv);
+	$('#reference-page-provdelete').val(data[0].prov_del);
+	$('#reference-page-pwalert').val(data[0].pw_alert);
+	$('#reference-page-pwage').val(data[0].pw_expire);
+	$('#reference-page-pwrepeat').val(data[0].pw_repeat);
+	$('#reference-page-pwreuse').val(data[0].pw_reuse);
+}
 
 $(document).ready(function() {
 
