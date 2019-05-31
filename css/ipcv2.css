@@ -1,4 +1,5 @@
-.table-hover>tbody>tr.bg-primary:hover {
+.table-hover>tbody>tr.bg-primary:hover,
+.table-striped>tbody>tr.bg-primary:nth-of-type(odd) {
   background-color: #337ab7;
 }
 
