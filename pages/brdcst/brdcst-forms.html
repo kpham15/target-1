@@ -113,8 +113,9 @@ $(document).ready(function() {
     // UPDATE Action
     else if (value === 'update') {
       if ( !id || id === '') {
-        $(this).siblings('.help-block').text('Select msg from table.');
-        $(this).parent('.form-group').addClass('has-error');
+        inputError($(this),'Select msg from table.');
+        // $(this).siblings('.help-block').text('Select msg from table.');
+        // $(this).parent('.form-group').addClass('has-error');
         return;
       }
 

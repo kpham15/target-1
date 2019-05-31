@@ -53,4 +53,15 @@
 			}
 		});
 	}
+
+	function inputError(selector, string) {
+		selector.siblings('.help-block').text(string);
+		selector.parent('.form-group').addClass('has-error');
+		return;
+	}
+
+	function clearErrors() {
+    $('.help-block').text('');
+    $('.form-group').removeClass('has-error');
+  }
 </script>
