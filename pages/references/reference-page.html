@@ -345,6 +345,10 @@ $(document).ready(function() {
 			let userdisable = $('#reference-page-userdisable').val();
 			let useridleto = $('#reference-page-useridleto').val();
 			let voltrange = $('#reference-page-voltrange').val();
+
+			if (action == "") {
+				inputError($('#reference-page-action'),'Select an action.');
+			}
       
       $.ajax({
         type: "POST",
