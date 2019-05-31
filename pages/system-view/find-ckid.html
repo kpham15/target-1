@@ -14,26 +14,19 @@
       </div>
       <div class="modal-body">
         <div class="row" style="margin-bottom: 10px;">
-          <div id="ckid-input" class="form-group col-md-4">
+          <div class="form-group col-md-4">
             <label>TN:</label>
-            <input id="tn-check" type="checkbox">
+            <input id="tn-check" type="checkbox" checked>
             <div class="input-group">
-              <input type="text" class="form-control ckid-num" placeholder="555-555-5555"/>
-              <input type="text" class="form-control ckid-num" placeholder="555-555-5555"  data-inputmask='"mask": "(999) 999-9999"' data-mask="" style="display:none;"/>
+              <input id="ckid-input" type="text" class="form-control ckid-num" placeholder="555-555-5555" style="display:none;"/>
+              <input id="ckid-input-tn" type="text" class="form-control ckid-num" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
               <span class="input-group-btn">
                 <button id="find-ckid-submit" type="button" class="btn btn-primary btn-flat">Find</button>
               </span>
             </div>
-            <span class="help-block"></span>
           </div>
         </div>
-        <!-- <form>
-          <div id="ckid-input" class="form-group">
-            <label>CKID Number</label>
-            <input type="text" class="form-control" placeholder="555-555-5555"/>
-            <span class="help-block"></span>
-          </div>
-        </form> -->
+
         <table id="ckid-table" class="table" style="width:100%;">
           <thead>
             <tr>
@@ -111,18 +104,22 @@
     });
 
     $(document).on('click', '#find-ckid-submit', function() {
-      let ckid = $('#ckid-input input').val();
+      let ckid = $('#tn-check').prop('checked') ? $('#ckid-input-tn').val() : $('#ckid-input').val();
       if ( !ckid ) {
-        $('#ckid-input .help-block').text('Missing value for CKID');
-        $('#ckid-input').addClass('has-error');
+        inputError($('.ckid-num'), 'Missing value for CKID');
       } else {
         queryCkid(ckid);
-        $('#ckid-input .help-block').text('');
-        $('#ckid-input').removeClass('has-error');
+        clearErrors();
       }
     });
 
     // TN Checkbox handler
-    
+    $('#tn-check').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      increaseArea: '20%'
+    });
+    $('#tn-check').cilck(function() {
+
+    });
   });
 </script>
