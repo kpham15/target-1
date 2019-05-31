@@ -108,12 +108,12 @@
           api:    "ipcFacilities",
           act:    action,
           user:   user.uname,
-          fac_id: id.val(),
-          fac:    facId.val().toUpperCase(),
-          ftyp:   ftyp.val(),
-          ort:    ort.val(),
-          spcfnc: spcfnc.val(),
-          range:  range.val()
+          fac_id: id,
+          fac:    facId.toUpperCase(),
+          ftyp:   ftyp,
+          ort:    ort,
+          spcfnc: spcfnc,
+          range:  range,
         },
         dataType: 'json'
       }).done(function(data) {
