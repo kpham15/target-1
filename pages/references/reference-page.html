@@ -113,11 +113,9 @@
 				<div class="form-group">
 					<label>PASSWORD REPEAT</label>
 					<select id="reference-page-pwrepeat" class="form-control">
-							<option value="0">0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
+						<option value="180">180 Days</option>
+						<option value="240">240 Days</option>
+						<option value="365">365 Days</option>
 					</select>
 				</div>
 			</div>
@@ -294,6 +292,9 @@ function displayRefs(data) {
 	$('#reference-page-pwage').val(data[0].pw_expire);
 	$('#reference-page-pwrepeat').val(data[0].pw_repeat);
 	$('#reference-page-pwreuse').val(data[0].pw_reuse);
+	$('#reference-page-userdisable').val(data[0].user_disable);
+	$('#reference-page-useridleto').val(data[0].user_idle_to);
+
 }
 
 $(document).ready(function() {
