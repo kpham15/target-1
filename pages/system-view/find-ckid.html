@@ -15,8 +15,11 @@
       <div class="modal-body">
         <div class="row" style="margin-bottom: 10px;">
           <div id="ckid-input" class="form-group col-md-4">
+            <span><strong>TN: </strong></span>
+            <input id="tn-check" type="checkbox">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="555-555-5555"/>
+              <input type="text" class="form-control ckid-num" placeholder="555-555-5555"/>
+              <input type="text" class="form-control ckid-num" placeholder="555-555-5555"  data-inputmask='"mask": "(999) 999-9999"' data-mask="" style="display:none;"/>
               <span class="input-group-btn">
                 <button id="find-ckid-submit" type="button" class="btn btn-primary btn-flat">Find</button>
               </span>
@@ -118,5 +121,8 @@
         $('#ckid-input').removeClass('has-error');
       }
     });
+
+    // TN Checkbox handler
+    
   });
 </script>
