@@ -11,10 +11,12 @@
 
     <!-- Node Status Section -->
     <?php include __DIR__ . "/node-status.html"; ?>
+
+    <hr class="content-page-divider">
     
     <!-- Includes for all the content pages -->
     <?php include __DIR__ . '/../system-view/system-view.php'; ?>
-    <?php include __DIR__ . '/../newpage.html'; ?>
+    <?php include __DIR__ . '/../brdcst/brdcst.php'; ?>
 
     <!-- /.content -->
   </div>

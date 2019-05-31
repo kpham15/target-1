@@ -1,3 +1,8 @@
+.table-hover>tbody>tr.bg-primary:hover,
+.table-striped>tbody>tr.bg-primary:nth-of-type(odd) {
+  background-color: #337ab7;
+}
+
 /* ============ Login Page ============== */
 .login-logo {
   width: 180px;
@@ -16,7 +21,7 @@
 }
 /* =========== END All Page Stylings ============= */
 
-/* ============ Nav Header Styling ============== */
+/* ============ Nav Wrapper Styling ============== */
   .nav-tabs-custom>.nav-tabs>li.active>a {
     border-left-color: #aaa;
     border-right-color: #aaa;
@@ -34,7 +39,14 @@
   .nav.node-tabs>li>a {
     padding: 8px;
   }
-/* ============ END Nav Header Styling =============== */
+  hr.content-page-divider {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-top: 1px solid #3c8dbc;
+  }
+/* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
 .modal-footer .confirm-btn {

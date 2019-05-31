@@ -68,18 +68,6 @@
     // Initialize datatable
     var datatable = $('#ckid-table').DataTable({
       "data": [],
-      // "ajax": {
-      //   "type": "POST",
-      //   "url": ipcDispatch,
-      //   "data": {
-      //     "api":    "ipcProv",
-      //     "act":    "queryCktconByCkid",
-      //     "user":   'SYSTEM',
-      //     "ckid":   '555-555-5555'
-      //   },
-      //   "dataType": 'json',
-      //   "dataSrc": 'rows',
-      // },
       "columns": [
         {"data":"ctyp"},
         {"data":"fport"},
@@ -105,16 +93,11 @@
         },
         dataType: 'json'
       }).done(function(data) {
-        console.log(data);
         let res = data.rows;
-        console.log(res);
         
         datatable.clear().draw();
-        console.log('after clear');
         datatable.rows.add(res); // Add new data
-        console.log('after row add');
         datatable.columns.adjust().draw(); // Redraw the DataTable
-        console.log('after adjust');
       });
     }
     
