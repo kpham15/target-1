@@ -1439,6 +1439,10 @@ var svcModal = {
                 alert(obj.reason);
             }
             else {
+                svc.ckid.val(svcModal.ckid.val());
+                svc.adsr.val(svcModal.adsr.val());
+                svc.prot.val(svcModal.prot.val());
+                svc.ordno.val(svcModal.ordno.val());
                 svcModal.modal.modal('hide');
                 alert(obj.reason);
                 svc.query.ckt('queryCkid');
