@@ -163,6 +163,7 @@ $(document).ready(function() {
 
   $('#fac-modal').on('hidden.bs.modal', function (e) {
     $('.fac-modal-field').prop('disabled', true).val('');
+    $("#fac-form-action").val("").change();
   });
 
   $('#fac-form-clear').click(function() {
