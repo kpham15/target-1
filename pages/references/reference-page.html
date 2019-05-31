@@ -5,7 +5,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label>MAXIMUM PASSWORD AGE</label>
-					<select id="reference-page-pwexpire" class="form-control">
+					<select id="reference-page-pwage" class="form-control">
 						<option value="30">30 Days</option>
 						<option value="60">60 Days</option>
 						<option value="90">90 Days</option>
@@ -41,13 +41,13 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label>PASSWORD ALERT</label>
+					<label>PASSWORD EXPIRY PROMPT</label>
 					<select id="reference-page-pwalert" class="form-control">
-						<option value="1">1 day</option>
-						<option value="2">2 days</option>
-						<option value="3">3 days</option>
-						<option value="4">4 days</option>
-						<option value="5">5 days</option>
+						<option value="1">1 Day</option>
+						<option value="5">5 Days</option>
+						<option value="10">10 Days</option>
+						<!-- @TODO check to see if 0 passes as never in back end-->
+						<option value="0">Do Not Prompt</option>
 					</select>
 				</div>
 			</div>
@@ -285,10 +285,10 @@ function queryReferences() {
 		$('#reference-page-provarchive').val(res[0].prov_archv);
 		$('#reference-page-provdelete').val(res[0].prov_del);
 		$('#reference-page-pwalert').val(res[0].pw_alert);
-		$('#reference-page-pwexpire').val(res[0].pw_expire);
+		$('#reference-page-pwage').val(res[0].pw_expire);
 		$('#reference-page-pwrepeat').val(res[0].pw_repeat);
 		$('#reference-page-pwreuse').val(res[0].pw_reuse);
-		$('#reference-page-pwreuse').val(res[0].pw_reuse);
+		
 
 
 
@@ -298,7 +298,7 @@ function queryReferences() {
 }
 
 // function displayRefs(data) {
-// 	$('#reference-page-pwexpire').val(data);
+// 	$('#reference-page-pwage').val(data);
 // }
 
 $(document).ready(function() {
