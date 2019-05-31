@@ -82,6 +82,10 @@
       $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
       $('#brdcst-form-details').val(data.detail);
 
+      // give selected class
+      $('#brdcst-table tbody tr').removeClass('selected');
+      $(this).addClass('selected');
+
       clearErrors();
     });
   });
