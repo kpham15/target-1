@@ -93,9 +93,13 @@
       }).done(function(data) {
         let res = data.rows;
         
-        datatable.clear().draw();
-        datatable.rows.add(res); // Add new data
-        datatable.columns.adjust().draw(); // Redraw the DataTable
+        if (data.rslt === 'fail') {
+          inputError($('.ckid-num'), data.reason);
+        } else {
+          datatable.clear().draw();
+          datatable.rows.add(res); // Add new data
+          datatable.columns.adjust().draw(); // Redraw the DataTable
+        }
       });
     }
     
