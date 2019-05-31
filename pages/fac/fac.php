@@ -58,6 +58,7 @@
 
     data.forEach(function(ftyp) {
       let html = `<option value="${ftyp.alias}">${ftyp.alias}</option>`;
+      console.log(html);
       a.push(html);
     });
 
