@@ -75,6 +75,7 @@
     $(document).on('click', '#fac-table tbody tr', function() {
       let data = facDatatable.row(this).data();
 
+      $('#fac-form-id').val(data.id);
       $('#fac-form-facId').val(data.fac);
       $('#fac-form-ftyp').val(data.ftyp);
       $('#fac-form-ort').val(data.ort);

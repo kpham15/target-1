@@ -86,5 +86,89 @@
     <button id="view-fac" type="button" class="btn btn-primary">
       VIEW
     </button>
+
+    <!-- FAC ID NUM -->
+    <input type="hidden" id="fac-form-id" style="width:20px;">
+    
   </form>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  // ACTION Change listener
+  $('#fac-form-action').change(function() {
+    let value = $(this).val();
+
+    let id = $('#fac-form-id').val();
+
+    let facId = $("#fac-form-facId").val();
+    let ftyp = $("#fac-form-ftyp").val();
+    let ort = $("#fac-form-ort").val();
+    let psta = $("#fac-form-psta").val();
+    let spcfnc = $("#fac-form-spcfnc").val();
+
+    clearErrors();
+
+    // ADD Action
+    if (value === 'add') {
+      // enable modal fields
+      $('#fac-modal-facId, #fac-modal-range, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+
+      $('#fac-modal-action').val('ADD');
+
+      $('#fac-modal').modal('show');
+    }
+    // UPDATE Action
+    else if (value === 'update') {
+      if ( !id || id === '') {
+        inputError($(this),'Select facility from table.');
+        return;
+      }
+
+      // enable modal fields
+      $('#fac-modal-facId, #fac-modal-range, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+      
+      // populate modal fields
+      $("#fac-modal-facId").val(facId);
+      $("#fac-modal-ftyp").val(ftyp);
+      $("#fac-modal-ort").val(ort);
+      $("#fac-modal-psta").val(psta);
+      $("#fac-modal-spcfnc").val(spcfnc);
+
+      $('#fac-modal-action').val('UPDATE');
+
+      $('#fac-modal').modal('show');
+    }
+    // DELETE Action
+    else if (value === 'delete') {
+      if ( !id || id === '') {
+        $(this).siblings('.help-block').text('Select facility from table.');
+        $(this).parent('.form-group').addClass('has-error');
+        return;
+      }
+
+      // populate modal fields
+      $("#fac-modal-facId").val(facId);
+      $("#fac-modal-ftyp").val(ftyp);
+      $("#fac-modal-ort").val(ort);
+      $("#fac-modal-psta").val(psta);
+      $("#fac-modal-spcfnc").val(spcfnc);
+
+      $('#fac-modal-action').val('DELETE');
+
+      $('#fac-modal').modal('show');
+    }
+  });
+
+  $('#fac-modal').on('hidden.bs.modal', function (e) {
+    $('.fac-modal-field').prop('disabled', true).val('');
+  });
+
+  $('#fac-form-clear').click(function() {
+    $('.fac-form-input').val('');
+
+    clearErrors();
+  });
+});
+</script>
