@@ -126,7 +126,7 @@ include "ipcProvConnect.php";
 	// --- Dispatch by ACTION ---
 	if ($act == "query" || $act == "queryCkid") {
 		$cktObj = new CKT();
-		$cktObj->queryCkid($ckid, $cls, $adsr, $prot);
+		$cktObj->queryCkid($ckid, "", "", "");
 		$result['rslt'] = $cktObj->rslt;
 		$result['reason'] = $cktObj->reason;
 		$result['rows'] = $cktObj->rows;
