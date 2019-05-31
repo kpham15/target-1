@@ -19,10 +19,10 @@
   echo '<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>';
   echo '<script>$.widget.bridge("uibutton", $.ui.button);</script>';
   echo '<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
-  echo '<script src="../../bower_components/select2/dist/js/select2.full.min.js"></script>';
-  echo '<script src="../../plugins/input-mask/jquery.inputmask.js"></script>';
-  echo '<script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>';
-  echo '<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>';
+  echo '<script src="bower_components/select2/dist/js/select2.full.min.js"></script>';
+  echo '<script src="plugins/input-mask/jquery.inputmask.js"></script>';
+  echo '<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>';
+  echo '<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>';
   echo '<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>';
   echo '<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>';
   echo '<script src="bower_components/raphael/raphael.min.js"></script>';
