@@ -274,8 +274,14 @@ function queryReferences() {
 		$('#reference-page-almdelete').val(res[0].alm_del);
 		$('#reference-page-autockid').val(res[0].auto_ckid);
 		$('#reference-page-autoordno').val(res[0].auto_ordno);
+		$('#reference-page-brdcstdel').val(res[0].brdcst_del);
+		$('#reference-page-cfgarchive').val(res[0].cfg_archv);
+		$('#reference-page-cfgdelete').val(res[0].cfg_del);
+
+
+
+
 		$('#reference-page-pwexpire').val(res[0].pw_expire);
-		$('#reference-page-autockid').val(res[0].auto_ckid);
 		// displayRefs(res);
 	});
 }
