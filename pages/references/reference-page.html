@@ -258,21 +258,29 @@
 <script type="text/javascript">
 
 function queryReferences() {
-    $.ajax({
-      type: 'POST',
-      url: ipcDispatch,
-      data: {
-        "api":      "ipcRef",
-        "action":   "query",
-        "user":     user.uname,
-      },
-      dataType: 'json'
-    }).done(function(data) {
-      let res = data.rows;
-    });
-  }
+	$.ajax({
+		type: 'POST',
+		url: ipcDispatch,
+		data: {
+			"api":      "ipcRef",
+			"action":   "query",
+			"user":     user.uname,
+		},
+		dataType: 'json'
+	}).done(function(data) {
+		let res = data.rows;
+
+		displayRefs(res);
+	});
+}
+
+function displayRefs(data) {
+	$('#reference-page-pwexpire').val(data.[0].pw_expire);
+}
 
 $(document).ready(function() {
+
+	// Click event for refresh button
 	$('#reference-page-refresh').click(function(e) {
 		e.preventDefault();
 
@@ -280,6 +288,7 @@ $(document).ready(function() {
 
 		clearErrors();
 	})
+
 });
 </script>
 
