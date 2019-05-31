@@ -269,8 +269,8 @@ function queryReferences() {
 		dataType: 'json'
 	}).done(function(data) {
 		let res = data.rows;
-
-		$('#reference-page-pwexpire').val(res.pw_expire);
+		console.log("CKID=" + res.auto_ckid);
+		$('#reference-page-autockid').val(res.auto_ckid);
 		// displayRefs(res);
 	});
 }
