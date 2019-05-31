@@ -60,6 +60,8 @@ $(document).ready(function() {
 		$('#login-page').show();
 	}
 
+	FastClick.attach(document.body);
+
 });
 
 </script>
