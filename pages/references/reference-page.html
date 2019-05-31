@@ -321,80 +321,79 @@ function displayRefs(data) {
 $(document).ready(function() {
 
 	// Click event for submit button
-	$(document).ready(function() {
-    $('#reference-page-submit').click(function() {
-			let action = $('#reference-page-action').val();
-			let almarchive = $('#reference-page-almarchive').val();
-			let almdelete = $('#reference-page-almdelete').val();
-			let autockid = $('#reference-page-autockid').val();
-			let autoordno = $('#reference-page-autoordno').val();
-			let brdcstdel = $('#reference-page-brdcstdel').val();
-			let cfgarchive = $('#reference-page-cfgarchive').val();
-			let cfgdelete = $('#reference-page-cfgdelete').val();
-			let dateformat = $('#reference-page-dateformat').val();
-			let maintarchive = $('#reference-page-maintarchive').val();
-			let maintdelete = $('#reference-page-maintdelete').val();
-			let maxtemp = $('#reference-page-maxtemp').val();
-			let mtcrestore = $('#reference-page-mtcrestore').val();
-			let provarchive = $('#reference-page-provarchive').val();
-			let provdelete = $('#reference-page-provdelete').val();
-			let pwalert = $('#reference-page-pwalert').val();
-			let pwage = $('#reference-page-pwage').val();
-			let pwrepeat = $('#reference-page-pwrepeat').val();
-			let pwreuse = $('#reference-page-pwreuse').val();
-			let userdisable = $('#reference-page-userdisable').val();
-			let useridleto = $('#reference-page-useridleto').val();
-			let voltrange = $('#reference-page-voltrange').val();
+	$('#reference-page-submit').click(function() {
+		let action = $('#reference-page-action').val();
+		let almarchive = $('#reference-page-almarchive').val();
+		let almdelete = $('#reference-page-almdelete').val();
+		let autockid = $('#reference-page-autockid').val();
+		let autoordno = $('#reference-page-autoordno').val();
+		let brdcstdel = $('#reference-page-brdcstdel').val();
+		let cfgarchive = $('#reference-page-cfgarchive').val();
+		let cfgdelete = $('#reference-page-cfgdelete').val();
+		let dateformat = $('#reference-page-dateformat').val();
+		let maintarchive = $('#reference-page-maintarchive').val();
+		let maintdelete = $('#reference-page-maintdelete').val();
+		let maxtemp = $('#reference-page-maxtemp').val();
+		let mtcrestore = $('#reference-page-mtcrestore').val();
+		let provarchive = $('#reference-page-provarchive').val();
+		let provdelete = $('#reference-page-provdelete').val();
+		let pwalert = $('#reference-page-pwalert').val();
+		let pwage = $('#reference-page-pwage').val();
+		let pwrepeat = $('#reference-page-pwrepeat').val();
+		let pwreuse = $('#reference-page-pwreuse').val();
+		let userdisable = $('#reference-page-userdisable').val();
+		let useridleto = $('#reference-page-useridleto').val();
+		let voltrange = $('#reference-page-voltrange').val();
 
-			if (action == "") {
-				inputError($('#reference-page-action'),'Select an action.');
-				return;
+		if (action == "") {
+			inputError($('#reference-page-action'),'Select an action.');
+			return;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: ipcDispatch,
+			data: {
+				"api":      			"ipcRef",
+				"action":   			action,
+				"user":     			user.uname,
+				"alm_archv": 			almarchive,
+				"alm_del": 				almdelete,
+				"auto_ckid": 			autockid,
+				"auto_ordno": 		autoordno,
+				"brdcst_del": 		brdcstdel,
+				"cfg_archv": 			cfgarchive,
+				"cfg_del": 				cfgdelete,
+				"date_format": 		dateformat,
+				"maint_archv": 		maintarchive,
+				"maint_del": 			maintdelete,
+				"temp_max": 			maxtemp,
+				"mtc_restore": 		mtcrestore,
+				"prov_archv": 		provarchive,
+				"prov_del": 			provdelete,
+				"pw_alert": 			pwalert,
+				"pw_expire": 			pwage,
+				"pw_repeat": 			pwrepeat,
+				"pw_reuse": 			pwreuse,
+				"user_disable": 	userdisable,
+				"user_idle_to": 	useridleto
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			let res = data.rows;
+			let modal = {
+				title: data.rslt,
+				body: data.reason,
 			}
-      
-      $.ajax({
-        type: "POST",
-        url: ipcDispatch,
-        data: {
-					"api":      			"ipcRef",
-          "action":   			action,
-					"user":     			user.uname,
-					"alm_archv": 			almarchive,
-					"alm_del": 				almdelete,
-					"auto_ckid": 			autockid,
-					"auto_ordno": 		autoordno,
-					"brdcst_del": 		brdcstdel,
-					"cfg_archv": 			cfgarchive,
-					"cfg_del": 				cfgdelete,
-					"date_format": 		dateformat,
-					"maint_archv": 		maintarchive,
-					"maint_del": 			maintdelete,
-					"temp_max": 			maxtemp,
-					"mtc_restore": 		mtcrestore,
-					"prov_archv": 		provarchive,
-					"prov_del": 			provdelete,
-					"pw_alert": 			pwalert,
-					"pw_expire": 			pwage,
-					"pw_repeat": 			pwrepeat,
-					"pw_reuse": 			pwreuse,
-					"user_disable": 	userdisable,
-					"user_idle_to": 	useridleto
-        },
-        dataType: 'json'
-      }).done(function(data) {
-        let res = data.rows;
-        let modal = {
-          title: data.rslt,
-          body: data.reason,
-        }
 
-        if (data.rslt === 'fail') {
-          modal.type = 'danger'
-          modalHandler(modal);
-        } else {
-          
-        }
-      });
-    });
+			if (data.rslt === 'fail') {
+				modal.type = 'danger'
+				modalHandler(modal);
+			} else {
+				
+			}
+		});
+
   });
 
 	// Click event for refresh button
