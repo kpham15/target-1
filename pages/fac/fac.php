@@ -58,7 +58,6 @@
 
     data.forEach(function(option) {
       let html = `<option value="${option[type]}">${option[type]}</option>`;
-      console.log(html);
       a.push(html);
     });
 
