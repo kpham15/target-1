@@ -320,6 +320,7 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
 		let action = $('#reference-page-action').val();
@@ -404,6 +405,16 @@ $(document).ready(function() {
 
 		clearErrors();
 	})
+
+	// Click event for action selection
+	$('#reference-page-action').change(function() {
+		clearErrors();
+	})
+
+	$('.menu-item[page_id="references-page"]').click(function() {
+		queryReferences();
+	})
+
 
 });
 </script>
