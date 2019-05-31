@@ -17,6 +17,9 @@
 
     <!-- Fac Table -->
     <?php include __DIR__ . '/fac-table.html'; ?>
+
+    <!-- Fac Modal -->
+    <?php include __DIR__ . '/fac-modals.html'; ?>
     
   </div>
 </div>
