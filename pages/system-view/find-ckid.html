@@ -14,23 +14,19 @@
       </div>
       <div class="modal-body">
         <div class="row" style="margin-bottom: 10px;">
-          <div id="ckid-input" class="form-group col-md-4">
+          <div class="form-group col-md-4">
+            <label>TN:</label>
+            <input id="tn-check" type="checkbox" checked>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="555-555-5555"/>
+              <input id="ckid-input" type="text" class="form-control ckid-num" style="display:none;"/>
+              <input id="ckid-input-tn" type="text" class="form-control ckid-num" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
               <span class="input-group-btn">
                 <button id="find-ckid-submit" type="button" class="btn btn-primary btn-flat">Find</button>
               </span>
             </div>
-            <span class="help-block"></span>
           </div>
         </div>
-        <!-- <form>
-          <div id="ckid-input" class="form-group">
-            <label>CKID Number</label>
-            <input type="text" class="form-control" placeholder="555-555-5555"/>
-            <span class="help-block"></span>
-          </div>
-        </form> -->
+
         <table id="ckid-table" class="table" style="width:100%;">
           <thead>
             <tr>
@@ -53,7 +49,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -64,6 +59,9 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
+
+    // Initialize inputmask
+    $('#ckid-input-tn').inputmask();
 
     // Initialize datatable
     var datatable = $('#ckid-table').DataTable({
@@ -95,9 +93,13 @@
       }).done(function(data) {
         let res = data.rows;
         
-        datatable.clear().draw();
-        datatable.rows.add(res); // Add new data
-        datatable.columns.adjust().draw(); // Redraw the DataTable
+        if (data.rslt === 'fail') {
+          inputError($('.ckid-num'), data.reason);
+        } else {
+          datatable.clear().draw();
+          datatable.rows.add(res); // Add new data
+          datatable.columns.adjust().draw(); // Redraw the DataTable
+        }
       });
     }
     
@@ -108,15 +110,28 @@
     });
 
     $(document).on('click', '#find-ckid-submit', function() {
-      let ckid = $('#ckid-input input').val();
-      if ( !ckid ) {
-        $('#ckid-input .help-block').text('Missing value for CKID');
-        $('#ckid-input').addClass('has-error');
+      let ckid = '';
+
+      if ($('#tn-check').prop('checked')) {
+        ckid = $('#ckid-input-tn').val();
+      } else {
+        ckid = $('#ckid-input').val();
+      }
+      
+      if ( !ckid || ckid === '') {
+        inputError($('.ckid-num'), 'Missing value for CKID');
       } else {
         queryCkid(ckid);
-        $('#ckid-input .help-block').text('');
-        $('#ckid-input').removeClass('has-error');
+        clearErrors();
       }
+    });
+
+    // TN Checkbox handler
+    $('#tn-check').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue'
+    });
+    $('#tn-check').on('ifToggled', function(){
+      $('.ckid-num').toggle();
     });
   });
 </script>
