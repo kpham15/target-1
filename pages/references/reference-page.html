@@ -257,20 +257,20 @@
 
 <script type="text/javascript">
 
-function queryReferences() {
-	$.ajax({
-		type: 	'POST',
-		url:		ipcDispatch,
-		data: {
-						"api": 		"ipcRef",
-						"action": "query",
-						"user": 	user.uname,
-		},
-		dataType: 'json'
-	}).done(function(data) {
-		let res = data.rows;
-	})
-}
+function queryBrdcst() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        "api":      "ipcRef",
+        "act":      "query",
+        "user":     user.uname,
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+    });
+  }
 
 $(document).ready(function() {
 	$('#reference-page').click(function(e) {
