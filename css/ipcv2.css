@@ -1,5 +1,5 @@
-.bg-primary {
-  background-color: #337ab7 !important;
+.table-hover>tbody>tr.bg-primary:hover {
+  background-color: #337ab7;
 }
 
 /* ============ Login Page ============== */
