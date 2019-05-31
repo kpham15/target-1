@@ -1,3 +1,7 @@
+.bg-primary {
+  background-color: #337ab7 !important;
+}
+
 /* ============ Login Page ============== */
 .login-logo {
   width: 180px;
