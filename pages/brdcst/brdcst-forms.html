@@ -1,0 +1,163 @@
+<!-- Forms -->
+<div class="col-md-5">
+  <form id="brdcst-form">
+    <!-- Top Row -->
+    <div class="row">
+      <!-- Hidden ID field -->
+      <input id="brdcst-form-id" type="hidden" class="brdcst-form-input" />
+
+      <!-- MSG OWNER -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>MSG OWNER</label>
+          <input id="brdcst-form-msgowner" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+  
+      <!-- SA dropdown -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>SA</label>
+          <select id="brdcst-form-sa" class="form-control brdcst-form-input">
+            <option value=""></option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Row -->
+    <div class="row">
+      <!-- Action Dropdown -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="brdcst-form-action" class="form-control brdcst-form-input">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE</option>
+          </select>
+          <span class="help-block"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="row">
+      <!-- Message Title -->
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>MESSAGE TITLE</label>
+          <input id="brdcst-form-msgtitle" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+      
+      <!-- Date field -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>DATE</label>
+          <input id="brdcst-form-date" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+
+      <!-- Messsage Details -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>MESSAGE DETAILS</label>
+          <textarea id="brdcst-form-details" class="form-control brdcst-form-input" rows="5" disabled=""></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Button -->
+    <button id="brdcst-form-clear" type="button" class="btn btn-primary btn-flat">
+      Clear
+    </button>
+    <!-- View Button -->
+    <button type="button" id="view-brdcst" class="btn btn-primary btn-flat">
+      View
+    </button>
+  </form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  // ACTION Change listener
+  $('#brdcst-form-action').change(function() {
+    let value = $(this).val();
+    let currDate = moment(new Date()).format('MM-DD-YYYY');
+    
+    let id = $('#brdcst-form-id').val();
+    let owner = $('#brdcst-form-msgowner').val();
+    let sa = $('#brdcst-form-sa').val();
+    let action = $('#brdcst-form-action').val();
+    let title = $('#brdcst-form-msgtitle').val();
+    let date = $('#brdcst-form-date').val();
+    let detail = $('#brdcst-form-details').val();
+
+    clearErrors();
+    loadOwners();
+
+    // ADD Action
+    if (value === 'add') {
+      $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+
+      $('#brdcst-modal-date').val(currDate);
+      $('#brdcst-modal-action').val('ADD');
+
+      $('#brdcst-modal').modal('show');
+    }
+    // UPDATE Action
+    else if (value === 'update') {
+      if ( !id || id === '') {
+        $(this).siblings('.help-block').text('Select msg from table.');
+        $(this).parent('.form-group').addClass('has-error');
+        return;
+      }
+
+      $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+      
+      $('#brdcst-modal-date').val(date);
+      $('#brdcst-modal-msgowner').val(owner);
+      $('#brdcst-modal-msgtitle').val(title);
+      $('#brdcst-modal-sa').val(sa);
+      $('#brdcst-modal-details').val(detail);
+      $('#brdcst-modal-action').val('UPDATE');
+
+      $('#brdcst-modal').modal('show');
+    }
+    // DELETE Action
+    else if (value === 'delete') {
+      if ( !id || id === '') {
+        $(this).siblings('.help-block').text('Select msg from table.');
+        $(this).parent('.form-group').addClass('has-error');
+        return;
+      }
+
+      $('#brdcst-modal-details').prop('disabled', false);
+
+      $('#brdcst-modal-date').val(date);
+      $('#brdcst-modal-msgowner').val(owner);
+      $('#brdcst-modal-msgtitle').val(title);
+      $('#brdcst-modal-sa').val(sa);
+      $('#brdcst-modal-details').val(detail);
+      $('#brdcst-modal-action').val('DELETE');
+
+      $('#brdcst-modal').modal('show');
+    }
+  });
+
+  $('#brdcst-modal').on('hidden.bs.modal', function (e) {
+    $('.brdcst-modal-field').prop('disabled', true).val('');
+  });
+
+  $('#brdcst-form-clear').click(function() {
+    $('.brdcst-form-input').val('');
+
+    clearErrors();
+  });
+});
+</script>

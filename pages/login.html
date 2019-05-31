@@ -1,0 +1,217 @@
+<div id="login-page" class="login-box" style="display: none;">
+  <div class="login-logo">
+    <a>
+      <p id="login-title">
+        <b>I</b>ntelligent<br/>
+        <b>P</b>rovisioning<br/>
+        <b>C</b>enter
+      </p>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+
+    <form>
+      <div class="form-group has-feedback">
+        <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
+        <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password" style="display:none">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    <!-- /.social-auth-links -->
+
+    <!-- <a href="#">I forgot my password</a><br>
+    <a href="register.html" class="text-center">Register a new membership</a> -->
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<script>
+  $(document).ready(function() {
+
+    $(function () {
+      $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' /* optional */
+      });
+    });
+  
+  
+    var keyId = "";
+    var login = {
+  
+      // jQuery Selectors
+      username:       $('#login_username'),
+      password:       $('#login_password_input'),
+      newpassword:    $('#login_newPassWord'),
+      loginBtn:       $('#login_btn'),
+  
+  
+      // General Functions
+      getSwVersion: function() {
+        $.post("../indexFunc.php", { act: "queryReadMe" }, function(data, status) {
+          // @TODO create a function in the sidebar/header to call that updates the software version and descriptions
+          // var obj = JSON.parse(data);
+          // login.swVersion.text('Version: ' + obj.ver);
+          // mB.versionDescr.val(obj.descr);
+          // mB.versionLbl.text('Version: ' + obj.ver);
+        });
+      },
+  
+      submitLogin: function() {
+        keyId = "";
+        $.post(ipcDispatch, {
+          api: "ipcConfirm",
+          act: "confirm"
+        }, function(data, status) {
+          var obj = JSON.parse(data);
+          let modal = {}
+  
+          if (obj.rslt == 'fail') {
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
+            modalHandler(modal);
+
+          } else {
+            keyId = obj.key;
+  
+            if (keyId == '') {
+              modal.title = 'KEY EMPTY';
+              modal.body = 'Confirm key is not available yet';
+              modal.type = 'warning';
+              modalHandler(modal);
+
+              return;
+            }
+            login.postUserPassword();
+          }
+        });
+      },
+  
+      postUserPassword: function() {
+        // @TODO checks for user registration
+        // if (login.newpassword.val() == '' && login.newpassword.val() === login.confirmPassword.val()) {
+        //   alert("New password and confirm password should be the same");
+        // }
+  
+        $.post(ipcDispatch,
+        {
+          api: "ipcLogin",
+          act: "login",
+          user: login.username.val(),
+          pw: encode(login.password.val()),
+          newPw: encode(login.newpassword.val())
+        }, function(data, status) {
+          var obj = JSON.parse(data);
+          let modal = {};
+
+          if (obj.rslt == "fail") {
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
+            modalHandler(modal);
+          } else {
+            
+            // @TODO add user name to profile area in sidebar/header nav
+            // $('#main_userFLname').text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
+            user.uname = obj.rows[0].uname;
+            user.fname = obj.rows[0].fname;
+            user.mi = obj.rows[0].mi;
+            user.lname = obj.rows[0].lname;
+            user.grp = obj.rows[0].grp;
+            user.ugrp = obj.rows[0].ugrp;
+            user.idle_to = obj.rows[0].user_idle_to;
+            login.username.val("");
+            login.password.val("");
+            // login.newpassword.val("");
+  
+            // call function to route to main page
+            loginSuccess();
+  
+            // @TODO find out what these do
+            // opt.query('queryOpt');
+            // bulletinBoard.query('query');
+            // brdcstModal.loadOwner();
+            // mB.start();
+          }
+        });
+      }
+    }
+  
+    // ================ Click Events ================= //
+  
+    login.loginBtn.click(function(e) {
+      e.preventDefault();
+      
+      login.submitLogin();
+    });
+  
+    $(".login-input-fields").keypress(function(event) {
+      if (event.which == 13) {
+          event.preventDefault();
+          login.loginBtn.trigger('click');
+      }
+    });
+  
+    // @TODO create register user/first login functionality
+  
+  
+    // ================ Encode Password ================= //
+    function encode(data) {
+      var header = {
+        "alg": "HS256",
+        "typ": "JWT"
+      };
+  
+      var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+      var encodedHeader = base64url(stringifiedHeader);
+  
+      var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+      var encodedData = base64url(stringifiedData);
+  
+      var signature = encodedHeader + "." + encodedData;
+      signature = CryptoJS.HmacSHA256(signature, keyId);
+      signature = base64url(signature);
+      return encodedHeader + "." + encodedData + "." + signature;
+    }
+  
+    function base64url(source) {
+      // Encode in classical base64
+      encodedSource = CryptoJS.enc.Base64.stringify(source);
+  
+      // Remove padding equal characters
+      encodedSource = encodedSource.replace(/=+$/, '');
+      
+      // Replace characters according to base64url specifications
+      encodedSource = encodedSource.replace(/\+/g, '-');
+      encodedSource = encodedSource.replace(/\//g, '_');
+  
+      return encodedSource;
+    }
+  });
+
+  // @TODO call looping wc.getHeaderInfo() after logging in.
+</script>
