@@ -284,11 +284,14 @@ function queryReferences() {
 		$('#reference-page-mtcrestore').val(res[0].mtc_restore);
 		$('#reference-page-provarchive').val(res[0].prov_archv);
 		$('#reference-page-provdelete').val(res[0].prov_del);
-
-
-
-
+		$('#reference-page-pwalert').val(res[0].pw_alert);
 		$('#reference-page-pwexpire').val(res[0].pw_expire);
+		$('#reference-page-pwrepeat').val(res[0].pw_repeat);
+		$('#reference-page-pwreuse').val(res[0].pw_reuse);
+
+
+
+
 		// displayRefs(res);
 	});
 }
