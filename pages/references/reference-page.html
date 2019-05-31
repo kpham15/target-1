@@ -270,13 +270,13 @@ function queryReferences() {
 	}).done(function(data) {
 		let res = data.rows;
 
-		displayRefs(res);
+		// displayRefs(res);
 	});
 }
 
-function displayRefs(data) {
-	$('#reference-page-pwexpire').val(data.[0].pw_expire);
-}
+// function displayRefs(data) {
+// 	$('#reference-page-pwexpire').val(data);
+// }
 
 $(document).ready(function() {
 
