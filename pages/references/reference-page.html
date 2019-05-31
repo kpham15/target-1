@@ -4,12 +4,13 @@
     <div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label>PASSWORD EXPIRE</label>
+					<label>MAXIMUM PASSWORD AGE</label>
 					<select id="reference-page-pwexpire" class="form-control">
-						<option value="7">1 week</option>
-						<option value="14">2 weeks</option>
-						<option value="30">1 month</option>
-						<option value="60">2 months</option>
+						<option value="30">30 Days</option>
+						<option value="60">60 Days</option>
+						<option value="90">90 Days</option>
+						<!--@TODO check to see if 0 passes as never expires in back end-->
+						<option value="0">Never</option>
 					</select>
 				</div>
 			</div>
@@ -278,7 +279,6 @@ function queryReferences() {
 		$('#reference-page-cfgarchive').val(res[0].cfg_archv);
 		$('#reference-page-cfgdelete').val(res[0].cfg_del);
 		$('#reference-page-dateformat').val(res[0].date_format);
-		
 		$('#reference-page-maintarchive').val(res[0].maint_archv);
 		$('#reference-page-maintdelete').val(res[0].maint_del);
 		$('#reference-page-mtcrestore').val(res[0].mtc_restore);
@@ -287,6 +287,7 @@ function queryReferences() {
 		$('#reference-page-pwalert').val(res[0].pw_alert);
 		$('#reference-page-pwexpire').val(res[0].pw_expire);
 		$('#reference-page-pwrepeat').val(res[0].pw_repeat);
+		$('#reference-page-pwreuse').val(res[0].pw_reuse);
 		$('#reference-page-pwreuse').val(res[0].pw_reuse);
 
 
