@@ -93,84 +93,86 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
+  $(document).ready(function() {
 
-  // ACTION Change listener
-  $('#fac-form-action').change(function() {
-    let value = $(this).val();
+    // ACTION Change listener
+    $('#fac-form-action').change(function() {
+      let value = $(this).val();
 
-    let id = $('#fac-form-id').val();
+      let id = $('#fac-form-id').val();
 
-    let facId = $("#fac-form-facId").val();
-    let ftyp = $("#fac-form-ftyp").val();
-    let ort = $("#fac-form-ort").val();
-    let psta = $("#fac-form-psta").val();
-    let spcfnc = $("#fac-form-spcfnc").val();
+      let facId = $("#fac-form-facId").val();
+      let ftyp = $("#fac-form-ftyp").val();
+      let ort = $("#fac-form-ort").val();
+      let psta = $("#fac-form-psta").val();
+      let spcfnc = $("#fac-form-spcfnc").val();
 
-    clearErrors();
+      clearErrors();
 
-    // ADD Action
-    if (value === 'add') {
-      // enable modal fields
-      $('#fac-modal-facId, #fac-modal-range, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+      // ADD Action
+      if (value === 'add') {
+        // enable modal fields
+        $('#fac-modal-facId, #fac-modal-range, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
 
-      $('#fac-modal-action').val('ADD');
+        $('#fac-modal-action').val('ADD');
 
-      $('#fac-modal').modal('show');
-    }
-    // UPDATE Action
-    else if (value === 'update') {
-      if ( !id || id === '') {
-        inputError($(this),'Select facility from table.');
-        $("#fac-form-action").val("");
-        return;
+        $('#fac-modal').modal('show');
       }
+      // UPDATE Action
+      else if (value === 'update') {
+        if ( !id || id === '') {
+          inputError($(this),'Select facility from table.');
+          $("#fac-form-action").val("");
+          return;
+        }
 
-      // enable modal fields
-      $('#fac-modal-facId, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
-      
-      // populate modal fields
-      $("#fac-modal-facId").val(facId);
-      $("#fac-modal-ftyp").val(ftyp);
-      $("#fac-modal-ort").val(ort);
-      $("#fac-modal-psta").val(psta);
-      $("#fac-modal-spcfnc").val(spcfnc);
+        // enable modal fields
+        $('#fac-modal-facId, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+        
+        // populate modal fields
+        $("#fac-modal-facId").val(facId);
+        $("#fac-modal-ftyp").val(ftyp);
+        $("#fac-modal-ort").val(ort);
+        $("#fac-modal-psta").val(psta);
+        $("#fac-modal-spcfnc").val(spcfnc);
 
-      $('#fac-modal-action').val('UPDATE');
+        $('#fac-modal-action').val('UPDATE');
 
-      $('#fac-modal').modal('show');
-    }
-    // DELETE Action
-    else if (value === 'delete') {
-      if ( !id || id === '') {
-        inputError($(this),'Select facility from table.');
-        $("#fac-form-action").val("");
-        return;
+        $('#fac-modal').modal('show');
       }
+      // DELETE Action
+      else if (value === 'delete') {
+        if ( !id || id === '') {
+          inputError($(this),'Select facility from table.');
+          $("#fac-form-action").val("");
+          return;
+        }
 
-      // populate modal fields
-      $("#fac-modal-facId").val(facId);
-      $("#fac-modal-ftyp").val(ftyp);
-      $("#fac-modal-ort").val(ort);
-      $("#fac-modal-psta").val(psta);
-      $("#fac-modal-spcfnc").val(spcfnc);
+        // populate modal fields
+        $("#fac-modal-facId").val(facId);
+        $("#fac-modal-ftyp").val(ftyp);
+        $("#fac-modal-ort").val(ort);
+        $("#fac-modal-psta").val(psta);
+        $("#fac-modal-spcfnc").val(spcfnc);
 
-      $('#fac-modal-action').val('DELETE');
+        $('#fac-modal-action').val('DELETE');
 
-      $('#fac-modal').modal('show');
-    }
+        $('#fac-modal').modal('show');
+      }
+    });
+
+    $('#fac-modal').on('hidden.bs.modal', function (e) {
+      $('.fac-modal-field').prop('disabled', true).val('');
+      $("#fac-form-action").val("").change();
+    });
+
+    $('#fac-form-clear').click(function() {
+      $('.fac-form-input').val('');
+      $('#fac-table tbody tr').removeClass('bg-primary');
+
+      clearErrors();
+    });
+
+    
   });
-
-  $('#fac-modal').on('hidden.bs.modal', function (e) {
-    $('.fac-modal-field').prop('disabled', true).val('');
-    $("#fac-form-action").val("").change();
-  });
-
-  $('#fac-form-clear').click(function() {
-    $('.fac-form-input').val('');
-    $('#fac-table tbody tr').removeClass('bg-primary');
-
-    clearErrors();
-  });
-});
 </script>

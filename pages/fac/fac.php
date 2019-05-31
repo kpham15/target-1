@@ -20,6 +20,49 @@
 
     <!-- Fac Modal -->
     <?php include __DIR__ . '/fac-modals.html'; ?>
-    
+
   </div>
 </div>
+
+<script type="text/javascript">
+  loadFtyps();
+  
+  function loadFtyps() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api: "ipcOpt",
+        act: "queryFtyp",
+        user: user.uname,
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason
+      }
+
+      if (data.rslt === "fail") {
+        modal.type = 'danger',
+        modalHandler(modal);
+      } else {
+        createFtypOptions(res);
+      }
+    });
+  }
+
+  function createFtypOptions(data) {
+    var a = [];
+    a.push('<option value=""></option>');
+
+    data.forEach(function(ftyp) {
+      let html = `<option value="${ftyp.alias}">${ftyp.alias}</option>`;
+      a.push(html);
+    });
+
+    $("#fac-form-ftyp").html(a.join(''));
+    $("#fac-modal-ftyp").html(a.join(''));
+  }
+</script>
