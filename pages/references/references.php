@@ -11,5 +11,8 @@
           <li class="active">References</li>
         </ol>
       </section>
+
+      <!-- Reference Page -->
+      <?php include __DIR__ . '/reference-page.html'; ?>
   </div>
 </div>
