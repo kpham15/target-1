@@ -64,9 +64,4 @@
 
     $('#brdcst-modal-msgowner').html(a.join(''));
   }
-  
-  function clearErrors() {
-    $('.help-block').text('');
-    $('.form-group').removeClass('has-error');
-  }
 </script>
