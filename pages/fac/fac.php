@@ -26,13 +26,13 @@
 
 <script type="text/javascript">
 
-  function loadFtyps() {
+  function loadOptions(action, type, element) {
     $.ajax({
       type: 'POST',
       url: "./em/ipcDispatch.php",
       data: {
         api: "ipcOpt",
-        act: "queryFtyp",
+        act: action,
         user: user.uname,
       },
       dataType: 'json'
@@ -47,22 +47,21 @@
         modal.type = 'danger',
         modalHandler(modal);
       } else {
-        createFtypOptions(res);
+        createFtypOptions(res, type, element);
       }
     });
   }
 
-  function createFtypOptions(data) {
+  function createFtypOptions(data, type, element) {
     var a = [];
     a.push('<option value=""></option>');
 
-    data.forEach(function(ftyp) {
-      let html = `<option value="${ftyp.alias}">${ftyp.alias}</option>`;
+    data.forEach(function(option) {
+      let html = `<option value="${option[type]}">${option[type]}</option>`;
       console.log(html);
       a.push(html);
     });
 
-    $("#fac-form-ftyp").html(a.join(''));
-    $("#fac-modal-ftyp").html(a.join(''));
+    element.html(a.join(''));
   }
 </script>
