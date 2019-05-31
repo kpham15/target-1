@@ -243,7 +243,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label>VOLTAGE RANGE</label>
-					<select id="reference-page-maintarchive" class="form-control">
+					<select id="reference-page-voltrange" class="form-control">
 						<option value="35-50">35-50V</option>
 						<option value="40-50">40-50V</option>
 						<option value="40-55">40-55V</option>
@@ -305,6 +305,7 @@ function displayRefs(data) {
 	$('#reference-page-dateformat').val(data[0].date_format);
 	$('#reference-page-maintarchive').val(data[0].maint_archv);
 	$('#reference-page-maintdelete').val(data[0].maint_del);
+	$('#reference-page-maxtemp').val(data[0].temp_max);
 	$('#reference-page-mtcrestore').val(data[0].mtc_restore);
 	$('#reference-page-provarchive').val(data[0].prov_archv);
 	$('#reference-page-provdelete').val(data[0].prov_del);
@@ -314,7 +315,7 @@ function displayRefs(data) {
 	$('#reference-page-pwreuse').val(data[0].pw_reuse);
 	$('#reference-page-userdisable').val(data[0].user_disable);
 	$('#reference-page-useridleto').val(data[0].user_idle_to);
-
+	$('#reference-page-voltrange').val(data[0].volt_range);
 }
 
 $(document).ready(function() {
