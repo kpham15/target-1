@@ -25,8 +25,7 @@
 </div>
 
 <script type="text/javascript">
-  loadFtyps();
-  
+
   function loadFtyps() {
     $.ajax({
       type: 'POST',
