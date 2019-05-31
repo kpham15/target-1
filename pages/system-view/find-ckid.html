@@ -106,8 +106,15 @@
     });
 
     $(document).on('click', '#find-ckid-submit', function() {
-      let ckid = ($('#tn-check').prop('checked')) ? $('#ckid-input-tn').val() : $('#ckid-input').val();
-      if ( !ckid ) {
+      let ckid = '';
+
+      if ($('#tn-check').prop('checked')) {
+        ckid = $('#ckid-input-tn').val();
+      } else {
+        ckid = $('#ckid-input').val();
+      }
+      
+      if ( !ckid || ckid === '') {
         inputError($('.ckid-num'), 'Missing value for CKID');
       } else {
         queryCkid(ckid);
