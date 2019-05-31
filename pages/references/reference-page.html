@@ -269,7 +269,12 @@ function queryReferences() {
 		dataType: 'json'
 	}).done(function(data) {
 		let res = data.rows;
-		// console.log("CKID=" + res[0].auto_ckid);
+		
+		$('#reference-page-almarchive').val(res[0].alm_archv);
+		$('#reference-page-almdelete').val(res[0].alm_del);
+		$('#reference-page-autockid').val(res[0].auto_ckid);
+		$('#reference-page-autoordno').val(res[0].auto_ordno);
+		$('#reference-page-pwexpire').val(res[0].pw_expire);
 		$('#reference-page-autockid').val(res[0].auto_ckid);
 		// displayRefs(res);
 	});
