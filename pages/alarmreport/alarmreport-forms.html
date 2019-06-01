@@ -34,7 +34,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" class="form-control pull-right" id="reservation">
+						<input type="text" class="form-control pull-right" id="alarmreport-calendar">
 					</div>
 				</div>
 			</div>
@@ -75,3 +75,11 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+
+		$('input[id="alarmrepot-calendar"]').daterangepicker();
+	});
+</script>
