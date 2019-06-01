@@ -202,7 +202,14 @@
 			$result["rows"]   = [];
 			return $result;
 		}
-		$node = $node -1;
+		if ($slot == "") {
+			$result["rslt"]   = 'fail';
+			$result["reason"] = "MISSING SLOT";
+			$result["rows"]   = [];
+			return $result;
+		}
+		$node = $node - 1;
+		$slot = $slot - 1;
 		$pathObj->queryPathByNode($node, $slot);
         $result["rslt"]   = $pathObj->rslt;
         $result["reason"] = $pathObj->reason;
