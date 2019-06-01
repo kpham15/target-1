@@ -106,6 +106,7 @@
 		// click event for submit
 		$('#alarmreport-submit').click(function() {
 			if (report == "VIEW_REPORT") {
+				console.log("REPORT="+report);
 				queryAlarmReports(report);
 			}
 		});
