@@ -54,8 +54,6 @@
         $fac = $_POST['fac'];
 	}
 
-	// $evtLog 	= new EVTLOG($user, "PATH", $act);
-
 	$evtLog = new EVENTLOG($user, "MAINTENANCE", "PATH ADMINISTRATION", $act, $_POST);
 
 	

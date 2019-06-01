@@ -5,120 +5,6 @@
     Copyright: BHD SOLUTIONS, LLC @ 2018
 */  
         
-    // // -- Initialize inputs --
-	// $act = "";
-	// if (isset($_POST['act'])) {
-	// 	$act = $_POST['act'];
-	// }
-
-	// $ordno = "";
-	// if (isset($_POST['ordno'])) {
-	// 	$ordno = strtoupper($_POST['ordno']);
-	// }
-
-    // $mlo = "";
-	// if (isset($_POST['mlo'])) {
-	// 	$mlo = strtoupper($_POST['mlo']);
-	// }
-    // if ($mlo == "") {
-    //     $mlo = "N";
-    // }
-
-	// $ckid = "";
-	// if (isset($_POST['ckid'])) {
-	// 	$ckid = strtoupper($_POST['ckid']);
-	// }
-
-    // $cls = "";
-	// if (isset($_POST['cls'])) {
-	// 	$cls = strtoupper($_POST['cls']);
-	// }
-
-    // $adsr = "";
-	// if (isset($_POST['adsr'])) {
-    //     $adsr = strtoupper($_POST['adsr']);
-	// }
-    // if ($adsr == "" ) {
-    //     $adsr = "N";
-    // }
-
-    // $prot = "";
-	// if (isset($_POST['prot'])) {
-	// 	$prot = strtoupper($_POST['prot']);
-	// }
-
-    // $ctyp = "";
-	// if (isset($_POST['ctyp'])) {
-	// 	$ctyp = strtoupper($_POST['ctyp']);
-    // }
-    
-	// $ffac = "";
-	// if (isset($_POST['ffac'])) {
-	// 	$ffac = strtoupper($_POST['ffac']);
-	// }
-
-	// $tfac = "";
-	// if (isset($_POST['tfac'])) {
-	// 	$tfac = strtoupper($_POST['tfac']);
-    // }
-    
-    // $tktno = "";
-	// if (isset($_POST['tktno'])) {
-	// 	$tktno = $_POST['tktno'];
-    // }
-
-    // $dd = "";
-	// if (isset($_POST['dd'])) {
-	// 	$dd = $_POST['dd'];
-    // }
-
-    // $fdd = "";
-	// if (isset($_POST['fdd'])) {
-	// 	$fdd = $_POST['fdd'];
-    // }
-
-    // $fport= "";
-	// if (isset($_POST['fport'])) {
-	// 	$fport = $_POST['fport'];
-    // }
-
-    // $tport = "";
-    // if (isset($_POST['tport'])) {
-	// 	$tport = $_POST['tport'];
-    // }
-    
-    // // $input = date("Y-m-d H:i:s") . "\n";
-    // // $input .= str_pad("ORDNO=" . $ordno,30) . str_pad("ACTION=" . $act,20) . str_pad("MLO=" . $mlo,10) . str_pad("USER=" . $user,30) . "\n";
-	// // $input .= str_pad("DD=" . $dd,20) . str_pad("FDD=" . $fdd,20) . "\n";
-    // // $input .= str_pad("CKID=" . $ckid,30) . str_pad("CLS=" . $cls,15) . str_pad("ADSR=" . $adsr,10) . str_pad("PROT=" . $prot,10) . "\n";
-    // // $input .= str_pad("CONTYP=" . $ctyp,15) . str_pad("FAC(X)=" . $ffac,30) . str_pad("FAC(Y)=" . $tfac,30);
-
-    // // $evtLog = new EVTLOG($user, "SVCCONN", $act, $input);
-
-
-
-
-	// // --- Dispatch by ACTION ---
-    // $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, '');
-		
-	// if ($act == "CONNECT") {
-	//     $provLog = new PROVLOG();
-    //     $result = provConnect($userObj, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac);
-    //     $evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
-    //     $provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
-    //     echo json_encode($result);
-    //     mysqli_close($db);
-    //     return;
-    // }
-    // else {
-    //     $result['rslt'] = FAIL;
-    //     $result['reason'] = INVALID_ACTION;
-    //     $result['rows'] = [];
-    //     $evtLog->log($result["rslt"], $result["reason"]);
-    //     echo json_encode($result);
-    //     mysqli_close($db);
-    //     return;
-    // }
     
     function provConnect($userObj, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac) {
         try {
@@ -422,12 +308,6 @@
                 $result['reason'] = "PROVISIONING CONNECT - " . $tfacObj->portObj->reason;
                 return $result;
             }
-            
-            // update order table
-            // $ordObj = new ORDER();
-            // $ordObj->addOrder($ordno,$mlo,'CONNECT',$ckid,$cls,$adsr,$prot,'CONNECT',$ctyp,$ffac,$tfac);
-
-            
 
             $result['rows'] = [];
             $result["rslt"] = SUCCESS;

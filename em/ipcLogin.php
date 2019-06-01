@@ -24,8 +24,6 @@
     if (isset($_POST['act']))
         $act = $_POST['act'];
 
-    // $evtLog = new EVTLOG($user, "USERS", "LOGIN");
-
     $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", $act);
 
     /**

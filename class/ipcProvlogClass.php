@@ -63,7 +63,6 @@
 		public function log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $reason, $tktno) {
 			global $db;
 
-            // $qry = "INSERT INTO t_provlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$ordno', '$mlo', NOW(), $dd, $fdd,'$act', '$result')" ;
             $qry = "INSERT INTO 
 					t_provlog 
 					(user, ckid, cls, adsr, prot, 

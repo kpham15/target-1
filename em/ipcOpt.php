@@ -5,8 +5,6 @@
     if (isset($_POST['act']))
         $act = $_POST['act'];
 
-    // $evtLog = new Evtlog($user, "OPTION", $act);
-
     // DISPATCH
     if ($act == "queryOpt") {
         $optObj = new OPT();

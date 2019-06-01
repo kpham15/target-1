@@ -51,7 +51,6 @@
 		$psta = strtoupper($_POST['psta']);
 	}
 
-	// $evtLog = new EVTLOG($user, "FACILITY", $act, $input);
 	$evtLog = new EVENTLOG($user, "CONFIGURATION", "SETUP FACILITY", $act, '');
 
 	// Dispatch to Functions	

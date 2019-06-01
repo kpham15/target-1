@@ -101,10 +101,7 @@ if (isset($_POST['mtc_restore'])) {
     $mtc_restore = $_POST['mtc_restore'];
 }
 
-// $evtLog = new EVTLOG($user, "REF", $act);
-
 $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, $_POST);
-
 
 $refObj = new REF();
 if ($refObj->rslt != SUCCESS) {

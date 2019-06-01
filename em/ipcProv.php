@@ -114,11 +114,6 @@ include "ipcProvConnect.php";
 		$tktno = $_POST['tktno'];
     }
 
-	// $input = "SVCCONN: USER=" . $user . ", ACT=" . $act . ", CKID=" . $ckid . ", CLS=" . $cls . ", ADSR=" . $adsr;
-	// $input .= ", PROT=" . $prot . ", ORDNO=" . $ordno . ", MLO=" . $mlo . ", DD=" . $dd . ", FDD=" . $fdd;
-	// $input .= ", CONTYP=" . $ctyp . ", FAC(X)=" . $ffac . ", FAC(Y)=" . $tfac;
-
-	// $evtLog = new EVTLOG($user, "SVCCONN", $act, $input);
 
     $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, '');
 	$provLog = new PROVLOG();
