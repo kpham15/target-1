@@ -101,8 +101,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// initalize daterangepicker
-		$('#alarmreport-fromdate').datepicker();
+		// $('#alarmreport-fromdate').datepicker();
 		$('#alarmreport-todate').datepicker();
+
+		$(function () {
+        $("#alarmreport-fromdate").datepicker({
+            dateFormat: "mm/dd/yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            //gotoCurrent: true,
+        });
+});
 
 
 	});
