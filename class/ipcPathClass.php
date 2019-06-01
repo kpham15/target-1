@@ -282,7 +282,7 @@ class PATH {
         ///////------------log---------------///////
         //if ($this->rslt == 'fail') {
             //echo $this->log;
-            $this->saveLog();
+            //$this->saveLog();
         //} 
     }
 
@@ -1786,19 +1786,17 @@ class PATH {
         $this->rslt = 'success';
         $this->reason = "PATH_RESET_SUCCESS";
 
-        $this->saveLog();
-        //echo $this->log;
+        //$this->saveLog();
     }
 
-    public function saveLog() {
-        $debugFile = fopen("./createPathLog.txt", "w");
-        $logString = "\n--------------------------------\n";
-        $logString .= "\n" . date('Y-m-d H:i:s') . "\n"  . $this->log;
-        fwrite($debugFile,$logString);
-        fclose($debugFile);
+//     public function saveLog() {
+//         $debugFile = fopen("./createPathLog.txt", "w");
+//         $logString = "\n--------------------------------\n";
+//         $logString .= "\n" . date('Y-m-d H:i:s') . "\n"  . $this->log;
+//         fwrite($debugFile,$logString);
+//         fclose($debugFile);
 
-        //echo $this->log;
-   }
+//    }
    
 
     public function queryCrossNodesPaths() {
