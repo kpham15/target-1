@@ -1,7 +1,6 @@
 <?php
 include "./ipcClasses.php";
 
-$root_dir = '/var/www/html/target-1/UPDATE';
 
 /* Initialize expected inputs */
 $api = '';
