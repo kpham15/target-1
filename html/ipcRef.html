@@ -12,39 +12,36 @@
             <div class="col-sm-2">
                 <form>
                     <div class="form-group">
-                        <label for="ref_pwExpire_sel">PW_EXPIRE:</label>
+                        <label for="ref_pwExpire_sel">MAXIMUM PASSWORD AGE:</label>
                         <select id="ref_pwExpire_sel" class="form-control">
                             
-                            <option value="7">1 week</option>
-                            <option value="14">2 weeks</option>
-                            <option value="30">1 month</option>
-                            <option value="60">2 months</option>
+                            <option value="0">NEVER EXPIRES</option>
+                            <option value="30">EXPIRES IN 30 DAYS</option>
+                            <option value="60">EXPIRES IN 60 DAYS</option>
+                            <option value="90">EXPIRES IN 90 DAYS</option>
                         </select>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
-                        <label for="ref_pwAlert_sel">PW_ALERT:</label>
+                        <label for="ref_pwAlert_sel">PASSWORD EXPIRY PROMPT:</label>
                         <select id="ref_pwAlert_sel" class="form-control">
                             
-                            <option value="1">1 day</option>
-                            <option value="2">2 days</option>
-                            <option value="3">3 days</option>
-                            <option value="4">4 days</option>
-                            <option value="5">5 days</option>
+                            <option value="0">NEVER PROMPT</option>
+                            <option value="3">PROMPT BEFORE 3 DAYS</option>
+                            <option value="5">PROMPT BEFORE 5 DAYS</option>
+                            <option value="7">PROMPT BEFORE 7 DAYS</option>
                         </select>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
-                        <label for="ref_pwReuse_sel">PW_REUSE:</label>
+                        <label for="ref_pwReuse_sel">PASSWORD REUSE:</label>
                         <select id="ref_pwReuse_sel" class="form-control">
                             <option value=""></option>
-                            <option value="1">1 times</option>
-                            <option value="2">2 times</option>
-                            <option value="3">3 times</option>
-                            <option value="4">4 times</option>
-                            <option value="5">5 times</option>
+                            <option value="2">NO REUSE LAST 2 PW</option>
+                            <option value="3">NO REUSE LAST 3 PW</option>
+                            <option value="4">NO REUSE LAST 4 PW</option>
                         </select>
                     </div>
                 </form>
