@@ -102,6 +102,13 @@
 
 
 	$(document).ready(function() {
+		let report = $('#alarmreport-report').val();
+		// click event for submit
+		$('#alarmreport-submit').click(function() {
+			if (report == "VIEW_REPORT") {
+				queryAlarmReports(report);
+			}
+		});
 
 		// initalize daterangepicker
 		// $(function () {

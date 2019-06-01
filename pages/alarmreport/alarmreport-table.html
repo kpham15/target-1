@@ -49,13 +49,13 @@
     "order": [[ 0, "desc" ]]
 	});
 
-	function queryAlarmReports() {
+	function queryAlarmReports(report) {
 		$.ajax({
       type: 'POST',
       url: ipcDispatch,
       data: {
         "api":      "ipcAlmReport",
-        "act":      "VIEW REPORT",
+        "act":      report,
         "user":     user.uname,
 				"action": 	"",
 				"sev": 			"",
