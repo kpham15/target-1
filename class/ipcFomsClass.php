@@ -256,7 +256,7 @@ class FOMS {
       $pri = $this->ord['PRI'];
     }
 
-    $qry = "INSERT INTO t_Ord (ordno, ot, cdd, dd, fdd, fdt, wc, pri) VALUES ('$ordno', '$ot', '$cdd', '$dd', '$fdd', '$fdt', '$wc', '$pri')";
+    $qry = "INSERT INTO t_Ord (ordno, ot, cdd, dd, fdd, fdt, wc, pri, stat) VALUES ('$ordno', '$ot', '$cdd', '$dd', '$fdd', '$fdt', '$wc', '$pri', 'NEW')";
 
     $res = $db->query($qry);
     if (!$res) {
