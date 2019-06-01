@@ -1,5 +1,5 @@
 <!-- Forms Left Side -->
-<div class="col-md-8">
+<div class="col-md-7">
   <form id="alarmreport-forms-left">
 		<div class="row">
 			<!-- Top Row Left -->
@@ -7,7 +7,10 @@
 				<div class="form-group">
 					<label>ACTION:</label>
 					<select id="alarmreport-action" class="form-control">
-						<option>Test1</option>
+						<option></option>
+						<option>ACK</option>
+						<option>UN-ACK</option>
+						<option>CLR</option>
 					</select>
 				</div>
 			</div>
@@ -15,7 +18,10 @@
 				<div class="form-group">
 					<label>SEVERITY:</label>
 					<select id="alarmreport-severity" class="form-control">
-						<option>Test1</option>
+						<option></option>
+						<option>CRIT</option>
+						<option>MAJ</option>
+						<option>MIN</option>
 					</select>
 				</div>
 			</div>
@@ -27,16 +33,32 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-3">
 				<div class="form-group">
-					<label>DATE RANGE:</label>
-					<div class="input-group">
+					<label>FROM DATE:</label>
+
+					<div class="input-group date">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" class="form-control pull-right" id="alarmreport-calendar">
+						<input type="text" class="form-control pull-right" id="alarmreport-fromdate">
 					</div>
-				</div>
+					<!-- /.input group -->
+					</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>TO DATE:</label>
+
+					<div class="input-group date">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control pull-right" id="alarmreport-todate">
+					</div>
+					<!-- /.input group -->
+					</div>
 			</div>
 		</div>
 		<!-- Second Row Left -->
@@ -62,7 +84,7 @@
    </form>
 </div>
 <!-- Forms Right Side-->
-<div class="col-md-4">
+<div class="col-md-5">
 	<form id="alarmreport-forms-right">
 		<div class="row">
 			<!-- Comments -->
@@ -78,8 +100,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		// initalize daterangepicker
+		$('#alarmreport-fromdate').datepicker();
+		$('#alarmreport-todate').datepicker();
 
 
-		$('#alarmreport-calendar').daterangepicker();
 	});
 </script>
