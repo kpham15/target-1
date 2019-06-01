@@ -356,35 +356,6 @@
             }
         }
 
-        public function addOrder($ordno, $mlo, $stat, $ckid, $cls, $adsr, $prot, $act, $ctyp, $ffac, $tfac) {
-            global $db;
-
-            // $qry = "INSERT INTO t_orders VALUES(0, '$stat', '$ordno', '$mlo',  '$ckid', '$cls', '$adsr', '$prot', '$act', '$ctyp', '$ffac', '$tfac', now())";
-
-            $qry = "INSERT INTO t_orders (stat, ordno, mlo, ckid, cls, adsr, prot, act, ctyp, ffac, tfac, date) ";
-            $qry .= " VALUES ('$stat', '$ordno', '$mlo', '$ckid', '$cls', '$adsr', '$prot', '$act', '$ctyp', '$ffac', '$tfac', now())";
-
-            $res = $db->query($qry);
-            if (!$res) {
-                $this->rslt    = FAIL;
-                $this->reason  = mysqli_error($db);
-                return false;
-            }
-            else {
-                $rows = [];
-                if ($res->num_rows > 0) {
-                    while ($row = $res->fetch_assoc()) { 
-                        $rows[] = $row;   
-                    } 
-                }
-                $this->rslt    = SUCCESS;
-                $this->reason  = "ADD ORDER";
-                $this->rows = $rows;
-                return true;
-            }
-        }
-
-
         public function updateOrderStat($ordno, $stat, $ckid, $ffac, $tfac) {
             global $db;
 
