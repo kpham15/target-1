@@ -60,8 +60,8 @@
 	function deleteExpiredLog() {
 
 		$refObj = new REF();
-		//get evt_del from refObj
-		$event_del = $refObj->ref[0]['evt_del'];
+		//get evt_del from refObj, use alm_del for now
+		$event_del = $refObj->ref[0]['alm_del'];
 
 		//convert value into seconds
 		$event_del_in_sec = $event_del * 86400;
