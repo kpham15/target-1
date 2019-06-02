@@ -6,7 +6,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>ACTION:</label>
-					<select id="alarmreport-action" class="form-control">
+					<select id="alarmreport-action" class="form-control alarmreport-form-input">
 						<option></option>
 						<option>ACK</option>
 						<option>UN-ACK</option>
@@ -17,7 +17,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>SEVERITY:</label>
-					<select id="alarmreport-severity" class="form-control">
+					<select id="alarmreport-severity" class="form-control alarmreport-form-input">
 						<option></option>
 						<option>CRIT</option>
 						<option>MAJ</option>
@@ -28,7 +28,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>SOURCE:</label>
-					<input id="alarmreport-source" class="form-control">
+					<input id="alarmreport-source" class="form-control alarmreport-form-input">
 					</select>
 				</div>
 			</div>
@@ -65,7 +65,8 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label>REPORT:</label>
-					<select id="alarmreport-report" class="form-control">
+					<select id="alarmreport-report" class="form-control alarmreport-form-input">
+						<option value=""></option>
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
 					</select>
@@ -102,16 +103,40 @@
 
 
 	$(document).ready(function() {
-		let report = $('#alarmreport-report').val();
-		// click event for submit
+
+		// Click Event For 'Submit Button'
 		$('#alarmreport-submit').click(function() {
-			if (report == "VIEW_REPORT") {
-				console.log("REPORT="+report);
-				queryAlarmReports(report);
+			
+			let report = $('#alarmreport-report').val();
+
+			if (report === '') {
+				inputError($('#alarmreport-report'),'Select An Option');
+			}
+			else if (report === "VIEW REPORT") {
+				// @TODO check that FROMDATE is not after TODATE
+				console.log(report);
+				queryAlarmReports();
+			}
+			else if (report === "CREATE REPORT") {
+				// @TODO check that FROMDATE is not after TODATE
+				// FUNCTION TO CREATE REPORT
+				console.log(report);
 			}
 		});
 
-		// initalize daterangepicker
+		// Click Event For 'Clear Button'
+		$('#alarmreport-clear').click(function() {
+			$('.alarmreport-form-input').val('');
+			
+			clearErrors();
+		})
+
+		// REPORT Change listener
+		$('#alarmreport-report').change(function() {
+			clearErrors();
+		})
+
+		// initalize datepicker
 		// $(function () {
 		// 	$("#alarmreport-fromdate").datepicker({
 		// 		dateFormat: "yy/mm/dd",
