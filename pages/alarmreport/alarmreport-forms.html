@@ -6,7 +6,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>ACTION:</label>
-					<select id="alarmreport-action" class="form-control alarmreport-form-input">
+					<select id="alarmreport-forms-action" class="form-control alarmreport-forms-input">
 						<option></option>
 						<option>ACK</option>
 						<option>UN-ACK</option>
@@ -17,7 +17,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>SEVERITY:</label>
-					<select id="alarmreport-severity" class="form-control alarmreport-form-input">
+					<select id="alarmreport-forms-severity" class="form-control alarmreport-forms-input">
 						<option></option>
 						<option>CRIT</option>
 						<option>MAJ</option>
@@ -28,7 +28,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label>SOURCE:</label>
-					<input id="alarmreport-source" class="form-control alarmreport-form-input">
+					<input id="alarmreport-forms-source" class="form-control alarmreport-forms-input">
 					</select>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" class="form-control pull-right" id="alarmreport-fromdate">
+						<input type="text" class="form-control pull-right" id="alarmreport-forms-fromdate">
 					</div>
 					<!-- /.input group -->
 					</div>
@@ -54,7 +54,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" class="form-control pull-right" id="alarmreport-todate">
+						<input type="text" class="form-control pull-right" id="alarmreport-forms-todate">
 					</div>
 					<!-- /.input group -->
 					</div>
@@ -65,7 +65,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label>REPORT:</label>
-					<select id="alarmreport-report" class="form-control alarmreport-form-input">
+					<select id="alarmreport-forms-report" class="form-control alarmreport-forms-input">
 						<option value=""></option>
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<!-- Submit Button -->
-		<button id="alarmreport-submit" type="button" class="btn btn-primary btn-flat">
+		<button id="alarmreport-forms-submit" type="button" class="btn btn-primary btn-flat">
 			Submit
 		</button>
 		<!-- Clear Button -->
@@ -105,12 +105,12 @@
 	$(document).ready(function() {
 
 		// Click Event For 'Submit Button'
-		$('#alarmreport-submit').click(function() {
+		$('#alarmreport-forms-submit').click(function() {
 			
-			let report = $('#alarmreport-report').val();
+			let report = $('#alarmreport-forms-report').val();
 
 			if (report === '') {
-				inputError($('#alarmreport-report'),'Select An Option');
+				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
 				// @TODO check that FROMDATE is not after TODATE
@@ -126,19 +126,19 @@
 
 		// Click Event For 'Clear Button'
 		$('#alarmreport-clear').click(function() {
-			$('.alarmreport-form-input').val('');
+			$('.alarmreport-forms-input').val('');
 			
 			clearErrors();
 		})
 
 		// REPORT Change listener
-		$('#alarmreport-report').change(function() {
+		$('#alarmreport-forms-report').change(function() {
 			clearErrors();
 		})
 
 		// initalize datepicker
 		// $(function () {
-		// 	$("#alarmreport-fromdate").datepicker({
+		// 	$("#alarmreport-forms-fromdate").datepicker({
 		// 		dateFormat: "yy/mm/dd",
 		// 		showOtherMonths: true,
 		// 		selectOtherMonths: true,
@@ -150,7 +150,7 @@
 		// });
 
 		// $(function () {
-		// 	$("#alarmreport-todate").datepicker({
+		// 	$("#alarmreport-forms-todate").datepicker({
 		// 		dateFormat: "yy/mm/dd",
 		// 		showOtherMonths: true,
 		// 		selectOtherMonths: true,
