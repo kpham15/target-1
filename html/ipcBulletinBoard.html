@@ -81,7 +81,9 @@
                     </table>
                 </div>
             </div>
-
+            <div align="center">
+                <label id="bulletin_rslt" ></label>
+            </div>
             <div class="col-sm-12"  align="center">
                 <button id="bulletinBoard_continue_btn" class="btn btn-primary">CONTINUE</button>
             </div>
@@ -177,7 +179,8 @@ var bulletinBoard = {
 
     start: function() {
         bulletinBoard.clearForm();
-        bulletinBoard.query('query');    
+        bulletinBoard.query('query');  
+        $('#bulletin_rslt').text(''); 
     },
     
     query: function(){
@@ -201,8 +204,8 @@ var bulletinBoard = {
             }
             else {
                 if (obj.rows.length === 0) {
-                    
-                    alert("There Are No Active Broadcast Messages");
+                    $('#bulletin_rslt').text('THERE IS NO ACTIVE BROADCAST MESSAGE')
+                    //alert("There Is No Active Broadcast Message");
                 }
                 bulletinBoard.tbl.index=0;
                 for (var i = 0; i < obj.rows.length; i++) {
@@ -255,7 +258,8 @@ var bulletinBoard = {
                 bulletinBoard.indexLbl.text("(total:" + len + ")") ;
             else
                 bulletinBoard.indexLbl.text((startIndex+1) + " - " + stopIndex + " (total:" + len + ")");
-        } 
+        }
+        $('#bulletin_rsl').text('');
     },
     
     clearForm: function() {
@@ -323,6 +327,7 @@ bulletinBoard.refreshBtn.click(function() {
 });
 
 bulletinBoard.continueBtn.click(function() {
+    $('#bulletin_rslt').text('');
     mB.sysview.click();
 });
 

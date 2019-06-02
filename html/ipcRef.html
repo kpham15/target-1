@@ -396,13 +396,13 @@ ref.submitBtn.click( function() {
         alert("Please select an action!");
     }
     if (ref.action.val() == "UPDATE") {
-        confirm("Are you sure you want to update the options with the new selections?",function(){
+        confirm("Are you sure you want to update the options with the new selections?", false, function(){
             ref.query('update');
             ref.action.val("");
         });
     }
     if (ref.action.val() == "RESET") {
-        confirm("Are you sure you want to reset options to the default?",function(){
+        confirm("Are you sure you want to reset options to the default?", false, function(){
             ref.query('reset');
             ref.action.val("");
         });         
