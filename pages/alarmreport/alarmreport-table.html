@@ -53,7 +53,7 @@
 	function queryAlarmReports() {
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
-		// let src = $('#alarmreport-forms-source');
+		let src = $('#alarmreport-forms-source').val();
 
 		$.ajax({
       type: 'POST',
@@ -64,7 +64,7 @@
         "user":     user.uname,
 				"action": 	action,
 				"sev": 			sev,
-				"src": 			"",
+				"src": 			src,
 				"fromDate": '2019-05-01',
 				"toDate": 	'2019-05-31'
       },
