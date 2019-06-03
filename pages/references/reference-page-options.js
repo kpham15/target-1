@@ -75,16 +75,20 @@ var refOptions = [
     ref_id:     "pw_alert",
 		options: 		[
 			{
-				value:	"1",
-				text: 	"1 Days"
+				value:	"0",
+				text: 	"NEVER PROMPT"
+			},
+			{
+				value: 	"3",
+				text: 	"PROMPT BEFORE 3 DAYS"
 			},
 			{
 				value: 	"5",
-				text: 	"5 Days"
+				text: 	"PROMPT BEFORE 5 DAYS"
 			},
 			{
-				value: 	"10",
-				text: 	"10 Days"
+				value: 	"7",
+				text: 	"PROMPT BEFORE 7 DAYS"
 			}
 		]
 	},
