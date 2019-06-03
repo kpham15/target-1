@@ -459,36 +459,68 @@ function updateCpsStatus($hwRsp) {
 }
 
 // function called by updateAlm in case string contains voltage only
-// str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
+// str looks like this "$ackid=1-cps-csta,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsVolt($hwRsp) {
-    // filters data brought from $cmd and extracts voltage values
+    // filters data brought from $hwRsp and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
-    $ackid = explode('=',$splitCmd[0]);
-    $newAckid = $ackid[1];
-    $volt1 = explode('=',$splitCmd[2]);
-    $volt2 = explode('=',$splitCmd[3]);
-    $volt3 = explode('=',$splitCmd[4]);
-    $volt4 = explode('=',$splitCmd[5]);
 
-    sscanf($volt1[1], "%d%s", $volt1Val, $volt1Unit);
-    sscanf($volt2[1], "%d%s", $volt2Val, $volt2Unit);
-    sscanf($volt3[1], "%d%s", $volt3Val, $volt3Unit);
-    sscanf($volt4[1], "%d%s", $volt4Val, $volt4Unit);
+    foreach($splitCmd as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $ackid = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage1") {
+            $volt1 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage2") {
+            $volt2 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage3") {
+            $volt3 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "voltage4") {
+            $volt4 = $paraExtract[1];
+        }
+    }
+
+    // extract node from ackid
+    $ackidArray = explode("-", $ackid);
+    $node = $ackidArray[0];
+ 
+    sscanf($volt1, "%d%s", $volt1Val, $volt1Unit);
+    sscanf($volt2, "%d%s", $volt2Val, $volt2Unit);
+    sscanf($volt3, "%d%s", $volt3Val, $volt3Unit);
+    sscanf($volt4, "%d%s", $volt4Val, $volt4Unit);
 
     // get lowest and highest values from volt
     $volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
     $volt_low = min($volt1Val, $volt2Val, $volt3Val, $volt4Val);
     
+    $newVolt_hiVal = round((int)($volt_hi/1000));
+    $newVolt_lowVal = round((int)($volt_low/1000));
+       
     // put units back onto volt values to prepare sending to t_nodes
     $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
     $newVolt_low = round((int)($volt_low/1000)) . 'V';
 
-    // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber;
-    $nodeObj = new NODE($newNodeNumber);
+    $refObj = new REF();
+    if ($refObj->rslt == FAIL) {
+        $result['rslt'] = $refObj->rslt;
+        $result['reason'] = $refObj->reason;
+        return $result;
+    }
+
+    $voltRange = $refObj->ref[0]['volt_range'];
+    
+    $voltRangeArray = explode("-", $voltRange);
+    $minVolt = $voltRangeArray[0];
+    $maxVolt = $voltRangeArray[1];
+
+    // $result['reason'] = "newVolt_hiVal=$newVolt_hiVal||maxVolt=$maxVolt||newVolt_minVal=$newVolt_lowVal||minVolt=$minVolt";
+    // return $result;
+   
+    $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
         $result['reason'] = $nodeObj->reason;
@@ -496,7 +528,7 @@ function updateCpsVolt($hwRsp) {
     }
 
     // write to t_nodes the volt_hi by default or the voltage that is out of range
-    if ($volt_low < 42000) {
+    if ($volt_low < $minVolt) {
         $nodeObj->updateVolt($newVolt_low);
     }
     else{
@@ -504,8 +536,8 @@ function updateCpsVolt($hwRsp) {
     }
 
     // makes new alm if voltage is out of range
-    if (($volt_hi > 52000) || ($volt_low < 42000)) {
-        $almid = $newAckid . '-V';
+    if (($newVolt_hiVal > $maxVolt) || ($newVolt_lowVal < $minVolt)) {
+        $almid = $ackid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -513,7 +545,7 @@ function updateCpsVolt($hwRsp) {
             $cond = 'VOLTAGE OUT-OF-RANGE';
             $sa = 'N';
             $sev = 'MIN';
-            $remark = $almid . ' : ' . $cond;
+            $remark = $almid . ' : ' . $cond . 'VOLT_HI=' . $newVolt_hiVal . '||VOLT_LOW=' . $newVolt_lowVal;
             $almObj = new ALMS();
             $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
             //logError if failed here
@@ -521,8 +553,8 @@ function updateCpsVolt($hwRsp) {
     }
 
     // sys-clr alm if voltage is in range
-    if (($volt_hi <= 46000) && ($volt_low >= 42000)) {
-        $almid = $newAckid . '-V';
+    if (($newVolt_hiVal <= $maxVolt) && ($newVolt_lowVal >= $minVolt)) {
+        $almid = $ackid . '-V';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : VOLTAGE IN-RANGE';
@@ -536,24 +568,36 @@ function updateCpsVolt($hwRsp) {
 }
 
 // function called by updateAlm in case string contains temp only
-// str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
+// str looks like this "$ackid=1-cps-csta,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsTemp($hwRsp) {
 
     // filters data brought from $cmd and extracts temp values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
-    $ackid = explode('=', $splitCmd[0]);
-    $newAckid = $ackid[1];
- 
-    $temp1 = explode('=',$splitCmd[3]);
-    $temp2 = explode('=',$splitCmd[4]);
-    $temp3 = explode('=',$splitCmd[5]);
-    $temp4 = explode('=',$splitCmd[6]);
 
-    sscanf($temp1[1], "%d%s", $temp1Val, $temp1Unit);
-    sscanf($temp2[1], "%d%s", $temp2Val, $temp2Unit);
-    sscanf($temp3[1], "%d%s", $temp3Val, $temp3Unit);
-    sscanf($temp4[1], "%d%s", $temp4Val, $temp4Unit);
+    foreach($splitCmd as $parameter) {
+        $paraExtract = explode("=", $parameter);
+        if ($paraExtract[0] == "ackid") {
+            $ackid = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone1") {
+            $temp1 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone2") {
+            $temp2 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone3") {
+            $temp3 = $paraExtract[1];
+        }
+        else if ($paraExtract[0] == "zone4") {
+            $temp4 = $paraExtract[1];
+        }
+    }
+
+    sscanf($temp1, "%d%s", $temp1Val, $temp1Unit);
+    sscanf($temp2, "%d%s", $temp2Val, $temp2Unit);
+    sscanf($temp3, "%d%s", $temp3Val, $temp3Unit);
+    sscanf($temp4, "%d%s", $temp4Val, $temp4Unit);
 
     $temp_hi = max($temp1Val, $temp2Val, $temp3Val, $temp4Val);
 
@@ -561,10 +605,10 @@ function updateCpsTemp($hwRsp) {
     $newTemp_hi = $temp_hi . $temp1Unit;
     
     // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber;
-    $nodeObj = new NODE($newNodeNumber);
+    $ackidArray = explode("-", $ackid);
+    $node = $ackidArray[0];
+
+    $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
         $result['rslt'] = $nodeObj->rslt;
         $result['reason'] = $nodeObj->reason;
@@ -574,9 +618,20 @@ function updateCpsTemp($hwRsp) {
     // update t_nodes w/ highest temp
     $nodeObj->updateTemp($newTemp_hi);
 
+    
+    $refObj = new REF();
+    if ($refObj->rslt == FAIL) {
+        $result['rslt'] = $refObj->rslt;
+        $result['reason'] = $refObj->reason;
+        return $result;
+    }
+
+    // obtain temp_max from refObj
+    $tempMax = $refObj->ref[0]['temp_max'];
+
     // makes new alm if temp is out of range
-    if ($temp_hi > 66) {
-        $almid = $newAckid . '-T';
+    if ($temp_hi > $tempMax) {
+        $almid = $ackid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
             $src = 'POWER';
@@ -596,8 +651,8 @@ function updateCpsTemp($hwRsp) {
     }
 
     // sys-clr alm if temp is in range
-    if ($temp_hi < 66) {
-        $almid = $newAckid . '-T';
+    if ($temp_hi < $tempMax) {
+        $almid = $ackid . '-T';
         $almObj = new ALMS($almid);
         if (count($almObj->rows) !== 0) {
             $remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : TEMPERATURE IN-RANGE';
@@ -649,7 +704,8 @@ function exec_resp($node, $hwRsp, $userObj) {
     // check if serial_no is the same as number in database
     if ($cpsObj->serial_no != '-' && $cpsObj->serial_no != '' && $cpsObj->serial_no !== $serial_no) {
         // create alarm here "almid=node-cps-sn"
-        $almid = "$node-cps-$serial_no";
+        // is serial_no from db or from parsed data??
+        $almid = "$node-cps-sn";
         // check if alm with this almid already exists, if no, create a new one
         $almObj = new ALMS($almid);
         if (count($almObj->rows) == 0) {
@@ -658,22 +714,26 @@ function exec_resp($node, $hwRsp, $userObj) {
             $cond = 'COMMUNICATION';
             $sa = 'N';
             $sev = 'MAJ';
-            $remark = 'INCORRECT BACKPLANE SERIAL NUMBER';
+            $remark = 'SERIAL NUMBER IN CONFLICT || EXPECTED: ' . $cpsObj->serial_no . " || INPUT: " . $serial_no;
             $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
         }
         
         // send stop UDP:stop
-        $cmd = "inst=STOP_CPS,sn=$serial_no";
-        $cmdObj = new CMD();
-        $cmdObj->sendCmd($cmd, $node);
-        if ($cmdObj->rslt == "fail") {
-            $result['rslt'] = $cmdObj->rslt;
-            $result['reason'] = $cmdObj->reason;
-            return;
-        }
+        // $cmd = "inst=STOP_CPS,sn=$serial_no";
+        // $cmdObj = new CMD();
+        // $cmdObj->sendCmd($cmd, $node);
+        // if ($cmdObj->rslt == "fail") {
+        //     $result['rslt'] = $cmdObj->rslt;
+        //     $result['reason'] = $cmdObj->reason;
+        //     return;
+        // }
+        
+        // use existing function that has checks and updates psta/ssta for this node
+        stop($node, $cpsObj->serial_no, $userObj);
+        
         
         $result['rslt'] = FAIL;
-        $result['reason'] = "INCORRECT BACKPLANE SERIAL NUMBER";
+        $result['reason'] = "SERIAL NUMBER IN CONFLICT";
         return $result;
     }
   
