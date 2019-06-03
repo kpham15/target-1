@@ -136,24 +136,16 @@ var refOptions = [
     ref_id:     "pw_reuse",
 		options: 		[
 			{
-				value:	"1",
-				text: 	"1 Time"
-			},
-			{
 				value: 	"2",
-				text: 	"2 Times"
+				text: 	"NO REUSE LAST 2 PW"
 			},
 			{
 				value: 	"3",
-				text: 	"3 Times"
+				text: 	"NO REUSE LAST 3 PW"
 			},
 			{
 				value: 	"4",
-				text: 	"4 Times"
-			},
-			{
-				value: 	"5",
-				text: 	"5 Times"
+				text: 	"NO REUSE LAST 4 PW"
 			}
 		]
 	},
