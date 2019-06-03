@@ -1,255 +1,7 @@
 <!-- Dropdown selections -->
 <div class="col-md-7">
-    <!-- Row 1 -->
-    <div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>MAXIMUM PASSWORD AGE</label>
-					<select id="reference-page-pwage" class="form-control">
-						<option value="30">30 Days</option>
-						<option value="60">60 Days</option>
-						<option value="90">90 Days</option>
-						<!--@TODO check to see if 0 passes as never expires in back end-->
-						<option value="0">Never</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>ALARM REPORT ARCHIVE</label>
-					<select id="reference-page-almarchive" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>MAINTENANCE REPORT DELETE</label>
-					<select id="reference-page-maintdelete" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 2 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>PASSWORD EXPIRY PROMPT</label>
-					<select id="reference-page-pwalert" class="form-control">
-						<option value="1">1 Day</option>
-						<option value="5">5 Days</option>
-						<option value="10">10 Days</option>
-						<!-- @TODO check to see if 0 passes as never in back end-->
-						<option value="0">Do Not Prompt</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>ALARM REPORT DELETE</label>
-					<select id="reference-page-almdelete" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>AUTO CKID</label>
-					<select id="reference-page-autockid" class="form-control">
-						<option value="Y">Y</option>
-						<option value="N">N</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 3 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>PASSWORD REUSE</label>
-					<select id="reference-page-pwreuse" class="form-control">
-						<option value="1">1 Times</option>
-						<option value="2">2 Times</option>
-						<option value="3">3 Times</option>
-						<option value="4">4 Times</option>
-						<option value="5">5 Times</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>CONFIGURATION REPORT ARCHIVE</label>
-					<select id="reference-page-cfgarchive" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>AUTO ORDER NUMBER</label>
-					<select id="reference-page-autoordno" class="form-control">
-						<option value="Y">Y</option>
-						<option value="N">N</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 4 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>PASSWORD REPEAT</label>
-					<select id="reference-page-pwrepeat" class="form-control">
-						<option value="180">180 Days</option>
-						<option value="240">240 Days</option>
-						<option value="365">365 Days</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>CONFIGURATION REPORT DELETE</label>
-					<select id="reference-page-cfgdelete" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>DATE FORMAT</label>
-					<select id="reference-page-dateformat" class="form-control">
-						<option value="YYYY-MM-DD">YYYY-MM-DD</option>
-						<option value="MM-DD-YYYY">MM-DD-YYYY</option>
-						<option value="MM-DD-YY">MM-DD-YY</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 5 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>BROADCAST MESSAGE RETENTION</label>
-					<select id="reference-page-brdcstdel" class="form-control">
-						<option value="10">10 Days</option>
-						<option value="7">7 Days</option>
-						<option value="14">14 Days</option>
-						<option value="30">30 Days</option>
-						<option value="90">90 Days</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>PROVISIONING REPORT ARCHIVE</label>
-					<select id="reference-page-provarchive" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<!--@TODO what does mtc restore mean? change to something more meaningful -->
-					<label>MTC RESTORE</label>
-					<select id="reference-page-mtcrestore" class="form-control">
-						<option value="3">3 Minutes</option>
-						<option value="5">5 Minutes</option>
-						<option value="10">10 Minutes</option>
-						<option value="15">15 Minutes</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 6 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>DISABLE INACTIVE USER</label>
-					<select id="reference-page-userdisable" class="form-control">
-						<option value="90">90 Days</option>
-						<option value="180">180 Days</option>
-						<option value="240">240 Days</option>
-						<option value="365">365 Days</option>
-						<!-- @TODO check to see if 0 returns never in the back end -->
-						<option value="0">Do Not Disable User</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>PROVISIONING REPORT DELETE</label>
-					<select id="reference-page-provdelete" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>MAXIMUM TEMPERATURE</label>
-					<select id="reference-page-maxtemp" class="form-control">
-						<option value="70">70C</option>
-						<option value="75">75C</option>
-						<option value="80">80C</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- Row 7 -->
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>USER IDLE TIMEOUT</label>
-					<select id="reference-page-useridleto" class="form-control">
-						<option value="15">15 Minutes</option>
-						<option value="30">30 Minutes</option>
-						<option value="45">45 Minutes</option>
-						<option value="60">60 Minutes</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>MAINTENANCE REPORT ARCHIVE</label>
-					<select id="reference-page-maintarchive" class="form-control">
-						<option value="7">1 Week</option>
-						<option value="14">2 Weeks</option>
-						<option value="30">1 Month</option>
-						<option value="90">3 Months</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>VOLTAGE RANGE</label>
-					<select id="reference-page-voltrange" class="form-control">
-						<option value="35-50">35-50V</option>
-						<option value="40-50">40-50V</option>
-						<option value="40-55">40-55V</option>
-					</select>
-				</div>
-			</div>
+    <!-- Selection Boxes Dyanamically Created -->
+    <div class="row ref-select-row">
 		</div>
 		<!-- Action Row -->
 		<div class="row">
@@ -275,7 +27,32 @@
 		</button>
 </div>
 
+<script type="text/javascript" src="./pages/references/reference-page-options.js"></script>
+
 <script type="text/javascript">
+
+function refStartup() {
+
+	for (let i=0; i<refOptions.length; i++) {
+		let refSelect = createRefSelect(refOptions[i]);
+		$('.ref-select-row').append(refSelect);
+	}
+}
+
+function createRefSelect(data) {
+	let refSelect = '<div class="col-md-4">' +
+										'<div class="form-group">' +
+											'<label>'+data.title+'</label>' +
+											'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
+	for (let i=0; i<data.options.length; i++) {
+		refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	}
+	refSelect +=				'</select>' +
+										'</div>' +
+									'</div>';
+
+	return refSelect;
+}
 
 function queryReferences() {
 	$.ajax({
@@ -288,63 +65,37 @@ function queryReferences() {
 		},
 		dataType: 'json'
 	}).done(function(data) {
-		let res = data.rows;
+		let res = data.rows[0];
 		
 		displayRefs(res);
 	});
 }
 
 function displayRefs(data) {
-	$('#reference-page-almarchive').val(data[0].alm_archv);
-	$('#reference-page-almdelete').val(data[0].alm_del);
-	$('#reference-page-autockid').val(data[0].auto_ckid);
-	$('#reference-page-autoordno').val(data[0].auto_ordno);
-	$('#reference-page-brdcstdel').val(data[0].brdcst_del);
-	$('#reference-page-cfgarchive').val(data[0].cfg_archv);
-	$('#reference-page-cfgdelete').val(data[0].cfg_del);
-	$('#reference-page-dateformat').val(data[0].date_format);
-	$('#reference-page-maintarchive').val(data[0].maint_archv);
-	$('#reference-page-maintdelete').val(data[0].maint_del);
-	$('#reference-page-maxtemp').val(data[0].temp_max);
-	$('#reference-page-mtcrestore').val(data[0].mtc_restore);
-	$('#reference-page-provarchive').val(data[0].prov_archv);
-	$('#reference-page-provdelete').val(data[0].prov_del);
-	$('#reference-page-pwalert').val(data[0].pw_alert);
-	$('#reference-page-pwage').val(data[0].pw_expire);
-	$('#reference-page-pwrepeat').val(data[0].pw_repeat);
-	$('#reference-page-pwreuse').val(data[0].pw_reuse);
-	$('#reference-page-userdisable').val(data[0].user_disable);
-	$('#reference-page-useridleto').val(data[0].user_idle_to);
-	$('#reference-page-voltrange').val(data[0].volt_range);
+
+	$('.ref-select-box').each(function() {
+		let refId = $(this).attr('ref_id');
+
+		$(this).val(data[refId]);
+	});
+	
 }
 
 $(document).ready(function() {
-
+	
 	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
+
+		let refObj = {};
+
+		$('.ref-select-box').each(function() {
+			let refId = $(this).attr('ref_id');
+
+			refObj[refId] = $(this).val();
+		});
+
 		let action = $('#reference-page-action').val();
-		let almarchive = $('#reference-page-almarchive').val();
-		let almdelete = $('#reference-page-almdelete').val();
-		let autockid = $('#reference-page-autockid').val();
-		let autoordno = $('#reference-page-autoordno').val();
-		let brdcstdel = $('#reference-page-brdcstdel').val();
-		let cfgarchive = $('#reference-page-cfgarchive').val();
-		let cfgdelete = $('#reference-page-cfgdelete').val();
-		let dateformat = $('#reference-page-dateformat').val();
-		let maintarchive = $('#reference-page-maintarchive').val();
-		let maintdelete = $('#reference-page-maintdelete').val();
-		let maxtemp = $('#reference-page-maxtemp').val();
-		let mtcrestore = $('#reference-page-mtcrestore').val();
-		let provarchive = $('#reference-page-provarchive').val();
-		let provdelete = $('#reference-page-provdelete').val();
-		let pwalert = $('#reference-page-pwalert').val();
-		let pwage = $('#reference-page-pwage').val();
-		let pwrepeat = $('#reference-page-pwrepeat').val();
-		let pwreuse = $('#reference-page-pwreuse').val();
-		let userdisable = $('#reference-page-userdisable').val();
-		let useridleto = $('#reference-page-useridleto').val();
-		let voltrange = $('#reference-page-voltrange').val();
 
 		if (action == "") {
 			inputError($('#reference-page-action'),'Select an action.');
@@ -358,26 +109,26 @@ $(document).ready(function() {
 				"api":      			"ipcRef",
 				"action":   			action,
 				"user":     			user.uname,
-				"alm_archv": 			almarchive,
-				"alm_del": 				almdelete,
-				"auto_ckid": 			autockid,
-				"auto_ordno": 		autoordno,
-				"brdcst_del": 		brdcstdel,
-				"cfg_archv": 			cfgarchive,
-				"cfg_del": 				cfgdelete,
-				"date_format": 		dateformat,
-				"maint_archv": 		maintarchive,
-				"maint_del": 			maintdelete,
-				"temp_max": 			maxtemp,
-				"mtc_restore": 		mtcrestore,
-				"prov_archv": 		provarchive,
-				"prov_del": 			provdelete,
-				"pw_alert": 			pwalert,
-				"pw_expire": 			pwage,
-				"pw_repeat": 			pwrepeat,
-				"pw_reuse": 			pwreuse,
-				"user_disable": 	userdisable,
-				"user_idle_to": 	useridleto
+				"alm_archv": 			refObj.alm_archv,
+				"alm_del": 				refObj.alm_del,
+				"auto_ckid": 			refObj.auto_ckid,
+				"auto_ordno": 		refObj.auto_ordno,
+				"brdcst_del": 		refObj.brdcst_del,
+				"cfg_archv": 			refObj.cfg_archv,
+				"cfg_del": 				refObj.cfg_del,
+				"date_format": 		refObj.date_format,
+				"maint_archv": 		refObj.maint_archv,
+				"maint_del": 			refObj.maint_del,
+				"temp_max": 			refObj.temp_max,
+				"mtc_restore": 		refObj.mtc_restore,
+				"prov_archv": 		refObj.prov_archv,
+				"prov_del": 			refObj.prov_del,
+				"pw_alert": 			refObj.pw_alert,
+				"pw_expire": 			refObj.pw_expire,
+				"pw_repeat": 			refObj.pw_repeat,
+				"pw_reuse": 			refObj.pw_reuse,
+				"user_disable": 	refObj.user_disable,
+				"user_idle_to": 	refObj.user_idle_to
 			},
 			dataType: 'json'
 		}).done(function(data) {
@@ -411,8 +162,10 @@ $(document).ready(function() {
 		clearErrors();
 	})
 
+	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
 		queryReferences();
+		refStartup();
 	})
 
 
