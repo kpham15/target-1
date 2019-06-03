@@ -18,6 +18,8 @@
     <?php include __DIR__ . '/../system-view/system-view.php'; ?>
     <?php include __DIR__ . '/../brdcst/brdcst.php'; ?>
     <?php include __DIR__ . '/../svc/svc.php'; ?>
+    <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
