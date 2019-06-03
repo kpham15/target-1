@@ -174,7 +174,6 @@ include "ipcProvConnect.php";
 		$result = provUpdateCkt($user, $ckid, $cls, $adsr, $prot, $ordno, $mlo, $userObj);
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
 		$provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
-		$result['provlog'] = $provLog->reason;
 		echo json_encode($result);
 		mysqli_close($db);
 		return;
