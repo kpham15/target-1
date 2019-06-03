@@ -6,16 +6,20 @@ var refOptions = [
 		options: 
 		[
 			{
-			value:		"30",
-			text: 		"30 Days"
+        value:		"0",
+        text: 		"NEVER EXPIRES"
+			},
+			{
+				value: 	"30",
+				text: 	"EXPIRES IN 30 DAYS"
 			},
 			{
 				value: 	"60",
-				text: 	"60 Days"
-			},
+				text: 	"EXPIRES IN 60 DAYS"
+			},	
 			{
 				value: 	"90",
-				text: 	"90 Days"
+				text: 	"EXPIRES IN 90 DAYS"
 			}	
 		]
 	},
