@@ -194,15 +194,15 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"180",
-				text: 	"DO NOT REUSE WITHIN 180 DAYS"
+				text: 	"DO NOT REPEAT WITHIN 180 DAYS"
 			},
 			{
 				value: 	"240",
-				text: 	"DO NOT REUSE WITHIN 240 DAYS"
+				text: 	"DO NOT REPEAT WITHIN 240 DAYS"
 			},
 			{
 				value: 	"365",
-				text: 	"DO NOT REUSE WITHIN 365 DAYS"
+				text: 	"DO NOT REPEAT WITHIN 365 DAYS"
 			},
 		]
 	},
