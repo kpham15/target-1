@@ -54,8 +54,6 @@
         $fac = $_POST['fac'];
 	}
 
-	// $evtLog 	= new EVTLOG($user, "PATH", $act);
-
 	$evtLog = new EVENTLOG($user, "MAINTENANCE", "PATH ADMINISTRATION", $act, $_POST);
 
 	
@@ -202,7 +200,14 @@
 			$result["rows"]   = [];
 			return $result;
 		}
-		$node = $node -1;
+		if ($slot == "") {
+			$result["rslt"]   = 'fail';
+			$result["reason"] = "MISSING SLOT";
+			$result["rows"]   = [];
+			return $result;
+		}
+		$node = $node - 1;
+		$slot = $slot - 1;
 		$pathObj->queryPathByNode($node, $slot);
         $result["rslt"]   = $pathObj->rslt;
         $result["reason"] = $pathObj->reason;

@@ -134,8 +134,6 @@ class ALMS {
         $now = date('Y-m-d H:i:s', time());
         $remark = $now . ": NEW-ALARM " . $remark;
 
-        // $qry = "INSERT INTO t_alms VALUES(0, '$almid', '', '$sa', '$src', '$type', '$cond', '$sev', '$psta', '$ssta', '$remark', '$now')";
-
         $qry = "INSERT INTO 
                 t_alms 
                 (almid, ack, sa, src, type, cond, 
@@ -845,78 +843,6 @@ class ALMS {
             $this->reason = "ALM_QUERY";
             $this->rows   = $rows;
         }
-    }
-
-    public function reportBySrc($user, $src, $evt) {
-        global $db;
-
-        $s = explode('-',$src);
-        if ($s[1] == 'MX' || $s[1] == 'MY' || $s[1] == 'MR') {
-            $this->src = $src;
-            $this->type = 'HW';
-            $this->sev = 'MAJ';
-            $this->sa = 'Y';
-            $this->cond = 'NEW';
-            $this->remark = $src . ": " . $evt;
-        }
-        else if ($s[1] == 'CPS') {
-            $e = explode('-',$evt);
-            if ($e[0] == 'T') {
-                if ($e[1] > 100) {
-                    $this->src = $src;
-                    $this->type = 'TEMPERATURE';
-                    $this->sev = 'MIN';
-                    $this->sa = 'N';
-                    $this->cond = 'NEW';
-                    $this->remark = $src . ": " . $evt;
-                }
-                else {
-                    $this->rslt = FAIL;
-                    $this->reason = 'CPS_TEMPERATURE_OK';
-                    return false;
-                }
-            }
-            else if ($e[0] == 'V') {
-                if ($e[1] < 42) {
-                    $this->src = $src;
-                    $this->type = 'POWER';
-                    $this->sev = 'MIN';
-                    $this->sa = 'N';
-                    $this->cond = 'NEW';
-                    $this->remark = $src . ": " . $evt;
-                }
-                else {
-                    $this->rslt = FAIL;
-                    $this->reason = "CPS_VOLTAGE_OK";
-                    return false;
-                }
-            }
-            else {
-                $this->rslt = FAIL;
-                $this->reason = "INVALID_ALM_REQUEST";
-                return false;
-            }
-        }
-        else {
-            $this->rslt = FAIL;
-            $this->reason = "INVALID_ALM_REQUEST";
-            return false;
-        }
-
-        $qry = "INSERT INTO t_alms VALUES(0, id, '', '$this->sa', '$this->src', '$this->type', '$this->cond', '$this->sev', '', '', '$this->remark',now())";
-        $res = $db->query($qry);
-		if (!$res) {
-			$this->rslt = "fail";
-            $this->reason = $qry . "\n" . mysqli_error($db);
-            return false;
-		}
-		else {
-            $this->id = $db->insert_id;
-            $this->almid = $this->id;
-			$this->rslt = "success";
-            $this->reason = "ALM_CREATED";
-            return true;
-		}
     }
 
 }

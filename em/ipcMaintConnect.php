@@ -87,12 +87,8 @@
 		$tport = $_POST['tport'];
     }
     
-    // $input = "ACTION=$act | TKTNO=$tktno | CKID=$ckid | CLS=$cls | ADSR=$adsr | PROT=$prot | CONTYP=$ctyp | FAC(X)=$ffac | FAC(Y)=$tfac";
-   
-    // $evtLog = new EVTLOG($user, "MAINT", $act, $input);
     $evtLog = new EVENTLOG($user, "MAINTENANCE", "SETUP MAINTENANCE CONNECTION", $act, '');
     
-
 
     $maintLog = new MAINTLOG();
 

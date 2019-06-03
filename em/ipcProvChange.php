@@ -92,15 +92,6 @@
 		$tport = $_POST['tport'];
     }
     
-    // $input = date("Y-m-d H:i:s") . "\n";
-    // $input .= str_pad("ORDNO=" . $ordno,30) . str_pad("ACTION=" . $act,20) . str_pad("MLO=" . $mlo,10) . str_pad("USER=" . $user,30) . "\n";
-	// $input .= str_pad("DD=" . $dd,20) . str_pad("FDD=" . $fdd,20) . "\n";
-    // $input .= str_pad("CKID=" . $ckid,30) . str_pad("CLS=" . $cls,15) . str_pad("ADSR=" . $adsr,10) . str_pad("PROT=" . $prot,10) . "\n";
-    // $input .= str_pad("CONTYP=" . $ctyp,15) . str_pad("FAC(X)=" . $ffac,30) . str_pad("FAC(Y)=" . $tfac,30);
-
-    // $evtLog = new EVTLOG($user, "SVCCONN", $act, $input);
-
-
 
 
 	// --- Dispatch by ACTION ---

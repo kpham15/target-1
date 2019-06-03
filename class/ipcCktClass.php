@@ -65,6 +65,31 @@
             }
         }
 
+        public function queryCkidByOrdno($ordno) {
+            global $db;
+
+            $qry = "SELECT * FROM t_ckts WHERE ORDNO='$ordno'";
+            $res = $db->query($qry);
+            if (!$res) {
+                $this->rslt    = FAIL;
+                $this->reason  = mysqli_error($db);
+                return;
+            }
+            else {
+                $rows = [];
+                if ($res->num_rows > 0) {
+                    while ($row = $res->fetch_assoc()) {
+                        $rows[] = $row;
+                    }
+                }
+
+                $this->rows = $rows;
+                $this->rslt = SUCCESS;
+                $this->reason = "QUERY BY CKID";
+            }
+        }
+
+
         public function queryCkid($ckid, $cls, $adsr, $prot) {
 
             global $db;
@@ -247,7 +272,6 @@
             };
 
             // setup new ckt
-            // $qry = "INSERT INTO t_ckts values(0,'$ckid','$cls','$adsr','$prot','$ordno','$mlo',now(),0,'$stat')";
             $qry = "INSERT INTO 
                     t_ckts 
                     (ckid, cls, adsr, prot, ordno, 
@@ -355,35 +379,6 @@
                 return true;
             }
         }
-
-        public function addOrder($ordno, $mlo, $stat, $ckid, $cls, $adsr, $prot, $act, $ctyp, $ffac, $tfac) {
-            global $db;
-
-            // $qry = "INSERT INTO t_orders VALUES(0, '$stat', '$ordno', '$mlo',  '$ckid', '$cls', '$adsr', '$prot', '$act', '$ctyp', '$ffac', '$tfac', now())";
-
-            $qry = "INSERT INTO t_orders (stat, ordno, mlo, ckid, cls, adsr, prot, act, ctyp, ffac, tfac, date) ";
-            $qry .= " VALUES ('$stat', '$ordno', '$mlo', '$ckid', '$cls', '$adsr', '$prot', '$act', '$ctyp', '$ffac', '$tfac', now())";
-
-            $res = $db->query($qry);
-            if (!$res) {
-                $this->rslt    = FAIL;
-                $this->reason  = mysqli_error($db);
-                return false;
-            }
-            else {
-                $rows = [];
-                if ($res->num_rows > 0) {
-                    while ($row = $res->fetch_assoc()) { 
-                        $rows[] = $row;   
-                    } 
-                }
-                $this->rslt    = SUCCESS;
-                $this->reason  = "ADD ORDER";
-                $this->rows = $rows;
-                return true;
-            }
-        }
-
 
         public function updateOrderStat($ordno, $stat, $ckid, $ffac, $tfac) {
             global $db;

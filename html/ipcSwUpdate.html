@@ -308,7 +308,7 @@ swUpd.act.change(function() {
            
         }
         else {
-            confirm("This action will reload the page. Continue?", function(){
+            confirm("This action will reload the page. Continue?", false, function(){
                 if (swUpd.act.val()  ==  "RUN CURRENT SW") {
                     swUpd.query('RUN CURRENT SW');
                     swUpd.clearForm();

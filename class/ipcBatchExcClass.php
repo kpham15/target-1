@@ -53,9 +53,7 @@ class BATCH {
 		global $db;
 
         $date = now();
-
-        // $qry = "INSERT INTO t_batch VALUES ('0','$user','$fileName','$fileContent',now())";
-        
+     
         $qry = "INSERT INTO 
                 t_batch 
                 (user, filename, content, date) 
@@ -75,7 +73,6 @@ class BATCH {
         $commandArray = preg_split ('/$\R?^/m', $fileContent);
         for($i=0; $i < count($commandArray); $i++) {
             $cmd_id = $i+1;
-            // $qry = "INSERT INTO t_bats VALUES ('0','$batch_id','$cmd_id','$commandArray[$i]')";
 
             $qry = "INSERT INTO 
                     t_bats 

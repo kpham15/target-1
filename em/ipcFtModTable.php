@@ -42,7 +42,6 @@
         $id = $_POST['id'];
     }
 
-    // $evtLog = new EVTLOG($user, "FTMODTABLE", $act, "");
     $evtLog = new EVENTLOG($user, "PROVISIONING", "FLOW THROUGH", "", $_POST);
 
 	// Dispatch to Functions
