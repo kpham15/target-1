@@ -174,6 +174,7 @@ include "ipcProvConnect.php";
 		$result = provUpdateCkt($user, $ckid, $cls, $adsr, $prot, $ordno, $mlo, $userObj);
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
 		$provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
+		$result['provlog'] = $provLog->reason;
 		echo json_encode($result);
 		mysqli_close($db);
 		return;
@@ -283,6 +284,24 @@ include "ipcProvConnect.php";
 			$result['jeop'] = "SP5:$cktObj->reason";
 			$result['reason'] = $cktObj->reason;
 			return $result;
+		}
+
+		// ORDNO must not already exist
+		if ($ordno ="") {
+			$result['rslt'] = FAIL;
+			$result['jeop'] = "SP5: MISSING ORDNO";
+			$result['reason'] = "MISSING ORDNO";
+			return $result;
+		}
+		else {
+			$ordObj = new CKT();
+			$ordObj->queryCkidByOrdno($ordno);
+			if (count($ordObj->rows) > 0) {
+				$result['rslt'] = 'fail';
+				$result['jeop'] = 'SP2: INVALID ORDNO'; 
+				$result['reason'] = 'ORDNO ALREADY EXISTS';
+				return $result;    
+			}
 		}
 
 		$cktObj->updateCkt($cls, $adsr, $prot, $ordno, $mlo);
