@@ -138,12 +138,10 @@
             data: alarmreportDataRows
         });
         if (csv == null) {
-						// alert("NO REPORT TO CREATE");
 						inputError($('#alarmreport-forms-report'),'No Reports To Create');
             return;
-        }
-
-        // filename = 'ALARM_REPORT_'+almReport.fromDate.val().replace(/-/g,'')+'_'+almReport.toDate.val().replace(/-/g,'')+'.csv';
+				}
+				
         filename = args.filename || 'export.csv';
 
         if (!csv.match(/^data:text\/csv/i)) {
