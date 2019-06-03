@@ -65,6 +65,31 @@
             }
         }
 
+        public function queryCkidByOrdno($ordno) {
+            global $db;
+
+            $qry = "SELECT * FROM t_ckts WHERE ORDNO='$ordno'";
+            $res = $db->query($qry);
+            if (!$res) {
+                $this->rslt    = FAIL;
+                $this->reason  = mysqli_error($db);
+                return;
+            }
+            else {
+                $rows = [];
+                if ($res->num_rows > 0) {
+                    while ($row = $res->fetch_assoc()) {
+                        $rows[] = $row;
+                    }
+                }
+
+                $this->rows = $rows;
+                $this->rslt = SUCCESS;
+                $this->reason = "QUERY BY CKID";
+            }
+        }
+
+
         public function queryCkid($ckid, $cls, $adsr, $prot) {
 
             global $db;

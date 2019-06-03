@@ -51,6 +51,18 @@
             }
 
             if ($newckt == true) {
+                // if MLO=N then ORDNO must not already existed
+                if (($mlo == '' || $mlo == 'N') && $ordno !="") {
+                    $ordObj = new CKT();
+                    $ordObj->queryCkidByOrdno($ordno);
+                    if (count($ordObj->rows) > 0) {
+                        $result['rslt'] = 'fail';
+                        $result['jeop'] = 'SP2: INVALID ORDNO'; 
+                        $result['reason'] = "PROVISIONING CONNECT - " . 'ORDNO ALREADY EXISTS (MLO=N)';
+                        return $result;    
+                    }
+                }
+
                 // cls must be specified
                 if (!in_array($cls,CLS_LST)) {
                     $result['rslt'] = "fail";
