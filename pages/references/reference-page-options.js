@@ -326,6 +326,10 @@ var refOptions = [
     selectId: 	"reference-page-userdisable",
     ref_id:     "user_disable",
 		options: 		[
+      {
+        value:  "0",
+        text:   "NEVER DISABLE"
+      },
 			{
 				value:	"90",
 				text: 	"90 Days"
