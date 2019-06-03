@@ -254,7 +254,6 @@ class CKTCON {
         }
         $idx = $result['idx'];
 
-        //$qry = "INSERT INTO t_cktcon VALUES(0,'$con','$ckt_id','$idx','$ctyp','$ctyp_o','$fp_id','$fp_n','$tp_id','$tp_n')";
         $qry = "INSERT INTO 
                 t_cktcon 
                 (con, ckt_id, ckid, idx, ctyp, 

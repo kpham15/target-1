@@ -58,8 +58,6 @@
 	if (isset($_POST['ugrp']))
 		$ugrp = $_POST['ugrp'];
 
-	// $evtLog = new EVTLOG($user, "USER", $act);
-	// $input = "UNAME=$uname | LNAME=$lname | FNAME=$fname | MI=$mi | SSN=$ssn | TEL=$tel | EMAIL=$email | TITLE=$title | UGRP=$ugrp";
 
     //$evtLog = new EVENTLOG($user, "USER MANAGEMENT", "SETUP USER", $act, $_POST);
 
