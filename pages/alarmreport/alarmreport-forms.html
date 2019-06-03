@@ -163,21 +163,22 @@
 		$('#alarmreport-forms-submit').click(function() {
 			
 			let report = $('#alarmreport-forms-report').val();
+			let fromDate = $('#alarmreport-forms-fromdate').val();
+			let toDate = $('#alarmreport-forms-todate').val();
 
 			if (report === '') {
 				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
 				// @TODO check that FROMDATE is not after TODATE
-				console.log(report);
+				
 				queryAlarmReports();
 			}
 			else if (report === "CREATE REPORT") {
 				// @TODO check that FROMDATE is not after TODATE
-				// FUNCTION TO CREATE REPORT
-				console.log(report);
+				
 				//@TODO change filename below to fromDate & toDate values
-				downloadAlarmReports({filename: `ALARM_REPORT_${"fromDateVal"}_${"toDateVal"}.csv`});
+				downloadAlarmReports({filename: `ALARM_REPORT_${fromDate}_${toDate}.csv`});
 			}
 		});
 
@@ -194,6 +195,7 @@
 		})
 
 		// initalize datepicker
+		//@TODO make a way for toDate to never be before fromDate
 		$(function () {
 			$("#alarmreport-forms-fromdate").datepicker({
 				format: "yyyy-mm-dd",
@@ -204,9 +206,7 @@
 				changeYear: true,
 				orientation: "bottom"
 			});
-		});
 
-		$(function () {
 			$("#alarmreport-forms-todate").datepicker({
 				format: "yyyy-mm-dd",
 				showOtherMonths: true,
@@ -214,9 +214,10 @@
 				autoclose: true,
 				changeMonth: true,
 				changeYear: true,
-				orientation: "bottom"
+				orientation: "bottom",
 			});
 		});
+
 
 	});
 </script>
