@@ -177,7 +177,7 @@
 				// FUNCTION TO CREATE REPORT
 				console.log(report);
 				//@TODO change filename below to fromDate & toDate values
-				downloadAlarmReports({filename: `ALARM_REPORT_${"1"}_${"2"}.csv`});
+				downloadAlarmReports({filename: `ALARM_REPORT_${"fromDateVal"}_${"toDateVal"}.csv`});
 			}
 		});
 
@@ -194,30 +194,29 @@
 		})
 
 		// initalize datepicker
-		// $(function () {
-		// 	$("#alarmreport-forms-fromdate").datepicker({
-		// 		dateFormat: "yy/mm/dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom"
-		// 	});
-		// });
+		$(function () {
+			$("#alarmreport-forms-fromdate").datepicker({
+				format: "yyyy-mm-dd",
+				showOtherMonths: true,
+				selectOtherMonths: true,
+				autoclose: true,
+				changeMonth: true,
+				changeYear: true,
+				orientation: "bottom"
+			});
+		});
 
-		// $(function () {
-		// 	$("#alarmreport-forms-todate").datepicker({
-		// 		dateFormat: "yy/mm/dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom"
-		// 	});
-		// });
-
+		$(function () {
+			$("#alarmreport-forms-todate").datepicker({
+				format: "yyyy-mm-dd",
+				showOtherMonths: true,
+				selectOtherMonths: true,
+				autoclose: true,
+				changeMonth: true,
+				changeYear: true,
+				orientation: "bottom"
+			});
+		});
 
 	});
 </script>
