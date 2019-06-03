@@ -138,7 +138,8 @@
             data: alarmreportDataRows
         });
         if (csv == null) {
-            alert("NO REPORT TO CREATE");
+						// alert("NO REPORT TO CREATE");
+						inputError($('#alarmreport-forms-report'),'No Reports To Create');
             return;
         }
 
