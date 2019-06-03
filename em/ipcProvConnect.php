@@ -63,7 +63,11 @@
                     }
                 }
 
-                // cls must be specified
+                // default CLS=RES if not specified
+                if ($cls == "") {
+                    $cls = "RES";
+                }
+
                 if (!in_array($cls,CLS_LST)) {
                     $result['rslt'] = "fail";
                     $result['jeop'] = 'A3:MISSING CLS'; 
