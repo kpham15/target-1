@@ -29,20 +29,20 @@ var refOptions = [
     ref_id:     "alm_archv",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
-			},
-			{
-				value: 	"14",
-				text: 	"14 Days"
-			},
-			{
-				value: 	"30",
+				value:	"30",
 				text: 	"30 Days"
+			},
+			{
+				value: 	"60",
+				text: 	"60 Days"
 			},
 			{
 				value: 	"90",
 				text: 	"90 Days"
+			},
+			{
+				value: 	"120",
+				text: 	"120 Days"
 			},
 		]
 	},
@@ -52,20 +52,20 @@ var refOptions = [
     ref_id:     "maint_del",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
+				value:	"60",
+				text: 	"60 Days"
 			},
 			{
-				value: 	"14",
-				text: 	"14 Days"
+				value: 	"120",
+				text: 	"120 Days"
 			},
 			{
-				value: 	"30",
-				text: 	"30 Days"
+				value: 	"180",
+				text: 	"180 Days"
 			},
 			{
-				value: 	"90",
-				text: 	"90 Days"
+				value: 	"240",
+				text: 	"240 Days"
 			},
 		]
 	},
@@ -98,20 +98,20 @@ var refOptions = [
     ref_id:     "alm_del",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
+				value:	"250",
+				text: 	"250 Days"
 			},
 			{
-				value: 	"14",
-				text: 	"14 Days"
+				value: 	"300",
+				text: 	"300 Days"
 			},
 			{
-				value: 	"30",
-				text: 	"30 Days"
+				value: 	"390",
+				text: 	"390 Days"
 			},
 			{
-				value: 	"90",
-				text: 	"90 Days"
+				value: 	"400",
+				text: 	"400 Days"
 			}
 		]
 	},
@@ -155,20 +155,20 @@ var refOptions = [
     ref_id:     "cfg_archv",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
-			},
-			{
-				value: 	"14",
-				text: 	"14 Days"
+				value:	"15",
+				text: 	"15 Days"
 			},
 			{
 				value: 	"30",
 				text: 	"30 Days"
 			},
 			{
-				value: 	"90",
-				text: 	"90 Days"
+				value: 	"45",
+				text: 	"45 Days"
+			},
+			{
+				value: 	"60",
+				text: 	"60 Days"
 			}
 		]
 	},
@@ -212,20 +212,20 @@ var refOptions = [
     ref_id:     "cfg_del",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
+				value:	"60",
+				text: 	"60 Days"
 			},
 			{
-				value: 	"14",
-				text: 	"14 Days"
+				value: 	"120",
+				text: 	"120 Days"
 			},
 			{
-				value: 	"30",
-				text: 	"30 Days"
+				value: 	"180",
+				text: 	"180 Days"
 			},
 			{
-				value: 	"90",
-				text: 	"90 Days"
+				value: 	"240",
+				text: 	"240 Days"
 			}
 		]
 	},
@@ -254,24 +254,20 @@ var refOptions = [
     ref_id:     "brdcst_del",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
+				value:	"0",
+				text: 	"DO NOT AUTO DELETE"
 			},
 			{
-				value: 	"10",
-				text: 	"10 Days"
+				value: 	"5",
+				text: 	"5 Days"
+			},
+			{
+				value: 	"7",
+				text: 	"7 Days"
 			},
 			{
 				value: 	"14",
 				text: 	"14 Days"
-			},
-			{
-				value: 	"30",
-				text: 	"30 Days"
-			},
-			{
-				value: 	"90",
-				text: 	"90 Days"
 			},
 		]
 	},
@@ -281,20 +277,20 @@ var refOptions = [
     ref_id:     "prov_archv",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
-			},
-			{
-				value: 	"14",
-				text: 	"14 Days"
-			},
-			{
-				value: 	"30",
+				value:	"30",
 				text: 	"30 Days"
+			},
+			{
+				value: 	"60",
+				text: 	"60 Days"
 			},
 			{
 				value: 	"90",
 				text: 	"90 Days"
+			},
+			{
+				value: 	"120",
+				text: 	"120 Days"
 			},
 		]
 	},
@@ -354,20 +350,20 @@ var refOptions = [
     ref_id:     "prov_del",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
+				value:	"250",
+				text: 	"250 Days"
 			},
 			{
-				value: 	"14",
-				text: 	"14 Days"
+				value: 	"300",
+				text: 	"300 Days"
 			},
 			{
-				value: 	"30",
-				text: 	"30 Days"
+				value: 	"390",
+				text: 	"390 Days"
 			},
 			{
-				value: 	"90",
-				text: 	"90 Days"
+				value: 	"400",
+				text: 	"400 Days"
 			},
 		]
 	},
@@ -396,8 +392,8 @@ var refOptions = [
     ref_id:     "user_idle_to",
 		options: 		[
 			{
-				value:	"15",
-				text: 	"15 Minutes"
+				value:	"0",
+				text: 	"DO NOT TIMEOUT"
 			},
 			{
 				value: 	"30",
@@ -419,16 +415,16 @@ var refOptions = [
     ref_id:     "maint_archv",
 		options: 		[
 			{
-				value:	"7",
-				text: 	"7 Days"
-			},
-			{
-				value: 	"14",
-				text: 	"14 Days"
+				value:	"15",
+				text: 	"15 Days"
 			},
 			{
 				value: 	"30",
 				text: 	"30 Days"
+			},
+			{
+				value: 	"45",
+				text: 	"45 Days"
 			},
 			{
 				value: 	"60",
