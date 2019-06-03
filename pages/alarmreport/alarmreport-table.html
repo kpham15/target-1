@@ -50,6 +50,9 @@
     "order": [[ 0, "desc" ]]
 	});
 
+	// Holds data.rows to make availabe for download
+	var alarmreportDataRows = [];
+
 	function queryAlarmReports() {
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
@@ -71,7 +74,9 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
+			let res = data.rows;
+			// used to store rows-> make available to download current rows shown
+			alarmreportDataRows = data.rows;
 
       alarmreportDatatable.clear().draw();
       alarmreportDatatable.rows.add(res);

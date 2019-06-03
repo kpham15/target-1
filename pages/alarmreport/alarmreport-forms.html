@@ -99,6 +99,8 @@
 
 <script type="text/javascript">
 
+	// this function to be used in all reports in order to format rows
+	//@TODO ask if this should be moved to functions?
 	function convertArrayOfObjectsToCSV(args) {
 		var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -133,7 +135,7 @@
 	function downloadAlarmReports(args) {
 		var data, filename, link;
         var csv = convertArrayOfObjectsToCSV({
-            data: alarmreportDatatable.data
+            data: alarmreportDataRows
         });
         if (csv == null) {
             alert("NO REPORT TO CREATE");
@@ -174,6 +176,7 @@
 				// @TODO check that FROMDATE is not after {filename: `ALARM_REPORT_${fromDate}_${toDate}.csv`}TODATE
 				// FUNCTION TO CREATE REPORT
 				console.log(report);
+				//@TODO change filename below to fromDate & toDate values
 				downloadAlarmReports({filename: `ALARM_REPORT_${"1"}_${"2"}.csv`});
 			}
 		});
