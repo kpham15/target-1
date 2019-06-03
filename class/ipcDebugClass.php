@@ -1,7 +1,7 @@
 <?php
 
 class DEBUG{
-    public $enable = '0';
+    public $enable = false;
     public $debugFile = null;
     public $rslt;
     public $reason;
@@ -9,12 +9,12 @@ class DEBUG{
     public function __construct($mode=NULL){
 
         $str = file_get_contents("../../ipc-debug.cfg");
-        if ($str == '0' || $str == '1') {
-            $this->enable = $str;
+        if ($str == '1') {
+            $this->enable = true;
         }
     
-        if ($this->enable == '1') {
-            $this->debugFile =  fopen("../report/debug.log", "a");
+        if ($this->enable == true) {
+            $this->debugFile =  fopen("../../LOG/debug.log", "a");
         }
         
         $this->rslt = 'success';
@@ -23,13 +23,13 @@ class DEBUG{
     }
 
     public function close() {
-        if ($this->enable == 0)
+        if ($this->enable == false)
             return;
         fclose($this->debugFile);
     }
 
     public function log($string) {
-        if ($this->enable == 0) {
+        if ($this->enable == false) {
             return;
         }
 
