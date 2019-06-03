@@ -300,20 +300,20 @@ var refOptions = [
     ref_id:     "mtc_restore",
 		options: 		[
 			{
-				value:	"3",
-				text: 	"3 Minutes"
-			},
-			{
-				value: 	"5",
-				text: 	"5 Minutes"
-			},
-			{
-				value: 	"10",
+				value:	"10",
 				text: 	"10 Minutes"
 			},
 			{
-				value: 	"15",
-				text: 	"15 Minutes"
+				value: 	"20",
+				text: 	"20 Minutes"
+			},
+			{
+				value: 	"30",
+				text: 	"30 Minutes"
+			},
+			{
+				value: 	"40",
+				text: 	"40 Minutes"
 			},
 		]
 	},
