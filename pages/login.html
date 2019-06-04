@@ -60,11 +60,17 @@
 
 <script>
   function loginErrorHandler(error) {
-    if (error.reason === 'INVALID PW') {
+    if (error.reason.toLowerCase().includes('invalid')) {
       inputError($('#login_username'), '');
       inputError($('#login_password_input'), 'Username/Password Invalid');
     } else if (error.reason.toLowerCase().includes('first')) {
-      console.log('first');
+      $('.login-input-fields').each(function() {
+        if ($(this).attr('id') === 'login_confirmPassWord') {
+          inputError($(this), 'First time logging in. Must change password.');
+        } else {
+          inputError($(this),'');
+        }
+      });
     }
 
   }
