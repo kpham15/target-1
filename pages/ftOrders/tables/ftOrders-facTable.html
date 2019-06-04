@@ -78,6 +78,9 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+
+      // REMOVE HIGHLIGHT FROM FORMS
+      $('#ftOrders-ordForm-action').val("").change();
     });
   });
 
