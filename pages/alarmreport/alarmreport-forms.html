@@ -167,18 +167,25 @@
 			let fromDate = $('#alarmreport-forms-fromdate').val();
 			let toDate = $('#alarmreport-forms-todate').val();
 
+			if (fromDate > toDate) {
+				let modal = {
+					title: "Error",
+					body: "'TO DATE' must be the same or after 'FROM DATE'!",
+					type: "danger"
+				}
+				modalHandler(modal);
+				return;
+			}
+
 			if (report === '') {
 				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
-				// @TODO check that FROMDATE is not after TODATE
 				
 				queryAlarmReports();
 			}
 			else if (report === "CREATE REPORT") {
-				// @TODO check that FROMDATE is not after TODATE
-				
-				//@TODO change filename below to fromDate & toDate values
+
 				downloadAlarmReports({filename: `ALARM_REPORT_${fromDate}_${toDate}.csv`});
 			}
 		});
@@ -218,7 +225,6 @@
 				orientation: "bottom",
 			});
 		});
-
 
 	});
 </script>
