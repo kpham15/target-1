@@ -168,6 +168,72 @@
     });
   }
 
+  function processOrder() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "PROCESS_ORD",
+        ordno: $("#ftOrder-ordForm-ordno").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      if (data.rslt == "fail") {
+        alert(data.reason);
+      } else {
+        alert(data.rslt);
+      }
+    });
+  }
+
+  function processCkt() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "PROCESS_CKT",
+        ordno: $("#ftOrder-ordForm-ordno").val().toUpperCase(),
+        ctid:  $("#ftOrder-cktForm-ctid").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      if (data.rslt == "fail") {
+        alert(data.reason);
+      } else {
+        alert(data.rslt);
+      }
+    });
+  }
+
+  function processConnection() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:    "ipcFtOrd",
+        user:   user.uname,
+        act:    "PROCESS_CONNECTION",
+        ordno:  $("#ftOrder-ordForm-ordno").val().toUpperCase(),
+        ctid:   $("#ftOrder-cktForm-ctid").val().toUpperCase(),
+        cls:    $("#ftOrder-cktForm-cls").val().toUpperCase(),
+        op:     $("#ftOrder-facForm-op").val().toUpperCase(),
+        ffacid: $("#ftOrder-facForm-ffacid").val().toUpperCase(),
+        tfacid: $("#ftOrder-facForm-tfacid").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      if (data.rslt == "fail") {
+        alert(data.reason);
+      } else {
+        alert(data.rslt);
+      }
+    });
+  }
+
   // VIEW BUTTON 1 
   $("#ftOrders-ordForm-view1").on("click", function() {
     ftOrdersCktDatatable.clear().draw();
@@ -200,6 +266,7 @@
     } else if (action == "PROCESS_FAC") {
       processFtConnection();
     }
+    $("#ftOrders-ordForm-action").val("").change();
   });
 
   // ACTION CHANGE
