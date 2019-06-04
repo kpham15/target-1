@@ -58,8 +58,6 @@
 	if (isset($_POST['ugrp']))
 		$ugrp = $_POST['ugrp'];
 
-	// $evtLog = new EVTLOG($user, "USER", $act);
-	// $input = "UNAME=$uname | LNAME=$lname | FNAME=$fname | MI=$mi | SSN=$ssn | TEL=$tel | EMAIL=$email | TITLE=$title | UGRP=$ugrp";
 
     //$evtLog = new EVENTLOG($user, "USER MANAGEMENT", "SETUP USER", $act, $_POST);
 
@@ -345,7 +343,13 @@
 		
 		// user can update his/her own tel,email
 		if($userObj->uname == $targetUserObj->uname) {
-			$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
+			// only admins can change their own names
+			if ($userObj->ugrp == "ADMIN")
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp);
+				// other users cannot change their names
+			else {
+				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
+			}
 		}
 		else {
 			// ADMIN and SUPERVISOR user can update other users in lower ugrp

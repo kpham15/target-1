@@ -67,10 +67,6 @@
 		$ckid = strtoupper($_POST['ckid']);
     
     
-    // $input = "PORTMAP: USER=" . $user . ", ACT=" . $act . ", PORT=" . $port . ", FAC=" . $fac;
-
-    // $evtLog = new EVTLOG($user, "PORTMAP", $act, $input);
-
     $evtLog = new EVENTLOG($user, "CONFIGURATION", "PORT MAPPING", $act, '');
 
     /* Dispatch to Func tions */

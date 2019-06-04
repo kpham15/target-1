@@ -220,7 +220,7 @@ class CKTCON {
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = FAIL;
-            $this->reason = mysqli_error($db);
+            $this->reason = mysqli_error($db) . ": " . $qry;
 			return $result;
         }
         if ($this->con == 0) {
@@ -254,7 +254,6 @@ class CKTCON {
         }
         $idx = $result['idx'];
 
-        //$qry = "INSERT INTO t_cktcon VALUES(0,'$con','$ckt_id','$idx','$ctyp','$ctyp_o','$fp_id','$fp_n','$tp_id','$tp_n')";
         $qry = "INSERT INTO 
                 t_cktcon 
                 (con, ckt_id, ckid, idx, ctyp, 
