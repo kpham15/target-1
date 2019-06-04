@@ -26,7 +26,12 @@
 
 <script type="text/javascript">
 
+  var facFirstLoad = true;
+
   $(".menu-item[page_id='fac-page']").click(async function() {
+    if (facFirstLoad != true) {
+      return;
+    }
     // loads options for ftyp, ort, spcfnc selection fields in setup facility
     loadFacOptions("queryFtyp", "ftyp");
     loadFacOptions("queryOrt", "ort");
@@ -34,6 +39,8 @@
 
     // load fac table upon visiting page
     queryFac();
+
+    facFirstLoad = false;
 
     
   });
