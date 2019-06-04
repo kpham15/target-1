@@ -71,4 +71,13 @@
 
 <script type="text/javascript">
   $(".ftOrders-cktForm-input").parent().parent().css('padding-right', "0px");
+
+  // FtOrders menu item click event
+  $(".menu-item[page_id='ftOrders-page']").click(function() {
+    if (ftOrdersFirstLoad != true) {
+      return;
+    }
+    // load ord table upon visiting page
+    queryFtOrdersOrd();
+  });
 </script>
