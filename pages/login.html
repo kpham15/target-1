@@ -109,8 +109,9 @@
           let modal = {}
   
           if (obj.rslt == 'fail') {
-            loginErrorHandler(obj);
-
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
           } else {
             keyId = obj.key;
   
@@ -145,10 +146,7 @@
           let modal = {};
 
           if (obj.rslt == "fail") {
-            modal.title = obj.rslt;
-            modal.body = obj.reason;
-            modal.type = 'danger';
-            modalHandler(modal);
+            loginErrorHandler(obj);
           } else {
             
             // @TODO add user name to profile area in sidebar/header nav
