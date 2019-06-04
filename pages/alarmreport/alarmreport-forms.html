@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<!-- @TODO determine what input field to use here check w/ bien-->
-			<!-- <div class="col-md-3">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label>FROM DATE:</label>
 					<div class="input-group date">
@@ -43,18 +43,18 @@
 						<input type="text" class="form-control pull-right" id="alarmreport-forms-fromdate">
 					</div>
 				</div>
-			</div> -->
-			<div class="col-md-3">
-				<label>FROM DATE</label>
-				<input type="date" class="form-control" id="alarmreport-forms-fromdate">
-			</div>
-			<!-- @TODO determine what input field to use here check w/ bien-->
-
-			<div class="col-md-3">
-				<label>TO DATE</label>
-				<input type="date" class="form-control" id="alarmreport-forms-todate">
 			</div>
 			<!-- <div class="col-md-3">
+				<label>FROM DATE</label>
+				<input type="date" class="form-control" id="alarmreport-forms-fromdate">
+			</div> -->
+			<!-- @TODO determine what input field to use here check w/ bien-->
+
+			<!-- <div class="col-md-3">
+				<label>TO DATE</label>
+				<input type="date" class="form-control" id="alarmreport-forms-todate">
+			</div> -->
+			<div class="col-md-3">
 				<div class="form-group">
 					<label>TO DATE:</label>
 					<div class="input-group date">
@@ -64,7 +64,7 @@
 						<input type="text" class="form-control pull-right" id="alarmreport-forms-todate">
 					</div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 		<!-- Second Row Left -->
 		<div class="row">
@@ -186,8 +186,8 @@
 				// }
 				// modalHandler(modal);
 				// return;
-				console.log("AAAAA");
-				inputError($('#alarmreport-forms-fromdate'),'Select An Option');
+				// console.log("AAAAA");
+				// inputError($('#alarmreport-forms-fromdate'),'Select An Option');
 				// inputError($('#alarmreport-forms-todate'),"Date must be after 'FROM DATE'");
 				return;
 			}
@@ -224,29 +224,29 @@
 
 		// initalize datepicker
 		//@TODO make a way for toDate to never be before fromDate
-		// $(function () {
-		// 	$("#alarmreport-forms-fromdate").datepicker({
-		// 		defaultDate: new Date(),
-		// 		format: "yyyy-mm-dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom"
-		// 	});
+		$(function () {
+			$("#alarmreport-forms-fromdate").datepicker({
+				defaultDate: new Date(),
+				format: "yyyy-mm-dd",
+				showOtherMonths: true,
+				selectOtherMonths: true,
+				autoclose: true,
+				changeMonth: true,
+				changeYear: true,
+				orientation: "bottom"
+			});
 
-		// 	$("#alarmreport-forms-todate").datepicker({
-		// 		defaultDate: new Date(),
-		// 		format: "yyyy-mm-dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom",
-		// 	});
-		// });
+			$("#alarmreport-forms-todate").datepicker({
+				defaultDate: new Date(),
+				format: "yyyy-mm-dd",
+				showOtherMonths: true,
+				selectOtherMonths: true,
+				autoclose: true,
+				changeMonth: true,
+				changeYear: true,
+				orientation: "bottom",
+			});
+		});
 
 	});
 </script>
