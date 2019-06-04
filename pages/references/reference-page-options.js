@@ -156,19 +156,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"15",
-				text: 	"15 Days"
+				text: 	"ARCHIVE AFTER 15 DAYS"
 			},
 			{
 				value: 	"30",
-				text: 	"30 Days"
+				text: 	"ARCHIVE AFTER 30 DAYS"
 			},
 			{
 				value: 	"45",
-				text: 	"45 Days"
+				text: 	"ARCHIVE AFTER 45 DAYS"
 			},
 			{
 				value: 	"60",
-				text: 	"60 Days"
+				text: 	"ARCHIVE AFTER 60 DAYS"
 			}
 		]
 	},
@@ -192,6 +192,10 @@ var refOptions = [
 		selectId: 	"reference-page-pwrepeat",
 		ref_id:     "pw_repeat",
 		options: 		[
+      {
+        value:  "0",
+        text:   "N/A"
+      },
 			{
 				value:	"180",
 				text: 	"DO NOT REPEAT WITHIN 180 DAYS"
@@ -213,19 +217,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"60",
-				text: 	"60 Days"
+				text: 	"DELETE AFTER 60 DAYS"
 			},
 			{
 				value: 	"120",
-				text: 	"120 Days"
+				text: 	"DELETE AFTER 120 DAYS"
 			},
 			{
 				value: 	"180",
-				text: 	"180 Days"
+				text: 	"DELETE AFTER 180 DAYS"
 			},
 			{
 				value: 	"240",
-				text: 	"240 Days"
+				text: 	"DELETE AFTER 240 DAYS"
 			}
 		]
 	},
@@ -259,15 +263,15 @@ var refOptions = [
 			},
 			{
 				value: 	"5",
-				text: 	"5 Days"
+				text: 	"DELETE AFTER 5 DAYS"
 			},
 			{
 				value: 	"7",
-				text: 	"7 Days"
+				text: 	"DELETE AFTER 7 DAYS"
 			},
 			{
 				value: 	"14",
-				text: 	"14 Days"
+				text: 	"DELETE AFTER 14 DAYS"
 			},
 		]
 	},
@@ -278,19 +282,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"30",
-				text: 	"30 Days"
+				text: 	"ARCHIVE AFTER 30 DAYS"
 			},
 			{
 				value: 	"60",
-				text: 	"60 Days"
+				text: 	"ARCHIVE AFTER 60 DAYS"
 			},
 			{
 				value: 	"90",
-				text: 	"90 Days"
+				text: 	"ARCHIVE AFTER 90 DAYS"
 			},
 			{
 				value: 	"120",
-				text: 	"120 Days"
+				text: 	"ARCHIVE AFTER 120 DAYS"
 			},
 		]
 	},
@@ -301,19 +305,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"10",
-				text: 	"10 Minutes"
+				text: 	"RESTORE AFTER 10 MINUTES"
 			},
 			{
 				value: 	"20",
-				text: 	"20 Minutes"
+				text: 	"RESTORE AFTER 20 MINUTES"
 			},
 			{
 				value: 	"30",
-				text: 	"30 Minutes"
+				text: 	"RESTORE AFTER 30 MINUTES"
 			},
 			{
 				value: 	"40",
-				text: 	"40 Minutes"
+				text: 	"RESTORE AFTER 40 MINUTES"
 			},
 		]
 	},
@@ -328,19 +332,19 @@ var refOptions = [
       },
 			{
 				value:	"90",
-				text: 	"90 Days"
+				text: 	"DISABLE AFTER 90 DAYS"
 			},
 			{
 				value: 	"180",
-				text: 	"180 Days"
+				text: 	"DISABLE AFTER 180 DAYS"
 			},
 			{
 				value: 	"240",
-				text: 	"240 Days"
+				text: 	"DISABLE AFTER 240 DAYS"
 			},
 			{
 				value: 	"365",
-				text: 	"365 Days"
+				text: 	"DISABLE AFTER 365 DAYS"
 			},
 		]
 	},
@@ -351,19 +355,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"250",
-				text: 	"250 Days"
+				text: 	"DELETE AFTER 250 DAYS"
 			},
 			{
 				value: 	"300",
-				text: 	"300 Days"
+				text: 	"DELETE AFTER 300 DAYS"
 			},
 			{
 				value: 	"390",
-				text: 	"390 Days"
+				text: 	"DELETE AFTER 390 DAYS"
 			},
 			{
 				value: 	"400",
-				text: 	"400 Days"
+				text: 	"DELETE AFTER 400 DAYS"
 			},
 		]
 	},
@@ -397,15 +401,15 @@ var refOptions = [
 			},
 			{
 				value: 	"30",
-				text: 	"30 Minutes"
+				text: 	"TIMEOUT AFTER 30 MINUTES"
 			},
 			{
 				value: 	"45",
-				text: 	"45 Minutes"
+				text: 	"TIMEOUT AFTER 45 MINUTES"
 			},
 			{
 				value: 	"60",
-				text: 	"60 Minutes"
+				text: 	"TIMEOUT AFTER 60 MINUTES"
 			},
 		]
 	},
@@ -416,19 +420,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"15",
-				text: 	"15 Days"
+				text: 	"ARCHIVE AFTER 15 DAYS"
 			},
 			{
 				value: 	"30",
-				text: 	"30 Days"
+				text: 	"ARCHIVE AFTER 30 DAYS"
 			},
 			{
 				value: 	"45",
-				text: 	"45 Days"
+				text: 	"ARCHIVE AFTER 45 DAYS"
 			},
 			{
 				value: 	"60",
-				text: 	"60 Days"
+				text: 	"ARCHIVE AFTER 60 DAYS"
 			},
 		]
 	},
@@ -439,15 +443,15 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"35-50",
-				text: 	"35-50"
+				text: 	"35-50V"
 			},
 			{
 				value: 	"40-50",
-				text: 	"40-50"
+				text: 	"40-50V"
 			},
 			{
 				value: 	"40-55",
-				text: 	"40-55"
+				text: 	"40-55V"
 			}
 		]
 	},
