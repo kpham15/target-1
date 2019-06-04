@@ -280,6 +280,7 @@
         $("#ftOrders-ordForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
       } else {
         // @TODO: ADD CODE TO ALERT
+        alert("PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS");
 
       }
     } else if ($(this).val() == "PROCESS_CKT") {
@@ -288,6 +289,7 @@
 
       } else {
         // @TODO: ADD CODE TO ALERT
+        alert("PLEASE SELECT A CKT FROM THE LIST OF CKTS");
 
       }
     } else if ($(this).val() == "PROCESS_FAC") {
@@ -296,11 +298,12 @@
 
       } else {
         // @TODO: ADD CODE TO ALERT
-
+        alert("PLEASE SELECT A FAC FROM THE LIST OF FACS");
       }
     } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
       return;
     }
+    $("#ftOrders-ordForm-action").val("").change();
   });
 
 
