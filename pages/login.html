@@ -13,21 +13,25 @@
     <p class="login-box-msg">Sign in to start your session</p>
 
     <form>
-      <div class="form-group has-feedback">
-        <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      <div id="login-forms">
+        <div class="form-group has-feedback">
+          <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
       </div>
-      <div class="form-group has-feedback">
-        <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-          <input id="login_confirmPassWord" type="password" class="login-input-fields form-control" placeholder="Retype Password">
-          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      <div id="newpassword-forms">
+        <div class="form-group has-feedback">
+          <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
+          <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input id="login_confirmPassWord" type="password" class="login-input-fields form-control" placeholder="Retype Password">
+            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -55,6 +59,16 @@
 <!-- /.login-box -->
 
 <script>
+  function loginErrorHandler(error) {
+    if (error.reason === 'INVALID PW') {
+      inputError($('#login_username'), '');
+      inputError($('#login_password_input'), 'Username/Password Invalid');
+    } else if (error.reason.toLowerCase().includes('first')) {
+      console.log('first');
+    }
+
+  }
+
   $(document).ready(function() {
 
     $('#login-remember').iCheck({
@@ -95,10 +109,7 @@
           let modal = {}
   
           if (obj.rslt == 'fail') {
-            modal.title = obj.rslt;
-            modal.body = obj.reason;
-            modal.type = 'danger';
-            modalHandler(modal);
+            loginErrorHandler(obj);
 
           } else {
             keyId = obj.key;
