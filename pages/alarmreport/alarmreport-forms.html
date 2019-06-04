@@ -179,12 +179,16 @@
 			let toDate = $('#alarmreport-forms-todate').val();
 
 			if (fromDate > toDate) {
-				let modal = {
-					title: "Error",
-					body: "'TO DATE' must be the same or after 'FROM DATE'!",
-					type: "danger"
-				}
-				modalHandler(modal);
+				// let modal = {
+				// 	title: "Error",
+				// 	body: "'TO DATE' must be the same or after 'FROM DATE'!",
+				// 	type: "danger"
+				// }
+				// modalHandler(modal);
+				// return;
+				console.log("AAAAA");
+				inputError($('#alarmreport-forms-fromdate'),'Select An Option');
+				// inputError($('#alarmreport-forms-todate'),"Date must be after 'FROM DATE'");
 				return;
 			}
 
