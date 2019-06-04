@@ -31,6 +31,11 @@
     loadFacOptions("queryFtyp", "ftyp");
     loadFacOptions("queryOrt", "ort");
     loadFacOptions("querySpcfnc", "spcfnc");
+
+    // load fac table upon visiting page
+    queryFac();
+
+    
   });
   
   function loadFacOptions(action, type) {
