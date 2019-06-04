@@ -156,14 +156,15 @@
       },
       dataType: 'json'
     }).done(function(data) {
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
       if (data.rslt == "fail") {
-        alert(data.reason);
+        modal.type = 'danger'
+        modalHandler(modal);
       } else {
-        if (data.rows == 0) {
-          alert("No Record Found");
-        } else {
-          queryFtOrdersOrd();
-        }
+        queryFtOrdersOrd();
       }
     });
   }
@@ -180,11 +181,18 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      if (data.rslt == "fail") {
-        alert(data.reason);
-      } else {
-        alert(data.rslt);
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
       }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
     });
   }
 
@@ -201,11 +209,18 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      if (data.rslt == "fail") {
-        alert(data.reason);
-      } else {
-        alert(data.rslt);
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
       }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
     });
   }
 
@@ -226,14 +241,24 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      if (data.rslt == "fail") {
-        alert(data.reason);
-      } else {
-        alert(data.rslt);
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
       }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
     });
   }
 
+
+  // EVENT HANDLERS
+  
   // VIEW BUTTON 1 
   $("#ftOrders-ordForm-view1").on("click", function() {
     ftOrdersCktDatatable.clear().draw();
@@ -279,26 +304,21 @@
       if ($("#ftOrders-ordForm-id").val() != "") {
         $("#ftOrders-ordForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
       } else {
-        // @TODO: ADD CODE TO ALERT
-        alert("PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS");
-
+        inputError($(this),'PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS');
       }
     } else if ($(this).val() == "PROCESS_CKT") {
       if ($("#ftOrders-cktForm-id").val() != "") {
         $("#ftOrders-cktForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
 
       } else {
-        // @TODO: ADD CODE TO ALERT
-        alert("PLEASE SELECT A CKT FROM THE LIST OF CKTS");
-
+        inputError($(this),'PLEASE SELECT A CKT FROM THE LIST OF CKTS');
       }
     } else if ($(this).val() == "PROCESS_FAC") {
       if ($("#ftOrders-facForm-id").val() != "") {
         $("#ftOrders-facForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
 
       } else {
-        // @TODO: ADD CODE TO ALERT
-        alert("PLEASE SELECT A FAC FROM THE LIST OF FACS");
+        inputError($(this),'PLEASE SELECT A FAC FROM THE LIST OF FACS');
       }
     } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
       return;
