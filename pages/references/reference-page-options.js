@@ -193,10 +193,6 @@ var refOptions = [
 		ref_id:     "pw_repeat",
 		options: 		[
 			{
-				value:	"0",
-				text: 	"N/A"
-			},
-			{
 				value:	"180",
 				text: 	"DO NOT REPEAT WITHIN 180 DAYS"
 			},
