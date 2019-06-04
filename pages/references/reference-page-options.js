@@ -53,19 +53,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"60",
-				text: 	"DELETE AFTER 30 DAYS"
-			},
-			{
-				value: 	"60",
 				text: 	"DELETE AFTER 60 DAYS"
-			},
-			{
-				value: 	"90",
-				text: 	"DELETE AFTER 90 DAYS"
 			},
 			{
 				value: 	"120",
 				text: 	"DELETE AFTER 120 DAYS"
+			},
+			{
+				value: 	"180",
+				text: 	"DELETE AFTER 180 DAYS"
+			},
+			{
+				value: 	"240",
+				text: 	"DELETE AFTER 240 DAYS"
 			},
 		]
 	},
