@@ -466,7 +466,7 @@ function updateCpsVolt($hwRsp) {
 
     $debugObj->log($hwRsp);
     $debugObj->close();
-    
+
     // filters data brought from $hwRsp and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
@@ -553,7 +553,7 @@ function updateCpsVolt($hwRsp) {
             $cond = 'VOLTAGE OUT-OF-RANGE';
             $sa = 'N';
             $sev = 'MIN';
-            $remark = $almid . ' : ' . $cond . 'VOLT_HI=' . $newVolt_hiVal . '||VOLT_LOW=' . $newVolt_lowVal;
+            $remark = $hwRsp . ' - ' . $almid . ' : ' . $cond . 'VOLT_HI=' . $newVolt_hiVal . '||VOLT_LOW=' . $newVolt_lowVal;
             $almObj = new ALMS();
             $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
             //logError if failed here
