@@ -1,8 +1,8 @@
 var refOptions = [
 	{
 		title:			"MAXIMUM PASSWORD AGE",
-    selectId:		"reference-page-pwage",
-    ref_id:     "pw_expire",
+		selectId:		"reference-page-pwage",
+		ref_id:     "pw_expire",
 		options: 
 		[
 			{
@@ -25,8 +25,8 @@ var refOptions = [
 	},
 	{
 		title: 			"ALARM REPORT ARCHIVE",
-    selectId: 	"reference-page-almarchive",
-    ref_id:     "alm_archv",
+		selectId: 	"reference-page-almarchive",
+		ref_id:     "alm_archv",
 		options: 		[
 			{
 				value:	"30",
@@ -48,8 +48,8 @@ var refOptions = [
 	},
 	{
 		title: 			"MAINTENANCE REPORT DELETE",
-    selectId: 	"reference-page-maintdelete",
-    ref_id:     "maint_del",
+		selectId: 	"reference-page-maintdelete",
+		ref_id:     "maint_del",
 		options: 		[
 			{
 				value:	"60",
@@ -71,8 +71,8 @@ var refOptions = [
 	},
 	{
 		title: 			"PASSWORD EXPIRY PROMPT",
-    selectId: 	"reference-page-pwalert",
-    ref_id:     "pw_alert",
+		selectId: 	"reference-page-pwalert",
+		ref_id:     "pw_alert",
 		options: 		[
 			{
 				value:	"0",
@@ -94,8 +94,8 @@ var refOptions = [
 	},
 	{
 		title: 			"ALARM REPORT DELETE",
-    selectId: 	"reference-page-almdelete",
-    ref_id:     "alm_del",
+		selectId: 	"reference-page-almdelete",
+		ref_id:     "alm_del",
 		options: 		[
 			{
 				value:	"250",
@@ -117,8 +117,8 @@ var refOptions = [
 	},
 	{
 		title: 			"AUTO CKID",
-    selectId: 	"reference-page-autockid",
-    ref_id:     "auto_ckid",
+		selectId: 	"reference-page-autockid",
+		ref_id:     "auto_ckid",
 		options: 		[
 			{
 				value:	"Y",
@@ -132,8 +132,8 @@ var refOptions = [
 	},
 	{
 		title: 			"PASSWORD REUSE",
-    selectId: 	"reference-page-pwreuse",
-    ref_id:     "pw_reuse",
+		selectId: 	"reference-page-pwreuse",
+		ref_id:     "pw_reuse",
 		options: 		[
 			{
 				value: 	"2",
@@ -151,8 +151,8 @@ var refOptions = [
 	},
 	{
 		title: 			"CONFIGURATION REPORT ARCHIVE",
-    selectId: 	"reference-page-cfgarchive",
-    ref_id:     "cfg_archv",
+		selectId: 	"reference-page-cfgarchive",
+		ref_id:     "cfg_archv",
 		options: 		[
 			{
 				value:	"15",
@@ -174,8 +174,8 @@ var refOptions = [
 	},
 	{
 		title: 			"AUTO ORDER NUMBER",
-    selectId: 	"reference-page-autoordno",
-    ref_id:     "auto_ordno",
+		selectId: 	"reference-page-autoordno",
+		ref_id:     "auto_ordno",
 		options: 		[
 			{
 				value:	"Y",
@@ -189,8 +189,8 @@ var refOptions = [
 	},
 	{
 		title: 			"PASSWORD REPEAT",
-    selectId: 	"reference-page-pwrepeat",
-    ref_id:     "pw_repeat",
+		selectId: 	"reference-page-pwrepeat",
+		ref_id:     "pw_repeat",
 		options: 		[
 			{
 				value:	"0",
@@ -212,8 +212,8 @@ var refOptions = [
 	},
 	{
 		title: 			"CONFIGURATION REPORT DELETE",
-    selectId: 	"reference-page-cfgdelete",
-    ref_id:     "cfg_del",
+		selectId: 	"reference-page-cfgdelete",
+		ref_id:     "cfg_del",
 		options: 		[
 			{
 				value:	"60",
@@ -235,8 +235,8 @@ var refOptions = [
 	},
 	{
 		title: 			"DATE FORMAT",
-    selectId: 	"reference-page-dateformat",
-    ref_id:     "date_format",
+		selectId: 	"reference-page-dateformat",
+		ref_id:     "date_format",
 		options: 		[
 			{
 				value:	"YYYY-MM-DD",
@@ -254,8 +254,8 @@ var refOptions = [
 	},
 	{
 		title: 			"BROADCAST MESSAGE RETENTION",
-    selectId: 	"reference-page-brdcstdel",
-    ref_id:     "brdcst_del",
+		selectId: 	"reference-page-brdcstdel",
+		ref_id:     "brdcst_del",
 		options: 		[
 			{
 				value:	"0",
@@ -277,8 +277,8 @@ var refOptions = [
 	},
 	{
 		title: 			"PROVISIONING REPORT ARCHIVE",
-    selectId: 	"reference-page-provarchive",
-    ref_id:     "prov_archv",
+		selectId: 	"reference-page-provarchive",
+		ref_id:     "prov_archv",
 		options: 		[
 			{
 				value:	"30",
@@ -300,8 +300,8 @@ var refOptions = [
 	},
 	{
 		title: 			"MTC RESTORE",
-    selectId: 	"reference-page-mtcrestore",
-    ref_id:     "mtc_restore",
+		selectId: 	"reference-page-mtcrestore",
+		ref_id:     "mtc_restore",
 		options: 		[
 			{
 				value:	"10",
@@ -323,8 +323,8 @@ var refOptions = [
 	},
 	{
 		title: 			"DISABLE INACTIVE USER",
-    selectId: 	"reference-page-userdisable",
-    ref_id:     "user_disable",
+		selectId: 	"reference-page-userdisable",
+		ref_id:     "user_disable",
 		options: 		[
       {
         value:  "0",
@@ -350,8 +350,8 @@ var refOptions = [
 	},
 	{
 		title: 			"PROVISIONING REPORT DELETE",
-    selectId: 	"reference-page-provdelete",
-    ref_id:     "prov_del",
+		selectId: 	"reference-page-provdelete",
+		ref_id:     "prov_del",
 		options: 		[
 			{
 				value:	"250",
@@ -373,8 +373,8 @@ var refOptions = [
 	},
 	{
 		title: 			"MAXIMUM TEMPERATURE",
-    selectId: 	"reference-page-maxtemp",
-    ref_id:     "temp_max",
+		selectId: 	"reference-page-maxtemp",
+		ref_id:     "temp_max",
 		options: 		[
 			{
 				value:	"70",
@@ -392,8 +392,8 @@ var refOptions = [
 	},
 	{
 		title: 			"USER IDLE TIMEOUT",
-    selectId: 	"reference-page-useridleto",
-    ref_id:     "user_idle_to",
+		selectId: 	"reference-page-useridleto",
+		ref_id:     "user_idle_to",
 		options: 		[
 			{
 				value:	"0",
@@ -415,8 +415,8 @@ var refOptions = [
 	},
 	{
 		title: 			"MAINTENANCE REPORT ARCHIVE",
-    selectId: 	"reference-page-maintarchive",
-    ref_id:     "maint_archv",
+		selectId: 	"reference-page-maintarchive",
+		ref_id:     "maint_archv",
 		options: 		[
 			{
 				value:	"15",
@@ -438,8 +438,8 @@ var refOptions = [
 	},
 	{
 		title: 			"VOLTAGE RANGE",
-    selectId: 	"reference-page-voltrange",
-    ref_id:     "volt_range",
+		selectId: 	"reference-page-voltrange",
+		ref_id:     "volt_range",
 		options: 		[
 			{
 				value:	"35-50",
