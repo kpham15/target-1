@@ -6,7 +6,7 @@ class DEBUG{
     public $rslt;
     public $reason;
 
-    public function __construct($mode=NULL){
+    public function __construct(){
 
         $str = file_get_contents("../../ipc-debug.cfg");
         if ($str == '1') {
