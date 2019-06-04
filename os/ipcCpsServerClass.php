@@ -33,6 +33,10 @@ class CPSSERVER {
 
     public function setNonBlock() {
         socket_set_nonblock ($this->socket);
+        
+    }
+    public function setBlock(){
+        socket_set_block ($this->socket);
         //set timeout for the server
         if($this->timeoutSec != 0 || $this->timeoutUsec != 0) {
             socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => $this->timeoutSec, 'usec' => $this->timeoutUsec));

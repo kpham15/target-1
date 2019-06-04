@@ -114,11 +114,6 @@ include "ipcProvConnect.php";
 		$tktno = $_POST['tktno'];
     }
 
-	// $input = "SVCCONN: USER=" . $user . ", ACT=" . $act . ", CKID=" . $ckid . ", CLS=" . $cls . ", ADSR=" . $adsr;
-	// $input .= ", PROT=" . $prot . ", ORDNO=" . $ordno . ", MLO=" . $mlo . ", DD=" . $dd . ", FDD=" . $fdd;
-	// $input .= ", CONTYP=" . $ctyp . ", FAC(X)=" . $ffac . ", FAC(Y)=" . $tfac;
-
-	// $evtLog = new EVTLOG($user, "SVCCONN", $act, $input);
 
     $evtLog = new EVENTLOG($user, "PROVISIONING", "SETUP SERVICE CONNECTION", $act, '');
 	$provLog = new PROVLOG();
@@ -126,7 +121,7 @@ include "ipcProvConnect.php";
 	// --- Dispatch by ACTION ---
 	if ($act == "query" || $act == "queryCkid") {
 		$cktObj = new CKT();
-		$cktObj->queryCkid($ckid, $cls, $adsr, $prot);
+		$cktObj->queryCkid($ckid, "", "", "");
 		$result['rslt'] = $cktObj->rslt;
 		$result['reason'] = $cktObj->reason;
 		$result['rows'] = $cktObj->rows;
@@ -179,6 +174,7 @@ include "ipcProvConnect.php";
 		$result = provUpdateCkt($user, $ckid, $cls, $adsr, $prot, $ordno, $mlo, $userObj);
 		$evtLog->log($result['rslt'], $result['log'] . " | " . $result['reason']);
 		$provLog->log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result['reason'], $tktno);
+		$result['provlog'] = $provLog->reason;
 		echo json_encode($result);
 		mysqli_close($db);
 		return;
@@ -288,6 +284,24 @@ include "ipcProvConnect.php";
 			$result['jeop'] = "SP5:$cktObj->reason";
 			$result['reason'] = $cktObj->reason;
 			return $result;
+		}
+
+		// ORDNO must not already exist
+		if ($ordno ="") {
+			$result['rslt'] = FAIL;
+			$result['jeop'] = "SP5: MISSING ORDNO";
+			$result['reason'] = "MISSING ORDNO";
+			return $result;
+		}
+		else {
+			$ordObj = new CKT();
+			$ordObj->queryCkidByOrdno($ordno);
+			if (count($ordObj->rows) > 0) {
+				$result['rslt'] = 'fail';
+				$result['jeop'] = 'SP2: INVALID ORDNO'; 
+				$result['reason'] = 'ORDNO ALREADY EXISTS';
+				return $result;    
+			}
 		}
 
 		$cktObj->updateCkt($cls, $adsr, $prot, $ordno, $mlo);

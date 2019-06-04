@@ -11,8 +11,6 @@
 
     /* Initialize expected inputs */
 
-    // $evtLog = new EVTLOG($user, "USERS", "LOGOUT");
-
     $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", "logout", '');
 
         
