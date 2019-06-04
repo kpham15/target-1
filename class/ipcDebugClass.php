@@ -13,7 +13,7 @@ class DEBUG{
             $this->enable = true;
         }
     
-        if ($this->enable == true) {
+        if ($this->enable === true) {
             $this->debugFile =  fopen("../../LOG/debug.log", "a");
         }
         
@@ -23,13 +23,13 @@ class DEBUG{
     }
 
     public function close() {
-        if ($this->enable == false)
+        if ($this->enable === false)
             return;
         fclose($this->debugFile);
     }
 
     public function log($string) {
-        if ($this->enable == false) {
+        if ($this->enable === false) {
             return;
         }
 
