@@ -68,6 +68,8 @@
 
 	if ($act == "findFac"  || $act == "findFOS") {
 		$facObj = new FAC();
+		if ($fac == '')
+			$fac = '%';
         $facObj->findFacLike($fac, $ftyp, $ort, $spcfnc, $psta);
         $result['rslt'] = $facObj->rslt;
         $result['reason'] = $facObj->reason;

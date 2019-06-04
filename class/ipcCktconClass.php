@@ -220,7 +220,7 @@ class CKTCON {
 		$res = $db->query($qry);
         if (!$res) {
             $this->rslt = FAIL;
-            $this->reason = mysqli_error($db);
+            $this->reason = mysqli_error($db) . ": " . $qry;
 			return $result;
         }
         if ($this->con == 0) {

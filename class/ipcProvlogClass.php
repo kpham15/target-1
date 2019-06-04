@@ -86,7 +86,7 @@
 			}
 			else {
                 $this->rslt = "success";
-                $this->reason = "SUCCESSFUL - PROVISIONING LOG INSERTED" . ": " . $qry;
+                $this->reason = "SUCCESSFUL - PROVISIONING LOG" . ": " . $qry;
                 $this->rows = [];
 			}
 

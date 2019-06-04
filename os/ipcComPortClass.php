@@ -34,7 +34,7 @@ class COMPORT {
             'parity'=>$parity
         ));
 
-        //set timeout parameter
+        //set timeout parameter for 1 sec
         $this->timeout = (float)$timeoutSec + ((float)$timeoutUsec/1000000);
     }
 
