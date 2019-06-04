@@ -21,7 +21,6 @@
     <?php include __DIR__ . '/../svc/svc.php'; ?>
     <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
-    <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
 
 
     <!-- /.content -->
