@@ -51,12 +51,12 @@
     "order": [[ 0, "desc" ]]
 	});
 
-	function queryAlarmReports() {
+	function queryAlarmReports(fromDate, toDate) {
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
 		let src = $('#alarmreport-forms-source').val();
-		let fromDate = $('#alarmreport-forms-fromdate').val();
-		let toDate = $('#alarmreport-forms-todate').val();
+		// let fromDate = $('#alarmreport-forms-fromdate').val();
+		// let toDate = $('#alarmreport-forms-todate').val();
 
 		$.ajax({
       type: 'POST',
@@ -68,8 +68,8 @@
 				"action": 	action,
 				"sev": 			sev,
 				"src": 			src,
-				"fromDate": alarmreportStartDate,
-				"toDate": 	alarmReportEndDate
+				"fromDate": fromDate,
+				"toDate": 	toDate
       },
       dataType: 'json'
     }).done(function(data) {

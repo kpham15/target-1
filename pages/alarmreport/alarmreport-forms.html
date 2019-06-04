@@ -32,9 +32,7 @@
 					</select>
 				</div>
 			</div>
-			<!-- @TODO determine what input field to use here check w/ bien-->
-			
-			
+			<!-- DateRangePicker -->
 			<div class="col-md-6">
 				<div class="form-group">
 					<label>DATE RANGE:</label>
@@ -45,42 +43,8 @@
 						  </div>
 						  <input type="text" class="form-control pull-right" id="alarmreport-daterange">
 					</div>
-					<!-- /.input group -->
 				</div>
 			</div>
-
-			<!-- <div class="col-md-3">
-				<div class="form-group">
-					<label>FROM DATE:</label>
-					<div class="input-group date">
-						<div class="input-group-addon">
-							<i class="fa fa-calendar"></i>
-						</div>
-						<input type="text" class="form-control pull-right" id="alarmreport-forms-fromdate">
-					</div>
-				</div>
-			</div> -->
-			<!-- <div class="col-md-3">
-				<label>FROM DATE</label>
-				<input type="date" class="form-control" id="alarmreport-forms-fromdate">
-			</div> -->
-			<!-- @TODO determine what input field to use here check w/ bien-->
-
-			<!-- <div class="col-md-3">
-				<label>TO DATE</label>
-				<input type="date" class="form-control" id="alarmreport-forms-todate">
-			</div> -->
-			<!-- <div class="col-md-3">
-				<div class="form-group">
-					<label>TO DATE:</label>
-					<div class="input-group date">
-						<div class="input-group-addon">
-							<i class="fa fa-calendar"></i>
-						</div>
-						<input type="text" class="form-control pull-right" id="alarmreport-forms-todate">
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<!-- Second Row Left -->
 		<div class="row">
@@ -124,43 +88,6 @@
 
 <script type="text/javascript">
 
-	
-
-	
-
-	// this function to be used in all reports in order to format rows
-	//@TODO ask if this should be moved to functions?
-	// function convertArrayOfObjectsToCSV(args) {
-	// 	var result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-    //     data = args.data || null;
-    //     if (data == null || !data.length) {
-    //         return null;
-    //     }
-
-    //     columnDelimiter = args.columnDelimiter || ',';
-    //     lineDelimiter = args.lineDelimiter || '\n';
-
-    //     keys = Object.keys(data[0]);
-
-    //     result = '';
-    //     result += keys.join(columnDelimiter);
-    //     result += lineDelimiter;
-
-    //     data.forEach(function(item) {
-    //         ctr = 0;
-    //         keys.forEach(function(key) {
-    //             if (ctr > 0) result += columnDelimiter;
-
-    //             result += item[key];
-    //             ctr++;
-    //         });
-    //         result += lineDelimiter;
-    //     });
-
-    //     return result;
-	// }
-
 	function downloadAlarmReports(args) {
 		var data, filename, link;
         var csv = convertArrayOfObjectsToCSV({
@@ -184,54 +111,34 @@
         link.click();
 	}
 
-	// function alarmreportDefaultDate() {
-	// 	$("#alarmreport-forms-fromdate").val(moment().format("YYYY-MM-DD"))
-	// 	$("#alarmreport-forms-todate").val(moment().format("YYYY-MM-DD"))
-	// }
-
-	var alarmreportStartDate = "";
-	var alarmreportEndDate = "";
 
 	$(document).ready(function() {
-
+		
+		var alarmreportStartDate = "";
+		var alarmreportEndDate = "";
 
 		// Initialze daterangepicker and assign values to start and from dates
-		$(function() {
-			$('input[id="alarmreport-daterange"]').daterangepicker({
-				opens: 'bottom'
-			}, function(start, end, label) {
-				alarmreportStartDate = start.format('YYYY-MM-DD');
-				alarmreportEndDate = end.format('YYYY-MM-DD');
-			});
+		$('input[id="alarmreport-daterange"]').daterangepicker({
+			opens: 'bottom'
+		}, function(start, end, label) {
+			alarmreportStartDate = start.format('YYYY-MM-DD');
+			alarmreportEndDate = end.format('YYYY-MM-DD');
+			
+			console.log(alarmreportEndDate);
 		});
+		
 
 		// Click Event For 'Submit Button'
 		$('#alarmreport-forms-submit').click(function() {
 			
 			let report = $('#alarmreport-forms-report').val();
-			// let fromDate = $('#alarmreport-forms-fromdate').val();
-			// let toDate = $('#alarmreport-forms-todate').val();
-
-			// if (fromDate > toDate) {
-				// let modal = {
-				// 	title: "Error",
-				// 	body: "'TO DATE' must be the same or after 'FROM DATE'!",
-				// 	type: "danger"
-				// }
-				// modalHandler(modal);
-				// return;
-				// console.log("AAAAA");
-				// inputError($('#alarmreport-forms-fromdate'),'Select An Option');
-				// inputError($('#alarmreport-forms-todate'),"Date must be after 'FROM DATE'");
-			// 	return;
-			// }
 
 			if (report === '') {
 				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
 				
-				queryAlarmReports();
+				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
 			}
 			else if (report === "CREATE REPORT") {
 
@@ -242,8 +149,6 @@
 		// Click Event For 'Clear Button'
 		$('#alarmreport-clear').click(function() {
 			$('.alarmreport-forms-input').val('');
-
-			// alarmreportDefaultDate();
 			
 			clearErrors();
 		})
@@ -251,38 +156,7 @@
 		// REPORT Change listener
 		$('#alarmreport-forms-report').change(function() {
 			clearErrors();
-		})
-
-		// Defaults Date Fields to Today
-		// alarmreportDefaultDate();
-
-		// initalize datepicker
-		//@TODO make a way for toDate to never be before fromDate
-		// $(function () {
-		// 	$("#alarmreport-forms-fromdate").datepicker({
-		// 		defaultDate: new Date(),
-		// 		format: "yyyy-mm-dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom"
-		// 	});
-
-		// 	$("#alarmreport-forms-todate").datepicker({
-		// 		defaultDate: new Date(),
-		// 		format: "yyyy-mm-dd",
-		// 		showOtherMonths: true,
-		// 		selectOtherMonths: true,
-		// 		autoclose: true,
-		// 		changeMonth: true,
-		// 		changeYear: true,
-		// 		orientation: "bottom",
-		// 	});
-		// });
-
-		
+		})	
 
 	});
 </script>
