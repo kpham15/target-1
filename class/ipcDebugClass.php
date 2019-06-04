@@ -15,7 +15,7 @@ class DEBUG{
         }
     
         if ($this->enable === true) {
-            $logFile = __DIR__ . "../../LOG/debug.log";
+            $logFile = __DIR__ . "/../../LOG/debug.log";
             $this->debugFile =  fopen($logFile, "a");
         }
         
