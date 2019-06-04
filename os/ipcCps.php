@@ -211,7 +211,7 @@ $cps = array();
 // 1) read the ipc-cps.cfg file and use class COM to establish connection on the tty(s)
 //    specified in this ipc-cps.cfg file. Stores the COM(s) in array cps[]
 
-$file =  "/../../ipc-cps.cfg";
+$file =  "../../ipc-cps.cfg";
 $tty_str = file_get_contents($file);
 $tty = explode(",", $tty_str);
 $numofcps = count($tty);
