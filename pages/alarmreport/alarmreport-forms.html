@@ -139,7 +139,7 @@
 				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
 			}
 			else if (report === "CREATE REPORT") {
-
+				console.log(alarmreportEndDate);
 				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
 			}
 		});
@@ -151,7 +151,7 @@
 
 			$('.alarmreport-forms-input').val('');
 
-			$('#alarmreport-daterange').val(currDate+' - '+currDate);
+			$('#alarmreport-daterange').val('').daterangepicker('update');
 			
 			clearErrors();
 		})
