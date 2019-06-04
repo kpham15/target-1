@@ -196,8 +196,8 @@
         api:   "ipcFtOrd",
         user:  user.uname,
         act:   "PROCESS_CKT",
-        ordno: $("#ftOrder-ordForm-ordno").val().toUpperCase(),
-        ctid:  $("#ftOrder-cktForm-ctid").val().toUpperCase(),
+        ordno: $("#ftOrders-ordForm-ordno").val().toUpperCase(),
+        ctid:  $("#ftOrders-cktForm-ctid").val().toUpperCase(),
       },
       dataType: 'json'
     }).done(function(data) {
