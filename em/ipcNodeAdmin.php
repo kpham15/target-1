@@ -91,7 +91,10 @@ if (isset($_POST['hwRsp'])) {
 
 if ($act == "queryAll") {
     $nodeObj = new NODES();
-    $result = queryAll($nodeObj, $userObj);
+    $result['rslt'] = $nodeObj->rslt;
+    $result['reason'] = $nodeObj->reason;
+    $result['rows'] = $nodeObj->rows;
+    //$result = queryAll($nodeObj, $userObj);
     echo json_encode($result);
     mysqli_close($db);
     return;
