@@ -164,6 +164,10 @@
         link.click();
 	}
 
+	function alarmreportDefaultDate() {
+		$("#alarmreport-forms-fromdate").val(moment().format("YYYY-MM-DD"))
+		$("#alarmreport-forms-todate").val(moment().format("YYYY-MM-DD"))
+	}
 
 	$(document).ready(function() {
 
@@ -212,8 +216,7 @@
 		})
 
 		// Defaults Date Fields to Today
-		$("#alarmreport-forms-fromdate").val(moment().format("YYYY-MM-DD"))
-		$("#alarmreport-forms-todate").val(moment().format("YYYY-MM-DD"))
+		alarmreportDefaultDate();
 
 		// initalize datepicker
 		//@TODO make a way for toDate to never be before fromDate
