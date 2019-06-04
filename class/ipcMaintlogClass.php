@@ -64,18 +64,17 @@
 	public function log($user, $tktno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $result, $ordno) {
 		global $db;
 
-		$dd = !empty($dd) ? "'$dd'" : "NULL";
-		$fdd = !empty($fdd) ? "'$fdd'" : "NULL";
+		if ($dd == null) $dd ='';
+		if ($fdd == null) $fdd='';
 
-		// $qry = "INSERT INTO t_maintlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$mlo', NOW(),$dd, $fdd,'$act', '$result')" ;
 		$qry = "INSERT INTO 
 				t_maintlog 
-				(user, tktno, mlo, ckid, cls, 
+				(user, tktno, ordno, mlo, ckid, cls, date, 
 				adsr, prot, dd, fdd, action, 
 				ctyp, ffac, fport, tfac, tport, 
 				result) 
 				VALUES 
-				('$user', '$tktno', '$mlo', '$ckid', '$cls',
+				('$user', '$tktno', '$ordno', '$mlo', '$ckid', '$cls', now(), 
 				'$adsr', '$prot', '$dd', '$fdd', '$act',
 				'$ctyp', '$ffac', '$fport', '$tfac', '$tport', 
 				'$result')";
@@ -83,12 +82,12 @@
 		$res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
-			$this->reason = mysqli_error($db);
+			$this->reason = mysqli_error($db) . " - " .$qry;
 			$this->rows = [];
 		}
 		else {
 			$this->rslt = "success";
-			$this->reason = "SUCCESSFUL - MAINTENANCE LOG INSERTED";
+			$this->reason = "SUCCESSFUL - MAINTENANCE LOG: " . $qry;
 			$this->rows = [];
 		}
 

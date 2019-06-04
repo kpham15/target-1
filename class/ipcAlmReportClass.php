@@ -44,7 +44,6 @@ class ALMLOG {
 		$dd = !empty($dd) ? "'$dd'" : "NULL";
 		$fdd = !empty($fdd) ? "'$fdd'" : "NULL";
 
-		// $qry = "INSERT INTO t_maintlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$mlo', NOW(),$dd, $fdd,'$act', '$result')" ;
 		$qry = "INSERT INTO 
                 t_almlog 
                 (almid, ack, sa, src, type, 

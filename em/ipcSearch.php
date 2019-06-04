@@ -24,8 +24,6 @@
 		$descr = $_POST['descr'];
 	}
 
-	// $input = "SEARCH: USER=" . $user . ", ACT=" . $act . ", item=" . $item;
-	// $evtLog = new EVTLOG($user, "SEARCH", $act, $input);
   
     /*
      * Dispatch to functions

@@ -37,7 +37,7 @@ class DB {
         if (mysqli_connect_errno())
         {
             $this->rslt = FAIL;
-            $this->reason = mysqli_connect_error();
+            $this->reason = mysqli_connect_error() . ": db: " . $dbName;
         }
         else {
             $this->rslt = SUCCESS;

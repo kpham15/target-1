@@ -112,7 +112,6 @@ class PATH {
 
         if ($this->r1->a != '' && $this->r1->a !== NULL) {
             $qry .= ",s1,s1x,s1y";
-            //$values .= ",'" . $this->r1->a . ":" . $this->r1->x . "." . $this->r1->y . "'," . $this->r1->x . "," . $this->r1->y;
             $values .= ",'" . $this->r1->a . ":" . $this->r1->x . "'," . $this->r1->x . "," . $this->r1->y;
         }
         else {
@@ -122,7 +121,6 @@ class PATH {
         
         if ($this->r2->a != '' && $this->r2->a !== NULL) {
             $qry .= ",s2,s2x,s2y";
-            //$values .= ",'" . $this->r2->a . ":" . $this->r2->x . "." . $this->r2->y . "'," . $this->r2->x . "," . $this->r2->y;
             $values .= ",'" . $this->r2->a . ":" . $this->r2->x . "'," . $this->r2->x . "," . $this->r2->y;
         }
         else {
@@ -132,7 +130,6 @@ class PATH {
 
         if ($this->r3f->a != '' && $this->r3f->a !== NULL) {
             $qry .= ",s3f,s3fx,s3fy";
-            //$values .= ",'" . $this->r3f->a . ":" . $this->r3f->x . "." . $this->r3f->y . "'," . $this->r3f->x . "," . $this->r3f->y;
             $values .= ",'" . $this->r3f->a . ":" . $this->r3f->x . "'," . $this->r3f->x . "," . $this->r3f->y;
         }
         else {
@@ -142,7 +139,6 @@ class PATH {
 
         if ($this->rco->a != '' && $this->rco->a !== NULL) {
             $qry .= ",sco,scox,scoy";
-            //$values .= ",'" . $this->rco->a . ":" . $this->rco->x . "." . $this->rco->y . "'," . $this->rco->x . "," . $this->rco->y;
             $values .= ",'" . $this->rco->a . ":" . $this->rco->x . "'," . $this->rco->x . "," . $this->rco->y;
         }
         else {
@@ -152,7 +148,6 @@ class PATH {
 
         if ($this->r4->a != '' && $this->r4->a !== NULL) {
             $qry .= ",s4,s4x,s4y";
-            //$values .= ",'" . $this->r4->a . ":" . $this->r4->x . "." . $this->r4->y . "'," . $this->r4->x . "," . $this->r4->y;
             $values .= ",'" . $this->r4->a . ":" . $this->r4->x . "'," . $this->r4->x . "," . $this->r4->y;
         }
         else {
@@ -162,7 +157,6 @@ class PATH {
 
         if ($this->rci->a != '' && $this->rci->a !== NULL) {
             $qry .= ",sci,scix,sciy";
-            //$values .= ",'" . $this->rci->a . ":" . $this->rci->x . "." . $this->rci->y . "'," . $this->rci->x . "," . $this->rci->y;
             $values .= ",'" . $this->rci->a . ":" . $this->rci->x . "'," . $this->rci->x . "," . $this->rci->y;
         }
         else {
@@ -172,7 +166,6 @@ class PATH {
 
         if ($this->r3t->a != '' && $this->r3t->a !== NULL) {
             $qry .= ",s3t,s3tx,s3ty";
-            //$values .= ",'" . $this->r3t->a . ":" . $this->r3t->x . "." . $this->r3t->y . "'," . $this->r3t->x . "," . $this->r3t->y;
             $values .= ",'" . $this->r3t->a . ":" . $this->r3t->x . "'," . $this->r3t->x . "," . $this->r3t->y;
         }
         else {
@@ -182,7 +175,6 @@ class PATH {
 
         if ($this->r5->a != '' && $this->r5->a !== NULL) {
             $qry .= ",s5,s5x,s5y";
-            //$values .= ",'" . $this->r5->a . ":" . $this->r5->x . "." . $this->r5->y . "'," . $this->r5->x . "," . $this->r5->y;
             $values .= ",'" . $this->r5->a . ":" . $this->r5->x . "'," . $this->r5->x . "," . $this->r5->y;
         }
         else {
@@ -192,7 +184,6 @@ class PATH {
 
         if ($this->r6->a != '' && $this->r6->a !== NULL) {
             $qry .= ",s6,s6x,s6y";
-            //$values .= ",'" . $this->r6->a . ":" . $this->r6->x . "." . $this->r6->y . "'," . $this->r6->x . "," . $this->r6->y;
             $values .= ",'" . $this->r6->a . ":" . $this->r6->x . "'," . $this->r6->x . "," . $this->r6->y;
         }
         else {
@@ -202,7 +193,6 @@ class PATH {
 
         if ($this->r7->a != '' && $this->r7->a !== NULL) {
             $qry .= ",s7,s7x,s7y";
-            //$values .= ",'" . $this->r7->a . ":" . $this->r7->x . "." . $this->r7->y . "'," . $this->r7->x . "," . $this->r7->y;
             $values .= ",'" . $this->r7->a . ":" . $this->r7->x . "'," . $this->r7->x . "," . $this->r7->y;
         }
         else {
@@ -279,11 +269,6 @@ class PATH {
             }
         }
 
-        ///////------------log---------------///////
-        //if ($this->rslt == 'fail') {
-            //echo $this->log;
-            $this->saveLog();
-        //} 
     }
 
     private function connectSameNodeSameSection() {
@@ -1786,19 +1771,17 @@ class PATH {
         $this->rslt = 'success';
         $this->reason = "PATH_RESET_SUCCESS";
 
-        $this->saveLog();
-        //echo $this->log;
+        //$this->saveLog();
     }
 
-    public function saveLog() {
-        $debugFile = fopen("./createPathLog.txt", "w");
-        $logString = "\n--------------------------------\n";
-        $logString .= "\n" . date('Y-m-d H:i:s') . "\n"  . $this->log;
-        fwrite($debugFile,$logString);
-        fclose($debugFile);
+//     public function saveLog() {
+//         $debugFile = fopen("./createPathLog.txt", "w");
+//         $logString = "\n--------------------------------\n";
+//         $logString .= "\n" . date('Y-m-d H:i:s') . "\n"  . $this->log;
+//         fwrite($debugFile,$logString);
+//         fclose($debugFile);
 
-        //echo $this->log;
-   }
+//    }
    
 
     public function queryCrossNodesPaths() {

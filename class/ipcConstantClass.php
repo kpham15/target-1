@@ -98,4 +98,29 @@
         echo json_encode($result);
     }
 
+    // Constants for posting through UDP
+    const nOpe = "ipcNodeOpe";
+    
+    const nAdm = "ipcNodeAdmin";
+
+    
+    const apiAndActArray = [
+        "cps" => [
+            "api"   => "ipcNodeOpe",
+            "dcv"   => "DISCOVER",
+            "dcvd"  => "DISCOVERED",
+            "stop"  => "STOP",
+            "on"    => "CPS_ON",
+            "off"   => "CPS_OFF",
+            "csta"  => "CPS_STATUS"
+        ],
+        "nadm" => [
+            "api"   => "ipcNodeAdmin",
+            "updc"  => "updateCpsCom",
+            "unds"  => "updateNodeDevicesStatus",
+        ]
+    ];
+
+    
+
 ?>

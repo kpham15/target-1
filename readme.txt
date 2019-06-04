@@ -1,7 +1,7 @@
-ver:0.16 (2019-03-22)
+ver:0.21 (2019-5-30)
 
 Description 
-The new SW version 0.16 has the following included:
+The new SW version 0.21 has the following included:
 1) Setup Facilities page:
     A.  You can put a wildcard (%) in the FAC to view those matched.
         For examples, FAC=2-% and click View button, it will return with all FACILITIES with starting with 2-.

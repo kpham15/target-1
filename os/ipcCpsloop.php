@@ -1,10 +1,14 @@
 <?php
+
+//change working dir to the file location
+chdir(__DIR__);
+
 //because this program needs to read /dev/ttyUSB file => www-data user need to be put in the group: dialout
-//cmd structure to run this program:
-//php ipcCpsloop.php node ip_port com_port
+//cmd structure to run this program: php ipcCpsloop.php node ip_port
 include 'ipcComPortClass.php';
 include 'ipcCpsServerClass.php';
 include 'ipcRspClass.php';
+include '../class/ipcDebugClass.php';
 
 set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -18,7 +22,7 @@ error_reporting(E_ALL);
 //assign arguments
 $node = $argv[1];
 $ip_port = $argv[2];
-// $com_port = $argv[3];
+$com_port = '';
 
 $baud = 115200;
 $bits = 8;
@@ -27,16 +31,18 @@ $parity = 0;
 
 $udp_timeoutSec = 0;
 $udp_timeoutUsec = 0;
-
 $serial_timeoutSec = 0;
 $serial_timeoutUsec = 500000;
-
 $RDWR_interval = 200000;
 
 $lostConn = 3;
 
-$connectHw = false;
+$discover_mode = false;
 $start_mode = false;
+
+$statusCmd = '';
+$cpsCmd='';
+$sn='';
 
 //-------------------------Begin--------------------------------
 // define ERROR CODE
@@ -47,11 +53,13 @@ try {
     $serverExist = false;
     $clientExist = false;
     $rspObjExist = false;
- 
+
+    $debugObj = new DEBUG();
+    $debugObj->log("\n-----------------BEGIN OF CPSLOOP-----------------\n");
     serverSock: 
         //-------------to communicate with API (UDP type)-----------------
-        echo "\ncreating UPD server.....\n";
         if($serverExist == false) {
+            $debugObj->log("\ncreating UPD server.....\n");
             $cpsServerObj = new CPSSERVER("127.0.0.1", $ip_port, $udp_timeoutSec, $udp_timeoutUsec);
             if($cpsServerObj->rslt == 'fail') {   
                 throw new Exception($cpsServerObj->rslt.": ".$cpsServerObj->reason,SOCKET_API_FAIL);
@@ -62,15 +70,14 @@ try {
 
     clientSock:
         // ------------create new connection to CPS HW  (serial type)
-        echo "\ncreating serial client....\n";
-        if($clientExist == false && $com_port != NULL) {
+        if($clientExist == false && $com_port != null) {
+            $debugObj->log("\ncreating serial client....\n");
             $comPortObj = new COMPORT($com_port,$baud, $bits, $stop, $parity, $serial_timeoutSec, $serial_timeoutUsec);
             if($comPortObj->rslt == 'fail') {   
                 throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
             }
             $clientExist = true;
         }
-
     createRspObj:
         //------create response object (to process response afterwards)------
         if($rspObjExist == false) {
@@ -80,16 +87,10 @@ try {
     
     startSendCmd:
     while(1) {
-        if($connectHw) {
+        if($start_mode && $statusCmd != '') {
             //------Send the status cmd and device cmd to HW-------
-            echo "\nCPS loop sends the status cmd:\n";
-            $rsp = $comPortObj->sendCmd("\$status,source=all,ackid=$node-cps*");
-            if($comPortObj->rslt == 'fail') {   
-                throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
-            }
-
-            echo "\nCPS loop sends the device status cmd:\n";
-            $rsp = $comPortObj->sendCmd("\$status,source=devices,ackid=$node-dev**");
+            $debugObj->log("\nCPS loop sends the status cmd:\n");
+            $rsp = $comPortObj->sendCmd($statusCmd);
             if($comPortObj->rslt == 'fail') {   
                 throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
             }
@@ -97,6 +98,7 @@ try {
        
        
         //initialize the cps connection status to default
+        
         $cpsAlive = false;
         //get the starting time before go into 5sec-window
         $startTime = microtime(true);
@@ -112,60 +114,101 @@ try {
 
             //if cmd exists, send cmd to API
             //after that clean the $buf. sleep for a while before listening for response
-            $cmd = trim($buf);
-            if($cmd !== '') {
-                echo "\n===CMD receive from API: ".$cmd."\n";
-                if($cmd == 'start') {
-                    $start_mode = true;
-                }
-                else if($cmd == 'stop') {
-                    return;
-                }
-                else if(strpos($cmd,'com_port=') !== false) {
-                    $dataExtract = explode('=',$cmd);
-                    $com_port = $dataExtract[1];
-                    $connectHw = true;
-                    goto clientSock;
-                }
-                else {
-                    if($connectHw) {
-                        $comPortObj->sendCmd($cmd);
-                        if($comPortObj->rslt == 'fail') {   
-                            throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
+            $udpMsg = trim($buf);
+            $udpMsgArr=[];
+            if($udpMsg !== '') {
+                $debugObj->log("\n===CMD receive from API: ".$udpMsg."\n");
+                $udpMsgArr = processUDPmsg($udpMsg);
+                $debugObj->log("Convert updmsg to array:\n".print_r($udpMsgArr,true)."\n");
+                if ($discover_mode && array_key_exists("cmd",$udpMsgArr))
+                    $cpsCmd .= $udpMsgArr['cmd'];
+                if($udpMsgArr['inst'] == 'DISCV_CPS') {
+                    if($udpMsgArr['node'] == $node) {
+                        $com_port = $udpMsgArr['dev'];
+                        if($clientExist) {
+                            $comPortObj->endConnection();
+                            $clientExist = false;
                         }
-                    }  
+                        $discover_mode = true;
+                        $start_mode = false;
+                        //just for now, chu Ninh want to replace backplane to miox, cause backplane is not ready yet
+                        $udpMsgArr['cmd'] = str_replace('backplane','miox',$udpMsgArr['cmd']);
+                        $cpsCmd .= $udpMsgArr['cmd'];
+                        $debugObj->log("Cmd changed to:".$udpMsgArr['cmd']);
+                        $buf = '';
+                        goto clientSock;
+                    }
                 }
-                   
-                $buf = '';
+                else if($udpMsgArr['inst'] == 'START_CPS') {
+                    if($sn != '' && $udpMsgArr['sn'] == $sn) {
+                        $start_mode = true;
+                        $statusCmd = $udpMsgArr['cmd'];
+                        $buf = '';
+                        goto clientSock;
+                    }
+                }
+                else if($udpMsgArr['inst'] == 'STOP_CPS') {
+                    if($udpMsgArr['sn'] == $sn ) {
+                        $com_port = '';
+                        $sn = '';
+                        if($clientExist) {
+                            $comPortObj->endConnection();
+                            $clientExist = false;
+                        }
+                        $discover_mode = false;
+                        $start_mode = false;
+                        $buf = '';
+                        $cpsCmd = '';
+                        goto clientSock;
+                    }
+                }   
             }
+
+            if($discover_mode) {
+                if($cpsCmd != '') {
+                    $comPortObj->sendCmd($cpsCmd);
+                    if($comPortObj->rslt == 'fail') {   
+                        throw new Exception($comPortObj->rslt.":".$comPortObj->reason,SERIAL_CPS_HW_FAIL);
+                    }
+                    $cpsCmd = '';
+                } 
+            }  
+
+            $buf = '';
             usleep($RDWR_interval);
 
             //receive response from HW. 
             //if response exists, process the response and update cps connection status
-            $rsp = $comPortObj->receiveRsp();
-            if($rsp !== '') {
-                if($start_mode)
+            if($discover_mode) {
+                $rsp = $comPortObj->receiveRsp();
+                if($rsp !== '') {        
+                    $lostConn = 0;
+                    $cpsAlive = true;
+                    //serial number is retrieved in discover_mode, not in start_mode
+                    if($start_mode == false) {
+                        $sn = $rspObj->getUuid($rsp);
+                        if($sn != '') {
+                            $debugObj->log("\nSerial number: $sn\n");
+                        }
+                    }
+                   
                     $rspObj->processRsp($rsp, $node);
-                if($cpsAlive == false) $cpsAlive = true;
+                }
+            
             }
+           
         }
 
 
 
-        if($connectHw) {
+        if($start_mode) {
             //when 5sec expires, check the cps communication status. Send post-request to API to declare alarm if needed
-            // If receive a response from HW, reset the lostConn = 0, and process the response
             // If not receive any response from HW, increase the lostConn. If lostConn = 3, consider that HW communication is broken 
-            if($cpsAlive == true) {
-                if($lostConn > 0 && $lostConn < 3)
-                    $lostConn = 0; 
-                else if($lostConn >= 3)
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-ONLINE"]);         
-            }
-            else {
+            $debugObj->log("\nlostconn:".$lostConn."\n");
+            if($cpsAlive !== true) {
                 $lostConn++;
-                if(($lostConn % 3) == 0) 
-                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-OFFLINE"]);
+                if($lostConn >=3)
+                    $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
             
             }
             //go back and send status command again
@@ -176,7 +219,7 @@ try {
 }
 catch (Throwable $t)
 {   
-    echo "\n".$t->getMessage()."\n";
+    $debugObj->log("\n".$t->getMessage()."\n");
 
     if($t->getCode() == SOCKET_API_FAIL) {
         // If errorCode = 1, that means socket to API is broken. Close the socket and create a new one
@@ -187,15 +230,22 @@ catch (Throwable $t)
     }
     else if($t->getCode() == SERIAL_CPS_HW_FAIL) {
         // If errorCode = 2, that means socket to HW is broken, close the socket and create a new one
-        $comPortObj->endConnection();
-        $clientExist = false;
-        // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+        if($clientExist == true) {
+            $comPortObj->endConnection();
+            $clientExist = false;
+        }
+        $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+        $lostConn = 3;
         sleep(5);
         goto clientSock;
     }
-    else if(strpos($t->getMessage(),'cannot open file') !== false) {
-        $clientExist = false;
-        // $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeAdmin','act'=>'updateCpsCom','node'=>$node,'cmd'=>"$node-errorSerialCom"]);
+    else if(strpos($t->getMessage(),'cannot open file') !== false || strpos($t->getMessage(),'cannot write data to file descriptor') !== false) {
+        if($clientExist == true) {
+            $comPortObj->endConnection();
+            $clientExist = false;
+        }
+        $rspObj->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'CPS_OFF','node'=>$node]);
+        $lostConn = 3;
         sleep(5);
         goto clientSock;
     }
@@ -204,6 +254,36 @@ catch (Throwable $t)
         return;
     }
     
+}
+
+
+//////////////////////////////////////////////////////////////
+function processUDPmsg($buf) {
+    $data = [];
+    $index = stripos($buf,'cmd=');
+    if($index !== false) {
+        $inst = substr($buf, 0, $index);
+        $cmdString = substr($buf, $index+4, strlen($buf) - $index -4);
+    }
+    else {
+        $inst = $buf;
+        $cmdString='';
+    }
+    $instArr = explode(',',$inst);
+    foreach($instArr as $parameter) {
+        if(trim($parameter) == '') continue;
+        $paraExtract = explode('=',$parameter);
+        if($paraExtract[0] == 'inst') 
+            $data['inst'] = $paraExtract[1];
+        else if($paraExtract[0] == 'node') 
+            $data['node'] = $paraExtract[1];
+        else if($paraExtract[0] == 'dev') 
+            $data['dev'] = $paraExtract[1];
+        else if($paraExtract[0] == 'sn') 
+            $data['sn'] = $paraExtract[1];
+    }
+    $data['cmd']= $cmdString;
+    return $data;
 }
 
 ?>

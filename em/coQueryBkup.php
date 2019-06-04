@@ -9,7 +9,7 @@
  * 2018-11-09: created (Thanh)
  */
 
- 	include "coCommonFunctions.php";
+ 	//include "coCommonFunctions.php";
   
     $act = "";
     if (isset($_POST['act']))
@@ -33,7 +33,7 @@
 		if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file']['tmp_name'])) 
 		{ 
 			$fileName = $_FILES["file"]["name"];
-			move_uploaded_file( $_FILES["file"]["tmp_name"], "../resource/dbbk/".$fileName);
+			move_uploaded_file( $_FILES["file"]["tmp_name"], "../../DBBK/".$fileName);
 		}
 	}
 
@@ -43,17 +43,10 @@
 		$ipAddress = '127.0.0.1';
 	}
 
-	// Dispatch to Functions
-	$ipcDb = new ipcDb();
-	if ($ipcDb->rslt == "fail") {
-		$result["rslt"] = "fail";
-		$result["reason"] = $ipcDb->reason;
-		echo json_encode($result);
-		return;
-	}
-	$ipcCon = $ipcDb->con;
+
+	$ipcCon = $db;
 		
-	$co5kDb = new Db();
+	$co5kDb = new DB();
 	if ($co5kDb->rslt == "fail") {
 		$result["rslt"] = "fail";
 		$result["reason"] = $co5kDb->reason;
@@ -120,12 +113,14 @@
 	}
 
 	function manualBkup() {
-		// Note: the folder resource/dbbk must be open for the permission of execution
+		// Note: the folder ../../DBBK must be open for the permission of execution
 		global $ipcCon, $ipcDb, $user, $ipAddress, $co5kDb;
 
+		$wc = new WC();
+		$bkupName = $wc->wcc . '_' . $wc->getWCTime() . '.sql';
 		$time = date("Y-m-d H:i:s");
 		
-		$bkupName = date("Y-m-d-H-i-s").'.sql';
+		// $bkupName = date("Y-m-d-H-i-s").'.sql';
 		//get directory of current php file
 		$directory = dirname(__FILE__);
 		
@@ -133,20 +128,15 @@
 		$dirArray = explode("/",$directory);
 		$htmlIndex = array_search("html",$dirArray);
 		$phpIndex = array_search("php",$dirArray);
-		$fullpath = 'http://'.$ipAddress;
-		
-		for($i=($htmlIndex+1); $i<$phpIndex; $i++) {
-			$fullpath .= '/'.$dirArray[$i];
-			
-		}
-		$fullpath .= '/resource/dbbk/'.$bkupName;
-		$dir = "../resource/dbbk/".$bkupName;
+
+		$fullpath = '../DBBK/' . $bkupName;
+		$dir = "../../DBBK/" . $bkupName;
 
 		$command = "mysqldump --user={$co5kDb->ui} --password={$co5kDb->pw} {$co5kDb->dbname} --result-file={$dir} 2>&1";
 
 		exec($command,$output,$return);
 		if(!$return) {
-			$qry = "insert t_dbbk values(0,'$user','$time','$bkupName','$fullpath', 'M')";
+			$qry = "insert into t_dbbk values(0,'$user','$time','$bkupName','$fullpath', 'M')";
 			$res = $ipcCon->query($qry);
 			if (!$res) {
 				$result["rslt"] = "fail";
@@ -175,7 +165,7 @@
 		}
 		else {
 			$result["rslt"] = "fail";
-			$result["reason"] = "execution failed";
+			$result["reason"] = "execution failed: " . $command . " : " . $return;
 		}
 
 
@@ -202,9 +192,9 @@
 			$fullpath .= '/'.$dirArray[$i];
 			
 		}
-		$fullpath .= '/resource/dbbk/'.$fileName;
+		$fullpath .= '../DBBK/' . $fileName;
 
-		$qry = "insert t_dbbk values(0,'$user','$time','$fileName','$fullpath', 'U')";
+		$qry = "insert into t_dbbk values(0,'$user','$time','$fileName','$fullpath', 'U')";
 
 		$res = $ipcCon->query($qry);
 		if (!$res) {
@@ -237,7 +227,7 @@
 	function deleteBkup() {
 		global $ipcCon, $id, $dbfile;
 
-		if(unlink("../resource/dbbk/".$dbfile)) {
+		if (unlink("../../DBBK/" . $dbfile)) {
 			$qry = "delete from t_dbbk where id='$id' or dbfile='$dbfile'";
 		
 			$res = $ipcCon->query($qry);
@@ -278,7 +268,7 @@
 		global $co5kDb, $dbfile;
 
 
-		$dir = "../resource/dbbk/".$dbfile;
+		$dir = "../../DBBK/" . $dbfile;
 
 		$command = "mysql --user={$co5kDb->ui} --password={$co5kDb->pw} {$co5kDb->dbname} < $dir";
 		exec($command,$output,$return);

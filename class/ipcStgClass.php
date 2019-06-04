@@ -185,6 +185,28 @@ class Stg {
         }
     }
 
+    public function findListOfPossibleS3($s5) {
+        global $db;
+
+        $e = explode(".",$s5);
+        $d = $e[0] . '.' . $e[1] . '.' . $e[2];
+
+        $qry = "SELECT a,x,y,d FROM t_stg WHERE d LIKE '$d.%' AND x=-1";
+        $rows = [];
+        $res = 	$db->query($qry);
+        if(!$res){
+            return $rows;
+        } 
+        else {
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+            }
+            return $rows;
+        }
+    }
+
 
 }
 

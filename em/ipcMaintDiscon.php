@@ -55,7 +55,6 @@
 	if (isset($_POST['tport'])) {
 		$tport = $_POST['tport'];
 	}	
-	// $evtLog 	= new EVTLOG($user, "MAINT", $act, $input);
 	
 	$maintLog 	= new MAINTLOG();
 	$evtLog = new EVENTLOG($user, "MAINTENANCE", "SETUP MAINTENANCE CONNECTION", $act, '');

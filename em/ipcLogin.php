@@ -24,8 +24,6 @@
     if (isset($_POST['act']))
         $act = $_POST['act'];
 
-    // $evtLog = new EVTLOG($user, "USERS", "LOGIN");
-
     $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", $act);
 
     /**
@@ -147,7 +145,12 @@
             $refObj = new REF();
 
             $result["rslt"]     = SUCCESS;
-            $result["reason"]   = "USER LOGIN UPDATED";
+            if ($userObj->pw == $newPw) {
+                $result['reason'] = "PASSWORD CHANGED/RESET SUCCESSFUL";
+            }
+            else {
+                $result["reason"]   = "LOGIN SUCCESSFUL";
+            }
             $result['rows'] = array(array('uname' => $userObj->uname,
                                         'lname'=>$userObj->lname,
                                         'fname'=>$userObj->fname,

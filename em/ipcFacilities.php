@@ -51,7 +51,6 @@
 		$psta = strtoupper($_POST['psta']);
 	}
 
-	// $evtLog = new EVTLOG($user, "FACILITY", $act, $input);
 	$evtLog = new EVENTLOG($user, "CONFIGURATION", "SETUP FACILITY", $act, '');
 
 	// Dispatch to Functions	
@@ -69,6 +68,8 @@
 
 	if ($act == "findFac"  || $act == "findFOS") {
 		$facObj = new FAC();
+		if ($fac == '')
+			$fac = '%';
         $facObj->findFacLike($fac, $ftyp, $ort, $spcfnc, $psta);
         $result['rslt'] = $facObj->rslt;
         $result['reason'] = $facObj->reason;

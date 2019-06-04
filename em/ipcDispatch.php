@@ -1,7 +1,6 @@
 <?php
 include "./ipcClasses.php";
 
-$root_dir = '/var/www/html/target-1/UPDATE';
 
 /* Initialize expected inputs */
 $api = '';
@@ -13,6 +12,7 @@ if($api =='ipcConfirm') {
     include "ipcConfirm.php";
     return;
 }
+
 
 $user = '';
 if (isset($_POST['user'])) {
@@ -28,37 +28,40 @@ if ($dbObj->rslt == "fail") {
 }
 $db = $dbObj->con;
 
+$debugObj = new DEBUG();
+
+
 
 // validate login user
-    $userObj = new USERS($user);
-    if ($userObj->rslt != SUCCESS) {
-        $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", '-');
-        $result['rslt'] = $userObj->rslt;
-        $result['reason'] = $userObj->reason;
-        $evtLog->log($result["rslt"], $result["reason"]);
-        $vioObj = new VIO();
-        $vioObj->setUnameViolation();
-        mysqli_close($db);
-        echo json_encode($result);
-        return;
-    }
+$userObj = new USERS($user);
+if ($userObj->rslt != SUCCESS) {
+    $evtLog = new EVENTLOG($user, "USER MANAGEMENT", "USER ACCESS", '-');
+    $result['rslt'] = $userObj->rslt;
+    $result['reason'] = $userObj->reason;
+    $evtLog->log($result["rslt"], $result["reason"]);
+    $vioObj = new VIO();
+    $vioObj->setUnameViolation();
+    mysqli_close($db);
+    echo json_encode($result);
+    $debugObj->close();
+    return;
+}
 // The following apis skip user validation
-    if ($api =='ipcLogout') {
-        include "ipcLogout.php";
-        return;
-    }
- 
-    if ($api =='ipcLogin') {
-        include "ipcLogin.php";
-        return;
-    }
-
+if ($api =='ipcLogout') {
+    include "ipcLogout.php";
+    return;
+}
+else if ($api =='ipcLogin') {
+    include "ipcLogin.php";
+    return;
+}
 // validate login user
-if ($userObj->uname != 'SYSTEM') {
+else if ($userObj->uname != 'SYSTEM') {
     $result = lib_ValidateUser($userObj);
     if ($result['rslt'] == 'fail') {
         echo json_encode($result);
         mysqli_close($db);
+        $debugObj->close();
         return;
     }
 }
@@ -69,6 +72,9 @@ if($api =='ipcAlm') {
 }
 else if($api =='ipcAlmReport') {
     include "ipcAlmReport.php";
+}
+else if($api =='coQueryBkup') {
+    include "coQueryBkup.php";
 }
 else if($api =='ipcBatchExc') {
     include "ipcBatchExc.php";
@@ -133,12 +139,6 @@ else if($api =='ipcPortmap') {
 else if($api =='ipcProv') {
     include "ipcProv.php";
 }
-// else if($api =='ipcProvConnect') {
-//     include "ipcProvConnect.php";
-// }
-// else if($api =='ipcProvDisconnect') {
-//     include "ipcProvDisconnect.php";
-// }
 else if($api =='ipcProvReport') {
     include "ipcProvReport.php";
 }
@@ -151,9 +151,6 @@ else if($api =='ipcSearch') {
 else if($api =='ipcSwUpdate') {
     include "ipcSwUpdate.php";
 }
-// else if($api =='ipcTrouble') {
-//     include "ipcTrouble.php";
-// }
 else if($api =='ipcUser') {
     include "ipcUser.php";
 }
@@ -172,16 +169,14 @@ else if($api == 'ipcTb') {
 else if($api == 'ipcTbus') {
     include "ipcTbus.php";
 }
-// else if($api == 'ipcAction') {
-//     include "ipcAction.php";
-// }
-
 else {
     $result["rslt"] = FAIL;
     $result["reason"] = "INVALID_API";
     echo json_encode($result);
-    return;
 }
+
+$debugObj->close();
+return;
 
 
 ?>
