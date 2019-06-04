@@ -12,7 +12,6 @@
         
         </section>
         <?php include __DIR__."/prov-report-form.html" ?>
-        <?php include __DIR__."/prov-report-modal.html"?>
         <?php include __DIR__."/prov-report-table.html"?>
 
     </div>

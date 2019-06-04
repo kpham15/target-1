@@ -1,57 +1,148 @@
 <div class="col-sm-12" style="padding-left: 0px">
 
-        <div class="col-sm-2">
-            <label for="provReport_user_txt">USER</label>
-            <input type="text" class="form-control" id="provReport_user_txt">
-        </div>
-
-        <div class="col-sm-2">
-        <label for="provReport_action_sel">ACTION</label>
-            <select class="form-control" id="provReport_action_sel">
-                <option></option>
-                <option>CONNECT</option>
-                <option>DISCONNECT</option>
-                <option>UPDATE_CKT</option>
-            </select>
-        </div>
-        
-
-        <div class="col-sm-2">
-            <label for="provReport_ordno_txt">ORDNO</label>
-            <input style="text-transform: uppercase" type="text" class="form-control" id="provReport_ordno_txt">
-        </div>
-
-        <div class="col-sm-2">
-            <label for="provReport_ckid_txt">CKID</label>
-            <input style="text-transform: uppercase" type="text" class="form-control" id="provReport_ckid_txt">
-        </div>
-
-        <div class="col-sm-2">
-            <label for="provReport_fromDate_date">FROM DATE</label>
-            <input type="date" class="form-control" id="provReport_fromDate_date">
-        </div>
-
-        <div class="col-sm-2">
-            <label for="provReport_toDate_date">TO DATE</label>
-            <input type="date" class="form-control" id="provReport_toDate_date">
-        </div>
+    <div class="col-sm-2">
+        <label for="provReport_user_txt">USER</label>
+        <input type="text" class="form-control provReport-form" id="provReport_user_txt">
     </div>
 
-
-    <!-- ----------------- -->
-    <div class="col-sm-12" style="padding-left: 0px">
-        <div class="col-sm-2">
-            <label for="provReport_report_sel">REPORT</label>
-            <select class="form-control" id="provReport_report_sel">
-                <option></option>
-                <option>VIEW REPORT</option>
-                <option>CREATE REPORT</option>
-            </select>
-        </div>
-        <div class="col-sm-10">
-            <button id="provReport_submit_btn" style="text-align:right;margin-top: 25px" class="btn btn-primary">SUBMIT</button>
-            <button id="provReport_clear_btn" style="text-align:right; margin-top: 25px" class="btn btn-primary">CLEAR</button>
-        </div>
+    <div class="col-sm-2">
+    <label for="provReport_action_sel">ACTION</label>
+        <select class="form-control provReport-form" id="provReport_action_sel">
+            <option></option>
+            <option>CONNECT</option>
+            <option>DISCONNECT</option>
+            <option>UPDATE_CKT</option>
+        </select>
     </div>
-    <br>
-    <!-- ---------- -->
+    
+
+    <div class="col-sm-2">
+        <label for="provReport_ordno_txt">ORDNO</label>
+        <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ordno_txt">
+    </div>
+
+    <div class="col-sm-2">
+        <label for="provReport_ckid_txt">CKID</label>
+        <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ckid_txt">
+    </div>
+
+    <div class="col-sm-2" style="padding: 2px">
+        <label for="provReport_fromDate_date">FROM DATE</label>
+        <input type="date" class="form-control provReport-form" id="provReport_fromDate_date" style="padding: 2px">
+    </div>
+
+    <div class="col-sm-2" style="padding: 2px">
+        <label for="provReport_toDate_date">TO DATE</label>
+        <input type="date" class="form-control provReport-form" id="provReport_toDate_date" style="padding: 2px">
+    </div>
+</div>
+
+<div class="col-sm-12" style="padding-left: 0px; margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label for="provReport_report_sel">REPORT</label>
+        <select class="form-control provReport-form" id="provReport_report_sel">
+            <option></option>
+            <option>VIEW REPORT</option>
+            <option>CREATE REPORT</option>
+        </select>
+    </div>
+    <div class="col-sm-10">
+        <button id="provReport_submit_btn" style="text-align:right;margin-top: 25px" class="btn btn-primary">SUBMIT</button>
+        <button id="provReport_clear_btn" style="text-align:right; margin-top: 25px" class="btn btn-primary">CLEAR</button>
+    </div>
+</div>
+
+
+<script>
+function convertArrayOfObjectsToCSV(args) {
+    var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+    data = args.data || null;
+    if (data == null || !data.length) {
+        return null;
+    }
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
+
+    keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+    data.forEach(function(item) {
+        ctr = 0;
+        keys.forEach(function(key) {
+            if (ctr > 0) result += columnDelimiter;
+
+            result += item[key];
+            ctr++;
+        });
+        result += lineDelimiter;
+    });
+
+    return result;
+}
+
+function downloadCSV(args) {
+    var data, filename, link;
+
+    var csv = convertArrayOfObjectsToCSV({
+        data: provReportDataTable.data().toArray()
+    });
+
+    if (csv == null) {
+        alert("NO REPORT TO CREATE");
+        return;
+    }
+
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + csv;
+    }            
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+}
+
+function provReport_resetDate(){
+    $("#provReport_fromDate_date").val(moment().format("YYYY-MM-DD"))
+    $("#provReport_toDate_date").val(moment().format("YYYY-MM-DD"))
+}
+
+$(document).ready(function(){
+    provReport_resetDate();
+
+    $("#provReport_clear_btn").click(function(){
+        $(".provReport-form").val("");
+        provReport_resetDate()
+        provReportDataTable.clear().draw();
+    })
+
+    $("#provReport_submit_btn").click(function(){
+        let act = $("#provReport_report_sel").val();
+        if ($("#provReport_fromDate_date").val() > $("#provReport_toDate_date").val()) {
+            let modal = {
+                title: "Error",
+                body: "'TO DATE' must the same or after 'FROM DATE'!",
+                type: 'danger'
+            }
+            modalHandler(modal);
+            return;
+        } 
+        if (act == "VIEW REPORT") {
+            provReportQueryProvlog(act);
+        }
+        else if (act == "CREATE REPORT") {
+            var fromDate = $("#provReport_fromDate_date").val().replace(/-/g, "");
+            var toDate = $("#provReport_toDate_date").val().replace(/-/g, "");
+            downloadCSV({filename: `PROVISIONING_REPORT_${fromDate}_${toDate}.csv`});
+            
+        }
+    })
+})
+
+</script>
