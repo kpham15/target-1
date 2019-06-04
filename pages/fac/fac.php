@@ -26,8 +26,10 @@
 
 <script type="text/javascript">
 
+  // A flag to check if it is first time loading, primary use is for click event for fac menu item
   var facFirstLoad = true;
 
+  // FAC menu item click event
   $(".menu-item[page_id='fac-page']").click(async function() {
     if (facFirstLoad != true) {
       return;
@@ -41,8 +43,6 @@
     queryFac();
 
     facFirstLoad = false;
-
-    
   });
   
   function loadFacOptions(action, type) {
