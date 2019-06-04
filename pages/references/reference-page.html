@@ -1,0 +1,174 @@
+<!-- Dropdown selections -->
+<div class="col-md-7">
+    <!-- Selection Boxes Dyanamically Created -->
+    <div class="row ref-select-row">
+		</div>
+		<!-- Action Row -->
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>ACTION</label>
+					<select id="reference-page-action" class="form-control">
+						<option value=""></option>
+						<option value="update">UPDATE</option>
+						<option value="reset">RESET</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<!-- Submit Button -->
+		<button id="reference-page-submit" type="button" class="btn btn-primary btn-flat">
+			Submit
+		</button>
+		<!-- Refresh Button -->
+		<button id="reference-page-refresh" type="button" class="btn btn-primary btn-flat">
+			Refresh
+		</button>
+</div>
+
+<script type="text/javascript" src="./pages/references/reference-page-options.js"></script>
+
+<script type="text/javascript">
+
+function refStartup() {
+
+	for (let i=0; i<refOptions.length; i++) {
+		let refSelect = createRefSelect(refOptions[i]);
+		$('.ref-select-row').append(refSelect);
+	}
+}
+
+function createRefSelect(data) {
+	let refSelect = '<div class="col-md-4">' +
+										'<div class="form-group">' +
+											'<label>'+data.title+'</label>' +
+											'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
+	for (let i=0; i<data.options.length; i++) {
+		refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	}
+	refSelect +=				'</select>' +
+										'</div>' +
+									'</div>';
+
+	return refSelect;
+}
+
+function queryReferences() {
+	$.ajax({
+		type: 'POST',
+		url: ipcDispatch,
+		data: {
+			"api":      "ipcRef",
+			"action":   "query",
+			"user":     user.uname,
+		},
+		dataType: 'json'
+	}).done(function(data) {
+		let res = data.rows[0];
+		
+		displayRefs(res);
+	});
+}
+
+function displayRefs(data) {
+
+	$('.ref-select-box').each(function() {
+		let refId = $(this).attr('ref_id');
+
+		$(this).val(data[refId]);
+	});
+	
+}
+
+$(document).ready(function() {
+	
+	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
+	// Click event for submit button
+	$('#reference-page-submit').click(function() {
+
+		let refObj = {};
+
+		$('.ref-select-box').each(function() {
+			let refId = $(this).attr('ref_id');
+
+			refObj[refId] = $(this).val();
+		});
+
+		let action = $('#reference-page-action').val();
+
+		if (action == "") {
+			inputError($('#reference-page-action'),'Select an action.');
+			return;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: ipcDispatch,
+			data: {
+				"api":      			"ipcRef",
+				"action":   			action,
+				"user":     			user.uname,
+				"alm_archv": 			refObj.alm_archv,
+				"alm_del": 				refObj.alm_del,
+				"auto_ckid": 			refObj.auto_ckid,
+				"auto_ordno": 		refObj.auto_ordno,
+				"brdcst_del": 		refObj.brdcst_del,
+				"cfg_archv": 			refObj.cfg_archv,
+				"cfg_del": 				refObj.cfg_del,
+				"date_format": 		refObj.date_format,
+				"maint_archv": 		refObj.maint_archv,
+				"maint_del": 			refObj.maint_del,
+				"temp_max": 			refObj.temp_max,
+				"mtc_restore": 		refObj.mtc_restore,
+				"prov_archv": 		refObj.prov_archv,
+				"prov_del": 			refObj.prov_del,
+				"pw_alert": 			refObj.pw_alert,
+				"pw_expire": 			refObj.pw_expire,
+				"pw_repeat": 			refObj.pw_repeat,
+				"pw_reuse": 			refObj.pw_reuse,
+				"user_disable": 	refObj.user_disable,
+				"user_idle_to": 	refObj.user_idle_to
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			let res = data.rows;
+			let modal = {
+				title: data.rslt,
+				body: data.reason,
+			}
+
+			if (data.rslt === 'fail') {
+				modal.type = 'danger'
+				modalHandler(modal);
+			} else {
+				//@TODO Do we want a success modal here? It will show on start of page.
+			}
+		});
+
+  });
+
+	// Click event for refresh button
+	$('#reference-page-refresh').click(function(e) {
+		e.preventDefault();
+
+		queryReferences();
+
+		clearErrors();
+	})
+
+	// Click event for action selection
+	$('#reference-page-action').change(function() {
+		clearErrors();
+	})
+
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
+		queryReferences();
+		refStartup();
+	})
+
+
+});
+</script>
+

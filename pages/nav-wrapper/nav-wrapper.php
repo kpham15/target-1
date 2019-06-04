@@ -17,8 +17,7 @@
     <!-- Includes for all the content pages -->
     <?php include __DIR__ . '/../system-view/system-view.php'; ?>
     <?php include __DIR__ . '/../brdcst/brdcst.php'; ?>
-    <?php include __DIR__ . '/../svc/svc.php'; ?>
-    <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
+    <?php include __DIR__ . '/../references/references.php'; ?>
 
     <!-- /.content -->
   </div>
