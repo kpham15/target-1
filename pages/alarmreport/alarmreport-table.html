@@ -28,7 +28,7 @@
 <script type="text/javascript">
 	// Intialize Datatable
 	var alarmreportDatatable = $('#alarmreport-table').DataTable({
-		// "scrollY": "200px",
+		
     "data": [],
     "columns": [
       {
@@ -55,8 +55,6 @@
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
 		let src = $('#alarmreport-forms-source').val();
-		// let fromDate = $('#alarmreport-forms-fromdate').val();
-		// let toDate = $('#alarmreport-forms-todate').val();
 
 		$.ajax({
       type: 'POST',
