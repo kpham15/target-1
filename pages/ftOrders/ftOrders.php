@@ -14,17 +14,19 @@
 
     <!-- ORD -->
     <div class="col-md-12">
-      <div class="col-sm-5" style="width:46%">
-
-        <!-- ORD FORM -->
-        <?php include __DIR__ . '/forms/ftOrders-ordForm.html'; ?>
-
-      </div>
-      <div class="col-sm-7" style="width:54%">
-        
-        <!-- ORD TABLE -->
-        <?php include __DIR__ . '/tables/ftOrders-ordTable.html'; ?>
-
+      <div class="row">
+        <div class="col-sm-5" style="width:46%">
+  
+          <!-- ORD FORM -->
+          <?php include __DIR__ . '/forms/ftOrders-ordForm.html'; ?>
+  
+        </div>
+        <div class="col-sm-7" style="width:54%">
+          
+          <!-- ORD TABLE -->
+          <?php include __DIR__ . '/tables/ftOrders-ordTable.html'; ?>
+  
+        </div>
       </div>
     </div>
 
@@ -32,17 +34,19 @@
 
     <!-- CKT -->
     <div class="col-md-12">
-      <div class="col-sm-5" style="width:46%">
-
-        <!-- CKT FORM -->
-        <?php include __DIR__ . '/forms/ftOrders-cktForm.html'; ?>
-
-      </div>
-      <div class="col-sm-7" style="width:54%">
-        
-        <!-- CKT TABLE -->
-        <?php include __DIR__ . '/tables/ftOrders-cktTable.html'; ?>
-
+      <div class="row">
+        <div class="col-sm-5" style="width:46%">
+  
+          <!-- CKT FORM -->
+          <?php include __DIR__ . '/forms/ftOrders-cktForm.html'; ?>
+  
+        </div>
+        <div class="col-sm-7" style="width:54%">
+          
+          <!-- CKT TABLE -->
+          <?php include __DIR__ . '/tables/ftOrders-cktTable.html'; ?>
+  
+        </div>
       </div>
     </div>
 
@@ -50,17 +54,19 @@
 
     <!-- FAC -->
     <div class="col-md-12">
-      <div class="col-sm-5" style="width:46%">
+      <div class="row">
+        <div class="col-sm-5" style="width:46%">
 
-        <!-- FAC FORM -->
-        <?php include __DIR__ . '/forms/ftOrders-facForm.html'; ?>
+          <!-- FAC FORM -->
+          <?php include __DIR__ . '/forms/ftOrders-facForm.html'; ?>
 
-      </div>
-      <div class="col-sm-7" style="width:54%">
-        
-        <!-- FAC TABLE -->
-        <?php include __DIR__ . '/tables/ftOrders-facTable.html'; ?>
+        </div>
+        <div class="col-sm-7" style="width:54%">
+          
+          <!-- FAC TABLE -->
+          <?php include __DIR__ . '/tables/ftOrders-facTable.html'; ?>
 
+        </div>
       </div>
     </div>
 
