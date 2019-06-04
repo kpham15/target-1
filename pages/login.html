@@ -102,10 +102,11 @@
     var login = {
   
       // jQuery Selectors
-      username:       $('#login_username'),
-      password:       $('#login_password_input'),
-      newpassword:    $('#login_newPassWord'),
-      loginBtn:       $('#login_btn'),
+      username:         $('#login_username'),
+      password:         $('#login_password_input'),
+      newpassword:      $('#login_newPassWord'),
+      confirmPassword:  $('#login_confirmPassWord'),
+      loginBtn:         ('#login_btn'),
   
   
       // General Functions
@@ -149,10 +150,10 @@
       },
   
       postUserPassword: function() {
-        // @TODO checks for user registration
-        // if (login.newpassword.val() == '' && login.newpassword.val() === login.confirmPassword.val()) {
-        //   alert("New password and confirm password should be the same");
-        // }
+        if (login.newpassword.val() !== '' && login.newpassword.val() !== login.confirmPassword.val()) {
+          inputError(login.newpassword, '');
+          inputError(login.confirmPassword, 'New password and Confirm password must match each other.');
+        }
   
         $.post(ipcDispatch,
         {
@@ -169,8 +170,6 @@
             loginErrorHandler(obj);
           } else {
             
-            // @TODO add user name to profile area in sidebar/header nav
-            // $('#main_userFLname').text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
             user.uname = obj.rows[0].uname;
             user.fname = obj.rows[0].fname;
             user.mi = obj.rows[0].mi;
@@ -180,7 +179,8 @@
             user.idle_to = obj.rows[0].user_idle_to;
             login.username.val("");
             login.password.val("");
-            // login.newpassword.val("");
+            login.newpassword.val("");
+            login.confirmPassword.val("");
   
             // call function to route to main page
             loginSuccess();
