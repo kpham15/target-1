@@ -1,0 +1,179 @@
+<!-- Forms -->
+<div class="col-md-5">
+  <form id="fac-form">
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- FAC_ID -->
+      <div class="col-md-7">
+        <div class="form-group">
+          <label>FAC_ID</label>
+          <input id="fac-form-facId" type="text" class="form-control fac-form-input">
+        </div>
+      </div>
+
+      <!-- PSTA -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>PSTA</label>
+          <select id="fac-form-psta" class="form-control fac-form-input">
+            <option value=""></option>
+            <option value="AVAIL">AVAIL</option>
+            <option value="SF">SF</option>
+            <option value="CONN">CONN</option>
+            <option value="MTCD">MTCD</option>
+            <option value="DEF">DEF</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- FAC_TYP -->
+      <div class="col-md-2">
+        <label>FAC_TYP</label>
+        <select id="fac-form-ftyp" class="form-control fac-form-input">
+          <option value=""></option>
+          <!-- TBC -->
+          <option value="CP">CP</option>
+        </select>
+      </div>
+
+      <!-- ORT-->
+      <div class="col-md-2">
+        <label>ORT</label>
+        <select id="fac-form-ort" class="form-control fac-form-input">
+          <option value=""></option>
+          <!-- TBC -->
+          <option value="CP">CP</option>
+        </select>
+      </div>
+
+      <!-- SPCFNC-->
+      <div class="col-md-3">
+        <label>SPCFNC</label>
+        <select id="fac-form-spcfnc" class="form-control fac-form-input">
+          <option value=""></option>
+          <!-- TBC -->
+          <option value="SP">SP</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- Action Dropdown -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="fac-form-action" class="form-control fac-form-input">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLEAR BTN -->
+    <button id="fac-form-clear" type="button" class="btn btn-primary">
+      CLEAR
+    </button>
+
+    <!-- VIEW BUTTON -->
+    <button id="view-fac" type="button" class="btn btn-primary">
+      VIEW
+    </button>
+
+    <!-- FAC ID NUM -->
+    <input type="hidden" id="fac-form-id" class="fac-form-input" style="width:20px;">
+    
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    // ACTION Change listener
+    $('#fac-form-action').change(function() {
+      let value = $(this).val();
+
+      let id = $('#fac-form-id').val();
+
+      let facId = $("#fac-form-facId").val();
+      let ftyp = $("#fac-form-ftyp").val();
+      let ort = $("#fac-form-ort").val();
+      let psta = $("#fac-form-psta").val();
+      let spcfnc = $("#fac-form-spcfnc").val();
+
+      clearErrors();
+
+      // ADD Action
+      if (value === 'add') {
+        // enable modal fields
+        $('#fac-modal-facId, #fac-modal-range, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+
+        $('#fac-modal-action').val('ADD');
+
+        $('#fac-modal').modal('show');
+      }
+      // UPDATE Action
+      else if (value === 'update') {
+        if ( !id || id === '') {
+          inputError($(this),'Select facility from table.');
+          $("#fac-form-action").val("");
+          return;
+        }
+
+        // enable modal fields
+        $('#fac-modal-facId, #fac-modal-ftyp, #fac-modal-ort, #fac-modal-spcfnc').prop('disabled', false);
+        
+        // populate modal fields
+        $("#fac-modal-facId").val(facId);
+        $("#fac-modal-ftyp").val(ftyp);
+        $("#fac-modal-ort").val(ort);
+        $("#fac-modal-psta").val(psta);
+        $("#fac-modal-spcfnc").val(spcfnc);
+
+        $('#fac-modal-action').val('UPDATE');
+
+        $('#fac-modal').modal('show');
+      }
+      // DELETE Action
+      else if (value === 'delete') {
+        if ( !id || id === '') {
+          inputError($(this),'Select facility from table.');
+          $("#fac-form-action").val("");
+          return;
+        }
+
+        // populate modal fields
+        $("#fac-modal-facId").val(facId);
+        $("#fac-modal-ftyp").val(ftyp);
+        $("#fac-modal-ort").val(ort);
+        $("#fac-modal-psta").val(psta);
+        $("#fac-modal-spcfnc").val(spcfnc);
+
+        $('#fac-modal-action').val('DELETE');
+
+        $('#fac-modal').modal('show');
+      }
+    });
+
+    $('#fac-modal').on('hidden.bs.modal', function (e) {
+      $('.fac-modal-field').prop('disabled', true).val('');
+      $("#fac-form-action").val("").change();
+    });
+
+    $('#fac-form-clear').click(function() {
+      $('.fac-form-input').val('');
+      $('#fac-table tbody tr').removeClass('bg-primary');
+
+      clearErrors();
+    });
+
+
+  });
+</script>
