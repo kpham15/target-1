@@ -23,7 +23,7 @@
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
       </div>
-      <div id="newpassword-forms">
+      <div id="newpassword-forms" style="display:none;">
         <div class="form-group has-feedback">
           <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
           <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
@@ -49,9 +49,9 @@
       </div>
     </form>
 
-    <div class="login-bottom-actions">
+    <div class="login-bottom-actions text-center">
       <p>- OR -</p>
-      <button type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
+      <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
     </div>
 
   </div>
@@ -77,6 +77,18 @@
   }
 
   $(document).ready(function() {
+
+    $('#change-password-btn').click(function() {
+      if ($(this).hasClass('active')) {
+        $(this).text('First Login / Change Password').button('toggle');
+        $('#newpassword-forms').hide();
+        clearErrors();
+      } else {
+        $(this).text('Go Back').button('toggle');
+        $('#newpassword-forms').show();
+        clearErrors();
+      }
+    });
 
     $('#login-remember').iCheck({
       checkboxClass: 'icheckbox_square-blue',
