@@ -17,13 +17,13 @@
       <div class="col-sm-5" style="width:46%">
 
         <!-- ORD FORM -->
-        <?php include __DIR__ . '/ftOrders-ordForm.html'; ?>
+        <?php include __DIR__ . './forms/ftOrders-ordForm.html'; ?>
 
       </div>
       <div class="col-sm-7" style="width:54%">
         
         <!-- ORD TABLE -->
-        <?php include __DIR__ . '/ftOrders-ordTable.html'; ?>
+        <?php include __DIR__ . './tables/ftOrders-ordTable.html'; ?>
 
       </div>
     </div>
@@ -35,13 +35,13 @@
       <div class="col-sm-5" style="width:46%">
 
         <!-- CKT FORM -->
-        <?php include __DIR__ . '/ftOrders-cktForm.html'; ?>
+        <?php include __DIR__ . './forms/ftOrders-cktForm.html'; ?>
 
       </div>
       <div class="col-sm-7" style="width:54%">
         
         <!-- CKT TABLE -->
-        <?php include __DIR__ . '/ftOrders-cktTable.html'; ?>
+        <?php include __DIR__ . './tables/ftOrders-cktTable.html'; ?>
 
       </div>
     </div>
@@ -53,13 +53,13 @@
       <div class="col-sm-5" style="width:46%">
 
         <!-- FAC FORM -->
-        <?php include __DIR__ . '/ftOrders-facForm.html'; ?>
+        <?php include __DIR__ . './forms/ftOrders-facForm.html'; ?>
 
       </div>
       <div class="col-sm-7" style="width:54%">
         
         <!-- FAC TABLE -->
-        <?php include __DIR__ . '/ftOrders-facTable.html'; ?>
+        <?php include __DIR__ . './tables/ftOrders-facTable.html'; ?>
 
       </div>
     </div>
