@@ -152,7 +152,8 @@
 
   // CLEAR BUTTON
   $("#ftOrders-ordForm-clear").on('click', function() {
-    ftOrdersOrdDatatable.clear().draw();
+
+    // ftOrdersOrdDatatable.clear().draw();
     $(".ftOrders-ordForm-input").val("").change();
     ftOrdersCktDatatable.clear().draw();
     $(".ftOrders-cktForm-input").val("").change();
