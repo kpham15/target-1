@@ -1,7 +1,7 @@
 var refOptions = [
 	{
-		title:			"MAXIMUM PASSWORD AGE",
-		selectId:		"reference-page-pwage",
+		title:		  "MAXIMUM PASSWORD AGE",
+		selectId:	  "reference-page-pwage",
 		ref_id:     "pw_expire",
 		options: 
 		[
@@ -99,19 +99,19 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"250",
-				text: 	"250 Days"
+				text: 	"DELETE AFTER 250 DAYS"
 			},
 			{
 				value: 	"300",
-				text: 	"300 Days"
+				text: 	"DELETE AFTER 300 DAYS"
 			},
 			{
 				value: 	"390",
-				text: 	"390 Days"
+				text: 	"DELETE AFTER 390 DAYS"
 			},
 			{
 				value: 	"400",
-				text: 	"400 Days"
+				text: 	"DELETE AFTER 400 DAYS"
 			}
 		]
 	},
