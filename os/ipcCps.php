@@ -216,10 +216,13 @@ $cps = array();
 $file =  "../../ipc-cps.cfg";
 $tty_str = file_get_contents($file);
 $tty = explode(",", $tty_str);
+
 $numofcps = count($tty);
 for ($i=0; $i<$numofcps; $i++) {
     $node = $i+1;
-    $cps[$i] = new COM($tty[$i], $node);
+    $com = trim($tty[$i]);
+
+    $cps[$i] = new COM($com, $node);
     $cps[$i]->sendStatusReq();
 }
 
