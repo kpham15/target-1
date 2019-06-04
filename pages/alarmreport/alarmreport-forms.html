@@ -91,17 +91,17 @@
 	function downloadAlarmReports(args) {
 		var data, filename, link;
         var csv = convertArrayOfObjectsToCSV({
-            data: alarmreportDatatable.data().toArray()
+          data: alarmreportDatatable.data().toArray()
         });
         if (csv == null) {
-						inputError($('#alarmreport-forms-report'),'No Reports To Create');
-            return;
+          inputError($('#alarmreport-forms-report'),'No Reports To Create');
+          return;
 				}
 				
         filename = args.filename || 'export.csv';
 
         if (!csv.match(/^data:text\/csv/i)) {
-            csv = 'data:text/csv;charset=utf-8,' + csv;
+          csv = 'data:text/csv;charset=utf-8,' + csv;
         }
         data = encodeURI(csv);
 
@@ -124,8 +124,8 @@
 			}, function(start, end, label) {
 				alarmreportStartDate = start.format('YYYY-MM-DD');
 				alarmreportEndDate = end.format('YYYY-MM-DD');
-				// console.log(alarmreportStartDate);
-				// console.log(alarmreportEndDate);
+				console.log(alarmreportStartDate);
+				console.log(alarmreportEndDate);
 			});
 		}
 
@@ -155,12 +155,16 @@
 		// Click Event For 'Clear Button'
 		$('#alarmreport-clear').click(function() {
 
-			let currDate = moment(new Date()).format('MM/DD/YYYY');
+			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
 			$('.alarmreport-forms-input').val('');
 			alarmreportDatatable.clear().draw();
 
 			$('#alarmreport-daterange').val('').daterangepicker("update");
+			alarmreportStartDate = currDate;
+			alarmreportEndDate = currDate;
+
+			// reinitialize daterangepicker if
 			initializeAlarmreportDateRangePicker();
 			
 			clearErrors();
