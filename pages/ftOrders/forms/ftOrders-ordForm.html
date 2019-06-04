@@ -176,7 +176,7 @@
         api:   "ipcFtOrd",
         user:  user.uname,
         act:   "PROCESS_ORD",
-        ordno: $("#ftOrder-ordForm-ordno").val().toUpperCase(),
+        ordno: $("#ftOrders-ordForm-ordno").val().toUpperCase(),
       },
       dataType: 'json'
     }).done(function(data) {
@@ -217,12 +217,12 @@
         api:    "ipcFtOrd",
         user:   user.uname,
         act:    "PROCESS_CONNECTION",
-        ordno:  $("#ftOrder-ordForm-ordno").val().toUpperCase(),
-        ctid:   $("#ftOrder-cktForm-ctid").val().toUpperCase(),
-        cls:    $("#ftOrder-cktForm-cls").val().toUpperCase(),
-        op:     $("#ftOrder-facForm-op").val().toUpperCase(),
-        ffacid: $("#ftOrder-facForm-ffacid").val().toUpperCase(),
-        tfacid: $("#ftOrder-facForm-tfacid").val().toUpperCase(),
+        ordno:  $("#ftOrders-ordForm-ordno").val().toUpperCase(),
+        ctid:   $("#ftOrders-cktForm-ctid").val().toUpperCase(),
+        cls:    $("#ftOrders-cktForm-cls").val().toUpperCase(),
+        op:     $("#ftOrders-facForm-op").val().toUpperCase(),
+        ffacid: $("#ftOrders-facForm-ffacid").val().toUpperCase(),
+        tfacid: $("#ftOrders-facForm-tfacid").val().toUpperCase(),
       },
       dataType: 'json'
     }).done(function(data) {
