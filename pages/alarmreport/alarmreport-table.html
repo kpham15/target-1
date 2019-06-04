@@ -28,7 +28,7 @@
 <script type="text/javascript">
 	// Intialize Datatable
 	var alarmreportDatatable = $('#alarmreport-table').DataTable({
-		"scrollY": "200px",
+		// "scrollY": "200px",
     "data": [],
     "columns": [
       {
@@ -58,6 +58,8 @@
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
 		let src = $('#alarmreport-forms-source').val();
+		let fromDate = $('#alarmreport-forms-fromdate').val();
+		let toDate = $('#alarmreport-forms-todate').val();
 
 		$.ajax({
       type: 'POST',
@@ -70,8 +72,8 @@
 				"sev": 			sev,
 				"src": 			src,
 				//@TODO remove hardcoded dates, take data from input fields
-				"fromDate": '2019-05-01',
-				"toDate": 	'2019-05-31'
+				"fromDate": fromDate,
+				"toDate": 	toDate
       },
       dataType: 'json'
     }).done(function(data) {
