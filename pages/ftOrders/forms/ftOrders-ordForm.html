@@ -162,9 +162,42 @@
     $(".ftOrders-facForm-input").val("").change();
   });
 
+  // SUBMIT BUTTON
   $("#ftOrders-ordForm-submit").on('click', function() {
     
   });
+
+  // ACTION CHANGE
+  $("#ftOrders-ordForm-action").on('change', function() {
+    if ($(this).val() == "PROCESS_ORDER") {
+      if ($("#ftOrders-ordForm-id").val() != "") {
+      // add background color to ord form if an ord in table is selected
+        
+      } else {
+        // @TODO: ADD CODE TO ALERT
+
+      }
+    } else if ($(this).val() == "PROCESS_CKT") {
+      if ($("#ftOrders-cktForm-id").val() != "") {
+      // add background color to ckt form if an ckt in table is selected
+
+      } else {
+        // @TODO: ADD CODE TO ALERT
+
+      }
+    } else if ($(this).val() == "PROCESS_FAC") {
+      if ($("#ftOrders-facForm-id").val() != "") {
+      // add background color to fac form if an fac in table is selected
+
+      } else {
+        // @TODO: ADD CODE TO ALERT
+
+      }
+    } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
+      // remove background color from all forms
+    }
+  });
+
 
 
 </script>
