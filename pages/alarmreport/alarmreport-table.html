@@ -51,9 +51,6 @@
     "order": [[ 0, "desc" ]]
 	});
 
-	// Holds data.rows to make availabe for download
-	var alarmreportDataRows = [];
-
 	function queryAlarmReports() {
 		let action = $('#alarmreport-forms-action').val();
 		let sev = $('#alarmreport-forms-severity').val();
@@ -71,7 +68,6 @@
 				"action": 	action,
 				"sev": 			sev,
 				"src": 			src,
-				//@TODO remove hardcoded dates, take data from input fields
 				"fromDate": fromDate,
 				"toDate": 	toDate
       },
