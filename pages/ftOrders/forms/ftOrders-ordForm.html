@@ -144,6 +144,22 @@
 
 <script type="text/javascript">
 
+  // FUNCTIONS
+  function fetchFtOrders() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "FETCH_FT_ORDERS",
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      console.log(data);
+    });
+  }
+
   // VIEW BUTTON 1 
   $("#ftOrders-ordForm-view1").on("click", function() {
     ftOrdersCktDatatable.clear().draw();
@@ -166,7 +182,16 @@
 
   // SUBMIT BUTTON
   $("#ftOrders-ordForm-submit").on('click', function() {
-    
+    let action = $("#ftOrders-ordForm-action").val()
+    if ( action == "FETCH_FT_ORDERS") {
+      fetchFtOrders();
+    } else if (action == "PROCESS_ORDER") {
+      processFtOrder();
+    } else if (action == "PROCESS-CKT") {
+      processFtCkt();
+    } else if (action == "PROCESS_FAC") {
+      processFtConnection();
+    }
   });
 
   // ACTION CHANGE
