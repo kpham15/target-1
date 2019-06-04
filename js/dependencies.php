@@ -7,6 +7,8 @@
   echo '<link rel="stylesheet" href="./dist/css/AdminLTE.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
   echo '<link rel="stylesheet" href="./bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">';
+  echo ' <link rel="stylesheet" href="/bower_components/bootstrap-daterangepicker/daterangepicker.css">';
+  echo '<link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
   echo '<link rel="stylesheet" href="./plugins/iCheck/all.css">';
