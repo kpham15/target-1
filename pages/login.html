@@ -151,8 +151,10 @@
   
       postUserPassword: function() {
         if (login.newpassword.val() !== '' && login.newpassword.val() !== login.confirmPassword.val()) {
+          clearErrors();
           inputError(login.newpassword, '');
           inputError(login.confirmPassword, 'New password and Confirm password must match each other.');
+          return;
         }
   
         $.post(ipcDispatch,
