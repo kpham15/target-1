@@ -465,7 +465,8 @@ function updateCpsVolt($hwRsp) {
     $debugObj = new DEBUG();
 
     $debugObj->log($hwRsp);
-
+    $debugObj->close();
+    
     // filters data brought from $hwRsp and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
