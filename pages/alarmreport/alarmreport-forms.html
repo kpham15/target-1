@@ -118,12 +118,18 @@
 		var alarmreportEndDate = "";
 
 		// Initialze daterangepicker and assign values to start and from dates
-		$('input[id="alarmreport-daterange"]').daterangepicker({
-			opens: 'bottom'
-		}, function(start, end, label) {
-			alarmreportStartDate = start.format('YYYY-MM-DD');
-			alarmreportEndDate = end.format('YYYY-MM-DD');
-		});
+		function initializeAlarmreportDateRangePicker () {
+			$('input[id="alarmreport-daterange"]').daterangepicker({
+				opens: 'bottom'
+			}, function(start, end, label) {
+				alarmreportStartDate = start.format('YYYY-MM-DD');
+				alarmreportEndDate = end.format('YYYY-MM-DD');
+				console.log(alarmreportStartDate);
+				console.log(alarmreportEndDate);
+			});
+		}
+
+		initializeAlarmreportDateRangePicker();
 		
 
 		// Click Event For 'Submit Button'
@@ -138,6 +144,8 @@
 				
 				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
 			}
+			//@TODO if there are too many rows, does not download?
+			//Example, report on 6/4/2019 produces 20k rows
 			else if (report === "CREATE REPORT") {
 				console.log(alarmreportEndDate);
 				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
@@ -150,8 +158,10 @@
 			let currDate = moment(new Date()).format('MM/DD/YYYY');
 
 			$('.alarmreport-forms-input').val('');
+			alarmreportDatatable.clear().draw();
 
-			$('#alarmreport-daterange').val('').daterangepicker('update');
+			$('#alarmreport-daterange').val('').daterangepicker("update");
+			initializeAlarmreportDateRangePicker();
 			
 			clearErrors();
 		})
