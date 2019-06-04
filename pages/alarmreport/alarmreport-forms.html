@@ -169,8 +169,6 @@
 		$("#alarmreport-forms-todate").val(moment().format("YYYY-MM-DD"))
 	}
 
-
-
 	$(document).ready(function() {
 
 		// Click Event For 'Submit Button'
@@ -206,7 +204,7 @@
 		// Click Event For 'Clear Button'
 		$('#alarmreport-clear').click(function() {
 			$('.alarmreport-forms-input').val('');
-			
+
 			alarmreportDefaultDate();
 			
 			clearErrors();
