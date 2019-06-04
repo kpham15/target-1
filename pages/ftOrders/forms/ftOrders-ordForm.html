@@ -1,114 +1,116 @@
-<form id="ftOrders-ordForm">
-  <!-- Ord Form -->
+<div class="row">
+  <form id="ftOrders-ordForm">
+    <!-- Ord Form -->
+    
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- ORDNO -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>ORDNO:</label>
+          <input id="ftOrders-ordForm-ordno" type="text" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
   
-  <!-- Row 1 -->
-  <div class="row">
-    <!-- ORDNO -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <label>ORDNO:</label>
-        <input id="ftOrders-ordForm-ordno" type="text" class="form-control ftOrders-ordForm-input">
+      <!-- OT -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>OT:</label>
+          <select id="ftOrders-ordForm-ot" class="form-control ftOrders-ordForm-input">
+            <option></option>
+            <option>CD</option>
+            <option>CH</option>
+            <option>F</option>
+            <option>NC</option>
+            <option>T</option>
+            <option>CIO</option>
+            <option>LST</option>
+            <option>MCT</option>
+            <option>SET</option>
+            <option>WAO</option>
+          </select>
+        </div>
       </div>
-    </div>
-
-    <!-- OT -->
-    <div class="col-md-2">
-      <div class="form-group">
-        <label>OT:</label>
-        <select id="ftOrders-ordForm-ot" class="form-control ftOrders-ordForm-input">
-          <option></option>
-          <option>CD</option>
-          <option>CH</option>
-          <option>F</option>
-          <option>NC</option>
-          <option>T</option>
-          <option>CIO</option>
-          <option>LST</option>
-          <option>MCT</option>
-          <option>SET</option>
-          <option>WAO</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- WC -->
-    <div class="col-md-2">
-      <div class="form-group">
-        <label>WC:</label>
-        <input id="ftOrders-ordForm-wc" type="text" class="form-control ftOrders-ordForm-input">
-      </div>
-    </div>
-
-    <!-- PRI -->
-    <div class="col-md-1">
-      <div class="form-group">
-        <label>PRI:</label>
-        <select id="ftOrders-ordForm-pri" class="form-control ftOrders-ordForm-input">
-          <option></option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- STAT -->
-    <div class="col-md-2">
-      <div class="form-group">
-        <label>STAT:</label>
-        <input id="ftOrders-ordForm-stat" class="form-control ftOrders-ordForm-input">
-      </div>
-    </div>
-    <!-- VIEW BUTTON 1 -->
-    <button id="ftOrders-ordForm-view1" type="button" class="btn btn-primary" style="margin-top: 25px">
-      VIEW
-    </button>
-
-  </div>
   
-  <!-- Row 2 -->
-  <div class="row">
-    <!-- CDD -->
-    <div class="col-md-1">
-      <div class="form-group">
-        <label>CDD:</label>
-        <select id="ftOrders-ordForm-cdd" class="form-control ftOrders-ordForm-input">
-          <option value=""></option>
-          <option value="">Y</option>
-        </select>
+      <!-- WC -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>WC:</label>
+          <input id="ftOrders-ordForm-wc" type="text" class="form-control ftOrders-ordForm-input">
+        </div>
       </div>
-    </div>
-
-    <!-- DD: -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <label>DD:</label>
-        <input id="ftOrders-ordForm-dd" class="form-control ftOrders-ordForm-input">
+  
+      <!-- PRI -->
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>PRI:</label>
+          <select id="ftOrders-ordForm-pri" class="form-control ftOrders-ordForm-input">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
       </div>
-    </div>
-
-    <!-- FDD: -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <label>FDD:</label>
-        <input id="ftOrders-ordForm-fdd" class="form-control ftOrders-ordForm-input">
+  
+      <!-- STAT -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>STAT:</label>
+          <input id="ftOrders-ordForm-stat" class="form-control ftOrders-ordForm-input">
+        </div>
       </div>
+      <!-- VIEW BUTTON 1 -->
+      <button id="ftOrders-ordForm-view1" type="button" class="btn btn-primary" style="margin-top: 25px">
+        VIEW
+      </button>
+  
     </div>
-
-    <!-- FDT -->
-    <div class="bootstrap-timepicker col-md-3">
-      <div class="form-group">
-        <label>FDT:</label>
-        <input id="ftOrders-ordForm-fdt" class="form-control ftOrders-ordForm-input">
+    
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- CDD -->
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>CDD:</label>
+          <select id="ftOrders-ordForm-cdd" class="form-control ftOrders-ordForm-input">
+            <option value=""></option>
+            <option value="">Y</option>
+          </select>
+        </div>
       </div>
+  
+      <!-- DD: -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>DD:</label>
+          <input id="ftOrders-ordForm-dd" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- FDD: -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>FDD:</label>
+          <input id="ftOrders-ordForm-fdd" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- FDT -->
+      <div class="bootstrap-timepicker col-md-3">
+        <div class="form-group">
+          <label>FDT:</label>
+          <input id="ftOrders-ordForm-fdt" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+      <!-- VIEW BUTTON 2 -->
+      <button id="ftOrders-ordForm-view2" type="button" class="btn btn-primary" style="margin-top: 25px">
+        VIEW
+      </button>
     </div>
-    <!-- VIEW BUTTON 2 -->
-    <button id="ftOrders-ordForm-view2" type="button" class="btn btn-primary" style="margin-top: 25px">
-      VIEW
-    </button>
-  </div>
-
-</form>
+  
+  </form>
+</div>
 
 <!-- Row 3 -->
 <div class="row">
