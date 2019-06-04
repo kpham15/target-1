@@ -86,6 +86,15 @@
       
       clearErrors();
 
+      // CLEAR CKT AND FAC FORM
+      $('.ftOrders-cktForm-input').val("").change();
+      $('.ftOrders-facForm-input').val("").change();
+
+      // CLEAR CKT AND FAC TABLES
+      ftOrdersCktDatatable.clear().draw();
+      ftOrdersFacDatatable.clear().draw();
+
+
       // Below function is located in ftOrders-facTable.html
       queryFtOrdersCkt(data.ordno);
       
