@@ -70,14 +70,17 @@
 </div>
 
 <script type="text/javascript">
+  // modify padding for input fields in cktForm
   $(".ftOrders-cktForm-input").parent().parent().css('padding-right', "0px");
 
   // FtOrders menu item click event
+  var ftOrdersFirstLoad = true;
   $(".menu-item[page_id='ftOrders-page']").click(function() {
     if (ftOrdersFirstLoad != true) {
       return;
     }
     // load ord table upon visiting page
     queryFtOrdersOrd();
+    ftOrdersFirstLoad = false;
   });
 </script>
