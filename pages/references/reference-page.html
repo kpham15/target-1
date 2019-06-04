@@ -33,9 +33,14 @@
 
 function refStartup() {
 
-	for (let i=0; i<refOptions.length; i++) {
-		let refSelect = createRefSelect(refOptions[i]);
-		$('.ref-select-row').append(refSelect);
+	if ($('.ref-select-row').length > 0) {
+		queryReferences();
+	} else {
+		for (let i=0; i<refOptions.length; i++) {
+			let refSelect = createRefSelect(refOptions[i]);
+			$('.ref-select-row').append(refSelect);
+		}
+		queryRefernces();
 	}
 }
 
@@ -164,7 +169,6 @@ $(document).ready(function() {
 
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
-		queryReferences();
 		refStartup();
 	})
 
