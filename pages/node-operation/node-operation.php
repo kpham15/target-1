@@ -16,6 +16,9 @@
 
       <!-- Node Operation Table -->
       <?php include __DIR__ . '/node-operation-table.html'; ?>
+
+      <!-- Node Operation Modals -->
+      <?php include __DIR__ . '/node-operation-modals.html'; ?>
       
   </div>
 </div>
