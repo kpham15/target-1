@@ -156,7 +156,15 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      console.log(data);
+      if (data.rslt == "fail") {
+        alert(data.reason);
+      } else {
+        if (data.rows == 0) {
+          alert("No Record Found");
+        } else {
+          queryFtOrdersOrd();
+        }
+      }
     });
   }
 
