@@ -78,8 +78,6 @@
       dataType: 'json'
     }).done(function(data) {
 			let res = data.rows;
-			// used to store rows-> make available to download current rows shown
-			alarmreportDataRows = data.rows;
 
       alarmreportDatatable.clear().draw();
       alarmreportDatatable.rows.add(res);
