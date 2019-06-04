@@ -124,8 +124,6 @@
 			}, function(start, end, label) {
 				alarmreportStartDate = start.format('YYYY-MM-DD');
 				alarmreportEndDate = end.format('YYYY-MM-DD');
-				console.log(alarmreportStartDate);
-				console.log(alarmreportEndDate);
 			});
 		}
 
@@ -147,7 +145,6 @@
 			//@TODO if there are too many rows, does not download?
 			//Example, report on 6/4/2019 produces 20k rows
 			else if (report === "CREATE REPORT") {
-				// console.log(alarmreportEndDate);
 				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
 			}
 		});
