@@ -169,7 +169,7 @@ $(document).ready(function() {
 
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
-		if ($(this).hasClass('active')) {
+		if ($('#references-page').hasClass('active-page')) {
 			return;
 		}
 		refStartup();
