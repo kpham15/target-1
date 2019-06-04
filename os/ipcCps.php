@@ -109,7 +109,7 @@ class COM {
     public function __construct($tty, $node) {
         if ($tty != '' && $node > 0) {
             //Connect to serial port
-            $conn = dio_open("/dev/$tty", O_RDWR | O_NOCTTY | O_NONBLOCK);
+            $conn = dio_open("/dev/ttyUSB1", O_RDWR | O_NOCTTY | O_NONBLOCK);
             if ($conn === true) {
                 //if successfully connected
                 $this->conn = $conn;
