@@ -19,6 +19,9 @@
 // 6) if got a resp_string, then post it to api nodeOpe->exec_resp()
 // 7) if 5-sec timer expires then send cmd-status=all to CPS-HW
 // 8) back to beginning of the while-loop
+
+chdir(__DIR__);
+
 include "../class/ipcDebugClass.php";
 
 class UDPSOCK {
