@@ -6,8 +6,8 @@ var refOptions = [
 		options: 
 		[
 			{
-        value:		"0",
-        text: 		"NEVER EXPIRES"
+        value:	"0",
+        text: 	"NEVER EXPIRES"
 			},
 			{
 				value: 	"30",
@@ -45,27 +45,27 @@ var refOptions = [
 				text: 	"120 Days"
 			},
 		]
-	},
-	{
+  },
+  {
 		title: 			"MAINTENANCE REPORT DELETE",
 		selectId: 	"reference-page-maintdelete",
 		ref_id:     "maint_del",
 		options: 		[
 			{
 				value:	"60",
-				text: 	"60 Days"
+				text: 	"DELETE AFTER 30 DAYS"
+			},
+			{
+				value: 	"60",
+				text: 	"DELETE AFTER 60 DAYS"
+			},
+			{
+				value: 	"90",
+				text: 	"DELETE AFTER 90 DAYS"
 			},
 			{
 				value: 	"120",
-				text: 	"120 Days"
-			},
-			{
-				value: 	"180",
-				text: 	"180 Days"
-			},
-			{
-				value: 	"240",
-				text: 	"240 Days"
+				text: 	"DELETE AFTER 120 DAYS"
 			},
 		]
 	},
