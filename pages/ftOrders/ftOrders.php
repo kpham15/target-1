@@ -35,7 +35,7 @@
     <!-- CKT -->
     <div class="col-md-12">
       <div class="row">
-        <div class="col-sm-5" style="width:46%">
+        <div class="col-sm-5 ftOrders-form" style="width:46%">
   
           <!-- CKT FORM -->
           <?php include __DIR__ . '/forms/ftOrders-cktForm.html'; ?>
@@ -55,7 +55,7 @@
     <!-- FAC -->
     <div class="col-md-12">
       <div class="row">
-        <div class="col-sm-5" style="width:46%">
+        <div class="col-sm-5 ftOrders-form" style="width:46%">
 
           <!-- FAC FORM -->
           <?php include __DIR__ . '/forms/ftOrders-facForm.html'; ?>
