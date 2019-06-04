@@ -146,7 +146,12 @@
 
 		// Click Event For 'Clear Button'
 		$('#alarmreport-clear').click(function() {
+
+			let currDate = moment(new Date()).format('MM/DD/YYYY');
+
 			$('.alarmreport-forms-input').val('');
+
+			$('#alarmreport-daterange').val(currDate+' - '+currDate);
 			
 			clearErrors();
 		})
