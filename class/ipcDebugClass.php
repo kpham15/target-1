@@ -7,14 +7,16 @@ class DEBUG{
     public $reason;
 
     public function __construct(){
-
-        $str = file_get_contents("../../ipc-debug.cfg");
+        
+        $file = __DIR__ . "/../../ipc-debug.cfg";
+        $str = file_get_contents($file);
         if ($str == '1') {
             $this->enable = true;
         }
     
         if ($this->enable === true) {
-            $this->debugFile =  fopen("../../LOG/debug.log", "a");
+            $logFile = __DIR__ . "../../LOG/debug.log";
+            $this->debugFile =  fopen($logFile, "a");
         }
         
         $this->rslt = 'success';
