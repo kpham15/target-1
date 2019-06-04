@@ -82,6 +82,7 @@
       if ($(this).hasClass('active')) {
         $(this).text('First Login / Change Password').button('toggle');
         $('#newpassword-forms').hide();
+        $('#newpassword-forms .login-input-fields').val('');
         clearErrors();
       } else {
         $(this).text('Go Back').button('toggle');
