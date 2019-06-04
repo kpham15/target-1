@@ -19,6 +19,7 @@
 // 6) if got a resp_string, then post it to api nodeOpe->exec_resp()
 // 7) if 5-sec timer expires then send cmd-status=all to CPS-HW
 // 8) back to beginning of the while-loop
+include "../class/ipcDebugClass.php";
 
 class UDPSOCK {
     public $ip_addr = '127.0.0.1';
@@ -192,7 +193,9 @@ function sendToCpsHw($cmd) {
 }
 
 function post_resp($resp_str) {
-
+    $deb = new DEBUG();
+    $deb->log($resp_str);
+    $deb->close();
 }
 
 //
