@@ -132,6 +132,8 @@ class COM {
                 $this->status_str = "\$status,source=all,ackid=$this->node-CPS*";
                 $this->rslt = 'success';
                 $this->reason = 'TTY: ' . $tty . ' IS CONNECTED';
+                echo $this->reason;
+                echo "\n";
                 return;
             }
         }
