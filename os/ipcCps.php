@@ -129,7 +129,7 @@ class COM {
                 $this->timeout = (float)$serial_timeoutSec + ((float)$serial_timeoutUsec/1000000);
                 $this->node = $node;
                 $this->tty = $tty;
-                $this->status_str = "\$status,source=all,ackid=$this->node-CPS*";
+                $this->status_req = "\$status,source=all,ackid=$this->node-CPS*";
                 $this->rslt = 'success';
                 $this->reason = 'TTY: ' . $tty . ' IS CONNECTED';        
             }
