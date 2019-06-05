@@ -178,8 +178,8 @@ class COM {
     public function receiveRsp() {
         $this->resp_str = '';
         $startTime = microtime(true);
-        // loop for 100 msec until received some data
-        while((microtime(true) - $startTime) < $this->timeout) {
+        // loop for 1 sec until received some data
+        while((microtime(true) - $startTime) < 1) {
             $data = dio_read($this->conn, 1024);
             if (trim($data) !== "") {
                 $this->resp_str .= $data;
@@ -203,9 +203,6 @@ function sendToCpsHw($cmd) {
 }
 
 function post_resp($resp_str) {
-    $deb = new DEBUG();
-    $deb->log($resp_str);
-    $deb->close();
 }
 
 //
@@ -213,6 +210,7 @@ function post_resp($resp_str) {
 //
 
 $cps = array();
+$deb = new DEBUG();
 
 // step 1:
 // 1) read the ipc-cps.cfg file and use class COM to establish connection on the tty(s)
@@ -228,6 +226,8 @@ for ($i=0; $i<$numofcps; $i++) {
     $com = trim($tty[$i]);
 
     $cps[$i] = new COM($com, $node);
+    $deb->log($cps[$i]->reason);
+
     $cps[$i]->sendStatusReq();
 }
 
@@ -241,6 +241,8 @@ while(1) {
     //    if there is response, post it to nodeOpe.api
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
+            $deb->log($cps[$i]->resp_str);
+
             post_resp($cps[$i]->resp_str);
         }
     }
