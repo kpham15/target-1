@@ -1,6 +1,6 @@
 <div id="portmap-page" class="content-page" style="display:none">
     <div class="container-fluid">
-        <section class="contend-header">
+        <section class="content-header">
             <h1>SETUP PORT MAPPING</h1>
 
             <ol class="breadcrumb">
