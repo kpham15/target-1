@@ -113,7 +113,7 @@ $(document).ready(function() {
     }
     // ACKNOWLEDGE action
     else if (value == 'ACK') {
-      if (ack == "ACK") {
+      if (ack !== "") {
         inputError($('#alarm-admin-forms-ack'),'Alarm already acknowledged!');
         return;
       }
