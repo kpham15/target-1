@@ -86,6 +86,9 @@ $(document).ready(function() {
   // Refresh Button Click Event
   $('#alarm-admin-forms-refresh').click(function() {
     $('.alarm-admin-forms-input, .alarm-admin-modal-field').val('');
+
+    clearErrors();
+    
     queryAlarmAdmin();
   })
 
