@@ -214,6 +214,7 @@ function sendToCpsHw($str, $cps) {
 }
 
 function post_resp($resp_str) {
+
     echo "post-resp: " . "\n";
 }
 
@@ -252,7 +253,7 @@ $startTime = microtime(true);
 while(1) {
     // a) check for response from COM
     //    if there is response, post it to nodeOpe.api
-    usleep(500000);
+    usleep(200000);
 
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
