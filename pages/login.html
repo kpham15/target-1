@@ -85,7 +85,9 @@
       inputError($('#login_username'), '');
       inputError($('#login_password_input'), 'Username/Password Invalid');
     } else if (error.reason.toLowerCase().includes('first')) {
-      $('#change-password-btn').trigger('click');
+      if (!$('#change-password-btn').hasClass('active')) {
+        $('#change-password-btn').trigger('click');
+      }
       $('.login-input-fields').each(function() {
         if ($(this).attr('id') === 'login_confirmPassWord') {
           inputError($(this), 'First time logging in. Must change password.');
