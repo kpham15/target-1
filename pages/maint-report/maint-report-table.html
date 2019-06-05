@@ -43,7 +43,7 @@
 
   function maintReportQueryMaintlog(fromDate, toDate){
     let report    = $("#maintReport-form-report").val();
-    let user      = $("#maintReport-form-user").val();
+    let maintUser      = $("#maintReport-form-user").val();
     let action    = $("#maintReport-form-action").val();
     let tktno     = $("#maintReport-form-tktno").val();
 
@@ -53,7 +53,7 @@
       data: {
         api:      'ipcMaintReport',
         act:      report,
-        uname:    user,
+        uname:    maintUser,
         action:   action,
         fromDate: fromDate,
         toDate:   toDate,     
@@ -67,7 +67,7 @@
       let res = data.rows;
       
       $("#maintReport-form-report").val("").change();
-      
+
       if (res.length == 0) {
         inputError($('#maintReport-form-report'),'No Record Found');
       }
