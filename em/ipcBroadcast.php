@@ -63,7 +63,6 @@
 	if (isset($_POST['detail']))
 		$detail = $_POST['detail'];
 	
-	// $evtLog = new EVTLOG($user, "BRDCST", $act, "BRDCST, USER=" . $user . ", ACT=". $act . ", OWNER=" . $owner . ", SA=" . $sa . ", TITLE=" . $msg . ", DETAIL=" . $detail);
 	$evtLog = new EVENTLOG($user, "USER MANAGEMENT", "BROADCAST NOTIFICATION", $act, $_POST);
 
 	// Dispatch to Functions

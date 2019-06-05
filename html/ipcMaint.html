@@ -1792,6 +1792,27 @@ var maintModal = {
 //--------------------maint CLICK FUNCTIONS---------------//
 
 maint.findCkidBtn.click(function(){
+    if (maint.tn.is(':checked')) {
+        // Does not check CKID format regardless of the whether the tn cbox is checked when the ckid is ""
+        if (maint.ckid.val() != "") {
+            var ckid = maint.ckid.val();
+            var telnum;
+            if ((telnum = getTN(ckid)) === false) {
+                var d = ckid.split('-');
+                if (d.length != 3 ||
+                    !(d[0].length == 3 && d[0].match(/^[0-9]+$/) != null
+                    && d[1].length == 3 && d[1].match(/^[0-9]+$/) != null
+                    && d[2].length == 4 && d[2].match(/^[0-9]+$/) != null))
+                {
+                    alert ("CKID: INVALID TN FORMAT");
+                    return;
+                }
+                
+                telnum = ckid;
+            }
+            maint.ckid.val(telnum);
+        }
+    }
     maint.cktArea.show();
     maint.tktArea.hide();
     maint.query.ckt('queryCkid');

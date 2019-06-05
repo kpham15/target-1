@@ -76,7 +76,7 @@
     </button>
 
     <!-- VIEW BUTTON -->
-    <button id="view-fac" type="button" class="btn btn-primary">
+    <button id="fac-form-view" type="button" class="btn btn-primary">
       VIEW
     </button>
 
@@ -156,11 +156,13 @@
       }
     });
 
+    // WHEN MODAL CLOSES
     $('#fac-modal').on('hidden.bs.modal', function (e) {
       $('.fac-modal-field').prop('disabled', true).val('');
       $("#fac-form-action").val("").change();
     });
 
+    // WHEN CLEAR BUTTON IS CLICKED
     $('#fac-form-clear').click(function() {
       $('.fac-form-input').val('');
       $('#fac-table tbody tr').removeClass('bg-primary');

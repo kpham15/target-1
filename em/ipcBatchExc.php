@@ -31,7 +31,6 @@ if (isset($_FILES['file']['tmp_name'])) {
     }
 }
 
-// $evtLog = new Evtlog($user, "BATCHEXEC", $act);
 $evtLog = new EVENTLOG($user, "PROVISIONING", "BATCH EXECUTION", $act, $_POST);
 
 

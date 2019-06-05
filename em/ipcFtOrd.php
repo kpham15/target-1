@@ -357,9 +357,8 @@ function queryFac($ctid, $ordno) {
 }
 
 function fetchFtOrders() {
-    global $root_dir;
-    
-    $url = $root_dir . "/resources/ftorders/";
+
+    $url = __DIR__ . "/../../FTORDERS/";
     try {
         $iterator = new DirectoryIterator($url);
     } catch (Throwable $e) {

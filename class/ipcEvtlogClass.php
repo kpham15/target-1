@@ -24,7 +24,6 @@
 			global $db;
 			
 			$this->reason = $this->input . "\n" . $rslt . ": " . $msg;
-			// $qry = "INSERT INTO t_evtlog VALUES(0,'$this->user','$this->fnc','$this->evt','$rslt','$this->reason',now())";
 
 			$qry - "INSERT INTO
 					t_evtlog 

@@ -48,8 +48,6 @@ if (isset($_POST['slotBitmask'])) {
     $slotBitmask = $_POST['slotBitmask'];
 }
 
-// $evtLog = new EVTLOG($user, "MXC", $act);
-
 $evtLog = new EVENTLOG($user, "MAINTENANCE", "LOCK/UNLOCK MATRIX CARD", $act, '');
 
 

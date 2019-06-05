@@ -165,24 +165,29 @@ var login = {
                     alert(obj.reason);
                 }
                 else {
-                    $("#main_currentUser").text(obj.rows[0].uname);
-                    $("#main_userFLname").text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
-                    login.user.fname = obj.rows[0].fname;
-                    login.user.mi = obj.rows[0].mi;
-                    login.user.lname = obj.rows[0].lname;
-                    login.user.grp = obj.rows[0].grp;
-                    login.user.ugrp = obj.rows[0].ugrp;
-                    login.user.idle_to = obj.rows[0].user_idle_to;
-                    login.username.val("");
-                    login.password.val("");
-                    login.newpassword.val("");
-                    login.warning.hide();
-                    login.page.hide();
-                    opt.query("queryOpt");
-                    bulletinBoard.query('query');
-                    brdcstModal.loadOwner();
-                    mB.start();
-                    //$("#mainPage").show();
+                    //alert(obj.reason);
+
+                    confirm(obj.reason, true, function(){
+            
+                        $("#main_currentUser").text(obj.rows[0].uname);
+                        $("#main_userFLname").text(obj.rows[0].fname + ' ' + obj.rows[0].lname);
+                        login.user.fname = obj.rows[0].fname;
+                        login.user.mi = obj.rows[0].mi;
+                        login.user.lname = obj.rows[0].lname;
+                        login.user.grp = obj.rows[0].grp;
+                        login.user.ugrp = obj.rows[0].ugrp;
+                        login.user.idle_to = obj.rows[0].user_idle_to;
+                        login.username.val("");
+                        login.password.val("");
+                        login.newpassword.val("");
+                        login.warning.hide();
+                        login.page.hide();
+                        opt.query("queryOpt");
+                        bulletinBoard.query('query');
+                        brdcstModal.loadOwner();
+                        mB.start();
+                        //$("#mainPage").show();
+                    });
                 } 
             });
         }
@@ -231,7 +236,8 @@ window.alert = function(message,action,showOk=true){
     else {
         $("#ok-btn").hide();
     }
-    $(document ).off("click", "#ok-btn");
+    $(document).off("click", "#ok-btn");
+    $(document).off("click", "#no-btn");
     $(document).on("click", "#ok-btn", function() {
         $('#alertLayer').hide();
         if(action != undefined) {
@@ -249,9 +255,13 @@ function closeAlert() {
     $('#alertLayer').hide();
 }
 
-window.confirm = function(message, action) {
+window.confirm = function(message, hideNo, action) {
     $("#popup_message").html(message);
-    $("#no-btn").show();
+    if (hideNo)
+        $('#no-btn').hide();
+    else
+        $("#no-btn").show();
+
     $(document ).off("click", "#ok-btn");
     $(document ).off("click", "#no-btn");
     $(document).on("click", "#ok-btn", function() {

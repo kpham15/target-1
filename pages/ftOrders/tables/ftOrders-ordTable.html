@@ -1,0 +1,106 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">LIST OF ORDERS:</h3>
+  </div>
+  <div style="padding: 10px;">
+    <table id="ftOrders-ordTable" class="table table-striped table-bordered table-hover" style="width:100%;">
+      <thead>
+        <tr>
+          <th>STAT</th>
+          <th>ORDNO</th>
+          <th>OT</th>
+          <th>DD</th>
+          <th>FDD</th>
+          <th>PRI</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // Initialize Datatable
+  var ftOrdersOrdDatatable = $('#ftOrders-ordTable').DataTable({
+    "data": [],
+    "columns": [
+      {"data":"stat"},
+      {"data":"ordno"},
+      {"data":"ot"},
+      {"data":"dd"},
+      {"data":"fdd"},
+      {"data":"pri"},
+    ],
+    "order": [[ 3, "asc" ]],
+    "scrollY": "100px",
+  });
+
+  function queryFtOrdersOrd() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:    "ipcFtOrd",
+        act:    "queryOrd",
+        user:   user.uname,
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      ftOrdersOrdDatatable.clear().draw();
+      ftOrdersOrdDatatable.rows.add(res);
+      ftOrdersOrdDatatable.columns.adjust().draw();
+    });
+  }
+
+  $(document).ready(function() {
+
+    $('#ftOrders-ordForm-view1').click(function(e) {
+      e.preventDefault();
+
+      queryFtOrdersOrd();
+
+      clearErrors();
+    });
+
+
+    // Click events on table rows
+    $(document).on('click', '#ftOrders-ordTable tbody tr', function() {
+      let data = ftOrdersOrdDatatable.row(this).data();
+
+      $('#ftOrders-ordForm-id').val(data.id);
+      $('#ftOrders-ordForm-ordno').val(data.ordno);
+      $('#ftOrders-ordForm-ot').val(data.ot);
+      $('#ftOrders-ordForm-wc').val(data.wc);
+      $('#ftOrders-ordForm-pri').val(data.pri);
+      $('#ftOrders-ordForm-stat').val(data.stat);
+      $('#ftOrders-ordForm-cdd').val(data.cdd);
+      $('#ftOrders-ordForm-dd').val(data.dd);
+      $('#ftOrders-ordForm-fdd').val(data.fdd);
+      $('#ftOrders-ordForm-fdt').val(data.fdt);
+
+      // give selected class
+      $('#ftOrders-ordTable tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+      
+      clearErrors();
+
+      // REMOVE HIGHLIGHT FROM FORMS
+      $('#ftOrders-ordForm-action').val("").change();
+
+      // CLEAR CKT AND FAC FORM
+      $('.ftOrders-cktForm-input').val("").change();
+      $('.ftOrders-facForm-input').val("").change();
+
+      // CLEAR CKT AND FAC TABLES
+      ftOrdersCktDatatable.clear().draw();
+      ftOrdersFacDatatable.clear().draw();
+
+
+      // Below function is located in ftOrders-facTable.html
+      queryFtOrdersCkt(data.ordno);
+      
+    });
+  });
+
+</script>

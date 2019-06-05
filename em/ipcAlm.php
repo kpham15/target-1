@@ -46,10 +46,6 @@ $cmd = "";
 if (isset($_POST['cmd']))
 	$cmd = $_POST['cmd'];
 
-// $input = "ALMADM: USER=" . $user . ", ACT=" . $act . ", SRC=" . $src . ", COND=" . $cond . ", REMARK=" . $remark;
-// $evtLog = new EVTLOG($user, "ALMADM", $act, $input);
-
-//$almLog = new ALMLOG();
 $evtLog = new EVENTLOG($user, "MAINTENANCE", "ALARM ADMINISTRATION", $act, '');
 
 

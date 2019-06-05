@@ -71,12 +71,10 @@ if (isset($_POST['cmd'])) {
     $cmd = $_POST['cmd'];
 }
 
-$device_status = "";
-if (isset($_POST['device_status'])) {
-    $device_status = $_POST['device_status'];
+$hwRsp = "";
+if (isset($_POST['hwRsp'])) {
+    $hwRsp = $_POST['hwRsp'];
 }
-
-
 
 // $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "NODE ADMINISTRATION", $act, $_POST);
 
@@ -185,6 +183,7 @@ if ($act == "STOP_NODE") {
 }
 
 if ($act == "updateCpsCom") {
+    
     $nodeObj = new NODE($node);
     if ($nodeObj->rslt != SUCCESS) {
         $result['rslt'] = $nodeObj->rslt;
@@ -194,10 +193,11 @@ if ($act == "updateCpsCom") {
         $cmdExtract = explode('-',$cmd);
     
         if ($cmdExtract[1] === 'ONLINE') {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_ON');
+            
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'CPS_ON');
         }
         else {
-            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'COMM_OFF');
+            $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'CPS_OFF');
         }
     
         if ($sms->rslt === SUCCESS) {
@@ -283,7 +283,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
     return;
 }
 if ($act == "updateNodeDevicesStatus") {
-    $result = updateNodeDevicesStatus($node, $device_status);
+    $result = updateNodeDevicesStatus($node, $hwRsp);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -298,8 +298,7 @@ else {
 
 // LOCAL FUNCTIONS
 
-function updateNodeDevicesStatus($node, $device_status) {
-    
+function updateNodeDevicesStatus($node, $hwRsp) {
     // construct device obj using node
     $deviceObj = new DEV($node);
     if ($deviceObj->rslt == FAIL) {
@@ -309,12 +308,13 @@ function updateNodeDevicesStatus($node, $device_status) {
     }
 
     // extract miox, mioy, mre, cps
-    $parsedString = $deviceObj->parseDevString($device_status);
+    $parsedString = $deviceObj->parseDevString($hwRsp);
     if ($deviceObj->rslt == FAIL) {
         $result['rslt'] = $deviceObj->rslt;
         $result['reason'] = $deviceObj->reason;
         return $result;
     }
+
     $newMiox = $parsedString['miox'];
     $newMioy = $parsedString['mioy'];
     $newMre = $parsedString['mre'];
@@ -339,7 +339,7 @@ function updateNodeDevicesStatus($node, $device_status) {
             $diffMiox = true;
         }
     }
-    
+
     if (strcmp($currentMioy, $newMioy) !== 0) {
         if ($deviceObj->setMioy($newMioy)) {
             if ($deviceObj->rslt === FAIL) {
@@ -383,7 +383,6 @@ function updateNodeDevicesStatus($node, $device_status) {
                 $slot = $i + 1;
                 $url = 'ipcDispatch.php';
                 if (strpos($newMioxArray[$i], "0") !== false){
-                    //@TODO what should the user be? 'SYSTEM'?
                     $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"1", "slot"=>$slot, "type"=>"MIOX");
                     $postReqObj->asyncPostRequest($url, $params);
                     //@TODO What happens if this fails?
@@ -408,7 +407,6 @@ function updateNodeDevicesStatus($node, $device_status) {
                 $slot = $i + 1;
                 $url = 'ipcDispatch.php';
                 if (strpos($newMioyArray[$i], "0") !== false){
-                    //@TODO what should the user be? 'SYSTEM'?
                     $params = array("act"=>"remove", "api"=>"ipcMxc", "user"=>"SYSTEM", "node"=>$node, "shelf"=>"2", "slot"=>$slot, "type"=>"MIOY");
                     $postReqObj->asyncPostRequest($url, $params);
                     //@TODO What happens if this fails?
@@ -727,10 +725,11 @@ function updateCpsCom($cmd,$userObj) {
      * 1) $nodeObj = new NODE($node);
      * 2) If $node exists then $nodeObj->updateCOM($com)
      */
+    
     $cmdExtract = explode('-',$cmd);
     $node = $cmdExtract[0];
     $com = $cmdExtract[1];
-    $nodeId = $node+1;
+    $nodeId = $node;
 
     $nodeObj = new NODE($nodeId);
     if ($nodeObj->rslt != FAIL) {
@@ -797,296 +796,6 @@ function updateCpsCom($cmd,$userObj) {
     $result['reason'] = $almObj->reason;
     return $result;
 }
-
-function updateCpsStatus($cmd, $userObj) {
-    
-	//-------check user permission--------------
-	// if ($userObj->grpObj->ipcadm != "Y") {
-    //     $result['rslt'] = 'fail';
-    //     $result['reason'] = 'Permission Denied';
-    //     return $result;
-    // }
-	///////////////////////////////////////////////
-
-	// checks what type of $cmd is being sent
-	if ((strpos($cmd, "voltage") !== false) && (strpos($cmd, "current") !== false)) {
-		$result = updateCpsCurrent($cmd);
-		return $result;
-	}
-	else if (strpos($cmd, "voltage") !== false){
-		$result = updateCpsVolt($cmd);
-		return $result;
-	}
-	else if (strpos($cmd, "temperature") !== false) {
-		$result = updateCpsTemp($cmd);
-		return $result;
-	}
-}
-
-
-function updateCpsCurrent($cmd) {
-    
-	/**
-	 * Parse $cmd to retrieve: almid, status, current, voltage
-	 * 
-	 * For example: $ackid=1-CPS,status,current=1239mA,voltage=45678mV*
-	 */
-	
-	/** 
-	 * Remove $ and * from beginning and end of $cmd
-	 * Leaving: ackid=1-CPS,status,current=1239mA,voltage=45678mV
-	 */
-	$newCmd = substr($cmd, 1, -1);
-
-	/**
-	 * Split $newCmd at each ',' into an array containing each slice
-	 * Leaving: [["ackid=1-CPS"]["status"]["current=1239mA"][voltage=45678mV]]
-	 */
-	$splitCmd = explode(',', $newCmd);
-
-	/**
-	 * Extract ackid
-	 */
-	$ackidArray = explode('=', $splitCmd[0]);
-    $ackid = $ackidArray[1];
- 
-	/**
-	 * Extract status
-	 */
-	$status = $splitCmd[1];
-
-	/**
-	 * Extract current
-	 */
-	$currentArray = explode('=', $splitCmd[2]);
-	sscanf($currentArray[1], "%d%s", $currentVal, $currentUnit);
-
-	/**
-	 * Extract voltage
-	 */
-	$voltArray = explode('=', $splitCmd[3]);
-    sscanf($voltArray[1], "%d%s", $voltVal, $voltUnit);
-    
-    //  extract node number
-    //  $nodeArray = explode('-', $ackid);
-    //  $nodeNumber = $nodeArray[0];
-    //  $newNodeNumber = $nodeNumber + 1;
-    //  $nodeObj = new NODE($newNodeNumber);
-    //  if($nodeObj->rslt == 'fail') {
-    //     $result['rslt'] = $nodeObj->rslt;
-    //     $result['reason'] = $nodeObj->reason;
-    //     return $result;
-    //  }
-    //  $newCurrent = $currentVal . $currentUnit;
-    //  $nodeObj->updateCurrent($newCurrent);
-
-	/**
-	 * If current is greater than 1600, then create new alarm with:
-	 * almid=1-CPS-P, sev=MIN, sa=N, src=POWER, type=CURRENT, cond=CURRENT OUT-OF-RANGE
-	 */
-	if ($currentVal > 1500) {
-		$almid 	= $ackid . '-P';
-		$almObj = new ALMS($almid);
-		
-		if (count($almObj->rows) == 0) {
-
-			$src 	= "POWER";
-			$type 	= "CURRENT";
-			$cond 	= "CURRENT OUT-OF-RANGE";
-			$sev 	= "MIN";
-			$sa 	= "N";
-			$remark = $almid . ' : ' . $cond;
-			
-			$almObj->newAlm($almid, $src, $type, $cond, $sev, $sa, $remark);
-			if ($almObj->rslt == "fail") {
-				$result["rslt"]   = $almObj->rslt;
-				$result["reason"] = $almObj->reason;
-				return $result;
-			}
-		}
-	}
-	/**
-	 * If current is less than or equal to 1600 then send System Clear alarm
-	 */
-	else if ($currentVal <= 1500) {
-		$almid = $ackid . '-P';
-
-		$almObj = new ALMS($almid);
-		
-		if (count($almObj->rows) !== 0) {
-			$remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : CURRENT IN-RANGE';
-			$almObj->sysClr($almid, $remark);
-			if ($almObj->rslt == FAIL) {
-				$result['rslt']   = $almObj->rslt;
-				$result['reason'] = $almObj->reason;
-				return $result;
-			}
-		}
-	}
-	$result['rslt'] = SUCCESS;
-	$result['reason'] = "POWER ALARM UPDATE SUCCESS";
-	return $result;
-}
-
-// function called by updateAlm in case string contains voltage only
-// str looks like this "$ackid=1-cps,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV*"
-function updateCpsVolt($cmd) {
-	// filters data brought from $cmd and extracts voltage values
-	$newCmd = substr($cmd, 1, -1);
-	$splitCmd = explode(',', $newCmd);
-	$ackid = explode('=',$splitCmd[0]);
-	$newAckid = $ackid[1];
-	$volt1 = explode('=',$splitCmd[2]);
-	$volt2 = explode('=',$splitCmd[3]);
-	$volt3 = explode('=',$splitCmd[4]);
-	$volt4 = explode('=',$splitCmd[5]);
-
-	sscanf($volt1[1], "%d%s", $volt1Val, $volt1Unit);
-	sscanf($volt2[1], "%d%s", $volt2Val, $volt2Unit);
-	sscanf($volt3[1], "%d%s", $volt3Val, $volt3Unit);
-	sscanf($volt4[1], "%d%s", $volt4Val, $volt4Unit);
-
-	// get lowest and highest values from volt
-	$volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
-    $volt_low = min($volt1Val, $volt2Val, $volt3Val, $volt4Val);
-    
-    // put units back onto volt values to prepare sending to t_nodes
-    $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
-    $newVolt_low = round((int)($volt_low/1000)) . 'V';
-
-    // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
-    $nodeObj = new NODE($newNodeNumber);
-    if($nodeObj->rslt == 'fail') {
-        $result['rslt'] = $nodeObj->rslt;
-        $result['reason'] = $nodeObj->reason;
-        return $result;
-    }
-
-    // write to t_nodes the volt_hi by default or the voltage that is out of range
-    if ($volt_low < 42000) {
-        $nodeObj->updateVolt($newVolt_low);
-    }
-    else{
-        $nodeObj->updateVolt($newVolt_hi);
-    }
-
-	// makes new alm if voltage is out of range
-	if (($volt_hi > 52000) || ($volt_low < 42000)) {
-		$almid = $newAckid . '-V';
-		$almObj = new ALMS($almid);
-		if (count($almObj->rows) == 0) {
-			$src = 'POWER';
-			$almtype = 'VOLTAGE';
-			$cond = 'VOLTAGE OUT-OF-RANGE';
-			$sa = 'N';
-			$sev = 'MIN';
-			$remark = $almid . ' : ' . $cond;
-			$almObj = new ALMS();
-			$almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
-            //logError if failed here
-		}
-	}
-
-	// sys-clr alm if voltage is in range
-	if (($volt_hi <= 46000) && ($volt_low >= 42000)) {
-		$almid = $newAckid . '-V';
-		$almObj = new ALMS($almid);
-		if (count($almObj->rows) !== 0) {
-			$remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : VOLTAGE IN-RANGE';
-			$almObj->sysClr($almid, $remark);
-            //logError if failed here
-		}
-	}
-	$result['rslt'] = SUCCESS;
-	$result['reason'] = "VOLTAGE ALARM UPDATE SUCCESS";
-	return $result;
-}
-
-// function called by updateAlm in case string contains temp only
-// str looks like this "$ackid=0-cps,status,temperature,zone1=67C,zone2=65C,zone3=66C,zone4=68C*"
-function updateCpsTemp($cmd) {
-
-	// filters data brought from $cmd and extracts temp values
-	$newCmd = substr($cmd, 1, -1);
-	$splitCmd = explode(',', $newCmd);
-	$ackid = explode('=', $splitCmd[0]);
-    $newAckid = $ackid[1];
-    $zeroBase = explode('-', $newAckid);
-    $oneBase = $zeroBase[0] + 1;
-    // puts back together 1-cps
-    $oneBaseAckid = $oneBase . '-' . $zeroBase[1];
-	$temp1 = explode('=',$splitCmd[3]);
-	$temp2 = explode('=',$splitCmd[4]);
-	$temp3 = explode('=',$splitCmd[5]);
-	$temp4 = explode('=',$splitCmd[6]);
-
-	sscanf($temp1[1], "%d%s", $temp1Val, $temp1Unit);
-	sscanf($temp2[1], "%d%s", $temp2Val, $temp2Unit);
-	sscanf($temp3[1], "%d%s", $temp3Val, $temp3Unit);
-	sscanf($temp4[1], "%d%s", $temp4Val, $temp4Unit);
-
-    $temp_hi = max($temp1Val, $temp2Val, $temp3Val, $temp4Val);
-
-    // combine temp value and unit to send to t_nodes
-    $newTemp_hi = $temp_hi . $temp1Unit;
-    
-    // extract node number from cmd
-    $nodeArray = explode('-', $newAckid[0]);
-    $nodeNumber = $nodeArray[0];
-    $newNodeNumber = $nodeNumber + 1;
-    $nodeObj = new NODE($newNodeNumber);
-    if($nodeObj->rslt == 'fail') {
-        $result['rslt'] = $nodeObj->rslt;
-        $result['reason'] = $nodeObj->reason;
-        return $result;
-    }
-    
-    // update t_nodes w/ highest temp
-    $nodeObj->updateTemp($newTemp_hi);
-
-	// makes new alm if temp is out of range
-	if ($temp_hi > 66) {
-		$almid = $newAckid . '-T';
-		$almObj = new ALMS($almid);
-		if (count($almObj->rows) == 0) {
-			$src = 'POWER';
-			$almtype = 'TEMPERATURE';
-			$cond = 'TEMPERATURE OUT-OF-RANGE';
-			$sa = 'N';
-			$sev = 'MIN';
-			$remark = $almid . ' : ' . $cond;
-			$almObj = new ALMS();
-			$almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
-			if ($almObj->rslt == 'fail') {
-				$result["rslt"] = "fail";
-				$result["reason"] = "Fail to create alarm";
-				return $result;
-			}
-		}
-	}
-
-	// sys-clr alm if temp is in range
-	if ($temp_hi < 66) {
-		$almid = $newAckid . '-T';
-		$almObj = new ALMS($almid);
-		if (count($almObj->rows) !== 0) {
-			$remark = 'SYSTEM CLEAR ALARM: ' . $almid . ' : TEMPERATURE IN-RANGE';
-			$almObj->sysClr($almid, $remark);
-			if ($almObj->rslt == 'fail') {
-				$result["rslt"] = "fail";
-				$result["reason"] = "Fail to clear alarm";
-				return $result;
-			}
-		}
-	}
-	$result['rslt'] = SUCCESS;
-	$result['reason'] = "TEMP ALARM UPDATE SUCCESS";
-	return $result;
-}
-
 
 // updates name of rack
 function updateRack($rack, $nodeObj, $userObj) {
