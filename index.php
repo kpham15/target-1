@@ -26,7 +26,7 @@
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
 	echo '</head>';
 
-	echo '<body class="login-page skin-blue sidebar-collapse fixed">';	
+	echo '<body class="login-page skin-blue sidebar-mini sidebar-collapse fixed">';	
 
 	//IPCv2
 	include './pages/nav-wrapper/nav-wrapper.php';
