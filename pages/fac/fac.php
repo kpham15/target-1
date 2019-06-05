@@ -26,11 +26,23 @@
 
 <script type="text/javascript">
 
+  // A flag to check if it is first time loading, primary use is for click event for fac menu item
+  var facFirstLoad = true;
+
+  // FAC menu item click event
   $(".menu-item[page_id='fac-page']").click(async function() {
+    if (facFirstLoad != true) {
+      return;
+    }
     // loads options for ftyp, ort, spcfnc selection fields in setup facility
     loadFacOptions("queryFtyp", "ftyp");
     loadFacOptions("queryOrt", "ort");
     loadFacOptions("querySpcfnc", "spcfnc");
+
+    // load fac table upon visiting page
+    queryFac();
+
+    facFirstLoad = false;
   });
   
   function loadFacOptions(action, type) {
