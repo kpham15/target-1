@@ -157,7 +157,7 @@ class COM {
                 $this->reason = "SEND STATUS FAILS";
             }
         }
-        echo "send-status-req: cnt=" . $cnt . "\n";
+        echo $this->tty . ": send-status-req: cnt=" . $cnt . " : " . $this->status_req . "\n";
         return $cnt;
     }
 
@@ -170,6 +170,7 @@ class COM {
             $this->reason = "SEND CMD FAILS";
         }
         return $cnt;
+        echo $this->tty . ": send-cmd: cnt=" . $cnt . " : " . $cmd . "\n";
     }
 
     // if no data received for 100 msec then return
@@ -188,7 +189,7 @@ class COM {
         
         $this->rslt = 'success';
         $this->reason = 'receive successfully';
-        echo "receive-resp: " . $this->resp_str . "\n";
+        echo $this->tty . ": receive-resp: " . $this->resp_str . "\n";
         return $this->resp_str;
     }
 
@@ -203,6 +204,7 @@ function sendToCpsHw($cmd) {
 }
 
 function post_resp($resp_str) {
+    echo $this->tty . " post-resp: " . $resp_str . "\n";
 }
 
 //
@@ -229,13 +231,12 @@ for ($i=0; $i<$numofcps; $i++) {
     $deb->log($cps[$i]->reason);
     echo $cps[$i]->reason . "\n";
     $cnt = $cps[$i]->sendStatusReq();
-    echo $cps[$i]->reason . "\n";
 
-    if ($cnt > 0) {
-        usleep(500000);
-        $cps[$i]->receiveRsp();
-        echo $cps[$i]->resp_str."\n";
-    }
+    // if ($cnt > 0) {
+    //     usleep(500000);
+    //     $cps[$i]->receiveRsp();
+    //     echo $cps[$i]->resp_str."\n";
+    // }
 
 }
 
@@ -249,8 +250,6 @@ while(1) {
     //    if there is response, post it to nodeOpe.api
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
-            $deb->log($cps[$i]->resp_str);
-            echo $cps[$i]->resp_str . "\n";
             post_resp($cps[$i]->resp_str);
         }
     }
