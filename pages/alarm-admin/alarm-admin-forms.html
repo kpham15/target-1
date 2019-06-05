@@ -107,20 +107,25 @@ $(document).ready(function() {
     
     clearErrors();
     
-    if (value == "") {
-      inputError($(this),'Select an item from list of tables')
+    if (almid == "") {
+      inputError($('#'),'Select an item from list of tables')
       return;
     }
     // ACKNOWLEDGE action
     else if (value == 'ACK') {
-
-      $('#alarm-admin-modal-almid').val(almid);
-      $('#alarm-admin-modal-source').val(source);
-      $('#alarm-admin-modal-ack').val(user.uname);
-      $('#alarm-admin-modal-condition').val(condition);
-      $('#alarm-admin-modal-action').val(action);
-
-      $('#alarm-admin-modal').modal('show');
+      if (ack == "ACK") {
+        inputError($('#alarm-admin-forms-ack'),'Alarm already acknowledged!');
+        return;
+      }
+      else {
+        $('#alarm-admin-modal-almid').val(almid);
+        $('#alarm-admin-modal-source').val(source);
+        $('#alarm-admin-modal-ack').val(user.uname);
+        $('#alarm-admin-modal-condition').val(condition);
+        $('#alarm-admin-modal-action').val(action);
+  
+        $('#alarm-admin-modal').modal('show');
+      }
     }
     // UN-ACKNOWLEDGE action
     else if (value == 'UN-ACK') {
