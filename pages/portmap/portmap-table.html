@@ -82,7 +82,7 @@
 
   $(document).ready(function() {
 
-    $(document).on('click', '#portmap-table body tr', function() {
+    $(document).on('click', '#portmap-table tbody tr', function() {
       let data = portmapDatatable.row(this).data();
 
       console.log(data);
