@@ -110,7 +110,7 @@ class COM {
         if ($tty != '' && $node > 0) {
             //Connect to serial port
             $conn = dio_open("/dev/$tty", O_RDWR | O_NOCTTY | O_NONBLOCK);
-            if ($conn === true) {
+            if ($conn !== false) {
                 //if successfully connected
                 $this->conn = $conn;
                 $this->tty = $tty;
