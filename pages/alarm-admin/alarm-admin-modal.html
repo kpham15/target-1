@@ -77,12 +77,49 @@
 </div>
 
 <script type="text/javascript">
+
   $(document).ready(function() {
    
 
     //click event for submit button
     $('#alarm-admin-modal-submit').click(function() {
-      console.log("AAA");
+      let action = $('#alarm-admin-modal-action').val();
+      let almid = $('#alarm-admin-modal-almid').val();
+      let source = $('#alarm-admin-modal-source').val();
+      let ack = $('#alarm-admin-modal-ack').val();
+      let condition = $('#alarm-admin-modal-condition').val();
+      let comments = $('#alarm-admin-modal-comments').val();
+
+      $.ajax({
+        type:     "POST",
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcAlm",
+          "act":    action,
+          "user":   user.uname,
+          "src":    source,
+          "ack":    ack,
+          "almid":  almid,
+          "cond":   condition,
+          "remark": comments
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title:  data.rslt,
+          body: data.reason,
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = 'danger'
+          modalHandler(modal);
+        }
+        else {
+          $('#alarm-admin-modal').modal('hide');
+        }
+      })
+
     })
   });
 </script>
