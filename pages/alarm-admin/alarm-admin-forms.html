@@ -111,24 +111,29 @@ $(document).ready(function() {
     
     clearErrors();
     
-    if (almid == "") {
-      inputError($('#alarm-admin-forms-action'),'Select an item from list of tables')
-      return;
-    }
+    
     // ACKNOWLEDGE action
-    else if (value == 'ACK') {
-      if (ack !== "") {
-        inputError($('#alarm-admin-forms-ack'),'Alarm already acknowledged!');
-        return;
+    if (value == 'ACK') {
+      if (almid !== "") {
+        if (ack !== "") {
+          inputError($('#alarm-admin-forms-ack'),'Alarm already Acknowledged');
+          $('#alarm-admin-forms-action').val('');
+          return;
+        }
+        else {
+          $('#alarm-admin-modal-almid').val(almid);
+          $('#alarm-admin-modal-source').val(source);
+          $('#alarm-admin-modal-ack').val(user.uname);
+          $('#alarm-admin-modal-condition').val(condition);
+          $('#alarm-admin-modal-action').val(action);
+    
+          $('#alarm-admin-modal').modal('show');
+        }
       }
       else {
-        $('#alarm-admin-modal-almid').val(almid);
-        $('#alarm-admin-modal-source').val(source);
-        $('#alarm-admin-modal-ack').val(user.uname);
-        $('#alarm-admin-modal-condition').val(condition);
-        $('#alarm-admin-modal-action').val(action);
-  
-        $('#alarm-admin-modal').modal('show');
+        inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+        $('#alarm-admin-forms-action').val('');
+        return;
       }
     }
     // UN-ACKNOWLEDGE action
