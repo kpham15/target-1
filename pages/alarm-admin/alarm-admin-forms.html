@@ -107,6 +107,10 @@ $(document).ready(function() {
 
     if (value == 'ACK') {
       // console.log(value);
+      $('#alarm-admin-modal-almid').val(almid);
+      $('#alarm-admin-modal-source').val(source);
+      $('#alarm-admin-modal-ack').val(user.uname);
+      $('#alarm-admin-modal-condition').val(condition);
       $('#alarm-admin-modal').modal('show');
     }
   });
