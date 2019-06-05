@@ -56,7 +56,6 @@ $(document).ready(function() {
 
 	if (user.uname == '')
 	{
-		// $('body').addClass('login-page');
 		$('#login-page').show();
 	}
 
