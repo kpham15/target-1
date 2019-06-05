@@ -65,7 +65,12 @@
       dataType: "json"
     }).done(function(data){
       let res = data.rows;
-
+      
+      $("#maintReport-form-report").val("").change();
+      
+      if (res.length == 0) {
+        inputError($('#maintReport-form-report'),'No Record Found');
+      }
       maintReportDatatable.clear().draw();
       maintReportDatatable.rows.add(res);
       maintReportDatatable.columns.adjust().draw();
