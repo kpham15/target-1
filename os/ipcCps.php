@@ -186,7 +186,7 @@ class COM {
         $this->resp_str = '';
         $startTime = microtime(true);
         // loop for 1 sec until received some data
-        while((microtime(true) - $startTime) < 0.2) {
+        while((microtime(true) - $startTime) < 0.5) {
             $data = dio_read($this->conn, 1024);
             if (trim($data) !== "") {
                 $this->resp_str .= $data;
