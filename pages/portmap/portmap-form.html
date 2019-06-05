@@ -38,8 +38,8 @@
         <div class="form-group">
           <label>CKID TN: </label>
           <input id="portmap-tn-check" type="checkbox" checked>
-          <input id="portmap-form-ckid" type="text" class="form-control portmap-form-input" style="display:none;">
-          <input id="portmap-form-ckid-tn" type="text" class="form-control portmap-form-input" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
+          <input id="portmap-form-ckid" type="text" class="form-control portmap-form-input portmap-form-ckid-num" style="display:none;">
+          <input id="portmap-form-ckid-tn" type="text" class="form-control portmap-form-input portmap-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
       </div>
 
@@ -57,3 +57,21 @@
     </div>
   </form>
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    // Initialize inputmask
+    $('#portmap-form-ckid-tn').inputmask();
+
+    // TN Checkbox Handler
+    $('#portmap-tn-check').iCheck({
+      checkboxclass: 'icheckbox_minimal-blue'
+    });
+
+    $('#portmap-tn-check').on('ifToggled', function() {
+      $('.portmap-form-ckid-num').toggle();
+    });
+  });
+</script>
