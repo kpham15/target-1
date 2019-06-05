@@ -133,7 +133,7 @@ $(document).ready(function() {
     }
     // UN-ACKNOWLEDGE action
     else if (value == 'UN-ACK') {
-      if (ack !== "ACK") {
+      if (ack  == "") {
         inputError($('#alarm-admin-forms-ack'),'Alarm is not yet Acknowledged!');
         return;
       }
