@@ -228,7 +228,7 @@ for ($i=0; $i<$numofcps; $i++) {
     $cps[$i] = new COM($com, $node);
     $deb->log($cps[$i]->reason);
     echo $cps[$i]->reason . "\n";
-    if ($cps[$i]->sendStatusReq() > 0) {;
+    if ($cps[$i]->sendStatusReq() > 0) {
         usleep(500000);
         $cps[$i]->receiveRsp();
         echo $cps[$i]->resp_str."\n";
