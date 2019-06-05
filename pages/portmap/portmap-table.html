@@ -85,11 +85,11 @@
             modal.type = "warning";
             modal.body = "No record found";
             modalHandler(modal);
-          } else {
+          } 
+        } else {
             portmapDatatable.clear().draw();
             portmapDatatable.rows.add(res);
             portmapDatatable.columns.adjust().draw();
-          }
         }
       }
 
