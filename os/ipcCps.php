@@ -206,9 +206,11 @@ class COM {
 
 }
 
-function sendToCpsHw($str) {
+function sendToCpsHw($str, $cps) {
     $s = explode('$', $str);
-    echo "send-to-hw: " . $s[1] . "\n";
+    $cmd = '$' . $s[1];
+    $cps[0]->sendCmd($cmd);
+    echo "send-to-hw: " . $cmd . "\n";
 }
 
 function post_resp($resp_str) {
@@ -261,7 +263,7 @@ while(1) {
     // b) check for incoming cmd from APIs, 
     //    if there is a cmd, send cmd over appropriate COM
     if ($udpsock->recv() != '') {
-        sendToCpsHw($udpsock->msg);
+        sendToCpsHw($udpsock->msg, $cps);
     }
 
     // c) check for 5 sec expires
