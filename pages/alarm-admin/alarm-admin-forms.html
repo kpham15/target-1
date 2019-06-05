@@ -121,6 +121,22 @@ function validateUnack(obj) {
   }
 }
 
+function validateClr(obj) {
+  if (obj.almid !== "") {
+    $('#alarm-admin-modal-almid').val(obj.almid);
+    $('#alarm-admin-modal-source').val(obj.source);
+    $('#alarm-admin-modal-ack').val(user.uname);
+    $('#alarm-admin-modal-condition').val(obj.condition);
+    $('#alarm-admin-modal-action').val(obj.value);
+
+    $('#alarm-admin-modal').modal('show');
+  }
+  else {
+    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    $('#alarm-admin-forms-action').val('');
+    return;
+  }
+}
 
 $(document).ready(function() {
   
@@ -157,6 +173,8 @@ $(document).ready(function() {
     } else if (obj.value === 'UN-ACK') {
       // UN-ACKNOWLEDGE action
       validateUnack(obj);
+    } else if (obj.value === "CLR") {
+      validateClr(obj);
     }
 
   });
