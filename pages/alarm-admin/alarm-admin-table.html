@@ -69,6 +69,15 @@
   }
   
   $(document).ready(function() {
+    // click events on table rows
+    $(document).on('click', '#alarm-admin-table tbody tr', function() {
+      let data = alarmAdminDatatable.row(this).data();
 
+      $('#alarm-admin-forms-comments').val(data.remark);
+
+      // give selected class
+      $('#alarm-admin-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
   });
 </script>
