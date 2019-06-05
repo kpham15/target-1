@@ -204,7 +204,7 @@ function sendToCpsHw($cmd) {
 }
 
 function post_resp($resp_str) {
-    echo $this->tty . " post-resp: " . $resp_str . "\n";
+    echo "post-resp: " . $resp_str . "\n";
 }
 
 //
