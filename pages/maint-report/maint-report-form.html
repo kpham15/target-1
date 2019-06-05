@@ -102,9 +102,9 @@
   }
 
 	$(document).ready(function() {
-		
-		var maintReportStartDate = "";
-		var maintReportEndDate = "";
+    
+		var maintReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+		var maintReportEndDate = moment(new Date()).format('YYYY-MM-DD');
 
 		// Initialze daterangepicker and assign values to start and from dates
 		function initializeMaintReportDateRangePicker () {
