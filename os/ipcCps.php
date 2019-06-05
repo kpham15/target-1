@@ -250,7 +250,7 @@ while(1) {
     //    if there is response, post it to nodeOpe.api
     usleep(500000);
     echo microtime(true) . "\n";
-    
+
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
             post_resp($cps[$i]->resp_str);
@@ -259,9 +259,9 @@ while(1) {
 
     // b) check for incoming cmd from APIs, 
     //    if there is a cmd, send cmd over appropriate COM
-    if ($udpsock->recv() != '') {
-        sendToCpsHw($udpsock->msg);
-    }
+    // if ($udpsock->recv() != '') {
+    //     sendToCpsHw($udpsock->msg);
+    // }
 
     // c) check for 5 sec expires
     //    if expires, send status,source=all to COM, and reset 5 sec timer
