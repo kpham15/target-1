@@ -196,7 +196,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a id="logout-btn" href="#" class="btn btn-default btn-flat">Sign out</a>
               </div>
             </li>
           </ul>
@@ -207,6 +207,24 @@
     </div>
   </nav>
 </header>
+
+<!-- LOGOUT MODAL -->
+<div class="modal fade" id="logout-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Logging out...</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   function updateUsername() {
@@ -250,6 +268,16 @@
   }
 
   $(document).ready(function() {
-    
+
+    // Watches logout modal, on close reload page
+    $('#logout-modal').on('hidden.bs.modal', function(e) {
+      location.reload();
+    });
+
+    // Click event for logout button
+    $('#logout-btn').click(function() {
+      logout('manual logout');
+    });
+
   });
 </script>
