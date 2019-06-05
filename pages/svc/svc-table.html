@@ -144,14 +144,16 @@
           "user":   user.uname,
           "grp":    user.grp,
           "ugrp":   user.ugrp,
-          "ckid":   $("#svc_ckid_txt").val(),
+          "ckid":   $("#svc_ckid").val(),
           "cls":    $("#svc_cls_sel").val(),
           "adsr":   $("#svc_adsr_sel").val(),
           "prot":   $("#svc_prot_sel").val()
         },
         dataType: 'json'
       }).done(function(data) {
-        let res = data.rows;
+        let res = [];
+        if(data.hasOwnProperty('rows'))
+            res = data.rows;
   
         svcCktDatatable.clear().draw();
         svcCktDatatable.rows.add(res);
@@ -174,7 +176,9 @@
             },
             dataType: 'json'
         }).done(function(data) {
-            let res = data.rows;
+            let res = [];
+            if(data.hasOwnProperty('rows'))
+                res = data.rows;
             svcOrdDatatable.clear().draw();
             svcOrdDatatable.rows.add(res);
             svcOrdDatatable.columns.adjust().draw();
@@ -195,7 +199,10 @@
             },
             dataType: 'json',
         }).done(function(data){
-            let res = data.rows;
+            let res = [];
+            if(data.hasOwnProperty('rows'))
+                res = data.rows;
+
             svcCktconDatatable.clear().draw();
             svcCktconDatatable.rows.add(res);
             svcCktconDatatable.columns.adjust().draw();
@@ -206,21 +213,6 @@
     
         $('#svc_findCkid_btn').click(function(e) {
             e.preventDefault();
-            if($("#svc_tn_cbx").is(':checked') && $("#svc_ckid_txt").val() != "") {
-                let ckidConverted = getTN($("#svc_ckid_txt").val());
-                if(ckidConverted === false) {
-                    // inputError($("#svc_ckid_txt"),"Ckid is not in TN format")
-                    let modal = {
-                        title: "Error",
-                        body: "Ckid is not in TN format",
-                        type: 'danger'
-                    }
-                    modalHandler(modal);
-                    return;
-                }
-                $("#svc_ckid_txt").val(ckidConverted);
-            }
-           
             $("#svc_cktArea").show();
             $("#svc_ordArea").hide();
             svcQueryCkid();
@@ -241,7 +233,7 @@
             if(data == undefined)
                 return;
             $("#svc_cktId_num").val(data.id);
-            $("#svc_ckid_txt").val(data.ckid);
+            $("#svc_ckid").val(data.ckid);
             $("#svc_cls_sel").val(data.cls);
             $("#svc_adsr_sel").val(data.adsr);
             $("#svc_prot_sel").val(data.prot);
@@ -258,7 +250,7 @@
 
             clearSearchArea();
             $("#svc_cktconArea").show();
-            svcQueryCktConByCkid($("#svc_ckid_txt").val());
+            svcQueryCktConByCkid($("#svc_ckid").val());
 
             // Reset svc_cktconIdx_num
             $("#svc_cktconIdx_num").val("");
@@ -277,7 +269,7 @@
             $("#svc_cktId_num").val(data.id);
             $("#svc_ordno_txt").val(data.ordno);
             $("#svc_mlo_sel").val(data.mlo);
-            $("#svc_ckid_txt").val(data.ckid);
+            $("#svc_ckid").val(data.ckid);
             $("#svc_cls_sel").val(data.cls);
             $("#svc_adsr_sel").val(data.adsr);
             $("#svc_prot_sel").val(data.prot);

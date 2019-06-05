@@ -1,22 +1,21 @@
 <div class='col-md-4'>
     <form class='svc-form'>
         <!-- First row -->
-        <div class='row' style="border-bottom: 2px solid #3F8CBC">
-            <div class="col-sm-6 " style="padding:2px 2px 2px 2px;">
+        <div class='row'>
+            <div class="col-sm-6 " style="padding:2px;">
                 <div class="form-group">
                     <label for="svc_ckid_txt">CKID</label>
                     <label for="svc_tn_cbx">TN:</label>
-                    <input type="checkbox" id="svc_tn_cbx" checked>
-                    <div id="svc_ckid">
-                        <input style="text-transform: uppercase" type="text" class="form-control svc-form" id="svc_ckid_txt" placeholder="123-456-7890">
-                    </div>
+                    <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" checked>
+                    <input style="text-transform: uppercase; display:none" type="text" class="form-control svc-form svc-ckid-txt">
+                    <input id="svc_ckid" type="text" class="form-control svc-form svc-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
                 </div>
             </div>
                 
-            <div class="col-sm-2 " style="padding: 2px ;">
+            <div class="col-sm-2 " style="padding: 2px;">
                 <div class="form-group">
                     <label for="svc_cls_sel">CLS</label>
-                    <select class="form-control svc-form" id="svc_cls_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_cls_sel" style="padding: 2px ">
                         <option></option>
                         <option>BUS</option>
                         <option>RES</option>
@@ -27,7 +26,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_adsr_sel">ADSR</label>
-                    <select class="form-control svc-form" id="svc_adsr_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_adsr_sel" style="padding: 2px ">
                         <option>N</option>
                         <option>Y</option>
                     </select>
@@ -41,7 +40,7 @@
         </div>
 
         <!-- Second row -->
-        <div class="row" style="border-bottom: 2px solid #3F8CBC">
+        <div class="row">
             <div class="col-sm-6 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_ordno_txt">ORDNO</label>
@@ -52,7 +51,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_mlo_sel">MLO</label>
-                    <select class="form-control svc-form" id="svc_mlo_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_mlo_sel" style="padding: 2px ">
                         <option>N</option>
                         <option>Y</option>
                     </select>
@@ -62,7 +61,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_prot_sel">PROT</label>
-                    <select class="form-control svc-form" id="svc_prot_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_prot_sel" style="padding: 2px ">
                         <option></option>
                         <option>SSM</option>
                         <option>SSP</option>
@@ -98,7 +97,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_ctyp_sel">CONTYP</label>
-                    <select class="form-control svc-form" id="svc_ctyp_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_ctyp_sel" style="padding: 2px ">
                         <option></option>
                         <option>GEN</option>
                         <option>LPBK</option>
@@ -181,7 +180,7 @@
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
                     <label for="svc_act_sel">ACTION</label>    
-                    <select class="form-control svc-form" id="svc_act_sel" style="padding-top: 2px " >
+                    <select class="form-control svc-form" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
@@ -244,23 +243,25 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
         }).done(function(data) {
             let res = [];
             let ftyp = $("#svc_facSearch").attr("ftyp");
-            
-            for (var i=0; i<data.rows.length; i++) {
-                if(data.rows[i].port == "") {
-                    continue;
-                }
-                if(ftyp == "X")
-                    if(data.rows[i].port.split('-')[2] == 'X')
-                        res.push(data.rows[i]);
-                    else 
+            if(data.hasOwnProperty('rows')) {
+                for (var i=0; i<data.rows.length; i++) {
+                    if(data.rows[i].port == "") {
                         continue;
-                else {
-                    if(data.rows[i].port.split('-')[2] == 'Y')
-                        res.push(data.rows[i]);
-                    else 
-                        continue;
+                    }
+                    if(ftyp == "X")
+                        if(data.rows[i].port.split('-')[2] == 'X')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    else {
+                        if(data.rows[i].port.split('-')[2] == 'Y')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    }
                 }
             }
+            
             svcFacSearchDatatable.clear().draw();
             svcFacSearchDatatable.rows.add(res);
             svcFacSearchDatatable.columns.adjust().draw();
@@ -270,6 +271,8 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
 
 
     $(document).ready(function(){
+        $(".svc-ckid-tn").inputmask();
+
         $("#svc_clear_btn").click(function(e){
             e.preventDefault();
             $(".svc-form").val("");
@@ -399,17 +402,18 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
             }
         })
     
+        $("#svc_tn_cbx").change(function(){
+            if($("#svc_tn_cbx").is(':checked')){
+                $(".svc-ckid-txt").attr("id","").hide();
+                $(".svc-ckid-tn").attr("id","svc_ckid").show();
+            }
+            else {
+                $(".svc-ckid-tn").attr("id","").hide();
+                $(".svc-ckid-txt").attr("id","svc_ckid").show();
+            }
+        })
+    
     })
     
-
-function getTN(ckid) {
-    let ckidConvert = ckid.replace("-","");
-    if (ckidConvert.match(/^[0-9]+$/) == null || ckid.length != 10) {
-        return false;
-    }
-    else {
-        return ckidConvert.substring(0,3) + '-' + ckidConvert.substring(3,6) + '-' + ckidConvert.substring(6,10);
-    } 
-}; 
 
 </script>

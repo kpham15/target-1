@@ -14,8 +14,10 @@
                 <div class="col-sm-4 " style="padding: 0px 2px 0px 20px;;">
                     <label for="svcModal_ckid_txt">CKID</label>
                     <label for="svcModal_tn_cbx">TN:</label>
-                    <input type="checkbox" id="svcModal_tn_cbx" checked>
-                    <input style="text-transform: uppercase" type="text" class="form-control svcModal-form" id="svcModal_ckid_txt" placeholder="123-456-7890">
+                    <input type="checkbox" id="svcModal_tn_cbx" style="padding-top:2px">
+                    <input style="text-transform: uppercase;" type="text" class="form-control svcModal-form svcModal-ckid-txt" id="svcModal_ckid" placeholder="123-456-7890">
+                    <input style="display:none" type="text" class="form-control svcModal-form svcModal-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+
                 </div>
                     
                 <div class="col-sm-2 " style="padding: 0px 2px 0px 2px;">
@@ -252,7 +254,7 @@ var svcModalFacSearchDatatable = $("#svcModal_newTblFac").DataTable({
 })
 
 function populateSvcModal(){
-    $("#svcModal_ckid_txt").val($("#svc_ckid_txt").val());
+    $("#svcModal_ckid").val($("#svc_ckid").val());
     $("#svcModal_cls_sel").val($("#svc_cls_sel").val());
     $("#svcModal_adsr_sel").val($("#svc_adsr_sel").val());
     $("#svcModal_prot_sel").val($("#svc_prot_sel").val());
@@ -294,22 +296,26 @@ function svcModal_searchFac(){
     }).done(function(data) {
         let res = [];
         let ftyp = $("#svcModal_newFacSearch").attr("ftyp");
-        for (var i=0; i<data.rows.length; i++) {
-            if(data.rows[i].port == "") {
-                continue;
-            }
-            if(ftyp == "X")
-                if(data.rows[i].port.split('-')[2] == 'X')
-                    res.push(data.rows[i]);
-                else 
+        if(data.hasOwnProperty('rows')) {
+            for (var i=0; i<data.rows.length; i++) {
+                if(data.rows[i].port == "") {
                     continue;
-            else {
-                if(data.rows[i].port.split('-')[2] == 'Y')
-                    res.push(data.rows[i]);
-                else 
-                    continue;
+                }
+                if(ftyp == "X")
+                    if(data.rows[i].port.split('-')[2] == 'X')
+                        res.push(data.rows[i]);
+                    else 
+                        continue;
+                else {
+                    if(data.rows[i].port.split('-')[2] == 'Y')
+                        res.push(data.rows[i]);
+                    else 
+                        continue;
+                }
             }
         }
+                
+        
         svcModalFacSearchDatatable.clear().draw();
         svcModalFacSearchDatatable.rows.add(res);
         svcModalFacSearchDatatable.columns.adjust().draw();
@@ -317,6 +323,8 @@ function svcModal_searchFac(){
 }
 
 function clearSvcModal() {
+    $(".svcModal-ckid-tn").prop('checked', false);
+    $("#svcModal_tn_cbx").trigger("change");
     $(".svcModal-form").val("");
     $("#svcModal_adsr_sel").val("N");
     $("#svcModal_mlo_sel").val("N");
@@ -331,6 +339,8 @@ function clearSvcModalFacSearch(){
 }
 
 $(document).ready(function(){
+    $(".svcModal-ckid-tn").inputmask();
+
     $("#svcModal_newFfacSearch_btn").click(function(){
         let ftyp = $("#svcModal_newFacSearch").attr("ftyp");
         svcModalFacSearchDatatable.clear().draw();
@@ -368,22 +378,8 @@ $(document).ready(function(){
     
     
     $("#svc-modal-submit").click(function(){
-        if($("#svcModal_tn_cbx").is(':checked') && $("#svcModal_ckid_txt").val() != "") {
-            let ckidConverted = getTN($("#svcModal_ckid_txt").val());
-            if(ckidConverted === false) {
-                let modal = {
-                    title: "Error",
-                    body: "Ckid is not in TN format",
-                    type: 'danger'
-                }
-                modalHandler(modal);
-                return;
-            }
-            $("#svcModal_ckid_txt").val(ckidConverted);
-        }
-
         let act = $("#svcModal_act_txt").val();
-        let ckid = $("#svcModal_ckid_txt").val();
+        let ckid = $("#svcModal_ckid").val();
         let cls = $("#svcModal_cls_sel").val();
         let adsr = $("#svcModal_adsr_sel").val();
         let prot = $("#svcModal_prot_sel").val();
@@ -445,8 +441,8 @@ $(document).ready(function(){
                 cktcon: cktcon,
                 idx:	idx,
 
-                newffac:newffac,
-                newtfac:newtfac,
+                newffac:  newffac,
+                newtfac:  newtfac,
                 newfport: newfport,
                 newtport: newtport,
 
@@ -469,7 +465,6 @@ $(document).ready(function(){
                 svcQueryCkid();
                 svcQueryCktConByCkid(ckid)
                 
-                $('#svc_clear_btn').trigger('click');
                 $('#svc_modal').modal('hide');
                 
                 modal.type = "success";
@@ -502,6 +497,17 @@ $(document).ready(function(){
     $("#svc_modal").on("hidden.bs.modal", function() {
         $("#svc_act_sel").val("");
     });
+
+    $("#svcModal_tn_cbx").change(function(){
+        if($("#svcModal_tn_cbx").is(':checked')){
+            $(".svcModal-ckid-txt").attr("id","").hide();
+            $(".svcModal-ckid-tn").attr("id","svcModal_ckid").show();
+        }
+        else {
+            $(".svcModal-ckid-tn").attr("id","").hide();
+            $(".svcModal-ckid-txt").attr("id","svcModal_ckid").show();
+        }
+    })
 })
     
 
