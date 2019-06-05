@@ -73,6 +73,10 @@
     $(document).on('click', '#alarm-admin-table tbody tr', function() {
       let data = alarmAdminDatatable.row(this).data();
 
+      $('#alarm-admin-forms-almid').val(data.almid);
+      $('#alarm-admin-forms-source').val(data.src);
+      $('#alarm-admin-forms-ack').val(data.ack);
+      $('#alarm-admin-forms-cond').val(data.cond);
       $('#alarm-admin-forms-comments').val(data.remark);
 
       // give selected class
