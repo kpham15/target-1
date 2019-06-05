@@ -1,25 +1,20 @@
 <!-- Forms Left Side -->
 <div class="col-md-5">
-  <form id="alarm-admin-forms-left">
-    <!-- Top Row Left -->
-    
-    <div class="row">
-      <!-- Hidden ID Field -->
-      <input id="alarm-admin-forms-id" type="hidden" class="alarm-admin-forms-input">
-      <!-- ALMID -->
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>ALMID:</label>
-          <input id="alarm-admin-forms-almid" class="form-control alarm-admin-forms-input" disabled="">
-        </div>
-      </div>
+  <form id="alarm-admin-forms-left" class="form-horizontal">
 
-      <!-- SOURCE -->
-      <div class="col-md-9">
-        <div class="form-group">
-          <label>SOURCE:</label>
-          <input id="alarm-admin-forms-source" class="form-control alarm-admin-forms-input" disabled="">
-        </div>
+    <!-- ALMID -->
+    <div class="form-group">
+      <label for="alarm-admin-forms-almid" class="col-sm-3 control-label">ALMID:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control alarm-admin-forms-input" id="alarm-admin-forms-almid" disabled="">
+      </div>
+    </div>
+
+    <!-- SOURCE -->
+    <div class="form-group">
+      <label for="alarm-admin-forms-source" class="col-sm-3 control-label">SOURCE:</label>
+      <div class="col-sm-9">
+        <input type="text" id="alarm-admin-forms-source" class="form-control alarm-admin-forms-input" disabled="">
       </div>
     </div>
 
@@ -150,7 +145,6 @@ $(document).ready(function() {
   $('#alarm-admin-forms-action').change(function() {
     let obj = {
       value:      $(this).val(),
-      id:         $('#alarm-admin-forms-id').val(),
       almid:      $('#alarm-admin-forms-almid').val(),
       source:     $('#alarm-admin-forms-source').val(),
       ack:        $('#alarm-admin-forms-ack').val(),
