@@ -44,7 +44,7 @@
 
     <div id="svc_cktconArea" class="box box-primary" style="display:none">
         <div class="box-header with-border">
-            <h3 class="box-title">LIST OF ORDERS:</h3>
+            <h3 class="box-title">LIST OF CONNECTIONS:</h3>
         </div>
         <div style="padding: 10px;">
             <table id="svc_cktcon_table" class="table table-striped table-bordered table-hover" style="width:100%;">
@@ -248,7 +248,7 @@
             $("#svc_portY_txt").val("");
             $("#svc_ctyp_sel").val("");
 
-            clearSearchArea();
+            // clearSearchArea();
             $("#svc_cktconArea").show();
             svcQueryCktConByCkid($("#svc_ckid").val());
 
@@ -280,7 +280,7 @@
             $("#svc_portX_txt").val(data.fport);
             $("#svc_portY_txt").val(data.tport);
             $("#svc_date_date").val(data.date);
-            clearSearchArea();
+            // clearSearchArea();
 
             // Reset svc_cktconIdx_num
             $("#svc_cktconIdx_num").val("");
@@ -304,7 +304,7 @@
             $("#svc_portX_txt").val(data.fport);
             $("#svc_portY_txt").val(data.tport);
 
-            clearSearchArea();
+            // clearSearchArea();
     
             // give selected class
             $('#svc_cktcon_table tbody tr').removeClass('bg-primary');

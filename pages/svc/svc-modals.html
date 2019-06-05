@@ -169,7 +169,7 @@
                         </div> 
             
                         <div id="svcModal_newFacSearch" ftyp="" class="col-sm-12 " style="padding: 2px ; display:none; background-color:#eff5ff;padding:0px; border: solid lightgray 1px;  ">
-                            <div class="col-sm-6 " style="padding: 2px ;">
+                            <!-- <div class="col-sm-6 " style="padding: 2px ;">
                                 <label for="svcModal_newFac_txt">FAC</label>
                                 <input style="text-transform: uppercase" type="text" class="form-control svcModal-facSearch-form" id="svcModal_newFac_txt">
                             </div>
@@ -189,9 +189,8 @@
                             </div>
                             <div class="col-sm-2 " style="padding: 2px ;">
                                 <button id= "svcModal_newFacSearch_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
-                                <!-- <button id= "svcModal_newFacClose_btn" class="btn btn-primary">Close</button> -->
-                            </div>
-                            <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+                            </div> -->
+                            <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0; padding: 0px">
                                 <div class="box box-primary">
                                     <table id="svcModal_newTblFac" class="table table-striped table-bordered table-hover" style="width:100%;">
                                         <thead>
@@ -242,8 +241,8 @@
 
 <script>
 var svcModalFacSearchDatatable = $("#svcModal_newTblFac").DataTable({
+    "dom": 'frtip', 
     "scrollY":        "100px",
-    "searching": false,
     "data": [],
     "columns": [
         {"data":"fac"},
@@ -289,8 +288,8 @@ function svcModal_searchFac(){
             "user":   user.uname,
             "grp":    user.grp,
             "ugrp":   user.ugrp,
-            "fac":     $("#svcModal_newFac_txt").val(),
-            "psta":    $("#svcModal_newPsta_sel").val(),
+            "fac":     "%",
+            "psta":    "",
         },
         dataType: 'json'
     }).done(function(data) {
@@ -323,9 +322,10 @@ function svcModal_searchFac(){
 }
 
 function clearSvcModal() {
-    $(".svcModal-ckid-tn").prop('checked', false);
+    $("#svcModal_tn_cbx").prop('checked', false);
     $("#svcModal_tn_cbx").trigger("change");
     $(".svcModal-form").val("");
+    $("#svcModal_cls_sel").val("RES");
     $("#svcModal_adsr_sel").val("N");
     $("#svcModal_mlo_sel").val("N");
     clearSvcModalFacSearch();
@@ -351,12 +351,12 @@ $(document).ready(function(){
             $("#svcModal_newFacSearch").attr("ftyp","");
         }
         else {
-            $("label[for='svcModal_newFac_txt']").text("FAC(X)");
             $("#svcModal_newFac_txt").val($("#svcModal_newFfac_txt").val())
             $("#svcModal_newFacSearch").show();
             $("#svcModal_newFacSearch").attr("ftyp","X");
         }
-        
+        svcModal_searchFac();
+
     })
     
     $("#svcModal_newTfacSearch_btn").click(function(){
@@ -369,11 +369,12 @@ $(document).ready(function(){
             $("#svcModal_newFacSearch").attr("ftyp","");
         }
         else {
-            $("label[for='svcModal_newFac_txt']").text("FAC(Y)");
             $("#svcModal_newFac_txt").val($("#svcModal_newTfac_txt").val())
             $("#svcModal_newFacSearch").show();
             $("#svcModal_newFacSearch").attr("ftyp","Y");
         }
+        svcModal_searchFac();
+
     })
     
     
@@ -472,11 +473,6 @@ $(document).ready(function(){
             }
         })
 
-    })
-
-
-    $("#svcModal_newFacSearch_btn").click(function(){
-        svcModal_searchFac();
     })
 
     $(document).on("click","#svcModal_newTblFac tbody tr", function(){
