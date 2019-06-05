@@ -18,9 +18,9 @@ try{
         throw new Exception("fail: Unable to create socket", 10);
     }
 
-    //set timeout
-    socket_set_option($clientSocket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 0, 'usec' => 500000));
-    socket_set_option($clientSocket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 0, 'usec' => 500000));
+    // //set timeout
+    // socket_set_option($clientSocket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 0, 'usec' => 500000));
+    // socket_set_option($clientSocket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 0, 'usec' => 500000));
             
     // $cmd = "\$command,action=disconnect,bus=x,tap=1,ackid=1-tbus*";
     $cmd = "inst=DISCV_CPS,node=1,dev=ttyUSB0,sn=,cmd=\$status,source=uuid,device=backplane,ackid=1-cps-dcvd*";
