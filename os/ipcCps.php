@@ -79,13 +79,13 @@ class UDPSOCK {
 
     public function recv() {
         $this->msg = '';
-        echo "UDP-SOCK: " . $this->socket ."\n";
         if ($this->socket != false) {
             $buf ='';
             $input = socket_recvfrom($this->socket, $buf, 1024, 0, $remote_ip, $remote_port);
             $this->msg = trim($buf);
         }
         return $this->msg;
+        echo "UDP-SOCK: recv: " . $this->msg ."\n";
     }
 
 
