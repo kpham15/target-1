@@ -97,6 +97,14 @@ $(document).ready(function() {
   $('#alarm-admin-forms-action').change(function() {
     let value = $(this).val();
 
+    let id = $('#alarm-admin-forms-id').val();
+    let almid = $('#alarm-admin-forms-almid').val();
+    let source = $('#alarm-admin-forms-source').val();
+    let ack = $('#alarm-admin-forms-ack').val();
+    let condition = $('#alarm-admin-forms-condition').val();
+
+    clearErrors();
+
     if (value == 'ACK') {
       // console.log(value);
       $('#alarm-admin-modal').modal('show');
