@@ -170,7 +170,6 @@ class COM {
             $this->rslt = "fail";
             $this->reason = "SEND CMD FAILS";
         }
-        usleep(200000);
         return $cnt;
     }
 
@@ -228,8 +227,13 @@ for ($i=0; $i<$numofcps; $i++) {
 
     $cps[$i] = new COM($com, $node);
     $deb->log($cps[$i]->reason);
+    echo $cps[$i]->reason . "\n";
+    if ($cps[$i]->sendStatusReq() > 0) {;
+        usleep(500000);
+        $cps[$i]->receiveRsp();
+        echo $cps[$i]->resp_str."\n";
+    }
 
-    $cps[$i]->sendStatusReq();
 }
 
 // step 2:
