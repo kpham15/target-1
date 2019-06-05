@@ -16,6 +16,9 @@
 
       <!-- Node Operation Table -->
       <?php include __DIR__ . '/alarm-admin-table.html'; ?>
+
+      <!-- Node Operation Modal -->
+      <?php include __DIR__ . '/alarm-admin-modal.html'; ?>
       
   </div>
 </div>

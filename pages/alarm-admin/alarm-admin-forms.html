@@ -79,6 +79,8 @@
 </div>
 
 <script type="text/javascript">
+
+
 $(document).ready(function() {
   
   // Refresh Button Click Event
@@ -89,6 +91,15 @@ $(document).ready(function() {
   // Click event for sidebar, loads page first time
 	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
 		queryAlarmAdmin();
-	})
+  })
+  
+  // Change event on Action
+  $('alarm-admin-forms-action').change(function() {
+    let value = $(this).val();
+    
+    if (value === 'ACK') {
+      $('#alarm-admin-modal').modal('show');
+    }
+  });
 });
 </script>
