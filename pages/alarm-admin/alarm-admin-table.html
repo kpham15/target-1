@@ -23,3 +23,28 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var alarmAdminDatatable = $('#alarm-admin-table').DataTable({
+		
+    "data": [],
+    "columns": [
+      {"data":"almid"},
+			{"data":"sev"},
+			{"data":"ack"},
+			{"data":"sa"},
+			{"data":"src"},
+			{"data":"type"},
+			{"data":"cond"},
+			{"data":"stat"},
+      {
+        "data":"datetime",
+        "render": function(data) {
+          let date = moment(data).format('MM-DD-YYYY HH:mm:ss')
+
+          return date;
+        }
+      },
+    ]
+	});
+</script>
