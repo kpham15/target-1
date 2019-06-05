@@ -186,7 +186,7 @@ class COM {
         $this->resp_str = '';
         $startTime = microtime(true);
         // loop for 1 sec until received some data
-        while((microtime(true) - $startTime) < 0.5) {
+        while((microtime(true) - $startTime) < 1) {
             $data = dio_read($this->conn, 1024);
             if (trim($data) !== "") {
                 $this->resp_str .= $data;
@@ -253,7 +253,7 @@ $startTime = microtime(true);
 while(1) {
     // a) check for response from COM
     //    if there is response, post it to nodeOpe.api
-    usleep(200000);
+    usleep(500000);
 
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
