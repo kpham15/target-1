@@ -135,8 +135,6 @@
 			//@TODO if there are too many rows, does not download?
 
 			else if (report === "CREATE REPORT") {
-        console.log(maintReportStartDate);
-        console.log(maintReportEndDate);
 				downloadMaintReports({filename: `MAINTENANCE_REPORT_${maintReportStartDate}_${maintReportEndDate}.csv`});
 			}
 		});
