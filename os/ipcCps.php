@@ -57,7 +57,7 @@ class UDPSOCK {
         }
        
         $this->rslt = 'success';
-        $this->reason = "Server $this->ip_addr is listening on port $this->ip_port";
+        $this->reason = "(socket: $this->socket) Server $this->ip_addr is listening on port $this->ip_port";
         echo $this->reason . "\n";
     }
 
@@ -77,6 +77,7 @@ class UDPSOCK {
 
     public function recv() {
         $this->msg = '';
+        echo "UDP-SOCK: " . $this->socket ."\n";
         if ($this->socket != false) {
             $buf ='';
             $input = socket_recvfrom($this->socket, $buf, 1024, 0, $remote_ip, $remote_port);
