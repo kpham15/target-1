@@ -59,8 +59,28 @@
 </div>
 <!-- /.login-box -->
 
+<!-- Successful Login Modal -->
+<div class="modal fade" id="login-success-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   function loginErrorHandler(error) {
+    clearErrors();
+
     if (error.reason.toLowerCase().includes('invalid')) {
       inputError($('#login_username'), '');
       inputError($('#login_password_input'), 'Username/Password Invalid');
@@ -73,11 +93,27 @@
           inputError($(this),'');
         }
       });
+    } else if (error.reason.toLowerCase().includes('previous')) {
+      $('.login-input-fields').each(function() {
+        if ($(this).attr('id') === 'login_confirmPassWord') {
+          inputError($(this), error.reason);
+        } else {
+          inputError($(this),'');
+        }
+      })
     }
   }
 
   $(document).ready(function() {
 
+    // Watches login success modal, on close run loginSuccess()
+    $('#login-success-modal').on('hidden.bs.modal', function(e) {
+      if (user.uname !== '') {
+        loginSuccess();
+      }
+    });
+
+    // Click event for change password button
     $('#change-password-btn').click(function() {
       if ($(this).hasClass('active')) {
         $(this).text('First Login / Change Password').button('toggle');
@@ -183,9 +219,12 @@
             login.password.val("");
             login.newpassword.val("");
             login.confirmPassword.val("");
-  
-            // call function to route to main page
-            loginSuccess();
+
+            $('#login-success-modal .modal-title').text(obj.rslt);
+            $('#login-success-modal .modal-body').text(obj.reason);
+
+            // Open login success modal
+            $('#login-success-modal').modal('show');
   
             // @TODO find out what these do
             // opt.query('queryOpt');
