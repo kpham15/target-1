@@ -142,8 +142,6 @@ class COM {
             $this->rslt = 'fail';
             $this->reason = 'INVALID TTY' . $tty;
         }
-        echo $this->reason;
-        echo "\n";
         return;
     }
 
@@ -154,11 +152,12 @@ class COM {
         $cnt = 0;
         if ($this->status_req != '') {
             $cnt = dio_write($this->conn, $this->status_req, strlen($this->status_req));
-            if ($cnt == 0) {
+            if ($cnt === 0) {
                 $this->rslt = "fail";
-                $this->reason = "SEND CMD FAILS";
+                $this->reason = "SEND STATUS FAILS";
             }
         }
+        echo "send-status-req: cnt=" . $cnt . "\n";
         return $cnt;
     }
 
@@ -189,6 +188,7 @@ class COM {
         
         $this->rslt = 'success';
         $this->reason = 'receive successfully';
+        echo "receive-resp: " . $this->resp_str . "\n";
         return $this->resp_str;
     }
 
