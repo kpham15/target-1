@@ -85,5 +85,10 @@ $(document).ready(function() {
   $('#alarm-admin-forms-refresh').click(function() {
     queryAlarmAdmin();
   })
+
+  // Click event for sidebar, loads page first time
+	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
+		queryAlarmAdmin();
+	})
 });
 </script>
