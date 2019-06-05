@@ -29,7 +29,7 @@ try{
 
 
     echo "\nSending....$cmd\n";
-    $sendCmd = socket_sendto($clientSocket,$cmd, 1024,0, '127.0.0.1', $argv[1]);
+    $sendCmd = socket_sendto($clientSocket,$cmd, 1024,0, '127.0.0.1', 9000);
     if($sendCmd === false) {
         throw new Exception("fail: ".socket_strerror(socket_last_error($clientSocket)), 15);
     }
