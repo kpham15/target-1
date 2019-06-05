@@ -75,47 +75,6 @@
 </div>
 
 <script type="text/javascript">
-
-  var portmapNode = '';
-  var portmapSlot = '';
-  var portmapPnum = '';
-  var portmapFacid = '';
-  var portmapPortid = '';
-
-  function queryPort(action) {
-    let ckid = '';
-    if ($('#portmap-tn-check').prop('checked')) {
-      ckid = $('#portmap-form-ckid-tn').val();
-    } else {
-      ckid = $('#portmap-form-ckid').val();
-    }
-
-    $.ajax({
-      type: "POST",
-      url: ipcDispatch,
-      data: {
-        "api":      "ipcPortmap",
-        "act":      action,
-        "user":     user.uname,
-        "node":     portmapNode,
-        "slot":     portmapSlot,
-        "pnum":     portmapPnum,
-        "ptyp":     $('#portmap-form-ptyp').val(),
-        "psta":     $('#portmap-form-psta').val(),
-        "port":     $('#portmap-form-port').val().toUpperCase(),
-        "fac":      $('#portmap-form-fac').val().toUpperCase(),
-        "fac_id":   portmapFacid,
-        "port_id":  portmapPortid,
-        "ckid":     ckid
-      },
-      dataType: 'json'
-    }).done(function(data) {
-      let res = data.rows;
-
-      console.log(res);
-    });
-  }
-
   $(document).ready(function() {
 
     // Initialize inputmask
