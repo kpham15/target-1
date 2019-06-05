@@ -166,7 +166,7 @@ class COM {
         //send cmd to CPS HW
         //this function returns # bytes written to descriptor
         $cnt = dio_write($this->conn, $cmd, strlen($cmd));
-        if ($cnt == 0) {
+        if ($cnt === 0) {
             $this->rslt = "fail";
             $this->reason = "SEND CMD FAILS";
         }
@@ -228,7 +228,10 @@ for ($i=0; $i<$numofcps; $i++) {
     $cps[$i] = new COM($com, $node);
     $deb->log($cps[$i]->reason);
     echo $cps[$i]->reason . "\n";
-    if ($cps[$i]->sendStatusReq() > 0) {
+    $cnt = $cps[$i]->sendStatusReq();
+    echo $cps[$i]->reason . "\n";
+
+    if ($cnt > 0) {
         usleep(500000);
         $cps[$i]->receiveRsp();
         echo $cps[$i]->resp_str."\n";
