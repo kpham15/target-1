@@ -1,0 +1,176 @@
+<!-- Forms Left Side -->
+<div class="col-md-7">
+  <form id="alarmreport-forms-left">
+		<div class="row">
+			<!-- Top Row Left -->
+			<div class="col-md-2">
+				<div class="form-group">
+					<label>ACTION:</label>
+					<select id="alarmreport-forms-action" class="form-control alarmreport-forms-input">
+						<option></option>
+						<option>ACK</option>
+						<option>UN-ACK</option>
+						<option>CLR</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label>SEVERITY:</label>
+					<select id="alarmreport-forms-severity" class="form-control alarmreport-forms-input">
+						<option></option>
+						<option>CRIT</option>
+						<option>MAJ</option>
+						<option>MIN</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label>SOURCE:</label>
+					<input id="alarmreport-forms-source" class="form-control alarmreport-forms-input">
+					</select>
+				</div>
+			</div>
+			<!-- DateRangePicker -->
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>DATE RANGE:</label>
+	
+					<div class="input-group">
+						  <div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						  </div>
+						  <input type="text" class="form-control pull-right" id="alarmreport-daterange">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Second Row Left -->
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>REPORT:</label>
+					<select id="alarmreport-forms-report" class="form-control alarmreport-forms-input">
+						<option value=""></option>
+						<option value="VIEW REPORT">VIEW REPORT</option>
+						<option value="CREATE REPORT">CREATE REPORT</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div style="margin-bottom: 10px">
+			<!-- Submit Button -->
+			<button id="alarmreport-forms-submit" type="button" class="btn btn-primary btn-flat">
+				Submit
+			</button>
+			<!-- Clear Button -->
+			<button id="alarmreport-clear" type="button" class="btn btn-primary btn-flat">
+				Clear
+			</button>
+		</div>
+   </form>
+</div>
+<!-- Forms Right Side-->
+<div class="col-md-5">
+	<form id="alarmreport-forms-right">
+		<div class="row">
+			<!-- Comments -->
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>COMMENTS:</label>
+					<textarea id="alarmreport-forms-comments" class="form-control" rows="5" disabled=""></textarea>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+	function downloadAlarmReports(args) {
+		var data, filename, link;
+        var csv = convertArrayOfObjectsToCSV({
+          data: alarmreportDatatable.data().toArray()
+        });
+        if (csv == null) {
+          inputError($('#alarmreport-forms-report'),'No Reports To Create');
+          return;
+				}
+				
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+          csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+	}
+
+
+	$(document).ready(function() {
+		
+		var alarmreportStartDate = "";
+		var alarmreportEndDate = "";
+
+		// Initialze daterangepicker and assign values to start and from dates
+		function initializeAlarmreportDateRangePicker () {
+			$('input[id="alarmreport-daterange"]').daterangepicker({
+				opens: 'bottom'
+			}, function(start, end, label) {
+				alarmreportStartDate = start.format('YYYY-MM-DD');
+				alarmreportEndDate = end.format('YYYY-MM-DD');
+			});
+		}
+
+		initializeAlarmreportDateRangePicker();
+		
+
+		// Click Event For 'Submit Button'
+		$('#alarmreport-forms-submit').click(function() {
+			
+			let report = $('#alarmreport-forms-report').val();
+
+			if (report === '') {
+				inputError($('#alarmreport-forms-report'),'Select An Option');
+			}
+			else if (report === "VIEW REPORT") {
+				
+				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
+			}
+			//@TODO if there are too many rows, does not download?
+
+			else if (report === "CREATE REPORT") {
+				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
+			}
+		});
+
+		// Click Event For 'Clear Button'
+		$('#alarmreport-clear').click(function() {
+
+			let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+			$('.alarmreport-forms-input').val('');
+			alarmreportDatatable.clear().draw();
+
+			$('#alarmreport-daterange').val('').daterangepicker("update");
+			alarmreportStartDate = currDate;
+			alarmreportEndDate = currDate;
+
+			// reinitialize daterangepicker
+			initializeAlarmreportDateRangePicker();
+			
+			clearErrors();
+		})
+
+		// REPORT Change listener
+		$('#alarmreport-forms-report').change(function() {
+			clearErrors();
+		})	
+
+	});
+</script>
