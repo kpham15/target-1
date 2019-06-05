@@ -95,7 +95,7 @@
       $('#portmap-form-psta').val(data.psta);
       $('#portmap-form-fac').val(data.fac);
       if ($('#portmap-tn-check').prop('checked')) {
-        $('#portmap-tn-check').trigger('click');
+        $('#portmap-tn-check').iCheck('toggle');
       }
       $('.portmap-form-ckid-num').val(data.ckid);
 
