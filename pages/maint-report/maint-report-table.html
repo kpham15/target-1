@@ -46,7 +46,6 @@
     let user      = $("#maintReport-form-user").val();
     let action    = $("#maintReport-form-action").val();
     let tktno     = $("#maintReport-form-tktno").val();
-    let ordno     = $("#maintReport-form-ordno").val();
 
     $.ajax({
       url: ipcDispatch,
@@ -56,7 +55,6 @@
         act:      report,
         uname:    user,
         action:   action,
-        ordno:    ordno.toUpperCase(),
         fromDate: fromDate,
         toDate:   toDate,     
 
