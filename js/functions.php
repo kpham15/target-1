@@ -85,7 +85,11 @@
 
 	function inputError(selector, string) {
 		let helpBlock = '<span class="help-block">'+string+'</span>';
-		selector.closest('.form-group').append(helpBlock);
+		if (selector.closest('form').hasClass('form-horizontal')) {
+			selector.append('helpBlock');
+		} else {
+			selector.closest('.form-group').append(helpBlock);
+		}
 		selector.closest('.form-group').addClass('has-error');
 		return;
 	}
