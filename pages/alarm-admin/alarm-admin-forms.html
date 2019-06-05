@@ -102,6 +102,7 @@ $(document).ready(function() {
     let source = $('#alarm-admin-forms-source').val();
     let ack = $('#alarm-admin-forms-ack').val();
     let condition = $('#alarm-admin-forms-condition').val();
+    let action = $('#alarm-admin-forms-action').val();
 
     clearErrors();
 
@@ -111,6 +112,7 @@ $(document).ready(function() {
       $('#alarm-admin-modal-source').val(source);
       $('#alarm-admin-modal-ack').val(user.uname);
       $('#alarm-admin-modal-condition').val(condition);
+      $('#alarm-admin-modal-action').val(action);
       $('#alarm-admin-modal').modal('show');
     }
   });
