@@ -26,26 +26,15 @@
         <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ckid_txt">
     </div>
 
-    <div class="form-group">
+    <div class="col-sm-4">
         <label>Date range:</label>
-
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-calendar"></i>
           </div>
-          <input type="text" class="form-control pull-right" id="reservation">
+          <input type="text" class="form-control pull-right" id="provReport_daterange">
         </div>
-        <!-- /.input group -->
       </div>
-    <!-- <div class="col-sm-2" style="padding: 2px">
-        <label for="provReport_fromDate_date">FROM DATE</label>
-        <input type="date" class="form-control provReport-form" id="provReport_fromDate_date" style="padding: 2px">
-    </div>
-
-    <div class="col-sm-2" style="padding: 2px">
-        <label for="provReport_toDate_date">TO DATE</label>
-        <input type="date" class="form-control provReport-form" id="provReport_toDate_date" style="padding: 2px">
-    </div> -->
 </div>
 
 <div class="col-sm-12" style="padding-left: 0px; margin-bottom: 10px">
@@ -119,45 +108,29 @@ function downloadCSV(args) {
     link.click();
 }
 
-function provReport_resetDate(){
-    $("#provReport_fromDate_date").val(moment().format("YYYY-MM-DD"))
-    $("#provReport_toDate_date").val(moment().format("YYYY-MM-DD"))
-}
+var provReportStartDate = "";
+var provReportEndDate = "";
 
 $(document).ready(function(){
-    $('#reservation').daterangepicker()
-    // $('#reservation').daterangepicker({
-	// 			opens: 'bottom'
-	// 		}, function(start, end, label) {
-	// 			alarmreportStartDate = start.format('YYYY-MM-DD');
-	// 			alarmreportEndDate = end.format('YYYY-MM-DD');
-	// 		});
-
-    provReport_resetDate();
+    $('#provReport_daterange').daterangepicker({},function(start,end){
+        provReportStartDate = start.format("YYYY-MM-DD");
+        provReportEndDate = end.format("YYYY-MM-DD");
+    })
 
     $("#provReport_clear_btn").click(function(){
         $(".provReport-form").val("");
-        provReport_resetDate()
+        $('#provReport_daterange').val('').daterangepicker("update")
         provReportDataTable.clear().draw();
     })
 
     $("#provReport_submit_btn").click(function(){
         let act = $("#provReport_report_sel").val();
-        if ($("#provReport_fromDate_date").val() > $("#provReport_toDate_date").val()) {
-            let modal = {
-                title: "Error",
-                body: "'TO DATE' must the same or after 'FROM DATE'!",
-                type: 'danger'
-            }
-            modalHandler(modal);
-            return;
-        } 
         if (act == "VIEW REPORT") {
             provReportQueryProvlog(act);
         }
         else if (act == "CREATE REPORT") {
-            var fromDate = $("#provReport_fromDate_date").val().replace(/-/g, "");
-            var toDate = $("#provReport_toDate_date").val().replace(/-/g, "");
+            var fromDate = provReportStartDate.replace(/-/g, "");
+            var toDate = provReportEndDate.replace(/-/g, "");
             downloadCSV({filename: `PROVISIONING_REPORT_${fromDate}_${toDate}.csv`});
             
         }
