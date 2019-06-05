@@ -74,7 +74,7 @@ class UDPSOCK {
 
     public function recv() {
         $this->msg = '';
-        if ($this->socket) {
+        if ($this->socket !== false) {
             $buf ='';
             $input = socket_recvfrom($this->socket, $buf, 1024, 0, $remote_ip, $remote_port);
             $this->msg = trim($buf);
@@ -259,9 +259,9 @@ while(1) {
 
     // b) check for incoming cmd from APIs, 
     //    if there is a cmd, send cmd over appropriate COM
-    // if ($udpsock->recv() != '') {
-    //     sendToCpsHw($udpsock->msg);
-    // }
+    if ($udpsock->recv() != '') {
+        sendToCpsHw($udpsock->msg);
+    }
 
     // c) check for 5 sec expires
     //    if expires, send status,source=all to COM, and reset 5 sec timer
