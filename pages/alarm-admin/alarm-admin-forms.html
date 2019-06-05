@@ -20,7 +20,7 @@
 
     <!-- ACK -->
     <div class="form-group">
-      <label for="alarm-admin-forms-ack" class="col-sm-2 control-label">ACK</label>
+      <label for="alarm-admin-forms-ack" class="col-sm-2 control-label">ACK:</label>
       <div class="col-sm-9">
         <input type="text" id="alarm-admin-forms-ack" class="form-control alarm-admin-forms-input" disabled="">
       </div>
@@ -34,20 +34,19 @@
       </div>
     </div>
 
-    <!-- Action Row -->
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>ACTION:</label>
-          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
-            <option></option>
-            <option value="ACK">ACK</option>
-            <option value="UN-ACK">UN-ACK</option>
-            <option value="CLR">CLR</option>
-          </select>
-        </div>
+    <!-- ACTION -->
+    <div class="form-group">
+      <label for="alarm-admin-forms-action" class="col-sm-2 control-label">ACTION:</label>
+      <div class="col-sm-9">
+        <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+          <option value=""></option>
+          <option value="ACK">ACK</option>
+          <option value="UN-ACK">UN-ACK</option>
+          <option value="CLR">CLR</option>
+        </select>
       </div>
     </div>
+
     <div style="margin-bottom: 10px">
       <!-- Refresh Button -->
       <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat">
