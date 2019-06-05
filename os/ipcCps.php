@@ -74,7 +74,7 @@ class UDPSOCK {
 
     public function recv() {
         $this->msg = '';
-        if ($this->socket !== false) {
+        if ($this->socket != false) {
             $buf ='';
             $input = socket_recvfrom($this->socket, $buf, 1024, 0, $remote_ip, $remote_port);
             $this->msg = trim($buf);
