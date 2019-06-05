@@ -19,6 +19,9 @@
 .active-page {
   display: block !important;
 }
+.content-header {
+  margin-bottom: 10px;
+}
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
