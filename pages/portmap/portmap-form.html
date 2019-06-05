@@ -1,4 +1,4 @@
-<div class="col-md-5">
+<div class="col-md-6">
   <form id="portmap-forms">
     <div class="row">
 
@@ -31,20 +31,28 @@
         <button id="pm_findPort_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-11">
         <div class="form-group">
           <label>FAC_ID</label>
           <input id="portmap-form-facid" type="text" class="form-control portmap-form-input">
         </div>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-1">
+        <button id="pm_findFac_btn" class="btn btn-orimary" style="margin-top:25px;">View</button>
+      </div>
+
+      <div class="col-md-11">
         <div class="form-group">
           <label>CKID TN: </label>
           <input id="portmap-tn-check" type="checkbox" checked>
           <input id="portmap-form-ckid" type="text" class="form-control portmap-form-input portmap-form-ckid-num" style="display:none;">
           <input id="portmap-form-ckid-tn" type="text" class="form-control portmap-form-input portmap-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
+      </div>
+
+      <div class="col-md-1">
+        <button id="pm_findCkid_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
       </div>
 
       <div class="col-md-4">
@@ -56,6 +64,10 @@
             <option value="unmap">UNMAP</option>
           </select>
         </div>
+      </div>
+
+      <div class="col-md-2">
+        <button id="portmap-form-clear" class="btn btn-primary" style="margin-top:25px;">Clear</button>
       </div>
 
     </div>
