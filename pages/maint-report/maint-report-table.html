@@ -66,9 +66,9 @@
     }).done(function(data){
       let res = data.rows;
 
-      maintReportDataTable.clear().draw();
-      maintReportDataTable.rows.add(res);
-      maintReportDataTable.columns.adjust().draw();
+      maintReportDatatable.clear().draw();
+      maintReportDatatable.rows.add(res);
+      maintReportDatatable.columns.adjust().draw();
     });
   }
   
