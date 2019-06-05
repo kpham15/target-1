@@ -183,7 +183,7 @@ class COM {
             $data = dio_read($this->conn, 1024);
             if (trim($data) !== "") {
                 $this->resp_str .= $data;
-                $startTime = microtime(true);
+                //$startTime = microtime(true);
             }
         }
         
