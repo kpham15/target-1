@@ -13,7 +13,7 @@
         <?php include __DIR__ . '/portmap-form.html'; ?>
 
         <!-- Port Mapping Table -->
-        <?php //include __DIR__ . '/portmap-table.html'; ?>
+        <?php include __DIR__ . '/portmap-table.html'; ?>
 
 
     </div>
