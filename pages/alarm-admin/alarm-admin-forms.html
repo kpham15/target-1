@@ -160,10 +160,10 @@ $(document).ready(function() {
     clearErrors();
     
     
-    if (value === 'ACK') {
+    if (obj.value === 'ACK') {
       // ACKNOWLEDGE action
       validateAck(obj);
-    } else if (value === 'UN-ACK') {
+    } else if (obj.value === 'UN-ACK') {
       // UN-ACKNOWLEDGE action
       validateUnack(obj);
     }
