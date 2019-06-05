@@ -121,7 +121,8 @@
 
 		// Click Event For 'Submit Button'
 		$('#maintReport-form-submit').click(function() {
-			
+      clearErrors();
+      
 			let report = $('#maintReport-form-report').val();
 
 			if (report === '') {
