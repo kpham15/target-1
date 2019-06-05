@@ -88,7 +88,7 @@ $(document).ready(function() {
     $('.alarm-admin-forms-input, .alarm-admin-modal-field').val('');
 
     clearErrors();
-    
+
     queryAlarmAdmin();
   })
 
@@ -112,7 +112,7 @@ $(document).ready(function() {
     clearErrors();
     
     if (almid == "") {
-      inputError($('#'),'Select an item from list of tables')
+      inputError($('#alarm-admin-forms-action'),'Select an item from list of tables')
       return;
     }
     // ACKNOWLEDGE action
