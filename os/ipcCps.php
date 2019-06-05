@@ -44,6 +44,7 @@ class UDPSOCK {
         if ($this->socket === false) {
             $this->rslt = 'fail';
             $this->reason = "Could not create socket";
+            echo $this->reason . "\n";
             return;
         }
 
@@ -51,6 +52,7 @@ class UDPSOCK {
         if ($this->bind === false) {
             $this->rslt = 'fail';
             $this->reason = "Could not bind to socket $this->ip_addr:$this->ip_port";
+            echo $this->reason . "\n";
             return;
         }
        
