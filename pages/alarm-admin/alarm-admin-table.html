@@ -25,6 +25,7 @@
 </div>
 
 <script type="text/javascript">
+  // Initialize Datatable
   var alarmAdminDatatable = $('#alarm-admin-table').DataTable({
 		
     "data": [],
@@ -46,5 +47,28 @@
         }
       },
     ]
-	});
+  });
+
+  function queryAlarmAdmin() {
+    $.ajax({
+      type:   'POST',
+      url:    ipcDispatch,
+      data:   {
+        "api":    "ipcAlm",
+        "act":    "query",
+        "user":   user.uname
+      },
+      dataType:   'json'
+    }).done(function(data) {
+      let res = data.rows;
+      
+      alarmAdminDatatable.clear().draw();
+      alarmAdminDatatable.rows.add(res);
+      alarmAdminDatatable.columns.adjust().draw();
+    })
+  }
+  
+  $(document).ready(function() {
+
+  });
 </script>
