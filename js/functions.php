@@ -38,7 +38,7 @@
 	}
 
 	function loginSuccess() {
-		$('body').attr('class','skin-blue sidebar-mini sidebar-collapse fixed');
+		// $('body').attr('class','skin-blue sidebar-mini sidebar-collapse fixed');
 		$('#login-page').hide();
 		$('#nav-wrapper').show();
 
