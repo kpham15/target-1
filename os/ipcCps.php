@@ -58,6 +58,7 @@ class UDPSOCK {
        
         $this->rslt = 'success';
         $this->reason = "Server $this->ip_addr is listening on port $this->ip_port";
+        echo $this->reason . "\n";
     }
 
     public function setNonBlock() {
