@@ -15,7 +15,7 @@
             <th>SRC</th>
             <th>TYPE</th>
             <th>COND</th>
-            <th>STAT</th>
+            <th>PSTA</th>
             <th>DATETIME</th>
           </tr>
         </thead>
@@ -37,7 +37,7 @@
 			{"data":"src"},
 			{"data":"type"},
 			{"data":"cond"},
-			{"data":"stat"},
+			{"data":"psta"},
       {
         "data":"datetime",
         "render": function(data) {
@@ -61,7 +61,7 @@
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      
+
       alarmAdminDatatable.clear().draw();
       alarmAdminDatatable.rows.add(res);
       alarmAdminDatatable.columns.adjust().draw();
