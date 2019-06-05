@@ -255,7 +255,6 @@ while(1) {
     // a) check for response from COM
     //    if there is response, post it to nodeOpe.api
     usleep(500000);
-    echo microtime(true) . "\n";
 
     for ($i=0; $i<$numofcps; $i++) {
         if ($cps[$i]->receiveRsp() != '') {
