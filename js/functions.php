@@ -16,7 +16,7 @@
 			user:		user.uname
 		},
 		function (data, status) {
-			var obj = json.parse(data);
+			var obj = JSON.parse(data);
 			let modal = {
 				title: obj.rslt,
 				body: obj.reason
