@@ -10,7 +10,8 @@ class DEBUG{
         
         $file = __DIR__ . "/../../ipc-debug.cfg";
         $str = file_get_contents($file);
-        if ($str == '1') {
+        $data = trim($str);
+        if ($data == '1') {
             $this->enable = true;
         }
     
