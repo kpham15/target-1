@@ -71,10 +71,28 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason
+      }
 
-      portmapDatatable.clear().draw();
-      portmapDatatable.rows.add(res);
-      portmapDatatable.columns.adjust().draw();
+      if (data.rslt === 'fail') {
+        modal.type = "danger";
+        modalHandler(modal);
+      } else {
+        if (res.length === 0) {
+          if (action !== 'query') {
+            modal.type = "warning";
+            modal.body = "No record found";
+            modalHandler(modal);
+          } else {
+            portmapDatatable.clear().draw();
+            portmapDatatable.rows.add(res);
+            portmapDatatable.columns.adjust().draw();
+          }
+        }
+      }
+
     });
   }
 
