@@ -131,14 +131,19 @@ class COM {
                 $this->tty = $tty;
                 $this->status_str = "\$status,source=all,ackid=$this->node-CPS*";
                 $this->rslt = 'success';
-                $this->reason = 'TTY: ' . $tty . ' IS CONNECTED';
-                echo $this->reason;
-                echo "\n";
-                return;
+                $this->reason = 'TTY: ' . $tty . ' IS CONNECTED';        
+            }
+            else {
+                $this->rslt = 'fail';
+                $this->reason = 'CANNOT OPEN COM PORT';
             }
         }
-        $this->rslt = 'fail';
-        $this->reason = 'INVALID TTY' . $tty;
+        else {
+            $this->rslt = 'fail';
+            $this->reason = 'INVALID TTY' . $tty;
+        }
+        echo $this->reason;
+        echo "\n";
         return;
     }
 
