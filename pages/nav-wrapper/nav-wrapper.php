@@ -23,6 +23,7 @@
     <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
+    <?php include __DIR__ . '/../portmap/portmap.php'; ?>
 
 
     <!-- /.content -->
