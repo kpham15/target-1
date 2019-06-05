@@ -1,24 +1,31 @@
 <!-- FORM -->
 <div class="col-md-12">
-  <form id="maint-report-form">
+  <form id="maintReport-form">
     <!-- ROW 1 BEGIN-->
     <div class="row">
+
       <!-- USER -->
       <div class="col-md-1">
         <label>USER</label>
-        <input id="maint-report-form-user" class="form-control maint-report-form-input">
+        <input id="maintReport-form-user" class="form-control maintReport-form-input">
       </div>
 
       <!-- TKTNO -->
       <div class="col-md-2">
         <label>TKTNO</label>
-        <input id="maint-report-form-tktno" class="form-control maint-report-form-input">
+        <input id="maintReport-form-tktno" class="form-control maintReport-form-input">
       </div>
 
       <!-- ACTION -->
       <div class="col-md-2">
         <label>ACTION</label>
-        <input id="maint-report-form-action" class="form-control maint-report-form-input">
+        <select class="form-control maintReport-form" id="maintReport-form-action">
+          <option></option>
+          <option>MTC_CONN</option>
+          <option>MTC_DISCON</option>
+          <option>MTC_RESTORE</option>
+          <option>RESTORE_MTCD</option>
+        </select>
       </div>
 
 			<!-- DateRangePicker -->
@@ -29,35 +36,41 @@
 						  <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
 						  </div>
-						  <input type="text" id="maint-report-form-daterange" class="form-control pull-right">
+						  <input type="text" id="maintReport-form-daterange" class="form-control pull-right">
 					</div>
 				</div>
-			</div>
+      </div>
+      
     </div>
     <!-- END ROW 1 -->
 
     <!-- ROW 2 BEGIN -->
     <div class="row">
+
+      <!-- REPORT -->
 			<div class="col-md-3">
 				<div class="form-group">
 					<label>REPORT:</label>
-					<select id="maint-report-form-report" class="form-control maint-report-form-input">
+					<select id="maintReport-form-report" class="form-control maintReport-form-input">
 						<option value=""></option>
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
 					</select>
 				</div>
       </div>
+
 			<!-- Submit Button -->
-			<button id="maint-report-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+			<button id="maintReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
 				Submit
-			</button>
+      </button>
+      
 			<!-- Clear Button -->
-			<button id="maint-report-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+			<button id="maintReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
 				Clear
 			</button>
 
     </div>
     <!-- ROW 2 END -->
+    
   </form>
 </div>
