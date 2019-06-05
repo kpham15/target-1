@@ -1,0 +1,141 @@
+<div class="modal fade" id="fac-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">SETUP FACILITIES</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <div class="row">
+            <!-- FAC_ID -->
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>FAC_ID</label>
+                <input id="fac-modal-facId" type="text" class="form-control fac-modal-field" disabled="" />
+              </div>
+            </div>
+  
+            <!-- RANGE -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>RANGE</label>
+                <select id="fac-modal-range" class="form-control fac-modal-field" disabled="">
+                </select>
+              </div>
+            </div>
+  
+            <!-- PORT -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>PORT</label>
+                <input id="fac-modal-port" type="text" class="form-control fac-modal-field" disabled="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- FAC_TYP -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC_TYP</label>
+                <select id="fac-modal-ftyp" class="form-control fac-modal-field" disabled="">
+                    <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ORT -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ORT</label>
+                <select id="fac-modal-ort" class="form-control fac-modal-field" disabled="">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <!-- SPCFNC -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>SPCFNC</label>
+                <select id="fac-modal-spcfnc" class="form-control fac-modal-field" disabled="">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Action -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>ACTION</label>
+                <input id="fac-modal-action" type="text" class="form-control fac-modal-field" disabled="">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button id="fac-modal-submit" type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#fac-modal-submit').click(function() {
+      let id = $('#fac-form-id').val();
+
+      let facId = $("#fac-modal-facId").val();
+      let range = $("#fac-modal-range").val();
+      let ftyp = $("#fac-modal-ftyp").val();
+      let ort = $("#fac-modal-ort").val();
+      let spcfnc = $("#fac-modal-spcfnc").val();
+      let action = $('#fac-modal-action').val();
+      
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api:    "ipcFacilities",
+          act:    action,
+          user:   user.uname,
+          fac_id: id,
+          fac:    facId.toUpperCase(),
+          ftyp:   ftyp,
+          ort:    ort,
+          spcfnc: spcfnc,
+          range:  range,
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason,
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = 'danger'
+          modalHandler(modal);
+        } else {
+          $('#fac-form-clear').trigger('click');
+          $('#fac-modal').modal('hide');
+          
+          queryFac();
+          
+          modal.type = "success";
+          modalHandler(modal);
+        }
+      });
+    });
+  });
+</script>
