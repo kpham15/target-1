@@ -8,6 +8,35 @@
 		sysviewStartup();
 	}
 
+	function logout(action) {
+		clearInterval(systemInfoInterval);
+		$.post(ipcDispatch,
+		{
+			api:		'ipcLogout',
+			user:		user.uname
+		},
+		function (data, status) {
+			var obj = json.parse(data);
+			let modal = {
+				title: obj.rslt,
+				body: obj.reason
+			}
+
+			if (obj.rslt === 'fail') {
+				modal.type = 'danger';
+				modalHandler(modal);
+			} else {
+				if (action === 'manual logout') {
+					$('#logout-modal .modal-body').text('You have logged out.');
+					$('#logout-modal').modal('show');
+				} else {
+					$('#logout-modal .modal-body').text('Your session has timed out, please log in again!');
+					$('#logout-modal').modal('show');
+				}
+			}
+		});
+	}
+
 	function loginSuccess() {
 		$('body').attr('class','skin-blue sidebar-mini sidebar-collapse fixed');
 		$('#login-page').hide();
