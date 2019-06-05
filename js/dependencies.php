@@ -39,6 +39,6 @@
   echo '<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>';
   echo '<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>';
   echo '<script src="bower_components/fastclick/lib/fastclick.js"></script>';
-  // echo '<script src="dist/js/adminlte.min.js"></script>';
+  echo '<script src="dist/js/adminlte.min.js"></script>';
   echo '<script src="plugins/iCheck/icheck.min.js"></script>';
 ?>

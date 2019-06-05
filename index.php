@@ -44,7 +44,6 @@
 <script src="./js/ipcOpt.js"></script>
 <script src="./js/hmac-sha256.js"></script>
 <script src="./js/enc-base64-min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
 
 <script>
 
