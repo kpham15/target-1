@@ -206,8 +206,9 @@ class COM {
 
 }
 
-function sendToCpsHw($cmd) {
-
+function sendToCpsHw($str) {
+    $s = explode('$', $str);
+    echo "send-to-hw: " . $s[1] . "\n";
 }
 
 function post_resp($resp_str) {
@@ -238,12 +239,6 @@ for ($i=0; $i<$numofcps; $i++) {
     $deb->log($cps[$i]->reason);
     echo $cps[$i]->reason . "\n";
     $cnt = $cps[$i]->sendStatusReq();
-
-    // if ($cnt > 0) {
-    //     usleep(500000);
-    //     $cps[$i]->receiveRsp();
-    //     echo $cps[$i]->resp_str."\n";
-    // }
 
 }
 
