@@ -25,4 +25,31 @@
       {"data":"descr"},
     ]
   });
+
+  function queryHelpsearch() {
+    $.ajax({
+      type:'POST',
+      url: ipcDispatch,
+      data: {
+        "api": "ipcSearch",
+        "act": "search",
+        "user": user.uname,
+        "item": $('#helpsearch-form-item').val()
+      },
+      dataType: 'json'
+
+    }).done(function(data) {
+      let res = data.rows;
+      helpSearchDatatable.clear().draw();
+      helpSearchDatatable.rows.add(res);
+      helpSearchDatatable.columns.adjust().draw();
+    });
+  }
+
+  $(document).ready(function() {
+    $('#view-helpsearch').click(function() {
+      queryHelpsearch();
+      clearErrors();
+    });
+  });
 </script>
