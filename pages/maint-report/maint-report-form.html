@@ -1,6 +1,56 @@
 <!-- FORM -->
-<div class="row">
-  <form id="maint-report-forms">
-    <div class="row"></div>
+<div class="col-md-12">
+  <form id="maint-report-form">
+    <!-- ROW 1 BEGIN-->
+    <div class="row">
+      <!-- USER -->
+      <div class="col-md-1">
+        <label>USER</label>
+        <input id="maint-report-form-user" class="form-control maint-report-form-input">
+      </div>
+
+      <!-- TKTNO -->
+      <div class="col-md-2">
+        <label>TKTNO</label>
+        <input id="maint-report-form-tktno" class="form-control maint-report-form-input">
+      </div>
+
+      <!-- ACTION -->
+      <div class="col-md-2">
+        <label>ACTION</label>
+        <input id="maint-report-form-action" class="form-control maint-report-form-input">
+      </div>
+
+			<!-- DateRangePicker -->
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>DATE RANGE:</label>
+					<div class="input-group">
+						  <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+						  </div>
+						  <input type="text" id="maint-report-form-daterange" class="form-control pull-right">
+					</div>
+				</div>
+			</div>
+    </div>
+    <!-- END ROW 1 -->
+
+    <!-- ROW 2 BEGIN -->
+    <div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>REPORT:</label>
+					<select id="maint-report-form-report" class="form-control maint-report-form-input">
+						<option value=""></option>
+						<option value="VIEW REPORT">VIEW REPORT</option>
+						<option value="CREATE REPORT">CREATE REPORT</option>
+					</select>
+				</div>
+      </div>
+      <!-- BUTTONS -->
+      
+    </div>
+    <!-- ROW 2 END -->
   </form>
 </div>
