@@ -1,22 +1,21 @@
 <div class='col-md-4'>
     <form class='svc-form'>
         <!-- First row -->
-        <div class='row' style="border-bottom: 2px solid #3F8CBC">
-            <div class="col-sm-6 " style="padding:2px 2px 2px 2px;">
+        <div class='row'>
+            <div class="col-sm-6 " style="padding:2px;">
                 <div class="form-group">
                     <label for="svc_ckid_txt">CKID</label>
                     <label for="svc_tn_cbx">TN:</label>
-                    <input type="checkbox" id="svc_tn_cbx" checked>
-                    <div id="svc_ckid">
-                        <input style="text-transform: uppercase" type="text" class="form-control svc-form" id="svc_ckid_txt" placeholder="123-456-7890">
-                    </div>
+                    <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" checked>
+                    <input style="text-transform: uppercase; display:none" type="text" class="form-control svc-form svc-ckid-txt">
+                    <input id="svc_ckid" type="text" class="form-control svc-form svc-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
                 </div>
             </div>
                 
-            <div class="col-sm-2 " style="padding: 2px ;">
+            <div class="col-sm-2 " style="padding: 2px;">
                 <div class="form-group">
                     <label for="svc_cls_sel">CLS</label>
-                    <select class="form-control svc-form" id="svc_cls_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_cls_sel" style="padding: 2px ">
                         <option></option>
                         <option>BUS</option>
                         <option>RES</option>
@@ -27,7 +26,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_adsr_sel">ADSR</label>
-                    <select class="form-control svc-form" id="svc_adsr_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_adsr_sel" style="padding: 2px ">
                         <option>N</option>
                         <option>Y</option>
                     </select>
@@ -41,7 +40,7 @@
         </div>
 
         <!-- Second row -->
-        <div class="row" style="border-bottom: 2px solid #3F8CBC">
+        <div class="row">
             <div class="col-sm-6 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_ordno_txt">ORDNO</label>
@@ -52,7 +51,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_mlo_sel">MLO</label>
-                    <select class="form-control svc-form" id="svc_mlo_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_mlo_sel" style="padding: 2px ">
                         <option>N</option>
                         <option>Y</option>
                     </select>
@@ -62,7 +61,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_prot_sel">PROT</label>
-                    <select class="form-control svc-form" id="svc_prot_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_prot_sel" style="padding: 2px ">
                         <option></option>
                         <option>SSM</option>
                         <option>SSP</option>
@@ -98,7 +97,7 @@
             <div class="col-sm-2 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_ctyp_sel">CONTYP</label>
-                    <select class="form-control svc-form" id="svc_ctyp_sel" style="padding-top: 2px ">
+                    <select class="form-control svc-form" id="svc_ctyp_sel" style="padding: 2px ">
                         <option></option>
                         <option>GEN</option>
                         <option>LPBK</option>
@@ -136,32 +135,10 @@
                 </div>
             </div> 
 
-            <div id="svc_facSearch" ftyp="" class="col-sm-12 " style="display:none; background-color:#b8cef1;padding:2px; border: solid rgb(218, 218, 218) 1px;  ">
-                <div class="col-sm-6 " style="padding: 2px ;">
-                    <label for="svc_fac_txt">FAC</label>
-                    <input style="text-transform: uppercase" type="text" class="form-control svc-facSearch-form" id="svc_fac_txt">
-                </div>
-                <div class="col-sm-2 " style="padding: 2px ;">
-                    <label for="svc_port_txt">PORT</label>
-                    <input style="text-transform: uppercase" type="text" class="form-control svc-facSearch-form" id="svc_port_txt">
-                </div>
-                <div class="col-sm-2 " style="padding: 2px ;">
-                    <label for="svc_psta_sel">PSTA</label>
-                    <select class="form-control svc-facSearch-form" id="svc_psta_sel">
-                        <option></option>
-                        <option>MTCD</option>
-                        <option>RS</option>
-                        <option>TST</option>
-                        <option>SF</option>
-                    </select>
-                </div>
-                <div class="col-sm-2 " style="padding: 2px ;">
-                    <button id= "svc_facSearch_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
-                </div>
-    
-                <div class="col-sm-12 panel panel-default" style="margin:0 0 1px 0">
+            <div id="svc_facSearch" ftyp="" class="col-sm-12" style="display:none; padding: 0px">
+                <div style="margin:0 0 1px 0;">
                     <div class="box box-primary">
-                        <table id="svcModal_facSearch_table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                        <table id="svc_facSearch_table" class="table table-striped table-bordered table-hover" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>FAC</th>
@@ -181,7 +158,7 @@
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
                     <label for="svc_act_sel">ACTION</label>    
-                    <select class="form-control svc-form" id="svc_act_sel" style="padding-top: 2px " >
+                    <select class="form-control svc-form" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
@@ -197,20 +174,20 @@
                 <input class="svc-form" id="svc_cktId_num" type="hidden" style="width:50px">
                 <input class="svc-form" id="svc_cktconId_num" type="hidden" style="width:50px">
                 <input class="svc-form" id="svc_cktconIdx_num" type="hidden" style="width:50px">
-            
-                <!-- <br> -->
-                <!-- <label id="checkProvInfor" style="color:red"></label> -->
             </div>
         </div>
 
     </form>
 
 </div>
+<!--  style for this dataTable -->
+<style>
 
+</style>
 <script>
-var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
+    var svcFacSearchDatatable = $("#svc_facSearch_table").DataTable({
+        "dom": 'frtip', 
         "scrollY":        "100px",
-        "searching": false,
         "data": [],
         "columns": [
             {"data":"fac"},
@@ -237,49 +214,62 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
                 "user":   user.uname,
                 "grp":    user.grp,
                 "ugrp":   user.ugrp,
-                "fac":     $("#svc_fac_txt").val(),
-                "psta":    $("#svc_psta_sel").val(),
+                "fac":     "%",
+                "psta":    "",
             },
             dataType: 'json'
         }).done(function(data) {
             let res = [];
             let ftyp = $("#svc_facSearch").attr("ftyp");
-            
-            for (var i=0; i<data.rows.length; i++) {
-                if(data.rows[i].port == "") {
-                    continue;
-                }
-                if(ftyp == "X")
-                    if(data.rows[i].port.split('-')[2] == 'X')
-                        res.push(data.rows[i]);
-                    else 
+            if(data.hasOwnProperty('rows')) {
+                for (var i=0; i<data.rows.length; i++) {
+                    if(data.rows[i].port == "") {
                         continue;
-                else {
-                    if(data.rows[i].port.split('-')[2] == 'Y')
-                        res.push(data.rows[i]);
-                    else 
-                        continue;
+                    }
+                    if(ftyp == "X")
+                        if(data.rows[i].port.split('-')[2] == 'X')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    else {
+                        if(data.rows[i].port.split('-')[2] == 'Y')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    }
                 }
             }
+            
             svcFacSearchDatatable.clear().draw();
             svcFacSearchDatatable.rows.add(res);
             svcFacSearchDatatable.columns.adjust().draw();
         });
     }
 
-
+    function resetSvcPage() {
+        $(".svc-form").val("");
+        $("#svc_cls_sel").val("RES");
+        $("#svc_adsr_sel").val("N");
+        $("#svc_mlo_sel").val("N");
+        svcQueryCkid();
+        svcOrdDatatable.clear().draw();
+        svcCktconDatatable.clear().draw();
+        clearSearchArea();
+        $("#svc_cktArea").show();
+        $("#svc_ordArea").hide();
+        $("#svc_cktconArea").hide();
+    }
 
     $(document).ready(function(){
+        $(".svc-ckid-tn").inputmask();
+
+        $(".menu-item[page_id='svc-page']").click(function() {
+            resetSvcPage()
+        });
+
         $("#svc_clear_btn").click(function(e){
             e.preventDefault();
-            $(".svc-form").val("");
-            svcCktDatatable.clear().draw();
-            svcOrdDatatable.clear().draw();
-            svcCktconDatatable.clear().draw();
-            clearSearchArea();
-            $("#svc_cktArea").show();
-            $("#svc_ordArea").hide();
-            $("#svc_cktconArea").hide();
+            resetSvcPage();  
         })
 
         $("#svc_ffacSearch_btn").click(function(){
@@ -290,11 +280,10 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
                 $("#svc_facSearch").attr("ftyp","");
             }
             else {
-                $("label[for='svc_fac_txt']").text("FAC(X)");
                 $("#svc_facSearch").show();
                 $("#svc_facSearch").attr("ftyp","X");
             }
-            
+            searchFac();
         })
 
         $("#svc_tfacSearch_btn").click(function(){
@@ -305,86 +294,84 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
                 $("#svc_facSearch").attr("ftyp","");
             }
             else {
-                $("label[for='svc_fac_txt']").text("FAC(Y)");
                 $("#svc_facSearch").show();
                 $("#svc_facSearch").attr("ftyp","Y");
             }
+            searchFac();
         })
     
         $("#svc_act_sel").change(function(){
             let act = $("#svc_act_sel").val();
             let cktId = $("#svc_cktId_num").val();
             let idx = $("#svc_cktconIdx_num").val();
-            if(cktId == "" || cktId == 0) {
-                let modal = {
-                    title: "Error",
-                    body: "Please select a CKT from the LIST OF CKTs",
-                    type: 'danger'
-                }
-                modalHandler(modal);
-                $("#svc_act_sel").val("");
-                return;
-            }
+            
             clearSvcModal();
-            if(act == "UPDATE_CKT") {
-                $("#svcModal_newConForm").hide();
-                $("#svcModal_discConForm").hide();
-                $("#svcModal_changeConForm").hide();
 
-            }
-            else if(act == "CONNECT") {
+            if(act == "CONNECT") {
                 $("#svcModal_newConForm").show();
                 $("#svcModal_discConForm").hide();
                 $("#svcModal_changeConForm").hide();
-
-            }
-            else if(act == "DISCONNECT") {
-                if(idx == "" || idx == 0) {
-                    let modal = {
-                        title: "Error",
-                        body: "Please select a CON from the LIST OF CONNECTIONS",
-                        type: 'danger'
-                    }
-                    modalHandler(modal);
-                    $("#svc_act_sel").val("");
-                    return;
-                }
-                $("#svcModal_newConForm").hide();
-                $("#svcModal_discConForm").show();
-                $("#svcModal_changeConForm").hide();
-
-            }
-            else if(act == "CHANGE") {
-                if(idx == "" || idx == 0) {
-                    let modal = {
-                        title: "Error",
-                        body: "Please select a CON from the LIST OF CONNECTIONS",
-                        type: 'danger'
-                    }
-                    modalHandler(modal);
-                    $("#svc_act_sel").val("");
-                    return;
-                }
-                $("#svcModal_newConForm").hide();
-                $("#svcModal_discConForm").hide();
-                $("#svcModal_changeConForm").show();
             }
             else {
-                $("#svc_act_sel").val("");
-                return;
+                if(cktId == "" || cktId == 0) {
+                    let modal = {
+                        title: "Error",
+                        body: "Please select a CKT from the LIST OF CKTs",
+                        type: 'danger'
+                    }
+                    modalHandler(modal);
+                    $("#svc_act_sel").val("");
+                    return;
+                }
+                if(act == "UPDATE_CKT") {
+                    $("#svcModal_newConForm").hide();
+                    $("#svcModal_discConForm").hide();
+                    $("#svcModal_changeConForm").hide();
+                }
+                else if(act == "DISCONNECT") {
+                    if(idx == "" || idx == 0) {
+                        let modal = {
+                            title: "Error",
+                            body: "Please select a CON from the LIST OF CONNECTIONS",
+                            type: 'danger'
+                        }
+                        modalHandler(modal);
+                        $("#svc_act_sel").val("");
+                        return;
+                    }
+                    $("#svcModal_newConForm").hide();
+                    $("#svcModal_discConForm").show();
+                    $("#svcModal_changeConForm").hide();
+
+                }
+                else if(act == "CHANGE") {
+                    if(idx == "" || idx == 0) {
+                        let modal = {
+                            title: "Error",
+                            body: "Please select a CON from the LIST OF CONNECTIONS",
+                            type: 'danger'
+                        }
+                        modalHandler(modal);
+                        $("#svc_act_sel").val("");
+                        return;
+                    }
+                    $("#svcModal_newConForm").hide();
+                    $("#svcModal_discConForm").hide();
+                    $("#svcModal_changeConForm").show();
+                }
+                else {
+                    $("#svc_act_sel").val("");
+                    return;
+                }
             }
 
-            $("#svc_modal input,#svc_modal select").val("");
+            
+            // $("#svc_modal input,#svc_modal select").val("");
             populateSvcModal();
             $("#svc_modal").modal("show");
         })
 
-        $("#svc_facSearch_btn").click(function(e){
-            e.preventDefault();
-            searchFac();
-        })
-
-        $(document).on("click","#svcModal_facSearch_table tbody tr", function(){
+        $(document).on("click","#svc_facSearch_table tbody tr", function(){
             let data = svcFacSearchDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -399,17 +386,18 @@ var svcFacSearchDatatable = $("#svcModal_facSearch_table").DataTable({
             }
         })
     
+        $("#svc_tn_cbx").change(function(){
+            if($("#svc_tn_cbx").is(':checked')){
+                $(".svc-ckid-txt").attr("id","").hide();
+                $(".svc-ckid-tn").attr("id","svc_ckid").show();
+            }
+            else {
+                $(".svc-ckid-tn").attr("id","").hide();
+                $(".svc-ckid-txt").attr("id","svc_ckid").show();
+            }
+        })
+    
     })
     
-
-function getTN(ckid) {
-    let ckidConvert = ckid.replace("-","");
-    if (ckidConvert.match(/^[0-9]+$/) == null || ckid.length != 10) {
-        return false;
-    }
-    else {
-        return ckidConvert.substring(0,3) + '-' + ckidConvert.substring(3,6) + '-' + ckidConvert.substring(6,10);
-    } 
-}; 
 
 </script>
