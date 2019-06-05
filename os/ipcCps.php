@@ -55,7 +55,9 @@ class UDPSOCK {
             echo $this->reason . "\n";
             return;
         }
-       
+    
+        socket_set_nonblock ($this->socket);
+
         $this->rslt = 'success';
         $this->reason = "(socket: $this->socket) Server $this->ip_addr is listening on port $this->ip_port";
         echo $this->reason . "\n";
