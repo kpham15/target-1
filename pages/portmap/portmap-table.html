@@ -85,7 +85,25 @@
     $(document).on('click', '#portmap-table tbody tr', function() {
       let data = portmapDatatable.row(this).data();
 
-      console.log(data);
+      portmapPortid = data.id;
+      portmapFacid = data.fac_id;
+      portmapNode = data.node;
+      portmapSlot = data.slot;
+      portmapPnum = data.pnum;
+      $('#portmap-form-ptyp').val(data.ptyp);
+      $('#portmap-form-port').val(data.port);
+      $('#portmap-form-psta').val(data.psta);
+      $('#portmap-form-fac').val(data.fac);
+      if ($('#portmap-tn-check').prop('checked')) {
+        $('#portmap-tn-check').trigger('click');
+      }
+      $('.portmap-form-ckid-num').val(data.ckid);
+
+      // give selected class
+      $('#portmap-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
+      clearErrors();
     });
   });
 
