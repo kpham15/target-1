@@ -135,6 +135,7 @@
 
 		// Click Event For 'Submit Button'
 		$('#alarmreport-forms-submit').click(function() {
+			clearErrors();
 			
 			let report = $('#alarmreport-forms-report').val();
 
@@ -142,11 +143,8 @@
 				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
-				
 				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
 			}
-			//@TODO if there are too many rows, does not download?
-
 			else if (report === "CREATE REPORT") {
 				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
 			}
