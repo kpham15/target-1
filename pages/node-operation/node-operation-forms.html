@@ -68,7 +68,7 @@
   function validateNodeOpeNode(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-opeation-forms-action').val('');
+      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -83,7 +83,7 @@
   function validateNodeOpeStop(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-opeation-forms-action').val('');
+      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -114,7 +114,7 @@
       } else if (obj.action === "STOP") {
         validateNodeOpeStop(obj);
       }
-      
+
     })
 
     // Clear button click event
