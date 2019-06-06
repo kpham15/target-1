@@ -68,6 +68,7 @@
   function validateNodeOpeNode(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
+      $('#node-opeation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
