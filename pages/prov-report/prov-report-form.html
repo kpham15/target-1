@@ -105,7 +105,7 @@ function downloadCSV(args) {
     });
 
     if (csv == null) {
-        alert("NO REPORT TO CREATE");
+        inputError($('#provReport_report_sel'),'No Report To Create');
         return;
     }
 
