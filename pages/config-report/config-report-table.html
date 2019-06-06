@@ -181,11 +181,9 @@
       dataType: "json"
     }).done(function(data){
       let res = data.rows;
-      
-      $("#configReport-form-report").val("").change();
 
       if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+        inputError($('#configReport-form-submit'),'No Record Found');
       }
       configReportWcDatatable.clear().draw();
       configReportWcDatatable.rows.add(res);
@@ -219,10 +217,8 @@
     }).done(function(data){
       let res = data.rows;
       
-      $("#configReport-form-report").val("").change();
-
       if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+        inputError($('#configReport-form-submit'),'No Record Found');
       }
       configReportFacDatatable.clear().draw();
       configReportFacDatatable.rows.add(res);
