@@ -186,8 +186,6 @@ function processOrd($ordno) {
 
             if ($op == "IN") {
                 $action = 'CONNECT';
-
-                // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
                 $url = "ipcDispatch.php";
                 $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
                 $response = $postReqObj->syncPostRequest($url, $params);
@@ -197,7 +195,7 @@ function processOrd($ordno) {
             }
             else {
                 $action = 'DISCONNECT';
-                // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
+                
                 $url = "ipcDispatch.php";
                 $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
                 $response = $postReqObj->syncPostRequest($url, $params);
@@ -244,7 +242,7 @@ function processCkt($ordno, $ctid) {
     
             if ($op == "IN") {
                 $action = 'CONNECT';
-                // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
+
                 $url = "ipcDispatch.php";
                 $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
                 $response = $postReqObj->syncPostRequest($url, $params);
@@ -254,7 +252,6 @@ function processCkt($ordno, $ctid) {
                 }
             } else {
                 $action = 'DISCONNECT';
-                // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
                 $url = "ipcDispatch.php";
                 $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
                 $response = $postReqObj->syncPostRequest($url, $params);
@@ -293,7 +290,6 @@ function processConnection($ordno, $mlo, $ctid, $cls, $adsr, $prot, $ctyp, $ffac
 
     if ($op == "IN") {
         $action = 'CONNECT';
-        // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
         $url = "ipcDispatch.php";
         $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
         $response = $postReqObj->syncPostRequest($url, $params);
@@ -302,7 +298,6 @@ function processConnection($ordno, $mlo, $ctid, $cls, $adsr, $prot, $ctyp, $ffac
     }
     else {
         $action = 'DISCONNECT';
-        // $response = postOP($ordno, $newCls, $ctyp, $action, $ckid, $ffac, $tfac);
         $url = "ipcDispatch.php";
         $params = ['api' => 'ipcProv', 'user' => 'ninh','act' => $action, 'ordno' => $ordno, 'mlo'=> $mlo , 'ckid' => $ckid, 'cls' => $newCls, 'adsr'=> $adsr, 'prot'=> $prot, 'ctyp' => $ctyp, 'ffac' => $ffac, 'tfac' => $tfac];
         $response = $postReqObj->syncPostRequest($url, $params);

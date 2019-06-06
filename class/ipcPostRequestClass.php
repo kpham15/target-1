@@ -65,8 +65,8 @@ class POST_REQUEST {
             )
         );
         $context  = stream_context_create($options);
-        $response = json_decode(file_get_contents($url, false, $context));
-        return $response;
+        $this->reply = json_decode(file_get_contents($url, false, $context));
+        return $this->reply;
     }
 }
 
