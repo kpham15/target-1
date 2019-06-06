@@ -65,20 +65,35 @@
     })
   }
 
+  function validateNodeOpeNode(obj) {
+    if (obj.node !== "") {
+      $('#node-operation-modal-action').val(obj.action);
+      $('#node-operation-modal-node').val(obj.node);
+      $('#node-operation-modal-device').val(obj.device);
+      $('#node-operation-modal-serialnum').val(obj.serialnum);
+    } else {
+      inputError($('#node-operation-forms-action'),'Select a node from the list');
+      $('#node-operation-forms-action').val('');
+      return;
+    }
+  }
+
   $(document).ready(function() {
 
     // Action change event
     $('#node-operation-forms-action').change(function() {
-      let action =  $(this).val();
-      let node = $('#node-operation-forms-node').val();
-      let device = $('#node-operation-forms-device').val();
-      let serialnum = $('#node-operation-forms-serialnum').val();
-      // console.log(action);
-      
-      $('#node-operation-modal-action').val(action);
-      $('#node-operation-modal-node').val(node);
-      $('#node-operation-modal-device').val(device);
-      $('#node-operation-modal-serialnum').val(serialnum);
+      let obj = {
+      action:     $(this).val(),
+      node:       $('#node-operation-forms-node').val(),
+      device:     $('#node-operation-forms-device').val(),
+      serialnum:  $('#node-operation-forms-serialnum').val()
+      }
+
+      if (obj.action === "DISCOVER") {
+        validateNodeOpeNode(obj);
+      } else if (obj.action === "STOP") {
+
+      }
 
       clearErrors();
 
