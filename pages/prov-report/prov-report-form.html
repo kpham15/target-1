@@ -135,6 +135,7 @@ $(document).ready(function(){
         $(".provReport-form").val("");
         $('#provReport_daterange').val('').daterangepicker("update")
         provReportDataTable.clear().draw();
+        clearErrors();
     })
 
     $("#provReport_submit_btn").click(function(){
@@ -148,6 +149,10 @@ $(document).ready(function(){
             downloadCSV({filename: `PROVISIONING_REPORT_${fromDate}_${toDate}.csv`});
             
         }
+    })
+
+    $('#provReport_report_sel').change(function() {
+        clearErrors();
     })
 })
 
