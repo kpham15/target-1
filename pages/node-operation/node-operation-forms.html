@@ -67,6 +67,11 @@
 
   $(document).ready(function() {
 
+    // Action change event
+    $('#node-operation-forms-action').change(function() {
+      $('#node-operation-modal').modal('show');
+    })
+
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
       $('.node-operation-forms-input').val('');
