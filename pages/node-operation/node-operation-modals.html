@@ -25,7 +25,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>DEVICE:</label>
-                <input id="node-operation-modal-device" type="text" class="form-control alarm-operation-modal-input">
+                <input id="node-operation-modal-device" type="text" class="form-control alarm-operation-modal-input" disabled="">
               </div>
             </div>
 
@@ -33,9 +33,25 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label>SERIAL NUMBER:</label>
-                <input id="node-operation-modal-serialnum" type="text" class="form-control alarm-operation-modal-input">
+                <input id="node-operation-modal-serialnum" type="text" class="form-control alarm-operation-modal-input" disabled="">
               </div>
             </div>
+          </div>
+
+          <!-- ACTION Row -->
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="node-operation-modal-action" type="text" class="form control alarm-operation-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button id="node-operation-modal-submit" type="button" class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
