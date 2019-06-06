@@ -53,7 +53,7 @@ class RSP {
     // only process the response in the format: $.....*
     public function processRsp($rsp, $node) {
 
-        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'EXEC_RESP','node'=>$node,'hwRsp'=>"$rsp"]);
+        $this->asyncPostRequest(['user'=>'SYSTEM','api'=>'ipcNodeOpe','act'=>'cps_connected','node'=>$node,'hwRsp'=>"$rsp"]);
                 
     }
 

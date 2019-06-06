@@ -35,8 +35,6 @@ if (isset($_POST['cmd'])) {
 }
 
 // dispatch to functions
-
-
 if ($act == "queryAll") {
 	$result = queryAll();	
 	echo json_encode($result);
@@ -100,13 +98,6 @@ if ($act == "EXEC_RESP") {
 	return;
 }
 
-if ($act == "CONNECT_TBX_TAP1") {
-    // $result = processHwResp($node, $hwRsp);
-    echo json_encode($result);
-	mysqli_close($db);
-	return;
-}
-
 if ($act == "EXEC_CMD") {
     $result = exec_cmd($node, $cmd, $userObj);
     echo json_encode($result);
@@ -116,6 +107,26 @@ if ($act == "EXEC_CMD") {
 
 if ($act == "VIEW CMD") {
     $result = view_cmd($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+if ($act == "VIEW CMD") {
+    $result = view_cmd($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+
+if ($act == "cps_connected") {
+    $result = cps_connected($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+
+if ($act == "cps_disconnected") {
+    $result = cps_disconnected($node);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -130,6 +141,56 @@ else {
 }
 
 // functions area
+function cps_disconnected($node) {
+    $src = 'CPS CARD';
+    $almtype = 'EQUIP';
+    $cond = 'NO COMMUNICATION';
+    $sev = 'MAJ';
+    $sa = 'Y';
+    $almid = "$node-cps-D";
+    $remark = ":CPS IS DISCONNECTED";
+    
+    $almObj = new ALMS($almid);
+    if($almObj->rslt == "success") {
+        $result["rslt"] = "fail";
+        $result["reason"] = "ALM WAS ALREADY CREATED";
+        return $result;
+    }
+    if($almObj->reason != "ALARM NOT FOUND") {
+        $result["rslt"] = "fail";
+        $result["reason"] = $almObj->reason;
+        return $result;
+    }
+    $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+    $result["rslt"] = $almObj->rslt;
+    $result["reason"] = $almObj->reason;
+    return $result;
+}
+
+function cps_connected($node) {
+    $src = 'CPS CARD';
+    $almtype = 'EQUIP';
+    $remark = ': CPS IS CONNECTED';  
+    $almid = "$node-cps-D";
+    
+    $almObj = new ALMS($almid);
+    if($almObj->rslt == "fail") {
+        $result["rslt"] = "fail";
+        $result["reason"] = "ALM DOES NOT EXIST";
+        return $result;
+    }
+
+    $almObj->sysClr($almid, $remark);
+
+    $result["rslt"] = $almObj->rslt;
+    $result["reason"] = $almObj->reason;
+    return $result;
+}
+
+function connected($node) {
+
+}
+
 function view_cmd($node) {
     $cmdObj = new CMD();
     $cmdObj->getCmdList($node);
@@ -450,7 +511,6 @@ function discovered($node, $hwRsp) {
 }
 
 function updateCpsStatus($hwRsp) {
-    
     // checks what type of $hwRsp is being sent
     if (strpos($hwRsp, "voltage") !== false){
         $result = updateCpsVolt($hwRsp);
