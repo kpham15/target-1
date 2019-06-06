@@ -168,6 +168,8 @@
 
     // ACTION change listener
     $('#portmap-form-action').change(function() {
+      clearErrors();
+      
       let obj = {
         value:    $(this).val(),
         portId:   portmapPortid,
