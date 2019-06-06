@@ -3,8 +3,6 @@
   <form id="brdcst-form">
     <!-- Top Row -->
     <div class="row">
-      <!-- Hidden ID field -->
-      <input id="brdcst-form-id" type="hidden" class="brdcst-form-input" />
 
       <!-- MSG OWNER -->
       <div class="col-md-4">
@@ -83,6 +81,8 @@
 
 <script type="text/javascript">
 $(document).ready(function(obj) {
+  var id = '';
+
   function actionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
@@ -134,7 +134,6 @@ $(document).ready(function(obj) {
     let obj = {
       value:      $(this).val(),
       currDate:   moment(new Date()).format('MM-DD-YYYY'),
-      id:         $('#brdcst-form-id').val(),
       owner:      $('#brdcst-form-msgowner').val(),
       sa:         $('#brdcst-form-sa').val(),
       action:     $('#brdcst-form-action').val(),
@@ -166,6 +165,7 @@ $(document).ready(function(obj) {
 
   $('#brdcst-form-clear').click(function() {
     $('.brdcst-form-input').val('');
+    id = '';
 
     clearErrors();
   });
