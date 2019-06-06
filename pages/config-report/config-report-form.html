@@ -80,100 +80,115 @@
     </form>
   </div>
   
-  <script type="text/javascript">
-  
-    // DOWNLOAD REPORT
-    function downloadConfigReports(args) {
-      var data, filename, link;
-      var csv = convertArrayOfObjectsToCSV({
-        data: configReportDatatable.data().toArray()
-      });
-      if (csv == null) {
-        inputError($('#configReport-form-report'),'No Reports To Create');
-        return;
-      }
-      
-      filename = args.filename || 'export.csv';
-  
-      if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
-      }
-      data = encodeURI(csv);
-  
-      link = document.createElement('a');
-      link.setAttribute('href', data);
-      link.setAttribute('download', filename);
-      link.click();
+<script type="text/javascript">
+
+  // DOWNLOAD REPORT
+  function downloadConfigReports(args) {
+    var data, filename, link;
+    var csv = convertArrayOfObjectsToCSV({
+      data: configReportDatatable.data().toArray()
+    });
+    if (csv == null) {
+      inputError($('#configReport-form-report'),'No Reports To Create');
+      return;
     }
-  
-    $(document).ready(function() {
+    
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+  }
+
+  $(document).ready(function() {
+    
+    var configReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+    var configReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+
+    // Initialze daterangepicker and assign values to start and from dates
+    function initializeConfigReportDateRangePicker () {
+      $('input[id="configReport-form-daterange"]').daterangepicker({
+        opens: 'bottom'
+      }, function(start, end, label) {
+        configReportStartDate  = start.format('YYYY-MM-DD');
+        configReportEndDate    = end.format('YYYY-MM-DD');
+      });
+    }
+
+    initializeConfigReportDateRangePicker();
+    
+
+    // Click Event For 'Submit Button'
+    $('#configReport-form-submit').click(function() {
+      clearErrors();
       
-      var configReportStartDate = moment(new Date()).format('YYYY-MM-DD');
-      var configReportEndDate = moment(new Date()).format('YYYY-MM-DD');
-  
-      // Initialze daterangepicker and assign values to start and from dates
-      function initializeConfigReportDateRangePicker () {
-        $('input[id="configReport-form-daterange"]').daterangepicker({
-          opens: 'bottom'
-        }, function(start, end, label) {
-          configReportStartDate  = start.format('YYYY-MM-DD');
-          configReportEndDate    = end.format('YYYY-MM-DD');
-        });
+      let report = $('#configReport-form-report').val();
+      let type   = $("#configReport-form-type").val();
+
+      if (report === '') {
+        inputError($('#configReport-form-report'),'Select An Option');
+      } else if (report === "VIEW REPORT") {
+
+        if (type == "SETUP PORT MAPPING") {
+          configReportQueryPortlog(configReportStartDate, configReportEndDate);
+        } else if (type == "SETUP WIRECENTER") {
+          configReportQueryWclog(configReportStartDate, configReportEndDate);
+        } else if (type == "SETUP FACILITIES") {
+          configReportQueryFaclog(configReportStartDate, configReportEndDate);
+        }
+
+      } else if (report === "CREATE REPORT") {
+
+        downloadConfigReports({filename: `MAINTENANCE_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
       }
-  
+    });
+
+    // Click Event For 'Clear Button'
+    $('#configReport-form-clear').click(function() {
+
+      let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+      $('.configReport-form-input').val('');
+      configReportDatatable.clear().draw();
+
+      $('#configReport-daterange').val('').daterangepicker("update");
+      configReportStartDate = currDate;
+      configReportEndDate = currDate;
+
+      // reinitialize daterangepicker
       initializeConfigReportDateRangePicker();
       
-  
-      // Click Event For 'Submit Button'
-      $('#configReport-form-submit').click(function() {
-        clearErrors();
-        
-        let report = $('#configReport-form-report').val();
-        let type   = $("#configReport-form-type").val();
-
-        if (report === '') {
-          inputError($('#configReport-form-report'),'Select An Option');
-        } else if (report === "VIEW REPORT") {
-
-          if (type == "SETUP PORT MAPPING") {
-            configReportQueryPortlog(configReportStartDate, configReportEndDate);
-          } else if (type == "SETUP WIRECENTER") {
-            configReportQueryWclog(configReportStartDate, configReportEndDate);
-          } else if (type == "SETUP FACILITIES") {
-            configReportQueryFaclog(configReportStartDate, configReportEndDate);
-          }
-
-        } else if (report === "CREATE REPORT") {
-
-          downloadConfigReports({filename: `MAINTENANCE_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
-        }
-      });
-  
-      // Click Event For 'Clear Button'
-      $('#configReport-form-clear').click(function() {
-  
-        let currDate = moment(new Date()).format('YYYY-MM-DD');
-  
-        $('.configReport-form-input').val('');
-        configReportDatatable.clear().draw();
-  
-        $('#configReport-daterange').val('').daterangepicker("update");
-        configReportStartDate = currDate;
-        configReportEndDate = currDate;
-  
-        // reinitialize daterangepicker
-        initializeConfigReportDateRangePicker();
-        
-        clearErrors();
-      });
-  
-      // REPORT Change listener
-      $('#configReport-form-report').change(function() {
-        clearErrors();
-      })	
-  
+      clearErrors();
     });
-  
-  
-  
-  </script>
+
+    // REPORT Change listener
+    $('#configReport-form-report').change(function() {
+      clearErrors();
+    });
+
+    $("#configReport-form-type").change(function() {
+      let tables = $(".configReport-table");
+      let portmapTable = $(".configReport-portmap-table");
+      let facilityTable = $(".configReport-facility-table");
+      let wirecenterTable = $(".configReport-wirecenter-table");
+      
+      $(".configReport-table").css('display', 'none');
+      if ($(this) == "SETUP PORT MAPPING" || $(this) == "") {
+        portmapTable.css('display', 'block');
+      } else if ($(this) == "SETUP FACILITIES") {
+        facilityTable.css('display', 'block');
+      } else if ($(this) == "SETUP WIRE CENTER") {
+        wirecenterTable.css('display', 'block');
+      }
+    });
+  });
+
+
+
+</script>
