@@ -67,7 +67,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="portmap-form-action" class="form-control">
+          <select id="portmap-form-action" class="form-control portmap-form-input">
             <option value=""></option>
             <option value="map">MAP</option>
             <option value="unmap">UNMAP</option>
@@ -111,5 +111,11 @@
     $('#pm_findCkid_btn').click(function() {
       queryPort('findCkid');
     })
+
+    // Clear button click handler
+    $('#portmap-form-clear').click(function() {
+      $('.portmap-form-input').val('');
+      portmapDatatable.clear().draw();
+    });
   });
 </script>
