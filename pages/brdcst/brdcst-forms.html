@@ -147,15 +147,15 @@ $(document).ready(function(obj) {
     loadOwners();
 
     // ADD Action
-    if (value === 'add') {
+    if (obj.value === 'add') {
       actionAdd(obj);
     }
     // UPDATE Action
-    else if (value === 'update') {
+    else if (obj.value === 'update') {
       actionUpdate(obj);
     }
     // DELETE Action
-    else if (value === 'delete') {
+    else if (obj.value === 'delete') {
       actionDelete(obj);
     }
   });
