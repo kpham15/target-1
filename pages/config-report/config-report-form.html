@@ -117,13 +117,12 @@
     $('#configReport-form-submit').click(function() {
       clearErrors();
       
-      let report = $('#configReport-form-report').val();
+      let report = $('#configReport-form-report');
       let type   = $("#configReport-form-type").val();
 
       if (report === '') {
-        inputError($('#configReport-form-report'),'Select An Option');
-      } else if (report === "VIEW REPORT") {
-
+        inputError(report,'Select An Option');
+      } else if (report.val() === "VIEW REPORT") {
         if (type == "SETUP PORT MAPPING") {
           configReportQueryPortlog(configReportStartDate, configReportEndDate);
         } else if (type == "SETUP WIRE CENTER") {
@@ -131,10 +130,8 @@
         } else if (type == "SETUP FACILITIES") {
           configReportQueryFaclog(configReportStartDate, configReportEndDate);
         }
-
-      } else if (report === "CREATE REPORT") {
-
-        downloadConfigReports({filename: `MAINTENANCE_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
+      } else if (report.val() === "CREATE REPORT") {
+        downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
       }
     });
 
