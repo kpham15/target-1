@@ -4,7 +4,7 @@
 
     <!-- NODE -->
     <div class="form-group">
-      <label for="node-operation-forms-node" class="col-sm-2 control-label">NODE:</label>
+      <label for="node-operation-forms-node" class="col-sm-3 control-label">NODE:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control node-operation-forms-input" id="node-operation-forms-node" disabled="">
       </div>
@@ -12,7 +12,7 @@
 
     <!-- DEVICE -->
     <div class="form-group">
-      <label for="node-operation-forms-device" class="col-sm-2 control-label">DEVICE:</label>
+      <label for="node-operation-forms-device" class="col-sm-3 control-label">DEVICE:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control node-operation-forms-input" id="node-operations-forms-device">
       </div>
@@ -20,27 +20,23 @@
 
     <!-- SERIAL NUMBER -->
     <div class="form-group">
-      <label for="node-operation-forms-serialnum" class="col-sm-2 control-label">SERIAL NUMBER</label>
+      <label for="node-operation-forms-serialnum" class="col-sm-3 control-label">SERIAL NUMBER:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control node-operation-forms-input" id="node-operation-serialnum">
       </div>
     </div>
 
-    <!-- ACTION Row and Clear Button-->
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label>ACTION:</label>
-          <select id="node-operation-action" class="form-control node-operation-input">
-            <option></option>
-            <option value="DISCOVER">DISCOVER</option>
-            <option value="STOP">STOP</option>
-          </select>
-        </div>
-          <button id="node-operation-clear" type="button" class="btn btn-primary btn-flat">
-            Clear
-          </button>
-        </div>
+    <!-- ACTION -->
+    <div class="form-group">
+      <label for="node-operation-action" class="col-sm-3 control-label">ACTION:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control node-operation-forms-input" id="node-operation-action">
+      </div>
     </div>
+
+    <!-- Clear Button -->
+    <button id="node-operation-clear" type="button" class="btn btn-primary btn-flat">
+      Clear
+    </button>
   </form>
 </div>
