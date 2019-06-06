@@ -257,6 +257,11 @@
     $('#setup-portmap-modal').on('hidden.bs.modal', function() {
       portmapModalClear();
       $('.portmap-form-input').val('');
+      portmapNode = '';
+      portmapSlot = '';
+      portmapPnum = '';
+      portmapFacid = '';
+      portmapPortid = '';
     });
 
     // Submit button click
@@ -282,7 +287,7 @@
     // Modal Table Row Click
     $(document).on('click', '#portmap-modal-fac-table tbody tr', function() {
       clearErrors();
-      
+
       let data = portmapModalFacDatatable.row(this).data();
 
       portmapFacid = data.id;
