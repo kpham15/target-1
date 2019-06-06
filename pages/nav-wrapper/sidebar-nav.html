@@ -28,55 +28,67 @@
     <!-- /.search form -->
 
     <!-- Sidebar Menu -->
-    <ul class="sidebar-menu" data-widget="tree">
+    <ul class="sidebar-menu tree" data-widget="tree">
       <li class="header">Navigation</li>
-      <!-- Optionally, you can add icons to the links -->
+
+      <!-- Home -->
       <li class="active menu-item" page_id="system-view-page">
         <a href="#">
           <i class="glyphicon glyphicon-home"></i>
           <span>Home</span>
         </a>
       </li>
-
-      <li class="menu-item" page_id="alarmreport-page">
-          <a href="#">
-            <i class="glyphicon glyphicon-th"></i>
-            <span>Alarm Report</span>
-          </a>
-        </li>
-
+      
+      <!-- Broadcast Notifications -->
       <li class="menu-item" page_id="brdcst-page">
         <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
+          <i class="glyphicon glyphicon-bullhorn"></i>
           <span>Broadcast Notification</span>
         </a>
       </li>
 
+      <!-- IPC References -->
       <li class="menu-item" page_id="references-page">
         <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
+          <i class="glyphicon glyphicon-tags"></i>
           <span>IPC References</span>
         </a>
       </li>
 
-      <li class="menu-item" page_id="svc-page">
+      <!-- Setup -->
+      <li class="treeview">
         <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
-          <span>Setup Service Connection</span>
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>Setup</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
+        <ul class="treeview-menu">
+
+          <!-- Setup Service Connection-->
+          <li class="menu-item" page_id="svc-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Service Connection</span>
+            </a>
+          </li>
+          
+          <!-- Setup Facilities -->
+          <li class="menu-item" page_id="fac-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Facilities</span>
+            </a>
+          </li>
+        </ul>
       </li>
 
-      <li class="menu-item" page_id="prov-report-page">
+      <!-- Alarm Administration -->
+      <li class="menu-item" page_id="alarm-admin-page">
         <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
-          <span>Provisioning Report</span>
-        </a>
-      </li>
-
-      <li class="menu-item" page_id="maint-report-page">
-        <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
-          <span>Maintenance Report</span>
+          <i class="fa fa-warning"></i>
+          <span>Alarm Administration</span>
         </a>
       </li>
 
@@ -90,23 +102,47 @@
       
       <li class="menu-item" page_id="fac-page">
         <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
-          <span>Setup Facilities</span>
-        </a>
-      </li>
-
-      <li class="menu-item" page_id="alarm-admin-page">
-        <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
-          <span>Alarm Administration</span>
-        </a>
-      </li>
-
-      <li class="menu-item" page_id="ftOrders-page">
-        <a href="#">
-          <i class="glyphicon glyphicon-th"></i>
+          <i class="fa fa-paper-plane"></i>
           <span>FT Orders</span>
         </a>
+      </li>
+
+      <!-- Reports -->
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Reports</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+
+          <!-- Maintenance Report -->
+          <li class="menu-item" page_id="maint-report-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Maintenance Report</span>
+            </a>
+          </li>
+          
+          <!-- Provisioning Report -->
+          <li class="menu-item" page_id="prov-report-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Provisioning Report</span>
+            </a>
+          </li>
+
+          <!-- Alarm Report -->
+          <li class="menu-item" page_id="alarmreport-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Alarm Report</span>
+            </a>
+          </li>
+      
+        </ul>
       </li>
 
       <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
