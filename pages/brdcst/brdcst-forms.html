@@ -80,8 +80,9 @@
 </div>
 
 <script type="text/javascript">
+var brdcstId = '';
+
 $(document).ready(function(obj) {
-  var id = '';
 
   function actionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
@@ -94,7 +95,7 @@ $(document).ready(function(obj) {
 
   function actionUpdate(obj) {
     if ( !id || id === '') {
-      inputError($(this),'Select msg from table.');
+      inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
     }
 
@@ -112,8 +113,7 @@ $(document).ready(function(obj) {
 
   function actionDelete(obj) {
     if ( !id || id === '') {
-      $(this).siblings('.help-block').text('Select msg from table.');
-      $(this).parent('.form-group').addClass('has-error');
+      inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
     }
 
