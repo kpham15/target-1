@@ -67,10 +67,11 @@
 
   function validateNodeOpeNode(obj) {
     if (obj.node !== "") {
-      $('#node-operation-modal-action').val(obj.action);
-      $('#node-operation-modal-node').val(obj.node);
-      $('#node-operation-modal-device').val(obj.device);
-      $('#node-operation-modal-serialnum').val(obj.serialnum);
+      console.log(obj.node);
+      // $('#node-operation-modal-action').val(obj.action);
+      // $('#node-operation-modal-node').val(obj.node);
+      // $('#node-operation-modal-device').val(obj.device);
+      // $('#node-operation-modal-serialnum').val(obj.serialnum);
     } else {
       inputError($('#node-operation-forms-action'),'Select a node from the list');
       $('#node-operation-forms-action').val('');
@@ -83,10 +84,10 @@
     // Action change event
     $('#node-operation-forms-action').change(function() {
       let obj = {
-      action:     $(this).val(),
-      node:       $('#node-operation-forms-node').val(),
-      device:     $('#node-operation-forms-device').val(),
-      serialnum:  $('#node-operation-forms-serialnum').val()
+        action:     $(this).val(),
+        node:       $('#node-operation-forms-node').val(),
+        device:     $('#node-operation-forms-device').val(),
+        serialnum:  $('#node-operation-forms-serialnum').val()
       }
 
       if (obj.action === "DISCOVER") {
