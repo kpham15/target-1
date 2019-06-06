@@ -80,6 +80,22 @@
     }
   }
 
+  function validateNodeOpeStop(obj) {
+    if (obj.node == "") {
+      inputError($('#node-operation-forms-action'),'Select an node from the list');
+      $('#node-opeation-forms-action').val('');
+      return;
+    } else {
+      $('#node-operation-modal-action').val(obj.action);
+      $('#node-operation-modal-node').val(obj.node);
+      $('#node-operation-modal-device').val(obj.device);
+      $('#node-operation-modal-serialnum').val(obj.serialnum);
+
+      $('#node-operation-modal').modal('show');
+    }
+  }
+  
+
   $(document).ready(function() {
 
     // Action change event
@@ -96,7 +112,7 @@
       if (obj.action === "DISCOVER") {
         validateNodeOpeNode(obj);
       } else if (obj.action === "STOP") {
-
+        validateNodeOpeStop(obj);
       }
 
 
