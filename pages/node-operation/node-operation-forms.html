@@ -1,27 +1,31 @@
 <!-- Forms -->
 <div class="col-md-4">
-  <form id="node-operation-forms">
-    <div class="row">
-      <!-- Top Row -->
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>NODE:</label>
-          <input id="node-operation-node" class="form-control node-operation-input" disabled="">
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>DEVICE:</label>
-          <input id="node-operation-device" class="form-control node-operation-input" disabled="">
-        </div>
-      </div>
-      <div class="col-md-7">
-        <div class="form-group">
-          <label>SERIAL NUMBER:</label>
-          <input id="node-operation-serialnum" class="form-control node-operation-input" disabled="">
-        </div>
+  <form id="node-operation-forms" class="form-horizontal">
+
+    <!-- NODE -->
+    <div class="form-group">
+      <label for="node-operation-forms-node" class="col-sm-2 control-label">NODE:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control node-operation-forms-input" id="node-operation-forms-node" disabled="">
       </div>
     </div>
+
+    <!-- DEVICE -->
+    <div class="form-group">
+      <label for="node-operation-forms-device" class="col-sm-2 control-label">DEVICE:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control node-operation-forms-input" id="node-operations-forms-device">
+      </div>
+    </div>
+
+    <!-- SERIAL NUMBER -->
+    <div class="form-group">
+      <label for="node-operation-forms-serialnum" class="col-sm-2 control-label">SERIAL NUMBER</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control node-operation-forms-input" id="node-operation-serialnum">
+      </div>
+    </div>
+
     <!-- ACTION Row and Clear Button-->
     <div class="row">
       <div class="col-md-4">
