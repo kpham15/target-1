@@ -66,6 +66,13 @@
   }
 
   $(document).ready(function() {
+
+    // Clear button click event
+    $('#node-operation-forms-clear').click(function() {
+      $('.node-operation-forms-input').val('');
+      
+      queryNodeOperation();
+    })
   
     // side bar menu click event
     $('.menu-item[page_id="node-operation-page"').click(function() {
