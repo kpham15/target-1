@@ -66,16 +66,16 @@
   }
 
   function validateNodeOpeNode(obj) {
-    if (obj.node !== "") {
-      console.log(obj.node);
-      // $('#node-operation-modal-action').val(obj.action);
-      // $('#node-operation-modal-node').val(obj.node);
-      // $('#node-operation-modal-device').val(obj.device);
-      // $('#node-operation-modal-serialnum').val(obj.serialnum);
-    } else {
-      inputError($('#node-operation-forms-action'),'Select a node from the list');
-      $('#node-operation-forms-action').val('');
+    if (obj.node == "") {
+      inputError($('#node-operation-forms-action'),'Select an node from the list');
       return;
+    } else {
+      $('#node-operation-modal-action').val(obj.action);
+      $('#node-operation-modal-node').val(obj.node);
+      $('#node-operation-modal-device').val(obj.device);
+      $('#node-operation-modal-serialnum').val(obj.serialnum);
+
+      $('#node-operation-modal').modal('show');
     }
   }
 
@@ -89,6 +89,8 @@
         device:     $('#node-operation-forms-device').val(),
         serialnum:  $('#node-operation-forms-serialnum').val()
       }
+      
+      clearErrors();
 
       if (obj.action === "DISCOVER") {
         validateNodeOpeNode(obj);
@@ -96,9 +98,8 @@
 
       }
 
-      clearErrors();
 
-      $('#node-operation-modal').modal('show');
+      
     })
 
     // Clear button click event
