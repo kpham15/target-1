@@ -1,0 +1,226 @@
+<div class="col-sm-12">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">LIST OF MAINTENANCE REPORTS:</h3>
+    </div>
+    <div style="padding: 10px;">
+      <table id="configReport-portmap-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>USER</th>
+            <th>ACTION</th>
+            <th>PORT</th>
+            <th>FAC</th>
+            <th>FAC_TYPE</th>
+            <th>ORT</th>
+            <th>SPCFNC</th>
+            <th>RESULT</th>
+          </tr>
+        </thead>
+      </table>
+      <table id="configReport-wirecenter-table" class="table table-striped table-bordered table-hover" style="width:100%; display: none">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>USER</th>
+            <th>EVENT</th>
+            <th>FUNCTION</th>
+            <th>TASK</th>
+            <th>DETAIL</th>
+          </tr>
+        </thead>
+      </table>
+      <table id="configReport-facility-table" class="table table-striped table-bordered table-hover" style="width:100%; display: none">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>USER</th>
+            <th>EVENT</th>
+            <th>FUNCTION</th>
+            <th>TASK</th>
+            <th>DETAIL</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  var configReportPortmapDatatable = $("#configReport-portmap-table").DataTable({
+    "scrollY": "200px",
+    "data": [],
+    "columns": [
+      {
+        "data":"date",
+        "render": function(data) {
+          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          return date;
+        }
+      },
+      {"data":"user"},
+      {"data":"action"},
+      {"data":"port"},
+      {"data":"fac"},
+      {"data":"ftyp"},
+      {"data":"ort"},
+      {"data":"spcfnc"},
+      {"data":"result"},
+    ],
+    "order":[[0,"desc"]]
+  });
+
+  var configReportWirecenterDatatable = $("#configReport-wirecenter-table").DataTable({
+    "scrollY": "200px",
+    "data": [],
+    "columns": [
+      {
+        "data":"time",
+        "render": function(data) {
+          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          return date;
+        }
+      },
+      {"data":"user"},
+      {"data":"evt"},
+      {"data":"fnc"},
+      {"data":"task"},
+      {"data":"detail"},
+    ],
+    "order":[[0,"desc"]]
+  });
+
+  var configReportFacDatatable = $("#configReport-facility-table").DataTable({
+    "scrollY": "200px",
+    "data": [],
+    "columns": [
+      {
+        "data":"time",
+        "render": function(data) {
+          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          return date;
+        }
+      },
+      {"data":"user"},
+      {"data":"evt"},
+      {"data":"fnc"},
+      {"data":"task"},
+      {"data":"detail"},
+    ],
+    "order":[[0,"desc"]]
+  });
+
+  function configReportQueryPortlog(fromDate, toDate){
+    let report     = $("#configReport-form-report").val();
+    let configUser = $("#configReport-form-user").val();
+    let action     = $("#configReport-form-action").val();
+
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcConfigReport',
+        act:      report,
+        uname:    configUser,
+        action:   action,
+        fromDate: fromDate,
+        toDate:   toDate,
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+      
+      $("#configReport-form-report").val("").change();
+
+      if (res.length == 0) {
+        inputError($('#configReport-form-report'),'No Record Found');
+      }
+      configReportPortmapDatatable.clear().draw();
+      configReportPortmapDatatable.rows.add(res);
+      configReportPortmapDatatable.columns.adjust().draw();
+    });
+  }
+
+  function configReportQueryWclog(fromDate, toDate){
+    let report     = $("#configReport-form-report").val();
+    let configUser = $("#configReport-form-user").val();
+    let action     = $("#configReport-form-action").val();
+    let fnc        = $("#configReport-form-type").val();
+    let evt        = "CONFIGURATION";
+
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcConfigReport',
+        act:      report,
+        uname:    configUser,
+        fnc:      fnc,
+        evt:      evt,
+        fromDate: fromDate,
+        toDate:   toDate,
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+      
+      $("#configReport-form-report").val("").change();
+
+      if (res.length == 0) {
+        inputError($('#configReport-form-report'),'No Record Found');
+      }
+      configReportWcDatatable.clear().draw();
+      configReportWcDatatable.rows.add(res);
+      configReportWcDatatable.columns.adjust().draw();
+    });
+  }
+
+  function configReportQueryFaclog(fromDate, toDate){
+    let report     = $("#configReport-form-report").val();
+    let configUser = $("#configReport-form-user").val();
+    let action     = $("#configReport-form-action").val();
+    let fnc        = $("#configReport-form-type").val();
+    let evt        = "CONFIGURATION";
+
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcConfigReport',
+        act:      report,
+        uname:    configUser,
+        fnc:      fnc,
+        evt:      evt,
+        fromDate: fromDate,
+        toDate:   toDate,
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+      
+      $("#configReport-form-report").val("").change();
+
+      if (res.length == 0) {
+        inputError($('#configReport-form-report'),'No Record Found');
+      }
+      configReportFacDatatable.clear().draw();
+      configReportFacDatatable.rows.add(res);
+      configReportFacDatatable.columns.adjust().draw();
+    });
+  }
+  
+
+</script>

@@ -129,17 +129,22 @@
         clearErrors();
         
         let report = $('#configReport-form-report').val();
-  
+        let type   = $("#configReport-form-type").val();
+
         if (report === '') {
           inputError($('#configReport-form-report'),'Select An Option');
-        }
-        else if (report === "VIEW REPORT") {
-          
-          configReportQueryConfiglog(configReportStartDate, configReportEndDate);
-        }
-        //@TODO if there are too many rows, does not download?
-  
-        else if (report === "CREATE REPORT") {
+        } else if (report === "VIEW REPORT") {
+
+          if (type == "SETUP PORT MAPPING") {
+            configReportQueryPortlog(configReportStartDate, configReportEndDate);
+          } else if (type == "SETUP WIRECENTER") {
+            configReportQueryWclog(configReportStartDate, configReportEndDate);
+          } else if (type == "SETUP FACILITIES") {
+            configReportQueryFaclog(configReportStartDate, configReportEndDate);
+          }
+
+        } else if (report === "CREATE REPORT") {
+
           downloadConfigReports({filename: `MAINTENANCE_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
         }
       });
