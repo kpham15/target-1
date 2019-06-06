@@ -192,10 +192,65 @@
     });
   }
 
+  // Submit action
+  function portmapSubmit(action) {
+    let formData = {
+      "api":      "ipcPortmap",
+      "act":      action,
+      "user":     user.uname,
+      "fac_id":   portmapFacid,
+      "port_id":  portmapPortid,
+      "port":     $('#portmap-modal-node').val() + '-' + 
+                  $('#portmap-modal-slot').val() + '-' + 
+                  $('#portmap-modal-ptyp').val().tpUpperCase() + '-' + 
+                  $('#portmap-modal-pnum').val(),
+      "ckt":      ""
+    }
+    $('.portmap-modal-field[target]').each(function() {
+      let target = $(this).attr('target');
+      formData[target] = $(this).val();
+    });
+
+    $.ajax({
+      type: "POST",
+      url: ipcDispatch,
+      data: formData,
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows
+      let modal = {
+        title:  data.rslt,
+        body: data.reason
+      }
+
+      if (data.rslt === 'fail') {
+        modal.type = "danger";
+        modalHandler(modal);
+      } else {
+        $('#setup-portmap-modal').modal('hide');
+        modal.type = "success";
+        modalHandler(modal);
+        
+        let page = portmapModalFacDatatable.page();
+
+        portmapModalFacDatatable.clear().draw();
+        portmapModalFacDatatable.rows.add(res);
+        portmapModalFacDatatable.page(page).draw('page');
+        portmapModalFacDatatable.columns.adjust().draw();
+      }
+    });
+  }
+
   $(document).ready(function() {
+
+    // When modal is hidden
     $('#setup-portmap-modal').on('hidden.bs.modal', function() {
       portmapModalClear();
       $('.portmap-form-input').val('');
+    });
+
+    $('#portmap-modal-submit').click(function() {
+      portmapSubmit($('#portmap-modal-action').val());
     });
   });
 
