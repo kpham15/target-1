@@ -148,7 +148,7 @@
       let res = data.rows;
 
       if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+        inputError($('#configReport-form-submit'),'No Record Found');
       }
       configReportPortmapDatatable.clear().draw();
       configReportPortmapDatatable.rows.add(res);
