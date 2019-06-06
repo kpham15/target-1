@@ -22,6 +22,7 @@
     <?php include __DIR__ . '/../svc/svc.php'; ?>
     <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
     <?php include __DIR__ . '/../maint-report/maint-report.php'; ?>
+    <?php include __DIR__ . '/../config-report/config-report.php'; ?>
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
