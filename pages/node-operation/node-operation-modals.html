@@ -61,6 +61,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+  // Modal Close Event Listener
+  $('#node-operation-modal').on('hidden.bs.modal', function(e) {
+    $('#node-operation-forms-clear').trigger('click');
+  })
+  
   // Submit Button Click Event
   $('#node-operation-modal-submit').click(function() {
     let action = $('#node-operation-modal-action').val();
