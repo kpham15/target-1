@@ -14,6 +14,9 @@
 
       <!-- Database Backup Page -->
       <?php include __DIR__ . '/database-backup-forms.html'; ?>
+
+      <!-- Database Backup Table -->
+      <?php include __DIR__ . '/database-backup-table.html'; ?>
      
   </div>
 </div>
