@@ -114,6 +114,7 @@
                 <table id="portmap-modal-fac-table" class="table table-striped table-bordered table-hover" style="width:100%;">
                   <thead>
                     <tr>
+                      <th>ID</th>
                       <th>FAC_ID</th>
                       <th>FAC_TYP</th>
                       <th>ORT</th>
@@ -151,11 +152,20 @@
   var portmapModalFacDatatable = $('#portmap-modal-fac-table').DataTable({
     "data": [],
     "columns": [
+      {"data":"id"},
       {"data":"fac"},
       {"data":"ftyp"},
       {"data":"ort"},
       {"data":"spcfnc"}
     ],
+    "columnDefs": [
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    "order": [[ 0, 'asc' ]],
     "scrollY": "200px"
   });
 
