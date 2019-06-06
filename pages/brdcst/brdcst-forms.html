@@ -84,7 +84,7 @@ var brdcstId = '';
 
 $(document).ready(function(obj) {
 
-  function actionAdd() {
+  function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
     $('#brdcst-modal-date').val(obj.currDate);
@@ -93,7 +93,7 @@ $(document).ready(function(obj) {
     $('#brdcst-modal').modal('show');
   }
 
-  function actionUpdate(obj) {
+  function brdcstActionUpdate(obj) {
     if ( !brdcstId || brdcstId === '') {
       inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
@@ -111,7 +111,7 @@ $(document).ready(function(obj) {
     $('#brdcst-modal').modal('show');
   }
 
-  function actionDelete(obj) {
+  function brdcstActionDelete(obj) {
     if ( !brdcstId || brdcstId === '') {
       inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
@@ -147,15 +147,15 @@ $(document).ready(function(obj) {
 
     // ADD Action
     if (obj.value === 'add') {
-      actionAdd(obj);
+      brdcstActionAdd(obj);
     }
     // UPDATE Action
     else if (obj.value === 'update') {
-      actionUpdate(obj);
+      brdcstActionUpdate(obj);
     }
     // DELETE Action
     else if (obj.value === 'delete') {
-      actionDelete(obj);
+      brdcstActionDelete(obj);
     }
   });
 
@@ -165,7 +165,7 @@ $(document).ready(function(obj) {
 
   $('#brdcst-form-clear').click(function() {
     $('.brdcst-form-input').val('');
-    id = '';
+    brdcstId = '';
 
     clearErrors();
   });

@@ -84,7 +84,53 @@
 </div>
 
 <script type="text/javascript">
+
   $(document).ready(function() {
+
+    function portmapPopulateModal(obj) {
+      $('.portmap-modal-field').each(function() {
+        let target = $(this).attr('target');
+        $(this).val(obj[target]);
+      });
+    }
+
+    function portmapActionMap(obj) {
+      if (portmapPortid > 0) {
+        if (portmapFacid > 0) {
+          inputError($('#portmap-form-action'),'This PORT is already MAPPED');
+          $('#portmap-form-action').val('');
+          return;
+        } else {
+          portmapModalClear();
+          $('.portmap-modal-fac-forms').prop('disabled', false);
+          portmapPopulateModal(obj);
+          $('#portmap-modal-factbl-row').show();
+          portmapQueryAvailFac();
+          $('#setup-portmap-modal').modal('show');
+        }
+      } else {
+        inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
+        $('#portmap-form-action').val('');
+      }
+    }
+
+    function portmapActionUnmap(obj) {
+      if (portmapPortid > 0) {
+        if (portmapFacid > 0) {
+          portmapModalClear();
+          $('.portmap-modal-fac-forms').prop('disabled',true);
+          portmapPopulateModal(obj);
+          $('#portmap-modal-factbl-row').hide();
+          $('#setup-portmap-modal').modal('show');
+        } else {
+          inputError($('#portmap-form-action'),'This PORT has not been MAPPED');
+          $('#portmap-form-action').val('');
+        }
+      } else {
+        inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
+        $('#portmap-form-action').val('');
+      }
+    }
 
     // Initialize inputmask
     $('#portmap-form-ckid-tn').inputmask();
@@ -117,5 +163,38 @@
       $('.portmap-form-input').val('');
       portmapDatatable.clear().draw();
     });
+
+    // ACTION change listener
+    $('#portmap-form-action').change(function() {
+      let obj = {
+        value:    $(this).val(),
+        portId:   portmapPortid,
+        facId:    portmapFacid,
+        node:     portmapNode,
+        slot:     portmapSlot,
+        pnum:     portmapPnum,
+        ptyp:     $('#portmap-form-ptyp').val(),
+        port:     $('#portmap-form-port').val(),
+        psta:     $('#portmap-form-psta').val(),
+        fac:      $('#portmap-form-fac').val(),
+      }
+
+      if ($('#portmap-tn-check').prop('checked')) {
+        obj.ckid = $('#portmap-form-ckid-tn').val();
+      } else {
+        obj.ckid = $('#portmap-form-ckid').val();
+      }
+
+      clearErrors();
+      
+      // MAP Action
+      if (obj.value === 'map') {
+        portmapActionMap(obj);
+      }
+      // UNMAP Action
+      else if (obj.value === 'unmap') {
+        portmapActionUnmap(obj);
+      }
+    }
   });
 </script>

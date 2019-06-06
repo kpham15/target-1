@@ -15,6 +15,9 @@
         <!-- Port Mapping Table -->
         <?php include __DIR__ . '/portmap-table.html'; ?>
 
+        <!-- Port Mapping Modals -->
+        <?php include __DIR__ . '/portmap-modals.html'; ?>
+
 
     </div>
 
