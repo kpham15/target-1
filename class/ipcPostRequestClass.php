@@ -48,38 +48,26 @@ class POST_REQUEST {
             $out.= $content;
         // echo $out."\n";
         fwrite($fp, $out);
-        // while (!feof($fp)) {
-        //     print_r(fgets($fp, 1024));
-        // }
-        fclose($fp);
-    }
-
-    public function syncPostRequest($url, $params){
-        $url = $this->url."/$url";
-        $content = http_build_query($params);
-        $parts=parse_url($url);
-        
-        // echo $parts."\n";
-        $fp = fsockopen($parts['host'],
-            isset($parts['port'])?$parts['port']:80,
-            $errno, $errstr, 30);
-    
-        $out = "POST ".$parts['path']." HTTP/1.1\r\n";
-        $out.= "Host: ".$parts['host']."\r\n";
-        $out.= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $out.= "Content-Length: ".strlen($content)."\r\n";
-        $out.= "Connection: Close\r\n\r\n";
-    
-        if (isset($content)) 
-            $out.= $content;
-        // echo $out."\n";
-        fwrite($fp, $out);
         while (!feof($fp)) {
             $this->reply = fgets($fp, 1024);
         }
         fclose($fp);
     }
     
+    public function syncPostRequest($url, $params) {
+        $this->reply = "";
+        $url = $this->url."/$url";    
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($params)
+            )
+        );
+        $context  = stream_context_create($options);
+        $response = json_decode(file_get_contents($url, false, $context));
+        return $response;
+    }
 }
 
 ?>
