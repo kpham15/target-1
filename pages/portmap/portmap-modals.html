@@ -281,6 +281,8 @@
 
     // Modal Table Row Click
     $(document).on('click', '#portmap-modal-fac-table tbody tr', function() {
+      clearErrors();
+      
       let data = portmapModalFacDatatable.row(this).data();
 
       portmapFacid = data.id;
