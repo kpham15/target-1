@@ -123,7 +123,7 @@
     $('#configReport-form-submit').click(function() {
       clearErrors();
       
-      let report = $('#configReport-form-report');
+      let report = $('#configReport-form-report').val();
       let type   = $("#configReport-form-type").val();
 
       if (report === '') {
