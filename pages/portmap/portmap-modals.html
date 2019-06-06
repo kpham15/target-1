@@ -253,12 +253,13 @@
     $('#portmap-modal-submit').click(function() {
       let action = $('#portmap-modal-action').val();
 
-      if (action === 'map') {
+      if (action === 'MAP') {
         if (!(portmapFacid > 0)) { 
+          console.log('test');
           return;
         }
       }
-      
+
       portmapSubmit(action);
     });
 
