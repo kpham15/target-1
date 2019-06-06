@@ -8,49 +8,61 @@
     </div>
 
     <div class="col-sm-2">
-    <label for="provReport_action_sel">ACTION</label>
-        <select class="form-control provReport-form" id="provReport_action_sel">
-            <option></option>
-            <option>CONNECT</option>
-            <option>DISCONNECT</option>
-            <option>UPDATE_CKT</option>
-        </select>
+        <div class="form-group">
+            <label for="provReport_action_sel">ACTION</label>
+                <select class="form-control provReport-form" id="provReport_action_sel">
+                    <option></option>
+                    <option>CONNECT</option>
+                    <option>DISCONNECT</option>
+                    <option>UPDATE_CKT</option>
+                </select>
+        </div>
     </div>
     
 
     <div class="col-sm-2">
-        <label for="provReport_ordno_txt">ORDNO</label>
-        <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ordno_txt">
+        <div class="form-group">
+            <label for="provReport_ordno_txt">ORDNO</label>
+            <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ordno_txt">
+        </div>
     </div>
 
     <div class="col-sm-2">
-        <label for="provReport_ckid_txt">CKID</label>
-        <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ckid_txt">
+        <div class="form-group">
+            <label for="provReport_ckid_txt">CKID</label>
+            <input style="text-transform: uppercase" type="text" class="form-control provReport-form" id="provReport_ckid_txt">
+        </div>
     </div>
 
     <div class="col-sm-4">
-        <label>Date range:</label>
-        <div class="input-group">
-          <div class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-          </div>
-          <input type="text" class="form-control pull-right" id="provReport_daterange">
+        <div class="form-group">
+            <label>Date range:</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="text" class="form-control pull-right" id="provReport_daterange">
+            </div>
         </div>
       </div>
 </div>
 
 <div class="col-sm-12" style="padding-left: 0px; margin-bottom: 10px">
     <div class="col-sm-2">
-        <label for="provReport_report_sel">REPORT</label>
-        <select class="form-control provReport-form" id="provReport_report_sel">
-            <option></option>
-            <option>VIEW REPORT</option>
-            <option>CREATE REPORT</option>
-        </select>
+        <div class="form-group">
+            <label for="provReport_report_sel">REPORT</label>
+            <select class="form-control provReport-form" id="provReport_report_sel">
+                <option></option>
+                <option>VIEW REPORT</option>
+                <option>CREATE REPORT</option>
+            </select>
+        </div>
     </div>
     <div class="col-sm-10">
-        <button id="provReport_submit_btn" style="text-align:right;margin-top: 25px" class="btn btn-primary">SUBMIT</button>
-        <button id="provReport_clear_btn" style="text-align:right; margin-top: 25px" class="btn btn-primary">CLEAR</button>
+        <div class="form-group">
+            <button id="provReport_submit_btn" style="text-align:right;margin-top: 25px" class="btn btn-primary">SUBMIT</button>
+            <button id="provReport_clear_btn" style="text-align:right; margin-top: 25px" class="btn btn-primary">CLEAR</button>
+        </div>
     </div>
 </div>
 
