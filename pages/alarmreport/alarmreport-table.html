@@ -72,6 +72,10 @@
     }).done(function(data) {
 			let res = data.rows;
 
+			if (res.length == 0) {
+				inputError($('#alarmreport-forms-submit'),'No Record Found');
+			}
+
       alarmreportDatatable.clear().draw();
       alarmreportDatatable.rows.add(res);
       alarmreportDatatable.columns.adjust().draw();
