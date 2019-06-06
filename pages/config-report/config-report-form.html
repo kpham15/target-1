@@ -110,13 +110,12 @@
       $('input[id="configReport-form-daterange"]').daterangepicker({
         opens: 'bottom',
         startDate: moment(),
-        endDate:   moment(),
         locale: {
           format: wcInfo.date_format
         }
       }, function(start, end, label) {
-        configReportStartDate  = start;
-        configReportEndDate    = end;
+        configReportStartDate  = start.format('YYYY-MM-DD');
+        configReportEndDate    = end.format('YYYY-MM-DD');
       });
     }
 
