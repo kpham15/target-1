@@ -11,9 +11,9 @@
       </ol>
     </section>
     <!-- Maint Report Forms -->
-    <?php include __DIR__ . '/maint-report-form.html'; ?>
+    <?php include __DIR__ . '/maint-report-forms.html'; ?>
     <!-- Maint Report Table -->
-    <?php include __DIR__ . '/maint-report-table.html'; ?>
+    <?php include __DIR__ . '/maint-report-tables.html'; ?>
     
   </div>
 </div>
