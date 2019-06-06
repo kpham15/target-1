@@ -40,3 +40,28 @@
     </button>
   </form>
 </div>
+
+<script type="text/javascript">
+  function queryNodeOperation() {
+    $.ajax({
+      type:       "POST",
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcNodeOpe",
+        "act":    "query",
+        "user":   user.uname
+      },
+      dataType:   'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      nodeOpreationDatatable.clear().draw();
+      nodeOpreationDatatable.rows.add(res);
+      nodeOpreationDatatable.columns.adjust().draw();
+    })
+  }
+
+  $(document).ready(function() {
+  
+  });
+</script>
