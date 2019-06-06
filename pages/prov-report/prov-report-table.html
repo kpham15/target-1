@@ -67,6 +67,10 @@
             dataType: "json"
         }).done(function(data){
             let res = data.rows;
+
+            if (res.length ==0) {
+                inputError($('#provReport_report_sel'),'No Record Found');
+            }
   
             provReportDataTable.clear().draw();
             provReportDataTable.rows.add(res);
