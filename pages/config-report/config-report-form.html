@@ -126,7 +126,7 @@
 
         if (type == "SETUP PORT MAPPING") {
           configReportQueryPortlog(configReportStartDate, configReportEndDate);
-        } else if (type == "SETUP WIRECENTER") {
+        } else if (type == "SETUP WIRE CENTER") {
           configReportQueryWclog(configReportStartDate, configReportEndDate);
         } else if (type == "SETUP FACILITIES") {
           configReportQueryFaclog(configReportStartDate, configReportEndDate);
@@ -156,15 +156,11 @@
       clearErrors();
     });
 
-    // REPORT Change listener
-    $('#configReport-form-report').change(function() {
-      clearErrors();
-    });
-
+    // CHANGE DISPLAYED TABLE ACCORDING TO TYPE SELECTED
     $("#configReport-form-type").change(function() {
-      let tables = $(".configReport-table");
-      let portmapTable = $(".configReport-portmap-table");
-      let facilityTable = $(".configReport-facility-table");
+      let tables          = $(".configReport-table");
+      let portmapTable    = $(".configReport-portmap-table");
+      let facilityTable   = $(".configReport-facility-table");
       let wirecenterTable = $(".configReport-wirecenter-table");
       
       $(".configReport-table").css('display', 'none');
@@ -176,8 +172,14 @@
         wirecenterTable.css('display', 'block');
       }
     });
-  });
 
+    // CLEAR ERRORS WHEN CLICK ON FIELD
+    $(".configReport-form-input").on('click', function() {
+      clearErrors();
+    });
+
+    // END OF DOCUMENT READY
+  });
 
 
 </script>
