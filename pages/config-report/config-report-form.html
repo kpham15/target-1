@@ -179,11 +179,11 @@
       let wirecenterTable = $(".configReport-wirecenter-table");
       
       $(".configReport-table").css('display', 'none');
-      if ($(this) == "SETUP PORT MAPPING" || $(this) == "") {
+      if ($(this).val() == "SETUP PORT MAPPING" || $(this) == "") {
         portmapTable.css('display', 'block');
-      } else if ($(this) == "SETUP FACILITIES") {
+      } else if ($(this).val() == "SETUP FACILITIES") {
         facilityTable.css('display', 'block');
-      } else if ($(this) == "SETUP WIRE CENTER") {
+      } else if ($(this).val() == "SETUP WIRE CENTER") {
         wirecenterTable.css('display', 'block');
       }
     });
