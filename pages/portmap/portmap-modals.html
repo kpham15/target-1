@@ -249,8 +249,29 @@
       $('.portmap-form-input').val('');
     });
 
+    // Submit button click
     $('#portmap-modal-submit').click(function() {
-      portmapSubmit($('#portmap-modal-action').val());
+      let action = $('#portmap-modal-action').val();
+
+      if (action === 'map') {
+        if (!(portmapFacid > 0)) { 
+          return;
+        }
+      }
+      
+      portmapSubmit(action);
+    });
+
+    // Modal Table Row Click
+    $(document).on('click', '#portmap-modal-fac-table tbody tr', function() {
+      let data = portmapModalFacDatatable.row(this).data();
+
+      portmapFacid = data.id;
+      $('.portmap-modal-field[target]').each(function() {
+        let target = $(this).attr('target');
+
+        $(this).val(data[target]);
+      });
     });
   });
 
