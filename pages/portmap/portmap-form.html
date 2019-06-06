@@ -128,7 +128,7 @@
         }
       } else {
         inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
-        $('#portmap-form-action').val('');
+        $('#portmap-form-action').val('')
       }
     }
 
@@ -156,7 +156,7 @@
     // Find ckid button click handler
     $('#pm_findCkid_btn').click(function() {
       queryPort('findCkid');
-    })
+    });
 
     // Clear button click handler
     $('#portmap-form-clear').click(function() {
@@ -195,6 +195,6 @@
       else if (obj.value === 'unmap') {
         portmapActionUnmap(obj);
       }
-    }
+    });
   });
 </script>
