@@ -162,6 +162,8 @@
     $('#portmap-form-clear').click(function() {
       $('.portmap-form-input').val('');
       portmapDatatable.clear().draw();
+
+      clearErrors();
     });
 
     // ACTION change listener
