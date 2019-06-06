@@ -231,12 +231,12 @@
         modal.type = "success";
         modalHandler(modal);
         
-        let page = portmapModalFacDatatable.page();
+        let page = portmapDatatable.page();
 
-        portmapModalFacDatatable.clear().draw();
-        portmapModalFacDatatable.rows.add(res);
-        portmapModalFacDatatable.page(page).draw('page');
-        portmapModalFacDatatable.columns.adjust().draw();
+        portmapDatatable.clear().draw();
+        portmapDatatable.rows.add(res);
+        portmapDatatable.page(page).draw('page');
+        portmapDatatable.columns.adjust().draw();
       }
     });
   }
