@@ -255,6 +255,13 @@
 
       if (action === 'MAP') {
         if (!(portmapFacid > 0)) { 
+          $('.portmap-modal-fac-forms').each(function() {
+            if ($(this).attr('target') === 'fac') {
+              inputError($(this), 'Must select a facility to map to.');
+            } else {
+              inputError($(this),'');
+            }
+          }).
           return;
         }
       }
