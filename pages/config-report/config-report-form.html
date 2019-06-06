@@ -152,7 +152,9 @@
       $('.configReport-form-input').val('');
       $('#configReport-form-type').val("SETUP PORT MAPPING");
       
-      configReportDatatable.clear().draw();
+      configReportPortmapDatatable.clear().draw();
+      configReportWcDatatable.clear().draw();
+      configReportFacDatatable.clear().draw();
       
       $('#configReport-daterange').val('').daterangepicker("update");
       configReportStartDate = currDate;
