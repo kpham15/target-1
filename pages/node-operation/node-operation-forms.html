@@ -70,7 +70,17 @@
     // Action change event
     $('#node-operation-forms-action').change(function() {
       let action =  $(this).val();
-      console.log(action);
+      let node = $('#node-operation-forms-node').val();
+      let device = $('#node-operation-forms-device').val();
+      let serialnum = $('#node-operation-forms-serialnum').val();
+      // console.log(action);
+      
+      $('#node-operation-modal-action').val(action);
+      $('#node-operation-modal-node').val(node);
+      $('#node-operation-modal-device').val(device);
+      $('#node-operation-modal-serialnum').val(serialnum);
+
+      clearErrors();
 
       $('#node-operation-modal').modal('show');
     })
