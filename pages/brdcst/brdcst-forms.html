@@ -94,7 +94,7 @@ $(document).ready(function(obj) {
   }
 
   function actionUpdate(obj) {
-    if ( !id || id === '') {
+    if ( !brdcstId || brdcstId === '') {
       inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
     }
@@ -112,7 +112,7 @@ $(document).ready(function(obj) {
   }
 
   function actionDelete(obj) {
-    if ( !id || id === '') {
+    if ( !brdcstId || brdcstId === '') {
       inputError($('#brdcst-form-action'),'Select msg from table.');
       return;
     }
