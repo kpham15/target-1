@@ -32,4 +32,19 @@
       {"data":"dev"},
     ]
   });
+
+  $(document).ready(function() {
+    // click event on table rows
+    $(document).on('click', '#node-operation-table tbody tr', function() {
+      let data = nodeOperationDatatable.row(this).data();
+
+      $('#node-operation-node').val(data.node);
+      $('#node-operation-device').val(data.dev);
+      $('#node-operation-seialnum').val(data.serial_no);
+      
+      // give selected class
+      $('#node-operation-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
+  });
 </script>
