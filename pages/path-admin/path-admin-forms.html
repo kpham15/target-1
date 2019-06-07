@@ -141,14 +141,16 @@ $("#pathAdmin-form-clear").on('click', function() {
   $(".pathAdmin-form-input").val("").change();
 });
 
-// POPULATE NODE SELECTION BOX
-let html = [];
-html += `<option></option>`;
-for (i = 0; i <= wcInfo.nodes; i++) {
-  let node = i + 1;
-  html += `<option>${node}</option>`;
-}
-$("#pathAdmin-form-node").html(html.join(""));
+$(".menu-item[page_id='path-admin-page']").click(function() {
+  // POPULATE NODE SELECTION BOX
+  let html = [];
+  html += `<option></option>`;
+  for (i = 0; i <= wcInfo.nodes; i++) {
+    let node = i + 1;
+    html += `<option>${node}</option>`;
+  }
+  $("#pathAdmin-form-node").html(html.join(""));
+});
 
 // NODE SLOT VIEW BUTTON
 
