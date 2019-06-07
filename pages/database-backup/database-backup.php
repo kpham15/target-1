@@ -17,6 +17,9 @@
 
       <!-- Database Backup Table -->
       <?php include __DIR__ . '/database-backup-table.html'; ?>
+
+      <!-- Database Backup Modal -->
+      <?php include __DIR__ . '/database-backup-modal.html'; ?>
      
   </div>
 </div>
