@@ -1,0 +1,128 @@
+<!-- Modal -->
+<div class="modal fade" id="batchExcModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">UPLOAD BATCH FILE</h4>
+            </div>
+      
+            <div class="modal-body">
+                <form class="form">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4>CHOOSE THE FILE FROM YOUR COMPUTER:</h4>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input class="form-control" type="file" data-icon="false" id="batchExcModal_file" accept=".csv" style="color:blue;font-weight: bold;height: 50px;background-color: rgb(195, 226, 247);border: groove;">
+                            </div>
+                        </div> 
+                        <label id="batchExcModal_result_lbl" style="color:red"></label>
+                    </div>
+                    
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary pull-left" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="batchExcModal_submit_btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+function batchExcModal_add() {
+    if($("#batchExcModal_file").val() == "") {
+        let modal = {
+            title:  "Error",
+            body: "There is no file uploaded!",
+            type : 'danger'
+        }
+        modalHandler(modal);
+        return;
+    }
+    let file= document.getElementById("batchExcModal_file").files[0];
+    if (file.size > 2097152) {
+        $("#batchExcModal_result_lbl").text("The file size must be less than 2MB!");
+    }
+    else {
+        let data = new FormData();
+        data.append("api", "ipcBatchExc");
+        data.append("user", user.uname);
+        data.append("grp", user.grp);
+        data.append("ugrp", user.ugrp);
+        data.append("act", "ADD");
+        data.append("file", file);  
+
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            let obj = JSON.parse(data);
+            if (obj["rslt"] == "fail") {
+                let modal = {
+                    title:  obj.rslt,
+                    body: obj.reason,
+                    type : 'danger'
+                }
+                modalHandler(modal);
+                
+            }
+            else {
+                if (obj['rows'].length == 0) {
+                    let modal = {
+                        title:  "Error",
+                        body: "No record found!",
+                        type : 'danger'
+                    }
+                    modalHandler(modal);
+                }
+                else {
+                    let a = [];
+                    batchExcList = obj['rows'];
+                    a.push('<option value="">Select a batch file</option>');
+
+                    for (let i=0; i<obj["rows"].length; i++) 
+                    {  
+                        a.push('<option value = "'+ i +'">' + batchExcList[i].filename + '</option>');
+                    }
+
+                    $("#batchExc_file_sel").empty();
+                    $("#batchExc_file_sel").html(a.join(""));
+                    let modal = {
+                        title:  obj.rslt,
+                        body: obj.reason,
+                        type : 'success'
+                    }
+                    modalHandler(modal);
+                }  
+            } 
+        });
+
+    }
+}
+
+function batchExcModal_clearForm() {
+    $("#batchExcModal_file").val("");
+    $("#batchExcModal_result_lbl").text("");
+}
+
+
+$("#batchExcModal_submit_btn").click(function(e){
+    e.preventDefault();
+    batchExcModal_add();
+});
+$("#batchExcModal").on("hidden.bs.modal", function(){
+    batchExec_clearForm()
+});
+
+</script>
