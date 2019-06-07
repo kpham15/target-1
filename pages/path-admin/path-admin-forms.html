@@ -143,7 +143,7 @@ $("#pathAdmin-form-clear").on('click', function() {
 
 $(".menu-item[page_id='path-admin-page']").click(function() {
   // POPULATE NODE SELECTION BOX
-  let html = [];
+  var html = [];
   html += `<option></option>`;
   for (i = 0; i <= wcInfo.nodes; i++) {
     let node = i + 1;
