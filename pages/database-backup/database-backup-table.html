@@ -21,6 +21,25 @@
 </div>
 
 <script type="text/javascript">
+  function queryDatabaseBackup() {
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":    "coQueryBkup",
+        "act":    "query",
+        "user":   user.uname
+      },
+      dataType:   'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      databaseBackupDatatable.clear().draw();
+      databaseBackupDatatable.rows.add(res);
+      databaseBackupDatatable.columns.adjust().draw();
+    })
+  }
+
   // Initialize Datatable
   var databaseBackupDatatable = $('#database-backup-table').DataTable({
 		
