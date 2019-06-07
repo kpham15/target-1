@@ -62,7 +62,7 @@
       let action = $('#database-backup-forms-action').val();
 
       if (action == "BACKUP MANUALLY") {
-        $('#database-backup-modal-action').val('MANUAL');
+        $('#database-backup-modal-action').val("MANUAL");
         $('#database-backup-modal').modal('show');
       }
       else if (action == "DELETE BACKUP FILE") {
@@ -70,7 +70,7 @@
         $('#database-backup-modal-filename').val(fileName);
         $('#database-backup-modal-type').val(type);
         $('#database-backup-modal-date').val(date);
-        $('#database-backup-modal-action').val('DELETE');
+        $('#database-backup-modal-action').val("DELETE");
 
         $('#database-backup-modal').modal('show');
       }
