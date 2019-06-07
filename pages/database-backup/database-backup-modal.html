@@ -72,7 +72,50 @@
 </div>
 
 <script type="text/javascript">
+
+
 $(document).ready(function() {
+
+  // Submit Btn Click Event Handler
+  $('#database-backup-modal-submit').click(function() {
+    let user = $('#database-backup-modal-user').val();
+    let fileName = $('#database-backup-modal-filename').val();
+    let type = $('#database-backup-modal-type').val();
+    let date = $('#database-backup-modal-date').val();
+    let action = $('#database-backup-modal-action').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":    "coQueryBkup",
+        "act":    action,
+        "user":   user.uname,
+        "dbfile": fileName
+      },
+      dataType:   'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+
+      if (res.rslt == 'fail') {
+        modal.type = 'danger'
+        modalHandler(modal);
+      }
+      else {
+        $('#database-backup-modal').modal('hide');
+
+        queryDatabaseBackup();
+        
+        modal.type = "success";
+        modalHandler(modal);
+      }
+    })
+
+  })
   // Modal Close Event Handler
   $('#database-backup-modal').on('hidden.bs.modal', function(e) {
     $('.database-backup-forms-input').val('');
