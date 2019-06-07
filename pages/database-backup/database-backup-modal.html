@@ -3,15 +3,66 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-labe;="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">DATABASE BACKUP</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-labe;="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">DATABASE BACKUP</h4>
       </div>
 
       <div class="modal-body">
-        <form class="row">
+        <form class="form">
+          <!-- Row 1 -->
+          <div class="row">
+            <!-- USER -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>USER:</label>
+                <input id="database-backup-modal-user" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
 
+            <!-- BACKUP FILE NAME -->
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>BACKUP FILE NAME:</label>
+                <input id="database-backup-modal-filename" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row">
+            <!-- TYPE -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>TYPE:</label>
+                <input id="database-backup-modal-type" type="text" class="form-control database-backup-modal-input">
+              </div>
+            </div>
+
+            <!-- DATE -->
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>DATE:</label>
+                <input id="database-backup-modal-date" type="text" class="form-control database-backup-modal-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row">
+            <!-- ACTION -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <select id="database-backup-modal-action" class="form-control data-dismiss-input">
+                  <option value=""></option>
+                  <option value="BACKUP MANUALLY">BACKUP MANUALLY</option>
+                  <option value="DELETE BACKUP FILE">DELETE BACKUP FILE</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
