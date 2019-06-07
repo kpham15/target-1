@@ -19,7 +19,6 @@
         <div class="form-group">
           <label>SLOT</label>          
           <select id="pathAdmin-form-slot" class="form-control pathAdmin-form-input">
-            <option></option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -148,13 +147,14 @@
 // CLEAR BUTTON
 $("#pathAdmin-form-clear").on('click', function() {
   $(".pathAdmin-form-input").val("").change();
+  $("#pathAdmin-form-node").val("1").change();
+  $("#pathAdmin-form-slot").val("1").change();
   clearErrors();
 });
 
 $(".menu-item[page_id='path-admin-page']").click(function() {
   // POPULATE NODE SELECTION BOX
   var html = [];
-  html.push(`<option></option>`);
   for (i = 0; i < wcInfo.nodes; i++) {
     let node = i + 1;
     html.push(`<option>${node}</option>`);
