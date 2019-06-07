@@ -155,7 +155,7 @@ $(".menu-item[page_id='path-admin-page']").click(function() {
 // NODE SLOT VIEW BUTTON
 $("#pathAdmin-form-view_node_slot").on("click", function() {
   clearErrors();
-  
+
   let node = $("#pathAdmin-form-node");
   let slot = $("#pathAdmin-form-slot");
 
@@ -169,10 +169,43 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 });
 
 // CKID VIEW BUTTON
+$("#pathAdmin-form-view_ckid").on("click", function() {
+  clearErrors();
+
+  let ckid = $("#pathAdmin-form-ckid");
+
+  if (ckid == "") {
+    inputError(ckid, 'Missing CKID');
+  } else {
+    pathAdminQueryByCkid();
+  }
+});
 
 // FAC_ID VIEW BUTTON
+$("#pathAdmin-form-view_fac_id").on("click", function() {
+  clearErrors();
+
+  let fac_id = $("#pathAdmin-form-fac_id");
+
+  if (fac_id == "") {
+    inputError(fac_id, 'Missing FAC_ID');
+  } else {
+    pathAdminQueryByFacId();
+  }
+});
 
 // PORT VIEW BUTTON
+$("#pathAdmin-form-view_port").on("click", function() {
+  clearErrors();
+
+  let port = $("#pathAdmin-form-port");
+
+  if (port == "") {
+    inputError(port, 'Missing PORT');
+  } else {
+    pathAdminQueryByPort();
+  }
+});
 
 // ACTION SUBMIT BUTTON
 
