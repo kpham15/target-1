@@ -45,6 +45,14 @@
         </select>
         </div>
     </div>
-
   </form>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // click event on sidebar menu
+    $('.menu-item[page_id="database-backup-page"]').click(function() {
+      queryDatabaseBackup();
+    })
+  })
+</script>
