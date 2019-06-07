@@ -73,6 +73,15 @@
 
 <script type="text/javascript">
 
+function databaseBackupReturn(modal) {
+  $('#database-backup-modal').modal('hide');
+
+  queryDatabaseBackup();
+
+  modal.type = "success"
+  modalHandler(modal);
+}
+
 
 $(document).ready(function() {
 
@@ -98,43 +107,46 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      
-
-      if (data.rslt == 'fail') {
-        let modal = {
+      let modal = {
         title: data.rslt,
         body: data.reason,
       }
+      
+      if (data.rslt == 'fail') { 
         modal.type = 'danger'
         modalHandler(modal);
       }
-      else if (action == "DELETE") {
 
+      if (action == "DELETE") {
         let modal = {
           title:  data.rslt,
           body:   "File Deleted"
         }
 
-        $('#database-backup-modal').modal('hide');
+        databaseBackupReturn(modal);
 
-        queryDatabaseBackup();
+        // $('#database-backup-modal').modal('hide');
 
-        modal.type = "success"
-        modalHandler(modal);
+        // queryDatabaseBackup();
 
-      } else if (action == "MANUAL") {
+        // modal.type = "success"
+        // modalHandler(modal);
+      }
 
+      if (action == "MANUAL") {
         let modal = {
           title: data.rslt,
           body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
         }
 
-        $('#database-backup-modal').modal('hide');
+        databaseBackupReturn(modal);
 
-        queryDatabaseBackup();
+        // $('#database-backup-modal').modal('hide');
 
-        modal.type = "success"
-        modalHandler(modal);
+        // queryDatabaseBackup();
+
+        // modal.type = "success"
+        // modalHandler(modal);
       }
     })
 
