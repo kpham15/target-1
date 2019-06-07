@@ -57,7 +57,63 @@
       let res = data.rows;
 
       if (res.length == 0) {
-        inputError($('#pathAdmin-form-submit'),'No Record Found');
+        inputError($('#pathAdmin-form-view_node_slot'),'No Record Found');
+      }
+      pathAdminDatatable.clear().draw();
+      pathAdminDatatable.rows.add(res);
+      pathAdminDatatable.columns.adjust().draw();
+    });
+  }
+
+  function pathAdminQueryByCkid(){
+    let ckid = $("#pathAdmin-form-ckid").val();
+    
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcPath',
+        act:      "query",
+        ckid:     ckid.toUpperCase(),
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#pathAdmin-form-view_ckid'),'No Record Found');
+      }
+      pathAdminDatatable.clear().draw();
+      pathAdminDatatable.rows.add(res);
+      pathAdminDatatable.columns.adjust().draw();
+    });
+  }
+
+  function pathAdminQueryByFacId(){
+    let fac = $("#pathAdmin-form-fac_id").val();
+    
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcPath',
+        act:      "query",
+        fac:      fac.toUpperCase(),
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#pathAdmin-form-view_fac_id'),'No Record Found');
       }
       pathAdminDatatable.clear().draw();
       pathAdminDatatable.rows.add(res);
