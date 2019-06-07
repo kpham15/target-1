@@ -144,10 +144,10 @@ $("#pathAdmin-form-clear").on('click', function() {
 $(".menu-item[page_id='path-admin-page']").click(function() {
   // POPULATE NODE SELECTION BOX
   var html = [];
-  html += `<option></option>`;
+  html.push(`<option></option>`);
   for (i = 0; i <= wcInfo.nodes; i++) {
     let node = i + 1;
-    html += `<option>${node}</option>`;
+    html.push(`<option>${node}</option>`);
   }
   $("#pathAdmin-form-node").html(html.join(''));
 });
