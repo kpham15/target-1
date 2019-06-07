@@ -40,8 +40,8 @@
         <div class="col-sm-8">
         <select id="database-backup-forms-action" class="form-control database-backup-forms-input">
           <option value=""></option>
-          <option value="BACKUP MANUALLY">BACKUP MANUALLY</option>
-          <option value="DELETE BACKUP FILE">DELETE BACKUP FILE</option>
+          <option value="MANUAL">BACKUP MANUALLY</option>
+          <option value="DELETE">DELETE BACKUP FILE</option>
         </select>
         </div>
     </div>
@@ -61,16 +61,16 @@
       let date = $('#database-backup-forms-date').val();
       let action = $('#database-backup-forms-action').val();
 
-      if (action == "BACKUP MANUALLY") {
-        $('#database-backup-modal-action').val("MANUAL");
+      if (action == "MANUAL") {
+        $('#database-backup-modal-action').val(action);
         $('#database-backup-modal').modal('show');
       }
-      else if (action == "DELETE BACKUP FILE") {
+      else if (action == "DELETE") {
         $('#database-backup-modal-user').val(user);
         $('#database-backup-modal-filename').val(fileName);
         $('#database-backup-modal-type').val(type);
         $('#database-backup-modal-date').val(date);
-        $('#database-backup-modal-action').val("DELETE");
+        $('#database-backup-modal-action').val(action);
 
         $('#database-backup-modal').modal('show');
       }
