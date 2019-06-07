@@ -1,0 +1,88 @@
+<!-- Modal -->
+<div class="modal fade" id="setup-users-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">SETUP USERS</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Top Row -->
+          <div class="row">
+            <!--USER NAME-->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>USER NAME</label>
+                <input id="setup-users-modal-uname" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- SSN -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>SSN:</label>
+                <input id="setup-users-modal-ssn" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- STAT -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>STATUS</label>
+                <input id="setup-users-modal-stat" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row">
+            <!-- FNAME -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FIRST NAME</label>
+                <input id="setup-users-modal-fname" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- MI -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MI</label>
+                <input id="setup-users-modal-mi" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- LNAME -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>LAST NAME</label>
+                <input id="setup-users-modal-lname" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="row">
+            <!-- TEL -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>TEL</label>
+                <label>TN:</label>
+                <input id="setup-users-modal-tn-cbx" type="checkbox" checked>
+                <div class="input-group">
+                  <input id="setup-users-modal-tel" type="text" class="form-control users-modal-tel" style="display:none;" />
+                  <input id="setup-users-modal-tel-tn" type="text" class="form-control users-modal-tel" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
+                </div>
+              </div>
+            </div>
+            <!-- EMAIL -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>EMAIL</label>
+                <input id="setup-users-modal-email" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
