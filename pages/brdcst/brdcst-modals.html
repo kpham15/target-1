@@ -116,6 +116,10 @@
           title: data.rslt,
           body: data.reason,
         }
+        let modalsuccess = {
+          title:  data.rslt,
+          body:   "Backup Created Successfully",
+        }
 
         if (data.rslt === 'fail') {
           modal.type = 'danger'
@@ -127,7 +131,7 @@
           queryBrdcst();
           
           modal.type = "success";
-          modalHandler(modal);
+          modalHandler(modalsuccess);
         }
       });
     });
