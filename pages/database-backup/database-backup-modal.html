@@ -98,7 +98,7 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let length = data.rows.length;
+      let length = (data.rows).length;
       let modal = {
         title: data.rslt,
         body: data.reason,
