@@ -48,8 +48,19 @@
     "columns": [
       {"data":"user"},
 			{"data":"dbfile"},
-			{"data":"bktyp"},
-			{"data":"dbpath"},
+      {"data":"bktyp"},
+      
+    //   { "data": "TelephoneNumber",
+    //     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+    //         $(nTd).html("<a href='tel:"+oData.TelephoneNumber+"'>"+oData.TelephoneNumber+"</a>");
+    //     }
+    // },
+
+      {"data":"dbpath",
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+              $(nTd).html("<a href='DOWNLOAD:"+oData.dbpath+"'>"+oData.dbpath+"</a>");
+          }
+      },
 			{"data":"date"}
     ]
   });
