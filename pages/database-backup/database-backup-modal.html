@@ -103,17 +103,17 @@ $(document).ready(function() {
         body: data.reason,
       }
 
-      // if (action == "DELETE"){
-      //   let modalsuccess = {
-      //     title:  data.rslt,
-      //     body:   "File Deleted"
-      //   }
-      // } else if (action == "MANUAL") {
-      //   let modalsuccess = {
-      //     title: data.rslt,
-      //     body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
-      //   }
-      // }
+      if (action == "DELETE"){
+        let modalsuccess = {
+          title:  data.rslt,
+          body:   "File Deleted"
+        }
+      } else if (action == "MANUAL") {
+        let modalsuccess = {
+          title: data.rslt,
+          body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
+        }
+      }
 
       if (data.rslt == 'fail') {
         modal.type = 'danger'
