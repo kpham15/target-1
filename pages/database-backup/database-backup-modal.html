@@ -98,31 +98,33 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
+      
+
+      if (data.rslt == 'fail') {
+        let modal = {
         title: data.rslt,
         body: data.reason,
       }
-
-      if (data.rslt == 'fail') {
         modal.type = 'danger'
         modalHandler(modal);
       }
+      else if (action == "DELETE") {
 
-      else if (action == "DELETE"){
-        
-        let modalsuccess = {
+        let modal = {
           title:  data.rslt,
           body:   "File Deleted"
         }
 
+        $('#database-backup-modal').modal('hide');
+
         queryDatabaseBackup();
 
-        modal.type = "success";
-        modalHandler(modalsuccess);
+        modal.type = "success"
+        modalHandler(modal);
 
       } else if (action == "MANUAL") {
 
-        let modalsuccess = {
+        let modal = {
           title: data.rslt,
           body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
         }
@@ -131,8 +133,8 @@ $(document).ready(function() {
 
         queryDatabaseBackup();
 
-        modal.type = "success";
-        modalHandler(modalsuccess);
+        modal.type = "success"
+        modalHandler(modal);
       }
     })
 
