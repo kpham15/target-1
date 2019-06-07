@@ -52,6 +52,8 @@ class BATCH {
     public function addBatch($user, $fileName, $fileContent) {
 		global $db;
 
+        $date = now();
+     
         $qry = "INSERT INTO 
                 t_batch 
                 (user, filename, content, date) 
