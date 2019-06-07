@@ -757,11 +757,11 @@ throw new Error('AdminLTE requires jQuery')
   };
 
   PushMenu.prototype.init = function () {
-    if (this.options.expandOnHover
-      || ($('body').is(Selector.mini + Selector.layoutFixed))) {
-      this.expandOnHover();
-      $('body').addClass(ClassName.expandFeature);
-    }
+    // if (this.options.expandOnHover
+    //   || ($('body').is(Selector.mini + Selector.layoutFixed))) {
+    //   this.expandOnHover();
+    //   $('body').addClass(ClassName.expandFeature);
+    // }
 
     $(Selector.contentWrapper).click(function () {
       // Enable hide menu when clicking on the content-wrapper on small screens

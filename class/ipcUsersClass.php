@@ -333,9 +333,6 @@ class USERS {
 		}
         $pw = encryptData($ssn);
 
-		// $qry = "INSERT INTO t_users VALUES(0,'" . $uname . "','" . $lname . "','" . $fname . "','" . $mi . "','" . $ssn . "'";
-        // $qry .= ",'','','','','" . $title . "','" . $tel . "','" . $email . "','INACTIVE','" . $pw . "'";
-        // $qry .= ",now(),'','','','','','','','','','','',0,'','','" . $grpId . "', '$ugrp',null,now())"; 
         
         $qry = "INSERT INTO t_users 
                 (uname, lname, fname, mi, ssn, 

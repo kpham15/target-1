@@ -7,6 +7,8 @@
   echo '<link rel="stylesheet" href="./dist/css/AdminLTE.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/skins/skin-blue.min.css">';
   echo '<link rel="stylesheet" href="./bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">';
+  echo ' <link rel="stylesheet" href="./bower_components/bootstrap-daterangepicker/daterangepicker.css">';
+  echo '<link rel="stylesheet" href="./bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">';
   echo '<link rel="stylesheet" href="./dist/css/fonts.css">';
 
   echo '<link rel="stylesheet" href="./plugins/iCheck/all.css">';
@@ -37,6 +39,6 @@
   echo '<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>';
   echo '<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>';
   echo '<script src="bower_components/fastclick/lib/fastclick.js"></script>';
-  echo '<script src="dist/js/adminlte.min.js"></script>';
+  echo '<script src="dist/js/adminlte.js"></script>';
   echo '<script src="plugins/iCheck/icheck.min.js"></script>';
 ?>

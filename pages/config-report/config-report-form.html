@@ -1,0 +1,193 @@
+<!-- FORM -->
+<div class="col-md-12">
+    <form id="configReport-form">
+      <!-- ROW 1 BEGIN-->
+      <div class="row">
+  
+        <!-- USER -->
+        <div class="col-md-1">
+          <label>USER</label>
+          <input id="configReport-form-user" class="form-control configReport-form-input">
+        </div>
+  
+        <!-- DateRangePicker -->
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>DATE RANGE:</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" id="configReport-form-daterange" class="form-control pull-right configReport-form-input">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <!-- END ROW 1 -->
+  
+      <!-- ROW 2 BEGIN -->
+      <div class="row">
+  
+        <!-- REPORT -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>REPORT:</label>
+            <select id="configReport-form-report" class="form-control configReport-form-input">
+              <option value=""></option>
+              <option value="VIEW REPORT">VIEW REPORT</option>
+              <option value="CREATE REPORT">CREATE REPORT</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- REPORT -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>TYPE:</label>
+            <select id="configReport-form-type" class="form-control configReport-form-input">
+              <option>SETUP PORT MAPPING</option>
+              <option>SETUP FACILITIES</option>
+              <option>SETUP WIRE CENTER</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="form-group">
+            <!-- Submit Button -->
+            <button id="configReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+              Submit
+            </button>
+            
+            <!-- Clear Button -->
+            <button id="configReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+              Clear
+            </button>
+            
+          </div>
+        </div>
+  
+      </div>
+      <!-- ROW 2 END -->
+      
+    </form>
+  </div>
+  
+<script type="text/javascript">
+
+  // DOWNLOAD REPORT
+  function downloadConfigReports(args) {
+    var data, filename, link;
+    var csv = convertArrayOfObjectsToCSV({
+      data: configReportDatatable.data().toArray()
+    });
+    if (csv == null) {
+      inputError($('#configReport-form-report'),'No Reports To Create');
+      return;
+    }
+    
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+  }
+
+  $(document).ready(function() {
+    
+    var configReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+    var configReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+
+    // Initialze daterangepicker and assign values to start and from dates
+    function initializeConfigReportDateRangePicker () {
+      $('input[id="configReport-form-daterange"]').daterangepicker({
+        opens: 'bottom',
+        startDate: moment(),
+      }, function(start, end, label) {
+        configReportStartDate  = start.format('YYYY-MM-DD');
+        configReportEndDate    = end.format('YYYY-MM-DD');
+      });
+    }
+
+    initializeConfigReportDateRangePicker();
+    
+
+    // Click Event For 'Submit Button'
+    $('#configReport-form-submit').click(function() {
+      clearErrors();
+      
+      let report = $('#configReport-form-report');
+      let type   = $("#configReport-form-type").val();
+
+      if (report === '') {
+        inputError($('#configReport-form-report'),'Select An Option');
+        return;
+      } else if (report.val() === "VIEW REPORT") {
+        if (type == "SETUP PORT MAPPING") {
+          configReportQueryPortlog(configReportStartDate, configReportEndDate);
+        } else if (type == "SETUP WIRE CENTER") {
+          configReportQueryWclog(configReportStartDate, configReportEndDate);
+        } else if (type == "SETUP FACILITIES") {
+          configReportQueryFaclog(configReportStartDate, configReportEndDate);
+        }
+      } else if (report.val() === "CREATE REPORT") {
+        downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
+      }
+    });
+
+    // Click Event For 'Clear Button'
+    $('#configReport-form-clear').click(function() {
+
+      let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+      $('.configReport-form-input').val('');
+      $('#configReport-form-type').val("SETUP PORT MAPPING");
+      
+      configReportPortmapDatatable.clear().draw();
+      configReportWcDatatable.clear().draw();
+      configReportFacDatatable.clear().draw();
+      
+      $('#configReport-daterange').val('').daterangepicker("update");
+      configReportStartDate = currDate;
+      configReportEndDate = currDate;
+
+      // reinitialize daterangepicker
+      initializeConfigReportDateRangePicker();
+      
+      clearErrors();
+    });
+
+    // CHANGE DISPLAYED TABLE ACCORDING TO TYPE SELECTED
+    $("#configReport-form-type").change(function() {
+      let tables          = $(".configReport-table");
+      let portmapTable    = $(".configReport-portmap-table");
+      let facilityTable   = $(".configReport-facility-table");
+      let wirecenterTable = $(".configReport-wirecenter-table");
+      
+      $(".configReport-table").css('display', 'none');
+      if ($(this).val() == "SETUP PORT MAPPING" || $(this) == "") {
+        portmapTable.css('display', 'block');
+      } else if ($(this).val() == "SETUP FACILITIES") {
+        facilityTable.css('display', 'block');
+      } else if ($(this).val() == "SETUP WIRE CENTER") {
+        wirecenterTable.css('display', 'block');
+      }
+    });
+
+    // CLEAR ERRORS WHEN CLICK ON FIELD
+    $(".configReport-form-input").on('click', function() {
+      clearErrors();
+    });
+
+    // END OF DOCUMENT READY
+  });
+
+
+</script>

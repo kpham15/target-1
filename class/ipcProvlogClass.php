@@ -63,15 +63,17 @@
 		public function log($user, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $dd, $fdd, $act, $ctyp, $ffac, $fport, $tfac, $tport, $reason, $tktno) {
 			global $db;
 
-            // $qry = "INSERT INTO t_provlog values (0,'$user','$ckid', '$cls', '$adsr', '$prot', '$ordno', '$mlo', NOW(), $dd, $fdd,'$act', '$result')" ;
+			if ($dd == null) $dd ='';
+			if ($fdd == null) $fdd='';
+
             $qry = "INSERT INTO 
 					t_provlog 
-					(user, ckid, cls, adsr, prot, 
+					(user, ckid, cls, adsr, prot, date, 
 					ordno, tktno, dd, fdd, mlo, 
 					action, result, ctyp, ffac, fport, 
 					tfac, tport) 
 					VALUES 
-					('$user', '$ckid', '$cls', '$adsr', '$prot', 
+					('$user', '$ckid', '$cls', '$adsr', '$prot', now(), 
 					'$ordno', '$tktno', '$dd', '$fdd', '$mlo', 
 					'$act', '$reason', '$ctyp', '$ffac', '$fport', 
 					'$tfac','$tport')";
@@ -79,12 +81,12 @@
 			$res = $db->query($qry);
 			if (!$res) {
 				$this->rslt = "fail";
-                $this->reason = mysqli_error($db);
+                $this->reason = mysqli_error($db) . " - " . $qry;
                 $this->rows = [];
 			}
 			else {
                 $this->rslt = "success";
-                $this->reason = "SUCCESSFUL - PROVISIONING LOG INSERTED";
+                $this->reason = "SUCCESSFUL - PROVISIONING LOG" . ": " . $qry;
                 $this->rows = [];
 			}
 

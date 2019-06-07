@@ -30,9 +30,8 @@
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu tree" data-widget="tree">
       <li class="header">Navigation</li>
-      <!-- Optionally, you can add icons to the links -->
 
-      <!-- Home Page -->
+      <!-- Home -->
       <li class="active menu-item" page_id="system-view-page">
         <a href="#">
           <i class="glyphicon glyphicon-home"></i>
@@ -48,10 +47,71 @@
         </a>
       </li>
 
-      <!-- Reports Nav -->
+      <!-- IPC References -->
+      <li class="menu-item" page_id="references-page">
+        <a href="#">
+          <i class="glyphicon glyphicon-tags"></i>
+          <span>IPC References</span>
+        </a>
+      </li>
+
+      <!-- Setup -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-table"></i>
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>Setup</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+
+          <!-- Setup Service Connection-->
+          <li class="menu-item" page_id="svc-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Service Connection</span>
+            </a>
+          </li>
+          
+          <!-- Setup Facilities -->
+          <li class="menu-item" page_id="fac-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Facilities</span>
+            </a>
+          </li>
+
+          <!-- Setup Port Mapping -->
+          <li class="menu-item" page_id="portmap-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Port Mapping</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <!-- Alarm Administration -->
+      <li class="menu-item" page_id="alarm-admin-page">
+        <a href="#">
+          <i class="fa fa-warning"></i>
+          <span>Alarm Administration</span>
+        </a>
+      </li>
+      
+      <li class="menu-item" page_id="ftOrders-page">
+        <a href="#">
+          <i class="fa fa-paper-plane"></i>
+          <span>FT Orders</span>
+        </a>
+      </li>
+
+      <!-- Reports -->
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
           <span>Reports</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -59,18 +119,54 @@
         </a>
         <ul class="treeview-menu">
 
-          <!-- Event Report Page -->
-          <li class="menu-item" page_id="evtreport-page">
+          <!-- Configuration Report -->
+          <li class="menu-item" page_id="config-report-page">
             <a href="#">
               <i class="fa fa-circle-o"></i>
-              Event Reports
+              <span>Configuration Report</span>
             </a>
           </li>
 
+          <!-- Maintenance Report -->
+          <li class="menu-item" page_id="maint-report-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Maintenance Report</span>
+            </a>
+          </li>
+          
+          <!-- Provisioning Report -->
+          <li class="menu-item" page_id="prov-report-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Provisioning Report</span>
+            </a>
+          </li>
 
+          <!-- Alarm Report -->
+          <li class="menu-item" page_id="alarmreport-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Alarm Report</span>
+            </a>
+          </li>
+      
         </ul>
       </li>
-      <!-- END Reports Nav -->
+
+      <li class="menu-item" page_id="node-operation-page">
+        <a href="#">
+          <i class="fa fa-gears"></i>
+          <span>Node Operation</span>
+        </a>
+      </li>
+
+      <li class="menu-item" page_id="evtreport-page">
+        <a href="#">
+          <i class="fa fa-circle-o"></i>
+          Event Reports
+        </a>
+      </li>
       
     </ul>
     <!-- /.sidebar-menu -->

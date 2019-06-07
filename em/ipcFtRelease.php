@@ -94,8 +94,6 @@
         $id = $_POST['id'];
     }
 
-    // $evtLog = new EVTLOG($user, "FTRELEASE", $act, "");
-    
 
     $evtLog = new EVENTLOG($user, "PROVISIONING", "FLOW-THROUGH RELEASE TABLE", $act, $_POST);
 
