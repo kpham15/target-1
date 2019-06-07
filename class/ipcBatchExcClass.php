@@ -52,13 +52,11 @@ class BATCH {
     public function addBatch($user, $fileName, $fileContent) {
 		global $db;
 
-        $date = now();
-     
         $qry = "INSERT INTO 
                 t_batch 
                 (user, filename, content, date) 
                 VALUES 
-                ('$user', '$fileName', '$fileContent', '$date')";
+                ('$user', '$fileName', '$fileContent', now())";
 
 		$res = $db->query($qry);
         if (!$res) {
@@ -66,7 +64,6 @@ class BATCH {
             $this->reason = mysqli_error($db);
             return;
         }
-
         $batch_id = $db->insert_id;
     
         //Break the text file into lines
@@ -78,7 +75,7 @@ class BATCH {
                     t_bats 
                     (batch_id, cmd_id, cmd) 
                     VALUES 
-                    ('$batch_id', '$cmd_id', $commandArray[$i]')";
+                    ('$batch_id', '$cmd_id', '$commandArray[$i]')";
             
             // echo $qry.PHP_EOL;
             $res = $db->query($qry);
