@@ -1,0 +1,173 @@
+<!-- Forms -->
+<div class="col-md-5">
+  <form id="brdcst-form">
+    <!-- Top Row -->
+    <div class="row">
+
+      <!-- MSG OWNER -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>MSG OWNER</label>
+          <input id="brdcst-form-msgowner" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+  
+      <!-- SA dropdown -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>SA</label>
+          <select id="brdcst-form-sa" class="form-control brdcst-form-input">
+            <option value=""></option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Row -->
+    <div class="row">
+      <!-- Action Dropdown -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="brdcst-form-action" class="form-control brdcst-form-input">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="row">
+      <!-- Message Title -->
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>MESSAGE TITLE</label>
+          <input id="brdcst-form-msgtitle" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+      
+      <!-- Date field -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>DATE</label>
+          <input id="brdcst-form-date" type="text" class="form-control brdcst-form-input" disabled="">
+        </div>
+      </div>
+
+      <!-- Messsage Details -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>MESSAGE DETAILS</label>
+          <textarea id="brdcst-form-details" class="form-control brdcst-form-input" rows="5" disabled=""></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Button -->
+    <button id="brdcst-form-clear" type="button" class="btn btn-primary btn-flat">
+      Clear
+    </button>
+    <!-- View Button -->
+    <button type="button" id="view-brdcst" class="btn btn-primary btn-flat">
+      View
+    </button>
+  </form>
+</div>
+
+<script type="text/javascript">
+var brdcstId = '';
+
+$(document).ready(function(obj) {
+
+  function brdcstActionAdd() {
+    $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+
+    $('#brdcst-modal-date').val(obj.currDate);
+    $('#brdcst-modal-action').val('ADD');
+
+    $('#brdcst-modal').modal('show');
+  }
+
+  function brdcstActionUpdate(obj) {
+    if ( !brdcstId || brdcstId === '') {
+      inputError($('#brdcst-form-action'),'Select msg from table.');
+      return;
+    }
+
+    $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+    
+    $('#brdcst-modal-date').val(obj.date);
+    $('#brdcst-modal-msgowner').val(obj.owner);
+    $('#brdcst-modal-msgtitle').val(obj.title);
+    $('#brdcst-modal-sa').val(obj.sa);
+    $('#brdcst-modal-details').val(obj.detail);
+    $('#brdcst-modal-action').val('UPDATE');
+
+    $('#brdcst-modal').modal('show');
+  }
+
+  function brdcstActionDelete(obj) {
+    if ( !brdcstId || brdcstId === '') {
+      inputError($('#brdcst-form-action'),'Select msg from table.');
+      return;
+    }
+
+    $('#brdcst-modal-details').prop('disabled', false);
+
+    $('#brdcst-modal-date').val(obj.date);
+    $('#brdcst-modal-msgowner').val(obj.owner);
+    $('#brdcst-modal-msgtitle').val(obj.title);
+    $('#brdcst-modal-sa').val(obj.sa);
+    $('#brdcst-modal-details').val(obj.detail);
+    $('#brdcst-modal-action').val('DELETE');
+
+    $('#brdcst-modal').modal('show');
+  }
+
+  // ACTION Change listener
+  $('#brdcst-form-action').change(function() {
+    let obj = {
+      value:      $(this).val(),
+      currDate:   moment(new Date()).format('MM-DD-YYYY'),
+      owner:      $('#brdcst-form-msgowner').val(),
+      sa:         $('#brdcst-form-sa').val(),
+      action:     $('#brdcst-form-action').val(),
+      title:      $('#brdcst-form-msg-title').val(),
+      date:       $('#brdcst-form-date').val(),
+      detail:     $('#brdcst-form-details').val()
+    }
+
+    clearErrors();
+    loadOwners();
+
+    // ADD Action
+    if (obj.value === 'add') {
+      brdcstActionAdd(obj);
+    }
+    // UPDATE Action
+    else if (obj.value === 'update') {
+      brdcstActionUpdate(obj);
+    }
+    // DELETE Action
+    else if (obj.value === 'delete') {
+      brdcstActionDelete(obj);
+    }
+  });
+
+  $('#brdcst-modal').on('hidden.bs.modal', function (e) {
+    $('.brdcst-modal-field').prop('disabled', true).val('');
+  });
+
+  $('#brdcst-form-clear').click(function() {
+    $('.brdcst-form-input').val('');
+    brdcstId = '';
+
+    clearErrors();
+  });
+});
+</script>

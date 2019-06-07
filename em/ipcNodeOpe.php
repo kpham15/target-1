@@ -841,6 +841,9 @@ function exec_resp($node, $hwRsp, $userObj) {
             return $result;
         }
     }
+}
+
+function updateCpsStatus($hwRsp) {
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
