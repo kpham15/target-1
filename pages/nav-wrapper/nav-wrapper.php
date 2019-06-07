@@ -28,6 +28,7 @@
     <?php include __DIR__ . '/../portmap/portmap.php'; ?>
     <?php include __DIR__ . '/../node-operation/node-operation.php'; ?>
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
+    <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
 
 
     <!-- /.content -->
