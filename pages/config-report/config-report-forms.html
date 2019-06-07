@@ -34,7 +34,6 @@
           <div class="form-group">
             <label>REPORT:</label>
             <select id="configReport-form-report" class="form-control configReport-form-input">
-              <option value=""></option>
               <option value="VIEW REPORT">VIEW REPORT</option>
               <option value="CREATE REPORT">CREATE REPORT</option>
             </select>
@@ -149,6 +148,7 @@
 
       $('.configReport-form-input').val('');
       $('#configReport-form-type').val("SETUP PORT MAPPING");
+      $('#configReport-form-report').val("VIEW REPORT");
       
       configReportPortmapDatatable.clear().draw();
       configReportWcDatatable.clear().draw();
