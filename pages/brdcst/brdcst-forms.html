@@ -3,8 +3,6 @@
   <form id="brdcst-form">
     <!-- Top Row -->
     <div class="row">
-      <!-- Hidden ID field -->
-      <input id="brdcst-form-id" type="hidden" class="brdcst-form-input" />
 
       <!-- MSG OWNER -->
       <div class="col-md-4">
@@ -82,71 +80,82 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
+var brdcstId = '';
+
+$(document).ready(function(obj) {
+
+  function brdcstActionAdd() {
+    $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+
+    $('#brdcst-modal-date').val(obj.currDate);
+    $('#brdcst-modal-action').val('ADD');
+
+    $('#brdcst-modal').modal('show');
+  }
+
+  function brdcstActionUpdate(obj) {
+    if ( !brdcstId || brdcstId === '') {
+      inputError($('#brdcst-form-action'),'Select msg from table.');
+      return;
+    }
+
+    $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
+    
+    $('#brdcst-modal-date').val(obj.date);
+    $('#brdcst-modal-msgowner').val(obj.owner);
+    $('#brdcst-modal-msgtitle').val(obj.title);
+    $('#brdcst-modal-sa').val(obj.sa);
+    $('#brdcst-modal-details').val(obj.detail);
+    $('#brdcst-modal-action').val('UPDATE');
+
+    $('#brdcst-modal').modal('show');
+  }
+
+  function brdcstActionDelete(obj) {
+    if ( !brdcstId || brdcstId === '') {
+      inputError($('#brdcst-form-action'),'Select msg from table.');
+      return;
+    }
+
+    $('#brdcst-modal-details').prop('disabled', false);
+
+    $('#brdcst-modal-date').val(obj.date);
+    $('#brdcst-modal-msgowner').val(obj.owner);
+    $('#brdcst-modal-msgtitle').val(obj.title);
+    $('#brdcst-modal-sa').val(obj.sa);
+    $('#brdcst-modal-details').val(obj.detail);
+    $('#brdcst-modal-action').val('DELETE');
+
+    $('#brdcst-modal').modal('show');
+  }
 
   // ACTION Change listener
   $('#brdcst-form-action').change(function() {
-    let value = $(this).val();
-    let currDate = moment(new Date()).format('MM-DD-YYYY');
-    
-    let id = $('#brdcst-form-id').val();
-    let owner = $('#brdcst-form-msgowner').val();
-    let sa = $('#brdcst-form-sa').val();
-    let action = $('#brdcst-form-action').val();
-    let title = $('#brdcst-form-msgtitle').val();
-    let date = $('#brdcst-form-date').val();
-    let detail = $('#brdcst-form-details').val();
+    let obj = {
+      value:      $(this).val(),
+      currDate:   moment(new Date()).format('MM-DD-YYYY'),
+      owner:      $('#brdcst-form-msgowner').val(),
+      sa:         $('#brdcst-form-sa').val(),
+      action:     $('#brdcst-form-action').val(),
+      title:      $('#brdcst-form-msg-title').val(),
+      date:       $('#brdcst-form-date').val(),
+      detail:     $('#brdcst-form-details').val()
+    }
 
     clearErrors();
     loadOwners();
 
     // ADD Action
-    if (value === 'add') {
-      $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
-
-      $('#brdcst-modal-date').val(currDate);
-      $('#brdcst-modal-action').val('ADD');
-
-      $('#brdcst-modal').modal('show');
+    if (obj.value === 'add') {
+      brdcstActionAdd(obj);
     }
     // UPDATE Action
-    else if (value === 'update') {
-      if ( !id || id === '') {
-        inputError($(this),'Select msg from table.');
-        // $(this).siblings('.help-block').text('Select msg from table.');
-        // $(this).parent('.form-group').addClass('has-error');
-        return;
-      }
-
-      $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
-      
-      $('#brdcst-modal-date').val(date);
-      $('#brdcst-modal-msgowner').val(owner);
-      $('#brdcst-modal-msgtitle').val(title);
-      $('#brdcst-modal-sa').val(sa);
-      $('#brdcst-modal-details').val(detail);
-      $('#brdcst-modal-action').val('UPDATE');
-
-      $('#brdcst-modal').modal('show');
+    else if (obj.value === 'update') {
+      brdcstActionUpdate(obj);
     }
     // DELETE Action
-    else if (value === 'delete') {
-      if ( !id || id === '') {
-        $(this).siblings('.help-block').text('Select msg from table.');
-        $(this).parent('.form-group').addClass('has-error');
-        return;
-      }
-
-      $('#brdcst-modal-details').prop('disabled', false);
-
-      $('#brdcst-modal-date').val(date);
-      $('#brdcst-modal-msgowner').val(owner);
-      $('#brdcst-modal-msgtitle').val(title);
-      $('#brdcst-modal-sa').val(sa);
-      $('#brdcst-modal-details').val(detail);
-      $('#brdcst-modal-action').val('DELETE');
-
-      $('#brdcst-modal').modal('show');
+    else if (obj.value === 'delete') {
+      brdcstActionDelete(obj);
     }
   });
 
@@ -156,6 +165,7 @@ $(document).ready(function() {
 
   $('#brdcst-form-clear').click(function() {
     $('.brdcst-form-input').val('');
+    brdcstId = '';
 
     clearErrors();
   });

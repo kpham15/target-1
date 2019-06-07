@@ -58,16 +58,19 @@
 					</select>
 				</div>
 			</div>
-		</div>
-		<div style="margin-bottom: 10px">
-			<!-- Submit Button -->
-			<button id="alarmreport-forms-submit" type="button" class="btn btn-primary btn-flat">
-				Submit
-			</button>
-			<!-- Clear Button -->
-			<button id="alarmreport-clear" type="button" class="btn btn-primary btn-flat">
-				Clear
-			</button>
+
+			<div class="col-md-4">
+				<div class="form-group">
+					<!-- Submit Button -->
+					<button id="alarmreport-forms-submit" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+						Submit
+					</button>
+					<!-- Clear Button -->
+					<button id="alarmreport-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+						Clear
+					</button>
+				</div>
+			</div>
 		</div>
    </form>
 </div>
@@ -132,6 +135,7 @@
 
 		// Click Event For 'Submit Button'
 		$('#alarmreport-forms-submit').click(function() {
+			clearErrors();
 			
 			let report = $('#alarmreport-forms-report').val();
 
@@ -139,11 +143,8 @@
 				inputError($('#alarmreport-forms-report'),'Select An Option');
 			}
 			else if (report === "VIEW REPORT") {
-				
 				queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
 			}
-			//@TODO if there are too many rows, does not download?
-
 			else if (report === "CREATE REPORT") {
 				downloadAlarmReports({filename: `ALARM_REPORT_${alarmreportStartDate}_${alarmreportEndDate}.csv`});
 			}
