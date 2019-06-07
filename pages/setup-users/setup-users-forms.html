@@ -123,10 +123,17 @@
 
 $(document).ready(function() {
   //TN Checkbox Handler
-  $('#setup-user-tn-cbx').iCheck({
+  // $('#setup-user-tn-cbx').iCheck({
+  //   checkboxClass: 'icheckbox_minimal-blue'
+  // });
+  // $('#setup-users-tn-cbx').on('ifToggled', function() {
+  //   $('.users-phonenum').toggle();
+  // });
+
+  $('#setup-users-tn-cbx').iCheck({
     checkboxClass: 'icheckbox_minimal-blue'
   });
-  $('#setup-users-tn-cbx').on('ifToggled', function() {
+  $('#setup-users-tn-cbx').on('ifToggled', function(){
     $('.users-phonenum').toggle();
   });
 });
