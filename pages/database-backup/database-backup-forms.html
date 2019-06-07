@@ -50,6 +50,11 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
+    // Action Change event handler
+    $('#database-backup-forms-action').change(function() {
+      $('#database-backup-modal').modal('show');
+    })
     // click event on sidebar menu
     $('.menu-item[page_id="database-backup-page"]').click(function() {
       queryDatabaseBackup();
