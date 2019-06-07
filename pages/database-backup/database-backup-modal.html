@@ -87,7 +87,6 @@ $(document).ready(function() {
 
   // Submit Btn Click Event Handler
   $('#database-backup-modal-submit').click(function() {
-    // let user = $('#database-backup-modal-user').val();
     let fileName = $('#database-backup-modal-filename').val();
     let type = $('#database-backup-modal-type').val();
     let date = $('#database-backup-modal-date').val();
@@ -122,15 +121,7 @@ $(document).ready(function() {
           title:  data.rslt,
           body:   "File Deleted"
         }
-
         databaseBackupReturn(modal);
-
-        // $('#database-backup-modal').modal('hide');
-
-        // queryDatabaseBackup();
-
-        // modal.type = "success"
-        // modalHandler(modal);
       }
 
       if (action == "MANUAL") {
@@ -138,15 +129,7 @@ $(document).ready(function() {
           title: data.rslt,
           body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
         }
-
         databaseBackupReturn(modal);
-
-        // $('#database-backup-modal').modal('hide');
-
-        // queryDatabaseBackup();
-
-        // modal.type = "success"
-        // modalHandler(modal);
       }
     })
 
