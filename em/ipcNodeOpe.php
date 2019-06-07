@@ -35,8 +35,6 @@ if (isset($_POST['cmd'])) {
 }
 
 // dispatch to functions
-
-
 if ($act == "queryAll") {
 	$result = queryAll();	
 	echo json_encode($result);
@@ -100,13 +98,6 @@ if ($act == "EXEC_RESP") {
 	return;
 }
 
-if ($act == "CONNECT_TBX_TAP1") {
-    // $result = processHwResp($node, $hwRsp);
-    echo json_encode($result);
-	mysqli_close($db);
-	return;
-}
-
 if ($act == "EXEC_CMD") {
     $result = exec_cmd($node, $cmd, $userObj);
     echo json_encode($result);
@@ -116,6 +107,26 @@ if ($act == "EXEC_CMD") {
 
 if ($act == "VIEW CMD") {
     $result = view_cmd($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+if ($act == "VIEW CMD") {
+    $result = view_cmd($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+
+if ($act == "cps_connected") {
+    $result = cps_connected($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
+
+if ($act == "cps_disconnected") {
+    $result = cps_disconnected($node);
     echo json_encode($result);
     mysqli_close($db);
     return;
@@ -130,6 +141,52 @@ else {
 }
 
 // functions area
+function cps_disconnected($node) {
+    $src = 'CPS CARD';
+    $almtype = 'EQUIP';
+    $cond = 'NO COMMUNICATION';
+    $sev = 'MAJ';
+    $sa = 'Y';
+    $almid = "$node-cps-D";
+    $remark = ":CPS IS DISCONNECTED";
+    
+    $almObj = new ALMS($almid);
+    if($almObj->rslt == "success") {
+        $result["rslt"] = "fail";
+        $result["reason"] = "ALM WAS ALREADY CREATED";
+        return $result;
+    }
+    
+    $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+    $result["rslt"] = $almObj->rslt;
+    $result["reason"] = $almObj->reason;
+    return $result;
+}
+
+function cps_connected($node) {
+    $src = 'CPS CARD';
+    $almtype = 'EQUIP';
+    $remark = ': CPS IS CONNECTED';  
+    $almid = "$node-cps-D";
+    
+    $almObj = new ALMS($almid);
+    if($almObj->rslt == "fail") {
+        $result["rslt"] = "fail";
+        $result["reason"] = "ALM DOES NOT EXIST";
+        return $result;
+    }
+
+    $almObj->sysClr($almid, $remark);
+
+    $result["rslt"] = $almObj->rslt;
+    $result["reason"] = $almObj->reason;
+    return $result;
+}
+
+function connected($node) {
+
+}
+
 function view_cmd($node) {
     $cmdObj = new CMD();
     $cmdObj->getCmdList($node);
@@ -363,13 +420,17 @@ function discovered($node, $hwRsp) {
     // UUID is serial number for now, extract uuid from string
     $newHwString = substr($hwRsp, 1, -1);
     $newHwStringArray = explode(",", $newHwString);
-
+    $serialNum = "";
     foreach($newHwStringArray as $parameter) {
         $paraExtract = explode('=',$parameter);
         if($paraExtract[0] == 'uuid') 
             $serialNum = $paraExtract[1];
     }
-
+    if($serialNum === "") {
+        $result['rslt'] = "fail";
+        $result['reason'] = "SERIAL NUMBER IS MISSING";
+        return $result;
+    }
     // construct to see if serial number already exists in DB
     $cpssObj = new CPSS();
     if ($cpssObj->rslt == FAIL) {
@@ -446,7 +507,6 @@ function discovered($node, $hwRsp) {
 }
 
 function updateCpsStatus($hwRsp) {
-    
     // checks what type of $hwRsp is being sent
     if (strpos($hwRsp, "voltage") !== false){
         $result = updateCpsVolt($hwRsp);
@@ -461,10 +521,16 @@ function updateCpsStatus($hwRsp) {
 // function called by updateAlm in case string contains voltage only
 // str looks like this "$ackid=1-cps-csta,status,voltage1=46587mV,voltage2=47982mV,voltage3=48765mV,voltage4=49234mV,backplane=IAMAMIOXUUIDTHATYOUCANTDECODE*"
 function updateCpsVolt($hwRsp) {
+    
+    $debugObj = new DEBUG();
+
+    $debugObj->log($hwRsp);
+    $debugObj->close();
+
     // filters data brought from $hwRsp and extracts voltage values
     $newCmd = substr($hwRsp, 1, -1);
     $splitCmd = explode(',', $newCmd);
-
+    
     foreach($splitCmd as $parameter) {
         $paraExtract = explode("=", $parameter);
         if ($paraExtract[0] == "ackid") {
@@ -483,6 +549,11 @@ function updateCpsVolt($hwRsp) {
             $volt4 = $paraExtract[1];
         }
     }
+    if($ackid === null || $volt1===null || $volt2===null || $volt3===null || $volt4 === null) {
+        $result['rslt'] = "fail";
+        $result['reason'] = "NO VOLTAGE INFO RECEIVED";
+        return $result;
+    }
 
     // extract node from ackid
     $ackidArray = explode("-", $ackid);
@@ -492,7 +563,6 @@ function updateCpsVolt($hwRsp) {
     sscanf($volt2, "%d%s", $volt2Val, $volt2Unit);
     sscanf($volt3, "%d%s", $volt3Val, $volt3Unit);
     sscanf($volt4, "%d%s", $volt4Val, $volt4Unit);
-
     // get lowest and highest values from volt
     $volt_hi = max($volt1Val, $volt2Val, $volt3Val, $volt4Val);
     $volt_low = min($volt1Val, $volt2Val, $volt3Val, $volt4Val);
@@ -501,6 +571,8 @@ function updateCpsVolt($hwRsp) {
     $newVolt_lowVal = round((int)($volt_low/1000));
        
     // put units back onto volt values to prepare sending to t_nodes
+    // $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
+    // $newVolt_low = round((int)($volt_low/1000)) . 'V';
     $newVolt_hi = round((int)($volt_hi/1000)) . 'V';
     $newVolt_low = round((int)($volt_low/1000)) . 'V';
 
@@ -516,9 +588,6 @@ function updateCpsVolt($hwRsp) {
     $voltRangeArray = explode("-", $voltRange);
     $minVolt = $voltRangeArray[0];
     $maxVolt = $voltRangeArray[1];
-
-    // $result['reason'] = "newVolt_hiVal=$newVolt_hiVal||maxVolt=$maxVolt||newVolt_minVal=$newVolt_lowVal||minVolt=$minVolt";
-    // return $result;
    
     $nodeObj = new NODE($node);
     if($nodeObj->rslt == 'fail') {
@@ -526,7 +595,6 @@ function updateCpsVolt($hwRsp) {
         $result['reason'] = $nodeObj->reason;
         return $result;
     }
-
     // write to t_nodes the volt_hi by default or the voltage that is out of range
     if ($volt_low < $minVolt) {
         $nodeObj->updateVolt($newVolt_low);
@@ -545,7 +613,7 @@ function updateCpsVolt($hwRsp) {
             $cond = 'VOLTAGE OUT-OF-RANGE';
             $sa = 'N';
             $sev = 'MIN';
-            $remark = $almid . ' : ' . $cond . 'VOLT_HI=' . $newVolt_hiVal . '||VOLT_LOW=' . $newVolt_lowVal;
+            $remark = $hwRsp . ' - ' . $almid . ' : ' . $cond . 'VOLT_HI=' . $newVolt_hiVal . '||VOLT_LOW=' . $newVolt_lowVal;
             $almObj = new ALMS();
             $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
             //logError if failed here
@@ -592,6 +660,12 @@ function updateCpsTemp($hwRsp) {
         else if ($paraExtract[0] == "zone4") {
             $temp4 = $paraExtract[1];
         }
+    }
+
+    if($ackid === null || $temp1===null || $temp2===null || $temp3===null || $temp4 === null) {
+        $result['rslt'] = "fail";
+        $result['reason'] = "NO TEMPERATURE INFO RECEIVED";
+        return $result;
     }
 
     sscanf($temp1, "%d%s", $temp1Val, $temp1Unit);
@@ -693,6 +767,13 @@ function exec_resp($node, $hwRsp, $userObj) {
             $serial_no = $paraExtract[1];
         }
     }
+    if($cmdArray === null || $ackid === null 
+       || $nodeExtract === null || $api_key === null 
+       || $apiAct_key === null || $serial_no === null) {
+            $result['rslt'] = "fail";
+            $result['reason'] = "NOT ENOUGH INFORMATION IN ACKID AND SERIAL NO";
+            return $result;
+       }
 
     $cpsObj = new CPS($node);
     if ($cpsObj->rslt == FAIL) {
@@ -760,13 +841,17 @@ function exec_resp($node, $hwRsp, $userObj) {
             return $result;
         }
     }
+}
+
+function updateCpsStatus($hwRsp) {
     
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "hwRsp"=>$hwRsp];
     //@TODO Maybe need asyncPostRequest here? Sync for debugging
     $postReqObj->syncPostRequest($url, $params);
-    return json_decode($postReqObj->reply);
+    return $postReqObj->reply;
+    // return ($postReqObj->reply);
 
 }
 
