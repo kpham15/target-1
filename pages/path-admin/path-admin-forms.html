@@ -148,6 +148,7 @@
 // CLEAR BUTTON
 $("#pathAdmin-form-clear").on('click', function() {
   $(".pathAdmin-form-input").val("").change();
+  clearErrors();
 });
 
 $(".menu-item[page_id='path-admin-page']").click(function() {
