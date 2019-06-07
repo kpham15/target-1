@@ -242,6 +242,7 @@ $("#pathAdmin-form-submit").on('click', function() {
 // CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
 $(".pathAdmin-form-input").on('click', function() {
   clearErrors();
+  $("#pathAdmin-form-action").val("").change();
 });
 
 </script>
