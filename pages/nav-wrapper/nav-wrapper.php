@@ -30,8 +30,7 @@
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
     <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
     <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
-
-
+    <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
 
 
     <!-- /.content -->

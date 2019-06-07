@@ -1,19 +1,19 @@
-<div id="maint-report-page" class="content-page" style="display:none;">
+<div id="path-admin-page" class="content-page" style="display:none;">
   <div class="container-fluid">    
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Maintenance Report
+        Path Administration
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Maintenance Report</li>
+        <li class="active">Path Administration</li>
       </ol>
     </section>
     <!-- Maint Report Forms -->
-    <?php include __DIR__ . '/maint-report-forms.html'; ?>
+    <?php include __DIR__ . '/path-admin-forms.html'; ?>
     <!-- Maint Report Table -->
-    <?php include __DIR__ . '/maint-report-tables.html'; ?>
+    <?php include __DIR__ . '/path-admin-tables.html'; ?>
     
   </div>
 </div>
