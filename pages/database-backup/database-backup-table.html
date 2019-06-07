@@ -21,6 +21,7 @@
 </div>
 
 <script type="text/javascript">
+
   function queryDatabaseBackup() {
     $.ajax({
       type:     'POST',
@@ -54,6 +55,18 @@
   });
 
   $(document).ready(function() {
+    // Table Click Events
+    $(document).on('click', '#database-backup-table tbody tr', function() {
+      let data = databaseBackupDatatable.row(this).data();
 
+      $('#database-backup-forms-user').val(data.user);
+      $('#database-backup-forms-filename').val(data.dbfile);
+      $('#database-backup-forms-type').val(data.bktyp);
+      $('#database-backup-forms-date').val(data.date);
+
+      // give selected class
+      $('#database-backup-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
   })
 </script>
