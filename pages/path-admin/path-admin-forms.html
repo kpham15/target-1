@@ -154,6 +154,8 @@ $(".menu-item[page_id='path-admin-page']").click(function() {
 
 // NODE SLOT VIEW BUTTON
 $("#pathAdmin-form-view_node_slot").on("click", function() {
+  clearErrors();
+  
   let node = $("#pathAdmin-form-node");
   let slot = $("#pathAdmin-form-slot");
 
@@ -174,6 +176,9 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 
 // ACTION SUBMIT BUTTON
 
-
+// CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
+$(".pathAdmin-form-input").on('click', function() {
+  clearErrors();
+});
 
 </script>
