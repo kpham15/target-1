@@ -153,6 +153,18 @@ $(".menu-item[page_id='path-admin-page']").click(function() {
 });
 
 // NODE SLOT VIEW BUTTON
+$("#pathAdmin-form-view_node_slot").on("click", function() {
+  let node = $("#pathAdmin-form-node");
+  let slot = $("#pathAdmin-form-slot");
+
+  if (node.val() == "") {
+    inputError(node, 'Select a node');
+  } else if (slot.val() == "") {
+    inputError(slot, 'Select a slot');
+  } else {
+    pathAdminQueryByNodeSlot();
+  }
+});
 
 // CKID VIEW BUTTON
 
