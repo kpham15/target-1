@@ -36,7 +36,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>TYPE:</label>
-                <input id="database-backup-modal-type" type="text" class="form-control database-backup-modal-input">
+                <input id="database-backup-modal-type" type="text" class="form-control database-backup-modal-input" disabled="">
               </div>
             </div>
 
@@ -44,7 +44,7 @@
             <div class="col-md-8">
               <div class="form-group">
                 <label>DATE:</label>
-                <input id="database-backup-modal-date" type="text" class="form-control database-backup-modal-input">
+                <input id="database-backup-modal-date" type="text" class="form-control database-backup-modal-input" disabled="">
               </div>
             </div>
           </div>
@@ -62,6 +62,12 @@
                 </select>
               </div>
             </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button id="database-backup-modal-submit" type="button" class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
