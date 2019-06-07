@@ -145,7 +145,7 @@ $(".menu-item[page_id='path-admin-page']").click(function() {
   // POPULATE NODE SELECTION BOX
   var html = [];
   html.push(`<option></option>`);
-  for (i = 0; i <= wcInfo.nodes; i++) {
+  for (i = 0; i < wcInfo.nodes; i++) {
     let node = i + 1;
     html.push(`<option>${node}</option>`);
   }
