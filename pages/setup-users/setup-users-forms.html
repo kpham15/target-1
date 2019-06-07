@@ -68,9 +68,9 @@
       <div class="col-md-4">
         <label>PHONE NUMBER</label>
         <label>TN:</label>
-        <input type="checkbox" id="setup-user-tn-cbx" style="margin-top:2px" checked>
-        <input id="ckid-input" type="text" class="form-control ckid-num" style="display:none;"/>
-        <input id="ckid-input-tn" type="text" class="form-control ckid-num" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+        <input type="checkbox" id="setup-users-tn-cbx" style="margin-top:2px" checked>
+        <input id="setup-users-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
+        <input id="setup-users-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
       </div>
       <!-- EMAIL -->
       <div class="col-md-7">
@@ -116,3 +116,16 @@
     </div>
   </form>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  //TN Checkbox Handler
+  $('#setup-user-tn-cbx').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#setup-users-tn-cbx').on('ifToggled', function() {
+    $('.users-phonenum').toggle();
+  })
+}
+
+</script>
