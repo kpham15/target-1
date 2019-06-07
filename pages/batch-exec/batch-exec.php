@@ -2,7 +2,7 @@
   <div class="container-fluid">
     
      <!-- Content Header (Page header) -->
-      <section class="content-header" style="padding:2px 2px 2px 2px;">
+      <section class="content-header" style="padding:2px">
         <h1>
           BATCH EXECUTION
         </h1>

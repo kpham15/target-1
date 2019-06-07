@@ -1,6 +1,6 @@
 <div id="svc-page" class="content-page" style="display:none;">
     <div class="container-fluid">
-      <section class="content-header" style="padding:2px 2px 2px 2px;">
+      <section class="content-header" style="padding:2px;">
         <h1>
           SETUP SERVICE CONNECTION
         </h1>
