@@ -120,6 +120,34 @@
       pathAdminDatatable.columns.adjust().draw();
     });
   }
+
+  function pathAdminQueryByPort(){
+    let port = $("#pathAdmin-form-port").val();
+    
+    $.ajax({
+      url: ipcDispatch,
+      type: "post",
+      data: {
+        api:      'ipcPath',
+        act:      "query",
+        port:      port.toUpperCase(),
+
+        user:     user.uname,
+        grp:      user.grp,
+        ugrp:     user.ugrp
+      },
+      dataType: "json"
+    }).done(function(data){
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#pathAdmin-form-view_port'),'No Record Found');
+      }
+      pathAdminDatatable.clear().draw();
+      pathAdminDatatable.rows.add(res);
+      pathAdminDatatable.columns.adjust().draw();
+    });
+  }
   
 
 </script>
