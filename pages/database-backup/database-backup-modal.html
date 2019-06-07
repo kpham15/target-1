@@ -98,9 +98,22 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
+      let length = data.rows.length;
       let modal = {
         title: data.rslt,
         body: data.reason,
+      }
+
+      if (action == "DELETE"){
+        let modalsuccess = {
+          title:  data.rslt,
+          body:   "File Deleted"
+        }
+      } else if (action == "MANUAL") {
+        let modalsuccess = {
+          title: data.rslt,
+          body:   "Database File Created: " + data.rows[length-1].dbfile,
+        }
       }
 
       if (data.rslt == 'fail') {
@@ -113,7 +126,7 @@ $(document).ready(function() {
         queryDatabaseBackup();
 
         modal.type = "success";
-        modalHandler(modal);
+        modalHandler(modalsuccess);
       }
     })
 
