@@ -150,7 +150,7 @@ function batchExcModal_clearForm() {
 
 
 $("#batchExcModal_submit_btn").click(function(e){
-    e.defaultPrevented();
+    e.preventDefault();
     batchExcModal_add();
 });
 $("#batchExcModal").on("hidden.bs.modal", function(){
