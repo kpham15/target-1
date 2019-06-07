@@ -1,0 +1,283 @@
+<div class="row">
+    <div class="col-sm-3">
+        <div class="col-sm-12 " style="padding:2px;">
+            <label for="batchExc_file_sel">BATCH FILE</label>
+            <select id="batchExc_file_sel" class="form-control" style="padding: 2px">  
+            </select>
+        </div>
+
+        <div class="col-sm-6 " style="padding:2px;">
+            <label for="batchExc_act_sel">ACTION</label>
+            <select id="batchExc_act_sel" class="form-control" style="padding: 2px">
+                <option></option>
+                <option>UPLOAD</option>
+                <option>DELETE</option>
+            </select>
+            <br>
+            <input type="hidden" id="batchExc_id_num" style="width:50px;">
+        </div>
+
+    </div>
+    <div class="col-sm-9">
+        <div class="col-sm-12 " style="padding:2px;">
+            <label>SCRIPTS:</label>
+            <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid"></div>
+        </div>
+
+        <button style="float:left; margin:25px" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
+   
+        <button style="float:right; margin:25px" class="btn btn-primary" id="batchExc_download_btn">DOWNLOAD RESULT</button>    
+   
+    </div>
+</div>
+
+<script>
+var batchExcList = [];
+var batchExcCmdArray = [];
+var batchExcTotalCmd;
+var batchExcFailCmd;
+var batchExcSuccessCmd;
+
+function batchExec_start() {
+    batchExec_clearForm();
+    batchExec_query('QUERY');    
+}
+
+function batchExec_clearForm(){
+    $("#batchExc_act_sel").val("");
+    $("#batchExc_file_sel").val("");
+    // batchExc.tbl.body.empty();
+    $("#batchExc_script_txt").empty();
+    $("#batchExc_id_num").val("");
+    $("#batchExc_download_btn").prop("disabled", true);
+}
+    
+function batchExec_query(action){
+
+    $.ajax({
+        url: ipcDispatch,
+        type: "POST",
+        data: {
+            api: "ipcBatchExc",
+            user: user.uname,
+            grp:  user.grp,
+            ugrp: user.ugrp,
+            act: action,
+            id:  $("#batchExc_id_num").val()
+        },
+        dataType:   'json'
+    })
+    .done(function(data, status) {
+        if (data["rslt"] == "fail") {
+            let modal = {
+                title:  data.rslt,
+                body: data.reason,
+                type : 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            if (action == "QUERYBATS") {
+                $("#batchExc_script_txt").empty();
+                let a = [];
+                let length = data['rows'].length;
+                batchExcCmdArray= data['rows'];
+                for (let i=1; i<length; i++) 
+                {  
+                   a.push(data['rows'][i].cmd_id + " " + data['rows'][i].cmd + "<br>")
+                }
+                // batchExc.tbl.body.html(a.join(""));
+                $("#batchExc_script_txt").html(a.join(""));
+                
+            }
+            else if (action == "QUERY" || action == "DELETE") {
+                let a = [];
+                batchExcList = data['rows'];
+                a.push('<option value="">Select a batch file</option>');
+
+                for (let i=0; i < data["rows"].length; i++) 
+                {  
+                    a.push('<option value = "'+ i +'">' + batchExcList[i].filename + '</option>');
+                }
+
+                $("#batchExc_file_sel").empty();
+                $("#batchExc_file_sel").html(a.join(""));
+                if (action == "DELETE") {
+                    let modal = {
+                        title:  data.rslt,
+                        body: data.reason,
+                        type : 'success'
+                    }
+                    modalHandler(modal);
+                }
+            }
+    
+        } 
+    });
+
+}
+
+function batchExec_executeCommand() {
+    if($("#batchExc_id_num").val() == "") {
+        let modal = {
+            title: "Error",
+            body:  "Please choose a batch file to execute!",
+            type : 'danger'
+        }
+        modalHandler(modal);
+        return;
+    }
+
+    // initialize "Commands" for use in recurExecute
+    batchExcTotalCmd = batchExcCmdArray.length -1;
+    batchExcFailCmd = 0;
+    batchExcSuccessCmd = 0;
+    $("#batchExc_script_txt").empty();
+    
+    batchExec_recurExecute(1);   
+    
+    
+}
+    
+function batchExec_recurExecute(i) {
+    if(i < batchExcCmdArray.length) {
+        let paraArray = batchExcCmdArray[0].cmd.replace(/\s/g, "").split(",");
+
+        ///Delete all line break in cmd string
+        batchExcCmdArray[i].cmd = batchExcCmdArray[i].cmd.replace(/^\s+|\s+$/g, '');
+        $("#batchExc_script_txt").append(batchExcCmdArray[i].cmd_id + " " + batchExcCmdArray[i].cmd+'<br>\n');
+        let paraValueArray = batchExcCmdArray[i].cmd.replace(/\s/g, "").split(",");
+        
+        let urlPost="";
+        let api = "";
+        if(paraValueArray[0] == 'SETFAC')
+            api = "ipcFacilities";
+        else if(paraValueArray[0] == 'PORTMAP')
+            api = "ipcPortmap";
+        else if(paraValueArray[0] == 'PROV' && paraValueArray[1] == 'CONNECT')
+            api = "ipcProvConnect";
+        else if(paraValueArray[0] == 'PROV' && paraValueArray[1] == 'DISCONNECT')
+            api = "ipcProvDisconnect";
+
+
+        let transferArray = {};
+        for(let j=1; j<paraArray.length; j++) {
+            transferArray[paraArray[j]] = paraValueArray[j];
+        }
+        transferArray['user'] = user.uname;
+        transferArray['grp'] = user.grp;
+        transferArray['ugrp'] = user.ugrp;
+        transferArray['api'] = api;   
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: transferArray,
+            dataType: 'json'
+        })
+        .done(function(data, status) {  
+            if (data["rslt"] == "fail"){
+                $("#batchExc_script_txt").append('<font color="red">'+data['rslt'] + " " + data['reason']+'</font><br>\n');
+                batchExcFailCmd++
+            }
+            else{
+                $("#batchExc_script_txt").append('<font color="blue">'+data['rslt'] + " " + data['reason']+'</font><br>\n');
+                batchExcSuccessCmd++
+            }
+
+    
+            if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
+                $("#batchExc_download_btn").prop("disabled", false);
+                return;
+            }
+
+            batchExec_recurExecute(i+1);
+        });
+    }
+    else {
+        // enable download button when the batch is done running
+        $("#batchExc_download_btn").prop("disabled", false);
+    }
+    
+    
+}
+        
+    
+$("#batchExc_execute_btn").click(function(){
+    batchExec_executeCommand();
+})
+
+$("#batchExc_act_sel").change(function() {
+    if ($("#batchExc_act_sel").val() !="") {
+        if ($("#batchExc_act_sel").val()  ==  "UPLOAD") {
+            batchExcModal_clearForm();
+            $("#batchExcModal").modal();
+            
+        }
+        else if ($("#batchExc_act_sel").val()  ==  "DELETE") {
+            if ($("#batchExc_id_num").val() != "") {
+                batchExec_query('DELETE');
+            }
+            else {
+                let modal = {
+                    title:  "Error",
+                    body: "Please select a batch file!",
+                    type : 'danger'
+                }
+                modalHandler(modal);
+            }
+            
+            batchExec_clearForm();
+        }
+        
+    }
+
+});
+
+// download button disabled when the batch file selection is changed
+$("#batchExc_file_sel").change(function() {
+    if($("#batchExc_file_sel").val() != "") {
+        if (batchExcList.length > 0) {
+            let index = $("#batchExc_file_sel").val();
+            $("#batchExc_id_num").val(batchExcList[index].id);
+            batchExec_query("QUERYBATS");
+            $("#batchExc_download_btn").prop("disabled", true);
+        }
+    }
+    else 
+        $("#batchExc_id_num").val("");
+
+});
+
+
+$("#batchExc_download_btn").click(function(){
+
+    let batchName = batchExcList[$("#batchExc_file_sel").val()].filename
+    batchName = batchName.split(".")[0];
+    let datetime = new Date();
+    let logText = "User:" + user.uname +
+                    "\nBATCH_LOGFILE: "+ batchExcList[$("#batchExc_file_sel").val()].filename+
+                    "\nDate:"+ datetime+"\n=====================\n";
+    logText += "Total commands: " + batchExcTotalCmd +"\n"; 
+    logText += "Successful commands: " + batchExcSuccessCmd +"\n"; 
+    logText += "Failed commands: " + batchExcFailCmd +"\n"; 
+    logText += "=====================\n";
+    logText += $("#batchExc_script_txt").text();
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(logText));
+    element.setAttribute('download', batchName +"_Result.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+})
+
+
+$(document).ready(function(){
+    $(".menu-item[page_id='batch-exec-page']").click(function() {
+        batchExec_start();
+    });
+})
+</script>

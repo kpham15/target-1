@@ -1,0 +1,248 @@
+<!-- FORM -->
+<div class="col-md-12">
+  <form id="pathAdmin-form">
+    <!-- ROW 1 BEGIN-->
+    <div class="row">
+
+      <!-- NODE -->
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>NODE</label>
+          <select id="pathAdmin-form-node" class="form-control pathAdmin-form-input">
+            <!-- @TODO js will create the options based on how many nodes there are -->
+          </select>
+        </div>
+      </div>
+
+      <!-- SLOT -->
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>SLOT</label>          
+          <select id="pathAdmin-form-slot" class="form-control pathAdmin-form-input">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="form-group">
+          <!-- VIEW NODE SLOT Button -->
+          <button id="pathAdmin-form-view_node_slot" type="button" class="btn btn-primary" style="margin-top:25px">
+            VIEW
+          </button>
+        </div>
+      </div>
+      
+    </div>
+    <!-- END ROW 1 -->
+
+    <!-- ROW 2 BEGIN -->
+    <div class="row">
+
+      <!-- CKID -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>CKID:</label>
+          <input id="pathAdmin-form-ckid" class="form-control pathAdmin-form-input">
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="form-group">
+          <!-- VIEW CKID Button -->
+          <button id="pathAdmin-form-view_ckid" type="button" class="btn btn-primary" style="margin-top:25px">
+            VIEW
+          </button>
+        </div>
+      </div>
+
+      <!-- FAC_ID -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>FAC_ID:</label>
+          <input id="pathAdmin-form-fac_id" class="form-control pathAdmin-form-input">
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="form-group">
+          <!-- VIEW FAC_ID Button -->
+          <button id="pathAdmin-form-view_fac_id" type="button" class="btn btn-primary" style="margin-top:25px">
+            VIEW
+          </button>
+        </div>
+      </div>
+      
+      <!-- PORT -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>PORT:</label>
+          <input id="pathAdmin-form-port" class="form-control pathAdmin-form-input">
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="form-group">
+          <!-- VIEW PORT Button -->
+          <button id="pathAdmin-form-view_port" type="button" class="btn btn-primary" style="margin-top:25px">
+            VIEW
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- ROW 2 END -->
+
+    <!-- ROW 3 BEGIN -->
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <label>PATH</label>
+          <input id="pathAdmin-form-path" class="form-control pathAdmin-form-input" disabled>
+        </div>
+      </div>
+    </div>
+    <!-- ROW 3 END -->
+
+    <!-- ROW 4 BEGIN -->
+    <div class="row">
+      <!-- Action Dropdown -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="pathAdmin-form-action" class="form-control pathAdmin-form-input">
+            <option value=""></option>
+            <option>SET_DEFECTIVE_PATH</option>
+            <option>REPLACE_DEFECTIVE_PATH</option>
+            <option>RELEASE_DEFECTIVE_PATH</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <!-- Submit Button -->
+          <button id="pathAdmin-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+            Submit
+          </button>
+          <!-- Clear Button -->
+          <button id="pathAdmin-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+            Clear
+          </button>
+        </div>            
+      </div>
+    </div>
+    <!-- ROW 4 END -->
+
+  </form>
+</div>
+
+<script type="text/javascript">
+
+// CLEAR BUTTON
+$("#pathAdmin-form-clear").on('click', function() {
+  $(".pathAdmin-form-input").val("").change();
+  $("#pathAdmin-form-node").val("1").change();
+  $("#pathAdmin-form-slot").val("1").change();
+  clearErrors();
+});
+
+$(".menu-item[page_id='path-admin-page']").click(function() {
+  // POPULATE NODE SELECTION BOX
+  var html = [];
+  for (i = 0; i < wcInfo.nodes; i++) {
+    let node = i + 1;
+    html.push(`<option>${node}</option>`);
+  }
+  $("#pathAdmin-form-node").html(html.join(''));
+});
+
+// NODE SLOT VIEW BUTTON
+$("#pathAdmin-form-view_node_slot").on("click", function() {
+  clearErrors();
+
+  let node = $("#pathAdmin-form-node");
+  let slot = $("#pathAdmin-form-slot");
+
+  if (node.val() == "") {
+    inputError(node, 'Select a node');
+  } else if (slot.val() == "") {
+    inputError(slot, 'Select a slot');
+  } else {
+    pathAdminQueryByNodeSlot();
+  }
+});
+
+// CKID VIEW BUTTON
+$("#pathAdmin-form-view_ckid").on("click", function() {
+  clearErrors();
+
+  let ckid = $("#pathAdmin-form-ckid");
+
+  if (ckid.val() == "") {
+    inputError(ckid, 'Missing CKID');
+  } else {
+    pathAdminQueryByCkid();
+  }
+});
+
+// FAC_ID VIEW BUTTON
+$("#pathAdmin-form-view_fac_id").on("click", function() {
+  clearErrors();
+
+  let fac_id = $("#pathAdmin-form-fac_id");
+
+  if (fac_id.val() == "") {
+    inputError(fac_id, 'Missing FAC_ID');
+  } else {
+    pathAdminQueryByFacId();
+  }
+});
+
+// PORT VIEW BUTTON
+$("#pathAdmin-form-view_port").on("click", function() {
+  clearErrors();
+
+  let port = $("#pathAdmin-form-port");
+
+  if (port.val() == "") {
+    inputError(port, 'Missing PORT');
+  } else {
+    pathAdminQueryByPort();
+  }
+});
+
+// SUBMIT BUTTON
+$("#pathAdmin-form-submit").on('click', function() {
+  clearErrors();
+
+  let action = $("#pathAdmin-form-action");
+
+  // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
+  if (action.val() == "SET_DEFECTIVE_PATH") {
+    inputError(action, 'Action not ready yet');
+
+  } else if (action.val() == "REPLACE_DEFECTIVE_PATH") {
+    inputError(action, 'Action not ready yet');
+
+  } else if (action.val() == "RELEASE_DEFECTIVE_PATH") {
+    inputError(action, 'Action not ready yet');
+
+  } else {
+    inputError(action, 'Select an Action');
+  }
+  
+});
+
+// CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
+$(".pathAdmin-form-input:not(#pathAdmin-form-action)").on('click', function() {
+  clearErrors();
+  $("#pathAdmin-form-action").val("").change();
+});
+
+</script>
