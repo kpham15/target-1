@@ -84,6 +84,8 @@ $(document).ready(function() {
     let date = $('#database-backup-modal-date').val();
     let action = $('#database-backup-modal-action').val();
 
+    clearErrors();
+
     $.ajax({
       type:     'POST',
       url:      ipcDispatch,
