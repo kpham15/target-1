@@ -101,7 +101,7 @@ $(document).ready(function() {
         body: data.reason,
       }
 
-      if (res.rslt == 'fail') {
+      if (data.rslt == 'fail') {
         modal.type = 'danger'
         modalHandler(modal);
       }
@@ -109,7 +109,7 @@ $(document).ready(function() {
         $('#database-backup-modal').modal('hide');
 
         queryDatabaseBackup();
-        
+
         modal.type = "success";
         modalHandler(modal);
       }
