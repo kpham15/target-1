@@ -149,7 +149,8 @@ function batchExcModal_clearForm() {
 }
 
 
-$("#batchExcModal_submit_btn").click(function(){
+$("#batchExcModal_submit_btn").click(function(e){
+    e.defaultPrevented();
     batchExcModal_add();
 });
 $("#batchExcModal").on("hidden.bs.modal", function(){
