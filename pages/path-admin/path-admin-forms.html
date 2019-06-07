@@ -174,7 +174,7 @@ $("#pathAdmin-form-view_ckid").on("click", function() {
 
   let ckid = $("#pathAdmin-form-ckid");
 
-  if (ckid == "") {
+  if (ckid.val() == "") {
     inputError(ckid, 'Missing CKID');
   } else {
     pathAdminQueryByCkid();
@@ -187,7 +187,7 @@ $("#pathAdmin-form-view_fac_id").on("click", function() {
 
   let fac_id = $("#pathAdmin-form-fac_id");
 
-  if (fac_id == "") {
+  if (fac_id.val() == "") {
     inputError(fac_id, 'Missing FAC_ID');
   } else {
     pathAdminQueryByFacId();
@@ -200,7 +200,7 @@ $("#pathAdmin-form-view_port").on("click", function() {
 
   let port = $("#pathAdmin-form-port");
 
-  if (port == "") {
+  if (port.val() == "") {
     inputError(port, 'Missing PORT');
   } else {
     pathAdminQueryByPort();
