@@ -126,7 +126,8 @@
       let type   = $("#configReport-form-type").val();
 
       if (report === '') {
-        inputError(report,'Select An Option');
+        inputError($('#configReport-form-report'),'Select An Option');
+        return;
       } else if (report.val() === "VIEW REPORT") {
         if (type == "SETUP PORT MAPPING") {
           configReportQueryPortlog(configReportStartDate, configReportEndDate);

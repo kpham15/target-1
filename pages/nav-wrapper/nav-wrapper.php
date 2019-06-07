@@ -25,6 +25,8 @@
     <?php include __DIR__ . '/../config-report/config-report.php'; ?>
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
+    <?php include __DIR__ . '/../portmap/portmap.php'; ?>
+    <?php include __DIR__ . '/../node-operation/node-operation.php'; ?>
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
 
