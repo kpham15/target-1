@@ -65,6 +65,7 @@
       clearErrors();
 
       if (action == "MANUAL") {
+        $('.database-backup-modal-input').hide();
         $('#database-backup-modal-action').val(action);
         $('#database-backup-modal').modal('show');
       }
