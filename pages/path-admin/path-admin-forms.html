@@ -218,6 +218,8 @@ $("#pathAdmin-form-view_port").on("click", function() {
 
 // SUBMIT BUTTON
 $("#pathAdmin-form-submit").on('click', function() {
+  clearErrors();
+
   let action = $("#pathAdmin-form-action");
 
   // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
@@ -230,6 +232,7 @@ $("#pathAdmin-form-submit").on('click', function() {
   } else {
     inputError(action, 'Select an Action');
   }
+  action.val("").change();
   
 });
 
