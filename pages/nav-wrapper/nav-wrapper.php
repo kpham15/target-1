@@ -32,6 +32,7 @@
     <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
     <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
+    <?php include __DIR__ . '/../event-report/event-report.php'; ?>
 
 
     <!-- /.content -->
