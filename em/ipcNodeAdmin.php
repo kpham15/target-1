@@ -88,13 +88,23 @@ if (isset($_POST['hwRsp'])) {
 // }
     
 //Dispatch to functions
-
-if ($act == "queryAll") {
-    $nodeObj = new NODES();
-    $result = queryAll($nodeObj, $userObj);
-    echo json_encode($result);
-    mysqli_close($db);
-    return;
+try {
+    if ($act == "queryAll") {
+        $nodeObj = new NODES();
+        $result['rslt'] = $nodeObj->rslt;
+        $result['reason'] = $nodeObj->reason;
+        $result['rows'] = $nodeObj->rows;
+        //$result = queryAll($nodeObj, $userObj);
+        echo json_encode($result);
+        mysqli_close($db);
+        return;
+    }
+}
+catch (Throwable $e) {
+        $result['rslt'] = FAIL;
+        $result['reason'] = $e->getMessage();
+        echo json_encode($result);
+        return;
 }
 
 if($act == "CHECK_NODES") {
