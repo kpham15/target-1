@@ -1,0 +1,220 @@
+<!-- FORM -->
+<div class="col-md-12">
+  <form id="eventReport-form">
+    <!-- ROW 1 BEGIN-->
+    <div class="col-md-7">
+      <div class="row">
+        <!-- USER -->
+        <div class="col-md-1">
+          <label>USER</label>
+          <input id="eventReport-form-user" class="form-control eventReport-form-input">
+        </div>
+    
+        <!-- EVENT -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>EVENT:</label>
+            <select id="eventReport-form-event" class="form-control eventReport-form-input">
+              <option></option>
+              <option>CONFIGURATION</option>
+              <option>PROVISIONING</option>
+              <option>MAINTENANCE</option>
+              <option>USER MANAGEMENT</option>
+              <option>IPC ADMINISTRATION</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- DateRangePicker -->
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>DATE RANGE:</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" id="eventReport-form-daterange" class="form-control pull-right eventReport-form-input">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <!-- END ROW 1 -->
+  
+      <!-- ROW 2 BEGIN -->
+      <div class="row">
+  
+        <!-- FUNCTION -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>FUNCTION:</label>
+            <select id="eventReport-form-function" class="form-control eventReport-form-input">
+            </select>
+          </div>
+        </div>
+  
+        <!-- TASK -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>TASK:</label>
+            <select id="eventReport-form-task" class="form-control eventReport-form-input">
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+  
+        <!-- REPORT -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>REPORT:</label>
+            <select id="eventReport-form-report" class="form-control eventReport-form-input">
+              <option value="VIEW REPORT">VIEW REPORT</option>
+              <option value="CREATE REPORT">CREATE REPORT</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <!-- Submit Button -->
+            <button id="eventReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+              Submit
+            </button>
+            
+            <!-- Clear Button -->
+            <button id="eventReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+              Clear
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+  
+      <!-- ROW 2 END -->
+    </div>
+        
+    
+  </form>
+</div>
+
+<script type="text/javascript">
+
+// DOWNLOAD REPORT
+function downloadConfigReports(args) {
+  var data, filename, link;
+  var csv = convertArrayOfObjectsToCSV({
+    data: eventReportDatatable.data().toArray()
+  });
+  if (csv == null) {
+    inputError($('#eventReport-form-report'),'No Reports To Create');
+    return;
+  }
+  
+  filename = args.filename || 'export.csv';
+
+  if (!csv.match(/^data:text\/csv/i)) {
+    csv = 'data:text/csv;charset=utf-8,' + csv;
+  }
+  data = encodeURI(csv);
+
+  link = document.createElement('a');
+  link.setAttribute('href', data);
+  link.setAttribute('download', filename);
+  link.click();
+}
+
+$(document).ready(function() {
+  
+  var eventReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+  var eventReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+
+  // Initialze daterangepicker and assign values to start and from dates
+  function initializeConfigReportDateRangePicker () {
+    $('input[id="eventReport-form-daterange"]').daterangepicker({
+      opens: 'bottom',
+      startDate: moment(),
+    }, function(start, end, label) {
+      eventReportStartDate  = start.format('YYYY-MM-DD');
+      eventReportEndDate    = end.format('YYYY-MM-DD');
+    });
+  }
+
+  initializeConfigReportDateRangePicker();
+  
+
+  // Click Event For 'Submit Button'
+  $('#eventReport-form-submit').click(function() {
+    clearErrors();
+    
+    let report = $('#eventReport-form-report');
+    let type   = $("#eventReport-form-type").val();
+
+    if (report === '') {
+      inputError($('#eventReport-form-report'),'Select An Option');
+      return;
+    } else if (report.val() === "VIEW REPORT") {
+      if (type == "SETUP PORT MAPPING") {
+        eventReportQueryPortlog(eventReportStartDate, eventReportEndDate);
+      } else if (type == "SETUP WIRE CENTER") {
+        eventReportQueryWclog(eventReportStartDate, eventReportEndDate);
+      } else if (type == "SETUP FACILITIES") {
+        eventReportQueryFaclog(eventReportStartDate, eventReportEndDate);
+      }
+    } else if (report.val() === "CREATE REPORT") {
+      downloadConfigReports({filename: `CONFIGURATION_REPORT_${eventReportStartDate}_${eventReportEndDate}.csv`});
+    }
+  });
+
+  // Click Event For 'Clear Button'
+  $('#eventReport-form-clear').click(function() {
+
+    let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+    $('.eventReport-form-input').val('');
+    $('#eventReport-form-type').val("SETUP PORT MAPPING");
+    $('#eventReport-form-report').val("VIEW REPORT");
+    
+    eventReportPortmapDatatable.clear().draw();
+    eventReportWcDatatable.clear().draw();
+    eventReportFacDatatable.clear().draw();
+    
+    $('#eventReport-daterange').val('').daterangepicker("update");
+    eventReportStartDate = currDate;
+    eventReportEndDate = currDate;
+
+    // reinitialize daterangepicker
+    initializeConfigReportDateRangePicker();
+    
+    clearErrors();
+  });
+
+  // CHANGE DISPLAYED TABLE ACCORDING TO TYPE SELECTED
+  $("#eventReport-form-type").change(function() {
+    let tables          = $(".eventReport-table");
+    let portmapTable    = $(".eventReport-portmap-table");
+    let facilityTable   = $(".eventReport-facility-table");
+    let wirecenterTable = $(".eventReport-wirecenter-table");
+    
+    $(".eventReport-table").css('display', 'none');
+    if ($(this).val() == "SETUP PORT MAPPING" || $(this) == "") {
+      portmapTable.css('display', 'block');
+    } else if ($(this).val() == "SETUP FACILITIES") {
+      facilityTable.css('display', 'block');
+    } else if ($(this).val() == "SETUP WIRE CENTER") {
+      wirecenterTable.css('display', 'block');
+    }
+  });
+
+  // CLEAR ERRORS WHEN CLICK ON FIELD
+  $(".eventReport-form-input").on('click', function() {
+    clearErrors();
+  });
+
+  // END OF DOCUMENT READY
+});
+
+
+</script>
