@@ -1,4 +1,4 @@
-<div id="setup-users-page" class="content-page" sytle="display:none">
+<div id="setup-users-page" class="content-page" style="display:none">
   <div class="container-fluid">
 
   <!-- Content Header (Page Header) -->
