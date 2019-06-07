@@ -156,11 +156,7 @@ function cps_disconnected($node) {
         $result["reason"] = "ALM WAS ALREADY CREATED";
         return $result;
     }
-    if($almObj->reason != "ALARM NOT FOUND") {
-        $result["rslt"] = "fail";
-        $result["reason"] = $almObj->reason;
-        return $result;
-    }
+    
     $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
     $result["rslt"] = $almObj->rslt;
     $result["reason"] = $almObj->reason;

@@ -133,6 +133,7 @@ class COM {
     public $node = 0;
     public $target = '';
     public $psta = 'UNQ';
+    public $online = false;
     public $status_req = '';
     public $fd = 0;         // file_discriptor
     public $conn = false;   // tty connect status
@@ -198,16 +199,21 @@ class COM {
         if ($this->status_req != '') {
             $cnt = dio_write($this->fd, $this->status_req, strlen($this->status_req));
             if ($cnt < 0) {
+                $this->online = false;
                 $this->close();
                 $this->rslt = "fail";
                 $this->reason = "SEND STATUS FAILS";
-                echo $this->tty . ": >>> : " . $this->status_req . "\n" . $this->reason . "\n";
+                echo $this->tty . ": >>> : " . $this->reason . "\n";
                 return false;
             }
+            else {
+                $this->online = true;
+                echo $this->tty . ": >>> : " . $this->status_req . "\n" . $this->reason . "\n";
+                return true;
+            }
         }
-        echo $this->tty . ": >>> : " . $this->status_req . "\n" . $this->reason . "\n";
         usleep(50000);
-        return $cnt;
+        return true;
     }
 
     public function sendCmd($cmd) {
@@ -237,28 +243,33 @@ class COM {
         if ($this->conn === false)
             return false;
 
-        $this->resp_str = '';
         $startTime = microtime(true);
-        // loop for 1 sec until received some data
-        while((microtime(true) - $startTime) < 1) {
+        $str = '';
+        // loop for 0.5 sec until received some data
+        while((microtime(true) - $startTime) < 0.5) {
             if($this->fd !== false) {
                 $data = dio_read($this->fd, 1024);
                 if (trim($data) !== "") {
-                    $this->resp_str .= $data;
-                    //$startTime = microtime(true);
+                    $this->online = true;
+                    $str .= $data;
+                    $startTime = microtime(true);
                 }
             }
         }
-        
-        $this->rslt = 'success';
-        $this->reason = 'receive successfully';
-        if ($this->resp_str != '')
-            echo $this->tty . ": <<< : " . $this->resp_str . "\n";
-        return true;
+
+        if ($str != '') {
+            $this->resp_str .= $str;
+            echo $this->tty . ": <<< : " . $str . "\n";
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function close() {
         dio_close($this->fd);
+        $this->online = false;
         $this->conn = false;
         $this->fd = 0;
     }
@@ -285,11 +296,40 @@ function procUdpMsg($msgObj, $cps) {
     }
 }
 
-function post_resp($cpsObj) {
-    if ($cpsObj->resp_str != '') {
-        echo "post-resp: " . $cpsObj->resp_str . "\n";
-        report_cps_online($cpsObj);
+function extractAckidMsg($resp) {
+    //get rid of line break character
+    $resp = preg_replace("/(\r\n|\n|\r)/",'',$resp);
+    //find position of 1st $ackid
+    $ackpos = stripos($resp,'$ackid');
+    if ($ackpos !== false) {
+        $remain = substr($resp, $ackpos);
+        //find position of * sign after the $ackid
+        $pos = stripos($remain,'*');
+        if ($pos !== false) {
+            // $str[0] = $ackid.....*
+            $str[] = substr($remain,0,$pos+1);
+            // $str[1] =  the rest of the string
+            $str[] = substr($remain, $pos + 1);
+            return $str;
+        }
+        else
+            return false;
     }
+    else
+        return false;
+}
+    
+  
+
+
+function post_resp($cpsObj) {
+    $str = extractAckidMsg($cpsObj->resp_str);
+    if ($str !== false) {
+        echo $cpsObj->tty.": ackid_str: " . $str[0] . "\n";
+        $cpsObj->resp_str = $str[1];
+        echo $cpsObj->tty.": remaining resp_str: " . $cpsObj->resp_str . "\n";
+    }
+    //report_cps_online($cpsObj);
 }
 
 function report_cps_connected($cpsObj) {
@@ -297,9 +337,9 @@ function report_cps_connected($cpsObj) {
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_connected',"node"=>$cpsObj->node];
-    $postReqObj->asyncPostRequest($url, $params);
+    $result = $postReqObj->asyncPostRequest($url, $params);
 
-    echo "report_cps_connected\n\n";
+    echo "report_cps_connected: " . $cpsObj->tty . "\n";
 }
 
 
@@ -308,9 +348,9 @@ function report_cps_disconnected($cpsObj) {
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_disconnected',"node"=>$cpsObj->node];
-    $postReqObj->asyncPostRequest($url, $params);
+    $result = $postReqObj->asyncPostRequest($url, $params);
 
-    echo "report_cps_disconnected\n\n";
+    echo "report_cps_disconnected: ". $cpsObj->tty . "\n";
 }
 
 function report_cps_online($cpsObj) {
@@ -319,6 +359,7 @@ function report_cps_online($cpsObj) {
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_online',"node"=>$cpsObj->node, 'msg'=>$cpsObj->resp_str];
     $postReqObj->asyncPostRequest($url, $params);
+    echo "report_cps_online: ". $cpsObj->tty . "\n";
 
 }
 
@@ -328,6 +369,7 @@ function report_cps_offline($cpsObj) {
     $url = "ipcDispatch.php";
     $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_offline',"node"=>$cpsObj->node];
     $postReqObj->asyncPostRequest($url, $params);
+    echo "report_cps_offline: ". $cpsObj->tty . "\n";
 
 }
 
@@ -386,6 +428,7 @@ while(1) {
     // a) check for 10 sec expires
     //    if expires, send status,source=all to COM, and reset 5 sec timer
     if (microtime(true) - $startTime > 10) {
+
         $numofcps = count($cps);
         for ($i=0; $i<$numofcps; $i++) {
             pollCps($cps[$i]);
@@ -393,9 +436,8 @@ while(1) {
         }
     }
     
-
     for ($i=0; $i<$numofcps; $i++) {
-        if ($cps[$i]->receiveRsp() != '') {
+        if ($cps[$i]->receiveRsp()) {
             post_resp($cps[$i]);
         }
     }

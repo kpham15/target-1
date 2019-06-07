@@ -145,7 +145,7 @@ class ALMS {
         $res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
-            $this->reason = mysqli_error($db);
+            $this->reason = mysqli_error($db) . ": " . $qry;
 		}
 		else {
             $this->id = $db->insert_id;
