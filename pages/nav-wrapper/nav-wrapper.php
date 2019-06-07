@@ -26,6 +26,8 @@
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
+    <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
+
 
 
     <!-- /.content -->
