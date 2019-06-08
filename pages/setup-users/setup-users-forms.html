@@ -122,6 +122,12 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+  // Action Change event listener
+$('#setup-users-forms-action').change(function() {
+  $('#setup-users-modal').modal('show');ßß
+})
+
   //Initialize inputmask
   $('#setup-users-phonenum-tn').inputmask();
 
