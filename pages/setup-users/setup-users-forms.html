@@ -66,18 +66,22 @@
     <div class="row">
       <!-- TELEPHONE NUMBER -->
       <div class="col-md-3">
-        <label>TEL</label>
-        <label>TN:</label>
-        <input id="setup-users-tn-cbx" type="checkbox" checked>
-          <div class="input-group">
-            <input id="setup-users-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
-            <input id="setup-users-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
-          </div>
+        <div class="form-group">
+          <label>TEL</label>
+          <label>TN:</label>
+          <input id="setup-users-tn-cbx" type="checkbox" checked>
+            <div class="input-group">
+              <input id="setup-users-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
+              <input id="setup-users-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+            </div>
+        </div>
       </div>
       <!-- EMAIL -->
       <div class="col-md-7">
-        <label>EMAIL</label>
-        <input id="setup-users-forms-email" type="text" class="form-control setup-users-forms-input">
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input id="setup-users-forms-email" type="text" class="form-control setup-users-forms-input">
+        </div>
       </div>
     </div>
     <!-- Row 4 -->
@@ -125,7 +129,7 @@ $(document).ready(function() {
 
   // Action Change event listener
 $('#setup-users-forms-action').change(function() {
-  $('#setup-users-modal').modal('show');ßß
+  $('#setup-users-modal').modal('show');
 })
 
   //Initialize inputmask
