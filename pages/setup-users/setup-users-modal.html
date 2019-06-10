@@ -172,10 +172,10 @@ function setupUsersModalSubmit(obj, tel) {
       modal.type = 'success';
       modalHandler(modal);
 
-      setupUsersDataTable.clear().draw();
-      setupUsersDataTable.rows.add(res);
-      setupUsersDataTable.columns.adjust().draw();
-      
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+
       $('#setup-users-modal').modal('hide');
     }
   })
@@ -211,28 +211,6 @@ $(document).ready(function() {
     }
 
     setupUsersModalSubmit(obj, tel);
-
-    // if (obj.action === 'ADD') {
-
-    // }
-    // else if (obj.action === 'UPDATE') {
-
-    // }
-    // else if (obj.action === 'LOCK') {
-
-    // }
-    // else if (obj.action === 'ENABLE') {
-
-    // }
-    // else if (obj.action === 'DISABLE') {
-
-    // }
-    // else if (obj.action === 'DELETE') {
-
-    // }
-    // else if (obj.action === 'RESET_PW') {
-
-    // }
 
   })
 
