@@ -199,7 +199,7 @@ function setupUserUpdate(obj, tel) {
   }
 }
 
-function setupUserLock(obj, tel) {
+function setupUserOther(obj, tel) {
 
   if (obj.name == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
@@ -264,23 +264,20 @@ $(document).ready(function() {
       setupUserUpdate(obj, tel);
     }
     else if (obj.action === 'LOCK') {
-
+      setupUserOther(obj, tel);
     }
     else if (obj.action === 'ENABLE') {
-
+      setupUserOther(obj, tel);
     }
     else if (obj.action === 'DISABLE') {
-
+      setupUserOther(obj, tel);
     }
     else if (obj.action === 'DELETE') {
-
+      setupUserOther(obj, tel);
     }
     else if (obj.action === 'RESET_PW') {
-
+      setupUserOther(obj, tel);
     }
-
-
-
   });
 
   // Clear Button Click Event
