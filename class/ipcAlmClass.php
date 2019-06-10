@@ -251,9 +251,9 @@ class ALMS {
 
         $almLog = new ALMLOG();
         $action = 'ACK';
-        $result = $this->rslt . ' : ' . $this->reason;
         $almLog->log($this->almid, $this->ack, $this->sa, $this->src, $this->type, $this->cond, $this->sev, $this->psta, $this->ssta, $remark, $action, $user, $result);
-        
+        $this->reason .= ": " . $almLog->reason;
+        $result = $this->rslt . ' : ' . $this->reason;
     }
 
 	public function unackAlm($ack, $user, $remark) {
