@@ -183,6 +183,8 @@ function setupUserUpdate(obj, tel) {
     $('#setup-users-modal-user').val(obj.uname);
     $('#setup-users-modal-ssn').val(obj.ssn);
     $('#setup-users-modal-stat').val(obj.stat);
+    $('#setup-users-modal-stat').prop('disabled', true);
+
     $('#setup-users-modal-fname').val(obj.fname);
     $('#setup-users-modal-mi').val(obj.mi);
     $('#setup-users-modal-lname').val(obj.lname);
@@ -198,6 +200,7 @@ function setupUserUpdate(obj, tel) {
 }
 
 function setupUserLock(obj, tel) {
+
   if (obj.name == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
     $('#setup-users-forms-action').val('');
