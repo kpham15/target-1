@@ -175,6 +175,7 @@ function setupUserUpdate(obj, tel) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
+    $('#setup-users-forms-action').val('');
     return;
   }
   else {
