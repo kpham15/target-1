@@ -224,7 +224,7 @@ $(document).ready(function() {
     let a = [];
     let pre_task = $("#eventReport-form-event option:selected").attr('array');
     pre_task = pre_task.replace("/", "");
-    let fnc = pre_task.replace(/ /g, "");
+    let task = pre_task.replace(/ /g, "");
     task = task.toUpperCase();
     a.push('<option></option>');
     eventReportTaskOptions[task].forEach(function(elem) {
