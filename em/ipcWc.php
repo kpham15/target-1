@@ -558,7 +558,7 @@
 			return $result;
 		}
 		$result["rslt"] = $wcObj->rslt;
-        $result["reason"] = "WC_UPDATE_SUCCESS";
+        $result["reason"] = "WC_RESET_SUCCESS";
 		$result["rows"] = $wcObj->rows;
 		return $result;
 
