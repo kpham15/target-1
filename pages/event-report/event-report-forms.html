@@ -1,110 +1,112 @@
 <!-- FORM -->
 <div class="col-md-12">
   <form id="eventReport-form">
-    <!-- ROW 1 BEGIN-->
-    <div class="col-md-7">
-      <div class="row">
-        <!-- USER -->
-        <div class="col-md-3">
-          <label>USER</label>
-          <input id="eventReport-form-user" class="form-control eventReport-form-input">
-        </div>
-    
-        <!-- EVENT -->
-        <div class="col-md-3">
-          <div class="form-group">
-            <label>EVENT:</label>
-            <select id="eventReport-form-event" class="form-control eventReport-form-input">
-              <option></option>
-              <option>CONFIGURATION</option>
-              <option>PROVISIONING</option>
-              <option>MAINTENANCE</option>
-              <option>USER MANAGEMENT</option>
-              <option>IPC ADMINISTRATION</option>
-            </select>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="row">
+          <!-- USER -->
+          <div class="col-md-3">
+            <label>USER</label>
+            <input id="eventReport-form-user" class="form-control eventReport-form-input">
           </div>
+      
+          <!-- EVENT -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>EVENT:</label>
+              <select id="eventReport-form-event" class="form-control eventReport-form-input">
+                <option></option>
+                <option>CONFIGURATION</option>
+                <option>PROVISIONING</option>
+                <option>MAINTENANCE</option>
+                <option>USER MANAGEMENT</option>
+                <option>IPC ADMINISTRATION</option>
+              </select>
+            </div>
+          </div>
+    
+          <!-- DateRangePicker -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>DATE RANGE:</label>
+              <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" id="eventReport-form-daterange" class="form-control pull-right eventReport-form-input">
+              </div>
+            </div>
+          </div>
+          
         </div>
-  
-        <!-- DateRangePicker -->
-        <div class="col-md-4">
-          <div class="form-group">
-            <label>DATE RANGE:</label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text" id="eventReport-form-daterange" class="form-control pull-right eventReport-form-input">
+        <!-- END ROW 1 -->
+    
+        <!-- ROW 2 BEGIN -->
+        <div class="row">
+    
+          <!-- FUNCTION -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>FUNCTION:</label>
+              <select id="eventReport-form-function" class="form-control eventReport-form-input">
+              </select>
+            </div>
+          </div>
+    
+          <!-- TASK -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>TASK:</label>
+              <select id="eventReport-form-task" class="form-control eventReport-form-input">
+              </select>
             </div>
           </div>
         </div>
         
-      </div>
-      <!-- END ROW 1 -->
-  
-      <!-- ROW 2 BEGIN -->
-      <div class="row">
-  
-        <!-- FUNCTION -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>FUNCTION:</label>
-            <select id="eventReport-form-function" class="form-control eventReport-form-input">
-            </select>
+        <div class="row">
+    
+          <!-- REPORT -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>REPORT:</label>
+              <select id="eventReport-form-report" class="form-control eventReport-form-input">
+                <option value="VIEW REPORT">VIEW REPORT</option>
+                <option value="CREATE REPORT">CREATE REPORT</option>
+              </select>
+            </div>
           </div>
-        </div>
   
-        <!-- TASK -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>TASK:</label>
-            <select id="eventReport-form-task" class="form-control eventReport-form-input">
-            </select>
+          <div class="col-md-4">
+            <div class="form-group">
+              <!-- Submit Button -->
+              <button id="eventReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+                Submit
+              </button>
+              
+              <!-- Clear Button -->
+              <button id="eventReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+                Clear
+              </button>
+              
+            </div>
           </div>
+  
         </div>
+    
+        <!-- ROW 2 END -->
       </div>
       
-      <div class="row">
-  
-        <!-- REPORT -->
-        <div class="col-md-3">
+      <!-- DETAILS -->
+      <div class="col-md-5">
+        <div class="col-sm-12">
           <div class="form-group">
-            <label>REPORT:</label>
-            <select id="eventReport-form-report" class="form-control eventReport-form-input">
-              <option value="VIEW REPORT">VIEW REPORT</option>
-              <option value="CREATE REPORT">CREATE REPORT</option>
-            </select>
+            <label>DETAILS:</label>
+            <textarea id="eventReport-form-detail" class="form-control" style="min-height: 175px; background-color: #F6F6F6" readonly></textarea>
           </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="form-group">
-            <!-- Submit Button -->
-            <button id="eventReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
-              Submit
-            </button>
-            
-            <!-- Clear Button -->
-            <button id="eventReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
-              Clear
-            </button>
-            
-          </div>
-        </div>
-
-      </div>
-  
-      <!-- ROW 2 END -->
-    </div>
-    
-    <!-- DETAILS -->
-    <div class="col-md-5">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>DETAILS:</label>
-          <textarea id="eventReport-form-detail" class="form-control" style="min-height: 175px; background-color: #F6F6F6" readonly></textarea>
         </div>
       </div>
     </div>
+    <!-- ROW 1 BEGIN-->
         
     
   </form>
