@@ -111,7 +111,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>ACTION</label>
-                <input id="setup-users-modal-action" type="text" class="form-control setup-users-modal-input" disabled="" />
+                <input id="setup-users-modal-action" type="text" class="form-control" disabled="" />
               </div>
             </div>
             <div class="col-md-2">
@@ -176,6 +176,11 @@ function setupUsersModalSubmit(obj, tel) {
 }
 
 $(document).ready(function() {
+  // Clear Button Click Event
+  $('#setup-users-modal-clear').click(function() {
+    $('.setup-users-modal-input').val('');
+  })
+
   // Submit Button Click Event
   $('#setup-users-modal-submit').click(function() {
     let obj = {
