@@ -14,7 +14,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>STATUS:</label>
-          <select id="setup-users-forms-stat" class="form-control setup-users-forms-stat">
+          <select id="setup-users-forms-stat" class="form-control setup-users-forms-input">
             <option value=""></option>
             <option value="ACTIVE">ACTIVE</option>
             <option value="INACTIVE">INACTIVE</option>
@@ -27,7 +27,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>LAST LOGIN:</label>
-          <input id="setup-users-forms-lastlogin" type="text" class="form-control setup-users-forms-lastlogin" disabled="">
+          <input id="setup-users-forms-lastlogin" type="text" class="form-control setup-users-forms-input" disabled="">
         </div>
       </div>
       <div class="col-md-2">
@@ -85,8 +85,8 @@
           <label>TN:</label>
           <input id="setup-users-tn-cbx" type="checkbox" checked>
             <div class="input-group">
-              <input id="setup-users-forms-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
-              <input id="setup-users-forms-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+              <input id="setup-users-forms-phonenum" type="text" class="form-control users-phonenum setup-users-forms-input" style="display:none;"/>
+              <input id="setup-users-forms-phonenum-tn" type="text" class="form-control users-phonenum setup-users-forms-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
             </div>
         </div>
       </div>
@@ -118,7 +118,7 @@
       <div class="col-md-5">
         <div class="form-group">
           <label>GROUP:</label>
-          <select id="setup-users-forms-group" class="form-control setup-users-forms-group">
+          <select id="setup-users-forms-group" class="form-control setup-users-forms-input">
             <option value=""></option>
             <option value="ADMIN">ADMIN</option>
             <option value="SUPERVISOR">SUPERVISOR</option>
@@ -170,7 +170,7 @@ $(document).ready(function() {
 
   // Clear Button Click Event
   $('#setup-users-forms-clear').click(function() {
-    $('.setup-useres-forms-input').val('');
+    $('.setup-users-forms-input').val('');
     clearErrors();
   })
   // Click Event View 1
