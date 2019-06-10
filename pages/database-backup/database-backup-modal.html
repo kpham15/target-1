@@ -1,0 +1,143 @@
+<!-- Modal -->
+<div class="modal fade" id="database-backup-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-labe;="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">DATABASE BACKUP</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Row 1 -->
+          <div class="row">
+            <!-- USER -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label class="database-backup-modal-input">USER:</label>
+                <input id="database-backup-modal-user" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
+
+            <!-- BACKUP FILE NAME -->
+            <div class="col-md-8">
+              <div class="form-group">
+                <label class="database-backup-modal-input">BACKUP FILE NAME:</label>
+                <input id="database-backup-modal-filename" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row">
+            <!-- TYPE -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label class="database-backup-modal-input">TYPE:</label>
+                <input id="database-backup-modal-type" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
+
+            <!-- DATE -->
+            <div class="col-md-8">
+              <div class="form-group">
+                <label class="database-backup-modal-input">DATE:</label>
+                <input id="database-backup-modal-date" type="text" class="form-control database-backup-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row">
+            <!-- ACTION -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="database-backup-modal-action" type="input" class="form-control database-backup-modal-action" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button id="database-backup-modal-submit" type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+function databaseBackupReturn(modal) {
+  $('#database-backup-modal').modal('hide');
+
+  queryDatabaseBackup();
+
+  modal.type = "success"
+  modalHandler(modal);
+}
+
+
+$(document).ready(function() {
+
+  // Submit Btn Click Event Handler
+  $('#database-backup-modal-submit').click(function() {
+    let fileName = $('#database-backup-modal-filename').val();
+    let type = $('#database-backup-modal-type').val();
+    let date = $('#database-backup-modal-date').val();
+    let action = $('#database-backup-modal-action').val();
+
+    clearErrors();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":    "coQueryBkup",
+        "act":    action,
+        "user":   user.uname,
+        "dbfile": fileName
+      },
+      dataType:   'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+      
+      if (data.rslt == 'fail') { 
+        modal.type = 'danger'
+        modalHandler(modal);
+      }
+
+      if (action == "DELETE") {
+        let modal = {
+          title:  data.rslt,
+          body:   "File Deleted"
+        }
+        databaseBackupReturn(modal);
+      }
+
+      if (action == "MANUAL") {
+        let modal = {
+          title: data.rslt,
+          body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
+        }
+        databaseBackupReturn(modal);
+      }
+    })
+
+  })
+  // Modal Close Event Handler
+  $('#database-backup-modal').on('hidden.bs.modal', function(e) {
+    $('.database-backup-forms-input').val('');
+    $('.database-backup-modal-input').val('');
+  })
+})
+</script>

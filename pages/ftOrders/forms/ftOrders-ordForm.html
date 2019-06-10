@@ -1,0 +1,335 @@
+<div class="row ftOrders-form" style="padding-left: 15px">
+  <form id="ftOrders-ordForm">
+    <!-- Ord Form -->
+    
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- ORDNO -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>ORDNO:</label>
+          <input id="ftOrders-ordForm-ordno" type="text" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- OT -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>OT:</label>
+          <select id="ftOrders-ordForm-ot" class="form-control ftOrders-ordForm-input">
+            <option></option>
+            <option>CD</option>
+            <option>CH</option>
+            <option>F</option>
+            <option>NC</option>
+            <option>T</option>
+            <option>CIO</option>
+            <option>LST</option>
+            <option>MCT</option>
+            <option>SET</option>
+            <option>WAO</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- WC -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>WC:</label>
+          <input id="ftOrders-ordForm-wc" type="text" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- PRI -->
+      <div class="col-md-1" style="padding-right: 0px">
+        <div class="form-group">
+          <label>PRI:</label>
+          <select id="ftOrders-ordForm-pri" class="form-control ftOrders-ordForm-input">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- STAT -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>STAT:</label>
+          <input id="ftOrders-ordForm-stat" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+      <!-- VIEW BUTTON 1 -->
+      <button id="ftOrders-ordForm-view1" type="button" class="btn btn-primary" style="margin-top: 25px">
+        VIEW
+      </button>
+  
+    </div>
+    
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- CDD -->
+      <div class="col-md-1" style="padding-right: 0px">
+        <div class="form-group">
+          <label>CDD:</label>
+          <select id="ftOrders-ordForm-cdd" class="form-control ftOrders-ordForm-input">
+            <option value=""></option>
+            <option value="">Y</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- DD: -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>DD:</label>
+          <input id="ftOrders-ordForm-dd" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- FDD: -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>FDD:</label>
+          <input id="ftOrders-ordForm-fdd" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+  
+      <!-- FDT -->
+      <div class="bootstrap-timepicker col-md-3">
+        <div class="form-group">
+          <label>FDT:</label>
+          <input id="ftOrders-ordForm-fdt" class="form-control ftOrders-ordForm-input">
+        </div>
+      </div>
+      <!-- VIEW BUTTON 2 -->
+      <button id="ftOrders-ordForm-view2" type="button" class="btn btn-primary" style="margin-top: 25px">
+        VIEW
+      </button>
+    </div>
+  
+  </form>
+</div>
+
+<!-- Row 3 -->
+<div class="row">
+  <!-- Action Dropdown -->
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>ACTION</label>
+      <select id="ftOrders-ordForm-action" class="form-control ftOrders-ordForm-input">
+        <option value=""></option>
+        <option>FETCH_FT_ORDERS</option>
+        <option>PROCESS_ORDER</option>
+        <option>PROCESS_CKT</option>
+        <option>PROCESS_FAC</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- SUBMIT BUTTON -->
+  <button id="ftOrders-ordForm-submit" type="button" class="btn btn-primary" style="margin-top: 25px">
+    SUBMIT
+  </button>
+
+  <!-- CLEAR BUTTON -->
+  <button id="ftOrders-ordForm-clear" type="button" class="btn btn-primary" style="margin-top: 25px">
+    CLEAR
+  </button>
+
+  <!-- ORD ID NUM -->
+  <input type="hidden" id="ftOrders-ordForm-id" class="ftOrders-ordForm-input" style="width:20px;">
+</div>
+
+<script type="text/javascript">
+
+  // FUNCTIONS
+  function fetchFtOrders() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "FETCH_FT_ORDERS",
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        queryFtOrdersOrd();
+      }
+    });
+  }
+
+  function processFtOrder() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "PROCESS_ORD",
+        ordno: $("#ftOrders-ordForm-ordno").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
+    });
+  }
+
+  function processFtCkt() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:   "ipcFtOrd",
+        user:  user.uname,
+        act:   "PROCESS_CKT",
+        ordno: $("#ftOrders-ordForm-ordno").val().toUpperCase(),
+        ctid:  $("#ftOrders-cktForm-ctid").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
+    });
+  }
+
+  function processFtConnection() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:    "ipcFtOrd",
+        user:   user.uname,
+        act:    "PROCESS_CONNECTION",
+        ordno:  $("#ftOrders-ordForm-ordno").val().toUpperCase(),
+        ctid:   $("#ftOrders-cktForm-ctid").val().toUpperCase(),
+        cls:    $("#ftOrders-cktForm-cls").val().toUpperCase(),
+        op:     $("#ftOrders-facForm-op").val().toUpperCase(),
+        ffacid: $("#ftOrders-facForm-ffacid").val().toUpperCase(),
+        tfacid: $("#ftOrders-facForm-tfacid").val().toUpperCase(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let modal = {
+        title: data.rslt,
+        body: data.reason,
+      }
+      if (data.rslt == "fail") {
+        modal.type = 'danger'
+        modalHandler(modal);
+      } else {
+        modal.type = "success";
+        modalHandler(modal);
+      }
+      $("#ftOrders-ordForm-action").val("").change();
+    });
+  }
+
+
+  // EVENT HANDLERS
+  
+  // VIEW BUTTON 1 
+  $("#ftOrders-ordForm-view1").on("click", function() {
+    ftOrdersCktDatatable.clear().draw();
+    $(".ftOrders-cktForm-input").val("").change();
+    ftOrdersFacDatatable.clear().draw();
+    $(".ftOrders-facForm-input").val("").change();
+  });
+
+  // CLEAR BUTTON
+  $("#ftOrders-ordForm-clear").on('click', function() {
+
+    // clears forms and tables then redraws ord table
+    queryFtOrdersOrd();
+    $(".ftOrders-ordForm-input").val("").change();
+    ftOrdersCktDatatable.clear().draw();
+    $(".ftOrders-cktForm-input").val("").change();
+    ftOrdersFacDatatable.clear().draw();
+    $(".ftOrders-facForm-input").val("").change();
+  });
+
+  // SUBMIT BUTTON
+  $("#ftOrders-ordForm-submit").on('click', function() {
+    let action = $("#ftOrders-ordForm-action").val()
+    if ( action == "FETCH_FT_ORDERS") {
+      fetchFtOrders();
+    } else if (action == "PROCESS_ORDER") {
+      processFtOrder();
+    } else if (action == "PROCESS_CKT") {
+      processFtCkt();
+    } else if (action == "PROCESS_FAC") {
+      processFtConnection();
+    }
+    $("#ftOrders-ordForm-action").val("").change();
+  });
+
+  // ACTION CHANGE
+  $("#ftOrders-ordForm-action").on('change', function() {
+
+    clearErrors();
+
+    // REMOVE BACKGROUND COLOR FROM ALL FORMS
+    $(".ftOrders-form").css('background-color', '');
+
+    // ADD BACKGROUND COLOR FOR THE RELEVANT FORM BASED ON ACTION
+    if ($(this).val() == "PROCESS_ORDER") {
+      if ($("#ftOrders-ordForm-id").val() != "") {
+        $("#ftOrders-ordForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+      } else {
+        inputError($(this),'PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS');
+      }
+    } else if ($(this).val() == "PROCESS_CKT") {
+      if ($("#ftOrders-cktForm-id").val() != "") {
+        $("#ftOrders-cktForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+
+      } else {
+        inputError($(this),'PLEASE SELECT A CKT FROM THE LIST OF CKTS');
+      }
+    } else if ($(this).val() == "PROCESS_FAC") {
+      if ($("#ftOrders-facForm-id").val() != "") {
+        $("#ftOrders-facForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+      } else {
+        inputError($(this),'PLEASE SELECT A FAC FROM THE LIST OF FACS');
+      }
+    } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
+      return;
+    }
+  });
+
+  // CLEAR ERRORS WHEN INPUT IS CLICKED
+  $(".ftOrders-cktForm-input .ftOrders-facForm-input .ftOrders-ordForm-input").on('click', function() {
+    clearErrors();
+  });
+
+</script>
