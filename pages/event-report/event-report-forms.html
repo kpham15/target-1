@@ -213,14 +213,26 @@ $(document).ready(function() {
     fnc = fnc.toUpperCase();
     a.push('<option></option>');
     eventReportFunctionOptions[fnc].forEach(function(elem) {
-      console.log(elem);
-      let html = `<option>${elem}</option>`;
+      let html = `<option array='${elem}'>${elem}</option>`;
       a.push(html);
     });
     $("#eventReport-form-function").html(a.join(""));
   });
 
   // CHANGE TASK BASED ON FUNCTION
+  $("#eventReport-form-event").on("change", function() {
+    let a = [];
+    let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
+    pre_fnc = pre_fnc.replace("/", "_");
+    let fnc = pre_fnc.replace(/ /g, "_");
+    fnc = fnc.toUpperCase();
+    a.push('<option></option>');
+    eventReportFunctionOptions[fnc].forEach(function(elem) {
+      let html = `<option array='${elem}'>${elem}</option>`;
+      a.push(html);
+    });
+    $("#eventReport-form-function").html(a.join(""));
+  });
 
 
   // END OF DOCUMENT READY
