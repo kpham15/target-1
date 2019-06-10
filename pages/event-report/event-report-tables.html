@@ -67,7 +67,7 @@
     }).done(function(data){
       let res = data.rows;
       
-      $("#eventReport-form-report").val("").change();
+      $("#eventReport-form-report").val("VIEW REPORT").change();
 
       if (res.length == 0) {
         inputError($('#eventReport-form-report'),'No Record Found');
