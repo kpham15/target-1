@@ -172,19 +172,35 @@ function setupUserAdd(obj) {
 }
 
 function setupUserUpdate(obj, tel) {
-  $('#setup-users-modal-action').val(obj.action);
-  $('#setup-users-modal-user').val(obj.uname);
-  $('#setup-users-modal-ssn').val(obj.ssn);
-  $('#setup-users-modal-stat').val(obj.stat);
-  $('#setup-users-modal-fname').val(obj.fname);
-  $('#setup-users-modal-mi').val(obj.mi);
-  $('#setup-users-modal-lname').val(obj.lname);
-  $('#setup-users-modal-email').val(obj.email);
-  $('#setup-users-modal-title').val(obj.title);
-  $('#setup-users-modal-group').val(obj.group);
 
-  $('#setup-users-modal').modal('show');
+  if (obj.uname == "") {
+    inputError($('#setup-users-forms-action'),'Select a user from the list');
+    return;
+  }
+  else {
+    $('#setup-users-modal-action').val(obj.action);
+    $('#setup-users-modal-user').val(obj.uname);
+    $('#setup-users-modal-ssn').val(obj.ssn);
+    $('#setup-users-modal-stat').val(obj.stat);
+    $('#setup-users-modal-fname').val(obj.fname);
+    $('#setup-users-modal-mi').val(obj.mi);
+    $('#setup-users-modal-lname').val(obj.lname);
+    $('#setup-users-modal-email').val(obj.email);
+    $('#setup-users-modal-title').val(obj.title);
+    $('#setup-users-modal-group').val(obj.group);
+  
+    $('#setup-users-modal-tel').val(tel);
+    $('#setup-users-modal-tel-tn').val(tel);
+  
+    $('#setup-users-modal').modal('show');
+  }
 }
+
+function setupUserLock(obj, tel) {
+
+}
+
+
 $(document).ready(function() {
 
   // Action Change Event
