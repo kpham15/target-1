@@ -13,7 +13,7 @@ var eventReportFunctionOptions = {
     "FLOW-THROUGH", 
     "FOMS/FUSA",
   ],
-
+  
   maintenance:        [
     "SETUP MAINTENANCE CONNECTION",
     "LOCK/UNLOCK MATRIX CARD",
