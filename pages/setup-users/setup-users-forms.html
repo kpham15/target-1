@@ -153,6 +153,13 @@
           </select>
         </div>
       </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            Clear
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
@@ -160,6 +167,11 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+  // Click Event View 1
+  $('#setup-users-forms-viewuser').change(function() {
+    let user = $('#setup-users-forms-user').val();
+    
+  })
 
   // Action Change event listener
 $('#setup-users-forms-action').change(function() {
