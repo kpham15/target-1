@@ -223,13 +223,12 @@ $(document).ready(function() {
   // Click Event View 3
   $('#setup-users-forms-viewtel').click(function() {
 
-   
     if ($('#setup-users-tn-cbx').prop('checked')) {
       console.log("checked");
-      let tel = $('#setup-users-forms-phonenum-tn');
+      let tel = $('#setup-users-forms-phonenum-tn').val();
     }
     else {
-      let tel = $('#setup-users-forms-phonenum');
+      let tel = $('#setup-users-forms-phonenum').val();
     }
 
     // console.log(tel);
