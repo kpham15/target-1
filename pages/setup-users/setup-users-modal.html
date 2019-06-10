@@ -172,6 +172,10 @@ function setupUsersModalSubmit(obj, tel) {
       modal.type = 'success';
       modalHandler(modal);
 
+      setupUsersDataTable.clear().draw();
+      setupUsersDataTable.rows.add(res);
+      setupUsersDataTable.columns.adjust().draw();
+      
       $('#setup-users-modal').modal('hide');
     }
   })
