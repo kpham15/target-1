@@ -85,8 +85,8 @@
           <label>TN:</label>
           <input id="setup-users-tn-cbx" type="checkbox" checked>
             <div class="input-group">
-              <input id="setup-users-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
-              <input id="setup-users-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+              <input id="setup-users-forms-phonenum" type="text" class="form-control users-phonenum" style="display:none;"/>
+              <input id="setup-users-forms-phonenum-tn" type="text" class="form-control users-phonenum" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
             </div>
         </div>
       </div>
@@ -218,15 +218,42 @@ $(document).ready(function() {
     });
 
 
-  })
+  });
+
+  // Click Event View 3
+  $('#setup-users-forms-viewtel').click(function() {
+    let tel = $('#setup-users-forms-phonenum').val();
+    let email = $('#setup-users-forms-email').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findTelEmail",
+        "user":     user.uname,
+        "fname":    fname,
+        "lname":    lname,
+    },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+
+
+  });
+
   // Action Change event listener
-$('#setup-users-forms-action').change(function() {
-  $('#setup-users-modal').modal('show');
-})
+  $('#setup-users-forms-action').change(function() {
+    $('#setup-users-modal').modal('show');
+  });
 
   //Initialize inputmask
-  $('#setup-users-phonenum-tn').inputmask();
-
+  $('#setup-users-forms-phonenum-tn').inputmask();
 
   //TN Checkbox Handler
   $('#setup-users-tn-cbx').iCheck({
