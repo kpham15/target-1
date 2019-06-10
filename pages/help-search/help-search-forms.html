@@ -20,7 +20,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>Description</label>
-          <textarea id="helpsearch-input" class="form-control helpsearch-input" rows="5"></textarea>
+          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -51,19 +51,51 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
+    function submitHelpSearch(action) {
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api: "ipcSearch",
+          act: action,
+          user: user.uname,
+          item: $('#helpsearch-form-item').val().toUpperCase(),
+          descr: $('#helpsearch-form-descr').val()
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = "danger";
+          modalHandler(modal);
+        }
+        else {
+          modal.type = 'success';
+          modalHandler(modal);
+          queryHelpsearch();
+          $('#help-form-action').val('');
+        }
+      });
+    }
+
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
 
       if (action === "add") {
-        console.log("add");
+        submitHelpSearch('ADD');
       } 
       else if (action === "update") {
-        console.log("update");
+        submitHelpSearch('UPDATE');
      }
       else if (action === "delete") {
-       console.log("delete");
+        submitHelpSearch('DELETE');
      }
-     
+
 
     });
 
