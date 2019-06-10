@@ -116,7 +116,8 @@ class CPS {
             $this->reason = mysqli_error($db);
             return;
         }
-        
+        $this->psta = $psta;
+        $this->ssta = $ssta;
         $this->rslt = SUCCESS;
         $this->reason = "CPS STATUS UPDATED";
        
