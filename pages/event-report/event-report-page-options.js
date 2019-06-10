@@ -42,24 +42,24 @@ var eventReportFunctionOptions = {
 
 var eventReportTaskOptions = {
   SETUPWIRECENTER: [
-      "VIEW",
-      "UPDATE",
-      "RESET",
-      "UPDATE_NETWORK",
-      "TURN_UP",
-      "HOLD"
+    "VIEW",
+    "UPDATE",
+    "RESET",
+    "UPDATE_NETWORK",
+    "TURN_UP",
+    "HOLD"
   ],
   
   PORTMAPPING: [
-      "MAP",
-      "UNMAP",
+    "MAP",
+    "UNMAP",
   ],
   
   SETUPSERVICECONNECTION: [
-      "CONNECT",
-      "DISCONNECT",
-      "DIP CONNECT",
-      "UPDATE_CKT",
+    "CONNECT",
+    "DISCONNECT",
+    "DIP CONNECT",
+    "UPDATE_CKT",
   ],
 
   FTADMINREPORT: [
@@ -71,59 +71,60 @@ var eventReportTaskOptions = {
   ],
 
   BATCHEXECUTION: [
-      "EXECUTE BATCH FILES",
+    "EXECUTE BATCH FILES",
   ],
 
   SETUPMAINTENANCECONNECTION: [
-      "MTC_CONN",
-      "MTC_DISCON",
-      "RESTORE_MTCD",
-      "MTC_RESTORE",
-      "MTC_LPBK_TEST",
+    "MTC_CONN",
+    "MTC_DISCON",
+    "RESTORE_MTCD",
+    "MTC_RESTORE",
+    "MTC_LPBK_TEST",
   ],
 
   LOCKUNLOCKMATRIXCARD: [
-      "LOCK_CARD",
-      "UNLOCK_CARD",
-      "REFRESH_CARD",
+    "LOCK_CARD",
+    "UNLOCK_CARD",
+    "REFRESH_CARD",
   ],
 
   LOCKUNLOCKMATRIXNODE: [
-      "LOCK_NODE",
-      "UNLOCK_NODE",
+    "LOCK_NODE",
+    "UNLOCK_NODE",
   ],
 
   ALARMADMINISTRATION: [
-      "ACK",
-      "UN-ACK",
-      "CLR ALARM",
+    "ACK",
+    "UN-ACK",
+    "CLR ALARM",
   ],
 
   PATHADMINISTRATION: [
-      "REPLACE DEF PATH",
-      "RELEASE DEF PATH",
-      "REPEAT CONNECT",
+    "REPLACE DEF PATH",
+    "RELEASE DEF PATH",
+    "REPEAT CONNECT",
   ],
 
   BROADCASTNOTIFICATION: [
-      "UPDATE MSG",
-      "DELETE MSG",
-      "ADD MSG",
+    "UPDATE MSG",
+    "DELETE MSG",
+    "ADD MSG",
   ],
 
   SETUPUSER: [
-      "ADD USER",
-      "UPDATE USER",
-      "LOCK USER",
-      "UNLOCK USER",
-      "UPDATE USER GROUP",
-      "DELETE USER",
-      "CHANGE PASSWORD",
-      "RESET PW",
+    "ADD USER",
+    "UPDATE USER",
+    "LOCK USER",
+    "UNLOCK USER",
+    "UPDATE USER GROUP",
+    "DELETE USER",
+    "CHANGE PASSWORD",
+    "RESET PW",
   ],
 
   USERACCESS: [
-
+    "LOGIN",
+    "LOGOUT",
   ],
 
   USERSEARCH: [
@@ -135,8 +136,8 @@ var eventReportTaskOptions = {
   ],
 
   BACKUPDATABASE: [
-      "BACKUP DB",
-      "RESTORE BACKUP DB",
+    "BACKUP DB",
+    "RESTORE BACKUP DB",
   ],
 
   RESTORESYSTEM: [
@@ -144,8 +145,8 @@ var eventReportTaskOptions = {
   ],
 
   UPDATESOFTWARERELEASES: [
-      "UPDATE SOFTWARE",
-      "ROLLBACK SOFTWARE",
+    "UPDATE SOFTWARE",
+    "ROLLBACK SOFTWARE",
   ],
 
   NODEADMINISTRATION: [
@@ -153,14 +154,14 @@ var eventReportTaskOptions = {
   ],
 
   SYSTEMSHUTDOWN: [
-      "LOCK IPC",
-      "UNLOCK IPC",
-      "SHUTDOWN IPC",
+    "LOCK IPC",
+    "UNLOCK IPC",
+    "SHUTDOWN IPC",
   ],
 
   IPCREFERENCEDATA: [
-      "UPDATE",
-      "RESET"
+    "UPDATE",
+    "RESET"
   ],
 
   FLOWTHROUGH: [
@@ -172,10 +173,10 @@ var eventReportTaskOptions = {
   ],
   
   SETUPFACILITY: [
-      "VIEW",
-      "ADD",
-      "UPDATE",
-      "DELETE",
+    "VIEW",
+    "ADD",
+    "UPDATE",
+    "DELETE",
   ],
 
 }
