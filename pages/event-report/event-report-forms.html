@@ -218,9 +218,9 @@ $(document).ready(function() {
         a.push(html);
       });
       $("#eventReport-form-function").html(a.join(""));
-      $("#eventReport-form-function").prop('disabled', false);
+      $("#eventReport-form-function").val("").prop('disabled', false);
     } else {
-      $("#eventReport-form-function").prop('disabled', true);
+      $("#eventReport-form-function").val("").prop('disabled', true);
     }
     $("#eventReport-form-task").val("").change().prop('disabled', true);
   });
@@ -239,7 +239,7 @@ $(document).ready(function() {
         a.push(html);
       });
       $("#eventReport-form-task").html(a.join(""));
-      $("#eventReport-form-task").prop('disabled', false);
+      $("#eventReport-form-task").val("").prop('disabled', false);
     } else {
       $("#eventReport-form-task").val("").change().prop('disabled', true);
 
