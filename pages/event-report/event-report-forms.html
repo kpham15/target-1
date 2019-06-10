@@ -206,32 +206,42 @@ $(document).ready(function() {
 
   // CHANGE FUNCTION FIELD BASED ON EVENT
   $("#eventReport-form-event").on("change", function() {
-    let a = [];
-    let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
-    pre_fnc = pre_fnc.replace("/", "");
-    let fnc = pre_fnc.replace(/ /g, "");
-    fnc = fnc.toUpperCase();
-    a.push('<option></option>');
-    eventReportFunctionOptions[fnc].forEach(function(elem) {
-      let html = `<option array='${elem}'>${elem}</option>`;
-      a.push(html);
-    });
-    $("#eventReport-form-function").html(a.join(""));
+
+    if ($(this).val() != "") {
+      let a = [];
+      let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
+      pre_fnc = pre_fnc.replace("/", "");
+      let fnc = pre_fnc.replace(/ /g, "");
+      fnc = fnc.toUpperCase();
+      a.push('<option></option>');
+      eventReportFunctionOptions[fnc].forEach(function(elem) {
+        let html = `<option array='${elem}'>${elem}</option>`;
+        a.push(html);
+      });
+      $("#eventReport-form-function").html(a.join(""));
+      $("#eventReport-form-function").prop('disabled', false);
+    } else {
+      $("#eventReport-form-function").prop('disabled', true);
+    }
+    $("#eventReport-form-task").val("").change().prop('disabled', true);
   });
 
   // CHANGE TASK BASED ON FUNCTION
   $("#eventReport-form-function").on("change", function() {
-    let a = [];
-    let pre_task = $("#eventReport-form-function option:selected").attr('array');
-    pre_task = pre_task.replace("/", "");
-    let task = pre_task.replace(/ /g, "");
-    task = task.toUpperCase();
-    a.push('<option></option>');
-    eventReportTaskOptions[task].forEach(function(elem) {
-      let html = `<option array='${elem}'>${elem}</option>`;
-      a.push(html);
-    });
-    $("#eventReport-form-task").html(a.join(""));
+    if ($(this).val() != "") {
+      let a = [];
+      let pre_task = $("#eventReport-form-function option:selected").attr('array');
+      pre_task = pre_task.replace("/", "");
+      let task = pre_task.replace(/ /g, "");
+      task = task.toUpperCase();
+      a.push('<option></option>');
+      eventReportTaskOptions[task].forEach(function(elem) {
+        let html = `<option array='${elem}'>${elem}</option>`;
+        a.push(html);
+      });
+      $("#eventReport-form-task").html(a.join(""));
+      $("#eventReport-form-task").val("").change().prop('disabled', false);
+    }
   });
 
 
