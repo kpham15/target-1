@@ -193,6 +193,32 @@ $(document).ready(function() {
 
   });
 
+  // Click Event View 2
+  $('#setup-users-forms-fname').click(function() {
+    let fname = $('#setup-users-forms-fname').val();
+    let fname = $('#setup-users-forms-lname').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findNameSsn",
+        "user":     user.uname,
+        "fname":    fname,
+        "lname":    lname,
+    },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+
+
+  })
   // Action Change event listener
 $('#setup-users-forms-action').change(function() {
   $('#setup-users-modal').modal('show');
