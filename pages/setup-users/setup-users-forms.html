@@ -327,6 +327,9 @@ $(document).ready(function() {
 
   // Click Event View 2
   $('#setup-users-forms-viewfname').click(function() {
+
+    clearErrors();
+
     let fname = $('#setup-users-forms-fname').val();
     let lname = $('#setup-users-forms-lname').val();
 
@@ -344,6 +347,10 @@ $(document).ready(function() {
     }).done(function(data) {
       let res = data.rows;
 
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewfname'),'No Results Found');
+      }
+
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
@@ -354,6 +361,8 @@ $(document).ready(function() {
 
   // Click Event View 3
   $('#setup-users-forms-viewtel').click(function() {
+
+    clearErrors();
 
     let tel = "";
 
@@ -380,6 +389,10 @@ $(document).ready(function() {
     }).done(function(data) {
       let res = data.rows;
 
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewtel'),'No Results Found');
+      }
+
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
@@ -390,6 +403,8 @@ $(document).ready(function() {
 
   // Click Event View 4
   $('#setup-users-forms-viewtitle').click(function() {
+
+    clearErrors();
 
     let title = $('#setup-users-forms-title').val();
     let ugrp = $('#setup-users-forms-group').val();
@@ -407,6 +422,10 @@ $(document).ready(function() {
         dataType:     'json'
       }).done(function(data) {
         let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewtitle'),'No Results Found');
+      }
 
         setupUsersDatatable.clear().draw();
         setupUsersDatatable.rows.add(res);
