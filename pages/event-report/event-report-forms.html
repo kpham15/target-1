@@ -207,7 +207,7 @@ $(document).ready(function() {
   // CHANGE FUNCTION FIELD BASED ON EVENT
   $("#eventReport-form-event").on("change", function() {
     let a = [];
-    let pre_fnc = $("#eventReport-form-event [array]");
+    let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
     pre_fnc = pre_fnc.replace("/", "_");
     let fnc = pre_fnc.replace(/ /g, "_");
     fnc = fnc.toUpperCase();
