@@ -29,7 +29,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="brdcst-form-action" class="form-control brdcst-form-input">
+          <select id="help-form-action" class="form-control brdcst-form-input">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -49,7 +49,9 @@
 </div>
 
 <script type="text/javascript">
-  $('#submit-helpsearch').click(function() {
-    console.log('submit');
+  $(document).ready(function() {
+    $('#submit-helpsearch').click(function() {
+      console.log('submit');
+    });
   });
 </script>
