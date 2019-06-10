@@ -143,6 +143,7 @@ function setupUsersModalSubmit(obj, tel) {
     url:        ipcDispatch,
     data:       {
       "api":    "ipcUser",
+      "user":   user.uname,
       "act":    obj.action,
       "ssn":    obj.ssn,
       "stat":   obj.stat,
