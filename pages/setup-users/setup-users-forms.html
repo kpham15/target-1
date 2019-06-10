@@ -232,8 +232,6 @@ $(document).ready(function() {
       tel = $('#setup-users-forms-phonenum').val();
     }
 
-    // console.log(tel);
-
     let email = $('#setup-users-forms-email').val();
 
     $.ajax({
@@ -256,6 +254,31 @@ $(document).ready(function() {
     });
 
 
+  });
+
+  $('#setup-users-forms-viewtitle').click(function() {
+
+    let title = $('#setup-users-forms-title').val();
+    let ugrp = $('#setup-users-forms-group').val();
+      
+      $.ajax({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":      "ipcUser",
+          "act":      "findTitleGrp",
+          "user":     user.uname,
+          "title":    title,
+          "ugrp":     ugrp,
+      },
+        dataType:     'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        setupUsersDatatable.clear().draw();
+        setupUsersDatatable.rows.add(res);
+        setupUsersDatatable.columns.adjust().draw();
+      });
   });
 
   // Action Change event listener
