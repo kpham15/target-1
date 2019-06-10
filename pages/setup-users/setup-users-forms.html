@@ -168,6 +168,7 @@
 
 function setupUserAdd(obj) {
   $('#setup-users-modal-action').val(obj.action);
+  $('#setup-users-modal-action').prop('disabled', true);
   $('#setup-users-modal').modal('show');
 }
 
@@ -182,7 +183,7 @@ function setupUserUpdate(obj, tel) {
     $('#setup-users-modal-action').val(obj.action);
 
     $('#setup-users-modal-action').prop('disabled', true);
-    
+
     $('#setup-users-modal-user').val(obj.uname);
     $('#setup-users-modal-ssn').val(obj.ssn);
     $('#setup-users-modal-stat').val(obj.stat);
