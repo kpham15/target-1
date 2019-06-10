@@ -295,6 +295,8 @@ $(document).ready(function() {
   })
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
+    clearErrors();
+
     let userTxt = $('#setup-users-forms-user').val();
     let status = $('#setup-users-forms-stat').val();
 
