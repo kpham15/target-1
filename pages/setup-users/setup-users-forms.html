@@ -233,7 +233,6 @@ function setupUserOther(obj, tel) {
   }
 }
 
-
 $(document).ready(function() {
 
   // Action Change Event
@@ -282,6 +281,7 @@ $(document).ready(function() {
     setupUsersDatatable.clear().draw();
     clearErrors();
   })
+
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
     clearErrors();
@@ -432,6 +432,7 @@ $(document).ready(function() {
   $('#setup-users-tn-cbx').on('ifToggled', function(){
     $('.users-phonenum').toggle();
   });
+
 });
 
 </script>
