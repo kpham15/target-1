@@ -42,8 +42,9 @@
   function eventReportQueryEventlog(fromDate, toDate){
     let report    = $("#eventReport-form-report").val();
     let eventUser = $("#eventReport-form-user").val();
-    let fnc       = $("#eventReport-form-fnc").val();
-    let evt       = $("#eventReport-form-evt").val();
+    let fnc       = $("#eventReport-form-function").val();
+    let evt       = $("#eventReport-form-event").val();
+    let task      = $("#eventReport-form-task").val();
 
     $.ajax({
       url: ipcDispatch,
@@ -54,6 +55,7 @@
         uname:    eventUser,
         fnc:      fnc,
         evt:      evt,
+        task:     task,
         fromDate: fromDate,
         toDate:   toDate,     
 

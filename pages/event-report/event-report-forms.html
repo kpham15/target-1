@@ -16,11 +16,11 @@
               <label>EVENT:</label>
               <select id="eventReport-form-event" class="form-control eventReport-form-input">
                 <option></option>
-                <option>CONFIGURATION</option>
-                <option>PROVISIONING</option>
-                <option>MAINTENANCE</option>
-                <option>USER MANAGEMENT</option>
-                <option>IPC ADMINISTRATION</option>
+                <option array="configuration">CONFIGURATION</option>
+                <option array="provisioning">PROVISIONING</option>
+                <option array="maintenance">MAINTENANCE</option>
+                <option array="userManagement">USER MANAGEMENT</option>
+                <option array="ipcAdministration">IPC ADMINISTRATION</option>
               </select>
             </div>
           </div>
@@ -201,6 +201,12 @@ $(document).ready(function() {
   $(".eventReport-form-input").on('click', function() {
     clearErrors();
   });
+
+  // CHANGE FUNCTION FIELD BASED ON EVENT
+  $("#eventReport-form-event")
+
+  // CHANGE TASK BASED ON FUNCTION
+
 
   // END OF DOCUMENT READY
 });
