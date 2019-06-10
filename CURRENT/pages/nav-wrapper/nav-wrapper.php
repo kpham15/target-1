@@ -35,6 +35,7 @@
     <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
+    <?php include __DIR__ .'/../setup-maint/setup-maint.php'; ?>
 
     <!-- /.content -->
   </div>
