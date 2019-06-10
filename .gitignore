@@ -3,3 +3,11 @@ report/
 testApi.php
 pages/.DS_Store
 .DS_Store
+UPDATE/*
+UPLOAD/*
+FTORDERS/*
+LOG/*
+!UPDATE/.readme
+!UPLOAD/.readme
+!FTORDERS/.readme
+!LOG/.readme
