@@ -50,8 +50,14 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
     $('#submit-helpsearch').click(function() {
-      console.log($('#help-form-action').val());
+
+      if ($('#help-form-action').val() === "add") {
+        console.log("add");
+      } 
     });
+
   });
+
 </script>
