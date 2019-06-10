@@ -40,8 +40,8 @@
 				}
 				else {
 					$this->rslt = FAIL;
-					$this->reason = "Invalid STAT: " . $this->psta . " - " . $this->ssta;
 				}
+				$this->reason = "SMS: $this->evt($this->psta->$this->npsta - $this->ssta->$this->nssta";
 			}			
 		}
 	}

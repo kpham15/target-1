@@ -138,6 +138,7 @@ class COM {
     public $fd = 0;         // file_discriptor
     public $conn = false;   // tty connect status
     public $resp_str = '';
+    public $ackid_str = '';
     public $timeout = 0;
     public $read_intv = 100000; //in msec
 
@@ -150,7 +151,9 @@ class COM {
             $this->tty = $tty;
                 
             //Connect to serial port
-            $this->open();
+            if ($this->open()) {
+                $this->sendStatusReq();
+            }
 
         }
         else {
@@ -274,117 +277,118 @@ class COM {
         $this->fd = 0;
     }
 
+
+    public function extractAckidMsg() {
+        $this->resp_str = preg_replace("/(\r\n|\n|\r)/",'',$this->resp_str);
+        $ackpos = stripos($this->resp_str,'$ackid');
+        if ($ackpos !== false) {
+            $remain = substr($this->resp_str, $ackpos);
+            $pos = stripos($remain,'*');
+            if ($pos !== false) {
+                $this->ackid_str = substr($remain,0,$pos+1);
+                $this->resp_str = substr($remain, $pos + 1);
+                return $this->ackid_str;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+        
 }
 
-function procUdpMsg($msgObj, $cps) {
+// support functions
+function procUdpMsg($msgObj, $cpsLst) {
     
     if ($msgObj->inst == 'discover') {
         // 
         if ($msgObj->node > 0) {
             $i = $msgObj->node -1;
-            if ($cps[$i]->psta == 'UNQ') {
-                $cps[$i]->status_req = $msgObj->cmd;
+            $cps = $cpsLst[$i];
+            if ($cps->psta == 'UNQ') {
+                $cps->status_req = $msgObj->cmd;
             }
         }
     }
     else if ($msgObj->inst == 'send') {
         if ($msgObj->node > 0) {
             $i = $msgObj->node -1;
-            $cps[$i]->sendCmd($msgObj->cmd);
-            echo $cps[$i]->tty . ": >>> : " . $msgObj->cmd . "\n";
+            $cps = $cpsLst[$i];
+            $cps->sendCmd($msgObj->cmd);
+            echo $cps->tty . ": >>> : " . $msgObj->cmd . "\n";
         }
     }
 }
 
-function extractAckidMsg($resp) {
-    //get rid of line break character
-    $resp = preg_replace("/(\r\n|\n|\r)/",'',$resp);
-    //find position of 1st $ackid
-    $ackpos = stripos($resp,'$ackid');
-    if ($ackpos !== false) {
-        $remain = substr($resp, $ackpos);
-        //find position of * sign after the $ackid
-        $pos = stripos($remain,'*');
-        if ($pos !== false) {
-            // $str[0] = $ackid.....*
-            $str[] = substr($remain,0,$pos+1);
-            // $str[1] =  the rest of the string
-            $str[] = substr($remain, $pos + 1);
-            return $str;
-        }
-        else
-            return false;
+
+function post_resp($cps) {
+    $cps->extractAckidMsg();
+    if ($cps->ackid_str != '') {
+        report_cps_online($cps);
     }
-    else
-        return false;
 }
-    
-  
+
+function report_cps_connected($cps) {
+
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_connected',"node"=>$cps->node];
+    //$result = $postReqObj->asyncPostRequest($url, $params);
+    $result = $postReqObj->syncPostRequest($url, $params);
+
+    echo "report_cps_connected: " . $cps->tty . "\n";
+    print_r($result);
+}
 
 
-function post_resp($cpsObj) {
-    $str = extractAckidMsg($cpsObj->resp_str);
-    if ($str !== false) {
-        echo $cpsObj->tty.": ackid_str: " . $str[0] . "\n";
-        $cpsObj->resp_str = $str[1];
-        echo $cpsObj->tty.": remaining resp_str: " . $cpsObj->resp_str . "\n";
+function report_cps_disconnected($cps) {
+
+    $postReqObj = new POST_REQUEST();
+    $url = "ipcDispatch.php";
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_disconnected',"node"=>$cps->node];
+    //$result = $postReqObj->asyncPostRequest($url, $params);
+    $result = $postReqObj->syncPostRequest($url, $params);
+
+    echo "report_cps_disconnected: ". $cps->tty . "\n";
+    print_r($result);
+}
+
+function report_cps_online($cps) {
+
+    if ($cps->ackid_str != '') {
+        $postReqObj = new POST_REQUEST();
+        $url = "ipcDispatch.php";
+        $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_online',"node"=>$cps->node, 'msg'=>$cps->ackid_str];
+        //$postReqObj->asyncPostRequest($url, $params);
+        $result = $postReqObj->syncPostRequest($url, $params);
+        echo "report_cps_online: ". $cps->tty . "\n";
+        print_r($result);
     }
-    //report_cps_online($cpsObj);
 }
 
-function report_cps_connected($cpsObj) {
+function report_cps_offline($cps) {
 
     $postReqObj = new POST_REQUEST();
     $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_connected',"node"=>$cpsObj->node];
-    $result = $postReqObj->asyncPostRequest($url, $params);
-
-    echo "report_cps_connected: " . $cpsObj->tty . "\n";
-}
-
-
-function report_cps_disconnected($cpsObj) {
-
-    $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_disconnected',"node"=>$cpsObj->node];
-    $result = $postReqObj->asyncPostRequest($url, $params);
-
-    echo "report_cps_disconnected: ". $cpsObj->tty . "\n";
-}
-
-function report_cps_online($cpsObj) {
-
-    $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_online',"node"=>$cpsObj->node, 'msg'=>$cpsObj->resp_str];
+    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_offline',"node"=>$cps->node];
     $postReqObj->asyncPostRequest($url, $params);
-    echo "report_cps_online: ". $cpsObj->tty . "\n";
+    echo "report_cps_offline: ". $cps->tty . "\n";
 
 }
 
-function report_cps_offline($cpsObj) {
-
-    $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>"ipcNodeOpe",'act'=>'cps_offline',"node"=>$cpsObj->node];
-    $postReqObj->asyncPostRequest($url, $params);
-    echo "report_cps_offline: ". $cpsObj->tty . "\n";
-
-}
-
-function pollCps($cpsObj) {
-    if ($cpsObj->conn === false) {
-        if ($cpsObj->open()) {
-            report_cps_connected($cpsObj);
-            $cpsObj->sendStatusReq();
+function pollCps($cps) {
+    if ($cps->conn === false) {
+        if ($cps->open()) {
+            report_cps_connected($cps);
+            $cps->sendStatusReq();
         }
         else {
-            report_cps_disconnected($cpsObj);
+            report_cps_disconnected($cps);
         }
     }
-    else if (!$cpsObj->sendStatusReq()) {
-        report_cps_disconnected($cpsObj);
+    else if (!$cps->sendStatusReq()) {
+        report_cps_disconnected($cps);
     }        
 }
 
@@ -393,7 +397,7 @@ function pollCps($cpsObj) {
 //program begins:
 //
 
-$cps = array();
+$cpsLst = array();
 $deb = new DEBUG();
 
 
@@ -410,11 +414,13 @@ for ($i=0; $i<$numofcps; $i++) {
     $node = $i+1;
     $com = trim($tty[$i]);
 
-    $cps[$i] = new COM($com, $node);
-    $deb->log($cps[$i]->reason);
-    pollCps($cps[$i]);
+    $cpsLst[$i] = new COM($com, $node);
+    pollCps($cpsLst[$i]);
 
 }
+
+// report_cps_connected($cpsLst[0]);
+// return;
 
 // step 2:
 // 2) create an UDP server and intial poll-cps
@@ -429,25 +435,26 @@ while(1) {
     //    if expires, send status,source=all to COM, and reset 5 sec timer
     if (microtime(true) - $startTime > 10) {
 
-        $numofcps = count($cps);
+        $numofcps = count($cpsLst);
         for ($i=0; $i<$numofcps; $i++) {
-            pollCps($cps[$i]);
+            pollCps($cpsLst[$i]);
             $startTime = microtime(true);
         }
     }
     
+    // b) check for any resonse from cps-hw
     for ($i=0; $i<$numofcps; $i++) {
-        if ($cps[$i]->receiveRsp()) {
-            post_resp($cps[$i]);
+        if ($cpsLst[$i]->receiveRsp()) {
+            post_resp($cpsLst[$i]);
         }
     }
 
-    // b) check for incoming cmd from APIs, 
+    // c) check for incoming cmd from APIs, 
     //    if there is a cmd, send cmd over appropriate COM
     $msg = $udpsock->recv();
     if ($msg != '') {
         $msgObj = new UDPMSG($msg);
-        procUdpMsg($msgObj, $cps);
+        procUdpMsg($msgObj, $cpsLst);
     }
 
     
