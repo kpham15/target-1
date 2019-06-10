@@ -224,12 +224,11 @@ $(document).ready(function() {
   $('#setup-users-forms-viewtel').click(function() {
 
    
-    if ($('#setup-users-tn-cbx').is(':checked')) {
-      // let tel = $('#setup-users-forms-phonenum-tn');
-      console.log("123")
-    } else {
-      console.log("321")
-      // let tel = $('#setup-users-forms-phonenum').val();
+    if ($('#setup-users-tn-cbx').prop('checked')) {
+      console.log("checked");
+    }
+    else {
+      console.log("not checked");
     }
 
     // console.log(tel);
@@ -243,7 +242,7 @@ $(document).ready(function() {
         "api":      "ipcUser",
         "act":      "findTelEmail",
         "user":     user.uname,
-        "tel":    tel,
+        "tel":      "",
         "email":    email,
     },
       dataType:     'json'
