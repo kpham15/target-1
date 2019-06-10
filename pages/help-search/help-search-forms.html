@@ -7,7 +7,7 @@
         <div class="form-group">
           <label>ITEM</label>
           <input id="helpsearch-form-item"
-          type="text" class="form-control">
+          type="text" class="form-control helpsearch-input">
         </div>
       </div>
       
@@ -29,7 +29,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="help-form-action" class="form-control brdcst-form-input">
+          <select id="help-form-action" class="form-control helpsearch-input">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -86,18 +86,9 @@
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
 
-      if (action === "add") {
-        submitHelpSearch('ADD');
-      } 
-      else if (action === "update") {
-        submitHelpSearch('UPDATE');
-     }
-      else if (action === "delete") {
-        submitHelpSearch('DELETE');
-     }
-
-
+      submitHelpSearch(action.toUpperCase());
     });
+
     $('#clear-helpsearch').click(function() {
       $('#helpsearch-form-descr').val("");
       $('#help-form-action').val("");
