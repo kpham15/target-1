@@ -157,6 +157,18 @@ $(document).ready(function() {
   }
 
   initializeConfigReportDateRangePicker();
+
+  // UPON LOAD PAGE FIRST TIME
+  var eventReportFirstLoad = true;
+  $(".menu-item[page_id='event-report-page']").click(async function() {
+    if (eventReportFirstLoad != true) {
+      return;
+    }
+    // load event log table upon visiting page
+    eventReportQueryEventlog(eventReportStartDate, eventReportEndDate);
+
+    eventReportFirstLoad = false;
+  });
   
 
   // Click Event For 'Submit Button'

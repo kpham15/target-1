@@ -19,16 +19,5 @@
 </div>
 
 <script type="text/javascript">
-
-  var eventReportFirstLoad = true;
-  $(".menu-item[page_id='event-report-page']").click(async function() {
-    if (eventReportFirstLoad != true) {
-      return;
-    }
-    // load event log table upon visiting page
-    eventReportQueryEventlog(eventReportStartDate, eventReportEndDate);
-
-    eventReportFirstLoad = false;
-  });
   
 </script>
