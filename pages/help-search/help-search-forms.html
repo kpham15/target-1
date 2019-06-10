@@ -52,10 +52,19 @@
   $(document).ready(function() {
 
     $('#submit-helpsearch').click(function() {
+      let action = $('#help-form-action').val();
 
-      if ($('#help-form-action').val() === "add") {
+      if (action === "add") {
         console.log("add");
       } 
+      else if (action === "update") {
+        console.log("update");
+     }
+      else if (action === "delete") {
+       console.log("delete");
+     }
+     
+
     });
 
   });
