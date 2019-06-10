@@ -31,5 +31,30 @@
       {"data":"ugrp"},
       {"data":"tel"}
     ]
-  })
+  });
+
+  $(document).ready(function() {
+    // Click Event on Table Rows
+    $(document).on('click', '#setup-users-table tbod tr', function() {
+      let data = setupUsersDatatable.row(this).data();
+
+      $('#setup-users-forms-user').val(data.uname);
+      $('#setup-users-forms-stat').val(data.stat);
+      $('#setup-users-forms-lastlogin').val(data.lastlogin);
+      $('#setup-users-forms-fname').val(data.fname);
+      $('#setup-users-forms-mi').val(data.mi);
+      $('#setup-users-forms-lname').val(data.lname);
+      $('#setup-users-forms-eid').val(data.ssn);
+      $('#setup-users-forms-phonenum-tn').val(data.tel);
+      $('#setup-users-forms-phonenum').val(data.tel);
+      $('#setup-users-forms-email').val(data.email);
+      $('#setup-users-forms-title').val(data.title);
+      $('#setup-users-forms-group').val(data.ugrp);
+
+      // give selected class
+      $('#setup-users-table tbod tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
+    })
+  });
 </script>
