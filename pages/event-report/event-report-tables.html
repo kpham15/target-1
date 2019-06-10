@@ -83,11 +83,11 @@
     $(document).on('click', '#eventReport-table tbody tr', function() {
       let data = eventReportDatatable.row(this).data();
 
-      $('#eventReport-form-user').val(data.user);
-      $('#eventReport-form-event').val(data.evt);
-      $('#eventReport-form-function').val(data.fnc);
-      $('#eventReport-form-task').val(data.task);
-      $('#eventReport-form-detail').val(data.detail);
+      $('#eventReport-form-user').val(data.user).change();
+      $('#eventReport-form-event').val(data.evt).change();
+      $('#eventReport-form-function').val(data.fnc).change();
+      $('#eventReport-form-task').val(data.task).change();
+      $('#eventReport-form-detail').val(data.detail).change();
 
       // give selected class
       $('#eventReport-table tbody tr').removeClass('bg-primary');
