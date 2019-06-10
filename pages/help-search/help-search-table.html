@@ -47,8 +47,22 @@
   }
 
   $(document).ready(function() {
+
     $('#view-helpsearch').click(function() {
       queryHelpsearch();
+      clearErrors();
+    });
+
+    $(document).on('click', '#helpsearch-table tbody tr', function() {
+      let data = helpSearchDatatable.row(this).data();
+
+      $('#helpsearch-form-item').val(data.item);
+      $('#helpsearch-form-descr').val(data.descr);
+
+      // give selected class
+      $('#helpsearch-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
       clearErrors();
     });
   });
