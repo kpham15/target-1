@@ -167,6 +167,7 @@
 <script type="text/javascript">
 
 function setupUserAdd(obj) {
+  $('#setup-users-modal-action').val(obj.action);
   $('#setup-users-modal').modal('show');
 }
 
@@ -198,19 +199,8 @@ $(document).ready(function() {
 
     clearErrors();
 
-    // $('#setup-users-modal-action').val(action);
-    // $('#setup-users-modal-ssn').val(ssn);
-    // $('#setup-users-modal-stat').val(stat);
-    // $('#setup-users-modal-fname').val(fname);
-    // $('#setup-users-modal-mi').val(mi);
-    // $('#setup-users-modal-lname').val(lname);
-    // $('#setup-users-modal-tel').val(tel);
-    // $('#setup-users-modal-tel-tn').val(tel);
-    // $('#setup-users-modal-email').val(email);
-    // $('#setup-users-modal-title').val(title);
-    // $('#setup-users-modal-group').val(group);
     if (obj.action === 'ADD') {
-
+      setupUserAdd(obj);
     }
     else if (obj.action === 'UPDATE') {
 
