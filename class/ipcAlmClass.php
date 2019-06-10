@@ -145,7 +145,7 @@ class ALMS {
         $res = $db->query($qry);
 		if (!$res) {
 			$this->rslt = "fail";
-            $this->reason = mysqli_error($db);
+            $this->reason = mysqli_error($db) . ": " . $qry;
 		}
 		else {
             $this->id = $db->insert_id;
@@ -159,8 +159,9 @@ class ALMS {
         $action = 'NEW';
         $ack = '';
         $user = 'SYStem';
-        $result = $this->rslt . ' : ' . $this->reason;
         $almLog->log($almid, $ack, $sa, $src, $type, $cond, $sev, $psta, $ssta, $remark, $action, $user, $result);
+        $this->reason .= ": " . $almLog->reason;
+        $result = $this->rslt . ' : ' . $this->reason;
         
         return;
     }
@@ -199,9 +200,10 @@ class ALMS {
         $almLog = new ALMLOG();
         $action = 'SYS-CLR';
         $user = 'SYSTEM';
-        $result = $this->rslt . ' : ' . $this->reason;
         $almLog->log($this->almid, $this->ack, $this->sa, $this->src, $this->type, $this->cond, $this->sev, $this->psta, $this->ssta, $remark, $action, $user, $result);
-        
+        $this->reason .= ": " . $almLog->reason;
+        $result = $this->rslt . ' : ' . $this->reason;
+
         return;
     }
     
@@ -249,9 +251,9 @@ class ALMS {
 
         $almLog = new ALMLOG();
         $action = 'ACK';
-        $result = $this->rslt . ' : ' . $this->reason;
         $almLog->log($this->almid, $this->ack, $this->sa, $this->src, $this->type, $this->cond, $this->sev, $this->psta, $this->ssta, $remark, $action, $user, $result);
-        
+        $this->reason .= ": " . $almLog->reason;
+        $result = $this->rslt . ' : ' . $this->reason;
     }
 
 	public function unackAlm($ack, $user, $remark) {

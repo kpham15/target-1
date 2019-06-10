@@ -2,8 +2,8 @@
   <div class="box-header with-border">
     <h3 class="box-title">LIST OF ORDERS:</h3>
   </div>
-  <div style="padding: 10px;">
-    <table id="ftOrders-ordTable" class="table table-striped table-bordered table-hover" style="width:100%;">
+  <div class="box-body">
+    <table id="ftOrders-ordTable" class="table table-striped table-bordered table-hover table-condensed" style="width:100%;">
       <thead>
         <tr>
           <th>STAT</th>
@@ -32,6 +32,10 @@
     ],
     "order": [[ 3, "asc" ]],
     "scrollY": "100px",
+    "bLengthChange": false,
+    "searching": false,
+    "paging": false,
+    "info": false,
   });
 
   function queryFtOrdersOrd() {

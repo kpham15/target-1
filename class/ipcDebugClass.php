@@ -6,15 +6,18 @@ class DEBUG{
     public $rslt;
     public $reason;
 
-    public function __construct($mode=NULL){
-
-        $str = file_get_contents("../../ipc-debug.cfg");
-        if ($str == '1') {
+    public function __construct(){
+        
+        $file = __DIR__ . "/../../ipc-debug.cfg";
+        $str = file_get_contents($file);
+        $data = trim($str);
+        if ($data == '1') {
             $this->enable = true;
         }
     
-        if ($this->enable == true) {
-            $this->debugFile =  fopen("../../LOG/debug.log", "a");
+        if ($this->enable === true) {
+            $logFile = __DIR__ . "/../../LOG/debug.log";
+            $this->debugFile =  fopen($logFile, "a");
         }
         
         $this->rslt = 'success';
@@ -23,13 +26,13 @@ class DEBUG{
     }
 
     public function close() {
-        if ($this->enable == false)
+        if ($this->enable === false)
             return;
         fclose($this->debugFile);
     }
 
     public function log($string) {
-        if ($this->enable == false) {
+        if ($this->enable === false) {
             return;
         }
 

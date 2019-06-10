@@ -26,7 +26,7 @@
 	echo '<link id="headerlinks" rel="shortcut icon" href="#">';
 	echo '</head>';
 
-	echo '<body>';	
+	echo '<body class="login-page skin-blue sidebar-mini">';	
 
 	//IPCv2
 	include './pages/nav-wrapper/nav-wrapper.php';
@@ -41,7 +41,6 @@
 	
 ?>
 
-<script src="./js/ipcOpt.js"></script>
 <script src="./js/hmac-sha256.js"></script>
 <script src="./js/enc-base64-min.js"></script>
 
@@ -56,7 +55,6 @@ $(document).ready(function() {
 
 	if (user.uname == '')
 	{
-		$('body').addClass('login-page');
 		$('#login-page').show();
 	}
 

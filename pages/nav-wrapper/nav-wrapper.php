@@ -21,9 +21,18 @@
     <?php include __DIR__ . '/../references/references.php'; ?>
     <?php include __DIR__ . '/../svc/svc.php'; ?>
     <?php include __DIR__ . '/../prov-report/prov-report.php'; ?>
+    <?php include __DIR__ . '/../maint-report/maint-report.php'; ?>
+    <?php include __DIR__ . '/../config-report/config-report.php'; ?>
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
     <?php include __DIR__ . '/../help-search/help-search.php'; ?>
+    <?php include __DIR__ . '/../portmap/portmap.php'; ?>
+    <?php include __DIR__ . '/../node-operation/node-operation.php'; ?>
+    <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
+    <?php include __DIR__ . '/../database-backup/database-backup.php'; ?>
+    <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
+    <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
+    <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
 
 
     <!-- /.content -->

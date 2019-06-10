@@ -72,7 +72,6 @@ else {
 }
 
 function addBatch($userObj, $fileName, $fileContent) {
-
     if ($userObj->grpObj->portmap != "Y") {
         $result['rslt'] = 'fail';
         $result['reason'] = 'Permission Denied';
@@ -80,6 +79,7 @@ function addBatch($userObj, $fileName, $fileContent) {
     }
 
     $batchObj = new BATCH();
+
     $batchObj->addBatch($userObj->uname, $fileName, $fileContent);
     if($batchObj->rslt == FAIL) {
         $result['rslt'] = $batchObj->rslt;
@@ -90,18 +90,17 @@ function addBatch($userObj, $fileName, $fileContent) {
     $result['rows'] = $batchObj->rows;
     $result["rslt"] = SUCCESS;
     $result["reason"] = "BATCH_ADD_SUCCESS";
-    
+
     return $result;
 }
 
 function delBatch($id, $userObj) {
-
     if ($userObj->grpObj->portmap != "Y") {
         $result['rslt'] = 'fail';
         $result['reason'] = 'Permission Denied';
         return $result;
     }
-
+    
     $batchObj = new BATCH();
     $batchObj->deleteBatch($id);
     if($batchObj->rslt == FAIL) {
