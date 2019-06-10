@@ -171,6 +171,12 @@
 		}
 
         // verify fac
+        if ($fac == '') {
+            $result['rslt'] = 'fail';
+            $result['reason'] = 'MISSING FAC';
+			return $result;
+        }
+        
         $facObj = new FAC($fac);
         if ($facObj->rslt == FAIL) {
             $facObj->add($fac, $ftyp, $ort, $spcfnc);

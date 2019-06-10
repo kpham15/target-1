@@ -38,39 +38,23 @@
           <span>Home</span>
         </a>
       </li>
-      
-      <!-- Broadcast Notifications -->
-      <li class="menu-item" page_id="brdcst-page">
-        <a href="#">
-          <i class="glyphicon glyphicon-bullhorn"></i>
-          <span>Broadcast Notification</span>
-        </a>
-      </li>
 
-      <!-- IPC References -->
-      <li class="menu-item" page_id="references-page">
-        <a href="#">
-          <i class="glyphicon glyphicon-tags"></i>
-          <span>IPC References</span>
-        </a>
-      </li>
-
-      <!-- Setup -->
+      <!-- Configuration Menu -->
       <li class="treeview">
         <a href="#">
           <i class="glyphicon glyphicon-cog"></i>
-          <span>Setup</span>
+          <span>Configuration Menu</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
 
-          <!-- Setup Service Connection-->
-          <li class="menu-item" page_id="svc-page">
+          <!-- Setup Wire Center -->
+          <li class="menu-item" page_id="wire-center-page">
             <a href="#">
               <i class="fa fa-circle-o"></i>
-              <span>Service Connection</span>
+              <span>Wire Center</span>
             </a>
           </li>
           
@@ -93,45 +77,172 @@
         </ul>
       </li>
 
-      <!-- Alarm Administration -->
-      <li class="menu-item" page_id="alarm-admin-page">
-        <a href="#">
-          <i class="fa fa-warning"></i>
-          <span>Alarm Administration</span>
-        </a>
-      </li>
-      
-      <li class="menu-item" page_id="ftOrders-page">
-        <a href="#">
-          <i class="fa fa-paper-plane"></i>
-          <span>FT Orders</span>
-        </a>
-      </li>
-
-      <!-- Reports -->
+      <!-- Provisioning Menu -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-book"></i>
-          <span>Reports</span>
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>Provisioning Menu</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+
+        <ul class="treeview-menu">
+
+          <!-- Setup Service Connections -->
+          <li class="menu-item" page_id="svc-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Service Connection</span>
+            </a>
+          </li>
+
+          <!-- Setup/Execute Batches -->
+          <li class="menu-item" page_id="batch-exec-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Batch Execution</span>
+            </a>
+          </li>
+          
+          <!-- Setup Flow-Through Orders -->
+          <li class="menu-item" page_id="ftOrders-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>FT Orders</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <!-- Maintenance Menu -->
+      <li class="treeview">
+        <a href="#">
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>Maintenance Menu</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+
+        <ul class="treeview-menu">
+          
+          <!-- @TODO -->
+          <!-- Setup Maintenance Connections -->
+
+          <!-- Alarm Administration -->
+          <li class="menu-item" page_id="alarm-admin-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Alarm Administration</span>
+            </a>
+          </li>
+
+          <!-- Path Administration -->
+          <li class="menu-item" page_id="path-admin-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Path Administration</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
+
+      <!-- User Administration Menu -->
+      <li class="treeview">
+        <a href="#">
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>User Administration Menu</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          
+          <!-- @TODO -->
+          <!-- Setup Users -->
+  
+          <!-- Broadcast Notifications -->
+          <li class="menu-item" page_id="brdcst-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Broadcast Notification</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <!-- IPC Administration Menu -->
+      <li class="treeview">
+        <a href="#">
+          <i class="glyphicon glyphicon-cog"></i>
+          <span>IPC Administration Menu</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
 
+          <!-- Node Operation -->
+          <li class="menu-item" page_id="node-operation-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Node Operation</span>
+            </a>
+          </li>
+
+          <!-- IPC References -->
+          <li class="menu-item" page_id="references-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>IPC References</span>
+            </a>
+          </li>
+
+          <!-- Database Backup -->
+          <li class="menu-item" page_id="database-backup-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Database Backup</span>
+            </a>
+          </li>
+
+          <!-- @TODO -->
+          <!-- Software Update -->
+
+          <!-- @TODO -->
+          <!-- Event Log-->
+
+        </ul>
+      </li>
+
+      <!-- Reports Menu -->
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Reports Menu</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+
+          <!-- Alarm Report -->
+          <li class="menu-item" page_id="alarmreport-page">
+            <a href="#">
+              <i class="fa fa-circle-o"></i>
+              <span>Alarm Reports</span>
+            </a>
+          </li>
+
           <!-- Configuration Report -->
           <li class="menu-item" page_id="config-report-page">
             <a href="#">
               <i class="fa fa-circle-o"></i>
-              <span>Configuration Report</span>
-            </a>
-          </li>
-
-          <!-- Maintenance Report -->
-          <li class="menu-item" page_id="maint-report-page">
-            <a href="#">
-              <i class="fa fa-circle-o"></i>
-              <span>Maintenance Report</span>
+              <span>Configuration Reports</span>
             </a>
           </li>
           
@@ -139,42 +250,27 @@
           <li class="menu-item" page_id="prov-report-page">
             <a href="#">
               <i class="fa fa-circle-o"></i>
-              <span>Provisioning Report</span>
+              <span>Provisioning Reports</span>
             </a>
           </li>
 
-          <!-- Alarm Report -->
-          <li class="menu-item" page_id="alarmreport-page">
+          <!-- Maintenance Report -->
+          <li class="menu-item" page_id="maint-report-page">
             <a href="#">
               <i class="fa fa-circle-o"></i>
-              <span>Alarm Report</span>
+              <span>Maintenance Reports</span>
             </a>
           </li>
-      
         </ul>
+        
+        <!-- Database Backup -->
+        
       </li>
 
       <!-- Configuration Report -->
-      <li class="menu-item" page_id="batch-exec-page">
-        <a href="#">
-          <i class="fa fa-circle-o"></i>
-          <span>Batch Execution</span>
-        </a>
-      </li>
-
-      <li class="menu-item" page_id="wire-center-page">
-        <a href="#">
-          <i class="fa fa-circle-o"></i>
-          <span>Setup Wire Center</span>
-        </a>
-      </li>
       
-      <li class="menu-item" page_id="node-operation-page">
-        <a href="#">
-          <i class="fa fa-gears"></i>
-          <span>Node Operation</span>
-        </a>
-      </li>
+      
+      
 
       <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
       <li class="treeview">

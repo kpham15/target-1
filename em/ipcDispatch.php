@@ -121,7 +121,7 @@ else if($api =='ipcMaintRestoreMtcd') {
 else if($api =='ipcMxc') {
     include "ipcMxc.php";
 }
-else if($api =='ipcNodeAdmin') {
+else if ($api =='ipcNodeAdmin') {
     include "ipcNodeAdmin.php";
 }
 else if ($api == 'ipcNodeOpe') {

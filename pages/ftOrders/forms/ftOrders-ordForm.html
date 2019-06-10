@@ -296,6 +296,9 @@
 
   // ACTION CHANGE
   $("#ftOrders-ordForm-action").on('change', function() {
+
+    clearErrors();
+
     // REMOVE BACKGROUND COLOR FROM ALL FORMS
     $(".ftOrders-form").css('background-color', '');
 
@@ -324,6 +327,9 @@
     }
   });
 
-
+  // CLEAR ERRORS WHEN INPUT IS CLICKED
+  $(".ftOrders-cktForm-input .ftOrders-facForm-input .ftOrders-ordForm-input").on('click', function() {
+    clearErrors();
+  });
 
 </script>
