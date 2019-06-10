@@ -138,14 +138,6 @@
 <script type="text/javascript">
 function setupUsersModalSubmit(obj, tel) {
 
-  let tel = "";
-  if ($('#setup-users-modal-tn-cbx').prop('checked')) {
-    tel = $('#setup-users-modal-tel-tn').val();
-  }
-  else {
-    tel = $('#setup-users-modal-tel').val();
-  }
-
   $.ajax({
     type:       'POST',
     url:        ipcDispatch,
