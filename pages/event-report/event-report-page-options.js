@@ -1,11 +1,11 @@
 var eventReportFunctionOptions = {
-  configuration:      [
+  CONFIGURATION:      [
     "SETUP WIRE CENTER", 
     "PORT MAPPING", 
     "SETUP FACILITY",
   ],
 
-  provisioning:       [
+  PROVISIONING:       [
     "SETUP SERVICE CONNECTION", 
     "BATCH EXECUTION", 
     "FT ADMIN REPORT", 
@@ -14,7 +14,7 @@ var eventReportFunctionOptions = {
     "FOMS/FUSA",
   ],
   
-  maintenance:        [
+  MAINTENANCE:        [
     "SETUP MAINTENANCE CONNECTION",
     "LOCK/UNLOCK MATRIX CARD",
     "LOCK/UNLOCK MATRIX NODE",
@@ -22,7 +22,7 @@ var eventReportFunctionOptions = {
     "PATH ADMINISTRATION",
   ],
 
-  userManagement:     [
+  USERMANAGEMENT:     [
     "SETUP USER",
     "USER ACCESS",
     "USER SEARCH",
@@ -30,7 +30,7 @@ var eventReportFunctionOptions = {
     "BROADCAST NOTIFICATION",
   ],
 
-  ipcAdministration:  [
+  IPCADMINISTRATION:  [
     "IPC REFERENCE DATA",
     "SYSTEM SHUTDOWN",
     "RESTORE SYSTEM",
