@@ -169,8 +169,28 @@
 $(document).ready(function() {
   // Click Event View 1
   $('#setup-users-forms-viewuser').change(function() {
-    let user = $('#setup-users-forms-user').val();
-    
+    let userTxt = $('#setup-users-forms-user').val();
+    let status = $('#setup-users-forms-stat').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findUser",
+        "user":     user.uname,
+        "uname":    userTxt,
+        "stat":     status,
+      },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    })
+
   })
 
   // Action Change event listener
