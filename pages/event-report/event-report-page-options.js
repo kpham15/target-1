@@ -41,7 +41,7 @@ var eventReportFunctionOptions = {
 }
 
 var eventReportTaskOptions = {
-  setupWireCenter: [
+  SETUPWIRECENTER: [
       "VIEW",
       "UPDATE",
       "RESET",
@@ -50,31 +50,31 @@ var eventReportTaskOptions = {
       "HOLD"
   ],
   
-  portMapping: [
+  PORTMAPPING: [
       "MAP",
       "UNMAP",
   ],
   
-  setupServiceConnection: [
+  SETUPSERVICECONNECTION: [
       "CONNECT",
       "DISCONNECT",
       "DIP CONNECT",
       "UPDATE_CKT",
   ],
 
-  ftAdminReport: [
+  FTADMINREPORT: [
 
   ],
 
-  fomsFusa: [
+  FOMSFUSA: [
 
   ],
 
-  batchExecution: [
+  BATCHEXECUTION: [
       "EXECUTE BATCH FILES",
   ],
 
-  setupMaintenanceConnection: [
+  SETUPMAINTENANCECONNECTION: [
       "MTC_CONN",
       "MTC_DISCON",
       "RESTORE_MTCD",
@@ -82,36 +82,36 @@ var eventReportTaskOptions = {
       "MTC_LPBK_TEST",
   ],
 
-  lockUnlockMatrixCard: [
+  LOCKUNLOCKMATRIXCARD: [
       "LOCK_CARD",
       "UNLOCK_CARD",
       "REFRESH_CARD",
   ],
 
-  lockUnlockMatrixNode: [
+  LOCKUNLOCKMATRIXNODE: [
       "LOCK_NODE",
       "UNLOCK_NODE",
   ],
 
-  alarmAdministration: [
+  ALARMADMINISTRATION: [
       "ACK",
       "UN-ACK",
       "CLR ALARM",
   ],
 
-  pathAdministration: [
+  PATHADMINISTRATION: [
       "REPLACE DEF PATH",
       "RELEASE DEF PATH",
       "REPEAT CONNECT",
   ],
 
-  broadcastNotification: [
+  BROADCASTNOTIFICATION: [
       "UPDATE MSG",
       "DELETE MSG",
       "ADD MSG",
   ],
 
-  setupUser: [
+  SETUPUSER: [
       "ADD USER",
       "UPDATE USER",
       "LOCK USER",
@@ -122,56 +122,56 @@ var eventReportTaskOptions = {
       "RESET PW",
   ],
 
-  userAccess: [
+  USERACCESS: [
 
   ],
 
-  userSearch: [
+  USERSEARCH: [
 
   ],
 
-  setResetPassword: [
+  SETRESETPASSWORD: [
 
   ],
 
-  backupDatabase: [
+  BACKUPDATABASE: [
       "BACKUP DB",
       "RESTORE BACKUP DB",
   ],
 
-  restoreSystem: [
+  RESTORESYSTEM: [
 
   ],
 
-  updateSoftwareReleases: [
+  UPDATESOFTWARERELEASES: [
       "UPDATE SOFTWARE",
       "ROLLBACK SOFTWARE",
   ],
 
-  nodeAdministration: [
+  NODEADMINISTRATION: [
 
   ],
 
-  systemShutdown: [
+  SYSTEMSHUTDOWN: [
       "LOCK IPC",
       "UNLOCK IPC",
       "SHUTDOWN IPC",
   ],
 
-  ipcReferenceData: [
+  IPCREFERENCEDATA: [
       "UPDATE",
       "RESET"
   ],
 
-  flowThrough: [
+  FLOWTHROUGH: [
 
   ],
 
-  flowThroughReleaseTable: [
+  FLOWTHROUGHRELEASETABLE: [
 
   ],
   
-  setupFacility: [
+  SETUPFACILITY: [
       "VIEW",
       "ADD",
       "UPDATE",
