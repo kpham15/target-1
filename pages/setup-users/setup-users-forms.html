@@ -167,6 +167,12 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+  // Clear Button Click Event
+  $('#setup-users-forms-clear').click(function() {
+    $('.setup-useres-forms-input').val('');
+    clearErrors();
+  })
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
     let userTxt = $('#setup-users-forms-user').val();
@@ -256,6 +262,7 @@ $(document).ready(function() {
 
   });
 
+  // Click Event View 4
   $('#setup-users-forms-viewtitle').click(function() {
 
     let title = $('#setup-users-forms-title').val();
