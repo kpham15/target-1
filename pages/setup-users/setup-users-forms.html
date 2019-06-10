@@ -217,6 +217,8 @@ function setupUserLock(obj, tel) {
     $('#setup-users-modal-email').val(obj.email);
     $('#setup-users-modal-title').val(obj.title);
     $('#setup-users-modal-group').val(obj.group);
+
+    $('.setup-users-modal-input').prop('disabled',true);
   
     $('#setup-users-modal-tel').val(tel);
     $('#setup-users-modal-tel-tn').val(tel);
