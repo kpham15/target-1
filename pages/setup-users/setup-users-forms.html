@@ -270,21 +270,10 @@ $(document).ready(function() {
     else if (obj.action === 'UPDATE') {
       setupUserUpdate(obj, tel);
     }
-    else if (obj.action === 'LOCK') {
+    else {
       setupUserOther(obj, tel);
     }
-    else if (obj.action === 'ENABLE') {
-      setupUserOther(obj, tel);
-    }
-    else if (obj.action === 'DISABLE') {
-      setupUserOther(obj, tel);
-    }
-    else if (obj.action === 'DELETE') {
-      setupUserOther(obj, tel);
-    }
-    else if (obj.action === 'RESET_PW') {
-      setupUserOther(obj, tel);
-    }
+    
   });
 
   // Clear Button Click Event
