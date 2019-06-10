@@ -1,0 +1,221 @@
+<!-- Modal -->
+<div class="modal fade" id="setup-users-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">SETUP USERS</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Top Row -->
+          <div class="row">
+            <!--USER NAME-->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>USER NAME</label>
+                <input id="setup-users-modal-user" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- SSN -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>SSN:</label>
+                <input id="setup-users-modal-ssn" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- STAT -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>STATUS</label>
+                <input id="setup-users-modal-stat" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row">
+            <!-- FNAME -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FIRST NAME</label>
+                <input id="setup-users-modal-fname" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- MI -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MI</label>
+                <input id="setup-users-modal-mi" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- LNAME -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>LAST NAME</label>
+                <input id="setup-users-modal-lname" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="row">
+            <!-- TEL -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>TEL</label>
+                <label>TN:</label>
+                <input id="setup-users-modal-tn-cbx" type="checkbox" checked>
+                <div class="input-group">
+                  <input id="setup-users-modal-tel" type="text" class="form-control setup-users-modal-input" style="display:none;" />
+                  <input id="setup-users-modal-tel-tn" type="text" class="form-control setup-users-modal-input" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
+                </div>
+              </div>
+            </div>
+            <!-- EMAIL -->
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>EMAIL</label>
+                <input id="setup-users-modal-email" type="text" class="form-control setup-users-modal-input" placeholder="name@email.com" />
+              </div>
+            </div>
+          </div>
+          <!-- Row 4 -->
+          <div class="row">
+            <!-- Title -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>TITLE:</label>
+                <input id="setup-users-modal-title" type="text" class="form-control setup-users-modal-input">
+              </div>
+            </div>
+            <!-- GROUP -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>GROUP</label>
+                <select id="setup-users-modal-group" class="form-control setup-users-modal-input">
+                  <option value=""></option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="SUPERVISOR">SUPERVISOR</option>
+                  <option value="TECH-I">TECH-I</option>
+                  <option value="TECH-II">TECH-II</option>
+                  <option value="GENERAL">GENERAL</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Action Row -->
+          <div class="row">
+            <!-- ACTION -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>ACTION</label>
+                <input id="setup-users-modal-action" type="text" class="form-control" disabled="" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <button id="setup-users-modal-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+              Close
+            </button>
+            <button id="setup-users-modal-submit" type="button" class="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function setupUsersModalSubmit(obj, tel) {
+
+  $.ajax({
+    type:       'POST',
+    url:        ipcDispatch,
+    data:       {
+      "api":    "ipcUser",
+      "user":   user.uname,
+      "uname":  obj.user,
+      "act":    obj.action,
+      "ssn":    obj.ssn,
+      "stat":   obj.stat,
+      "fname":  obj.fname,
+      "mi":     obj.mi,
+      "lname":  obj.lname,
+      "tel":    tel,
+      "email":  obj.email,
+      "title":  obj.title,
+      "ugrp":   obj.group
+    },
+    dataType: 'json',
+  }).done(function(data) {
+    let res = data.rows
+    let modal = {
+      title:  data.rslt,
+      body:   data.reason,
+    }
+
+    if (data.rslt == 'fail') {
+      modal.type = 'danger';
+      modalHandler(modal);
+    }
+    else {
+      modal.type = 'success';
+      modalHandler(modal);
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+
+      $('#setup-users-modal').modal('hide');
+    }
+  })
+}
+
+$(document).ready(function() {
+  // Clear Button Click Event
+  $('#setup-users-modal-clear').click(function() {
+    $('.setup-users-modal-input').val('');
+  })
+
+  // Submit Button Click Event
+  $('#setup-users-modal-submit').click(function() {
+    let obj = {
+      action:     $('#setup-users-modal-action').val(),
+      user:       $('#setup-users-modal-user').val(),
+      ssn:        $('#setup-users-modal-ssn').val(),
+      status:     $('#setup-users-modal-stat').val(),
+      fname:      $('#setup-users-modal-fname').val(),
+      mi:         $('#setup-users-modal-mi').val(),
+      lname:      $('#setup-users-modal-lname').val(),
+      email:      $('#setup-users-modal-email').val(),
+      title:      $('#setup-users-modal-title').val(),
+      group:      $('#setup-users-modal-group').val(),
+    }
+
+    let tel = "";
+    if ($('#setup-users-modal-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-modal-tel-tn').val();
+    }
+    else {
+      tel = $('#setup-users-modal-tel').val();
+    }
+    setupUsersModalSubmit(obj, tel);
+  })
+
+  // Modal Close Event Handler
+  $('#setup-users-modal').on('hidden.bs.modal', function(e) {
+    $('.setup-users-forms-input').val('');
+    $('.setup-users-modal-input').val('');
+  })
+});
+</script>
