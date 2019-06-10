@@ -7,3 +7,7 @@ UPDATE/*
 UPLOAD/*
 FTORDERS/*
 LOG/*
+!UPDATE/.readme
+!UPLOAD/.readme
+!FTORDERS/.readme
+!LOG/.readme
