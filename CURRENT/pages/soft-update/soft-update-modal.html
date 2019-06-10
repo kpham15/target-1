@@ -1,0 +1,86 @@
+<div id="swUpdModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SOFTWARE UPLOAD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="container">
+                        <h4>CHOOSE THE SOFTWARE FILE FROM YOUR COMPUTER:</h4>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <input type="file" data-icon="false" id="swUpdModal_file" accept=".zip">
+                            </div>
+                        </div> 
+
+                    </div>
+                    <div class="col-sm-8 modifyPadding">
+                        <button class="btn btn-primary" id="swUpdModal_submit_btn">Submit</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function swUpdModal_add() {
+        if($("#swUpdModal_file").val() == "") {
+            alert("There is no file uploaded!")
+            return;
+        }
+        let file= document.getElementById("swUpdModal_file").files[0];
+        if (file.size > 2097152) {
+            alert("The file size must be less than 2MB!");
+            return;
+        }
+  
+        let data = new FormData();
+        data.append("user", $("#main_currentUser").text());
+        data.append("act", "UPLOAD SW");
+        data.append("api", 'ipcSwUpdate')
+        data.append("user", user.uname)
+        data.append("grp", user.grp)
+        data.append("ugrp", user.ugrp)
+        data.append("file", file);  
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            let obj = JSON.parse(data);
+            alert(obj['reason']);
+            let modal = {
+                title: obj.rslt,
+                body: obj.reason,
+            }
+            if(obj.rslt == 'fail') modal.type = 'danger';
+            else modal.type = 'success';
+            modalHandler(modal);
+            
+        });
+    
+    }
+    
+    function swUpdModal_clearForm() {
+        $("#swUpdModal_file").val("");
+    }
+
+
+    $("#swUpdModal_submit_btn").click(function(){
+        swUpdModal_add();
+    });
+
+
+$("#swUpdModal").on("hidden.bs.modal", swUpd_clearForm);
+
+
+</script>

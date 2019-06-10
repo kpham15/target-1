@@ -25,15 +25,21 @@
     <?php include __DIR__ . '/../config-report/config-report.php'; ?>
     <?php include __DIR__ . '/../ftOrders/ftOrders.php'; ?>
     <?php include __DIR__ . '/../fac/fac.php'; ?>
+    <?php include __DIR__ . '/../help-search/help-search.php'; ?>
     <?php include __DIR__ . '/../portmap/portmap.php'; ?>
     <?php include __DIR__ . '/../node-operation/node-operation.php'; ?>
     <?php include __DIR__ . '/../alarm-admin/alarm-admin.php'; ?>
+    <?php include __DIR__ . '/../setup-users/setup-users.php'; ?>
     <?php include __DIR__ . '/../database-backup/database-backup.php'; ?>
     <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
     <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
+<<<<<<< HEAD:pages/nav-wrapper/nav-wrapper.php
     <?php include __DIR__ . '/../event-report/event-report.php'; ?>
 
+=======
+    <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
+>>>>>>> a27e9ea26fc2bbaa3e4c343c26f62e8c6d73e42a:CURRENT/pages/nav-wrapper/nav-wrapper.php
 
     <!-- /.content -->
   </div>

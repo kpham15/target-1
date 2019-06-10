@@ -923,17 +923,6 @@ function exec_resp($node, $hwRsp, $userObj) {
     }
 }
 
-function updateCpsStatus($hwRsp) {
-    
-    $postReqObj = new POST_REQUEST();
-    $url = "ipcDispatch.php";
-    $params = ["user"=>"SYSTEM", "api"=>$api, 'act'=>$apiAct, "node"=>$node, "hwRsp"=>$hwRsp];
-    //@TODO Maybe need asyncPostRequest here? Sync for debugging
-    $postReqObj->syncPostRequest($url, $params);
-    return $postReqObj->reply;
-    // return ($postReqObj->reply);
-
-}
 
 function exec_cmd($node, $cmd, $userObj) {
  

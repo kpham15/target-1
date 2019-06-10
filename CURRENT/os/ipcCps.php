@@ -133,7 +133,8 @@ class COM {
     public $node = 0;
     public $target = '';
     public $psta = 'UNQ';
-    public $online = false;
+    public $offline = true;
+    public $offline_cnt = 0;
     public $status_req = '';
     public $fd = 0;         // file_discriptor
     public $conn = false;   // tty connect status
@@ -149,26 +150,26 @@ class COM {
         if ($tty != '' && $node > 0) {
             $this->node = $node;
             $this->tty = $tty;
+            $this->status_req = "\$status,source=uuid,device=miox1,ackid=$node-sn*";
                 
             //Connect to serial port
             if ($this->open()) {
-                $this->sendStatusReq();
+                $this->sendCmdToHw($this->status_req);
             }
-
+            $this->rslt = 'success';
+            $this->reason = "TTY:$this->tty FOR NODE:$this->node";
         }
         else {
             $this->rslt = 'fail';
-            $this->reason = 'INVALID TTY' . $tty;
+            $this->reason = "INVALID TTY:$tty OR NODE:$node";
         }
-        return;
     }
 
     public function open() {
 
         $fd = dio_open("/dev/$this->tty", O_RDWR | O_NOCTTY | O_NONBLOCK);
-        if ($fd !== false) {
+        if ($fd > 0) {
             $this->fd = $fd;
-            $this->conn = true;
             //configure the connnection's parameters
             dio_tcsetattr($this->fd, array(
                 'baud'=> 115200,
@@ -181,12 +182,12 @@ class COM {
             $serial_timeoutSec = 0;
             $serial_timeoutUsec = 500000;
             $this->timeout = (float)$serial_timeoutSec + ((float)$serial_timeoutUsec/1000000);
-            $this->status_req = "\$status,source=uuid,device=miox1,ackid=1-sn*";
             $this->rslt = 'success';
             $this->reason = 'TTY: ' . $this->tty . ' IS CONNECTED';
             return true;   
         }
         else {
+            $this->fd = 0;
             $this->rslt = 'fail';
             $this->reason = 'CANNOT OPEN COM PORT';
             return false;
@@ -194,74 +195,51 @@ class COM {
     }
 
 
-    public function sendStatusReq() {
-        //send satus_req to CPS HW
-        //this function returns # bytes written to descriptor
+    //send satus_req to CPS HW
+    public function sendCmdToHw($cmd) {
         
+        $this->cmd = $cmd;
         $cnt = 0;
-        if ($this->status_req != '') {
-            $cnt = dio_write($this->fd, $this->status_req, strlen($this->status_req));
-            if ($cnt < 0) {
-                $this->online = false;
-                $this->close();
-                $this->rslt = "fail";
-                $this->reason = "SEND STATUS FAILS";
-                echo $this->tty . ": >>> : " . $this->reason . "\n";
-                return false;
-            }
-            else {
-                $this->online = true;
-                echo $this->tty . ": >>> : " . $this->status_req . "\n" . $this->reason . "\n";
-                return true;
-            }
-        }
-        usleep(50000);
-        return true;
-    }
-
-    public function sendCmd($cmd) {
-        //send cmd to CPS HW
-        //this function returns # bytes written to descriptor
-        if ($this->conn === false)
-            return false;
-
-        $cnt = 0;
-        $cnt = dio_write($this->fd, $cmd, strlen($cmd));
+        $cnt = dio_write($this->fd, $this->status_req, strlen($this->status_req));
         if ($cnt < 0) {
             $this->close();
             $this->rslt = "fail";
-            $this->reason = "SEND CMD FAILS";
-            return false;
         }
         else {
-            echo $this->tty . ": >>> : " . $cmd . "\n" . $this->reason . "\n";
-            return true;
+            $this->conn = true;
+            $this->rslt = 'success';
         }
+        $this->reason = "sendStatusReq";
         usleep(50000);
+        return $cnt;
     }
+        
+
 
     // if no data received for 100 msec then return
     // else read until no more data in buf
-    public function receiveRsp() {
-        if ($this->conn === false)
-            return false;
+    public function recvRespFromHw() {
 
         $startTime = microtime(true);
         $str = '';
         // loop for 0.5 sec until received some data
         while((microtime(true) - $startTime) < 0.5) {
-            if($this->fd !== false) {
+            if ($this->fd !== false) {
                 $data = dio_read($this->fd, 1024);
                 if (trim($data) !== "") {
-                    $this->online = true;
                     $str .= $data;
                     $startTime = microtime(true);
                 }
+            }
+            else {
+                return false;
             }
         }
 
         if ($str != '') {
             $this->resp_str .= $str;
+            $this->offline = false;
+            $this->offline_cnt = 0;
             echo $this->tty . ": <<< : " . $str . "\n";
             return true;
         }
@@ -272,8 +250,7 @@ class COM {
 
     public function close() {
         dio_close($this->fd);
-        $this->online = false;
-        $this->conn = false;
+        $this->offline = true;
         $this->fd = 0;
     }
 
@@ -315,7 +292,7 @@ function procUdpMsg($msgObj, $cpsLst) {
         if ($msgObj->node > 0) {
             $i = $msgObj->node -1;
             $cps = $cpsLst[$i];
-            $cps->sendCmd($msgObj->cmd);
+            $cps->sendCmdToHw($msgObj->cmd);
             echo $cps->tty . ": >>> : " . $msgObj->cmd . "\n";
         }
     }
@@ -377,8 +354,8 @@ function report_cps_offline($cps) {
 
 }
 
-function pollCps($cps) {
-    if ($cps->conn === false) {
+function polling_Cps($cps) {
+    if ($cps->fd === 0) {
         if ($cps->open()) {
             report_cps_connected($cps);
             $cps->sendStatusReq();
@@ -403,7 +380,7 @@ $deb = new DEBUG();
 
 // step 1:
 // 1) read the ipc-cps.cfg file and use class COM to establish connection on the tty(s)
-//    specified in this ipc-cps.cfg file. Stores the COM(s) in array cps[]
+//    specified in this ipc-cps.cfg file. Stores the COM(s) in array cpsLst[]
 
 $file =  "../../ipc-cps.cfg";
 $str = file_get_contents($file);
@@ -413,9 +390,8 @@ $numofcps = count($tty);
 for ($i=0; $i<$numofcps; $i++) {
     $node = $i+1;
     $com = trim($tty[$i]);
-
     $cpsLst[$i] = new COM($com, $node);
-    pollCps($cpsLst[$i]);
+    //polling_Cps($cpsLst[$i]);
 
 }
 
@@ -433,19 +409,29 @@ $startTime = microtime(true);
 while(1) {
     // a) check for 10 sec expires
     //    if expires, send status,source=all to COM, and reset 5 sec timer
-    if (microtime(true) - $startTime > 10) {
+    if (microtime(true) - $startTime > 5) {
 
         $numofcps = count($cpsLst);
         for ($i=0; $i<$numofcps; $i++) {
-            pollCps($cpsLst[$i]);
-            $startTime = microtime(true);
+            $cps = $cpsLst[$i];
+            if ($cps->fd > 0) {
+                if ($cps->offline == false) {
+                    $cps->offline_cnt++;
+                    if ($cps->offline_cnt > 2) {
+                        report_cps_offline($cps);
+                    }
+                }
+                $cps->sendCmdToHw($cps->status_req);
+            }
         }
+        $startTime = microtime(true);
     }
     
     // b) check for any resonse from cps-hw
     for ($i=0; $i<$numofcps; $i++) {
-        if ($cpsLst[$i]->receiveRsp()) {
-            post_resp($cpsLst[$i]);
+        $cps = $cpsLst[$i];
+        if ($cps->recvRespFromHw()) {
+            post_resp($cps);
         }
     }
 
