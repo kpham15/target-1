@@ -68,8 +68,8 @@
                 <label>TN:</label>
                 <input id="setup-users-modal-tn-cbx" type="checkbox" checked>
                 <div class="input-group">
-                  <input id="setup-users-modal-tel" type="text" class="form-control users-modal-tel" style="display:none;" />
-                  <input id="setup-users-modal-tel-tn" type="text" class="form-control users-modal-tel" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
+                  <input id="setup-users-modal-tel" type="text" class="form-control setup-users-modal-input" style="display:none;" />
+                  <input id="setup-users-modal-tel-tn" type="text" class="form-control setup-users-modal-input" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  
+
   // Modal Close Event Handler
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
     $('.setup-users-forms-input').val('');
