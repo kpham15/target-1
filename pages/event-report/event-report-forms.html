@@ -222,16 +222,16 @@ $(document).ready(function() {
   // CHANGE TASK BASED ON FUNCTION
   $("#eventReport-form-event").on("change", function() {
     let a = [];
-    let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
-    pre_fnc = pre_fnc.replace("/", "_");
-    let fnc = pre_fnc.replace(/ /g, "_");
-    fnc = fnc.toUpperCase();
+    let pre_task = $("#eventReport-form-event option:selected").attr('array');
+    pre_task = pre_task.replace("/", "_");
+    let fnc = pre_task.replace(/ /g, "_");
+    task = task.toUpperCase();
     a.push('<option></option>');
-    eventReportFunctionOptions[fnc].forEach(function(elem) {
+    eventReportFunctionOptions[task].forEach(function(elem) {
       let html = `<option array='${elem}'>${elem}</option>`;
       a.push(html);
     });
-    $("#eventReport-form-function").html(a.join(""));
+    $("#eventReport-form-task").html(a.join(""));
   });
 
 
