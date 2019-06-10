@@ -218,7 +218,7 @@ function setupUserOther(obj, tel) {
     $('#setup-users-modal-title').val(obj.title);
     $('#setup-users-modal-group').val(obj.group);
 
-    $('.setup-users-modal-input').prop('disabled',true);
+    $('.setup-users-modal-input').prop('disabled', true);
   
     $('#setup-users-modal-tel').val(tel);
     $('#setup-users-modal-tel-tn').val(tel);
@@ -232,6 +232,7 @@ $(document).ready(function() {
 
   // Action Change Event
   $('#setup-users-forms-action').change(function() {
+    $('.setup-users-modal-input').prop('disabled', false);
 
     let obj = {
       action:     $(this).val(),
