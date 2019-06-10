@@ -240,7 +240,10 @@ $(document).ready(function() {
         a.push(html);
       });
       $("#eventReport-form-task").html(a.join(""));
-      $("#eventReport-form-task").val("").change().prop('disabled', false);
+      $("#eventReport-form-task").prop('disabled', false);
+    } else {
+      $("#eventReport-form-task").val("").change().prop('disabled', true);
+
     }
   });
 
