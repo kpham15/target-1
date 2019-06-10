@@ -171,10 +171,24 @@ function setupUserAdd(obj) {
   $('#setup-users-modal').modal('show');
 }
 
+function setupUserUpdate(obj, tel) {
+  $('#setup-users-modal-action').val(obj.action);
+  $('#setup-users-modal-ssn').val(obj.ssn);
+  $('#setup-users-modal-stat').val(obj.stat);
+  $('#setup-users-modal-fname').val(obj.fname);
+  $('#setup-users-modal-mi').val(obj.mi);
+  $('#setup-users-modal-lname').val(obj.lname);
+  $('#setup-users-modal-email').val(obj.email);
+  $('#setup-users-modal-title').val(obj.title);
+  $('#setup-users-modal-group').val(obj.group);
+
+  $('#setup-users-modal').modal('show');
+}
 $(document).ready(function() {
 
   // Action Change Event
   $('#setup-users-forms-action').change(function() {
+
     let obj = {
       action:     $(this).val(),
       ssn:        $('#setup-users-forms-eid').val(),
@@ -188,7 +202,6 @@ $(document).ready(function() {
     }
 
     let tel = "";
-    let group = $('#setup-users-forms-group').val();
 
     if ($('#setup-users-tn-cbx').prop('checked')) {
       tel = $('#setup-users-forms-phonenum-tn').val();
@@ -203,7 +216,7 @@ $(document).ready(function() {
       setupUserAdd(obj);
     }
     else if (obj.action === 'UPDATE') {
-
+      setupUserUpdate(obj, tel);
     }
     else if (obj.action === 'LOCK') {
 
