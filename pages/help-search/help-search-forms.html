@@ -1,0 +1,98 @@
+<!--form-->
+<div class="col-md-5">
+  <form id="helpsearch-form">
+    <!---top row-->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ITEM</label>
+          <input id="helpsearch-form-item"
+          type="text" class="form-control helpsearch-input">
+        </div>
+      </div>
+      
+      <button type="button" id="view-helpsearch" class="btn btn-primary btn-flat" style="margin-top:25px;">
+          View
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input" rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="help-form-action" class="form-control helpsearch-input">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE</option>
+          </select>
+        </div>
+      </div>
+      
+      <button type="button" id="submit-helpsearch" class="btn btn-primary btn-flat" style="margin-top:25px;"> 
+        Submit
+      </button>
+      <button id="clear-helpsearch" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    function submitHelpSearch(action) {
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api: "ipcSearch",
+          act: action,
+          user: user.uname,
+          item: $('#helpsearch-form-item').val().toUpperCase(),
+          descr: $('#helpsearch-form-descr').val()
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason
+        }
+
+        if (data.rslt === 'fail') {
+          modal.type = "danger";
+          modalHandler(modal);
+        }
+        else {
+          modal.type = 'success';
+          modalHandler(modal);
+          queryHelpsearch();
+          $('#help-form-action').val('');
+        }
+      });
+    }
+
+    $('#submit-helpsearch').click(function() {
+      let action = $('#help-form-action').val();
+
+      submitHelpSearch(action.toUpperCase());
+    });
+
+    $('#clear-helpsearch').click(function() {
+      $('.helpsearch-input').val('');
+    });
+
+  });
+
+</script>
