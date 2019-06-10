@@ -132,6 +132,12 @@ if ($act == "cps_disconnected") {
     return;
 }
 
+if ($act == "cps_online") {
+    $result = cps_online($node);
+    echo json_encode($result);
+    mysqli_close($db);
+    return;
+}
 else {
 	$result["rslt"] = 'fail';
 	$result["reason"] = "This action is under development!";
@@ -140,52 +146,126 @@ else {
 	return;
 }
 
-// functions area
+
+// functions section
 function cps_disconnected($node) {
-    $src = 'CPS CARD';
-    $almtype = 'EQUIP';
-    $cond = 'NO COMMUNICATION';
-    $sev = 'MAJ';
-    $sa = 'Y';
-    $almid = "$node-cps-D";
-    $remark = ":CPS IS DISCONNECTED";
-    
-    $almObj = new ALMS($almid);
-    if($almObj->rslt == "success") {
-        $result["rslt"] = "fail";
-        $result["reason"] = "ALM WAS ALREADY CREATED";
+
+    $cps = new CPS($node);
+    // ignore if not discovered yes
+    if ($cps->psta == 'UAS') {
+        $result["rslt"] = 'fail';
+        $result["reason"] = 'CPS IS UAS';
         return $result;
     }
-    
-    $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
-    $result["rslt"] = $almObj->rslt;
-    $result["reason"] = $almObj->reason;
+
+    $evt = 'CPS_OUT';
+    $sms = new SMS($cps->psta, $cps->ssta, $evt);
+    if ($sms->rslt == 'success') {
+        $cps->setPsta($sms->npsta, $sms->nssta);
+        
+        if ($cps->psta == 'OOS') {
+            $almid = "$node-CPS-L";
+            $almObj = new ALMS($almid);
+            // create new alarm if not exists
+            if ($almObj->rslt == "fail") {
+                $src = 'CPS CARD';
+                $almtype = 'EQUIP';
+                $cond = 'NO COMMUNICATION';
+                $sev = 'MAJ';
+                $sa = 'Y';
+                $remark = ":NODE $node: CPS IS DISCONNECTED";        
+                $almObj->newAlm($almid, $src, $almtype, $cond, $sev, $sa, $remark);
+            }
+            $result["rslt"] = $almObj->rslt;
+            $result["reason"] = $almObj->reason . ": $almid";
+            return $result;
+        }
+        else {
+            $result["rslt"] = $sms->rslt;
+            $result["reason"] = "CPS PSTA=$cps->psta";
+            return $result;
+        }
+    }
+    $result["rslt"] = $sms->rslt;
+    $result["reason"] = $sms->reason;
     return $result;
 }
+
 
 function cps_connected($node) {
-    $src = 'CPS CARD';
-    $almtype = 'EQUIP';
-    $remark = ': CPS IS CONNECTED';  
-    $almid = "$node-cps-D";
-    
-    $almObj = new ALMS($almid);
-    if($almObj->rslt == "fail") {
-        $result["rslt"] = "fail";
-        $result["reason"] = "ALM DOES NOT EXIST";
-        return $result;
+
+    $cps = new CPS($node);
+    // if first discovered
+    if ($cps->psta == 'UAS') {
+        //assign serial_no to node
+    }
+    else {
+        //raise alarm if diff serial_no 
     }
 
-    $almObj->sysClr($almid, $remark);
-
-    $result["rslt"] = $almObj->rslt;
-    $result["reason"] = $almObj->reason;
+    $evt = 'CPS_IN';
+    $sms = new SMS($cps->psta, $cps->ssta, $evt);
+    if ($sms->rslt == 'success') {
+        $cps->setPsta($sms->npsta, $sms->nssta);
+        if ($cps->psta == 'INS') {
+            
+            // clear alarm if exists
+            $almid = "$node-CPS-L";
+            $almObj = new ALMS($almid);
+            if ($almObj->rslt == "success") {
+                $src = 'CPS CARD';
+                $almtype = 'EQUIP';
+                $remark = ":NODE $node: CPS IS CONNECTED";  
+                $almObj->sysClr($almid, $remark);
+            }
+            $result["rslt"] = $almObj->rslt;
+            $result["reason"] = $almObj->reason;
+            return $result;
+        }
+    }
+    $result["rslt"] = $sms->rslt;
+    $result["reason"] = $sms->reason;
     return $result;
 }
 
-function connected($node) {
 
+function cps_online($node) {
+
+    $cps = new CPS($node);
+    // ignore if not discovered yes
+    if ($cps->psta == 'UAS') {
+        $result["rslt"] = 'fail';
+        $result["reason"] = 'CPS IS UAS';
+        return $result;
+    }
+
+    $evt = 'CPS_ON';
+    $sms = new SMS($cps->psta, $cps->ssta, $evt);
+    if ($sms->rslt == 'success') {
+        $cps->setPsta($sms->npsta, $sms->nssta);
+        
+        if ($cps->psta == 'INS' && $cps->ssta == 'ONL') {
+            // clear alarm if exists
+
+            $almid = "$node-CPS-C";
+            $almObj = new ALMS($almid);
+            if ($almObj->rslt == "success") {
+                $src = 'CPS CARD';
+                $almtype = 'EQUIP';
+                $remark = ":NODE $node: CPS IS CONNECTED";  
+                $almObj->sysClr($almid, $remark);
+            }
+            $result["rslt"] = $almObj->rslt;
+            $result["reason"] = $almObj->reason;
+            return $result;
+        }
+    }
+    $result["rslt"] = $sms->rslt;
+    $result["reason"] = $sms->reason;
+    return $result;
 }
+
+
 
 function view_cmd($node) {
     $cmdObj = new CMD();
