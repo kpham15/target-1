@@ -312,6 +312,10 @@ $(document).ready(function() {
     }).done(function(data) {
       let res = data.rows;
 
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewuser'),'No Results Found');
+      }
+
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
