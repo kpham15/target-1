@@ -223,16 +223,14 @@ $(document).ready(function() {
   // Click Event View 3
   $('#setup-users-forms-viewtel').click(function() {
 
-    let value = $('setup-users-tn-cbx').iCheck('update')[0].checked;
-    if (value == true) {
-      console.log("1");
-    }
-    else {
-      console.log("2");
+   
+    if ($('#setup-users-tn-cbx').is(':checked')) {
+      let tel = $('#setup-users-forms-phonenum-tn');
+    } else {
+      let tel = $('#setup-users-forms-phonenum').val();
     }
 
-    let tel = $('#setup-users-forms-phonenum').val();
-
+    console.log(tel);
 
     let email = $('#setup-users-forms-email').val();
 
