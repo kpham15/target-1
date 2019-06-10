@@ -33,18 +33,20 @@
             alert("There is no file uploaded!")
             return;
         }
-        var file= document.getElementById("swUpdModal_file").files[0];
+        let file= document.getElementById("swUpdModal_file").files[0];
         if (file.size > 2097152) {
             alert("The file size must be less than 2MB!");
             return;
         }
   
-        var data = new FormData();
+        let data = new FormData();
         data.append("user", $("#main_currentUser").text());
         data.append("act", "UPLOAD SW");
         data.append("api", 'ipcSwUpdate')
+        data.append("user", user.uname)
+        data.append("grp", user.grp)
+        data.append("ugrp", user.ugrp)
         data.append("file", file);  
-
 
         $.ajax({
             url: ipcDispatch,
@@ -54,8 +56,15 @@
             contentType: false,
         })
         .done(function(data, status){
-            var obj = JSON.parse(data);
+            let obj = JSON.parse(data);
             alert(obj['reason']);
+            let modal = {
+                title: obj.rslt,
+                body: obj.reason,
+            }
+            if(obj.rslt == 'fail') modal.type = 'danger';
+            else modal.type = 'success';
+            modalHandler(modal);
             
         });
     

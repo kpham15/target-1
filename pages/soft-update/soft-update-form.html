@@ -44,7 +44,12 @@ function swUpd_query(action){
     })
     .done(function(obj) {
         if (obj["rslt"] == "fail") {
-            alert(obj['reason']);
+            let modal = {
+                title: obj.rslt,
+                body: obj.reason,
+                type: 'danger'
+            }
+            modalHandler(modal);
         }
         else {
             if(action != 'INSTALL UPDATE SW' && action != 'SET DEFAULT SW') {
@@ -79,7 +84,12 @@ $("#swUpd_act_sel").change(function() {
 if ($("#swUpd_act_sel").val() !="") {
     if ($("#swUpd_act_sel").val()  ==  "UPLOAD SW") {
         if(folderSwList.CURRENT.status != 'Running') {
-            alert("To run this action. SW CURRENT should be in status Running")
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW CURRENT should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
         }
         else {
             swUpdModal_clearForm();
@@ -90,7 +100,12 @@ if ($("#swUpd_act_sel").val() !="") {
     }
     else if ($("#swUpd_act_sel").val()  ==  "INSTALL UPDATE SW") {
         if(folderSwList.CURRENT.status != 'Running') {
-            alert("To run this action. SW CURRENT should be in status Running")
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW CURRENT should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
         }
         else {
             swUpd_query('INSTALL UPDATE SW');
@@ -114,7 +129,12 @@ if ($("#swUpd_act_sel").val() !="") {
             }
             else if ($("#swUpd_act_sel").val()  ==  "APPLY UPDATE SW") {
                 if(folderSwList.UPDATE.status != 'Running') {
-                    alert("To run this action. SW Update should be in status Running")
+                    let modal = {
+                        title: "Error",
+                        body: "To run this action. SW Update should be in status Running",
+                        type: 'danger'
+                    }
+                    modalHandler(modal);
                 }
                 else {
                     swUpd_query('APPLY UPDATE SW');
@@ -124,7 +144,12 @@ if ($("#swUpd_act_sel").val() !="") {
             }
             else if ($("#swUpd_act_sel").val()  ==  "APPLY DEFAULT SW") {
                 if(folderSwList.DEFAULT.status != 'Running') {
-                    alert("To run this action. SW Default should be in status Running")
+                    let modal = {
+                        title: "Error",
+                        body: "To run this action. SW Default should be in status Running",
+                        type: 'danger'
+                    }
+                    modalHandler(modal);
                 }
                 else {
                     swUpd_query('APPLY DEFAULT SW');
@@ -133,7 +158,12 @@ if ($("#swUpd_act_sel").val() !="") {
             }
             else if ($("#swUpd_act_sel").val() == "SET DEFAULT SW") {
                 if(folderSwList.CURRENT.status != 'Running') {
-                    alert("To run this action. SW CURRENT should be in status Running")
+                    let modal = {
+                        title: "Error",
+                        body: "To run this action. SW CURRENT should be in status Running",
+                        type: 'danger'
+                    }
+                    modalHandler(modal);
                 }
                 else {
                     swUpd_query('SET DEFAULT SW');
