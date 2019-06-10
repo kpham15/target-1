@@ -220,9 +220,9 @@ $(document).ready(function() {
   });
 
   // CHANGE TASK BASED ON FUNCTION
-  $("#eventReport-form-event").on("change", function() {
+  $("#eventReport-form-function").on("change", function() {
     let a = [];
-    let pre_task = $("#eventReport-form-event option:selected").attr('array');
+    let pre_task = $("#eventReport-form-function option:selected").attr('array');
     pre_task = pre_task.replace("/", "");
     let task = pre_task.replace(/ /g, "");
     task = task.toUpperCase();
