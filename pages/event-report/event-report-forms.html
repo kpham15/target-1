@@ -168,13 +168,9 @@ $(document).ready(function() {
       inputError($('#eventReport-form-report'),'Select An Option');
       return;
     } else if (report.val() === "VIEW REPORT") {
-      if (type == "SETUP PORT MAPPING") {
-        eventReportQueryPortlog(eventReportStartDate, eventReportEndDate);
-      } else if (type == "SETUP WIRE CENTER") {
-        eventReportQueryWclog(eventReportStartDate, eventReportEndDate);
-      } else if (type == "SETUP FACILITIES") {
-        eventReportQueryFaclog(eventReportStartDate, eventReportEndDate);
-      }
+      // @TODO: 
+      eventReportQueryEventlog(eventReportStartDate, eventReportEndDate);
+
     } else if (report.val() === "CREATE REPORT") {
       downloadConfigReports({filename: `CONFIGURATION_REPORT_${eventReportStartDate}_${eventReportEndDate}.csv`});
     }
@@ -189,10 +185,8 @@ $(document).ready(function() {
     $('#eventReport-form-type').val("SETUP PORT MAPPING");
     $('#eventReport-form-report').val("VIEW REPORT");
     
-    eventReportPortmapDatatable.clear().draw();
-    eventReportWcDatatable.clear().draw();
-    eventReportFacDatatable.clear().draw();
-    
+    eventReportDatatable.clear().draw();
+
     $('#eventReport-daterange').val('').daterangepicker("update");
     eventReportStartDate = currDate;
     eventReportEndDate = currDate;
@@ -201,23 +195,6 @@ $(document).ready(function() {
     initializeConfigReportDateRangePicker();
     
     clearErrors();
-  });
-
-  // CHANGE DISPLAYED TABLE ACCORDING TO TYPE SELECTED
-  $("#eventReport-form-type").change(function() {
-    let tables          = $(".eventReport-table");
-    let portmapTable    = $(".eventReport-portmap-table");
-    let facilityTable   = $(".eventReport-facility-table");
-    let wirecenterTable = $(".eventReport-wirecenter-table");
-    
-    $(".eventReport-table").css('display', 'none');
-    if ($(this).val() == "SETUP PORT MAPPING" || $(this) == "") {
-      portmapTable.css('display', 'block');
-    } else if ($(this).val() == "SETUP FACILITIES") {
-      facilityTable.css('display', 'block');
-    } else if ($(this).val() == "SETUP WIRE CENTER") {
-      wirecenterTable.css('display', 'block');
-    }
   });
 
   // CLEAR ERRORS WHEN CLICK ON FIELD
