@@ -77,7 +77,7 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label>EMAIL</label>
-                <input id="setup-users-modal-email" type="text" class="form-control setup-users-modal-input">
+                <input id="setup-users-modal-email" type="text" class="form-control setup-users-modal-input" placeholder="name@email.com" />
               </div>
             </div>
           </div>
@@ -171,6 +171,8 @@ function setupUsersModalSubmit(obj, tel) {
     else {
       modal.type = 'success';
       modalHandler(modal);
+
+      $('#setup-users-modal').modal('hide');
     }
   })
 }
