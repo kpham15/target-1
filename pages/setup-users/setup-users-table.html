@@ -35,7 +35,7 @@
 
   $(document).ready(function() {
     // Click Event on Table Rows
-    $(document).on('click', '#setup-users-table tbod tr', function() {
+    $(document).on('click', '#setup-users-table tbody tr', function() {
       let data = setupUsersDatatable.row(this).data();
 
       $('#setup-users-forms-user').val(data.uname);
