@@ -136,7 +136,99 @@
 </div>
 
 <script type="text/javascript">
+function setupUsersModalSubmit(obj, tel) {
+
+  let tel = "";
+  if ($('#setup-users-modal-tn-cbx').prop('checked')) {
+    tel = $('#setup-users-modal-tel-tn').val();
+  }
+  else {
+    tel = $('#setup-users-modal-tel').val();
+  }
+
+  $.ajax({
+    type:       'POST',
+    url:        ipcDispatch,
+    data:       {
+      "api":    "ipcUser",
+      "act":    obj.action,
+      "ssn":    obj.ssn,
+      "stat":   obj.stat,
+      "fname":  obj.fname,
+      "mi":     obj.mi,
+      "lname":  obj.lname,
+      "tel":    tel,
+      "email":  obj.email,
+      "title":  obj.title,
+      "ugrp":   obj.group
+    },
+    dataType: 'json',
+  }).done(function(data) {
+    let res = data.rows
+    let modal = {
+      title:  data.rslt,
+      body:   data.reason,
+    }
+
+    if (data.rslt == 'fail') {
+      modal.type = 'danger';
+      modalHandler(modal);
+    }
+    else {
+      modal.type = 'success';
+      modalHandler(modal);
+    }
+  })
+}
+
 $(document).ready(function() {
+  // Submit Button Click Event
+  $('#setup-users-modal-submit').click(function() {
+    let obj = {
+      action:     $('#setup-users-modal-action').val(),
+      ssn:        $('#setup-users-modal-ssn').val(),
+      status:     $('#setup-users-modal-stat').val(),
+      fname:      $('#setup-users-modal-fname').val(),
+      mi:         $('#setup-users-modal-mi').val(),
+      lname:      $('#setup-users-modal-lname').val(),
+      email:      $('#setup-users-modal-email').val(),
+      title:      $('#setup-users-modal-title').val(),
+      group:      $('#setup-users-modal-group').val(),
+    }
+
+    let tel = "";
+    if ($('#setup-users-modal-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-modal-tel-tn').val();
+    }
+    else {
+      tel = $('#setup-users-modal-tel').val();
+    }
+
+    setupUsersModalSubmit(obj, tel);
+
+    // if (obj.action === 'ADD') {
+
+    // }
+    // else if (obj.action === 'UPDATE') {
+
+    // }
+    // else if (obj.action === 'LOCK') {
+
+    // }
+    // else if (obj.action === 'ENABLE') {
+
+    // }
+    // else if (obj.action === 'DISABLE') {
+
+    // }
+    // else if (obj.action === 'DELETE') {
+
+    // }
+    // else if (obj.action === 'RESET_PW') {
+
+    // }
+
+  })
 
   // Modal Close Event Handler
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
