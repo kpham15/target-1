@@ -1,0 +1,50 @@
+<!-- Forms -->
+<div class="col-md-4">
+  <form id="setup-maint-forms">
+    <!-- Top Row -->
+    <div class="row">
+      <!-- CKID -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>CKID:</label>
+          <label>TN:</label>
+          <input id="setup-maint-forms-cbx" type="checkbox" checked />
+          <div class="input-group">
+            <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none;" />
+            <input id="setup-maint-forms-ckid-tn" type="text" class="form-control maint-ckid setup-maint-forms-input" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="" />
+          </div>
+        </div>
+      </div>
+      <!-- CLS -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>CLS:</label>
+          <select id="setup-maint-forms-cls" class="form-control setup-maint-forms-input">
+            <option value=""></option>
+            <option value="RES">RES</option>
+            <option value="BUS">BUS</option>
+          </select>
+        </div>
+      </div>
+      <!-- ADSR -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="setup-maint-forms-adsr" class="form-control">
+            <option value=""></option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        </div>
+      </div>
+      <!-- View Button -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-maint-forms-viewckid" type="button" class="btn btn-primary btn-flat">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
