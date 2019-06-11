@@ -250,6 +250,15 @@
         action: $('#setup-maint-modal-action').val(),
       }
 
+      let ckid = "";
+      if ($('#setup-maint-modal-cbx').prop('checked')) {
+        ckid = $('#setup-maint-modal-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-modal-ckid').val();
+      }
+
+
       if (obj.action == "MTC_CONN") {
         validateMtcConnModal(obj, ckid);
       }
