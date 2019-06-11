@@ -218,8 +218,10 @@
   function validateTableSelected() {
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
+      $('#setup-maint-forms-action').val('');
     } else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
+      $('#setup-maint-forms-action').val('');
     }
   }
   function validateMtcDisconnect(obj, ckid) {
