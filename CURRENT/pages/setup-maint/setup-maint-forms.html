@@ -169,7 +169,7 @@
         </div>
       </div>
       <!-- Hidden Row -->
-      <div class="row">
+      <div class="row" id="setup-maint-forms-factable-div">
         <!-- Search Table -->
         <div " class="form-group">
           <div class="col-md-12">
@@ -190,12 +190,31 @@
 
         </div>
       </div>
+      <!-- ACTION Row -->
+      <div class="row">
+        <!-- ACTION -->
+        <div class="form-group">
+          <div class="col-md-5">
+            <label>ACTION</label>
+            <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
+              <option value=""></option>
+              <option value="MTC_DISCON">MTC_DISCON</option>
+              <option value="MTC_CONN">MTC_CONN</option>
+              <option value="MTC_RESTORE">MTC_RESTORE</option>
+              <option value="RESTORE_MTCD">RESTORE_MTCD</option>
+              <option value="MTC_TEST">MTC_TEST</option>
+              <option value="CHANGE">CHANGE</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
   </form>
 </div>
 <script type="text/javascript">
   var setupMaintFacTable = $('#setup-maint-forms-factable').DataTable({
     "dom":"frtip",
+    "scrollY":"150px",
     "data":[],
     "columns": [
       {"data":"fac"},
@@ -203,7 +222,7 @@
       {"data":"port"},
     ]
   })
-  
+
   $(document).ready(function() {
    
   })
