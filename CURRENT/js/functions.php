@@ -3,9 +3,28 @@
 	function startup() {
 		systemInfoInterval = setInterval(getSystemInfo, 10000);
 		updateUsername();
+		getSwVersion();
 		updateNodeStatus();
 		updateHeaderInfo();
 		sysviewStartup();
+	}
+
+	function getSwVersion() {
+		$.ajax({
+			type: 'POST',
+			url: ipcDispatch,
+			data: {
+				act: 'queryReadMe'
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			$('#sidebar-user-name').text(data.ver)
+			let modal = {
+				modal.title = 'Software Information',
+				modal.body = data.descr
+			}
+			modalHandler(modal);
+		});
 	}
 
 	function logout(action) {
