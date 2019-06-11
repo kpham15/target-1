@@ -215,10 +215,38 @@
   </form>
 </div>
 <script type="text/javascript">
-  // function validateTableSelected() {
-  //   if ()
-  // }
+  function validateTableSelected() {
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
+    } else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
+    }
+  }
   function validateMtcDisconnect(obj, ckid) {
+    validateTableSelected();
+
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-cls').prop('disabled',true);
+    $('#setup-maint-modal-adsr').prop('disabled',true);
+    $('#setup-maint-modal-prot').prop('disabled',true);
+    $('#setup-maint-modal-tktno').prop('disabled',false);
+    $('#setup-maint-modal-mlo').prop('disabled',true);
+    $('#setup-maint-modal-contyp').prop('disabled',true);
+    $('#setup-maint-modal-ffac').prop('disabled',true);
+    $('#setup-maint-modal-tfac').prop('disabled',true);
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-action').prop('disabled',true);
+
+    $('#setup-maint-modal-ckid').val(ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    $('#setup-maint-modal-contyp').val(obj.contyp);
+    $('#setup-maint-modal-ffac').val(obj.ffac);
+    $('#setup-maint-modal-tfac').val(obj.tfac);
+    $('#setup-maint-modal-action').val(obj.action);
 
   }
   // Initialize Hidden Fac Datatable
@@ -238,22 +266,22 @@
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
       let obj = {
-        action:   $('#setup-maint-forms-action').val(),
+        action:     $('#setup-maint-forms-action').val(),
         // ckid:     $('#setup-maint-forms-ckid').val(),
-        cls:     $('#setup-maint-forms-cls').val(),
-        adsr:     $('#setup-maint-forms-adsr').val(),
-        tktno:     $('#setup-maint-forms-tktno').val(),
-        mlo:     $('#setup-maint-forms-mlo').val(),
-        prot:     $('#setup-maint-forms-prot').val(),
-        ckid:     $('#setup-maint-forms-ckid').val(),
-        dd:     $('#setup-maint-forms-dd').val(),
-        fdd:     $('#setup-maint-forms-fdd').val(),
+        cls:        $('#setup-maint-forms-cls').val(),
+        adsr:       $('#setup-maint-forms-adsr').val(),
+        tktno:      $('#setup-maint-forms-tktno').val(),
+        mlo:        $('#setup-maint-forms-mlo').val(),
+        prot:       $('#setup-maint-forms-prot').val(),
+        ckid:       $('#setup-maint-forms-ckid').val(),
+        dd:         $('#setup-maint-forms-dd').val(),
+        fdd:        $('#setup-maint-forms-fdd').val(),
         contyp:     $('#setup-maint-forms-contyp').val(),
-        ckid:     $('#setup-maint-forms-ckid').val(),
-        ffac:     $('#setup-maint-forms-ffac').val(),
-        tfac:     $('#setup-maint-forms-tfac').val(),
-        fport:     $('#setup-maint-forms-fport').val(),
-        tport:     $('#setup-maint-forms-tport').val(),
+        ckid:       $('#setup-maint-forms-ckid').val(),
+        ffac:       $('#setup-maint-forms-ffac').val(),
+        tfac:       $('#setup-maint-forms-tfac').val(),
+        fport:      $('#setup-maint-forms-fport').val(),
+        tport:      $('#setup-maint-forms-tport').val(),
       }
 
       let ckid = "";
