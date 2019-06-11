@@ -145,7 +145,7 @@
       <!-- Hidden Row -->
       <div class="row">
         <!-- Search Table -->
-        <div class="form-group">
+        <div id="setup-maint-forms-searchtable" class="form-group">
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-body">
@@ -159,3 +159,9 @@
 
   </form>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // load separate html page on hidden row
+    $('#setup-maint-forms-searchtable').load('setup-maint-searchtable.html');
+  })
+</script>
