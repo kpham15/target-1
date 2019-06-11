@@ -215,6 +215,12 @@
   </form>
 </div>
 <script type="text/javascript">
+  // function validateTableSelected() {
+  //   if ()
+  // }
+  function validateMtcDisconnect(obj, ckid) {
+
+  }
   // Initialize Hidden Fac Datatable
   var setupMaintFacTable = $('#setup-maint-forms-factable').DataTable({
     "dom":"frtip",
@@ -231,6 +237,47 @@
 
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
+      let obj = {
+        action:   $('#setup-maint-forms-action').val(),
+        // ckid:     $('#setup-maint-forms-ckid').val(),
+        cls:     $('#setup-maint-forms-cls').val(),
+        adsr:     $('#setup-maint-forms-adsr').val(),
+        tktno:     $('#setup-maint-forms-tktno').val(),
+        mlo:     $('#setup-maint-forms-mlo').val(),
+        prot:     $('#setup-maint-forms-prot').val(),
+        ckid:     $('#setup-maint-forms-ckid').val(),
+        dd:     $('#setup-maint-forms-dd').val(),
+        fdd:     $('#setup-maint-forms-fdd').val(),
+        contyp:     $('#setup-maint-forms-contyp').val(),
+        ckid:     $('#setup-maint-forms-ckid').val(),
+        ffac:     $('#setup-maint-forms-ffac').val(),
+        tfac:     $('#setup-maint-forms-tfac').val(),
+        fport:     $('#setup-maint-forms-fport').val(),
+        tport:     $('#setup-maint-forms-tport').val(),
+      }
+
+      let ckid = "";
+      if ($('#setup-maint-forms-cbx').prop('checked')) {
+        ckid = $('#setup-maint-forms-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-forms-ckid').val();
+      }
+
+      if (obj.action == "MTC_DISCONNECT") {
+        validateMtcDisconnect(obj, ckid);
+      } else if (obj.action == "MTC_CONN") {
+
+      } else if (obj.action == "MTC_RESTORE") {
+
+      } else if (obj.action == "RESTORE_MTCD") {
+
+      } else if (obj.action == "MTC_TEST") {
+        
+      } else if (obj.action == "CHANGE") {
+
+      }
+
       $('#setup-maint-modal').modal('show')
     })
 

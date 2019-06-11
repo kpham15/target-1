@@ -119,15 +119,13 @@
   });
 
   $(document).ready(function() {
-    var maintTableConsId = "";
-    var maintTableTktsId = "";
-    var maintTableCktsId = "";
+   
 
     // Click Event on Cons Table
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
       let data = setupMaintTableCons.row(this).data();
 
-      maintTableConsId = data.id;
+      var maintTableConsId = data.id;
       console.log(maintTableConsId);
       $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
