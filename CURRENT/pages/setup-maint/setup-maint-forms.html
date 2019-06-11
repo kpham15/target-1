@@ -231,6 +231,8 @@
     // View Button 1
     $('#setup-maint-forms-viewckid').click(function() {
 
+      $('#setup-maint-table-tkts-div').hide();
+
       clearErrors();
 
       let ckid = $('#setup-maint-forms-ckid').val();
@@ -270,6 +272,11 @@
       })
     })
     
+    // View Button 2
+    $('#setup-maint-forms-viewtkt').click(function() {
+      $('#setup-maint-table-ckts-div').hide();
+      $('#setup-maint-table-tkts-div').show();
+    })
     // Initialize inputmask
     $('#setup-maint-forms-ckid-tn').inputmask();
 
