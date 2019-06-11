@@ -221,10 +221,17 @@
     $('#setup-maint-modal-mtccon2-div').show();
     $('#setup-maint-modal-row3-div').hide();
 
-    $('#setup-maint-modal-conn1-ctyp').val(obj.ctyp);
+    $('#setup-maint-modal-ckid').val(ckid);
+    $('#setup-maint-modal-ckid-tn').val(ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    $('#setup-maint-modal-action').val(obj.action);
+    $('#setup-maint-modal-conn1-ctyp').val(obj.contyp);
     $('#setup-maint-modal-conn1-ffac').val(obj.ffac);
-
-    $('#setup-maint-modal-conn2-ctyp').val(obj.ctyp);
+    $('#setup-maint-modal-conn2-ctyp').val(obj.contyp);
     $('#setup-maint-modal-conn2-tfac').val(obj.tfac);
 
     $('#setup-maint-modal').modal('show');
@@ -248,6 +255,7 @@
     }
     else {
       $('#setup-maint-modal-ckid').val(ckid);
+      $('#setup-maint-modal-ckid-tn').val(ckid);
       $('#setup-maint-modal-cls').val(obj.cls);
       $('#setup-maint-modal-adsr').val(obj.adsr);
       $('#setup-maint-modal-prot').val(obj.prot);
@@ -280,6 +288,7 @@
     }
     else {
       $('#setup-maint-modal-ckid').val(ckid);
+      $('#setup-maint-modal-ckid-tn').val(ckid);
       $('#setup-maint-modal-cls').val(obj.cls);
       $('#setup-maint-modal-adsr').val(obj.adsr);
       $('#setup-maint-modal-prot').val(obj.prot);
@@ -326,6 +335,7 @@
     $('#setup-maint-modal-action').prop('disabled',true);
 
     $('#setup-maint-modal-ckid').val(ckid);
+    $('#setup-maint-modal-ckid-tn').val(ckid);
     $('#setup-maint-modal-cls').val(obj.cls);
     $('#setup-maint-modal-adsr').val(obj.adsr);
     $('#setup-maint-modal-prot').val(obj.prot);
