@@ -12,12 +12,13 @@
 	function getSwVersion() {
 		$.ajax({
 			type: 'POST',
-			url: ipcDispatch,
+			url: './indexFunc.php',
 			data: {
 				act: 'queryReadMe'
 			},
 			dataType: 'json'
 		}).done(function(data) {
+			console.log(data);
 			$('#sidebar-user-name').text(data.ver)
 			let modal = {
 				title: 'Software Information',
