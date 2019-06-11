@@ -230,8 +230,23 @@
       }
       if (maintPickedFfac == "")  {
         inputError($('#setup-maint-modal-conn1-ffac'),'Missing FAC(X)');
+        return;
       }
     }
+    else if ($('#setup-maint-modal-pick-conn2').is(':checked')) {
+      maintPickedTfac = $('#setup-maint-modal-conn2-tfac').val();
+      maintPickedFfac = $('#setup-maint-modal-conn2-ffac').val();
+      if (maintPickedTfac == "") {
+        inputError($('#setup-maint-modal-conn2-tfac'),'Missing FAC(Y)');
+        return;
+      }
+      if (maintPickedFfac == "")  {
+        inputError($('#setup-maint-modal-conn2-ffac'),'Missing FAC(X)');
+        return;
+      }
+    }
+
+    
   }
 
   $(document).ready(function() {
