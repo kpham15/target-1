@@ -6,22 +6,19 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="container">
+                    <div class="col-sm-12">
                         <h4>CHOOSE THE SOFTWARE FILE FROM YOUR COMPUTER:</h4>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <input type="file" data-icon="false" id="swUpdModal_file" accept=".zip">
-                            </div>
-                        </div> 
-
                     </div>
-                    <div class="col-sm-8 modifyPadding">
-                        <button class="btn btn-primary" id="swUpdModal_submit_btn">Submit</button>
-                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
-                    </div>
-            
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <input class="form-control" type="file" data-icon="false" id="swUpdModal_file" accept=".zip" style="color:blue;font-weight: bold;height: 50px;background-color: rgb(195, 226, 247);border: groove;">
+                        </div>
+                    </div> 
                 </div>
-                
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="swUpdModal_submit_btn">Submit</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -30,12 +27,22 @@
 <script>
     function swUpdModal_add() {
         if($("#swUpdModal_file").val() == "") {
-            alert("There is no file uploaded!")
+            let modal = {
+                title: "Error",
+                body: "There is no file uploaded!",
+                type: "danger"
+            }
+            modalHandler(modal);
             return;
         }
         let file= document.getElementById("swUpdModal_file").files[0];
         if (file.size > 2097152) {
-            alert("The file size must be less than 2MB!");
+            let modal = {
+                title: "Error",
+                body: "The file size must be less than 2MB!",
+                type: "danger"
+            }
+            modalHandler(modal);
             return;
         }
   
@@ -57,7 +64,6 @@
         })
         .done(function(data, status){
             let obj = JSON.parse(data);
-            alert(obj['reason']);
             let modal = {
                 title: obj.rslt,
                 body: obj.reason,
