@@ -20,8 +20,8 @@
 		}).done(function(data) {
 			$('#sidebar-user-name').text(data.ver)
 			let modal = {
-				modal.title = 'Software Information',
-				modal.body = data.descr
+				title = 'Software Information',
+				body = data.descr
 			}
 			modalHandler(modal);
 		});
