@@ -121,13 +121,13 @@ function uploadSw($userObj, $fileName, $uploadDir) {
         }
 
         if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
-            throw new Exception("UNABLE_TO_MOVE_SW_FILE"); 
+            throw new Exception("UNABLE TO MOVE SW FILE"); 
         }
 
         // exec("chmod 755  ".$uploadDir, $output, $return);
         exec("chmod -R 777  ".$uploadDir, $output, $return);
         if($return !== 0) {
-            throw new Exception("UNABLE_CONFIGURE_PERMISSION_FOLDER_UPLOAD");
+            throw new Exception("UNABLE TO CONFIGURE THE PERMISSION TO FOLDER UPLOAD");
         }
 
         $result["rslt"] = 'success';
@@ -166,18 +166,18 @@ function installUpdateSw($userObj, $updateDir, $uploadDir) {
         //check if there are more than 1 zip file in there
         $fileList = glob("{$uploadDir}/*");
         if(count($fileList) !== 1) {
-            throw new Exception('NEW_VERSION_NOT_FOUND');
+            throw new Exception('NEW VERSION DOES NOT FOUND');
         }
 
         ////////////////------------check folder UPDATE------------/////////////
         if ($updateDir ==="") {
-            throw new Exception("NO_UPDATE_FOLDER_INFORMATION");
+            throw new Exception("NO INFORMATION OF UPDATE_FOLDER");
         }
     
         if (!file_exists($updateDir)) {
             // if(!mkdir($updateDir, 0755, true)){
             if(!mkdir($updateDir, 0777, true)){
-                throw new Exception("FOLDER_FOR_UPDATESW_NOT_CREATED");
+                throw new Exception("FOLDER FOR UPDATESW IS NOT CREATED");
             }
         }
 

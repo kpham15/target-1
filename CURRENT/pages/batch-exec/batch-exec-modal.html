@@ -20,7 +20,6 @@
                                 <input class="form-control" type="file" data-icon="false" id="batchExcModal_file" accept=".csv" style="color:blue;font-weight: bold;height: 50px;background-color: rgb(195, 226, 247);border: groove;">
                             </div>
                         </div> 
-                        <label id="batchExcModal_result_lbl" style="color:red"></label>
                     </div>
                     
 
@@ -47,7 +46,12 @@ function batchExcModal_add() {
     }
     let file= document.getElementById("batchExcModal_file").files[0];
     if (file.size > 2097152) {
-        $("#batchExcModal_result_lbl").text("The file size must be less than 2MB!");
+        let modal = {
+            title: "Error",
+            body: "The file size must be less than 2MB!",
+            type: "danger"
+        }
+        modalHandler(modal);
     }
     else {
         let data = new FormData();
@@ -113,7 +117,6 @@ function batchExcModal_add() {
 
 function batchExcModal_clearForm() {
     $("#batchExcModal_file").val("");
-    $("#batchExcModal_result_lbl").text("");
 }
 
 
