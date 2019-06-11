@@ -65,12 +65,11 @@
     $(document).on('click', '#matrix-table tbody tr', function() {
       let data = matrixDatatable.row(this).data();
 
-      $('#matrix-form-id').val(data.id);
-      $('#matrix-form-node').val(data.matrix);
-      $('#matrix-form-ftyp').val(data.ftyp);
-      $('#matrix-form-ort').val(data.ort);
-      $('#matrix-form-psta').val(data.psta);
-      $('#matrix-form-spcfnc').val(data.spcfnc);
+      // $('#matrix-form-id').val(data.id);
+      $('#matrix-form-node').val(data.node);
+      $('#matrix-form-shelf').val(data.shelf);
+      $('#matrix-form-slot').val(data.slot);
+      $('#matrix-form-type').val(data.type);
 
       // give selected class
       $('#matrix-table tbody tr').removeClass('bg-primary');
