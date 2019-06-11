@@ -220,7 +220,8 @@
 
     $('#setup-maint-modal-mtccon1-div').hide();
     $('#setup-maint-modal-mtccon2-div').hide();
-    
+    $('#setup-maint-modal-row3-div').show();
+
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
@@ -251,6 +252,7 @@
 
     $('#setup-maint-modal-mtccon1-div').hide();
     $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').show();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
@@ -280,6 +282,10 @@
 
   function validateMtcDisconnect(obj, ckid) {
 
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').show();
+
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
@@ -291,9 +297,6 @@
       return;
     }
     else {
-    
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
     
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-ckid-tn').prop('disabled',true);
