@@ -277,6 +277,42 @@
     $('#setup-maint-forms-viewtkt').click(function() {
       $('#setup-maint-table-ckts-div').hide();
       $('#setup-maint-table-tkts-div').show();
+
+      clearErrors();
+
+      let tktno = $('#setup-maint-forms-tktno').val();
+
+      $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcMaintReport",
+          "act":    "queryTkt",
+          "user":   user.uname,
+          "tktno":  tktno
+        },
+        dataType:   'json',
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          header:   data.rslt,
+          body:     data.reason,
+        }
+
+        if (res.length == 0) {
+          inputError($('#setup-maint-forms-tktno'),'No Results Found');
+        }
+
+        if (data.rslt == 'fail') {
+          modal.type = 'danger';
+          modalHandler(modal);
+        }
+        else {
+          setupMaintTableTkts.clear().draw();
+          setupMaintTableTkts.rows.add(res);
+          setupMaintTableTkts.columns.adjust().draw();
+        }
+      })
     })
     // Initialize inputmask
     $('#setup-maint-forms-ckid-tn').inputmask();
