@@ -1,0 +1,266 @@
+<!-- FORM -->
+<div class="col-md-12">
+  <form id="eventReport-form">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="row">
+          <!-- USER -->
+          <div class="col-md-3">
+            <label>USER</label>
+            <input id="eventReport-form-user" class="form-control eventReport-form-input">
+          </div>
+      
+          <!-- EVENT -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>EVENT:</label>
+              <select id="eventReport-form-event" class="form-control eventReport-form-input">
+                <option></option>
+                <option array="configuration">CONFIGURATION</option>
+                <option array="provisioning">PROVISIONING</option>
+                <option array="maintenance">MAINTENANCE</option>
+                <option array="userManagement">USER MANAGEMENT</option>
+                <option array="ipcAdministration">IPC ADMINISTRATION</option>
+              </select>
+            </div>
+          </div>
+    
+          <!-- DateRangePicker -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>DATE RANGE:</label>
+              <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" id="eventReport-form-daterange" class="form-control pull-right eventReport-form-input">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <!-- END ROW 1 -->
+    
+        <!-- ROW 2 BEGIN -->
+        <div class="row">
+    
+          <!-- FUNCTION -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>FUNCTION:</label>
+              <select id="eventReport-form-function" class="form-control eventReport-form-input" disabled>
+              </select>
+            </div>
+          </div>
+    
+          <!-- TASK -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>TASK:</label>
+              <select id="eventReport-form-task" class="form-control eventReport-form-input" disabled>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+    
+          <!-- REPORT -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>REPORT:</label>
+              <select id="eventReport-form-report" class="form-control eventReport-form-input">
+                <option value="VIEW REPORT">VIEW REPORT</option>
+                <option value="CREATE REPORT">CREATE REPORT</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <!-- Submit Button -->
+              <button id="eventReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+                Submit
+              </button>
+              
+              <!-- Clear Button -->
+              <button id="eventReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+                Clear
+              </button>
+              
+            </div>
+          </div>
+  
+        </div>
+    
+        <!-- ROW 2 END -->
+      </div>
+      
+      <!-- DETAILS -->
+      <div class="col-md-5">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>DETAILS:</label>
+            <textarea id="eventReport-form-detail" class="form-control eventReport-form-input" style="min-height: 175px; background-color: #F6F6F6" readonly></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ROW 1 BEGIN-->
+        
+    
+  </form>
+</div>
+
+<script type="text/javascript" src="./pages/event-report/event-report-page-options.js"></script>
+
+<script type="text/javascript">
+
+// DOWNLOAD REPORT
+function downloadConfigReports(args) {
+  var data, filename, link;
+  var csv = convertArrayOfObjectsToCSV({
+    data: eventReportDatatable.data().toArray()
+  });
+  if (csv == null) {
+    inputError($('#eventReport-form-report'),'No Reports To Create');
+    return;
+  }
+  
+  filename = args.filename || 'export.csv';
+
+  if (!csv.match(/^data:text\/csv/i)) {
+    csv = 'data:text/csv;charset=utf-8,' + csv;
+  }
+  data = encodeURI(csv);
+
+  link = document.createElement('a');
+  link.setAttribute('href', data);
+  link.setAttribute('download', filename);
+  link.click();
+}
+
+$(document).ready(function() {
+  
+  var eventReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+  var eventReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+
+  // Initialze daterangepicker and assign values to start and from dates
+  function initializeConfigReportDateRangePicker () {
+    $('input[id="eventReport-form-daterange"]').daterangepicker({
+      opens: 'bottom',
+      startDate: moment(),
+    }, function(start, end, label) {
+      eventReportStartDate  = start.format('YYYY-MM-DD');
+      eventReportEndDate    = end.format('YYYY-MM-DD');
+    });
+  }
+
+  initializeConfigReportDateRangePicker();
+
+  // UPON LOAD PAGE FIRST TIME
+  var eventReportFirstLoad = true;
+  $(".menu-item[page_id='event-report-page']").click(async function() {
+    if (eventReportFirstLoad != true) {
+      return;
+    }
+    // load event log table upon visiting page
+    eventReportQueryEventlog(eventReportStartDate, eventReportEndDate);
+
+    eventReportFirstLoad = false;
+  });
+  
+
+  // Click Event For 'Submit Button'
+  $('#eventReport-form-submit').click(function() {
+    clearErrors();
+    
+    let report = $('#eventReport-form-report');
+    let type   = $("#eventReport-form-type").val();
+
+    if (report === '') {
+      inputError($('#eventReport-form-report'),'Select An Option');
+      return;
+    } else if (report.val() === "VIEW REPORT") {
+      // @TODO: 
+      eventReportQueryEventlog(eventReportStartDate, eventReportEndDate);
+
+    } else if (report.val() === "CREATE REPORT") {
+      downloadConfigReports({filename: `CONFIGURATION_REPORT_${eventReportStartDate}_${eventReportEndDate}.csv`});
+    }
+  });
+
+  // Click Event For 'Clear Button'
+  $('#eventReport-form-clear').click(function() {
+
+    let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+    $('.eventReport-form-input').val('').change();
+    $('#eventReport-form-report').val("VIEW REPORT");
+    
+    eventReportDatatable.clear().draw();
+
+    $('#eventReport-daterange').val('').daterangepicker("update");
+    eventReportStartDate = currDate;
+    eventReportEndDate = currDate;
+
+    // reinitialize daterangepicker
+    initializeConfigReportDateRangePicker();
+    
+    clearErrors();
+  });
+
+  // CLEAR ERRORS WHEN CLICK ON FIELD
+  $(".eventReport-form-input").on('click', function() {
+    clearErrors();
+  });
+
+  // CHANGE FUNCTION FIELD BASED ON EVENT
+  $("#eventReport-form-event").on("change", function() {
+
+    if ($(this).val() != "") {
+      let a = [];
+      let pre_fnc = $("#eventReport-form-event option:selected").attr('array');
+      pre_fnc = pre_fnc.replace("/", "");
+      let fnc = pre_fnc.replace(/ /g, "");
+      fnc = fnc.toUpperCase();
+      a.push('<option></option>');
+      eventReportFunctionOptions[fnc].forEach(function(elem) {
+        let html = `<option array='${elem}'>${elem}</option>`;
+        a.push(html);
+      });
+      $("#eventReport-form-function").html(a.join(""));
+      $("#eventReport-form-function").val("").prop('disabled', false);
+    } else {
+      $("#eventReport-form-function").val("").prop('disabled', true);
+    }
+    $("#eventReport-form-task").val("").change().prop('disabled', true);
+  });
+
+  // CHANGE TASK BASED ON FUNCTION
+  $("#eventReport-form-function").on("change", function() {
+    if ($(this).val() != "") {
+      let a = [];
+      let pre_task = $("#eventReport-form-function option:selected").attr('array');
+      pre_task = pre_task.replace("/", "");
+      let task = pre_task.replace(/ /g, "");
+      task = task.toUpperCase();
+      a.push('<option></option>');
+      eventReportTaskOptions[task].forEach(function(elem) {
+        let html = `<option array='${elem}'>${elem}</option>`;
+        a.push(html);
+      });
+      $("#eventReport-form-task").html(a.join(""));
+      $("#eventReport-form-task").val("").prop('disabled', false);
+    } else {
+      $("#eventReport-form-task").val("").change().prop('disabled', true);
+
+    }
+  });
+
+
+  // END OF DOCUMENT READY
+});
+
+
+</script>
