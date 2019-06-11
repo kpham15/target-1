@@ -216,6 +216,20 @@
 </div>
 <script type="text/javascript">
 
+  function validateMtcConn(obj, ckid) {
+    $('#setup-maint-modal-mtccon1-div').show();
+    $('#setup-maint-modal-mtccon2-div').show();
+    $('#setup-maint-modal-row3-div').hide();
+
+    $('#setup-maint-modal-conn1-ctyp').val(obj.ctyp);
+    $('#setup-maint-modal-conn1-ffac').val(obj.ffac);
+
+    $('#setup-maint-modal-conn2-ctyp').val(obj.ctyp);
+    $('#setup-maint-modal-conn2-tfac').val(obj.tfac);
+
+    $('#setup-maint-modal').modal('show');
+  }
+
   function validateRestoreMtcd(obj, ckid) {
 
     $('#setup-maint-modal-mtccon1-div').hide();
@@ -378,7 +392,7 @@
       if (obj.action == "MTC_DISCON") {
         validateMtcDisconnect(obj, ckid);
       } else if (obj.action == "MTC_CONN") {
-
+        validateMtcConnect(obj, ckid);
       } else if (obj.action == "MTC_RESTORE") {
         validateMtcRestore(obj, ckid);
       } else if (obj.action == "RESTORE_MTCD") {
