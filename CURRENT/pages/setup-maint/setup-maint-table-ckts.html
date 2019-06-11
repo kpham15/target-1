@@ -116,6 +116,16 @@
   });
 
   $(document).ready(function() {
+
+    // Click Event on Cons Table
+    $(document).on('click', '#setup-maint-table-cons tbod tr', function() {
+      let data = setupMaintTableCons.row(this).data();
+
+      $('#setup-maint-forms-ffac').val(data.ffac);
+      $('#setup-maint-forms-fport').val(data.fport);
+      $('#setup-maint-forms-tfac').val(data.tfac);
+      $('#setup-maint-forms-tport').val(data.tport);
+    })
     // Click Event on Ckts Table
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
       let data = setupMaintTableCkts.row(this).data();
@@ -154,7 +164,7 @@
         // if (res.length == 0) {
           
         // }
-        
+
         if (data.rslt == 'fail') {
           modal.type = 'danger';
           modalHandler(modal);
