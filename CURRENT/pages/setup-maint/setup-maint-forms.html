@@ -217,7 +217,7 @@
 <script type="text/javascript">
 
   function validateMtcConnnect(obj, ckid) {
-    $('#setup-maint-modal-conn-form').show();
+    $('#setup-maint-modal-mtccon-div').show();
     $('#setup-maint-modal-row3-div').hide();
 
     $('#setup-maint-modal-pick-conn1').prop('checked',true);
@@ -247,7 +247,7 @@
 
   function validateRestoreMtcd(obj, ckid) {
 
-    $('#setup-maint-modal-conn-form').hide();
+    $('#setup-maint-modal-mtccon-div').hide();
     $('#setup-maint-modal-row3-div').show();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
@@ -279,7 +279,7 @@
 
   function validateMtcRestore(obj, ckid) {
 
-    $('#setup-maint-modal-conn-form').hide();
+    $('#setup-maint-modal-mtccon-div').hide();
     $('#setup-maint-modal-row3-div').show();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
@@ -311,7 +311,7 @@
 
   function validateMtcDisconnect(obj, ckid) {
 
-    $('#setup-maint-modal-conn-form').hide();
+    $('#setup-maint-modal-mtccon-div').hide();
     $('#setup-maint-modal-row3-div').show();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
