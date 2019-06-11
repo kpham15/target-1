@@ -216,7 +216,7 @@
 </div>
 <script type="text/javascript">
 
-  function validateMtcConn(obj, ckid) {
+  function validateMtcConnnect(obj, ckid) {
     $('#setup-maint-modal-mtccon1-div').show();
     $('#setup-maint-modal-mtccon2-div').show();
     $('#setup-maint-modal-row3-div').hide();
@@ -392,7 +392,7 @@
       if (obj.action == "MTC_DISCON") {
         validateMtcDisconnect(obj, ckid);
       } else if (obj.action == "MTC_CONN") {
-        validateMtcConnect(obj, ckid);
+        validateMtcConnnect(obj, ckid);
       } else if (obj.action == "MTC_RESTORE") {
         validateMtcRestore(obj, ckid);
       } else if (obj.action == "RESTORE_MTCD") {
