@@ -278,7 +278,7 @@ $(document).ready(function() {
   // Clear Button Click Event
   $('#setup-users-forms-clear').click(function() {
     $('.setup-users-forms-input').val('');
-    setupUsersDatatable.clear().draw();
+    $('#setup-users-forms-viewuser').trigger('click');
     clearErrors();
   })
 
