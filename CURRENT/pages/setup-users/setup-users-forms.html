@@ -433,6 +433,11 @@ $(document).ready(function() {
     $('.users-phonenum').toggle();
   });
 
+  // Side NavBar Click Event
+  $('.menu-item[page_id="setup-users-page"]').click(function() {
+    $('#setup-users-forms-viewuser').trigger('click');
+  })
+
 });
 
 </script>
