@@ -119,6 +119,9 @@
   });
 
   var maintTableConsId = "";
+  var maintTableTktsId = "";
+  var maintTableCktsId = "";
+
   $(document).ready(function() {
    
 
@@ -127,7 +130,7 @@
       let data = setupMaintTableCons.row(this).data();
 
       maintTableConsId = data.idx;
-      console.log(maintTableConsId);
+
       $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
       $('#setup-maint-forms-fport').val(data.fport);
@@ -144,6 +147,8 @@
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
       let data = setupMaintTableCkts.row(this).data();
 
+      maintTableCktsId = data.id;
+      console.log(maintTableCktsId);
       $('#setup-maint-table-cons-div').show();
 
       $('#setup-maint-forms-ckid').val(data.ckid);
