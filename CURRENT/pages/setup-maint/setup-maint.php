@@ -50,9 +50,10 @@
         let a = [];
         a.push('<option></option');
 
-        for (let i=0; i<res.length; i++)m {
+        for (let i=0; i<res.length; i++) {
           a.push('<option>' + data.rows[i].fac + '</option>');
         }
+        
         $('#setup-maint-modal-conn2-ffac').empty();
         $('#setup-maint-modal-conn2-ffac').html(a.join(""));
       }
