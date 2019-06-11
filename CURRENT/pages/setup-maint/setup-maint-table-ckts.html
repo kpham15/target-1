@@ -114,4 +114,24 @@
       {"data":"date"},
     ]
   });
+
+  $(document).ready(function() {
+    // Click Event on Ckts Table
+    $(document).on('click', '#setup-maint-table-ckts tbody try', function() {
+      let data = setupMaintTableCkts.row(this).data();
+
+      $('#setup-maint-table-cons').show();
+
+      $('#setup-maint-forms-ckid').val(data.ckid);
+      $('#setup-maint-forms-cls').val(data.cls);
+      $('#setup-maint-forms-adsr').val(data.adsr);
+      $('#setup-maint-forms-tktno').val(data.tktno);
+      $('#setup-maint-forms-mlo').val(data.mlo);
+      $('#setup-maint-forms-prot').val(data.prot);
+
+      // give selected class
+      $('#setup-maint-table-ckts tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
+  });
 </script>
