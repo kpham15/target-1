@@ -16,7 +16,7 @@
     <?php include __DIR__ . '/matrix-forms.html'; ?>
 
     <!-- Fac Table -->
-    <?php include __DIR__ . '/matrix-table.html'; ?>
+    <?php include __DIR__ . '/matrix-tables.html'; ?>
 
     <!-- Fac Modal -->
     <?php include __DIR__ . '/matrix-modals.html'; ?>
