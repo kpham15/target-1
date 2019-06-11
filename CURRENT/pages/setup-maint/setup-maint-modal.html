@@ -246,13 +246,46 @@
       }
     }
 
-    
+    $.ajax({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintConnect",
+        "act":      obj.action,
+        "user":     user.uname,
+        "ckid":     ckid,
+        "cls":      obj.cls,
+        "adsr":     obj.adsr,
+        "prot":     obj.prot,
+        "tktno":    obj.tktno,
+        "mlo":      obj.mlo,
+        "ctyp":     obj.ctyp,
+        "ffac":     maintPickedFfac,
+        "tfac":     maintPickedTfac,
+      },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        header:   data.rslt,
+        body:     data.reason,
+      }
+
+      if (data.rslt == 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      }
+      else {
+        modal.type = 'success';
+        modalHandler(modal);
+      }
+    })
+
   }
 
   $(document).ready(function() {
 
     $('#setup-maint-modal-submit').click(function() {
-      console.log('SUBMIT CLICKED');
 
       let obj = {
         cls:    $('#setup-maint-modal-cls').val(),
@@ -263,6 +296,7 @@
         dd:     $('#setup-maint-modal-dd').val(),
         fdd:    $('#setup-maint-modal-fdd').val(),
         action: $('#setup-maint-modal-action').val(),
+        ctyp:   $('#setup-maint-modal-contyp').val()
       }
 
       let ckid = "";
@@ -296,6 +330,8 @@
 
     // Radio Button Click Event for Action MTC_CONN Top Button
     $('#setup-maint-modal-pick-conn1').click(function() {
+      clearErrors();
+
       if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
         $('#setup-maint-modal-conn1-tfac').prop('disabled',false);
         $('#setup-maint-modal-conn2-ffac').prop('disabled',true);
@@ -303,6 +339,8 @@
     });
     // Radio Button Click Event for Action MTC_CONN Bottom Button
     $('#setup-maint-modal-pick-conn2').click(function() {
+      clearErrors();
+
       if ($('#setup-maint-modal-pick-conn2').is(':checked')) {
         $('#setup-maint-modal-conn1-tfac').prop('disabled',true);
         $('#setup-maint-modal-conn2-ffac').prop('disabled',false);
