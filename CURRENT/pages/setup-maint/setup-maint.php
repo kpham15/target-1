@@ -12,7 +12,9 @@
         </ol>
       </section>
 
-      <!-- Reference Page -->
+      <!-- Setup Maint Forms -->
       <?php include __DIR__ . '/setup-maint-forms.html'; ?>
+
+      <!-- Setup Maint Table Left -->
   </div>
 </div>
