@@ -217,6 +217,10 @@
 <script type="text/javascript">
 
   function validateRestoreMtcd(obj, ckid) {
+
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
@@ -244,6 +248,10 @@
   }
 
   function validateMtcRestore(obj, ckid) {
+
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
@@ -283,6 +291,10 @@
       return;
     }
     else {
+    
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-ckid-tn').prop('disabled',true);
     $('#setup-maint-modal-cls').prop('disabled',true);
