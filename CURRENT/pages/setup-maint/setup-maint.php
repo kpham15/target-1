@@ -17,5 +17,6 @@
 
       <!-- Setup Maint Table Left -->
       <?php include __DIR__ . '/setup-maint-searchtable.html'; ?>
+      
   </div>
 </div>
