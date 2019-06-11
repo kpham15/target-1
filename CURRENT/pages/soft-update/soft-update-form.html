@@ -21,12 +21,8 @@
 <script>
 
 function swUpd_start() {
-    swUpd_clearForm();
-    swUpd_displayTable(); 
-}
-
-function swUpd_clearForm(){
     $("#swUpd_act_sel").val("");
+    swUpd_displayTable(); 
 }
 
 function swUpd_query(action){
@@ -62,6 +58,12 @@ function swUpd_query(action){
             }
             else {
                 swUpd_updateInfo();
+                let modal = {
+                    title: obj.rslt,
+                    body: obj.reason,
+                    type: 'success'
+                }
+                modalHandler(modal);
             } 
         } 
     })
@@ -84,15 +86,15 @@ function swUpd_updateInfo(){
 function swUpd_confirm(){
     if ($("#swUpd_act_sel").val()  ==  "RUN CURRENT SW") {
         swUpd_query('RUN CURRENT SW');
-        swUpd_clearForm();
+        $("#swUpd_act_sel").val("");
     }
     else if ($("#swUpd_act_sel").val()  ==  "RUN UPDATE SW") {
         swUpd_query('RUN UPDATE SW');
-        swUpd_clearForm();
+        $("#swUpd_act_sel").val("");
     }
     else if ($("#swUpd_act_sel").val()  ==  "RUN DEFAULT SW") {
         swUpd_query('RUN DEFAULT SW');
-        swUpd_clearForm();
+        $("#swUpd_act_sel").val("");
     }
     else if ($("#swUpd_act_sel").val()  ==  "APPLY UPDATE SW") {
         if(folderSwList.UPDATE.status != 'Running') {
@@ -105,7 +107,7 @@ function swUpd_confirm(){
         }
         else {
             swUpd_query('APPLY UPDATE SW');
-            swUpd_clearForm();
+            $("#swUpd_act_sel").val("");
         }
     
     }
@@ -120,7 +122,7 @@ function swUpd_confirm(){
         }
         else {
             swUpd_query('APPLY DEFAULT SW');
-            swUpd_clearForm();
+            $("#swUpd_act_sel").val("");
         }
     }
     else if ($("#swUpd_act_sel").val() == "SET DEFAULT SW") {
@@ -134,7 +136,7 @@ function swUpd_confirm(){
         }
         else {
             swUpd_query('SET DEFAULT SW');
-            swUpd_clearForm();
+            $("#swUpd_act_sel").val("");
         }
         
     }  
@@ -171,7 +173,7 @@ if ($("#swUpd_act_sel").val() !="") {
         }
         else {
             swUpd_query('INSTALL UPDATE SW');
-            swUpd_clearForm();
+            $("#swUpd_act_sel").val("");
         }
         
     }

@@ -11,15 +11,20 @@
       
             <div class="modal-body">
                 <form class="form">
-                    <div class="row">
+                    <div class="row" style="background-color: lightgray; padding:15px">
                         <div class="col-sm-12">
                             <h4>CHOOSE THE FILE FROM YOUR COMPUTER:</h4>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <input class="form-control" type="file" data-icon="false" id="batchExcModal_file" accept=".csv" style="color:blue;font-weight: bold;height: 50px;background-color: rgb(195, 226, 247);border: groove;">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary">
+                                        Choose a csv file <input class="form-control" type="file" style="display:none" id="batchExcModal_file" accept=".csv">
+                                    </span>
+                                </label>
+                                <input id="batchExcModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     
 
@@ -34,6 +39,14 @@
       </div>
 
 <script>
+
+$(document).on('change', '#batchExcModal_file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $("#batchExcModal_fileText").val(label);
+});
+
 function batchExcModal_add() {
     if($("#batchExcModal_file").val() == "") {
         let modal = {
@@ -108,6 +121,7 @@ function batchExcModal_add() {
                         type : 'success'
                     }
                     modalHandler(modal);
+                    $("#batchExcModal").modal("hide");
                 }  
             } 
         });
@@ -117,6 +131,8 @@ function batchExcModal_add() {
 
 function batchExcModal_clearForm() {
     $("#batchExcModal_file").val("");
+    $("#batchExcModal_fileText").val("");
+
 }
 
 

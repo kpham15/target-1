@@ -5,15 +5,21 @@
                 <h5 class="modal-title">SOFTWARE UPLOAD</h5>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row" style="background-color: lightgray; padding:15px;">
                     <div class="col-sm-12">
                         <h4>CHOOSE THE SOFTWARE FILE FROM YOUR COMPUTER:</h4>
                     </div>
                     <div class="col-xs-12">
-                        <div class="form-group">
-                            <input class="form-control" type="file" data-icon="false" id="swUpdModal_file" accept=".zip" style="color:blue;font-weight: bold;height: 50px;background-color: rgb(195, 226, 247);border: groove;">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Choose a zip file <input class="btn btn-primary" type="file" style="display:none" id="swUpdModal_file" accept=".zip">
+                                </span>
+                            </label>
+                            <input id="swUpdModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
                         </div>
-                    </div> 
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="swUpdModal_submit_btn">Submit</button>
@@ -25,6 +31,15 @@
 </div>
 
 <script>
+$(document).on('change', '#swUpdModal_file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $("#swUpdModal_fileText").val(label);
+});
+
+
+
     function swUpdModal_add() {
         if($("#swUpdModal_file").val() == "") {
             let modal = {
@@ -71,13 +86,15 @@
             if(obj.rslt == 'fail') modal.type = 'danger';
             else modal.type = 'success';
             modalHandler(modal);
-            
+            $("#swUpdModal").modal("hide");
+
         });
     
     }
     
     function swUpdModal_clearForm() {
         $("#swUpdModal_file").val("");
+        $("#swUpdModal_fileText").val("")
     }
 
 
@@ -86,7 +103,9 @@
     });
 
 
-$("#swUpdModal").on("hidden.bs.modal", swUpd_clearForm);
+$("#swUpdModal").on("hidden.bs.modal", function(){
+    $("#swUpd_act_sel").val("");
+});
 
 
 </script>
