@@ -223,8 +223,7 @@
     }
   }
   function validateMtcDisconnect(obj, ckid) {
-    validateTableSelected();
-
+  
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-cls').prop('disabled',true);
     $('#setup-maint-modal-adsr').prop('disabled',true);
@@ -286,6 +285,7 @@
         tport:      $('#setup-maint-forms-tport').val(),
       }
 
+
       let ckid = "";
       if ($('#setup-maint-forms-cbx').prop('checked')) {
         ckid = $('#setup-maint-forms-ckid-tn').val();
@@ -293,6 +293,8 @@
       else {
         ckid = $('#setup-maint-forms-ckid').val();
       }
+
+      validateTableSelected();
 
       if (obj.action == "MTC_DISCONNECT") {
         validateMtcDisconnect(obj, ckid);
