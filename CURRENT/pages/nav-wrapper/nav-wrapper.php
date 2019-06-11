@@ -34,12 +34,8 @@
     <?php include __DIR__ . '/../batch-exec/batch-exec.php'; ?>
     <?php include __DIR__ . '/../wire-center/wire-center.php'; ?>
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
-<<<<<<< HEAD:pages/nav-wrapper/nav-wrapper.php
     <?php include __DIR__ . '/../event-report/event-report.php'; ?>
-
-=======
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
->>>>>>> a27e9ea26fc2bbaa3e4c343c26f62e8c6d73e42a:CURRENT/pages/nav-wrapper/nav-wrapper.php
 
     <!-- /.content -->
   </div>
