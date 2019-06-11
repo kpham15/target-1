@@ -228,11 +228,46 @@
   })
 
   $(document).ready(function() {
-   // Initialize inputmask
-   $('#setup-maint-forms-ckid-tn').inputmask();
+    // View Button 1
+    $('#setup-maint-forms-viewckid').click(function() {
 
-   // TN Checkbox Handler
-   $('#setup-maint-forms-cbx').iCheck({
+      clearErrors();
+
+      let ckid = $('#setup-maint-forms-ckid').val();
+
+      $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcProv",
+          "action": "queryCkid",
+          "user":   user.uname,
+          "ckid":   ckid
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          header: data.rslt,
+          body:   data.reason,
+        }
+
+        if (data.rslt = 'fail') {
+          modal.type = 'danger';
+          modalHandler(modal);
+        }
+
+        if (res.length == 0) {
+          inputError($('#setup-maint-forms-ckid'),'No Results Found');
+        }
+      })
+    })
+    
+    // Initialize inputmask
+    $('#setup-maint-forms-ckid-tn').inputmask();
+
+    // TN Checkbox Handler
+    $('#setup-maint-forms-cbx').iCheck({
       checkboxClass: 'icheckbox_minimal-blue'
     });
     $('#setup-maint-forms-cbx').on('ifToggled', function(){
