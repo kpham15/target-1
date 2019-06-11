@@ -118,6 +118,7 @@
     ]
   });
 
+  var maintTableConsId = "";
   $(document).ready(function() {
    
 
@@ -125,7 +126,7 @@
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
       let data = setupMaintTableCons.row(this).data();
 
-      var maintTableConsId = data.id;
+      maintTableConsId = data.id;
       console.log(maintTableConsId);
       $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
