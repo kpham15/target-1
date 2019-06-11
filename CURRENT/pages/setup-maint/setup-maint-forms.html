@@ -219,9 +219,13 @@
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
+      return;
     } else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
       $('#setup-maint-forms-action').val('');
+      return;
+    } else {
+      return;
     }
   }
   function validateMtcDisconnect(obj, ckid) {
@@ -268,6 +272,9 @@
 
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
+
+      clearErrors();
+      
       let obj = {
         action:     $('#setup-maint-forms-action').val(),
         // ckid:     $('#setup-maint-forms-ckid').val(),
@@ -287,7 +294,6 @@
         tport:      $('#setup-maint-forms-tport').val(),
       }
 
-
       let ckid = "";
       if ($('#setup-maint-forms-cbx').prop('checked')) {
         ckid = $('#setup-maint-forms-ckid-tn').val();
@@ -296,7 +302,6 @@
         ckid = $('#setup-maint-forms-ckid').val();
       }
 
-      clearErrors();
       validateTableSelected();
 
       if (obj.action == "MTC_DISCONNECT") {
