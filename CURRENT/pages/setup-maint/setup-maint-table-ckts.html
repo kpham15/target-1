@@ -1,4 +1,4 @@
-<!-- Table -->
+<!-- CKT Table -->
 <div class="col-md-7">
   <div class="box box-primary">
     <div class="box-header with-border">
@@ -20,9 +20,52 @@
     </table>
     </div>
   </div>
+  <!-- List of connections -->
+  <div class="col-md-7">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">LIST OF CONNECTIONS:</h3>
+      </div>
+      <div class="body">
+        <table id="setup-maint-table-cons" class="table table-striped table-bordered table-hover" style="width:100%">
+          <thead>
+            <tr>
+             <th rowspan="2">ID</th>
+             <th rowspan="2">CONTYP</th>
+             <th colspan="3">FROM(X)</th>
+             <th colspan="3">TO(Y)</th>
+            </tr>
+            <tr>
+              <th>PORT</th>
+              <th>PSTA</th>
+              <th>FAC(X)</th>
+              <th>PORT</th>
+              <th>PSTA</th>
+              <th>FAC(Y)</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
+  var setupMaintTabelCons = $('#setup-maint-table-cons').DataTable({
+    "data":       [],
+    "columns":    [
+      {"data":"idx"},
+      {"data":"ctyp"},
+      {"data":"fport"},
+      {"data":"fpsta"},
+      {"data":"ffac"},
+      {"data":"tport"},
+      {"data":"tpsta"},
+      {"data":"tfac"}
+
+    ]
+  })
+
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
     "data":       [],
     "columns":    [
