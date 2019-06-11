@@ -16,5 +16,6 @@
       <?php include __DIR__ . '/setup-maint-forms.html'; ?>
 
       <!-- Setup Maint Table Left -->
+      <?php include __DIR__ . '/setup-maint-searchtable.html'; ?>
   </div>
 </div>
