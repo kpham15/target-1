@@ -154,7 +154,11 @@
       modalBody = modalInfo.body;
     }
     if (modalInfo.hasOwnProperty('func')) {
-      modalFunc = modalInfo.func;
+      $(document).off("click", ".modal-confirm-btn");
+      $(document).on("click",'.modal-confirm-btn', function(){
+          modalInfo.func()
+      } )
+      
     }
 
     switch(modalSize) {
@@ -177,8 +181,5 @@
 
     $('#modal-'+modalType).modal('show');
 
-    $('.modal-confirm-btn').click(function() {
-      modalFunc();
-    });
   }
 </script>
