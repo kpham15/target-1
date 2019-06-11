@@ -252,14 +252,21 @@
           body:   data.reason,
         }
 
-        if (data.rslt = 'fail') {
-          modal.type = 'danger';
-          modalHandler(modal);
-        }
-
         if (res.length == 0) {
           inputError($('#setup-maint-forms-ckid'),'No Results Found');
         }
+
+        if (data.rslt == 'fail') {
+          modal.type = 'danger';
+          modalHandler(modal);
+        }
+        else {
+          setupMaintTableCkts.clear().draw();
+          setupMaintTableCkts.rows.add(res);
+          setupMaintTableCkts.columns.adjust().draw();
+        }
+
+        
       })
     })
     
