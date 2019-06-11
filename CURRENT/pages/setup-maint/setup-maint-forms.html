@@ -89,7 +89,7 @@
       <!-- DD -->
       <div class="col-md-6">
         <div class="form-group">
-          <label>Date:</label>
+          <label>DD:</label>
           <div class="input-group date">
             <div class="input-group-addon">
               <i class="fa fa-calendar"></i>
@@ -101,7 +101,7 @@
       <!-- FDD -->
       <div class="col-md-6">
           <div class="form-group">
-            <label>Date:</label>
+            <label>FDD:</label>
             <div class="input-group date">
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
@@ -268,6 +268,10 @@
   })
 
   $(document).ready(function() {
+
+    // Initialize DatePicker
+    $('#setup-maint-forms-dd').datepicker();
+    $('#setup-maint-forms-fdd').datepicker();
 
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
