@@ -12,7 +12,7 @@
       <div class="modal-body">
         <form class="form">
           <!-- Top Row -->
-          <div class="row">
+          <div class="row" id="maint-modal-row1-div">
             <!-- CKID -->
             <div class="col-md-4">
               <div class="form-group">
@@ -53,6 +53,27 @@
                   <option value=""></option>
                   <option value="SSM">SSM</option>
                   <option value="SSB">SSB</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row" id="maint-modal-row2-div">
+            <!-- TKTNO -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>TKTNO</label>
+                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" />
+              </div>
+            </div>
+            <!-- MLO -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MLO:</label>
+                <select id="setup=-maint-modal-mlo" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="N">N</option>
+                  <option value="Y">Y</option>
                 </select>
               </div>
             </div>
