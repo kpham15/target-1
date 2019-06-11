@@ -229,6 +229,11 @@
 
   $(document).ready(function() {
 
+    // Action Change Event
+    $('#setup-maint-forms-action').change(function() {
+      $('#setup-maint-modal').modal('show')
+    })
+
     // View Button 1
     $('#setup-maint-forms-viewckid').click(function() {
 
@@ -332,5 +337,6 @@
     $('#setup-maint-forms-cbx').on('ifToggled', function(){
       $('.maint-ckid').toggle();
     });
+
   })
 </script>

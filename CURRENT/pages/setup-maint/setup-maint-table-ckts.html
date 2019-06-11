@@ -76,6 +76,7 @@
 
 
 <script type="text/javascript">
+  // Initialize Datatable for Cons
   var setupMaintTableCons = $('#setup-maint-table-cons').DataTable({
     "data":       [],
     "columns":    [
@@ -90,6 +91,7 @@
     ]
   });
 
+  // Initialize Datatable for Tkts
   var setupMaintTableTkts = $('#setup-maint-table-tkts').DataTable({
     "data":       [],
     "columns":    [
@@ -102,6 +104,7 @@
     ]
   })
 
+  // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
     "data":       [],
     "columns":    [
@@ -121,6 +124,7 @@
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
       let data = setupMaintTableCons.row(this).data();
 
+      $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
       $('#setup-maint-forms-fport').val(data.fport);
       $('#setup-maint-forms-tfac').val(data.tfac);
@@ -131,6 +135,7 @@
       $(this).addClass('bg-primary');
 
     })
+    
     // Click Event on Ckts Table
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
       let data = setupMaintTableCkts.row(this).data();
