@@ -18,7 +18,6 @@
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
 			$('#sidebar-user-name').text(data.ver)
 			let modal = {
 				title: 'Software Information',
