@@ -66,7 +66,12 @@
   }
 
   function pathAdminQueryByCkid(){
-    let ckid = $("#pathAdmin-form-ckid").val();
+
+    if ($('#pathAdmin-tn-check').prop('checked')) {
+      ckid = $('#pathAdmin-form-ckid-tn').val();
+    } else {
+      ckid = $('#pathAdmin-form-ckid').val();
+    }
     
     $.ajax({
       url: ipcDispatch,

@@ -50,8 +50,10 @@
       <!-- CKID -->
       <div class="col-md-2">
         <div class="form-group">
-          <label>CKID:</label>
-          <input id="pathAdmin-form-ckid" class="form-control pathAdmin-form-input">
+          <label>CKID TN: </label>
+          <input id="pathAdmin-tn-check" type="checkbox" checked>
+          <input id="pathAdmin-form-ckid" class="form-control pathAdmin-form-input pathAdmin-form-ckid-num" style="display:none;">
+          <input id="pathAdmin-form-ckid-tn" type="text" class="form-control pathAdmin-form-input pathAdmin-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
       </div>
       <div class="col-sm-1">
@@ -244,5 +246,18 @@ $(".pathAdmin-form-input:not(#pathAdmin-form-action)").on('click', function() {
   clearErrors();
   $("#pathAdmin-form-action").val("").change();
 });
+
+// Initialize inputmask
+$('#pathAdmin-form-ckid-tn').inputmask();
+
+// TN Checkbox Handler
+$('#pathAdmin-tn-check').iCheck({
+  checkboxClass: 'icheckbox_minimal-blue'
+});
+$('#pathAdmin-tn-check').on('ifToggled', function() {
+  $('.pathAdmin-form-ckid-num').toggle();
+});
+
+
 
 </script>
