@@ -228,6 +228,15 @@
   })
 
   $(document).ready(function() {
-   
+   // Initialize inputmask
+   $('#setup-maint-forms-ckid-tn').inputmask();
+
+   // TN Checkbox Handler
+   $('#setup-maint-forms-cbx').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue'
+    });
+    $('#setup-maint-forms-cbx').on('ifToggled', function(){
+      $('.maint-ckid').toggle();
+    });
   })
 </script>
