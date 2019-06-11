@@ -215,21 +215,16 @@
   </form>
 </div>
 <script type="text/javascript">
-  function validateTableSelected() {
+
+  function validateMtcDisconnect(obj, ckid) {
+
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
-      return true;
     } else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
       $('#setup-maint-forms-action').val('');
-      return true;
     } else {
-      return false;
-    }
-  }
-  function validateMtcDisconnect(obj, ckid) {
-  
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-cls').prop('disabled',true);
     $('#setup-maint-modal-adsr').prop('disabled',true);
@@ -254,7 +249,7 @@
     $('#setup-maint-modal-action').val(obj.action);
     
     $('#setup-maint-modal').modal('show')
-
+    }
   }
   // Initialize Hidden Fac Datatable
   var setupMaintFacTable = $('#setup-maint-forms-factable').DataTable({
@@ -300,10 +295,6 @@
       }
       else {
         ckid = $('#setup-maint-forms-ckid').val();
-      }
-
-      if (validateTableSelected()) {
-        return;
       }
 
       if (obj.action == "MTC_DISCONNECT") {
