@@ -240,10 +240,10 @@
 
       let ckid = "";
       if ($('#setup-maint-forms-cbx').prop('checked')) {
-        ckid = $('#setup-maint-forms-ckid-tn');
+        ckid = $('#setup-maint-forms-ckid-tn').val();
       }
       else {
-        ckid = $('#setup-maint-forms-ckid');
+        ckid = $('#setup-maint-forms-ckid').val();
       }
 
       $.ajax ({
