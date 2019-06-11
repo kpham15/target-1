@@ -221,6 +221,21 @@
 
 
   $(document).ready(function() {
+
+    // Radio Button Click Event for Action MTC_CONN
+    $('#setup-maint-modal-pick-conn1').click(function() {
+      if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
+        $('#setup-maint-modal-conn1-tfac').prop('disabled',false);
+        $('#setup-maint-modal-conn2-ffac').prop('disabled',true);
+      }
+    });
+
+    $('#setup-maint-modal-pick-conn2').click(function() {
+      if ($('#setup-maint-modal-pick-conn2').is(':checked')) {
+        $('#setup-maint-modal-conn1-tfac').prop('disabled',true);
+        $('#setup-maint-modal-conn2-ffac').prop('disabled',false);
+      }
+    })
     // Initialize Datepicker
     $('#setup-maint-modal-dd').datepicker();
     $('#setup-maint-modal-fdd').datepicker();
