@@ -283,6 +283,16 @@
 
   }
 
+  function validateMtcDisconModal(obj, ckid) {
+    if (obj.ffac == "") {
+      inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#setup-maint-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
+  }
   $(document).ready(function() {
 
     $('#setup-maint-modal-submit').click(function() {
@@ -296,7 +306,9 @@
         dd:     $('#setup-maint-modal-dd').val(),
         fdd:    $('#setup-maint-modal-fdd').val(),
         action: $('#setup-maint-modal-action').val(),
-        ctyp:   $('#setup-maint-modal-contyp').val()
+        ctyp:   $('#setup-maint-modal-contyp').val(),
+        ffac:   $('#setup-maint-modal-ffac').val(),
+        tfac:   $('#setup-maint-modal-tfac').val()
       }
 
       let ckid = "";
@@ -312,7 +324,7 @@
         validateMtcConnModal(obj, ckid);
       }
       else if (obj.action == "MTC_DISCON") {
-
+        validateMtcDisconModal(obj, ckid);
       }
       else if (obj.action == "RESTORE_MTCD") {
 
