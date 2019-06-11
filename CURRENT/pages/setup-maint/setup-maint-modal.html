@@ -225,7 +225,11 @@
       maintPickedTfac = $('#setup-maint-modal-conn1-tfac').val();
       maintPickedFfac = $('#setup-maint-modal-conn1-ffac').val();
       if (maintPickedTfac == "") {
-        // inputError($('#'))
+        inputError($('#setup-maint-modal-conn1-tfac'),'Missing FAC(Y)');
+        return;
+      }
+      if (maintPickedFfac == "")  {
+        inputError($('#setup-maint-modal-conn1-ffac'),'Missing FAC(X)');
       }
     }
   }
