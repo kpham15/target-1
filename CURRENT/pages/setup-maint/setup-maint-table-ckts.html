@@ -123,6 +123,7 @@
       $('#setup-maint-table-cons-div').show();
 
       $('#setup-maint-forms-ckid').val(data.ckid);
+      $('#setup-maint-forms-ckid-tn').val(data.ckid);
       $('#setup-maint-forms-cls').val(data.cls);
       $('#setup-maint-forms-adsr').val(data.adsr);
       $('#setup-maint-forms-tktno').val(data.tktno);
@@ -132,6 +133,38 @@
       // give selected class
       $('#setup-maint-table-ckts tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+
+      $.ajax({
+        type:       'POST',
+        url:        ipcDispatch,
+        data:       {
+          "api":    "ipcProv",
+          "act":    "queryCktconByCkid",
+          "user":   user.uname,
+          "ckid":   data.ckid,
+        },
+        dataType:   'json',
+      }).done(function(data) {
+        let res = data.rows;
+        let moda = {
+          header:   data.rslt,
+          body:     data.reason,
+        }
+
+        // if (res.length == 0) {
+          
+        // }
+        
+        if (data.rslt == 'fail') {
+          modal.type = 'danger';
+          modalHandler(modal);
+        }
+        else {
+          setupMaintTableCons.clear().draw();
+          setupMaintTableCons.rows.add(res);
+          setupMaintTableCons.columns.adjust().draw();
+        }
+      })
     })
   });
 </script>
