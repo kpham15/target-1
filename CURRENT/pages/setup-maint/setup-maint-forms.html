@@ -236,7 +236,13 @@
 
       clearErrors();
 
-      let ckid = $('#setup-maint-forms-ckid').val();
+      let ckid = "";
+      if ($('#setup-maint-forms-cbx').prop('checked')) {
+        ckid = $('#setup-maint-forms-ckid-tn');
+      }
+      else {
+        ckid = $('#setup-maint-forms-ckid');
+      }
 
       $.ajax ({
         type:     'POST',
