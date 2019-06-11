@@ -219,13 +219,13 @@
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
-      return;
+      return false;
     } else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
       $('#setup-maint-forms-action').val('');
-      return;
+      return false;
     } else {
-      return;
+      return true;
     }
   }
   function validateMtcDisconnect(obj, ckid) {
@@ -302,7 +302,9 @@
         ckid = $('#setup-maint-forms-ckid').val();
       }
 
-      validateTableSelected();
+      if (validateTableSelected().val() == false) {
+        return;
+      }
 
       if (obj.action == "MTC_DISCONNECT") {
         validateMtcDisconnect(obj, ckid);
