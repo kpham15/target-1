@@ -126,7 +126,7 @@
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
       let data = setupMaintTableCons.row(this).data();
 
-      maintTableConsId = data.id;
+      maintTableConsId = data.ctyp;
       console.log(maintTableConsId);
       $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
