@@ -60,27 +60,6 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <label>PORT STATUS</label>
-          <select id="matrix-form-slot" class="form-control matrix-form-input">
-            <option></option>
-            <option>CONN</option>
-            <option>WK</option>
-            <option>SF</option>
-            <option>RS</option>
-            <option>DIP</option>
-            <option>MAINT</option>
-            <option>MLPT</option>
-            <option>MTCD</option>
-            <option>UNQ</option>
-            <option>UAS</option>
-            <option>LCK</option>
-            <option>DEF</option>
-            <option>INS</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
           <button id="matrix-form-view" type="button" class="btn btn-primary" style="margin-top:25px">
             VIEW
           </button>          
@@ -118,3 +97,17 @@
     <!-- ROW 1 END -->
   </form>
 </div>
+
+<script type="text/javascript">
+
+  // VIEW BUTTON
+  $('#matrix-form-view').click(function(e) {
+    e.preventDefault();
+
+    queryMatrix();
+
+    clearErrors();
+  });
+
+
+</script>
