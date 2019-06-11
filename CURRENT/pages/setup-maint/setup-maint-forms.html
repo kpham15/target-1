@@ -221,10 +221,14 @@
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
       $('#setup-maint-forms-action').val('');
-    } else if (maintTableConsId == "" || maintTableConsId == 0) {
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
       $('#setup-maint-forms-action').val('');
-    } else {
+      return;
+    }
+    else {
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-cls').prop('disabled',true);
     $('#setup-maint-modal-adsr').prop('disabled',true);
