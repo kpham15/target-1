@@ -29,21 +29,8 @@ function getUrl() {
 
         fclose($file);
 
-<<<<<<< HEAD
-	if (user.uname == '')
-	{
-		$('#login-page').show();
-	}
-
-	FastClick.attach(document.body);
-
-});
-
-</script>
-=======
     }
     return $url;
->>>>>>> a27e9ea26fc2bbaa3e4c343c26f62e8c6d73e42a
 
 }
 
