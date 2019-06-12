@@ -123,6 +123,8 @@
             return;
           }
           modal.type = 'success';
+          modal.confirm = true;
+          modal.func = $("#matrix-modal").modal('hide');
           modalHandler(modal);
           queryMatrixCards();
         }

@@ -50,8 +50,10 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-
+      let res = [];
+      if (data.hasOwnProperty('rows')) {
+        res = data.rows;
+      }
       matrixCardDatatable.clear().draw();
       matrixCardDatatable.rows.add(res);
       matrixCardDatatable.columns.adjust().draw();
