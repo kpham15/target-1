@@ -4,8 +4,8 @@
   <section class="sidebar">
 
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel">
-      <div id="version-icon" class="pull-left" style="color: #fff;padding-left:10px;cursor:pointer;">
+    <div id="version-container" class="user-panel">
+      <div class="pull-left" style="color: #fff;padding-left:10px;cursor:pointer;">
         <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
         <i class="fa fa-code-fork fa-lg"></i>
       </div>
@@ -319,7 +319,7 @@
     $('#'+pageId).addClass('active-page');
   });
 
-  $('#version-icon').click(function() {
+  $('#version-container').click(function() {
     let modal = {
       title: 'Software Information',
       body: swVer.description
