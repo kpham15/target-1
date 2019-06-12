@@ -15,6 +15,7 @@
   <section class="content">
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
+    <?php include __DIR__ . "/find-fac.html"; ?>
 
     <!-- =========================================================== -->
 
