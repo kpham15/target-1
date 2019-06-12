@@ -15,11 +15,11 @@
     </div>
 
     <!-- search form (Optional) -->
-    <form action="#" method="get" class="sidebar-form">
+    <form class="sidebar-form">
       <div class="input-group">
         <input type="text" name="q" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            <button type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
             </button>
           </span>
       </div>
@@ -322,7 +322,7 @@
   $('#version-container').click(function() {
     let modal = {
       title: 'Software Information',
-      body: '<textarea style="width:100%;" rows="15">'+swVer.description+'</textarea>',
+      body: '<textarea style="width:100%;" rows="15" readonly>'+swVer.description+'</textarea>',
       size: 'lg'
     }
 
