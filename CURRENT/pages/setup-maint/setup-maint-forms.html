@@ -410,26 +410,15 @@
 
   }
 
-
-  // Initialize Hidden Fac Datatable
-  var setupMaintFacTable = $('#setup-maint-forms-factable').DataTable({
-    "dom":"frtip",
-    "scrollY":"150px",
-    "data":[],
-    "columns": [
-      {"data":"fac"},
-      {"data":"psta"},
-      {"data":"port"},
-    ]
-  })
-
   $(document).ready(function() {
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
+      clearErrors();
       $('.setup-maint-forms-input').val('');
       $('.setup-maint-modal-input').val('');
-
+      $('#setup-maint-table-cons-div').hide();
+      setupMaintTableCkts.clear().draw();
     })
 
     // Initialize DatePicker
