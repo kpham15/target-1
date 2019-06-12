@@ -27,6 +27,7 @@
 
 	function logout(action) {
 		clearInterval(systemInfoInterval);
+		$('.modal').modal('hide');
 		$.post(ipcDispatch,
 		{
 			api:		'ipcLogout',
