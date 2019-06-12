@@ -81,7 +81,7 @@
     $("#matrix-modal-submit").click(function() {
       clearErrors();
       clearResult();
-      
+
       let action = $("#matrix-modal-action").attr('action');
       $.ajax({
         type: "POST",
@@ -104,13 +104,13 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          inputError($(this), data.rslt + ": "  + data.reason)
+          inputError($("#matrix-modal-action"), data.rslt + ": "  + data.reason)
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              inputError($(this), data.rslt + ": "  + "No record found");
+              inputError($("#matrix-modal-action"), data.rslt + ": "  + "No record found");
             } else {
-              postResult($(this), data.rslt);
+              postResult($("#matrix-modal-action"), data.rslt);
             }
             $("#matrix-form-action").val("");
             return;
