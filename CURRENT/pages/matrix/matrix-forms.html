@@ -9,6 +9,7 @@
           <label>NODE</label>
           <select id="matrix-form-node" class="form-control matrix-form-input">
             <!-- @TODO: ADD JS TO AUTO POPULATE THIS SELECTION FIELD WITH OPTIONS BASED ON HOW MANY NODES THERE ARE IN WCINFO -->
+            <option></option>
             <option>1</option>
             <option>2</option>
           </select>
@@ -100,6 +101,16 @@
 
 <script type="text/javascript">
 
+  // LOAD TABLE WHEN PAGE FIRST LOADS
+  var matrixFirstLoad = true;
+  $(".menu-item[page_id='matrix-page']").click(function() {
+    if (matrixFirstLoad != true) {
+      return;
+    }
+    queryMatrix();
+    matrixFirstLoad = false;
+  });
+
   // VIEW BUTTON
   $('#matrix-form-view').click(function(e) {
     e.preventDefault();
@@ -109,5 +120,47 @@
     clearErrors();
   });
 
+  // CLEAR BUTTON
+  $("#matrix-form-clear").click(function() {
+    $(".matrix-form-input").val("").change();
+    $('#fac-table tbody tr').removeClass('bg-primary');
+    clearErrors();
+  });
 
+  // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
+  $(".matrix-form-input").on("click", function() {
+    clearErrors();
+  });
+
+  // ACTION
+  $("#matrix-form-action").change(function() {
+    let action          = $(this).val();
+    let mxcId           = $("#matrix-form-id").val();
+    let mxcModalInputs  = $(".matrix-modal-input");
+    let mxcModal        = $("#matrix-modal");
+
+    if (action != "") {
+      mxcModalInputs.val("").change();
+      if (mxcId != "") {
+        populateMxcModal();
+        mxcModal.modal("show");
+      } else {
+        if (action == "LCK_NODE" || ACTION == "UN-LCK_NODE") {
+          populateMxcModal();
+          mxcModal.modal("show");
+        } else {
+          inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
+          action = "";
+        }
+      }
+    }
+  });
+
+  function populateMxcModal() {
+    $("#matrix-modal-node").val($("#matrix-form-node").val());
+    $("#matrix-modal-shelf").val($("#matrix-form-shelf").val());
+    $("#matrix-modal-type").val($("#matrix-form-type").val());
+    $("#matrix-modal-slot").val($("#matrix-form-slot").val());
+    $("#matrix-modal-action").val(action);
+  }
 </script>
