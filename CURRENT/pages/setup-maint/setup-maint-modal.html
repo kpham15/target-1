@@ -219,6 +219,8 @@
 <script type="text/javascript">
   var maintPickedTfac = "";
   var maintPickedFfac = "";
+  var maintPstaTfac = "";
+  var maintPstaFfac = "";
 
   function validateMtcConnModal(obj, ckid) {
     if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
@@ -328,6 +330,53 @@
       }
     })
   }
+
+  function validateRestoreMtcd(obj, ckid) {
+    if (obj.ffac == "") {
+      inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#setup-maint-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
+
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintRestoreMtcd",
+        "act":    "RESTORE_MTCD",
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        header:   data.rslt,
+        body:     data.reason,
+      }
+
+      if (data.rslt == 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      }
+      else {
+        modal.type = 'success';
+        modalHandler(modal);
+      }
+    })
+  }
+
   $(document).ready(function() {
 
     $('#setup-maint-modal-submit').click(function() {
@@ -362,7 +411,7 @@
         validateMtcDisconModal(obj, ckid);
       }
       else if (obj.action == "RESTORE_MTCD") {
-
+        validateRestoreMtcd(obj, ckid);
       }
       else if (obj.action == "MTC_RESTORE") {
 
