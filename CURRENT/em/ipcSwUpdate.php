@@ -109,10 +109,12 @@ function uploadSw($userObj, $fileName, $uploadDir) {
         }
     
         if (!file_exists($uploadDir)) {
+            throw new Exception("FOLDER UPLOAD NOT EXIST"); 
+
             // // if(!mkdir($updateDir, 0755, true)){
-            if(!mkdir($uploadDir, 0777, true)){
-                throw new Exception("UNABLE_CREATE_FOLDER_UPLOAD"); 
-            }
+            // if(!mkdir($uploadDir, 0777, true)){
+            //     throw new Exception("UNABLE_CREATE_FOLDER_UPLOAD"); 
+            // }
             
         }
         exec("rm -rf ".$uploadDir.'/*', $output, $return);
@@ -121,14 +123,14 @@ function uploadSw($userObj, $fileName, $uploadDir) {
         }
 
         if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
-            throw new Exception("UNABLE_TO_MOVE_SW_FILE"); 
+            throw new Exception("UNABLE TO MOVE SW FILE"); 
         }
 
         // exec("chmod 755  ".$uploadDir, $output, $return);
-        exec("chmod -R 777  ".$uploadDir, $output, $return);
-        if($return !== 0) {
-            throw new Exception("UNABLE_CONFIGURE_PERMISSION_FOLDER_UPLOAD");
-        }
+        // exec("chmod -R 777  ".$uploadDir, $output, $return);
+        // if($return !== 0) {
+        //     throw new Exception("UNABLE TO CONFIGURE THE PERMISSION TO FOLDER UPLOAD");
+        // }
 
         $result["rslt"] = 'success';
         $result["reason"] = "SW_UPLOADED";
@@ -166,19 +168,20 @@ function installUpdateSw($userObj, $updateDir, $uploadDir) {
         //check if there are more than 1 zip file in there
         $fileList = glob("{$uploadDir}/*");
         if(count($fileList) !== 1) {
-            throw new Exception('NEW_VERSION_NOT_FOUND');
+            throw new Exception('NEW VERSION DOES NOT FOUND');
         }
 
         ////////////////------------check folder UPDATE------------/////////////
         if ($updateDir ==="") {
-            throw new Exception("NO_UPDATE_FOLDER_INFORMATION");
+            throw new Exception("NO INFORMATION OF UPDATE_FOLDER");
         }
     
         if (!file_exists($updateDir)) {
+            throw new Exception("FOLDER UPDATESW NOT EXIST");
             // if(!mkdir($updateDir, 0755, true)){
-            if(!mkdir($updateDir, 0777, true)){
-                throw new Exception("FOLDER_FOR_UPDATESW_NOT_CREATED");
-            }
+            // if(!mkdir($updateDir, 0777, true)){
+            //     throw new Exception("FOLDER FOR UPDATESW IS NOT CREATED");
+            // }
         }
 
         ///clear content inside the folder UPDATE
@@ -196,10 +199,10 @@ function installUpdateSw($userObj, $updateDir, $uploadDir) {
         }
 
         // exec("chmod 755 ".$updateDir, $output, $return);
-        exec("chmod -R 777 ".$updateDir, $output, $return);
-        if($return !== 0) {
-            throw new Exception('UNABLE_CHANGE_PERMISSION_UPDATE_FOLDER');
-        }
+        // exec("chmod -R 777 ".$updateDir, $output, $return);
+        // if($return !== 0) {
+        //     throw new Exception('UNABLE_CHANGE_PERMISSION_UPDATE_FOLDER');
+        // }
     
         $result['rslt'] = 'success';
         $result['reason'] = 'NEW_VERSION_INSTALLED';
@@ -382,10 +385,10 @@ function applyUpdateSw($userObj, $updateDir, $currentDir, $defaultDir) {
         }
 
         // exec("chmod 755 ".$currentDir, $output, $return);
-        exec("chmod -R 777 ".$currentDir, $output, $return);
-        if($return !== 0) {
-            throw new Exception('UNABLE_CHANGE_PERMISSION_CURRENT_FOLDER');
-        }
+        // exec("chmod -R 777 ".$currentDir, $output, $return);
+        // if($return !== 0) {
+        //     throw new Exception('UNABLE_CHANGE_PERMISSION_CURRENT_FOLDER');
+        // }
       
 
         if(!changeDir('CURRENT')) {
@@ -453,10 +456,10 @@ function applyDefaultSw($userObj, $updateDir, $currentDir, $defaultDir) {
         }
 
         // exec("chmod 755 ".$currentDir, $output, $return);
-        exec("chmod -R 777 ".$currentDir, $output, $return);
-        if($return !== 0) {
-            throw new Exception('UNABLE_CHANGE_PERMISSION_CURRENT_FOLDER');
-        }
+        // exec("chmod -R 777 ".$currentDir, $output, $return);
+        // if($return !== 0) {
+        //     throw new Exception('UNABLE_CHANGE_PERMISSION_CURRENT_FOLDER');
+        // }
         
         if(!changeDir('CURRENT')) {
             throw new Exception('CFG_FILE_UNWRITABLE');
@@ -528,10 +531,10 @@ function setDefaultSw($userObj, $updateDir, $currentDir, $defaultDir) {
         }
 
         // exec("chmod 755 ".$defaultDir, $output, $return);
-        exec("chmod -R 777 ".$defaultDir, $output, $return);
-        if($return !== 0) {
-            throw new Exception('UNABLE_CHANGE_PERMISSION_DEFAULT_FOLDER');
-        }
+        // exec("chmod -R 777 ".$defaultDir, $output, $return);
+        // if($return !== 0) {
+        //     throw new Exception('UNABLE_CHANGE_PERMISSION_DEFAULT_FOLDER');
+        // }
 
         $result['rslt'] = 'success';
         $result['reason'] = 'DEFAULT_SET';

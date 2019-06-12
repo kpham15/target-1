@@ -154,7 +154,11 @@
       modalBody = modalInfo.body;
     }
     if (modalInfo.hasOwnProperty('func')) {
-      modalFunc = modalInfo.func;
+      $(document).off("click", ".modal-confirm-btn");
+      $(document).on("click",'.modal-confirm-btn', function(){
+          modalInfo.func()
+      } )
+      
     }
 
     switch(modalSize) {
@@ -171,14 +175,14 @@
     if (modalConfirm) {
       $('.modal-handler .modal-footer .modal-confirm-btn').show();
     }
+    else
+      $('.modal-handler .modal-footer .modal-confirm-btn').hide();
+
 
     $('.modal-handler .modal-title').text(modalTitle);
     $('.modal-handler .modal-body > p').text(modalBody);
 
     $('#modal-'+modalType).modal('show');
 
-    $('.modal-confirm-btn').click(function() {
-      modalFunc();
-    });
   }
 </script>

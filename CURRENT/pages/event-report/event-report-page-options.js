@@ -1,0 +1,182 @@
+var eventReportFunctionOptions = {
+  CONFIGURATION:      [
+    "SETUP WIRE CENTER", 
+    "PORT MAPPING", 
+    "SETUP FACILITY",
+  ],
+
+  PROVISIONING:       [
+    "SETUP SERVICE CONNECTION", 
+    "BATCH EXECUTION", 
+    "FT ADMIN REPORT", 
+    "FLOW-THROUGH RELEASE TABLE", 
+    "FLOW-THROUGH", 
+    "FOMS/FUSA",
+  ],
+  
+  MAINTENANCE:        [
+    "SETUP MAINTENANCE CONNECTION",
+    "LOCK/UNLOCK MATRIX CARD",
+    "LOCK/UNLOCK MATRIX NODE",
+    "ALARM ADMINISTRATION",
+    "PATH ADMINISTRATION",
+  ],
+
+  USERMANAGEMENT:     [
+    "SETUP USER",
+    "USER ACCESS",
+    "USER SEARCH",
+    "SET/RESET PASSWORD",
+    "BROADCAST NOTIFICATION",
+  ],
+
+  IPCADMINISTRATION:  [
+    "IPC REFERENCE DATA",
+    "SYSTEM SHUTDOWN",
+    "RESTORE SYSTEM",
+    "BACKUP DATABASE",
+    "UPDATE SOFTWARE RELEASES",
+    "NODE ADMINISTRATION",
+  ],
+}
+
+var eventReportTaskOptions = {
+  SETUPWIRECENTER: [
+    "VIEW",
+    "UPDATE",
+    "RESET",
+    "UPDATE_NETWORK",
+    "TURN_UP",
+    "HOLD"
+  ],
+  
+  PORTMAPPING: [
+    "MAP",
+    "UNMAP",
+  ],
+  
+  SETUPSERVICECONNECTION: [
+    "CONNECT",
+    "DISCONNECT",
+    "DIP CONNECT",
+    "UPDATE_CKT",
+  ],
+
+  FTADMINREPORT: [
+
+  ],
+
+  FOMSFUSA: [
+
+  ],
+
+  BATCHEXECUTION: [
+    "EXECUTE BATCH FILES",
+  ],
+
+  SETUPMAINTENANCECONNECTION: [
+    "MTC_CONN",
+    "MTC_DISCON",
+    "RESTORE_MTCD",
+    "MTC_RESTORE",
+    "MTC_LPBK_TEST",
+  ],
+
+  LOCKUNLOCKMATRIXCARD: [
+    "LOCK_CARD",
+    "UNLOCK_CARD",
+    "REFRESH_CARD",
+  ],
+
+  LOCKUNLOCKMATRIXNODE: [
+    "LOCK_NODE",
+    "UNLOCK_NODE",
+  ],
+
+  ALARMADMINISTRATION: [
+    "ACK",
+    "UN-ACK",
+    "CLR ALARM",
+  ],
+
+  PATHADMINISTRATION: [
+    "REPLACE DEF PATH",
+    "RELEASE DEF PATH",
+    "REPEAT CONNECT",
+  ],
+
+  BROADCASTNOTIFICATION: [
+    "UPDATE MSG",
+    "DELETE MSG",
+    "ADD MSG",
+  ],
+
+  SETUPUSER: [
+    "ADD USER",
+    "UPDATE USER",
+    "LOCK USER",
+    "UNLOCK USER",
+    "UPDATE USER GROUP",
+    "DELETE USER",
+    "CHANGE PASSWORD",
+    "RESET PW",
+  ],
+
+  USERACCESS: [
+    "LOGIN",
+    "LOGOUT",
+  ],
+
+  USERSEARCH: [
+
+  ],
+
+  SETRESETPASSWORD: [
+
+  ],
+
+  BACKUPDATABASE: [
+    "BACKUP DB",
+    "RESTORE BACKUP DB",
+  ],
+
+  RESTORESYSTEM: [
+
+  ],
+
+  UPDATESOFTWARERELEASES: [
+    "UPDATE SOFTWARE",
+    "ROLLBACK SOFTWARE",
+  ],
+
+  NODEADMINISTRATION: [
+
+  ],
+
+  SYSTEMSHUTDOWN: [
+    "LOCK IPC",
+    "UNLOCK IPC",
+    "SHUTDOWN IPC",
+  ],
+
+  IPCREFERENCEDATA: [
+    "UPDATE",
+    "RESET"
+  ],
+
+  FLOWTHROUGH: [
+
+  ],
+
+  FLOWTHROUGHRELEASETABLE: [
+
+  ],
+  
+  SETUPFACILITY: [
+    "VIEW",
+    "ADD",
+    "UPDATE",
+    "DELETE",
+  ],
+
+}

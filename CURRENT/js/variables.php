@@ -2,6 +2,12 @@
   // Interval loop for querying systme information
   var systemInfoInterval = 0;
 
+  // Current Software Version
+  var swVer = {
+    version: '',
+    description: ''
+  }
+
   // Current User Information
   var user = {
     uname: '',
