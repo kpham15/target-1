@@ -129,6 +129,42 @@
   <!-- /.modal-dialog -->
 </div>
 
+<!-- LOGOUT MODAL -->
+<div class="modal fade" id="logout-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Logging out...</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cancel Timeout Modal -->
+<div class="modal modal-warning fade" id="cancel-timeout-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Session Timing Out</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script typ="text/javascript">
   function modalHandler(modalInfo) {
     let modalType = "default";
@@ -136,7 +172,6 @@
     let modalConfirm = false;
     let modalTitle = "";
     let modalBody = "";
-    let modalFunc = null;
 
     if (modalInfo.hasOwnProperty('type')) {
       modalType = modalInfo.type;
@@ -185,4 +220,10 @@
     $('#modal-'+modalType).modal('show');
 
   }
+
+  $(document).ready(function() {
+    $('#cancel-timeout-modal').on('hidden.bs.modal', function() {
+      cancelTimeout();
+    });
+  });
 </script>
