@@ -1,108 +1,106 @@
 <!-- FORMS -->
-<div class="col-md-5">
-  <form id="matrix-form">
+<form id="matrix-form">
 
-    <!-- ROW 1: NODE; SHELF; TYPE; SLOT; PORT STATUS; VIEW-->
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>NODE</label>
-          <select id="matrix-form-node" class="form-control matrix-form-input">
-            <!-- @TODO: ADD JS TO AUTO POPULATE THIS SELECTION FIELD WITH OPTIONS BASED ON HOW MANY NODES THERE ARE IN WCINFO -->
-            <option></option>
-            <option>1</option>
-            <option>2</option>
-          </select>
-        </div>
+  <!-- ROW 1: NODE; SHELF; TYPE; SLOT; PORT STATUS; VIEW-->
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>NODE</label>
+        <select id="matrix-form-node" class="form-control matrix-form-input">
+          <!-- @TODO: ADD JS TO AUTO POPULATE THIS SELECTION FIELD WITH OPTIONS BASED ON HOW MANY NODES THERE ARE IN WCINFO -->
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+        </select>
       </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>SHELF</label>
-          <select id="matrix-form-shelf" class="form-control matrix-form-input">
-            <option></option>
-            <option>1</option>
-            <option>2</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>TYPE</label>
-          <select id="matrix-form-type" class="form-control matrix-form-input">
-            <option></option>
-            <option>MIOX</option>
-            <option>MIOY</option>
-            <option>MRE</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>SLOT</label>
-          <select id="matrix-form-slot" class="form-control matrix-form-input">
-            <option></option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <button id="matrix-form-view" type="button" class="btn btn-primary" style="margin-top:25px">
-            VIEW
-          </button>          
-        </div>
-      </div>
-
     </div>
-    <!-- ROW 1 END -->
-
-    <!-- ROW 2: ACTION; CLEAR-->
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>ACTION</label>
-          <select id="matrix-form-action" class="form-control matrix-form-input">
-            <option></option>
-            <option>LCK</option>
-            <option>UN-LCK</option>
-            <option>VIEW_PORT_STATUS</option>
-            <option>REFRESH</option>
-            <option>LCK_NODE</option>
-            <option>UN-LCK_NODE</option>
-          </select>
-        </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>SHELF</label>
+        <select id="matrix-form-shelf" class="form-control matrix-form-input">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+        </select>
       </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <button id="matrix-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
-            Clear
-          </button>
-        </div>
-      </div>
-
     </div>
-    <!-- ROW 1 END -->
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>TYPE</label>
+        <select id="matrix-form-type" class="form-control matrix-form-input">
+          <option></option>
+          <option>MIOX</option>
+          <option>MIOY</option>
+          <option>MRE</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>SLOT</label>
+        <select id="matrix-form-slot" class="form-control matrix-form-input">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <button id="matrix-form-view" type="button" class="btn btn-primary" style="margin-top:25px">
+          VIEW
+        </button>          
+      </div>
+    </div>
+
+  </div>
+  <!-- ROW 1 END -->
+
+  <!-- ROW 2: ACTION; CLEAR-->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>ACTION</label>
+        <select id="matrix-form-action" class="form-control matrix-form-input">
+          <option></option>
+          <option action="lck">LCK</option>
+          <option action="unlck">UN-LCK</option>
+          <option action="VIEW_PORT_STATUS">VIEW_PORT_STATUS</option>
+          <option action="refresh">REFRESH</option>
+          <option action="lck_node">LCK_NODE</option>
+          <option action="unlck_node">UN-LCK_NODE</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <button id="matrix-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+          Clear
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <!-- ROW 1 END -->
 
 
-    <!-- FAC ID NUM -->
-    <input type="hidden" id="matrix-form-id" class="matrix-form-input" style="width:20px;">
-    
-  </form>
-</div>
+  <!-- FAC ID NUM -->
+  <input type="hidden" id="matrix-form-id" class="matrix-form-input" style="width:20px;">
+  
+</form>
 
 <script type="text/javascript">
 
@@ -166,6 +164,6 @@
     $("#matrix-modal-shelf").val($("#matrix-form-shelf").val());
     $("#matrix-modal-type").val($("#matrix-form-type").val());
     $("#matrix-modal-slot").val($("#matrix-form-slot").val());
-    $("#matrix-modal-action").val($("#matrix-form-action").val());
+    $("#matrix-modal-action").val($("#matrix-form-action").val()).attr('action', $("#matrix-form-action").attr('action'));
   }
 </script>

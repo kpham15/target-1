@@ -12,13 +12,22 @@
       </ol>
     </section>
 
-    <!-- Fac Forms -->
-    <?php include __DIR__ . '/matrix-forms.html'; ?>
+    <div class="col-md-5">
+      <!-- MATRIX FORM -->
+      <?php include __DIR__ . '/matrix-forms.html'; ?>
 
-    <!-- Fac Table -->
-    <?php include __DIR__ . '/matrix-tables.html'; ?>
+      <!-- VIEW PORT TABLE -->
+      <?php include __DIR__ . '/tables/matrix-viewport-table.html'; ?>
 
-    <!-- Fac Modal -->
+    </div>
+
+    <div class="col-md-7">
+      <!-- MATRIX CARDS TABLE -->
+      <?php include __DIR__ . '/tables/matrix-table.html'; ?>
+
+    </div>
+
+    <!-- MATRIX MODAL -->
     <?php include __DIR__ . '/matrix-modals.html'; ?>
 
   </div>

@@ -60,3 +60,71 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+
+  function matrixModalSubmit(action) {
+
+  }
+
+  $(document).ready(function() {
+    // WHEN MODAL IS HIDDEN
+    $("#matrix-modal").on('hidden.bs.modal', function() {
+      $(".matrix-form-input").val("").change();
+    });
+
+    // SUBMIT BUTTON
+    $("#matrix-modal-submit").click(function() {
+      let action = $("#matrix-modal-action").attr('action');
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api:    "ipcFacilities",
+          act:    action,
+          user:   user.uname,
+          id:     $("#matrix-modal-id").val(),
+          node:   $("#matrix-modal-node").val(),
+          shelf:  $("#matrix-modal-shelf").val(),
+          slot:   $("#matrix-modal-slot").val(),
+          type:   $("#matrix-modal-type").val(),
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason,
+        }
+        if (data.rslt === 'fail') {
+          modal.type = 'danger';
+          modalHandler(modal);
+        } else {
+          if (action == "VIEW_PORT_STATUS") {
+            if (res.length === 0) {
+              modal.type = 'danger';
+              modal.body = 'No records found';
+              modalHandler(modal);
+            } else {
+              // INITIALIZE VIEW PORT TABLE
+
+              // ALERT OBJ.RSLT
+
+              // HIDE MODAL
+
+              // DISPLAY VIEW PORT TABLE
+              
+              modal.type = "success";
+              modalHandler(modal);
+            }
+            $("#matrix-form-action").val("");
+            return;
+          }
+          modal.type = 'success';
+          modalHandler(modal);
+          queryMatrix();
+        }
+      });
+    });
+  });
+</script>
