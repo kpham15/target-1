@@ -322,7 +322,8 @@
   $('#version-container').click(function() {
     let modal = {
       title: 'Software Information',
-      body: '<textarea>'+swVer.description+'</textarea>'
+      body: '<textarea style="width:100%;" rows="15">'+swVer.description+'</textarea>',
+      size: 'lg'
     }
 
     modalHandler(modal);
