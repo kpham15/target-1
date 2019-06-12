@@ -703,12 +703,12 @@
       let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
       maintChangeSearchDatatable.clear().draw();
       if (ftyp == "X") {
-        $('#setup-maint-modal-change-in-search-ffac').hide();
-        $('#setup-maint-modal-change-in-search-ffac').attr("ftyp","");
+        $('#setup-maint-modal-change-search-div').hide();
+        $('#setup-maint-modal-change-search-div').attr("ftyp","");
       }
       else {
-        $('#setup-maint-modal-change-in-search-ffac').show();
-        $('#setup-maint-modal-change-in-search-ffac').attr('ftyp','X');
+        $('#setup-maint-modal-change-search-div').show();
+        $('#setup-maint-modal-change-search-div').attr('ftyp','X');
       }
     })
 
