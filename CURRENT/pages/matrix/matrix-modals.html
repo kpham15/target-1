@@ -116,9 +116,7 @@
             $("#matrix-form-action").val("");
             return;
           }
-          console.log($(this));
-          console.log(data.rslt);
-          postResult($("#matrix-modal-submit"), data.rslt);
+          postResult($("#matrix-modal-action"), data.rslt);
           queryMatrixCards();
         }
       });
