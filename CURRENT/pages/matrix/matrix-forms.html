@@ -128,12 +128,14 @@
     $('#matrix-card-table tbody tr').removeClass('bg-primary');
     $("#matrix-port").css('display', 'none');
     clearErrors();
+    clearResult();
     queryMatrixCards();
   });
 
   // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
   $(".matrix-form-input").on("click", function() {
     clearErrors();
+    clearResult();
   });
 
   // ACTION
