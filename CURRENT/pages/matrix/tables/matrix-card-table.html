@@ -60,7 +60,7 @@
 
   $(document).ready(function() {
     // Click events on table rows
-    $(document).on('click', '#matrix-table tbody tr', function() {
+    $(document).on('click', '#matrix-card-table tbody tr', function() {
       let data = matrixCardDatatable.row(this).data();
 
       $('#matrix-form-id').val(data.id);
