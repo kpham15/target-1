@@ -712,6 +712,21 @@
       }
     })
 
+    // Right Search Button Click for CHANGE
+    $('#setup-maint-modal-change-in-search-tfac').click(function() {
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      maintChangeSearchDatatable.clear().draw();
+      if (ftyp == "Y") {
+        $('#setup-maint-modal-change-search-div').hide();
+        $('#setup-maint-modal-change-search-div').attr("ftyp","");
+      }
+      else {
+        $('#setup-maint-modal-change-search-div').show();
+        $('#setup-maint-modal-change-search-div').attr('ftyp','Y');
+      }
+    })
+
+
     // Submit Click Event
     $('#setup-maint-modal-submit').click(function() {
 
