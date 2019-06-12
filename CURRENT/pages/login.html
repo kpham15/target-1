@@ -293,6 +293,9 @@
             inputError($(this),'');
           }
         })
+      } else if (error.reason.toLowerCase().includes('locked')) {
+        inputError(login.username, '');
+        inputError(login.password, 'Too many login attempts, user locked.');
       }
     }
 
