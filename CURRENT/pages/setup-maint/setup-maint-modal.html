@@ -111,7 +111,7 @@
           <div id="setup-maint-modal-change-div" class="row">
             <div id="setup-maint-modal-change-out" class="col-md-12">
               <div class="form-group">
-                <label class="col-md-1">OUT:</label>
+                <label class="col-md-1 form-control">OUT:</label>
                 <!-- Border for Out -->
                 <div class="col-md-11" style="border:lightgray solid 1px;">
                   <!-- CONTYP -->
@@ -129,8 +129,18 @@
                   <!-- FAC(X) -->
                   <div class="col-md-5">
                     <div class="form-group">
-                      <label>FAC(X):</label>
-                      <input id="setup-maint-modal-change-ffac" class="form-control setup-maint-modal-input">
+                      <div class="col-md-3">
+                        <label>FAC(X):</label>
+                        <div class="col-md-9">
+                          <input id="setup-maint-modal-change-ffac" class="form-control setup-maint-modal-input">
+                        </div>
+                        <div class="col-md-3">
+                          <label>PORT(X):</label>
+                        </div>
+                        <div class="col-md-9">
+                          <input id="setup-maint-modal-change-fport" class="form-control setup-maint-modal-input">
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- FAC(Y) -->
