@@ -427,7 +427,7 @@
     ]
   })
 
-
+  //@TODO update the all tables with new information
   function validateMtcConnModal(obj, ckid) {
     if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
       maintPickedTfac = $('#setup-maint-modal-conn1-tfac').val();
@@ -537,7 +537,6 @@
     })
   }
 
-  //@TODO update the all tables with new information
   function validateRestoreMtcdModal(obj, ckid) {
     if (obj.ffac == "") {
       inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
@@ -690,6 +689,11 @@
         modalHandler(modal);
       }
     })
+  }
+  
+  function valudateChangeModal(obj, ckid) {
+
+
   }
   
   $(document).ready(function() {

@@ -213,6 +213,7 @@
     $('#setup-maint-modal-mtccon2-div').show();
     $('#setup-maint-modal-row3-div').hide();
     $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
 
     $('#setup-maint-modal-pick-conn1').prop('checked',true);
     $('#setup-maint-modal-pick-conn2').prop('checked',false);
@@ -246,6 +247,7 @@
     $('#setup-maint-modal-mtccon2-div').hide();
     $('#setup-maint-modal-row3-div').show();
     $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
@@ -280,6 +282,7 @@
     $('#setup-maint-modal-mtccon2-div').hide();
     $('#setup-maint-modal-row3-div').show();
     $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
@@ -314,6 +317,7 @@
     $('#setup-maint-modal-mtccon2-div').hide();
     $('#setup-maint-modal-row3-div').show();
     $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
@@ -375,6 +379,7 @@
     $('#setup-maint-modal-mtctest-div').show();
     $('#setup-maint-modal-mtccon1-div').hide();
     $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-change-div').hide();
 
     $('#setup-maint-modal-test-radio1').prop('checked', true);
     $('#setup-maint-modal-test-radio2').prop('checked', false);
@@ -408,6 +413,16 @@
     $('#setup-maint-modal').modal('show');
     }
 
+  }
+
+  function validateMtcChange(obj, ckid) {
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').show();
+
+    $('#setup-maint-modal').modal('show');
   }
 
   $(document).ready(function() {
@@ -470,7 +485,7 @@
       } else if (obj.action == "MTC_TEST") {
         validateMtcTest(obj, ckid);
       } else if (obj.action == "CHANGE") {
-
+        validateMtcChange(obj, ckid);
       }
 
     })
