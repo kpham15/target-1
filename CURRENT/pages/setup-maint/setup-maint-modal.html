@@ -691,9 +691,52 @@
     })
   }
   
-  function valudateChangeModal(obj, ckid) {
+  function validateChangeModal(obj, ckid) {
 
+  
+  }
 
+  function maintChangeSearch() {
+    $.ajax({
+      type:       'POST',
+      url:      ipcDispatch,
+      data:       {
+        "api":    "ipcFacilities",
+        "act":    "findFac",
+        "user":   user.uname,
+        "grp":    user.grp,
+        "ugrp":   user.ugrp,
+        "fac":    "%",
+        "psta":   "",
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = [];
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      if (data.hasOwnProperty('rows')) {
+        for (let i=0; i<data.rows.length; i++) {
+          if (data.rows[i].port == "") {
+            continue;
+          }
+          if (ftyp == 'X') {
+            if (data.rows[i].port.split('-')[2] == 'X') {
+              res.push(data.rows[i]);
+            }
+            else {
+              continue;
+            }
+          }
+          else {
+            if (data.rows[i].port.split('-')[2] == 'Y') {
+              res.push(data.rows[i]);
+            }
+            else {
+              continue;
+            }
+          }
+        }
+      }
+    })
   }
   
   $(document).ready(function() {
@@ -710,6 +753,8 @@
         $('#setup-maint-modal-change-search-div').show();
         $('#setup-maint-modal-change-search-div').attr('ftyp','X');
       }
+      
+      maintChangeSearch();
     })
 
     // Right Search Button Click for CHANGE
@@ -724,6 +769,8 @@
         $('#setup-maint-modal-change-search-div').show();
         $('#setup-maint-modal-change-search-div').attr('ftyp','Y');
       }
+
+      maintChangeSearch();
     })
 
 
@@ -769,7 +816,7 @@
         validateMtcTestModal(obj, ckid);
       }
       else if (obj.action == "CHANGE") {
-
+        validateChangeModal(obj, ckid);
       }
     })
 
