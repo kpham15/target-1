@@ -19,12 +19,9 @@
 			dataType: 'json'
 		}).done(function(data) {
 			$('#sidebar-user-name').text(data.ver)
-			let descrClean = data.descr;
-
-			descrClean.replace(/\r\n/g,'<br/>');
 
 			swVer.version = data.ver;
-			swVer.description = descrClean;
+			swVer.description = data.descr;
 		});
 	}
 
