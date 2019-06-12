@@ -126,6 +126,7 @@
   $("#matrix-form-clear").click(function() {
     $(".matrix-form-input").val("").change();
     $('#matrix-card-table tbody tr').removeClass('bg-primary');
+    $("#matrix-port").css('display', 'none');
     clearErrors();
   });
 
