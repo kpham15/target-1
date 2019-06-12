@@ -479,8 +479,10 @@
       }
     })
   }
+
   $(document).ready(function() {
 
+    // Submit Click Event
     $('#setup-maint-modal-submit').click(function() {
 
       let obj = {
@@ -526,7 +528,27 @@
       }
     })
 
-    // Radio Button Click Event for Action MTC_CONN Top Button
+
+    // Radio Button Click Event for MTC_TEST Top
+    $('#setup-maint-modal-test-radio1').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-test-radio1').is(':checked')) {
+        $('#setup-maint-modal-test-port1').prop('disabled', false);
+        $('#setup-maint-modal-test-port2').prop('disabled', true);
+      }
+    });
+
+    // Radio Button Click Event for MTC_TEST Bottom
+    $('#setup-maint-modal-test-radio1').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-test-radio2').is(':checked')) {
+        $('#setup-maint-modal-test-port1').prop('disabled', true);
+        $('#setup-maint-modal-test-port2').prop('disabled', false);
+      }
+    });
+    // Radio Button Click Event for MTC_CONN Top
     $('#setup-maint-modal-pick-conn1').click(function() {
       clearErrors();
 
@@ -535,7 +557,7 @@
         $('#setup-maint-modal-conn2-ffac').prop('disabled',true);
       }
     });
-    // Radio Button Click Event for Action MTC_CONN Bottom Button
+    // Radio Button Click Event for MTC_CONN Bottom
     $('#setup-maint-modal-pick-conn2').click(function() {
       clearErrors();
 
