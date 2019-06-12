@@ -197,7 +197,7 @@
 
             // If user changing password, then open modal.
             // otherwise, log user in normally
-            if (obj.reason.toLowerCase.includes('changed/reset')) {
+            if (obj.reason.toLowerCase().includes('changed/reset')) {
               $('#login-success-modal .modal-title').text(obj.rslt);
               $('#login-success-modal .modal-body').text(obj.reason);
   
