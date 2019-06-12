@@ -354,7 +354,6 @@
     $('#setup-maint-modal-contyp').prop('disabled',true);
     $('#setup-maint-modal-ffac').prop('disabled',true);
     $('#setup-maint-modal-tfac').prop('disabled',true);
-    $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-action').prop('disabled',true);
 
     $('#setup-maint-modal-ckid').val(ckid);
@@ -390,7 +389,12 @@
     $('#setup-maint-modal-mtctest-div').show();
     $('#setup-maint-modal-mtccon1-div').hide();
     $('#setup-maint-modal-mtccon2-div').hide();
-    
+
+    $('#setup-maint-modal-test-radio1').prop('checked', true);
+    $('#setup-maint-modal-test-radio2').prop('checked', false);
+    $('#setup-maint-modal-test-port1').prop('disabled', false);
+    $('#setup-maint-modal-test-port2').prop('disabled', true);
+
     $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-ckid-tn').prop('disabled',true);
     $('#setup-maint-modal-cls').prop('disabled',true);
@@ -398,10 +402,6 @@
     $('#setup-maint-modal-prot').prop('disabled',true);
     $('#setup-maint-modal-tktno').prop('disabled',false);
     $('#setup-maint-modal-mlo').prop('disabled',true);
-    $('#setup-maint-modal-contyp').prop('disabled',true);
-    $('#setup-maint-modal-ffac').prop('disabled',true);
-    $('#setup-maint-modal-tfac').prop('disabled',true);
-    $('#setup-maint-modal-ckid').prop('disabled',true);
     $('#setup-maint-modal-action').prop('disabled',true);
 
     $('#setup-maint-modal-ckid').val(ckid);
@@ -451,6 +451,8 @@
       $('.setup-maint-modal-input').val('');
       clearErrors();
       
+      // @TODO need to pass the correct ctyp to the modal so it fills in correctly
+      // cannot just take obj.contyp and put into both
       let obj = {
         action:     $('#setup-maint-forms-action').val(),
         // ckid:     $('#setup-maint-forms-ckid').val(),
