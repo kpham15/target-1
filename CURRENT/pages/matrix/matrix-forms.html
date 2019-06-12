@@ -150,6 +150,7 @@
       } else {
         if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
           populateMxcModal();
+          $(".matrix-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
           mxcModal.modal("show");
         } else {
           inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
