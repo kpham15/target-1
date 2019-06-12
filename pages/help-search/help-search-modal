@@ -1,0 +1,41 @@
+
+
+
+<div class="modal fade" id="help-search-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close"></button>
+          <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">SETUP HELP/SEARCH</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>ITEM</label>
+              <input id="help-search-item" type="text"
+              class="form-control help-search-modal-field">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>DESCRIPTION</label>
+              <textarea id="help-search-modal-description"
+              class="form-control help-search-modal-field">
+            </textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
