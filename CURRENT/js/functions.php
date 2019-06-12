@@ -27,7 +27,6 @@
 
 	function logout(action) {
 		clearInterval(systemInfoInterval);
-		$('.modal').modal('hide');
 		$.post(ipcDispatch,
 		{
 			api:		'ipcLogout',
@@ -85,6 +84,7 @@
 		let idle_to = user.idle_to * 60;
 
 		if ((time - loginTime) > idle_to) {
+			$('#cancel-timeout-modal').modal('hide');
 			logout();
 			return;
 		}
