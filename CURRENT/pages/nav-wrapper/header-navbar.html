@@ -176,24 +176,12 @@
               </p>
             </li>
             <!-- Menu Body -->
-            <li class="user-body">
-              <div class="row">
-                <div class="col-xs-4 text-center">
-                  <a href="#">Followers</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Friends</a>
-                </div>
-              </div>
-              <!-- /.row -->
-            </li>
+            <!-- <li class="user-body">
+            </li> -->
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a id="changePw_btn" href="#" class="btn btn-default btn-flat">Change PW</a>
               </div>
               <div class="pull-right">
                 <a id="logout-btn" href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -225,6 +213,44 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="pwChange_modal">
+    <div class="modal-dialog modal-sm" style="transition: width 0.7s;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">CHANGE PASSWORD</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="pwChange_modal_oldPw" placeholder="Old password">
+                <span style="pointer-events: initial" class="showPw glyphicon fa fa-eye form-control-feedback"></span>              
+              </div>
+
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="pwChange_modal_newPw" placeholder="New password">
+                <span style="pointer-events: initial" class="showPw glyphicon fa fa-eye form-control-feedback"></span>              
+              </div>
+
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="pwChange_modal_retypeNewPw" placeholder="Re-type new password">
+                <span style="pointer-events: initial" class="showPw glyphicon fa fa-eye form-control-feedback"></span>              
+              </div>
+              <label id="pwChange_rslt"></label>
+            </div>
+
+            <div class="modal-footer">
+              <button id="pwChange_modal_submit" style="text-align:right; margin-right:5px;" class="btn btn-primary">Submit</button>
+              <button id="pwChange_modal_clear" style="text-align:right;margin-right:5px;" class="btn btn-primary">Clear</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 
 <script type="text/javascript">
   function updateUsername() {
@@ -267,6 +293,31 @@
     $('#header-timezone').text(wcInfo.tzone);
   }
 
+  function cleanPwChangeModal(){
+    $("#pwChange_modal_oldPw").val("");
+    $("#pwChange_modal_newPw").val("");
+    $("#pwChange_modal_retypeNewPw").val("");
+    $("#pwChange_rslt").text("");
+  }
+  $(".showPw").click(function(){
+    let input_id = $(this).parent().closest('div').find("input");
+    let type = input_id.attr("type")
+    if(type === "password") 
+      input_id.attr("type","text")
+    else
+      input_id.attr("type","password")
+  })
+
+  $('#changePw_btn').click(function() {
+    cleanPwChangeModal();
+    $("#pwChange_modal").modal();
+  });
+
+  $("#pwChange_modal_clear").click(function(){
+    cleanPwChangeModal();
+  })
+
+
   $(document).ready(function() {
 
     // Watches logout modal, on close reload page
@@ -279,5 +330,43 @@
       logout('manual logout');
     });
 
-  });
+    $("#pwChange_modal_submit").click(function(){
+      let oldPw = $("#pwChange_modal_oldPw").val();
+      let newPw = $("#pwChange_modal_newPw").val();
+      let retypeNewPw = $("#pwChange_modal_retypeNewPw").val();
+
+      if(oldPw === "" || newPw === "" || retypeNewPw === "") {
+        $("#pwChange_rslt").css("color","red").text("All the fields must be filled")
+        return;
+      }
+
+      if (newPw !== retypeNewPw) {
+        $("#pwChange_rslt").css("color","red").text('New password and Re-type new password must match each other');
+        return;
+      }
+  
+      $.post(ipcDispatch,
+      {
+        api: "ipcLogin",
+        act: "login",
+        user: user.uname,
+        pw: encode(oldPw),
+        newPw: encode(newPw)
+      }, function(data) {
+        var obj = JSON.parse(data);
+        if (obj.rslt == "fail") {
+          $("#pwChange_rslt").css("color","red").text(obj.reason)
+        } else {
+          $("#pwChange_rslt").css("color","green").text(obj.reason)
+        
+        } 
+      })
+       
+    });
+
+  })
+
+
+
+
 </script>
