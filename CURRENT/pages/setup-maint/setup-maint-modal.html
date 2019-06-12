@@ -118,7 +118,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>CONTYP</label>
-                      <select id="setup-maint-modal-change-ctyp" class="form-control setup-maint-modal-input">
+                      <select id="setup-maint-modal-change-in-ctyp" class="form-control setup-maint-modal-input" disabled="">
                         <option value=""></option>
                         <option value="GEN">GEN</option>
                         <option value="LPBK">LPBK</option>
@@ -131,7 +131,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>FAC(X):</label>
-                        <input id="setup-maint-modal-change-ffac" class="form-control setup-maint-modal-input">
+                        <input id="setup-maint-modal-change-ffac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-md-9">
                       <div class="form-group">
-                        <input id="setup-maint-modal-change-fport" type="text" class="form-control setup-maint-modal-input" />
+                        <input id="setup-maint-modal-change-fport" type="text" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
                   </div>
@@ -150,7 +150,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>FAC(Y):</label>
-                        <input id="setup-maint-modal-change-tfac" class="form-control setup-maint-modal-input">
+                        <input id="setup-maint-modal-change-tfac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -160,8 +160,28 @@
                     </div>
                     <div class="col-md-9">
                       <div class="form-group">
-                        <input id="setup-maint-modal-change-tport" class="form-control setup-maint-modal-input" />
+                        <input id="setup-maint-modal-change-tport" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="setup-maint-modal-change-in" class="col-md-12">
+              <div class="form-group">
+                <label class="col-md-1">IN:</label>
+                <!-- Border for IN -->
+                <div class="col-md-11" style="border:lightgray solid 1px;">
+                  <!-- CONTYP -->
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>CONTYP</label>
+                      <select id="setup-maint-modal-change-out-ctyp" class="form-control setup-maint-modal-input">
+                        <option value=""></option>
+                        <option value="GEN">GEN</option>
+                        <option value="LPBK">LPBK</option>
+                        <option value="MLPT">MLPT</option>
+                      </select>
                     </div>
                   </div>
                 </div>
