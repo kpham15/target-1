@@ -73,8 +73,7 @@
     $("#matrix-modal").on('hidden.bs.modal', function() {
       $(".matrix-form-input").val("").change();
       $("#matrix-form-node").val("1").change();
-      $('#matrix-card-table tbody tr').removeClass('bg-primary');
-      $("#matrix-port").css('display', 'none');
+      queryMatrixPorts();
     });
 
     // SUBMIT BUTTON
