@@ -89,9 +89,14 @@ function sysview_clearFindFacModal(){
     $("#sysview_findFac_fac").val("")
 }
 
-$("#find_fac_btn,#sysview_findFac_clear").click(function(){
+$("#find_fac_btn").click(function(){
     sysview_clearFindFacModal();
     $("#sysview_findFac_modal").modal();
+    sysview_findFac()
+})
+
+$("#sysview_findFac_clear").click(function(){
+    sysview_clearFindFacModal();
 })
 
 $("#sysview_findFac_find").click(function(){
