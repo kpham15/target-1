@@ -268,11 +268,11 @@
 
       if (error.reason.toLowerCase().includes('invalid')) {
         if (error.reason.toLowerCase().includes('format')) {
-          inputError($('#login_newPassWord'), '');
-          inputError($('#login_confirmPassWord'), 'Password must be 6-15 characters with at least 1 letter and 1 number.');
+          inputError(login.newpassword, '');
+          inputError(login.confirmPassword, 'Password must be 6-15 characters with at least 1 letter and 1 number.');
         } else {
-          inputError($('#login_username'), '');
-          inputError($('#login_password_input'), 'Username/Password Invalid');
+          inputError(login.username, '');
+          inputError(login.password, 'Username/Password Invalid');
         }
       } else if (error.reason.toLowerCase().includes('first')) {
         if (!$('#change-password-btn').hasClass('active')) {
