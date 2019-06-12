@@ -71,6 +71,7 @@
     // WHEN MODAL IS HIDDEN
     $("#matrix-modal").on('hidden.bs.modal', function() {
       $(".matrix-form-input").val("").change();
+      $('#matrix-card-table tbody tr').removeClass('bg-primary');
     });
 
     // SUBMIT BUTTON
