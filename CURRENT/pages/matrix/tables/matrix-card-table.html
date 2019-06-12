@@ -74,6 +74,10 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+
+      // LOAD LIST OF PORTS TABLE
+      $("#matrix-port-table").css('display', 'block');
+      queryMatrixPorts();
     });
   });
 </script>
