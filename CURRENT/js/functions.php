@@ -19,9 +19,10 @@
 			dataType: 'json'
 		}).done(function(data) {
 			$('#sidebar-user-name').text(data.ver)
+			let descrClean = data.descr.replace(/\u21B5/g,'<br/>');
 
 			swVer.version = data.ver;
-			swVer.description = data.descr;
+			swVer.description = descrClean;
 		});
 	}
 
