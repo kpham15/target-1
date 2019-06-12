@@ -79,6 +79,9 @@
 
     // SUBMIT BUTTON
     $("#matrix-modal-submit").click(function() {
+      clearErrors();
+      clearResult();
+      
       let action = $("#matrix-modal-action").attr('action');
       $.ajax({
         type: "POST",
