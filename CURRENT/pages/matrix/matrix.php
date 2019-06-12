@@ -17,7 +17,7 @@
       <?php include __DIR__ . '/matrix-forms.html'; ?>
 
       <!-- VIEW PORT TABLE -->
-      <?php include __DIR__ . '/tables/matrix-viewport-table.html'; ?>
+      <?php include __DIR__ . '/tables/matrix-port-table.html'; ?>
 
     </div>
 
