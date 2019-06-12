@@ -63,8 +63,8 @@
 
 <script type="text/javascript">
 
-  function matrixModalSubmit(action) {
-
+  function matrixModalConfirm() {
+    $("#matrix-modal").modal('hide');
   }
 
   $(document).ready(function() {
@@ -124,7 +124,7 @@
           }
           modal.type = 'success';
           modal.confirm = true;
-          modal.func = $("#matrix-modal").modal('hide');
+          modal.func = matrixModalConfirm();
           modalHandler(modal);
           queryMatrixCards();
         }
