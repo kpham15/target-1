@@ -218,6 +218,18 @@
 
   function validateMtcConnnect(obj, ckid) {
 
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+
     $('#setup-maint-modal-mtccon1-div').show();
     $('#setup-maint-modal-mtccon2-div').show();
     $('#setup-maint-modal-row3-div').hide();
@@ -245,6 +257,7 @@
     $('#setup-maint-modal-conn2-tfac').val(obj.tfac);
 
     $('#setup-maint-modal').modal('show');
+    }
   }
 
   function validateRestoreMtcd(obj, ckid) {
