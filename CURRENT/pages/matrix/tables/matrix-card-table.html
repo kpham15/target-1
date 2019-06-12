@@ -1,10 +1,10 @@
 <!-- Table -->
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">LIST OF FACILITIES:</h3>
+    <h3 class="box-title">LIST OF MATRIX CARDS:</h3>
   </div>
   <div class="box-body">
-    <table id="matrix-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+    <table id="matrix-card-table" class="table table-striped table-bordered table-hover" style="width:100%;">
       <thead>
         <tr>
           <th>NODE</th>
@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
   // Initialize Datatable
-  var matrixDatatable = $('#matrix-table').DataTable({
+  var matrixCardDatatable = $('#matrix-card-table').DataTable({
     "data": [],
     "columns": [
       {"data":"node"},
@@ -33,7 +33,7 @@
     "scrollY": "400px",
   });
 
-  function queryMatrix() {
+  function queryMatrixCards() {
     $.ajax({
       type: 'POST',
       url: ipcDispatch,
@@ -52,16 +52,16 @@
     }).done(function(data) {
       let res = data.rows;
 
-      matrixDatatable.clear().draw();
-      matrixDatatable.rows.add(res);
-      matrixDatatable.columns.adjust().draw();
+      matrixCardDatatable.clear().draw();
+      matrixCardDatatable.rows.add(res);
+      matrixCardDatatable.columns.adjust().draw();
     });
   }
 
   $(document).ready(function() {
     // Click events on table rows
     $(document).on('click', '#matrix-table tbody tr', function() {
-      let data = matrixDatatable.row(this).data();
+      let data = matrixCardDatatable.row(this).data();
 
       $('#matrix-form-id').val(data.id);
       $('#matrix-form-node').val(data.node);
@@ -70,7 +70,7 @@
       $('#matrix-form-type').val(data.type);
 
       // give selected class
-      $('#matrix-table tbody tr').removeClass('bg-primary');
+      $('#matrix-card-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
 
       clearErrors();

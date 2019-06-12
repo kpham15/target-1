@@ -118,7 +118,7 @@
   $('#matrix-form-view').click(function(e) {
     e.preventDefault();
 
-    queryMatrix();
+    queryMatrixCards();
 
     clearErrors();
   });
@@ -126,7 +126,7 @@
   // CLEAR BUTTON
   $("#matrix-form-clear").click(function() {
     $(".matrix-form-input").val("").change();
-    $('#matrix-table tbody tr').removeClass('bg-primary');
+    $('#matrix-card-table tbody tr').removeClass('bg-primary');
     clearErrors();
   });
 
