@@ -698,6 +698,20 @@
   
   $(document).ready(function() {
 
+    // Left Search Button Click for CHANGE
+    $('#setup-maint-modal-change-in-search-ffac').click(function() {
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      maintChangeSearchDatatable.clear().draw();
+      if (ftyp == "X") {
+        $('#setup-maint-modal-change-in-search-ffac').hide();
+        $('#setup-maint-modal-change-in-search-ffac').attr("ftyp","");
+      }
+      else {
+        $('#setup-maint-modal-change-in-search-ffac').show();
+        $('#setup-maint-modal-change-in-search-ffac').attr('ftyp','X');
+      }
+    })
+
     // Submit Click Event
     $('#setup-maint-modal-submit').click(function() {
 
