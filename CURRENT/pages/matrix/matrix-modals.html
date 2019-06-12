@@ -57,8 +57,6 @@
         <form class="form">
           <div class="form-group">
             <button id="matrix-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
-          </div>
-          <div class="form-group">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </form>
@@ -104,18 +102,18 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          inputError($("#matrix-modal-action"), data.rslt + ": "  + data.reason)
+          inputError($("#matrix-modal-submit"), data.rslt + ": "  + data.reason)
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              inputError($("#matrix-modal-action"), data.rslt + ": "  + "No record found");
+              inputError($("#matrix-modal-submit"), data.rslt + ": "  + "No record found");
             } else {
-              postResult($("#matrix-modal-action"), data.rslt);
+              postResult($("#matrix-modal-submit"), data.rslt);
             }
-            $("#matrix-form-action").val("");
+            $("#matrix-form-submit").val("");
             return;
           }
-          postResult($("#matrix-modal-action"), data.rslt);
+          postResult($("#matrix-modal-submit"), data.rslt);
           queryMatrixCards();
         }
       });
