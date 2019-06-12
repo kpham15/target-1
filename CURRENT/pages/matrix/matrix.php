@@ -23,7 +23,7 @@
 
     <div class="col-md-7">
       <!-- MATRIX CARDS TABLE -->
-      <?php include __DIR__ . '/tables/matrix-table.html'; ?>
+      <?php include __DIR__ . '/tables/matrix-card-table.html'; ?>
 
     </div>
 
