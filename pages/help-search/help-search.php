@@ -14,6 +14,7 @@
     <?php include __DIR__ . '/help-search-forms.html'; ?>
     <?php include __DIR__ . '/help-search-table.html'; ?>
     <?php include __DIR__ . '/help-search-modal.html'; ?>
+    
   </div>
 
 </div>
