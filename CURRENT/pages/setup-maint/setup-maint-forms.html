@@ -423,6 +423,12 @@
 
   $(document).ready(function() {
 
+    // Clear Button Click Event
+    $('#setup-maint-forms-clear').click(function() {
+      $('.setup-maint-forms-input').val('');
+      $('.setup-maint-modal-input').val('');
+    })
+
     // Initialize DatePicker
     $('#setup-maint-forms-dd').datepicker();
     $('#setup-maint-forms-fdd').datepicker();
