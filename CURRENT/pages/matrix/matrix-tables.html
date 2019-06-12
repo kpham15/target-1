@@ -65,7 +65,7 @@
     $(document).on('click', '#matrix-table tbody tr', function() {
       let data = matrixDatatable.row(this).data();
 
-      // $('#matrix-form-id').val(data.id);
+      $('#matrix-form-id').val(data.id);
       $('#matrix-form-node').val(data.node);
       $('#matrix-form-shelf').val(data.shelf);
       $('#matrix-form-slot').val(data.slot);
