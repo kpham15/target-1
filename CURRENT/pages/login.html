@@ -188,6 +188,7 @@
       },
   
       postUserPassword: function() {
+        let newPw = login.newpassword.val();
         if (login.newpassword.val() !== '' && login.newpassword.val() !== login.confirmPassword.val()) {
           clearErrors();
           inputError(login.newpassword, '');
@@ -221,11 +222,19 @@
             login.password.val("");
             login.newpassword.val("");
             login.confirmPassword.val("");
-
-            if (user.uname !== '') {
-              loginSuccess();
+            if(newPw !== "") {
+              $('#login-success-modal .modal-title').text(obj.rslt);
+              $('#login-success-modal .modal-body').text(obj.reason);
+              // Open login success modal
+              $('#login-success-modal').modal('show');
             }
+            else{
+              if (user.uname !== '') {
+                loginSuccess();
+              }
   
+            }
+
             // @TODO find out what these do
             // opt.query('queryOpt');
             // bulletinBoard.query('query');
