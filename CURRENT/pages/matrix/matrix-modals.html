@@ -99,25 +99,18 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          modal.type = 'danger';
-          modalHandler(modal);
+          inputError($(this), data.rslt + ": "  + data.reason)
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              modal.type = 'danger';
-              modal.body = 'No records found';
-              modalHandler(modal);
+              inputError($(this), data.rslt + ": "  + "No record found");
             } else {
-              modal.type = "success";
-              modalHandler(modal);
+              postResult($(this), data.rslt);
             }
             $("#matrix-form-action").val("");
             return;
           }
-          modal.type = 'success';
-          modal.confirm = true;
-          modal.func = matrixModalConfirm;
-          modalHandler(modal);
+          postResult($(this), data.rslt);
           queryMatrixCards();
         }
       });
