@@ -224,7 +224,7 @@ include "ipcProvConnect.php";
 		$cktObj = new CKT($ckid);
 		if ($cktObj->rslt == "fail") {
 			$result['rslt'] = FAIL;
-			$result['reason'] = "INVALID CKID for CKT";
+			$result['reason'] = "CKID $ckid NOT FOUND";
 			return $result;
 		}
 
@@ -232,7 +232,7 @@ include "ipcProvConnect.php";
 		$cktconObj->queryCktconByCkid($ckid);
 		if ($cktconObj->rslt == "fail") {
 			$result['rslt'] = FAIL;
-			$result['reason'] = "INVALID CKID for CKTCON";
+			$result['reason'] = "INVALID CKID ($ckid) for CKTCON";
 			return $result;
 		}
 
@@ -299,7 +299,7 @@ include "ipcProvConnect.php";
 			if (count($ordObj->rows) > 0) {
 				$result['rslt'] = 'fail';
 				$result['jeop'] = 'SP2: INVALID ORDNO'; 
-				$result['reason'] = 'ORDNO ALREADY EXISTS';
+				$result['reason'] = "ORDNO $ordno ALREADY EXISTS";
 				return $result;    
 			}
 		}
