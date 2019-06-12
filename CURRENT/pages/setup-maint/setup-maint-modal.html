@@ -278,6 +278,9 @@
   var maintPickedFfac = "";
   var maintPstaTfac = "";
   var maintPstaFfac = "";
+  var maintTestFac = "";
+  var maintTestPort = "";
+
 
   function validateMtcConnModal(obj, ckid) {
     if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
@@ -326,7 +329,7 @@
     }).done(function(data) {
       let res = data.rows;
       let modal = {
-        header:   data.rslt,
+        title:   data.rslt,
         body:     data.reason,
       }
 
@@ -373,7 +376,7 @@
     }).done(function(data) {
       let res = data.rows;
       let modal = {
-        header:   data.rslt,
+        title:   data.rslt,
         body:     data.reason,
       }
 
@@ -419,7 +422,7 @@
     }).done(function(data) {
       let res = data.rows;
       let modal = {
-        header:   data.rslt,
+        title:   data.rslt,
         body:     data.reason,
       }
 
@@ -465,7 +468,7 @@
     }).done(function(data) {
       let res = data.rows;
       let modal = {
-        header:   data.rslt,
+        title:   data.rslt,
         body:     data.reason,
       }
 
@@ -480,6 +483,68 @@
     })
   }
 
+  function validateMtcTestModal(obj, ckid) {
+    if ($('#setup-maint-modal-test-radio1').is(':checked')) {
+      maintTestFac = $('#setup-maint-modal-test-ffac').val();
+      maintTestPort = $('#setup-maint-modal-test-port1').val();
+      if (maintTestFac == "") {
+        inputError($('#setup-maint-modal-test-ffac'),'Missing FAC(X)');
+        return;
+      }
+      if (maintTestPort == "") {
+        inputError($('#setup-maint-modal-test-port1'),'Missing TEST PORT');
+        return;
+      }
+    }
+    else if ($('#setup-maint-modal-test-radio2').is(':checked')) {
+      maintTestFac = $('#setup-maint-modal-test-tfac').val();
+      maintTestPort = $('#setup-maint-modal-test-port2').val();
+      if (maintTestFac == "") {
+        inputError($('#setup-maint-modal-test-ffac'),'Missing FAC(X)');
+        return;
+      }
+      if (maintTestPort == "") {
+        inputError($('#setup-maint-modal-test-port1'),'Missing TEST PORT');
+        return;
+      }
+    }
+
+    $.ajax({
+      type:       'POST',
+      url:         ipcDispatch,
+      data:       {
+        "api":    "ipcMaintConnect",
+        "act":    obj.action,
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   maintTestFac,
+        "tstfac": maintTestPort,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title:   data.rslt,
+        body:    data.body,
+      }
+
+      if (data.rslt == 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      }
+      else {
+        modal.type = 'success';
+        modalHandler(modal);
+      }
+    })
+  }
+  
   $(document).ready(function() {
 
     // Submit Click Event
@@ -521,7 +586,7 @@
         validateMtcRestoreModal(obj, ckid);
       }
       else if (obj.action == "MTC_TEST"){
-
+        validateMtcTestModal(obj, ckid);
       }
       else if (obj.action == "CHANGE") {
 
