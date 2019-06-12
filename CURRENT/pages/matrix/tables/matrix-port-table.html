@@ -47,10 +47,11 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
-
       matrixPortDatatable.clear().draw();
-      matrixPortDatatable.rows.add(res);
-      matrixPortDatatable.columns.adjust().draw();
+      if (res != "") {
+        matrixPortDatatable.rows.add(res);
+        matrixPortDatatable.columns.adjust().draw();
+      }
     });
   }
 
