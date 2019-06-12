@@ -322,7 +322,7 @@
   $('#version-container').click(function() {
     let modal = {
       title: 'Software Information',
-      body: swVer.description.replace(/\r\n/g,'<br/>')
+      body: swVer.description.replace(/\r\n/g,'\n')
     }
 
     modalHandler(modal);
