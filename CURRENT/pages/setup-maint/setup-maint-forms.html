@@ -359,6 +359,56 @@
     $('#setup-maint-modal').modal('show');
     }
   }
+  
+  function validateMtcTest(obj, ckid) {
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of CKTs');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Select from the list of Connections');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').show();
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-ckid-tn').prop('disabled',true);
+    $('#setup-maint-modal-cls').prop('disabled',true);
+    $('#setup-maint-modal-adsr').prop('disabled',true);
+    $('#setup-maint-modal-prot').prop('disabled',true);
+    $('#setup-maint-modal-tktno').prop('disabled',false);
+    $('#setup-maint-modal-mlo').prop('disabled',true);
+    $('#setup-maint-modal-contyp').prop('disabled',true);
+    $('#setup-maint-modal-ffac').prop('disabled',true);
+    $('#setup-maint-modal-tfac').prop('disabled',true);
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-action').prop('disabled',true);
+
+    $('#setup-maint-modal-ckid').val(ckid);
+    $('#setup-maint-modal-ckid-tn').val(ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    $('#setup-maint-modal-contyp').val(obj.contyp);
+    $('#setup-maint-modal-ffac').val(obj.ffac);
+    $('#setup-maint-modal-tfac').val(obj.tfac);
+    $('#setup-maint-modal-action').val(obj.action);
+    
+    $('#setup-maint-modal').modal('show');
+    }
+
+  }
+
+
   // Initialize Hidden Fac Datatable
   var setupMaintFacTable = $('#setup-maint-forms-factable').DataTable({
     "dom":"frtip",
@@ -418,7 +468,7 @@
       } else if (obj.action == "RESTORE_MTCD") {
         validateRestoreMtcd(obj, ckid);
       } else if (obj.action == "MTC_TEST") {
-        
+        validateMtcTest(obj, ckid);
       } else if (obj.action == "CHANGE") {
 
       }
