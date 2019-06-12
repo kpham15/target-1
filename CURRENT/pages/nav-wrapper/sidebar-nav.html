@@ -320,6 +320,11 @@
   });
 
   $('#version-icon').click(function() {
-    return;
+    let modal = {
+      title: 'Software Information',
+      body: swVer.description
+    }
+
+    modalHandler(modal);
   });
 </script>
