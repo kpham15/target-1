@@ -129,6 +129,7 @@
 			$toDate = $toDate." 23:59:59";
 				
 			$qry = "SELECT * FROM t_evtlog WHERE user LIKE '$uname' AND evt LIKE '$evt' AND fnc LIKE '$fnc' AND task LIKE '$task' AND time >= '$fromDate' AND time <= '$toDate' ORDER BY time DESC";
+			
 			$res = $db->query($qry);
 			if (!$res) {
 				$this->rslt = "fail";
