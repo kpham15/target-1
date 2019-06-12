@@ -71,6 +71,7 @@
   $(document).ready(function() {
     // WHEN MODAL IS HIDDEN
     $("#matrix-modal").on('hidden.bs.modal', function() {
+      $("#matrix-form-action").val("");
       queryMatrixPorts();
     });
 
