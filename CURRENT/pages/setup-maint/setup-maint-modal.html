@@ -331,7 +331,7 @@
     })
   }
 
-  function validateRestoreMtcd(obj, ckid) {
+  function validateRestoreMtcdModal(obj, ckid) {
     if (obj.ffac == "") {
       inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
       return;
@@ -411,7 +411,7 @@
         validateMtcDisconModal(obj, ckid);
       }
       else if (obj.action == "RESTORE_MTCD") {
-        validateRestoreMtcd(obj, ckid);
+        validateRestoreMtcdModal(obj, ckid);
       }
       else if (obj.action == "MTC_RESTORE") {
 
