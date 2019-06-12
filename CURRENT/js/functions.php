@@ -21,7 +21,7 @@
 			$('#sidebar-user-name').text(data.ver)
 			let descrClean = data.descr;
 
-			descrClean.replace('↵','<br/>');
+			descrClean.replace(/\r\n/g,'<br/>');
 
 			swVer.version = data.ver;
 			swVer.description = descrClean;
