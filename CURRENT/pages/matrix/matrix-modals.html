@@ -49,6 +49,11 @@
               <input type="text" class="form-control matrix-modal-input" id="matrix-modal-action" action="" readonly>
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label id="matrix-modal-result"></label>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -74,13 +79,13 @@
     $("#matrix-modal").on('hidden.bs.modal', function() {
       $("#matrix-form-action").val("");
       queryMatrixPorts();
-      clearResult();
+      $("#matrix-modal-result").text("");
     });
 
     // SUBMIT BUTTON
     $("#matrix-modal-submit").click(function() {
       clearErrors();
-      clearResult();
+      $("#matrix-modal-result").text("");
 
       let action = $("#matrix-modal-action").attr('action');
       $.ajax({
@@ -104,18 +109,18 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          inputError($("#matrix-modal-action"), data.rslt + ": "  + data.reason)
+          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              inputError($("#matrix-modal-action"), data.rslt + ": "  + "No record found");
+              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
             } else {
-              postResult($("#matrix-modal-action"), data.rslt);
+              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
             }
             $("#matrix-form-action").val("");
             return;
           }
-          postResult($("#matrix-modal-action"), data.rslt);
+          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
           queryMatrixCards();
         }
       });
