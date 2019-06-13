@@ -119,12 +119,12 @@
 
     // UPON LOAD PAGE FIRST TIME
     var configReportFirstLoad = true;
-    $(".menu-item[page_id='event-report-page']").click(async function() {
+    $(".menu-item[page_id='config-report-page']").click(async function() {
       if (configReportFirstLoad != true) {
         return;
       }
       // load event log table upon visiting page
-      configReportQueryEventlog(configReportStartDate, configReportEndDate);
+      configReportQueryPortlog(configReportStartDate, configReportEndDate);
 
       configReportFirstLoad = false;
     });

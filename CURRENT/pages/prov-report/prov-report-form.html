@@ -128,7 +128,21 @@ $(document).ready(function(){
     $('#provReport_daterange').daterangepicker({},function(start,end){
         provReportStartDate = start.format("YYYY-MM-DD");
         provReportEndDate = end.format("YYYY-MM-DD");
-    })
+    });
+
+
+
+    // UPON LOAD PAGE FIRST TIME
+    var provReportFirstLoad = true;
+    $(".menu-item[page_id='prov-report-page']").click(async function() {
+      if (provReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      provReportQueryProvlog(provReportStartDate, provReportEndDate);
+
+      provReportFirstLoad = false;
+    });
 
     $("#provReport_clear_btn").click(function(){
         $(".provReport-form").val("");
