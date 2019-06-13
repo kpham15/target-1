@@ -148,7 +148,7 @@
       let res = data.rows;
 
       if (res.length == 0) {
-        inputError($('#configReport-form-submit'),'No Record Found');
+        inputError($('#configReport-form-report'),'No Record Found');
       }
       configReportPortmapDatatable.clear().draw();
       configReportPortmapDatatable.rows.add(res);
@@ -183,7 +183,7 @@
       let res = data.rows;
 
       if (res.length == 0) {
-        inputError($('#configReport-form-submit'),'No Record Found');
+        inputError($('#configReport-form-report'),'No Record Found');
       }
       configReportWcDatatable.clear().draw();
       configReportWcDatatable.rows.add(res);
@@ -218,7 +218,7 @@
       let res = data.rows;
       
       if (res.length == 0) {
-        inputError($('#configReport-form-submit'),'No Record Found');
+        inputError($('#configReport-form-report'),'No Record Found');
       }
       configReportFacDatatable.clear().draw();
       configReportFacDatatable.rows.add(res);
