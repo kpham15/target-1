@@ -128,7 +128,10 @@
         "searchable": false
       }
     ],
-    "order": [[ 0, 'asc' ]]
+    "order": [[ 0, 'asc' ]],
+    "createdRow": function( row, data, dataIndex ) {
+      console.log(data);
+    }
   });
 
   var portYDatatable = $('#y-ports-table').DataTable({
