@@ -1,7 +1,7 @@
 <div id="nav-wrapper" class="wrapper" style="display: none;">
 
   <!-- Main Header -->
-  <?php include __DIR__ . "/header-navbar.html"; ?>
+  <?php include __DIR__ . "/header-navbar.php"; ?>
 
   <!-- Left side column. contains the logo and sidebar -->
   <?php include __DIR__ . "/sidebar-nav.html"; ?>
@@ -36,6 +36,7 @@
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
     <?php include __DIR__ . '/../event-report/event-report.php'; ?>
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
+    <?php include __DIR__ .'/../setup-maint/setup-maint.php'; ?>
     <?php include __DIR__ . '/../matrix/matrix.php'; ?>
 
     <!-- /.content -->

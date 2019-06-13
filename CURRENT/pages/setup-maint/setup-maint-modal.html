@@ -1,0 +1,953 @@
+<!-- Modal -->
+<div class="modal fade" id="setup-maint-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <Span aria-hidden="true">&times;</Span>
+        </button>
+        <h4 class="modal-title">SETUP MAINTENANCE CONNECTION</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Top Row -->
+          <div class="row" id="setup-maint-modal-row1-div">
+            <!-- CKID -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>CKID:</label>
+                <label>TN:</label>
+                <input id="setup-maint-modal-cbx" type="checkbox" checked />
+                <input id="setup-maint-modal-ckid" type="text" class="form-control maint-modal-ckid setup-maint-modal-input" style="display:none;"/>
+                <input id="setup-maint-modal-ckid-tn" type="text" class="form-control maint-modal-ckid setup-maint-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+              </div>
+            </div>
+            <!-- CLS -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>CLS:</label>
+                <select id="setup-maint-modal-cls" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="RES">RES</option>
+                  <option value="BUS">BUS</option>
+                </select>
+              </div>
+            </div>
+            <!-- ADSR -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>ADSR:</label>
+                <select id="setup-maint-modal-adsr" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select>
+              </div>
+            </div>
+            <!-- PROT -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>PROT:</label>
+                <select id="setup-maint-modal-prot" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="SSM">SSM</option>
+                  <option value="SSB">SSB</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row" id="setup-maint-modal-row2-div">
+            <!-- TKTNO -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>TKTNO</label>
+                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" />
+              </div>
+            </div>
+            <!-- MLO -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MLO:</label>
+                <select id="setup-maint-modal-mlo" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="N">N</option>
+                  <option value="Y">Y</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="row" id="setup-maint-modal-row3-div">
+            <!-- CONTYP -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>CONTYP:</label>
+                <select id="setup-maint-modal-contyp" class="form-control setup-maint-modal-input">
+                  <option value=""></option>
+                  <option value="GEN">GEN</option>
+                  <option value="LPBK">LPBK</option>
+                  <option value="MLPT">MLPT</option>
+                  <option value="MTCD">MTCD</option>
+                  <option value="MAINT">MAINT</option>
+                </select>
+              </div>
+            </div>
+            <!-- FAC(X) -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>FAC(X):</label>
+                <input id="setup-maint-modal-ffac" type="text" class="form-control setup-maint-modal-input">
+              </div>
+            </div>
+            <!-- FAC(Y) -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>FAC(Y):</label>
+                <input id="setup-maint-modal-tfac" type="text" class="form-control setup-maint-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- CHANGE Div -->
+          <div id="setup-maint-modal-change-div" class="row">
+            <div id="setup-maint-modal-change-out" class="col-md-12">
+              <div class="form-group">
+                <label class="col-md-1">OUT:</label>
+                <!-- Border for Out -->
+                <div class="col-md-11" style="border:lightgray solid 1px;">
+                  <!-- CONTYP -->
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>CONTYP</label>
+                      <select id="setup-maint-modal-change-out-ctyp" class="form-control setup-maint-modal-input" disabled="">
+                        <option value=""></option>
+                        <option value="GEN">GEN</option>
+                        <option value="LPBK">LPBK</option>
+                        <option value="MLPT">MLPT</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- FAC(X) -->
+                  <div class="col-md-5">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>FAC(X):</label>
+                        <input id="setup-maint-modal-change-out-ffac" class="form-control setup-maint-modal-input" disabled="" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>PORT(X):</label>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input id="setup-maint-modal-change-out-fport" type="text" class="form-control setup-maint-modal-input" disabled="" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- FAC(Y) -->
+                  <div class="col-md-5">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>FAC(Y):</label>
+                        <input id="setup-maint-modal-change-out-tfac" class="form-control setup-maint-modal-input" disabled="" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>PORT(Y):</label>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input id="setup-maint-modal-change-out-tport" class="form-control setup-maint-modal-input" disabled="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="setup-maint-modal-change-in" class="col-md-12">
+              <div class="form-group">
+                <label class="col-md-1">IN:</label>
+                <!-- Border for IN -->
+                <div class="col-md-11" style="border:lightgray solid 1px;">
+                  <!-- CONTYP -->
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>CONTYP</label>
+                      <select id="setup-maint-modal-change-in-ctyp" class="form-control setup-maint-modal-input">
+                        <option value=""></option>
+                        <option value="GEN">GEN</option>
+                        <option value="LPBK">LPBK</option>
+                        <option value="MLPT">MLPT</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- FAC(X) -->
+                  <div class="col-md-5">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>FAC(X):</label>
+                        <a id="setup-maint-modal-change-in-search-ffac" class="pull-right">Search</a>
+                        <input id="setup-maint-modal-change-in-ffac" class="form-control setup-maint-modal-input" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>PORT(X):</label>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input id="setup-maint-modal-change-in-fport" type="text" class="form-control setup-maint-modal-input" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- FAC(Y) -->
+                  <div class="col-md-5">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>FAC(Y):</label>
+                        <a id="setup-maint-modal-change-in-search-tfac" class="pull-right">Search</a>
+                        <input id="setup-maint-modal-change-in-tfac" class="form-control setup-maint-modal-input" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>PORT(Y):</label>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input id="setup-maint-modal-change-in-tport" type="text" class="form-control setup-maint-modal-input" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="setup-maint-modal-change-search-div" ftyp="" class="col-md-11 col-md-offset-1" style="display:none;">
+              <div class="box box-primary">
+                <table id="setup-maint-modal-change-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                <thead>
+                  <tr>
+                    <th>FAC</th>
+                    <th>PSTA</th>
+                    <th>PORT</th>
+                  </tr>
+                </thead>
+              </table>
+              </div>
+            </div>
+          </div>
+          <!-- MTC Test Div -->
+          <div id="setup-maint-modal-mtctest-div" style="display:none;">
+            <!-- Radio 1 -->
+            <div class="col-md-1">
+              <div class="form-group">
+                <input id="setup-maint-modal-test-radio1" type="radio" class="pull-right" name="select-test-port" style="margin-top:35px;" />
+              </div>
+            </div>
+            <!-- CTYP -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>CTYP:</label>
+                <input id="setup-maint-modal-test-ctyp1" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <!-- FAC(X) -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC(X):</label>
+                <input id="setup-maint-modal-test-ffac" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <!-- TEST PORT X -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>TEST PORT</label>
+                <select id="setup-maint-modal-test-port1" class="form-control setup-maint-modal-input">
+                </select>
+              </div>
+            </div>
+            <!-- Radio 2 -->
+            <div class="col-md-1">
+                <div class="form-group">
+                  <input id="setup-maint-modal-test-radio2" type="radio" class="pull-right" name="select-test-port" style="margin-top:35px;" />
+                </div>
+              </div>
+              <!-- CTYP -->
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>CTYP:</label>
+                  <input id="setup-maint-modal-test-ctyp2" type="text" class="form-control setup-maint-modal-input" disabled="" />
+                </div>
+              </div>
+              <!-- FAC(Y) -->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>FAC(Y):</label>
+                  <input id="setup-maint-modal-test-tfac" type="text" class="form-control setup-maint-modal-input" disabled="" />
+                </div>
+              </div>
+              <!-- TEST PORT Y -->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>TEST PORT</label>
+                  <select id="setup-maint-modal-test-port2" class="form-control setup-maint-modal-input">
+                  </select>
+                </div>
+              </div>
+          </div>
+          <!-- MTC Connect Row 3 -->
+          <div class="row" id="setup-maint-modal-mtccon1-div" style="display:none;">
+            <!-- RADIO -->
+            <div class="col-md-1">
+              <div class="form-group">
+                <input id="setup-maint-modal-pick-conn1" type="radio" class="pull-right" name="select-test-fac" style="margin-top:35px;">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>CTYP:</label>
+                <input id="setup-maint-modal-conn1-ctyp" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC(X)</label>
+                <input id="setup-maint-modal-conn1-ffac" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC(Y)</label>
+                <select id="setup-maint-modal-conn1-tfac" class="form-control setup-maint-modal-input">
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- MTC Connect Row 4 -->
+          <div class="row" id="setup-maint-modal-mtccon2-div" style="display:none;">
+            <!-- RADIO -->
+            <div class="col-md-1">
+              <div class="form-group">
+                <input id="setup-maint-modal-pick-conn2" type="radio" class="pull-right" name="select-test-fac" style="margin-top:35px;">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>CTYP:</label>
+                <input id="setup-maint-modal-conn2-ctyp" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC(Y)</label>
+                <input id="setup-maint-modal-conn2-tfac" type="text" class="form-control setup-maint-modal-input" disabled="" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>FAC(X)</label>
+                <select id="setup-maint-modal-conn2-ffac" class="form-control setup-maint-modal-input">
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Action Row -->
+          <div class="row" id="setup-maint-modal-row5-div">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="setup-maint-modal-action" type="text" class="form-control setup-maint-modal-input" disabled=""/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label id="setup-maint-modal-post-response-text" style="margin-top:35px;"></label>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button id="setup-maint-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var maintPickedTfac = "";
+  var maintPickedFfac = "";
+  var maintPstaTfac = "";
+  var maintPstaFfac = "";
+  var maintTestFac = "";
+  var maintTestPort = "";
+
+  // Initialize DataTable for Change->Search
+  var maintChangeSearchDatatable = $('#setup-maint-modal-change-table').DataTable({
+    "dom":      "frtip",
+    "scrollY":  "100px",
+    "data":      [],
+    "columns":   [
+      {"data":"fac"},
+      {"data":"psta"},
+      {"data":"port"},
+    ]
+  })
+
+  function validateMtcConnModal(obj, ckid) {
+
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+
+    if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
+      maintPickedTfac = $('#setup-maint-modal-conn1-tfac').val();
+      maintPickedFfac = $('#setup-maint-modal-conn1-ffac').val();
+      if (maintPickedTfac == "") {
+        inputError($('#setup-maint-modal-conn1-tfac'),'Missing FAC(Y)');
+        return;
+      }
+      if (maintPickedFfac == "")  {
+        inputError($('#setup-maint-modal-conn1-ffac'),'Missing FAC(X)');
+        return;
+      }
+    }
+    else if ($('#setup-maint-modal-pick-conn2').is(':checked')) {
+      maintPickedTfac = $('#setup-maint-modal-conn2-tfac').val();
+      maintPickedFfac = $('#setup-maint-modal-conn2-ffac').val();
+      if (maintPickedTfac == "") {
+        inputError($('#setup-maint-modal-conn2-tfac'),'Missing FAC(Y)');
+        return;
+      }
+      if (maintPickedFfac == "")  {
+        inputError($('#setup-maint-modal-conn2-ffac'),'Missing FAC(X)');
+        return;
+      }
+    }
+
+    $.ajax({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintConnect",
+        "act":      obj.action,
+        "user":     user.uname,
+        "ckid":     ckid,
+        "cls":      obj.cls,
+        "adsr":     obj.adsr,
+        "prot":     obj.prot,
+        "tktno":    obj.tktno,
+        "mlo":      obj.mlo,
+        "ctyp":     obj.ctyp,
+        "ffac":     maintPickedFfac,
+        "tfac":     maintPickedTfac,
+      },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+
+  }
+
+  function validateMtcDisconModal(obj, ckid) {
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+    if (obj.ffac == "") {
+      inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#setup-maint-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
+
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintDiscon",
+        "act":    "MTC_DISCON",
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+  }
+
+  function validateRestoreMtcdModal(obj, ckid) {
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+    if (obj.ffac == "") {
+      inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#setup-maint-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
+
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintRestoreMtcd",
+        "act":    "RESTORE_MTCD",
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+  }
+
+  function validateMtcRestoreModal(obj, ckid) {
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+    if (obj.ffac == "") {
+      inputError($('#setup-maint-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#setup-maint-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
+
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintConnect",
+        "act":    "MTC_RESTORE",
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+  }
+
+  function validateMtcTestModal(obj, ckid) {
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+    if ($('#setup-maint-modal-test-radio1').is(':checked')) {
+      maintTestFac = $('#setup-maint-modal-test-ffac').val();
+      maintTestPort = $('#setup-maint-modal-test-port1').val();
+      if (maintTestFac == "") {
+        inputError($('#setup-maint-modal-test-ffac'),'Missing FAC(X)');
+        return;
+      }
+      if (maintTestPort == "") {
+        inputError($('#setup-maint-modal-test-port1'),'Missing TEST PORT');
+        return;
+      }
+    }
+    else if ($('#setup-maint-modal-test-radio2').is(':checked')) {
+      maintTestFac = $('#setup-maint-modal-test-tfac').val();
+      maintTestPort = $('#setup-maint-modal-test-port2').val();
+      if (maintTestFac == "") {
+        inputError($('#setup-maint-modal-test-ffac'),'Missing FAC(X)');
+        return;
+      }
+      if (maintTestPort == "") {
+        inputError($('#setup-maint-modal-test-port2'),'Missing TEST PORT');
+        return;
+      }
+    }
+
+    $.ajax({
+      type:       'POST',
+      url:         ipcDispatch,
+      data:       {
+        "api":    "ipcMaintConnect",
+        "act":    obj.action,
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   maintTestFac,
+        "tstfac": maintTestPort,
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+  }
+  
+  function validateChangeModal(obj, ckid) {
+    if ($('#setup-maint-modal-tktno').val() == "") {
+      inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+
+    if (!((obj.oldFfac == obj.newFfac && obj.oldTfac !== obj.newTfac) || (obj.oldFfac !== obj.newFfac && obj.oldTfac == obj.newTfac))) {
+      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'Only one FAC must be from the original connection');
+      return;
+    }
+    if (obj.newFfac == "") {
+      inputError($('#setup-maint-modal-change-in-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.newTfac == "") {
+      inputError($('#setup-maint-modal-change-in-tfac'),'Missing FAC(Y)');
+      return;
+    }
+    if (obj.newFport == "") {
+      inputError($('#setup-maint-modal-change-in-fport'),'Missing PORT(X)');
+      return;
+    }
+    if (obj.newTport == "") {
+      inputError($('#setup-maint-modal-change-in-tport'),'Missing PORT(Y)');
+      return;
+    }
+
+    $.ajax({
+      type:         'POST',
+      url:          ipcDispatch,
+      data:         {
+        "api":      "ipcProv",
+        "act":      "CHANGE",
+        "user":     user.uname,
+        "ckid":     ckid,
+        "cls":      obj.cls,
+        "adsr":     obj.adsr,
+        "prot":     obj.prot,
+        "tktno":    obj.tktno,
+        "mlo":      obj.mlo,
+        "ctyp":     obj.ctyp,
+        "ffac":     obj.oldFfac,
+        "tfac":     obj.oldTfac,
+        "newffac":  obj.newFfac,
+        "newtfac":  obj.newTfac,
+        "fport":    obj.fport,
+        "tport":    obj.tport,
+        "newfport": obj.newFport,
+        "newtport": obj.newTport,
+      },
+      dataType:     'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
+    })
+  }
+
+  function maintChangeSearch() {
+    $.ajax({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcFacilities",
+        "act":    "findFac",
+        "user":   user.uname,
+        "grp":    user.grp,
+        "ugrp":   user.ugrp,
+        "fac":    "%",
+        "psta":   "",
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = [];
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      if (data.hasOwnProperty('rows')) {
+        for (let i=0; i<data.rows.length; i++) {
+          if (data.rows[i].port == "") {
+            continue;
+          }
+          if (ftyp == 'X') {
+            if (data.rows[i].port.split('-')[2] == 'X') {
+              res.push(data.rows[i]);
+            }
+            else {
+              continue;
+            }
+          }
+          else {
+            if (data.rows[i].port.split('-')[2] == 'Y') {
+              res.push(data.rows[i]);
+            }
+            else {
+              continue;
+            }
+          }
+        }
+      }
+      maintChangeSearchDatatable.clear().draw();
+      maintChangeSearchDatatable.rows.add(res);
+      maintChangeSearchDatatable.columns.adjust().draw();
+    })
+  }
+  
+  $(document).ready(function() {
+
+    // Left Search Button Click for CHANGE
+    $('#setup-maint-modal-change-in-search-ffac').click(function() {
+      clearErrors();
+
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      maintChangeSearchDatatable.clear().draw();
+      if (ftyp == "X") {
+        $('#setup-maint-modal-change-search-div').hide();
+        $('#setup-maint-modal-change-search-div').attr("ftyp","");
+      }
+      else {
+        $('#setup-maint-modal-change-search-div').show();
+        $('#setup-maint-modal-change-search-div').attr('ftyp','X');
+      }
+      
+      maintChangeSearch();
+    })
+
+    // Right Search Button Click for CHANGE
+    $('#setup-maint-modal-change-in-search-tfac').click(function() {
+      clearErrors();
+
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      maintChangeSearchDatatable.clear().draw();
+      if (ftyp == "Y") {
+        $('#setup-maint-modal-change-search-div').hide();
+        $('#setup-maint-modal-change-search-div').attr("ftyp","");
+      }
+      else {
+        $('#setup-maint-modal-change-search-div').show();
+        $('#setup-maint-modal-change-search-div').attr('ftyp','Y');
+      }
+
+      maintChangeSearch();
+    })
+
+    // Submit Click Event
+    $('#setup-maint-modal-submit').click(function() {
+      clearErrors();
+
+      let obj = {
+        cls:      $('#setup-maint-modal-cls').val(),
+        adsr:     $('#setup-maint-modal-adsr').val(),
+        prot:     $('#setup-maint-modal-prot').val(),
+        tktno:    $('#setup-maint-modal-tktno').val(),
+        mlo:      $('#setup-maint-modal-mlo').val(),
+        action:   $('#setup-maint-modal-action').val(),
+        ctyp:     $('#setup-maint-modal-contyp').val(),
+        ffac:     $('#setup-maint-modal-ffac').val(),
+        tfac:     $('#setup-maint-modal-tfac').val(),
+        fport:    $('#setup-maint-modal-change-out-fport').val(),
+        tport:    $('#setup-maint-modal-change-out-tport').val(),
+        oldFfac:  $('#setup-maint-modal-change-out-ffac').val(),
+        oldTfac:  $('#setup-maint-modal-change-out-tfac').val(),
+        newFfac:  $('#setup-maint-modal-change-in-ffac').val(),
+        newTfac:  $('#setup-maint-modal-change-in-tfac').val(),
+        newFport: $('#setup-maint-modal-change-in-fport').val(),
+        newTport: $('#setup-maint-modal-change-in-tport').val()
+      }
+
+      let ckid = "";
+      if ($('#setup-maint-modal-cbx').prop('checked')) {
+        ckid = $('#setup-maint-modal-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-modal-ckid').val();
+      }
+
+
+      if (obj.action == "MTC_CONN") {
+        validateMtcConnModal(obj, ckid);
+      }
+      else if (obj.action == "MTC_DISCON") {
+        validateMtcDisconModal(obj, ckid);
+      }
+      else if (obj.action == "RESTORE_MTCD") {
+        validateRestoreMtcdModal(obj, ckid);
+      }
+      else if (obj.action == "MTC_RESTORE") {
+        validateMtcRestoreModal(obj, ckid);
+      }
+      else if (obj.action == "MTC_TEST"){
+        validateMtcTestModal(obj, ckid);
+      }
+      else if (obj.action == "CHANGE") {
+        validateChangeModal(obj, ckid);
+      }
+    })
+
+    // Search Fac Table Click Event
+    $(document).on('click', '#setup-maint-modal-change-table tbody tr', function() {
+
+      clearErrors();
+
+      let data = maintChangeSearchDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      if (ftyp == 'X') {
+        $('#setup-maint-modal-change-in-ffac').val(data.fac);
+        $('#setup-maint-modal-change-in-fport').val(data.port);
+      }
+      else if (ftyp == 'Y') {
+        $('#setup-maint-modal-change-in-tfac').val(data.fac);
+        $('#setup-maint-modal-change-in-tport').val(data.port);
+      }
+
+      // give selected class
+      $('#setup-maint-modal-change-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
+
+    // Radio Button Click Event for MTC_TEST Top
+    $('#setup-maint-modal-test-radio1').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-test-radio1').is(':checked')) {
+        $('#setup-maint-modal-test-port1').prop('disabled', false);
+        $('#setup-maint-modal-test-port2').prop('disabled', true);
+      }
+    });
+    // Radio Button Click Event for MTC_TEST Bottom
+    $('#setup-maint-modal-test-radio2').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-test-radio2').is(':checked')) {
+        $('#setup-maint-modal-test-port1').prop('disabled', true);
+        $('#setup-maint-modal-test-port2').prop('disabled', false);
+      }
+    });
+    // Radio Button Click Event for MTC_CONN Top
+    $('#setup-maint-modal-pick-conn1').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
+        $('#setup-maint-modal-conn1-tfac').prop('disabled',false);
+        $('#setup-maint-modal-conn2-ffac').prop('disabled',true);
+      }
+    });
+    // Radio Button Click Event for MTC_CONN Bottom
+    $('#setup-maint-modal-pick-conn2').click(function() {
+      clearErrors();
+
+      if ($('#setup-maint-modal-pick-conn2').is(':checked')) {
+        $('#setup-maint-modal-conn1-tfac').prop('disabled',true);
+        $('#setup-maint-modal-conn2-ffac').prop('disabled',false);
+      }
+    })
+
+    // Initialize inputmask
+    $('#setup-maint-modal-ckid-tn').inputmask();
+
+    // TN Checkbox Handler
+    $('#setup-maint-modal-cbx').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue'
+    });
+    $('#setup-maint-modal-cbx').on('ifToggled', function(){
+      $('.maint-modal-ckid').toggle();
+    });
+
+    // Modal Close Event Handler
+    $('#setup-maint-modal').on('hidden.bs.modal', function(e) {
+      $('#setup-maint-forms-action').val('');
+    })
+  })
+</script>
