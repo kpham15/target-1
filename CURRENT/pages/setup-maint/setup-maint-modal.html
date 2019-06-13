@@ -392,7 +392,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label id="setup-maint-modal-post-response-text" style="margin-top:35px;">I AM A POTENTIAL POST REQUEST RESPONSE</label>
+              <label id="setup-maint-modal-post-response-text" style="margin-top:35px;"></label>
             </div>
           </div>
           <!-- Footer -->
@@ -531,11 +531,10 @@
       }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','green').text('MTC_DISCON Fail!');
       }
       else {
-        
+        $('#setup-maint-modal-post-response-text').css('color','green').text('MTC_DISCON Success!');
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
