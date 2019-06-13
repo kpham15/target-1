@@ -116,6 +116,18 @@
     }
 
     initializeConfigReportDateRangePicker();
+
+    // UPON LOAD PAGE FIRST TIME
+    var configReportFirstLoad = true;
+    $(".menu-item[page_id='config-report-page']").click(async function() {
+      if (configReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      configReportQueryPortlog(configReportStartDate, configReportEndDate);
+
+      configReportFirstLoad = false;
+    });
     
 
     // Click Event For 'Submit Button'
