@@ -148,7 +148,8 @@
     let mxcCardModal    = $("#matrix-card-modal");
 
     if (action != "") {
-      mxcModalInputs.val("").change();
+      mxcNodeModalInputs.val("").change();
+      mxcCardModalInputs.val("").change();
       if (mxcId != "") {
         populateMxcModal();
         mxcCardModal.modal("show");
