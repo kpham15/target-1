@@ -78,34 +78,7 @@
 </div>
 
 <script>
-  function loginErrorHandler(error) {
-    clearErrors();
-
-    if (error.reason.toLowerCase().includes('invalid')) {
-      inputError($('#login_username'), '');
-      inputError($('#login_password_input'), 'Username/Password Invalid');
-    } else if (error.reason.toLowerCase().includes('first')) {
-      if (!$('#change-password-btn').hasClass('active')) {
-        $('#change-password-btn').trigger('click');
-      }
-      $('.login-input-fields').each(function() {
-        if ($(this).attr('id') === 'login_confirmPassWord') {
-          inputError($(this), 'First time logging in. Must change password.');
-        } else {
-          inputError($(this),'');
-        }
-      });
-    } else if (error.reason.toLowerCase().includes('previous')) {
-      $('.login-input-fields').each(function() {
-        if ($(this).attr('id') === 'login_confirmPassWord') {
-          inputError($(this), error.reason);
-        } else {
-          inputError($(this),'');
-        }
-      })
-    }
-  }
-
+  
   $(document).ready(function() {
 
     // Watches login success modal, on close run loginSuccess()
@@ -262,7 +235,42 @@
   
     // @TODO create register user/first login functionality
 
-  });
+    // Login Error Handling
+    function loginErrorHandler(error) {
+      clearErrors();
 
-  // @TODO call looping wc.getHeaderInfo() after logging in.
+      if (error.reason.toLowerCase().includes('invalid')) {
+        if (error.reason.toLowerCase().includes('format')) {
+          inputError(login.newpassword, '');
+          inputError(login.confirmPassword, 'Password must be 6-15 characters with at least 1 letter and 1 number.');
+        } else {
+          inputError(login.username, '');
+          inputError(login.password, 'Username/Password Invalid');
+        }
+      } else if (error.reason.toLowerCase().includes('first')) {
+        if (!$('#change-password-btn').hasClass('active')) {
+          $('#change-password-btn').trigger('click');
+        }
+        $('.login-input-fields').each(function() {
+          if ($(this).attr('id') === 'login_confirmPassWord') {
+            inputError($(this), 'First time logging in. Must change password.');
+          } else {
+            inputError($(this),'');
+          }
+        });
+      } else if (error.reason.toLowerCase().includes('previous')) {
+        $('.login-input-fields').each(function() {
+          if ($(this).attr('id') === 'login_confirmPassWord') {
+            inputError($(this), error.reason);
+          } else {
+            inputError($(this),'');
+          }
+        })
+      } else if (error.reason.toLowerCase().includes('locked')) {
+        inputError(login.username, '');
+        inputError(login.password, 'Too many login attempts, user locked.');
+      }
+    }
+
+  });
 </script>

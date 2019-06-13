@@ -18,13 +18,10 @@
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
 			$('#sidebar-user-name').text(data.ver)
-			let modal = {
-				title: 'Software Information',
-				body: data.descr
-			}
-			modalHandler(modal);
+
+			swVer.version = data.ver;
+			swVer.description = data.descr;
 		});
 	}
 
@@ -64,6 +61,40 @@
 		getSystemInfo();
 	}
 
+	function cancelTimeout() {
+		$.ajax({
+			type: 'POST',
+			url: ipcDispatch,
+			data: {
+				api: 'ipcLogin',
+				act: 'continue',
+				user: user.uname
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			if (data.rslt === 'fail') {
+				alert(data.reason);
+			}
+		});
+	}
+
+	function checkUserTimeout(data) {
+		let loginTime = new Date(data.loginTime).getTime() / 1000;
+		let time = new Date(data.time).getTime() / 1000;
+		let idle_to = user.idle_to * 60;
+
+		if ((time - loginTime) > idle_to) {
+			$('#cancel-timeout-modal').modal('hide');
+			logout();
+			return;
+		}
+
+		if (((time - loginTime) > (idle_to - 60)) && ((time - loginTime) < idle_to)) {
+			$('#cancel-timeout-modal .modal-body').html('Your session will be timed out in ' + (idle_to - (time - loginTime)) + ' seconds.<br/><br/>Close this window to cancel the time out.');
+			$('#cancel-timeout-modal').modal('show');
+		}
+	}
+
 	function getSystemInfo() {
 		$.ajax({
 			type: 'POST',
@@ -91,7 +122,10 @@
 				wcInfo = res;
 
 				updateNodeStatus();
-				updateHeaderInfo();				
+				updateHeaderInfo();
+				
+				// Check if user is timed out
+				checkUserTimeout(res);
 			}
 
 			// check if first time loading information
