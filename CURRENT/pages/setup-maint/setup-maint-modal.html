@@ -478,16 +478,12 @@
       dataType:     'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:   data.rslt,
-        body:     data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
@@ -525,16 +521,12 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:   data.rslt,
-        body:     data.reason,
-      }
 
       if (data.rslt == 'fail') {
         $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
-        $('#setup-maint-modal-post-response-text').css('color','green').text('MTC_DISCON Success!');
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
@@ -571,16 +563,12 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:   data.rslt,
-        body:     data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
@@ -617,16 +605,12 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:   data.rslt,
-        body:    data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
@@ -679,16 +663,12 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:   data.rslt,
-        body:    data.body,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
@@ -744,16 +724,12 @@
       dataType:     'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:    data.rslt,
-        body:     data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         maintQueryTableCkts(ckid);
         maintQueryTableCons(ckid);
       }
