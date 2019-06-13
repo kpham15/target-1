@@ -1,12 +1,12 @@
 <!-- Modal -->
 <div class="modal fade" id="database-backup-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-labe;="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">DATABASE BACKUP</h4>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">DATABASE BACKUP</h4>
       </div>
 
       <div class="modal-body">
@@ -71,7 +71,74 @@
   </div>
 </div>
 
+<!-- Table Modal -->
+<div class="modal fade" id="database-download-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">DOWNLOAD BACKUP FILE</h4>
+      </div>
+
+      <div class="modal-body">
+        <table id="database-download-table" class="table table-striped table-bordered table-hover" style="width:100%">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>DB BACKUP FILE NAME</th>
+              <th>BACKUP TYPE</th>
+              <th>DOWNLOAD LINK</th> 
+              <th>DATE</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button id="database-download-modal-submit" type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
+
+var databaseDownloadDatatable = $('#database-download-table').DataTable({
+  "data": [],
+  "columns": [
+    {"data":"user"},
+    {"data":"dbfile"},
+    {"data":"bktyp"},
+    {"data":"dbpath",
+      "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+        $(nTd).html("<a href='"+oData.dbpath+"'>DOWNLOAD</a>");
+      }
+    },
+    {"data":"date"}
+  ]
+});
+
+function queryDatabaseDownload() {
+  $.ajax({
+    type:     'POST',
+    url:      ipcDispatch,
+    data:     {
+      "api":    "coQueryBkup",
+      "act":    "query",
+      "user":   user.uname
+    },
+    dataType:   'json'
+  }).done(function(data) {
+    let res = data.rows;
+
+    databaseDownloadDatatable.clear().draw();
+    databaseDownloadDatatable.rows.add(res);
+    databaseDownloadDatatable.columns.adjust().draw();
+  })
+}
 
 function databaseBackupReturn(modal) {
   $('#database-backup-modal').modal('hide');
