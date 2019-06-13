@@ -60,7 +60,7 @@
 	function loginSuccess() {
 		$('#login-page').hide();
 		$('#nav-wrapper').show();
-
+		
 		getSystemInfo();
 	}
 
