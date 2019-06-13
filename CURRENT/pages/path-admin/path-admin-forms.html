@@ -177,7 +177,11 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 $("#pathAdmin-form-view_ckid").on("click", function() {
   clearErrors();
 
-  let ckid = $("#pathAdmin-form-ckid");
+  if ($("#pathAdmin-tn-check").is(":checked")) {
+    let ckid = $("#pathAdmin-form-ckid-tn");
+  } else {
+    let ckid = $("#pathAdmin-form-ckid");
+  }
 
   if (ckid.val() == "") {
     inputError(ckid, 'Missing CKID');
