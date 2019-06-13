@@ -52,7 +52,6 @@
         <div class="form-group">
             <label for="provReport_report_sel">REPORT</label>
             <select class="form-control provReport-form" id="provReport_report_sel">
-                <option></option>
                 <option>VIEW REPORT</option>
                 <option>CREATE REPORT</option>
             </select>
@@ -122,8 +121,8 @@ function downloadCSV(args) {
     link.click();
 }
 
-var provReportStartDate = "";
-var provReportEndDate = "";
+var provReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+var provReportEndDate = moment(new Date()).format('YYYY-MM-DD');
 
 $(document).ready(function(){
     $('#provReport_daterange').daterangepicker({},function(start,end){
@@ -133,6 +132,7 @@ $(document).ready(function(){
 
     $("#provReport_clear_btn").click(function(){
         $(".provReport-form").val("");
+        $("#provReport_report_sel").val("VIEW REPORT");
         $('#provReport_daterange').val('').daterangepicker("update")
         provReportDataTable.clear().draw();
         clearErrors();
@@ -159,9 +159,9 @@ $(document).ready(function(){
         }
     })
 
-    $('#provReport_report_sel').change(function() {
+    $('#provReport-form').on("click", function() {
         clearErrors();
-    })
+    });
 })
 
 </script>
