@@ -273,7 +273,7 @@
 
   function createMioBtn(psta, index, ptyp) {
     let slot = index + 1;
-    let mioBtn = `<div class="dropdown">
+    let mioBtn = `<div class="dropdown" style="float: left">
                     <button type="button" class="mio-btn btn btn-default" data-toggle="dropdown" slot="${slot}" ptyp="${ptyp}">
                       <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
                     </button>
