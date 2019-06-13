@@ -434,7 +434,7 @@
 
   function validateMtcConnModal(obj, ckid) {
 
-    if ($('#setup-maint-modal-tktno') == "") {
+    if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
     }
