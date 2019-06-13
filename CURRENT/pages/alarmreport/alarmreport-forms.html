@@ -131,6 +131,18 @@
 		}
 
 		initializeAlarmreportDateRangePicker();
+
+    // UPON LOAD PAGE FIRST TIME
+    var alarmReportFirstLoad = true;
+    $(".menu-item[page_id='alarmreport-page']").click(async function() {
+      if (alarmReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      queryAlarmReports(alarmReportStartDate, alarmReportEndDate);
+
+      alarmReportFirstLoad = false;
+    });
 		
 
 		// Click Event For 'Submit Button'
