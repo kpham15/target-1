@@ -122,6 +122,38 @@
   var maintTableTktsId = "";
   var maintTableCktsId = "";
 
+  function maintQueryTableCkts(ckid) {
+    $.ajax({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title:  data.rslt,
+        body:   data.reason
+      }
+      if (data.rslt == 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      }
+      else {
+        setupMaintTableCkts.clear().draw();
+        setupMaintTableCkts.rows.add(res);
+        setupMaintTableCkts.columns.adjust().draw();
+      }
+    })
+  }
+
+  function maintQueryTableCons(ckid) {
+    
+  }
   $(document).ready(function() {
    
 

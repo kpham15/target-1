@@ -427,6 +427,7 @@
     ]
   })
 
+  
   //@TODO update the all tables with new information
   function validateMtcConnModal(obj, ckid) {
     if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
@@ -752,6 +753,9 @@
       else {
         modal.type = 'success';
         modalHandler(modal);
+
+        maintQueryTableCkts(ckid);
+        
       }
     })
   }
