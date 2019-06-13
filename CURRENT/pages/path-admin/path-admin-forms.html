@@ -176,12 +176,9 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 // CKID VIEW BUTTON
 $("#pathAdmin-form-view_ckid").on("click", function() {
   clearErrors();
-  let tn = $("#pathAdmin-tn-check");
-  
-  if (tn.is(":checked")) {
-    let ckid = $("#pathAdmin-form-ckid-tn");
-  } else if (tn.is(":not(:checked)")){
-    let ckid = $("#pathAdmin-form-ckid");
+  let ckid = $("#pathAdmin-form-ckid");
+  if ($("#pathAdmin-tn-check").is(":checked")) {
+    ckid = $("#pathAdmin-form-ckid-tn");
   }
 
   if (ckid.val() == "") {
