@@ -36,6 +36,7 @@
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
     <?php include __DIR__ . '/../event-report/event-report.php'; ?>
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
+    <?php include __DIR__ . '/../matrix/matrix.php'; ?>
 
     <!-- /.content -->
   </div>
