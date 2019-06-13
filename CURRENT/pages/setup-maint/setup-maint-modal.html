@@ -695,7 +695,23 @@
     // one of new facs must be same with old connection - this means ffac or tfac must be the same in below fields - one old and one new, regardless of which order
     //@TODO finish click event
     if ((!(obj.oldFfac == obj.newFfac) && (obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac) && (obj.oldTfac == obj.newTfac))) {
-      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One facility must be from the original connection');
+      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One FAC must be from the original connection');
+      return;
+    }
+    if (obj.newFfac == "") {
+      inputError($('#setup=maint-modal-change-in-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.newTfac == "") {
+      inputError($('#setup=maint-modal-change-in-tfac'),'Missing FAC(Y)');
+      return;
+    }
+    if (obj.newFport == "") {
+      inputError($('#setup=maint-modal-change-in-fport'),'Missing PORT(X)');
+      return;
+    }
+    if (obj.newTport == "") {
+      inputError($('#setup=maint-modal-change-in-tport'),'Missing PORT(Y)');
       return;
     }
   }
@@ -799,7 +815,9 @@
         oldFfac: $('#setup-maint-modal-change-out-ffac').val(),
         oldTfac: $('#setup-maint-modal-change-out-tfac').val(),
         newFfac: $('#setup-maint-modal-change-in-ffac').val(),
-        newTfac: $('#setup-maint-modal-change-in-tfac').val()
+        newTfac: $('#setup-maint-modal-change-in-tfac').val(),
+        newFport:$('#setup-maint-modal-change-in-fport').val(),
+        newTport:$('#setup-maint-modal-change-in-tport').val()
       }
 
       let ckid = "";
