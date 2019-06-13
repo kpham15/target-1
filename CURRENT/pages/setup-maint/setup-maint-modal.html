@@ -765,6 +765,8 @@
 
     // Left Search Button Click for CHANGE
     $('#setup-maint-modal-change-in-search-ffac').click(function() {
+      clearErrors();
+      
       let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
       maintChangeSearchDatatable.clear().draw();
       if (ftyp == "X") {
@@ -781,6 +783,8 @@
 
     // Right Search Button Click for CHANGE
     $('#setup-maint-modal-change-in-search-tfac').click(function() {
+      clearErrors();
+
       let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
       maintChangeSearchDatatable.clear().draw();
       if (ftyp == "Y") {
@@ -850,6 +854,9 @@
 
     // Search Fac Table Click Event
     $(document).on('click', '#setup-maint-modal-change-table tbody tr', function() {
+
+      clearErrors();
+
       let data = maintChangeSearchDatatable.row(this).data();
 
       if (data == undefined) {
