@@ -233,7 +233,7 @@
           portY = res;
           portYDatatable.clear().draw();
           portYDatatable.rows.add(res);
-          portXDatatable.columns.adjust().draw();
+          portYDatatable.columns.adjust().draw();
         }
 
         updatePortRangeBtns(ptyp);
