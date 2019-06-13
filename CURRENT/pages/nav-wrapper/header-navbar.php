@@ -108,7 +108,7 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/../database-backup-modal.html";z ?>
+<?php include __DIR__ . "/../database-backup-modal.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
