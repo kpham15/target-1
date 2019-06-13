@@ -1,0 +1,104 @@
+<div id="matrix-node-modal" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">LOCK/UNLOCK MATRIX NODE</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <form class="form">
+          <!-- ROW 1: NODE, SHELF, SLOT, TYPE -->
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>NODE</label>
+                <input type="number" class="form-control matrix-node-modal-input" id="matrix-node-modal-node" target="node" disabled>
+              </div>
+            </div>
+          </div>
+          <!-- END ROW 1 -->
+        </form>
+
+        <!-- Action Field -->
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>ACTION</label>
+              <input type="text" class="form-control matrix-node-modal-input" id="matrix-node-modal-action" action="" readonly>
+            </div>
+          </div>
+          <label style="padding-top: 30px" id="matrix-node-modal-result"></label>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <form class="form">
+          <div class="form-group">
+            <button id="matrix-node-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    // WHEN MODAL IS HIDDEN
+    $("#matrix-node-modal").on('hidden.bs.modal', function() {
+      $("#matrix-form-action").val("");
+      queryMatrixPorts();
+      $("#matrix-node-modal-result").text("");
+    });
+
+    // SUBMIT BUTTON
+    $("#matrix-node-modal-submit").click(function() {
+      clearErrors();
+      $("#matrix-node-modal-result").text("");
+
+      let action = $("#matrix-node-modal-action").attr('action');
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api:    "ipcMxc",
+          act:    action,
+          user:   user.uname,
+          id:     $("#matrix-node-modal-id").val(),
+          node:   $("#matrix-node-modal-node").val(),
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+        let modal = {
+          title: data.rslt,
+          body: data.reason,
+        }
+        if (data.rslt === 'fail') {
+          $("#matrix-node-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+        } else {
+          if (action == "VIEW_PORT_STATUS") {
+            if (res.length === 0) {
+              $("#matrix-node-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+            } else {
+              $("#matrix-node-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+            }
+            $("#matrix-form-action").val("");
+            return;
+          }
+          $("#matrix-node-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+          queryMatrixCards();
+        }
+      });
+    });
+  });
+</script>
