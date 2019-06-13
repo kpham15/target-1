@@ -139,7 +139,7 @@ $(document).ready(function(){
         return;
       }
       // load event log table upon visiting page
-      provReportQueryProvlog(provReportStartDate, provReportEndDate);
+      provReportQueryProvlog($("#provReport_report_sel").val());
 
       provReportFirstLoad = false;
     });
