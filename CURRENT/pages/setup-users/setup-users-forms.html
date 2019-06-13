@@ -278,7 +278,7 @@ $(document).ready(function() {
   // Clear Button Click Event
   $('#setup-users-forms-clear').click(function() {
     $('.setup-users-forms-input').val('');
-    setupUsersDatatable.clear().draw();
+    $('#setup-users-forms-viewuser').trigger('click');
     clearErrors();
   })
 
@@ -432,6 +432,11 @@ $(document).ready(function() {
   $('#setup-users-tn-cbx').on('ifToggled', function(){
     $('.users-phonenum').toggle();
   });
+
+  // Side NavBar Click Event
+  $('.menu-item[page_id="setup-users-page"]').click(function() {
+    $('#setup-users-forms-viewuser').trigger('click');
+  })
 
 });
 
