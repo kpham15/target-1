@@ -677,8 +677,8 @@
   
   function validateChangeModal(obj, ckid) {
 
-    if (!((obj.oldFfac == obj.newFfac && obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac && obj.oldTfac == obj.newTfac))) {
-      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One FAC must be from the original connection');
+    if (!((obj.oldFfac == obj.newFfac && obj.oldTfac !== obj.newTfac) || (obj.oldFfac !== obj.newFfac && obj.oldTfac == obj.newTfac))) {
+      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'Only one FAC must be from the original connection');
       return;
     }
     if (obj.newFfac == "") {
@@ -952,5 +952,9 @@
       $('.maint-modal-ckid').toggle();
     });
 
+    // Modal Close Event Handler
+    $('#setup-maint-modal').on('hidden.bs.modal', function(e) {
+      $('#setup-maint-forms-action').val('');
+    })
   })
 </script>
