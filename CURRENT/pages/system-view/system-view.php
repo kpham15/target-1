@@ -40,6 +40,28 @@
           </div>
         </div>
       </div>
+
+      <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Y PORTS</h3>
+          </div>
+          <div class="box-body">
+            <table id="y-ports-table" class="table" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>PORT</th>
+                  <th>PSTA</th>
+                  <th>FAC</th>
+                  <th>FTYP</th>
+                  <th>CKID</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -104,6 +126,26 @@
 
 <script type="text/javascript">
   var portXDatatable = $('#x-ports-table').DataTable({
+    "data": [],
+    "columns": [
+      {"data":"id"},
+      {"data":"port"},
+      {"data":"psta"},
+      {"data":"fac"},
+      {"data":"ftyp"},
+      {"data":"ckid"}
+    ],
+    "columnDefs": [
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    "order": [[ 0, 'asc' ]]
+  });
+
+  var portYDatatable = $('#y-ports-table').DataTable({
     "data": [],
     "columns": [
       {"data":"id"},
@@ -189,6 +231,9 @@
           portXDatatable.columns.adjust().draw();
         } else if (ptyp === 'y') {
           portY = res;
+          portYDatatable.clear().draw();
+          portYDatatable.rows.add(res);
+          portXDatatable.columns.adjust().draw();
         }
 
         updatePortRangeBtns(ptyp);
