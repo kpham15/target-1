@@ -852,8 +852,18 @@
     $(document).on('click', '#setup-maint-modal-change-table tbody tr', function() {
       let data = maintChangeSearchDatatable.row(this).data();
 
-      $('#setup-maint-modal-change-in-ffac').val(data.fac);
-      $('#setup-maint-modal-change-in-tport').val(data.port);
+      if (data == undefined) {
+        return;
+      }
+      let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
+      if (ftyp == 'X') {
+        $('#setup-maint-modal-change-in-ffac').val(data.fac);
+        $('#setup-maint-modal-change-in-fport').val(data.port);
+      }
+      else if (ftyp == 'Y') {
+        $('#setup-maint-modal-change-in-tfac').val(data.fac);
+        $('#setup-maint-modal-change-in-tport').val(data.port);
+      }
 
       // give selected class
       $('#setup-maint-modal-change-table tbody tr').removeClass('bg-primary');
