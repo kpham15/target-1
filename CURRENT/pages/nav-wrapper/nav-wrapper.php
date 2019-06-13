@@ -36,11 +36,8 @@
     <?php include __DIR__ . '/../path-admin/path-admin.php'; ?>
     <?php include __DIR__ . '/../event-report/event-report.php'; ?>
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
-<<<<<<< HEAD
     <?php include __DIR__ .'/../setup-maint/setup-maint.php'; ?>
-=======
     <?php include __DIR__ . '/../matrix/matrix.php'; ?>
->>>>>>> ipcv2
 
     <!-- /.content -->
   </div>
