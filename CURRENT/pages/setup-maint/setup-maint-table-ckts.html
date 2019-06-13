@@ -202,6 +202,7 @@
     
     // Click Event on Ckts Table
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
+      $('.maint-row4').val('');
       let data = setupMaintTableCkts.row(this).data();
 
       maintTableCktsId = data.id;
