@@ -430,8 +430,6 @@
     ]
   })
 
-  
-  //@TODO update the all tables with new information
   function validateMtcConnModal(obj, ckid) {
     if ($('#setup-maint-modal-pick-conn1').is(':checked')) {
       maintPickedTfac = $('#setup-maint-modal-conn1-tfac').val();
@@ -908,7 +906,6 @@
         $('#setup-maint-modal-test-port2').prop('disabled', true);
       }
     });
-
     // Radio Button Click Event for MTC_TEST Bottom
     $('#setup-maint-modal-test-radio2').click(function() {
       clearErrors();
