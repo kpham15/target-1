@@ -297,6 +297,11 @@
 
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn', function() {
+      // new code
+      if ($(this).hasClass('active')) {
+        console.log("test1");
+      }
+      
       let ptyp = $(this).attr('ptyp');
 
       $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
@@ -304,10 +309,7 @@
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
 
-      // new code
-      if ($(this).hasClass('active')) {
-        console.log("test1");
-      }
+
     });
 
     // Click event for Port range buttons
