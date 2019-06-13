@@ -60,10 +60,10 @@
           </a>
           <ul class="dropdown-menu">
             <li id="backup-database">
-              <a>Backup Database</a>
+              <a>Manual Backup</a>
             </li>
-            <li>
-              <a>Something else Database</a>
+            <li id="download-database">
+              <a>Download DB Backup File</a>
             </li>
           </ul>
         </li>
@@ -107,6 +107,8 @@
     </div>
   </nav>
 </header>
+
+<?php include __DIR__ . "/header-nav-modals.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
@@ -172,6 +174,18 @@
     // Click event for logout button
     $('#logout-btn').click(function() {
       logout('manual logout');
+    });
+
+    // Click Event for Database Manual Backup
+    $('#backup-database').click(function() {
+      $('#header-database-backup-modal-action').val('MANUAL');
+      $('#header-database-backup-modal').modal('show');
+    });
+
+    // Click Event for Database Download Backup File
+    $('#download-database').click(function() {
+      queryDatabaseDownload();
+      $('#header-database-download-modal').modal('show');
     });
 
 

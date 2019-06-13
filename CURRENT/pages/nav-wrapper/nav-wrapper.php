@@ -1,7 +1,7 @@
 <div id="nav-wrapper" class="wrapper" style="display: none;">
 
   <!-- Main Header -->
-  <?php include __DIR__ . "/header-navbar.html"; ?>
+  <?php include __DIR__ . "/header-navbar.php"; ?>
 
   <!-- Left side column. contains the logo and sidebar -->
   <?php include __DIR__ . "/sidebar-nav.html"; ?>
