@@ -180,7 +180,28 @@
     })
   }
   $(document).ready(function() {
-   
+    // Click Event on Tkt Table
+    $(document).on('click', '#setup-maint-table-tkts tbody tr', function() {
+      let data = setupMaintTableTkts.row(this).data();
+
+      $('#setup-maint-forms-ckid').val(data.ckid);
+      $('#setup-maint-forms-ckid-tn').val(data.ckid);
+      $('#setup-maint-forms-cls').val(data.cls);
+      $('#setup-maint-forms-adsr').val(data.adsr);
+      $('#setup-maint-forms-tktno').val(data.tktno);
+      $('#setup-maint-forms-mlo').val(data.mlo);
+      $('#setup-maint-forms-prot').val(data.prot);
+      $('#setup-maint-forms-contyp').val(data.ctyp);
+      $('#setup-maint-forms-ffac').val(data.ffac);
+      $('#setup-maint-forms-tfac').val(data.tfac);
+      $('#setup-maint-forms-fport').val(data.fport);
+      $('#setup-maint-forms-tport').val(data.tport);
+
+      // give selected class
+      $('#setup-maint-table-tkts tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+      
+    })
 
     // Click Event on Cons Table
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
