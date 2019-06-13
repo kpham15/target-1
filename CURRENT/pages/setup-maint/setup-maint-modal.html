@@ -692,8 +692,7 @@
   }
   
   function validateChangeModal(obj, ckid) {
-    // one of new facs must be same with old connection - this means ffac or tfac must be the same in below fields - one old and one new, regardless of which order
-    //@TODO finish click event
+
     if ((!(obj.oldFfac == obj.newFfac) && (obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac) && (obj.oldTfac == obj.newTfac))) {
       inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One FAC must be from the original connection');
       return;
@@ -849,6 +848,17 @@
       }
     })
 
+    // Search Fac Table Click Event
+    $(document).on('click', '#setup-maint-modal-change-table tbody tr', function() {
+      let data = maintChangeSearchDatatable.row(this).data();
+
+      $('#setup-maint-modal-change-in-ffac').val(data.fac);
+      $('#setup-maint-modal-change-in-tport').val(data.port);
+
+      // give selected class
+      $('#setup-maint-modal-change-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+    })
 
     // Radio Button Click Event for MTC_TEST Top
     $('#setup-maint-modal-test-radio1').click(function() {
