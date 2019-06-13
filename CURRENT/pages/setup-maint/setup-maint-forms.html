@@ -86,113 +86,85 @@
     </div>
     <!-- Row 3 -->
     <div class="row">
-      <!-- DD -->
-      <div class="col-md-6">
+      <!-- CONTYP -->
+      <div class="col-md-2">
         <div class="form-group">
-          <label>DD:</label>
-          <div class="input-group date">
-            <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-            </div>
-            <input id="setup-maint-forms-dd" type="text" class="form-control pull-right setup-maint-forms-input">
-          </div>
+          <label>CONTYP</label>
+          <select id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="">
+            <option value=""></option>
+            <option value="GEN">GEN</option>
+            <option value="LPBK">LPBK</option>
+            <option value="MLPT">MLPT</option>
+            <option value="MTCD">MTCD</option>
+            <option value="MAINT">MAINT</option>
+          </select>
         </div>
       </div>
-      <!-- FDD -->
-      <div class="col-md-6">
+      <!-- FAC(X) -->
+      <div class="col-md-5">
+        <div class="col-md-12">
           <div class="form-group">
-            <label>FDD:</label>
-            <div class="input-group date">
-              <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <input id="setup-maint-forms-fdd" type="text" class="form-control pull-right setup-maint-forms-input">
-            </div>
+            <label>FAC(X):</label>
+            <input id="setup-maint-forms-ffac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
         </div>
-      </div>
-      <!-- Row 4 -->
-      <div class="row">
-        <!-- CONTYP -->
-        <div class="col-md-2">
+        <!-- PORT(X) -->
+        <div class="col-md-3">
           <div class="form-group">
-            <label>CONTYP</label>
-            <select id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="">
-              <option value=""></option>
-              <option value="GEN">GEN</option>
-              <option value="LPBK">LPBK</option>
-              <option value="MLPT">MLPT</option>
-              <option value="MTCD">MTCD</option>
-              <option value="MAINT">MAINT</option>
-            </select>
+            <label>PORT(X):</label>
           </div>
         </div>
-        <!-- FAC(X) -->
-        <div class="col-md-5">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>FAC(X):</label>
-              <input id="setup-maint-forms-ffac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
-            </div>
-          </div>
-          <!-- PORT(X) -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>PORT(X):</label>
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="form-group">
-              <input id="setup-maint-forms-fport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
-            </div>
-          </div>
-        </div>
-        <!-- FAC(Y) -->
-        <div class="col-md-5">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>FAC(Y):</label>
-              <input id="setup-maint-forms-tfac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
-            </div>
-          </div>
-          <!-- PORT(Y) -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>PORT(Y):</label>
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="form-group">
-              <input id="setup-maint-forms-tport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ACTION Row -->
-      <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-9">
           <div class="form-group">
-            <label>ACTION</label>
-            <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
-              <option value=""></option>
-              <option value="MTC_DISCON">MTC_DISCON</option>
-              <option value="MTC_CONN">MTC_CONN</option>
-              <option value="MTC_RESTORE">MTC_RESTORE</option>
-              <option value="RESTORE_MTCD">RESTORE_MTCD</option>
-              <option value="MTC_TEST">MTC_TEST</option>
-              <option value="CHANGE">CHANGE</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form group">
-            <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
-              Clear
-            </button>
+            <input id="setup-maint-forms-fport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
         </div>
       </div>
-
+      <!-- FAC(Y) -->
+      <div class="col-md-5">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>FAC(Y):</label>
+            <input id="setup-maint-forms-tfac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+        <!-- PORT(Y) -->
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>PORT(Y):</label>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="form-group">
+            <input id="setup-maint-forms-tport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ACTION Row -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
+            <option value=""></option>
+            <option value="MTC_DISCON">MTC_DISCON</option>
+            <option value="MTC_CONN">MTC_CONN</option>
+            <option value="MTC_RESTORE">MTC_RESTORE</option>
+            <option value="RESTORE_MTCD">RESTORE_MTCD</option>
+            <option value="MTC_TEST">MTC_TEST</option>
+            <option value="CHANGE">CHANGE</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form group">
+          <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 <script type="text/javascript">
@@ -233,8 +205,6 @@
     $('#setup-maint-modal-prot').val(obj.prot);
     $('#setup-maint-modal-tktno').val(obj.tktno);
     $('#setup-maint-modal-mlo').val(obj.mlo);
-    $('#setup-maint-modal-dd').val(obj.dd);
-    $('#setup-maint-modal-fdd').val(obj.fdd);
     $('#setup-maint-modal-action').val(obj.action);
     $('#setup-maint-modal-conn1-ctyp').val(obj.contyp);
     $('#setup-maint-modal-conn1-ffac').val(obj.ffac);
@@ -274,8 +244,6 @@
       $('#setup-maint-modal-contyp').val(obj.contyp);
       $('#setup-maint-modal-ffac').val(obj.ffac);
       $('#setup-maint-modal-tfac').val(obj.tfac);
-      $('#setup-maint-modal-dd').val(obj.dd);
-      $('#setup-maint-modal-fdd').val(obj.fdd);
       $('#setup-maint-modal-action').val(obj.action);
       
       $('#setup-maint-modal').modal('show');
@@ -311,8 +279,6 @@
       $('#setup-maint-modal-contyp').val(obj.contyp);
       $('#setup-maint-modal-ffac').val(obj.ffac);
       $('#setup-maint-modal-tfac').val(obj.tfac);
-      $('#setup-maint-modal-dd').val(obj.dd);
-      $('#setup-maint-modal-fdd').val(obj.fdd);
       $('#setup-maint-modal-action').val(obj.action);
       
       $('#setup-maint-modal').modal('show');
@@ -361,8 +327,6 @@
     $('#setup-maint-modal-contyp').val(obj.contyp);
     $('#setup-maint-modal-ffac').val(obj.ffac);
     $('#setup-maint-modal-tfac').val(obj.tfac);
-    $('#setup-maint-modal-dd').val(obj.dd);
-    $('#setup-maint-modal-fdd').val(obj.fdd);
     $('#setup-maint-modal-action').val(obj.action);
     
     $('#setup-maint-modal').modal('show');
@@ -412,8 +376,6 @@
     $('#setup-maint-modal-prot').val(obj.prot);
     $('#setup-maint-modal-tktno').val(obj.tktno);
     $('#setup-maint-modal-mlo').val(obj.mlo);
-    $('#setup-maint-modal-dd').val(obj.dd);
-    $('#setup-maint-modal-fdd').val(obj.fdd);
     // @TODO change here where contyp is individual of each other being shown
     // values may be different (ex, tfac == MAINT, ffac == MTCD)
     $('#setup-maint-modal-test-ctyp1').val(obj.contyp);
@@ -454,8 +416,6 @@
     $('#setup-maint-modal-prot').val(obj.prot);
     $('#setup-maint-modal-tktno').val(obj.tktno);
     $('#setup-maint-modal-mlo').val(obj.mlo);
-    $('#setup-maint-modal-dd').val(obj.dd);
-    $('#setup-maint-modal-fdd').val(obj.fdd);
 
     $('#setup-maint-modal-change-out-ctyp').val(obj.contyp);
     $('#setup-maint-modal-change-out-ffac').val(obj.ffac);
@@ -487,10 +447,6 @@
       maintTestPort = "";
     })
 
-    // Initialize DatePicker
-    $('#setup-maint-forms-dd').datepicker();
-    $('#setup-maint-forms-fdd').datepicker();
-
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
       $('#setup-maint-modal-post-response-text').text('');
@@ -508,8 +464,6 @@
         mlo:        $('#setup-maint-forms-mlo').val(),
         prot:       $('#setup-maint-forms-prot').val(),
         ckid:       $('#setup-maint-forms-ckid').val(),
-        dd:         $('#setup-maint-forms-dd').val(),
-        fdd:        $('#setup-maint-forms-fdd').val(),
         contyp:     $('#setup-maint-forms-contyp').val(),
         ckid:       $('#setup-maint-forms-ckid').val(),
         ffac:       $('#setup-maint-forms-ffac').val(),
