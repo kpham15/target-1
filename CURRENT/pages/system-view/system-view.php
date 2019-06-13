@@ -277,12 +277,12 @@
                     <button type="button" class="mio-btn btn btn-default" data-toggle="dropdown" slot="${slot}" ptyp="${ptyp}">
                       <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
                     </button>
-                  </div>
-                  <ul class="dropdown-menu">
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 2</a></li>
-                    <li><a>Item 3</a></li>
-                  </ul>`;
+                    <ul class="dropdown-menu">
+                      <li><a>Item 1</a></li>
+                      <li><a>Item 2</a></li>
+                      <li><a>Item 3</a></li>
+                    </ul>
+                  </div>`;
 
     return mioBtn;
   }
