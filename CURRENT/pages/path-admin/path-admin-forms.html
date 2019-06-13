@@ -40,12 +40,6 @@
           </button>
         </div>
       </div>
-      
-    </div>
-    <!-- END ROW 1 -->
-
-    <!-- ROW 2 BEGIN -->
-    <div class="row">
 
       <!-- CKID -->
       <div class="col-md-2">
@@ -97,11 +91,10 @@
         </div>
       </div>
 
-
     </div>
-    <!-- ROW 2 END -->
+    <!-- END ROW 1 -->
 
-    <!-- ROW 3 BEGIN -->
+    <!-- ROW 2 BEGIN -->
     <div class="row">
       <div class="col-md-10">
         <div class="form-group">
@@ -110,9 +103,9 @@
         </div>
       </div>
     </div>
-    <!-- ROW 3 END -->
+    <!-- ROW 2 END -->
 
-    <!-- ROW 4 BEGIN -->
+    <!-- ROW 3 BEGIN -->
     <div class="row">
       <!-- Action Dropdown -->
       <div class="col-md-3">
@@ -139,7 +132,7 @@
         </div>            
       </div>
     </div>
-    <!-- ROW 4 END -->
+    <!-- ROW 3 END -->
 
   </form>
 </div>
@@ -151,6 +144,7 @@ $("#pathAdmin-form-clear").on('click', function() {
   $(".pathAdmin-form-input").val("").change();
   $("#pathAdmin-form-node").val("1").change();
   $("#pathAdmin-form-slot").val("1").change();
+  pathAdminDatatable.clear().draw();
   clearErrors();
 });
 
@@ -183,8 +177,10 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 // CKID VIEW BUTTON
 $("#pathAdmin-form-view_ckid").on("click", function() {
   clearErrors();
-
   let ckid = $("#pathAdmin-form-ckid");
+  if ($("#pathAdmin-tn-check").is(":checked")) {
+    ckid = $("#pathAdmin-form-ckid-tn");
+  }
 
   if (ckid.val() == "") {
     inputError(ckid, 'Missing CKID');
