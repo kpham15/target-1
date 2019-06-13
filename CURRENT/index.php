@@ -49,7 +49,7 @@
 var folderSwList = <?php echo json_encode($folderList); ?>;
 
 var ipcDispatch = "./em/ipcDispatch.php";
-
+var ipcSwInfo = "./indexFunc.php";
 
 $(document).ready(function() {
 

@@ -18,13 +18,10 @@
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
 			$('#sidebar-user-name').text(data.ver)
-			let modal = {
-				title: 'Software Information',
-				body: data.descr
-			}
-			modalHandler(modal);
+
+			swVer.version = data.ver;
+			swVer.description = data.descr;
 		});
 	}
 
@@ -60,8 +57,42 @@
 	function loginSuccess() {
 		$('#login-page').hide();
 		$('#nav-wrapper').show();
-
+		
 		getSystemInfo();
+	}
+
+	function cancelTimeout() {
+		$.ajax({
+			type: 'POST',
+			url: ipcDispatch,
+			data: {
+				api: 'ipcLogin',
+				act: 'continue',
+				user: user.uname
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			if (data.rslt === 'fail') {
+				alert(data.reason);
+			}
+		});
+	}
+
+	function checkUserTimeout(data) {
+		let loginTime = new Date(data.loginTime).getTime() / 1000;
+		let time = new Date(data.time).getTime() / 1000;
+		let idle_to = user.idle_to * 60;
+
+		if ((time - loginTime) > idle_to) {
+			$('#cancel-timeout-modal').modal('hide');
+			logout();
+			return;
+		}
+
+		if (((time - loginTime) > (idle_to - 60)) && ((time - loginTime) < idle_to)) {
+			$('#cancel-timeout-modal .modal-body').html('Your session will be timed out in ' + (idle_to - (time - loginTime)) + ' seconds.<br/><br/>Close this window to cancel the time out.');
+			$('#cancel-timeout-modal').modal('show');
+		}
 	}
 
 	function getSystemInfo() {
@@ -91,7 +122,10 @@
 				wcInfo = res;
 
 				updateNodeStatus();
-				updateHeaderInfo();				
+				updateHeaderInfo();
+				
+				// Check if user is timed out
+				checkUserTimeout(res);
 			}
 
 			// check if first time loading information
@@ -150,4 +184,40 @@
 
         return result;
 	}
+
+
+	// ================ Encode Password ================= //
+	var keyId = "";
+	function encode(data) {
+		var header = {
+			"alg": "HS256",
+			"typ": "JWT"
+		};
+	
+		var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+		var encodedHeader = base64url(stringifiedHeader);
+	
+		var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+		var encodedData = base64url(stringifiedData);
+	
+		var signature = encodedHeader + "." + encodedData;
+		signature = CryptoJS.HmacSHA256(signature, keyId);
+		signature = base64url(signature);
+		return encodedHeader + "." + encodedData + "." + signature;
+    }
+  
+    function base64url(source) {
+		// Encode in classical base64
+		encodedSource = CryptoJS.enc.Base64.stringify(source);
+	
+		// Remove padding equal characters
+		encodedSource = encodedSource.replace(/=+$/, '');
+		
+		// Replace characters according to base64url specifications
+		encodedSource = encodedSource.replace(/\+/g, '-');
+		encodedSource = encodedSource.replace(/\//g, '_');
+	
+		return encodedSource;
+    }
+  
 </script>

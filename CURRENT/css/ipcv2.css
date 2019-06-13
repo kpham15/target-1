@@ -52,7 +52,7 @@
 /* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
-.modal-footer .confirm-btn {
+.modal-footer .modal-confirm-btn {
   display: none;
 }
 /* ============= END Modal Styling =============*/
@@ -73,6 +73,11 @@
 /* ============ END IPC Alarm Colors ============ */
 
 /* ============ Sysview Page CSS ============= */
+.addBorder {
+  box-shadow: 0px 0px 0px 2px black inset;
+  box-sizing: border-box;
+}
+
 .node-status-row {
   margin-top: 10px;
   display: flex;

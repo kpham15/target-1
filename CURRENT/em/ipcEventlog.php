@@ -23,11 +23,11 @@
 
 	$evt = "";
 	if (isset($_POST['evt']))
-        $evt = $_POST['evt'];
-        
+		$evt = $_POST['evt'];
+		
     $task = "";
 	if (isset($_POST['task']))
-		$evt = $_POST['task'];
+		$task = $_POST['task'];
 
 	$fromDate = "";
 	if (isset($_POST['fromDate']))
@@ -80,6 +80,7 @@
 
 
     function queryEventlog($uname, $evt, $fnc, $task, $fromDate, $toDate) {
+
         if($uname === "") {
             $uname = "%";
         }
