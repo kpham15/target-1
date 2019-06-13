@@ -123,6 +123,9 @@
 
 				updateNodeStatus();
 				updateHeaderInfo();
+
+				//mxc update when nodeBtn, mxcbtn, portbtn are ready
+				updateMxcInfo();
 				
 				// Check if user is timed out
 				checkUserTimeout(res);
@@ -133,6 +136,9 @@
 				startup();
 				firstload = false;
 			}
+
+
+
 		});
 	}
 

@@ -288,6 +288,37 @@
     return nodeTab;
   }
 
+  function updateMxcInfo() {
+    let nodeX = $(".node-tab.active[ptyp='x']").attr("node_id");
+    let slotX = $(".mio-btn.active[ptyp='x']").attr("slot");
+    let nodeY = $(".node-tab.active[ptyp='y']").attr("node_id");
+    let slotY = $(".mio-btn.active[ptyp='y']").attr("slot");
+    //if sys-view not ready, don't do anything
+    if(nodeX == undefined || slotX == undefined || nodeY == undefined || slotY == undefined)
+      return;
+    //update miox
+    nodeInfo.filter(function(item) {
+      return item.node == nodeX
+    })[0].MIOX.forEach(function(psta,i){
+      let slotId = i +1;
+      $("#mio-btn[slot='"+slotId+"'][ptyp='x']").find('span').html(psta);
+
+    });
+    //update mioy
+    nodeInfo.filter(function(item) {
+      return item.node == nodeY
+    })[0].MIOY.forEach(function(psta,i){
+      let slotId = i +1;
+      $("#mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
+    })
+    
+    //update ports Xside
+    queryAndUpdatePorts(nodeX,slotX,'x')
+    queryAndUpdatePorts(nodeY,slotY,'y')
+
+
+  }
+
   $(document).ready(function() {
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
