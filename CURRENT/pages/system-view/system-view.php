@@ -20,47 +20,11 @@
     <!-- =========================================================== -->
     <div class="row">
       <div class="col-md-6">
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">X PORTS</h3>
-          </div>
-          <div class="box-body">
-            <table id="x-ports-table" class="table" style="width: 100%">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>PORT</th>
-                  <th>PSTA</th>
-                  <th>FAC</th>
-                  <th>FTYP</th>
-                  <th>CKID</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
+        
       </div>
 
       <div class="col-md-6">
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Y PORTS</h3>
-          </div>
-          <div class="box-body">
-            <table id="y-ports-table" class="table" style="width: 100%">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>PORT</th>
-                  <th>PSTA</th>
-                  <th>FAC</th>
-                  <th>FTYP</th>
-                  <th>CKID</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
+        
       </div>
     </div>
 
@@ -80,13 +44,24 @@
                     <!-- MIO buttons created dynamically -->
                   </div>
                 </div>
-                <div class="row">
-                  <div class="btn-group port-range-btns" ptyp="x">
-                    <!-- Port range buttons created dynamically -->
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">X PORTS</h3>
                   </div>
-                </div>
-                <div id="x-port-grid" class="row port-grid" ptyp="x">
-                  <!-- Port boxes created dynamically -->
+                  <div class="box-body">
+                    <table id="x-ports-table" class="table" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>PORT</th>
+                          <th>PSTA</th>
+                          <th>FAC</th>
+                          <th>FTYP</th>
+                          <th>CKID</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,13 +81,24 @@
                     <!-- MIO buttons created dynamically -->
                   </div>
                 </div>
-                <div class="row">
-                  <div class="btn-group port-range-btns" ptyp="y">
-                    <!-- Port range buttons created dynamically -->
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Y PORTS</h3>
                   </div>
-                </div>
-                <div id="y-port-grid" class="row port-grid" ptyp="y">
-                  <!-- Port boxes created dynamically -->
+                  <div class="box-body">
+                    <table id="y-ports-table" class="table" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>PORT</th>
+                          <th>PSTA</th>
+                          <th>FAC</th>
+                          <th>FTYP</th>
+                          <th>CKID</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -191,10 +177,10 @@
     $('.mio-btn[slot="1"]').addClass('active');
     
     // Create port grid template
-    for (let i = 1; i <= 25; i++) {
-      let portBox = createPortBox(i);
-      $('.port-grid').append(portBox);
-    }
+    // for (let i = 1; i <= 25; i++) {
+    //   let portBox = createPortBox(i);
+    //   $('.port-grid').append(portBox);
+    // }
 
     // Query for initial X & Y port info
     queryAndUpdatePorts(1, 1, 'x');
@@ -236,8 +222,8 @@
           portYDatatable.columns.adjust().draw();
         }
 
-        updatePortRangeBtns(ptyp);
-        updatePortGrid(ptyp);
+        // updatePortRangeBtns(ptyp);
+        // updatePortGrid(ptyp);
       }
     });
   }
@@ -391,11 +377,14 @@
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn', function() {
       let ptyp = $(this).attr('ptyp');
+      let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
+      let slot = $(this).attr('slot');
 
       $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
-      $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      // $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      queryAndUpdatePorts(node, slot, ptyp);
 
     });
 
