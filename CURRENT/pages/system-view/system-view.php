@@ -262,9 +262,10 @@
                       '</div>' +
                     '</button>' +
                     '<ul class="dropdown-menu" aria-labelledby="dropdown'+gridNum+'">' +
-                      '<li><a>Item 1</a></li>' +
-                      '<li><a>Item 2</a></li>' +
-                      '<li><a>Item 3</a></li>' +
+                      '<li id="mt-disconnect"><a>MT_DISCONNECT</a></li>' +
+                      '<li id="mt-restore"><a>MT_RESTORE</a></li>' +
+                      '<li id="restore-mtcd"><a>RESTORE_MTCD</a></li>' +
+                      '<li id="mt-test"><a>MT_TEST</a></li>' +
                     '</ul>' +
                   '</div>';
 
