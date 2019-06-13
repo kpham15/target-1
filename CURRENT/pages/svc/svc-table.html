@@ -86,7 +86,8 @@
             {
                 "data":"date",
                 "render": function(data) {
-                    let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+                    if(!data) return data;
+                    let date = moment(data,'YYYY-MM-DD HH:mm:ss').format('MM-DD-YYYY HH:mm:ss');
                     return date;
                 }
             }
@@ -106,7 +107,8 @@
             {"data":"tfac"},
             {"data":"date",
              "render":function(data) {
-                let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+                if(!data) return data;
+                let date = moment(data,'YYYY-MM-DD HH:mm:ss').format('MM-DD-YYYY HH:mm:ss');
                 return date;
              }
             }
@@ -221,6 +223,7 @@
         $("#svc_findOrd_btn").click(function(e) {
             e.preventDefault();
             $("#svc_cktArea").hide();
+            $("#svc_cktconArea").hide();
             $("#svc_ordArea").show();
             queryOrd();
         })
@@ -286,7 +289,7 @@
             $("#svc_cktconIdx_num").val("");
     
             // give selected class
-            $('#svc_ckt_table tbody tr').removeClass('bg-primary');
+            $('#svc_ord_table tbody tr').removeClass('bg-primary');
             $(this).addClass('bg-primary');
     
             // clearErrors();
