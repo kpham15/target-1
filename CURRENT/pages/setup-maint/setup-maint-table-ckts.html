@@ -182,6 +182,8 @@
   $(document).ready(function() {
     // Click Event on Tkt Table
     $(document).on('click', '#setup-maint-table-tkts tbody tr', function() {
+
+      $('#setup-maint-forms-action').prop('disabled',true);
       let data = setupMaintTableTkts.row(this).data();
 
       $('#setup-maint-forms-ckid').val(data.ckid);
@@ -205,6 +207,8 @@
 
     // Click Event on Cons Table
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
+
+      $('#setup-maint-forms-action').prop('disabled',false);
       let data = setupMaintTableCons.row(this).data();
 
       maintTableConsId = data.idx;
@@ -223,6 +227,7 @@
     
     // Click Event on Ckts Table
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
+      $('#setup-maint-forms-action').prop('disabled',false);
       $('.maint-row4').val('');
       maintTableConsId = "";
 
