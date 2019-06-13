@@ -32,7 +32,7 @@
                   <th>PORT</th>
                   <th>PSTA</th>
                   <th>FAC</th>
-                  <th>CP</th>
+                  <th>FTYP</th>
                   <th>CKID</th>
                 </tr>
               </thead>
@@ -110,7 +110,7 @@
       {"data":"port"},
       {"data":"psta"},
       {"data":"fac"},
-      {"data":"cp"},
+      {"data":"ftyp"},
       {"data":"ckid"}
     ],
     "columnDefs": [
