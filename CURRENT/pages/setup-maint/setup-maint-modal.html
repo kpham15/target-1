@@ -531,7 +531,7 @@
       }
 
       if (data.rslt == 'fail') {
-        $('#setup-maint-modal-post-response-text').css('color','red').text('MTC_DISCON '+ data.rslt + ' - ' + data.reason);
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text('MTC_DISCON Success!');
