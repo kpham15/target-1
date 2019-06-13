@@ -117,11 +117,13 @@
         <div class="col-md-2">
           <div class="form-group">
             <label>CONTYP</label>
-            <select id="setup-maint-forms-contyp" class="form-control">
+            <select id="setup-maint-forms-contyp" class="form-control" disabled="">
               <option value=""></option>
               <option value="GEN">GEN</option>
               <option value="LPBK">LPBK</option>
               <option value="MLPT">MLPT</option>
+              <option value="MTCD">MTCD</option>
+              <option value="MAINT">MAINT</option>
             </select>
           </div>
         </div>
@@ -197,7 +199,7 @@
 
   var maintFfacPsta = "";
   var maintTfacPsta = "";
-  
+
   function validateMtcConnnect(obj, ckid) {
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
