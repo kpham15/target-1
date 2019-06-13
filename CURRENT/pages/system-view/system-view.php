@@ -273,7 +273,7 @@
 
   function createMioBtn(psta, index, ptyp) {
     let slot = index + 1;
-    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'"><p>MIO'+ptyp.toUpperCase()+'-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button>';
+    let mioBtn = '<div class="dropdown"><button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'"><p>MIO'+ptyp.toUpperCase()+'-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button></div>';
 
     return mioBtn;
   }
@@ -299,7 +299,8 @@
     $(document).on('click', '.mio-btn', function() {
       // new code
       if ($(this).hasClass('active')) {
-        console.log("test1");
+        console.log("test1"); //success
+
       }
       
       let ptyp = $(this).attr('ptyp');
