@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <Span aria-hidden="true">&times;</Span>
         </button>
-        <h4 class="modal-title">SETUP MAINTENANCE</h4>
+        <h4 class="modal-title">SETUP MAINTENANCE CONNECTION</h4>
       </div>
 
       <div class="modal-body">
@@ -358,33 +358,6 @@
               </div>
             </div>
           </div>
-          <!-- Row 4 -->
-          <div class="row" id="setup-maint-modal-row4-div">
-            <!-- DD -->
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>DD:</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input id="setup-maint-modal-dd" type="text" class="form-control pull-right setup-maint-modal-input" />
-                </div>
-              </div>
-            </div>
-            <!-- FDD -->
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>FDD:</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input id="setup-maint-modal-fdd" type="text" class="form-control pull-right setup-maint-modal-input" />
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Action Row -->
           <div class="row" id="setup-maint-modal-row5-div">
             <div class="col-md-4">
@@ -478,8 +451,6 @@
         "tktno":    obj.tktno,
         "mlo":      obj.mlo,
         "ctyp":     obj.ctyp,
-        "dd":       obj.dd,
-        "fdd":      obj.fdd,
         "ffac":     maintPickedFfac,
         "tfac":     maintPickedTfac,
       },
@@ -527,8 +498,6 @@
         "tktno":  obj.tktno,
         "mlo":    obj.mlo,
         "ctyp":   obj.ctyp,
-        "dd":     obj.dd,
-        "fdd":    obj.fdd,
         "ffac":   obj.ffac,
         "tfac":   obj.tfac,
       },
@@ -575,8 +544,6 @@
         "tktno":  obj.tktno,
         "mlo":    obj.mlo,
         "ctyp":   obj.ctyp,
-        "dd":     obj.dd,
-        "fdd":    obj.fdd,
         "ffac":   obj.ffac,
         "tfac":   obj.tfac,
       },
@@ -623,8 +590,6 @@
         "tktno":  obj.tktno,
         "mlo":    obj.mlo,
         "ctyp":   obj.ctyp,
-        "dd":     obj.dd,
-        "fdd":    obj.fdd,
         "ffac":   obj.ffac,
         "tfac":   obj.tfac,
       },
@@ -687,8 +652,6 @@
         "tktno":  obj.tktno,
         "mlo":    obj.mlo,
         "ctyp":   obj.ctyp,
-        "dd":     obj.dd,
-        "fdd":    obj.fdd,
         "ffac":   maintTestFac,
         "tstfac": maintTestPort,
       },
@@ -748,8 +711,6 @@
         "tktno":    obj.tktno,
         "mlo":      obj.mlo,
         "ctyp":     obj.ctyp,
-        "dd":       obj.dd,
-        "fdd":      obj.fdd,
         "ffac":     obj.oldFfac,
         "tfac":     obj.oldTfac,
         "newffac":  obj.newFfac,
@@ -861,15 +822,13 @@
     // Submit Click Event
     $('#setup-maint-modal-submit').click(function() {
       clearErrors();
-      
+
       let obj = {
         cls:      $('#setup-maint-modal-cls').val(),
         adsr:     $('#setup-maint-modal-adsr').val(),
         prot:     $('#setup-maint-modal-prot').val(),
         tktno:    $('#setup-maint-modal-tktno').val(),
         mlo:      $('#setup-maint-modal-mlo').val(),
-        dd:       $('#setup-maint-modal-dd').val(),
-        fdd:      $('#setup-maint-modal-fdd').val(),
         action:   $('#setup-maint-modal-action').val(),
         ctyp:     $('#setup-maint-modal-contyp').val(),
         ffac:     $('#setup-maint-modal-ffac').val(),
@@ -974,10 +933,6 @@
         $('#setup-maint-modal-conn2-ffac').prop('disabled',false);
       }
     })
-    // Initialize Datepicker
-    $('#setup-maint-modal-dd').datepicker();
-    $('#setup-maint-modal-fdd').datepicker();
-
 
     // Initialize inputmask
     $('#setup-maint-modal-ckid-tn').inputmask();
