@@ -130,7 +130,26 @@
     ],
     "order": [[ 0, 'asc' ]],
     "createdRow": function( row, data, dataIndex ) {
-      console.log(data);
+      let color = '';
+
+      switch(data.psta) {
+        case "SF":
+          color = 'bg-aqua';
+          break;
+        case "LCK":
+          color = 'bg-critical';
+          break;
+        case "CONN":
+          color = 'bg-green';
+          break;
+        case "MTCD":
+          color = 'bg-minor';
+          break;
+        default:
+          color = '';
+      }
+
+      $(row).addClass(color);
     }
   });
 
@@ -151,7 +170,29 @@
         "searchable": false
       }
     ],
-    "order": [[ 0, 'asc' ]]
+    "order": [[ 0, 'asc' ]],
+    "createdRow": function( row, data, dataIndex ) {
+      let color = '';
+
+      switch(data.psta) {
+        case "SF":
+          color = 'bg-aqua';
+          break;
+        case "LCK":
+          color = 'bg-critical';
+          break;
+        case "CONN":
+          color = 'bg-green';
+          break;
+        case "MTCD":
+          color = 'bg-minor';
+          break;
+        default:
+          color = '';
+      }
+
+      $(row).addClass(color);
+    }
   });
 
   function sysviewStartup() {
