@@ -114,7 +114,7 @@
   var portXDatatable = $('#x-ports-table').DataTable({
     "bLengthChange": false,
     "pageLength": 25,
-    "scrollY": "200px",
+    "scrollY": "300px",
     "data": [],
     "columns": [
       {"data":"id"},
@@ -159,7 +159,7 @@
   var portYDatatable = $('#y-ports-table').DataTable({
     "bLengthChange": false,
     "pageLength": 25,
-    "scrollY": "200px",
+    "scrollY": "300px",
     "data": [],
     "columns": [
       {"data":"id"},
