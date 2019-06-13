@@ -304,6 +304,10 @@
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
 
+      // new code
+      if ($(this).hasClass('active')) {
+        console.log("test1");
+      }
     });
 
     // Click event for Port range buttons
