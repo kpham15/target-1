@@ -187,6 +187,8 @@
       let data = setupMaintTableCons.row(this).data();
 
       maintTableConsId = data.idx;
+      maintFfacPsta = data.fpsta;
+      maintTfacPsta = data.tpsta;
 
       $('#setup-maint-forms-contyp').val(data.ctyp);
       $('#setup-maint-forms-ffac').val(data.ffac);
