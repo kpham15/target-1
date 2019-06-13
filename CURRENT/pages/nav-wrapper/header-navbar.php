@@ -108,7 +108,7 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/../database-backup-modal.html"; ?>
+<?php include __DIR__ . "/../header-nav-modals.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
@@ -178,15 +178,14 @@
 
     // Click Event for Database Manual Backup
     $('#backup-database').click(function() {
-      $('.database-backup-modal-input').hide();
-      $('#database-backup-modal-action').val('MANUAL');
-      $('#database-backup-modal').modal('show');
+      $('#header-database-backup-modal-action').val('MANUAL');
+      $('#header-database-backup-modal').modal('show');
     });
 
     // Click Event for Database Download Backup File
     $('#download-database').click(function() {
       queryDatabaseDownload();
-      $('#database-backup-modal').modal('show');
+      $('#header-database-backup-modal').modal('show');
     });
 
 
