@@ -692,8 +692,12 @@
   }
   
   function validateChangeModal(obj, ckid) {
-
-  
+    // one of new facs must be same with old connection - this means ffac or tfac must be the same in below fields - one old and one new, regardless of which order
+    //@TODO finish click event
+    if ((!(obj.oldFfac == obj.newFfac) && (obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac) && (obj.oldTfac == obj.newTfac))) {
+      inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One facility must be from the original connection');
+      return;
+    }
   }
 
   function maintChangeSearch() {
@@ -791,7 +795,11 @@
         action: $('#setup-maint-modal-action').val(),
         ctyp:   $('#setup-maint-modal-contyp').val(),
         ffac:   $('#setup-maint-modal-ffac').val(),
-        tfac:   $('#setup-maint-modal-tfac').val()
+        tfac:   $('#setup-maint-modal-tfac').val(),
+        oldFfac: $('#setup-maint-modal-change-out-ffac').val(),
+        oldTfac: $('#setup-maint-modal-change-out-tfac').val(),
+        newFfac: $('#setup-maint-modal-change-in-ffac').val(),
+        newTfac: $('#setup-maint-modal-change-in-tfac').val()
       }
 
       let ckid = "";
