@@ -117,6 +117,18 @@
 		}
 
 		initializeMaintReportDateRangePicker();
+
+    // UPON LOAD PAGE FIRST TIME
+    var maintReportFirstLoad = true;
+    $(".menu-item[page_id='maint-report-page']").click(async function() {
+      if (maintReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      maintReportQueryMaintlog(maintReportStartDate, maintReportEndDate);
+
+      maintReportFirstLoad = false;
+    });
 		
 
 		// Click Event For 'Submit Button'
