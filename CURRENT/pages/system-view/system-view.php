@@ -110,8 +110,8 @@
       {"data":"port"},
       {"data":"psta"},
       {"data":"fac"},
-      {"data":"CP"},
-      {"data":"CKID"}
+      {"data":"cp"},
+      {"data":"ckid"}
     ],
     "columnDefs": [
       {
