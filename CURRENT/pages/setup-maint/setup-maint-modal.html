@@ -693,7 +693,7 @@
   
   function validateChangeModal(obj, ckid) {
 
-    if ((!(obj.oldFfac == obj.newFfac) && (obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac) && (obj.oldTfac == obj.newTfac))) {
+    if (!((obj.oldFfac == obj.newFfac && obj.oldTfac !== obj.newTfac)) || ((obj.oldFfac !== obj.newFfac && obj.oldTfac == obj.newTfac))) {
       inputError($('#setup-maint-modal-change-in-ffac, #setup-maint-modal-change-in-tfac'),'One FAC must be from the original connection');
       return;
     }
