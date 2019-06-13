@@ -306,17 +306,17 @@
 
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn', function() {
-      // new code
-      if ($(this).hasClass('active')) {
-        console.log("test1"); //success
-      }
+      // // new code
+      // if ($(this).hasClass('active')) {
+      //   console.log("test1"); //success
+      // }
       
-      let ptyp = $(this).attr('ptyp');
+      // let ptyp = $(this).attr('ptyp');
 
-      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
-      $(this).button('toggle');
+      // $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
+      // $(this).button('toggle');
 
-      $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      // $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
 
 
     });
