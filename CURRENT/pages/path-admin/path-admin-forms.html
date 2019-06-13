@@ -144,6 +144,7 @@ $("#pathAdmin-form-clear").on('click', function() {
   $(".pathAdmin-form-input").val("").change();
   $("#pathAdmin-form-node").val("1").change();
   $("#pathAdmin-form-slot").val("1").change();
+  pathAdminDatatable.clear().draw();
   clearErrors();
 });
 
