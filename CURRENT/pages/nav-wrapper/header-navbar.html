@@ -223,6 +223,7 @@
 
   $("#changePw_btn").click(function(){
     $("#login_username").val(user.uname);
+    $("#login_password_input").val("")
     if(!$("#change-password-btn").hasClass("active")) {
       $("#change-password-btn").trigger("click");
     }
