@@ -18,7 +18,32 @@
     <?php include __DIR__ . "/find-fac.html"; ?>
 
     <!-- =========================================================== -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">X PORTS</h3>
+          </div>
+          <div class="box-body">
+            <table id="x-ports-table" class="table" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>PORT</th>
+                  <th>PSTA</th>
+                  <th>FAC</th>
+                  <th>CP</th>
+                  <th>CKID</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
+
+    <!-- ORIGINAL SYSTEM VIEW GRID -->
     <div class="row">
       <div class="col-md-6">
         <div id="node-x-table" class="nav-tabs-custom">
@@ -78,6 +103,26 @@
 </div>
 
 <script type="text/javascript">
+  var portXDatatable = $('#x-ports-table').DataTable({
+    "data": [],
+    "columns": [
+      {"data":"id"},
+      {"data":"port"},
+      {"data":"psta"},
+      {"data":"fac"},
+      {"data":"CP"},
+      {"data":"CKID"}
+    ],
+    "columnDefs": [
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    "order": [[ 0, 'asc' ]]
+  });
+
   function sysviewStartup() {
     // Create the Node tabs according to amount of nodes
     // @TODO
@@ -139,6 +184,9 @@
       } else {
         if (ptyp === 'x') {
           portX = res;
+          portXDatatable.clear().draw();
+          portXDatatable.rows.add(res);
+          portXDatatable.columns.adjust().draw();
         } else if (ptyp === 'y') {
           portY = res;
         }
