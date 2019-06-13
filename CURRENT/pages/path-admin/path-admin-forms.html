@@ -176,10 +176,11 @@ $("#pathAdmin-form-view_node_slot").on("click", function() {
 // CKID VIEW BUTTON
 $("#pathAdmin-form-view_ckid").on("click", function() {
   clearErrors();
-
-  if ($("#pathAdmin-tn-check").is(":checked")) {
+  let tn = $("#pathAdmin-tn-check");
+  
+  if (tn.is(":checked")) {
     let ckid = $("#pathAdmin-form-ckid-tn");
-  } else {
+  } else if (tn.is(":not(:checked)")){
     let ckid = $("#pathAdmin-form-ckid");
   }
 
