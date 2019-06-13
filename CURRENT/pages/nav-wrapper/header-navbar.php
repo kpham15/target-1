@@ -185,7 +185,7 @@
     // Click Event for Database Download Backup File
     $('#download-database').click(function() {
       queryDatabaseDownload();
-      $('#header-database-backup-modal').modal('show');
+      $('#header-database-download-modal').modal('show');
     });
 
 
