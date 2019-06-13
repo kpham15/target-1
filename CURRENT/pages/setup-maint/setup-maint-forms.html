@@ -448,6 +448,7 @@
       maintPstaFfac = "";
       maintTestFac = "";
       maintTestPort = "";
+      $('#setup-maint-forms-viewckid').trigger('click');
     })
 
     // Action Change Event
@@ -604,5 +605,9 @@
       $('.maint-ckid').toggle();
     });
 
+    // side navbar click event
+    $('.menu-item[page_id="setup-maint-page"]').click(function() {
+      $('#setup-maint-forms-viewckid').trigger('click');
+    })
   })
 </script>
