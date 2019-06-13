@@ -152,7 +152,32 @@
   }
 
   function maintQueryTableCons(ckid) {
-    
+    $.ajax({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title:  data.rslt,
+        body:   data.reason
+      }
+      if (data.rslt == 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      }
+      else {
+        setupMaintTableCons.clear().draw();
+        setupMaintTableCons.rows.add(res);
+        setupMaintTableCons.columns.adjust().draw();
+      }
+    })
   }
   $(document).ready(function() {
    
