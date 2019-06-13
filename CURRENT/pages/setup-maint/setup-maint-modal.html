@@ -860,7 +860,8 @@
 
     // Submit Click Event
     $('#setup-maint-modal-submit').click(function() {
-
+      clearErrors();
+      
       let obj = {
         cls:      $('#setup-maint-modal-cls').val(),
         adsr:     $('#setup-maint-modal-adsr').val(),
