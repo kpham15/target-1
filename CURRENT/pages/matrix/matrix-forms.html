@@ -151,11 +151,11 @@
       mxcNodeModalInputs.val("").change();
       mxcCardModalInputs.val("").change();
       if (mxcId != "") {
-        populateMxcModal();
+        populateMxcModal('card');
         mxcCardModal.modal("show");
       } else {
         if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
-          populateMxcModal();
+          populateMxcModal('node');
           $(".matrix-node-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
           mxcNodeModal.modal("show");
         } else {
@@ -166,11 +166,16 @@
     }
   });
 
-  function populateMxcModal() {
-    $("#matrix-card-modal-node").val($("#matrix-form-node").val());
-    $("#matrix-card-modal-shelf").val($("#matrix-form-shelf").val());
-    $("#matrix-card-modal-type").val($("#matrix-form-type").val());
-    $("#matrix-card-modal-slot").val($("#matrix-form-slot").val());
-    $("#matrix-card-modal-action").val($("#matrix-form-action").val()).attr('action', $("#matrix-form-action option:selected").attr('action'));
+  function populateMxcModal(action) {
+    if (action == "card") {
+      $("#matrix-card-modal-node").val($("#matrix-form-node").val());
+      $("#matrix-card-modal-shelf").val($("#matrix-form-shelf").val());
+      $("#matrix-card-modal-type").val($("#matrix-form-type").val());
+      $("#matrix-card-modal-slot").val($("#matrix-form-slot").val());
+      $("#matrix-card-modal-action").val($("#matrix-form-action").val()).attr('action', $("#matrix-form-action option:selected").attr('action'));
+    } else if (action == "node") {
+      $("#matrix-node-modal-node").val($("#matrix-form-node").val());
+      $("#matrix-node-modal-action").val($("#matrix-form-action").val()).attr('action', $("#matrix-form-action option:selected").attr('action'));
+    }
   }
 </script>
