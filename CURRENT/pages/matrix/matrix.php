@@ -28,8 +28,7 @@
     </div>
 
     <!-- MATRIX MODAL -->
-    <?php include __DIR__ . '/modals/matrix-card-modal.html'; ?>
-    <?php include __DIR__ . '/modals/matrix-node-modal.html'; ?>
+    <?php include __DIR__ . '/matrix-card-modal.html'; ?>
 
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div id="matrix-card-modal" class="modal fade">
+<div id="matrix-modal" class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,25 +16,25 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>NODE</label>
-                <input type="number" class="form-control matrix-card-modal-input" id="matrix-card-modal-node" target="node" disabled>
+                <input type="number" class="form-control matrix-modal-input" id="matrix-modal-node" target="node" disabled>
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>SHELF</label>
-                <input type="number" class="form-control matrix-card-modal-input" id="matrix-card-modal-shelf" target="shelf" disabled>
+                <input type="number" class="form-control matrix-modal-input" id="matrix-modal-shelf" target="shelf" disabled>
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>SLOT</label>
-                <input type="number" class="form-control matrix-card-modal-input" id="matrix-card-modal-slot" target="slot" disabled>
+                <input type="number" class="form-control matrix-modal-input" id="matrix-modal-slot" target="slot" disabled>
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>TYPE</label>
-                <input type="text" class="form-control matrix-card-modal-input" id="matrix-card-modal-type" target="type" disabled>
+                <input type="text" class="form-control matrix-modal-input" id="matrix-modal-type" target="type" disabled>
               </div>
             </div>
           </div>
@@ -46,10 +46,10 @@
           <div class="col-md-3">
             <div class="form-group">
               <label>ACTION</label>
-              <input type="text" class="form-control matrix-card-modal-input" id="matrix-card-modal-action" action="" readonly>
+              <input type="text" class="form-control matrix-modal-input" id="matrix-modal-action" action="" readonly>
             </div>
           </div>
-          <label style="padding-top: 30px" id="matrix-card-modal-result"></label>
+          <label style="padding-top: 30px" id="matrix-modal-result"></label>
         </div>
 
       </div>
@@ -57,7 +57,7 @@
       <div class="modal-footer">
         <form class="form">
           <div class="form-group">
-            <button id="matrix-card-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+            <button id="matrix-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -72,18 +72,18 @@
 
   $(document).ready(function() {
     // WHEN MODAL IS HIDDEN
-    $("#matrix-card-modal").on('hidden.bs.modal', function() {
+    $("#matrix-modal").on('hidden.bs.modal', function() {
       $("#matrix-form-action").val("");
       queryMatrixPorts();
-      $("#matrix-card-modal-result").text("");
+      $("#matrix-modal-result").text("");
     });
 
     // SUBMIT BUTTON
-    $("#matrix-card-modal-submit").click(function() {
+    $("#matrix-modal-submit").click(function() {
       clearErrors();
-      $("#matrix-card-modal-result").text("");
+      $("#matrix-modal-result").text("");
 
-      let action = $("#matrix-card-modal-action").attr('action');
+      let action = $("#matrix-modal-action").attr('action');
       $.ajax({
         type: "POST",
         url: ipcDispatch,
@@ -91,11 +91,11 @@
           api:    "ipcMxc",
           act:    action,
           user:   user.uname,
-          id:     $("#matrix-card-modal-id").val(),
-          node:   $("#matrix-card-modal-node").val(),
-          shelf:  $("#matrix-card-modal-shelf").val(),
-          slot:   $("#matrix-card-modal-slot").val(),
-          type:   $("#matrix-card-modal-type").val(),
+          id:     $("#matrix-modal-id").val(),
+          node:   $("#matrix-modal-node").val(),
+          shelf:  $("#matrix-modal-shelf").val(),
+          slot:   $("#matrix-modal-slot").val(),
+          type:   $("#matrix-modal-type").val(),
         },
         dataType: 'json'
       }).done(function(data) {
@@ -105,18 +105,18 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          $("#matrix-card-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              $("#matrix-card-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
             } else {
-              $("#matrix-card-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
             }
             $("#matrix-form-action").val("");
             return;
           }
-          $("#matrix-card-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
           queryMatrixCards();
         }
       });
