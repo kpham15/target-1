@@ -28,7 +28,7 @@
     </div>
 
     <!-- MATRIX MODAL -->
-    <?php include __DIR__ . '/matrix-card-modal.html'; ?>
+    <?php include __DIR__ . '/matrix-modal.html'; ?>
 
   </div>
 </div>
@@ -45,7 +45,7 @@
     }
 
     // load matrix table upon visiting page
-    queryFac();
+    queryMatrixCards();
 
     matrixFirstLoad = false;
   });
