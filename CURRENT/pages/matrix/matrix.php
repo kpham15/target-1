@@ -45,7 +45,7 @@
     }
 
     // load matrix table upon visiting page
-    queryFac();
+    queryMatrixCards();
 
     matrixFirstLoad = false;
   });
