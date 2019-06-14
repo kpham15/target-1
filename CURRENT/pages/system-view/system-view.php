@@ -342,8 +342,8 @@
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
 
-      $('#mt-disconnect').removeClass('disabled');
-      $('#mt-restore').addClass('disabled');
+      $('#mt-disconnect').removeAttr('disabled');
+      $('#mt-restore').attr('disabled');
       
       
     })
