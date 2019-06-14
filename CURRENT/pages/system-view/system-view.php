@@ -332,8 +332,16 @@
         shelf = "2";
       }
       console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
+
+      $("#matrix-modal-node").val(node);
+      $("#matrix-modal-shelf").val(shelf);
+      $("#matrix-modal-slot").val(slot);
+      $("#matrix-modal-type").val(ptyp);
+      $("#matrix-modal-action").val("LCK");
+      // popup modal
       // Set node, shelf, slot, type values
       // Display modal populated with values
+
     });
 
     // MIO dropdown menu unlock card
