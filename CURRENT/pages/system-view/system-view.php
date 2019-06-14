@@ -310,9 +310,8 @@
       let ptyp = $(this).attr('ptyp');
       if ($(this).hasClass('active')) {
         console.log("test1"); //success
-        $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
       }
-      
+      $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
       $(this).addClass('active');
 
 
