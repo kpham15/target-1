@@ -296,7 +296,7 @@
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
       let portCkid = $(this).parent().parent().find('span.port-ckid').text();
-      console.log(portCkid);
+      $('#setup-maint-modal').modal('show');
 
     });
 
@@ -348,9 +348,9 @@
 
     // Click event for Port Box MTCD = Minor (Pale Yellow)
     $(document).on('click', '.bg-minor button', function() {
-      console.log('i am clicking a yellow box');
+
       let portPsta = $(this).find('span.port-psta').text();
-      console.log(portPsta);
+
 
 
       $(this).parent().find('#mt-disconnect').addClass('disabled');
@@ -361,9 +361,9 @@
 
     // Click event for Port Box MAINT = Orange
     $(document).on('click', '.bg-orange button', function() {
-      console.log('i am click on an orange box');
+
       let portPsta = $(this).find('span.port-psta').text();
-      console.log(portPsta);
+
 
       $(this).parent().find('#mt-disconnect').addClass('disabled');
       $(this).parent().find('#mt-restore').addClass('disabled');
@@ -374,7 +374,7 @@
 
     // Click event for Port Box Not CONN/MTCD/MAINT
     $(document).on('click', '.bg-aqua button, .bg-critical button, .bg-gray-active button', function() {
-      console.log('click button not green/orange/yellow');
+      // console.log('click button not green/orange/yellow');
       $(this).parent().find('#mt-disconnect').addClass('disabled');
       $(this).parent().find('#mt-restore').addClass('disabled');
       $(this).parent().find('#restore-mtcd').addClass('disabled');
