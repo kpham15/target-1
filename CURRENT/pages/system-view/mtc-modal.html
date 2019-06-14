@@ -20,7 +20,7 @@
                 <label>TN:</label>
                 <input id="mtc-modal-cbx" type="checkbox" checked />
                 <input id="mtc-modal-ckid" type="text" class="form-control maint-modal-ckid mtc-modal-input" style="display:none;"/>
-                <input id="mtc-modal-ckid-tn" type="text" class="form-control maint-modal-ckid mtc-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+                <input id="mtc-modal-ckid-tn" type="text" class="form-control mtc-modal-ckid mtc-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
               </div>
             </div>
             <!-- CLS -->
@@ -135,3 +135,17 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  // TN Checkbox Handler
+  $('#mtc-modal-cbx').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#mtc-modal-cbx').on('ifToggled', function(){
+    $('.mtc-modal-ckid').toggle();
+  });
+
+})
+</script>
