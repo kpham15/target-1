@@ -293,7 +293,7 @@
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
       // console.log($('.fac-num'));
-      console.log($(this).parent().find('span.port-num').text());
+      console.log($(this).parent().parent().find('span.port-num').text());
     });
 
     // Click event for Node Tabs
