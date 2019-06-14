@@ -84,7 +84,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>CONTYP:</label>
-                <select id="mtc-modal-contyp" class="form-control mtc-modal-input">
+                <select id="mtc-modal-ctyp" class="form-control mtc-modal-input">
                   <option value=""></option>
                   <option value="GEN">GEN</option>
                   <option value="LPBK">LPBK</option>
@@ -137,7 +137,36 @@
 </div>
 
 <script type="text/javascript">
+
+ function sysviewMaintQueryCkid(ckid) {
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      $('#mtc-modal-ckid').val(ckid);
+      $('#mtc-modal-ckid-tn').val(ckid);
+      $('#mtc-modal-cls').val(data.cls);
+      $('#mtc-modal-adsr').val(data.adsr);
+      $('#mtc-modal-prot').val(data.prot);
+      $('#mtc-modal-tktno').val(data.tktno);
+      $('#mtc-modal-mlo').val(data.mlo);
+      $('#mtc-modal-ctyp').val(data.ctyp);
+      $('#mtc-modal-ffac').val(data.ffac);
+      $('#mtc-modal-tfac').val(data.tfac);
+    })
+  }
+
 $(document).ready(function() {
+  // Submit button click event
 
   // Initialize inputmask
   $('#mtc-modal-ckid-tn').inputmask();
