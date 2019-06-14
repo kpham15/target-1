@@ -320,12 +320,12 @@
 
     // MIO dropdown menu lock card
     $(".dropdown-menu-lock-card").on('click', function() {
-      console.log("lock card modal should open");
+      console.log($(this));
     });
 
     // MIO dropdown menu unlock card
     $(".dropdown-menu-unlock-card").on('click', function() {
-      console.log("unlock card modal should open");
+      console.log($(this));
     });
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
