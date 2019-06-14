@@ -311,9 +311,9 @@
       if ($(this).hasClass('active')) {
         console.log("test1"); //success
       }
-      $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
-      
-      $(this).button('toggle');
+      // $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
+
+      // $(this).button('toggle');
 
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
