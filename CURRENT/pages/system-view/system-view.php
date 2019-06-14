@@ -322,8 +322,6 @@
 
     // MIO dropdown menu lock card
     $(document).on('click',".dropdown-menu-lock-card", function() {
-      console.log($(this).parent().parent().parent().children('button').attr('ptyp'));
-      console.log($(this).parent().parent().parent().children('button').attr('slot'));
       let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
       let slot = $(this).parent().parent().parent().children('button').attr('slot');
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
@@ -343,17 +341,30 @@
       $("#matrix-modal-type").val(ptyp);
       $("#matrix-modal-action").val("LCK").attr('action', 'lck');
       $("#matrix-modal").modal();
-      // popup modal
-      // Set node, shelf, slot, type values
-      // Display modal populated with values
 
     });
 
     // MIO dropdown menu unlock card
     $(document).on('click',".dropdown-menu-unlock-card", function() {
-      console.log($(this).parent().parent().parent().children('button').attr('ptyp'));
-      // Set node, shelf, slot, type values
-      // Display modal populated with values
+      let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
+      let slot = $(this).parent().parent().parent().children('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      let shelf = "";
+      if (ptyp == "x") {
+        shelf = "1";
+        ptyp = "MIOX";
+      } else if (ptyp == "y") {
+        shelf = "2";
+        ptyp = "MIOY";
+      }
+      console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
+
+      $("#matrix-modal-node").val(node);
+      $("#matrix-modal-shelf").val(shelf);
+      $("#matrix-modal-slot").val(slot);
+      $("#matrix-modal-type").val(ptyp);
+      $("#matrix-modal-action").val("LCK").attr('action', 'lck');
+      $("#matrix-modal").modal();
     });
 
     // Click event for Port range buttons
