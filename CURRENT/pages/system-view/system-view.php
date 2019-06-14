@@ -299,15 +299,14 @@
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
-      // let ckid = $(this).parent().parent().find('span.port-ckid').text();
+
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
-      console.log(ckid);
-      // clearErrors();
-      // $('#mtc-modal-post-response-text').text('');
-      // $('.mtc-modal').val('');
-      // sysviewMtcDiscon(ckid);
-      // $('#mtc-modal-action').val('MTC_DISCON');
-      // $('#mtc-modal').modal('show');
+      clearErrors();
+      $('#mtc-modal-post-response-text').text('');
+      $('.mtc-modal').val('');
+      sysviewMtcDiscon(ckid);
+      $('#mtc-modal-action').val('MTC_DISCON');
+      $('#mtc-modal').modal('show');
 
     });
 
