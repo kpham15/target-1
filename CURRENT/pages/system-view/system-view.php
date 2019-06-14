@@ -345,7 +345,7 @@
     })
 
     // Click event for Port Box MTCD = Yellow
-    $(document).on('click', 'bg-minor', function() {
+    $(document).on('click', '.bg-minor', function() {
       console.log('i am clicking a yellow box');
       let portPsta = $(this).find('span.port-psta').text();
       console.logt(portPsta);
