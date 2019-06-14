@@ -310,7 +310,7 @@
       // new code
       let ptyp = $(this).attr('ptyp');
       if ($(this).hasClass('active')) {
-
+        return;
       }
       else {        
         $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
@@ -322,8 +322,8 @@
 
     // MIO dropdown menu lock card
     $(document).on('click',".dropdown-menu-lock-card", function() {
-      let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
-      let slot = $(this).parent().parent().parent().children('button').attr('slot');
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
       let shelf = "";
       if (ptyp == "x") {
@@ -333,7 +333,6 @@
         shelf = "2";
         ptyp = "MIOY";
       }
-      console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
 
       $("#matrix-modal-node").val(node);
       $("#matrix-modal-shelf").val(shelf);
@@ -346,8 +345,8 @@
 
     // MIO dropdown menu unlock card
     $(document).on('click',".dropdown-menu-unlock-card", function() {
-      let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
-      let slot = $(this).parent().parent().parent().children('button').attr('slot');
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
       let shelf = "";
       if (ptyp == "x") {
@@ -357,7 +356,6 @@
         shelf = "2";
         ptyp = "MIOY";
       }
-      console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
 
       $("#matrix-modal-node").val(node);
       $("#matrix-modal-shelf").val(shelf);
