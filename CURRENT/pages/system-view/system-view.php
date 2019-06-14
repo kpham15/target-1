@@ -344,7 +344,7 @@
       let ptyp = $(this).attr('ptyp');
       let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
       let slot = $('.mio-btn.active[ptyp="'+ptyp+'"]').attr('slot');
-
+      console.log("ptyp",ptyp,"node",node,"slot",slot)
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
