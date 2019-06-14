@@ -334,7 +334,7 @@
     // });
 
     // Click event for Port Box CONN = Green
-    $(document).on('click', '.port-box .bg-green', function() {
+    $(document).on('click', '.port-box bg-green', function() {
       console.log('i am clicking a green box');
     })
   });
