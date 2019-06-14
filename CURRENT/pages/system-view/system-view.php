@@ -278,9 +278,8 @@
                       <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a>Item 1</a></li>
-                      <li><a>Item 2</a></li>
-                      <li><a>Item 3</a></li>
+                      <li class="dropdown-menu-lock-card"><a>LOCK CARD</a></li>
+                      <li class="dropdown-menu-unlock-card"><a>UNLOCK CARD</a></li>
                     </ul>
                   </div>`;
 
@@ -309,9 +308,7 @@
       // new code
       let ptyp = $(this).attr('ptyp');
       if ($(this).hasClass('active')) {
-        // $(this).click();
-        
-        console.log("test1"); //success
+
       }
       else {        
         $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
@@ -319,10 +316,17 @@
         $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
       }
 
-      $()
-
     });
 
+    // MIO dropdown menu lock card
+    $(".dropdown-menu-lock-card").on('click', function() {
+      console.log("lock card modal should open");
+    });
+
+    // MIO dropdown menu unlock card
+    $(".dropdown-menu-unlock-card").on('click', function() {
+      console.log("unlock card modal should open");
+    });
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
       let ptyp = $(this).attr('ptyp');
