@@ -27,11 +27,11 @@
 
     </div>
 
-    <!-- MATRIX MODAL -->
-    <?php include __DIR__ . '/matrix-modal.html'; ?>
-
+    
   </div>
 </div>
+<!-- MATRIX MODAL -->
+<?php include __DIR__ . '/matrix-modal.html'; ?>
 
 <script type="text/javascript">
 
