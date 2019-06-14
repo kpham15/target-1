@@ -296,7 +296,7 @@
       console.log($(this).parent().parent().find('span.port-num').text());
       console.log($(this).parent().parent().find('span.port-psta').text());
       console.log($(this).parent().parent().find('span.fac-num').text());
-      console.log($(this).parent().parent().find('span.fac-typ').text());
+      console.log($(this).parent().parent().find('span.fac-type').text());
       console.log($(this).parent().parent().find('span.port-ckid').text());
 
 
