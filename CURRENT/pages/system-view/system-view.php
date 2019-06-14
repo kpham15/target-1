@@ -309,7 +309,8 @@
       // new code
       let ptyp = $(this).attr('ptyp');
       if ($(this).hasClass('active')) {
-        $(this).click();
+        // $(this).click();
+        
         console.log("test1"); //success
       }
       else {        
