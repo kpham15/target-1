@@ -293,40 +293,14 @@
     return nodeTab;
   }
   
-  // function sysviewMaintQueryCkid(ckid) {
-  //   $.ajax ({
-  //     type:       'POST',
-  //     url:        ipcDispatch,
-  //     data:       {
-  //       "api":    "ipcProv",
-  //       "act":    "queryCktconByCkid",
-  //       "user":   user.uname,
-  //       "ckid":   ckid
-  //     },
-  //     dataType:   'json',
-  //   }).done(function(data) {
-  //     let res = data.rows;
-
-  //     $('#setup-maint-modal-ckid').val(ckid),
-  //     $('#setup-maint-modal-ckid-tn').val(ckid),
-  //     $('#setup-maint-modal-cls').val(data.cls),
-  //     $('#setup-maint-modal-adsr').val(data.adsr),
-  //     $('#setup-maint-modal-prot').val(data.prot),
-  //     $('#setup-maint-modal-tktno').val(data.tktno),
-  //     $('#setup-maint-modal-mlo').val(data.mlo),
-  //     $('#setup-maint-modal-contyp').val(data.ctyp),
-  //     $('#setup-maint-modal-ffac').val(data.ffac),
-  //     $('#setup-maint-modal-action').val('MTC_DISCON'),
  
-  //   })
-  // }
   
 
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
       let ckid = $(this).parent().parent().find('span.port-ckid').text();
-
+      sysviewMaintQueryCkid(ckid);
       $('#mtc-modal').modal('show');
 
     });
