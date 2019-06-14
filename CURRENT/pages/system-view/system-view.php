@@ -16,6 +16,7 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/mtc-modal.html"; ?>
 
     <!-- =========================================================== -->
 
@@ -326,7 +327,7 @@
     $(document).on('click', '#mt-disconnect', function() {
       let ckid = $(this).parent().parent().find('span.port-ckid').text();
 
-      $('#setup-maint-modal').modal('show');
+      $('#mtc-modal').modal('show');
 
     });
 
