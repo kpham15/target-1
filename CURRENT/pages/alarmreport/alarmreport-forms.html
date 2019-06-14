@@ -52,7 +52,6 @@
 				<div class="form-group">
 					<label>REPORT:</label>
 					<select id="alarmreport-forms-report" class="form-control alarmreport-forms-input">
-						<option value=""></option>
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
 					</select>
@@ -117,13 +116,14 @@
 
 	$(document).ready(function() {
 		
-		var alarmreportStartDate = "";
-		var alarmreportEndDate = "";
+		var alarmreportStartDate = moment(new Date()).format('YYYY-MM-DD');
+		var alarmreportEndDate = moment(new Date()).format('YYYY-MM-DD');
 
 		// Initialze daterangepicker and assign values to start and from dates
 		function initializeAlarmreportDateRangePicker () {
 			$('input[id="alarmreport-daterange"]').daterangepicker({
-				opens: 'bottom'
+				opens: 'bottom',
+        startDate: moment(),
 			}, function(start, end, label) {
 				alarmreportStartDate = start.format('YYYY-MM-DD');
 				alarmreportEndDate = end.format('YYYY-MM-DD');
@@ -131,6 +131,18 @@
 		}
 
 		initializeAlarmreportDateRangePicker();
+
+    // UPON LOAD PAGE FIRST TIME
+    var alarmReportFirstLoad = true;
+    $(".menu-item[page_id='alarmreport-page']").click(async function() {
+      if (alarmReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      queryAlarmReports(alarmreportStartDate, alarmreportEndDate);
+
+      alarmReportFirstLoad = false;
+    });
 		
 
 		// Click Event For 'Submit Button'
@@ -156,6 +168,7 @@
 			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
 			$('.alarmreport-forms-input').val('');
+			$("#alarmreport-forms-report").val("VIEW REPORT");
 			alarmreportDatatable.clear().draw();
 
 			$('#alarmreport-daterange').val('').daterangepicker("update");
@@ -168,10 +181,10 @@
 			clearErrors();
 		})
 
-		// REPORT Change listener
-		$('#alarmreport-forms-report').change(function() {
+		// Clears errors when any input is clicked
+		$(".alarmreport-forms-input").on("click", function() {
 			clearErrors();
-		})	
+		});
 
 	});
 </script>

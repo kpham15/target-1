@@ -28,7 +28,11 @@
     </div>
 
     <!-- MATRIX MODAL -->
+<<<<<<< HEAD
     <?php include __DIR__ . '/matrix-card-modal.html'; ?>
+=======
+    <?php include __DIR__ . '/matrix-modal.html'; ?>
+>>>>>>> ipcv2
 
   </div>
 </div>
@@ -45,7 +49,11 @@
     }
 
     // load matrix table upon visiting page
+<<<<<<< HEAD
     queryFac();
+=======
+    queryMatrixCards();
+>>>>>>> ipcv2
 
     matrixFirstLoad = false;
   });
