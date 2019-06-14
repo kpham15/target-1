@@ -308,14 +308,13 @@
     $(document).on('click', '.mio-btn', function() {
       // new code
       let ptyp = $(this).attr('ptyp');
-      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       if ($(this).hasClass('active')) {
-
+        $(this).click();
         console.log("test1"); //success
       }
       else {        
+        $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
         $(this).button('toggle');
-
         $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
       }
 
