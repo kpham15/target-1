@@ -348,7 +348,7 @@
     $(document).on('click', '.bg-minor', function() {
       console.log('i am clicking a yellow box');
       let portPsta = $(this).find('span.port-psta').text();
-      console.logt(portPsta);
+      console.log(portPsta);
     })
   });
 </script>
