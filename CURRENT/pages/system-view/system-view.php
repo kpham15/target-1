@@ -291,7 +291,7 @@
 
   $(document).ready(function() {
     // Click event Port -> MT_DISCONNECT
-    $('#mt-disconnect').on('click', function() {
+    $(document).on('click', '#mt-disconnect', function() {
       console.log('i am here');
     });
 
