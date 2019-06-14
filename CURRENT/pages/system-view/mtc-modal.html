@@ -19,15 +19,15 @@
                 <label>CKID:</label>
                 <label>TN:</label>
                 <input id="mtc-modal-cbx" type="checkbox" checked />
-                <input id="mtc-modal-ckid" type="text" class="form-control mtc-modal-ckid mtc-modal-input" style="display:none;"/>
-                <input id="mtc-modal-ckid-tn" type="text" class="form-control mtc-modal-ckid mtc-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+                <input id="mtc-modal-ckid" type="text" class="form-control mtc-modal-ckid mtc-modal-input" style="display:none;" disabled=""/>
+                <input id="mtc-modal-ckid-tn" type="text" class="form-control mtc-modal-ckid mtc-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask="" disabled=""/>
               </div>
             </div>
             <!-- CLS -->
             <div class="col-md-2">
               <div class="form-group">
                 <label>CLS:</label>
-                <select id="mtc-modal-cls" class="form-control mtc-modal-input">
+                <select id="mtc-modal-cls" class="form-control mtc-modal-input" disabled="">
                   <option value=""></option>
                   <option value="RES">RES</option>
                   <option value="BUS">BUS</option>
@@ -38,7 +38,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>ADSR:</label>
-                <select id="mtc-modal-adsr" class="form-control mtc-modal-input">
+                <select id="mtc-modal-adsr" class="form-control mtc-modal-input" disabled="">
                   <option value=""></option>
                   <option value="Y">Y</option>
                   <option value="N">N</option>
@@ -49,7 +49,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>PROT:</label>
-                <select id="mtc-modal-prot" class="form-control mtc-modal-input">
+                <select id="mtc-modal-prot" class="form-control mtc-modal-input" disabled="">
                   <option value=""></option>
                   <option value="SSM">SSM</option>
                   <option value="SSB">SSB</option>
@@ -70,7 +70,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>MLO:</label>
-                <select id="mtc-modal-mlo" class="form-control mtc-modal-input">
+                <select id="mtc-modal-mlo" class="form-control mtc-modal-input" disabled="">
                   <option value=""></option>
                   <option value="N">N</option>
                   <option value="Y">Y</option>
@@ -84,7 +84,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>CONTYP:</label>
-                <select id="mtc-modal-ctyp" class="form-control mtc-modal-input">
+                <select id="mtc-modal-ctyp" class="form-control mtc-modal-input" disabled="">
                   <option value=""></option>
                   <option value="GEN">GEN</option>
                   <option value="LPBK">LPBK</option>
@@ -98,14 +98,14 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label>FAC(X):</label>
-                <input id="mtc-modal-ffac" type="text" class="form-control mtc-modal-input">
+                <input id="mtc-modal-ffac" type="text" class="form-control mtc-modal-input" disabled="">
               </div>
             </div>
             <!-- FAC(Y) -->
             <div class="col-md-5">
               <div class="form-group">
                 <label>FAC(Y):</label>
-                <input id="mtc-modal-tfac" type="text" class="form-control mtc-modal-input">
+                <input id="mtc-modal-tfac" type="text" class="form-control mtc-modal-input" disabled="">
               </div>
             </div>
           </div>
@@ -166,8 +166,23 @@
   }
 
   function sysviewMtcDisconSubmit() {
-
-    let ckid = "";
+    let tktno = $('#mtc-modal-tktno').val();
+    let ffac = $('#mtc-modal-ffac').val();
+    let tfac = $('#mtc-modal-tfac').val();
+    let ckid 
+    = "";
+    if (tktno == "") {
+      inputError($('#mtc-modal-tktno'),'Missing TKTNO');
+      return;
+    }
+    if (obj.ffac == "") {
+      inputError($('#mtc-modal-ffac'),'Missing FAC(X)');
+      return;
+    }
+    if (obj.tfac == "") {
+      inputError($('#mtc-modal-tfac'),'Missing FAC(Y)');
+      return;
+    }
     if ($('#mtc-modal-cbx').prop('checked')) {
       ckid = $('#mtc-modal-ckid-tn').val();
     }
@@ -214,7 +229,7 @@ $(document).ready(function() {
     if (action == "MTC_DISCON") {
       sysviewMtcDisconSubmit();
     }
-    
+
   })
 
   // Initialize inputmask
