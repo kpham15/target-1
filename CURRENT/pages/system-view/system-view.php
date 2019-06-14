@@ -371,5 +371,17 @@
       $(this).parent().find('#mt-test').addClass('disabled');
 
     })
+
+    // Click event for Port Box Not CONN/MTCD/MAINT
+    $(document).on('click', '.bg-aqua button, .bg-critical button, bg-gray-active button', function() {
+      console.log('click button not green/orange/yellow');
+      $(this).parent().find('#mt-disconnect').addClass('disabled');
+      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#restore-mtcd').addClass('disabled');
+      $(this).parent().find('#mt-test').addClass('disabled');
+    })
+
+
+
   });
 </script>
