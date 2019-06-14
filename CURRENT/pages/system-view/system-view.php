@@ -312,7 +312,7 @@
         console.log("test1"); //success
       }
       $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
-      $(this).addClass('active');
+      
       $(this).button('toggle');
 
 
