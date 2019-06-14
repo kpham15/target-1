@@ -292,9 +292,16 @@
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
-      // console.log($('.fac-num'));
-      // console.log($(this).parent().parent().find('span.port-num').text());
-      console.log($(this).parents().find('span.port-num').text());
+      // port num
+      console.log($(this).parent().parent().find('span.port-num').text());
+      console.log($(this).parent().parent().find('span.port-psta').text());
+      console.log($(this).parent().parent().find('span.fac-num').text());
+      console.log($(this).parent().parent().find('span.fac-typ').text());
+      console.log($(this).parent().parent().find('span.port-ckid').text());
+
+
+
+
 
     });
 
