@@ -340,8 +340,10 @@
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
 
-      $(this).parent().find('li#mt-dissconnect').removeClass('disabled');
-      $(this).parent().find('li#mt-restore').addClass('disabled');
+      $(this).parent().find('#mt-dissconnect').removeClass('disabled');
+      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#restore-mtcd').addClass('disabled');
+      $(this).parent().find('#mt-test').addClass('disabled');
 
       
     })
