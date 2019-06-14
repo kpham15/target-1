@@ -338,7 +338,7 @@
       $("#matrix-modal-slot").val(slot);
       $("#matrix-modal-type").val(ptyp);
       $("#matrix-modal-action").val("LCK");
-      $("#matrix-modal").modal('show');
+      $("#matrix-modal").modal();
       // popup modal
       // Set node, shelf, slot, type values
       // Display modal populated with values
