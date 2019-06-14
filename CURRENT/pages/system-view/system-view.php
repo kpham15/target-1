@@ -196,7 +196,7 @@
           color = 'bg-minor';
           break;
         case "MAINT":
-          color = 'bg-orange';
+          color = 'bg-major';
           break;
         default:
           color = 'bg-gray-active';
@@ -268,10 +268,10 @@
                       '</div>' +
                     '</button>' +
                     '<ul class="dropdown-menu" aria-labelledby="dropdown'+gridNum+'">' +
-                      '<li id="mt-disconnect"><a>MT_DISCONNECT</a></li>' +
-                      '<li id="mt-restore"><a>MT_RESTORE</a></li>' +
-                      '<li id="restore-mtcd"><a>RESTORE_MTCD</a></li>' +
-                      '<li id="mt-test"><a>MT_TEST</a></li>' +
+                      '<li class="mt-disconnect"><a>MT_DISCONNECT</a></li>' +
+                      '<li class="mt-restore"><a>MT_RESTORE</a></li>' +
+                      '<li class="restore-mtcd"><a>RESTORE_MTCD</a></li>' +
+                      '<li class="mt-test"><a>MT_TEST</a></li>' +
                     '</ul>' +
                   '</div>';
 
@@ -404,51 +404,72 @@
     // });
 
     // Click event for Port Box CONN = Green
-    $(document).on('click', '.bg-green button', function() {
+    $(document).on('click', '.port-box button', function() {
+      let stat = $(this).parent().attr('class');
       let portPsta = $(this).find('span.port-psta').text();
+      let mtDisconnect = 'disabled';
+      let mtRestore = 'disabled';
+      let restoreMtcd = 'disabled';
+      let mtTest = 'disabled';
 
-      $(this).parent().find('#mt-disconnect').removeClass('disabled');
-      $(this).parent().find('#mt-restore').addClass('disabled');
-      $(this).parent().find('#restore-mtcd').addClass('disabled');
-      $(this).parent().find('#mt-test').addClass('disabled');
+      if (stat.includes('bg-green')) {
+        mtDisconnect = '';
+      } else if (stat.includes('bg-minor')) {
+        mtRestore = '';
+      } else if (stat.includes('bg-major')) {
+        restoreMtcd = '';
+      }
 
-      
-    })
-
-    // Click event for Port Box MTCD = Minor (Pale Yellow)
-    $(document).on('click', '.bg-minor button', function() {
-
-      let portPsta = $(this).find('span.port-psta').text();
-
-
-
-      $(this).parent().find('#mt-disconnect').addClass('disabled');
-      $(this).parent().find('#mt-restore').removeClass('disabled');
-      $(this).parent().find('#restore-mtcd').addClass('disabled');
-      $(this).parent().find('#mt-test').addClass('disabled');
-    })
-
-    // Click event for Port Box MAINT = Orange
-    $(document).on('click', '.bg-orange button', function() {
-
-      let portPsta = $(this).find('span.port-psta').text();
-
-
-      $(this).parent().find('#mt-disconnect').addClass('disabled');
-      $(this).parent().find('#mt-restore').addClass('disabled');
-      $(this).parent().find('#restore-mtcd').removeClass('disabled');
-      $(this).parent().find('#mt-test').addClass('disabled');
+      $(this).siblings('ul')
+        .children('.mt-disconnect')
+        .attr('class', 'mt-disconnect ' + mtDisconnect);
+      $(this).siblings('ul')
+        .children('.mt-restore')
+        .attr('class', 'mt-restore ' + mtRestore);
+      $(this).siblings('ul')
+        .children('.restore-mtcd')
+        .attr('class', 'restore-mtcd ' + restoreMtcd);
 
     })
+    
+    // $(document).on('click', '.port-box.bg-green button', function() {
+    //   let portPsta = $(this).find('span.port-psta').text();
 
-    // Click event for Port Box Not CONN/MTCD/MAINT
-    $(document).on('click', '.bg-aqua button, .bg-critical button, .bg-gray-active button', function() {
-      // console.log('click button not green/orange/yellow');
-      $(this).parent().find('#mt-disconnect').addClass('disabled');
-      $(this).parent().find('#mt-restore').addClass('disabled');
-      $(this).parent().find('#restore-mtcd').addClass('disabled');
-      $(this).parent().find('#mt-test').addClass('disabled');
-    })
+    //   $(this).parent().find('.mt-disconnect').removeClass('disabled');
+    //   $(this).parent().find('.mt-restore').addClass('disabled');
+    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
+    //   $(this).parent().find('.mt-test').addClass('disabled');
+    // })
+
+    // // Click event for Port Box MTCD = Minor (Pale Yellow)
+    // $(document).on('click', '.port-box.bg-minor button', function() {
+    //   let portPsta = $(this).find('span.port-psta').text();
+
+    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
+    //   $(this).parent().find('.mt-restore').removeClass('disabled');
+    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
+    //   $(this).parent().find('.mt-test').addClass('disabled');
+    // })
+
+    // // Click event for Port Box MAINT = Orange
+    // $(document).on('click', '.port-box.bg-major button', function() {
+    //   let portPsta = $(this).find('span.port-psta').text();
+
+    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
+    //   $(this).parent().find('.mt-restore').addClass('disabled');
+    //   $(this).parent().find('.restore-mtcd').removeClass('disabled');
+    //   $(this).parent().find('.mt-test').addClass('disabled');
+
+    // })
+
+    // // Click event for Port Box Not CONN/MTCD/MAINT
+    // $(document).on('click', '.port-box.bg-aqua button, .bg-critical button, .bg-gray-active button', function() {
+
+    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
+    //   $(this).parent().find('.mt-restore').addClass('disabled');
+    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
+    //   $(this).parent().find('.mt-test').addClass('disabled');
+    // })
 
 
 
