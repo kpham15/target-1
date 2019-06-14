@@ -24,7 +24,16 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Wire Center Information -->
-        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs"></button></p>
+        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: 
+        <div class="btn-group">
+          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
+          <ul class="dropdown-menu">
+            <li>ACK_ALARM</li>
+            <li>UN-ACK_ALARM</li>
+            <li>CLEAR_ALARM</li>
+          </ul>
+        </div>
+        </p>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
 
         <!-- Wire Center Information dropdown -->
@@ -111,6 +120,25 @@
 <?php include __DIR__ . "/header-nav-modals.html"; ?>
 
 <script type="text/javascript">
+  // $('#alarm-header-icon').click(function() {
+  //   $.ajax({
+  //     type: "POST",
+  //     url: ipcDispatch,
+  //     data: {
+  //       api: "ipcAlm",
+  //       act: "query",
+  //       user: user.uname
+  //     },
+  //     dataType: 'json'
+  //   }).done(function(data) {
+  //     let res = data.rows;
+
+  //     if (res.length > 0) {
+        
+  //     }
+  //   });
+  // });
+
   function updateUsername() {
     $('#top-nav-user-name, #profile-dropdown-user-name').text(user.fname + ' ' + user.lname);
     $('#profile-dropdown-user-group').text(user.ugrp);
@@ -125,9 +153,7 @@
     $('#nav-wrapper').hide()
     $('#login-page').show()
 
-  })
-
-  
+  });
 
   function updateHeaderInfo() {
     let alarmText = '';
