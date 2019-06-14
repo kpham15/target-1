@@ -1,0 +1,137 @@
+<!-- Modal -->
+<div class="modal fade" id="mtc-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <Span aria-hidden="true">&times;</Span>
+        </button>
+        <h4 class="modal-title">SETUP MAINTENANCE CONNECTION</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Top Row -->
+          <div class="row" id="mtc-modal-row1-div">
+            <!-- CKID -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>CKID:</label>
+                <label>TN:</label>
+                <input id="mtc-modal-cbx" type="checkbox" checked />
+                <input id="mtc-modal-ckid" type="text" class="form-control maint-modal-ckid mtc-modal-input" style="display:none;"/>
+                <input id="mtc-modal-ckid-tn" type="text" class="form-control maint-modal-ckid mtc-modal-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+              </div>
+            </div>
+            <!-- CLS -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>CLS:</label>
+                <select id="mtc-modal-cls" class="form-control mtc-modal-input">
+                  <option value=""></option>
+                  <option value="RES">RES</option>
+                  <option value="BUS">BUS</option>
+                </select>
+              </div>
+            </div>
+            <!-- ADSR -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>ADSR:</label>
+                <select id="mtc-modal-adsr" class="form-control mtc-modal-input">
+                  <option value=""></option>
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select>
+              </div>
+            </div>
+            <!-- PROT -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>PROT:</label>
+                <select id="mtc-modal-prot" class="form-control mtc-modal-input">
+                  <option value=""></option>
+                  <option value="SSM">SSM</option>
+                  <option value="SSB">SSB</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row" id="mtc-modal-row2-div">
+            <!-- TKTNO -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>TKTNO</label>
+                <input id="mtc-modal-tktno" type="text" class="form-control mtc-modal-input" />
+              </div>
+            </div>
+            <!-- MLO -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MLO:</label>
+                <select id="mtc-modal-mlo" class="form-control mtc-modal-input">
+                  <option value=""></option>
+                  <option value="N">N</option>
+                  <option value="Y">Y</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="row" id="mtc-modal-row3-div">
+            <!-- CONTYP -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>CONTYP:</label>
+                <select id="mtc-modal-contyp" class="form-control mtc-modal-input">
+                  <option value=""></option>
+                  <option value="GEN">GEN</option>
+                  <option value="LPBK">LPBK</option>
+                  <option value="MLPT">MLPT</option>
+                  <option value="MTCD">MTCD</option>
+                  <option value="MAINT">MAINT</option>
+                </select>
+              </div>
+            </div>
+            <!-- FAC(X) -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>FAC(X):</label>
+                <input id="mtc-modal-ffac" type="text" class="form-control mtc-modal-input">
+              </div>
+            </div>
+            <!-- FAC(Y) -->
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>FAC(Y):</label>
+                <input id="mtc-modal-tfac" type="text" class="form-control mtc-modal-input">
+              </div>
+            </div>
+          </div>
+          <!-- Action Row -->
+          <div class="row" id="mtc-modal-row5-div">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="mtc-modal-action" type="text" class="form-control mtc-modal-input" disabled=""/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label id="mtc-modal-post-response-text" style="margin-top:35px;"></label>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button id="mtc-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

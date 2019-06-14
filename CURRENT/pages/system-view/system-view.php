@@ -16,6 +16,7 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/mtc-modal.html"; ?>
 
     <!-- =========================================================== -->
 
@@ -291,12 +292,42 @@
     // Return html string
     return nodeTab;
   }
+  
+  function sysviewMaintQueryCkid(ckid) {
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      $('#mtc-modal-ckid').val(ckid),
+      $('#mtc-modal-ckid-tn').val(ckid),
+      $('#mtc-modal-cls').val(data.cls),
+      $('#mtc-modal-adsr').val(data.adsr),
+      $('#mtc-modal-prot').val(data.prot),
+      $('#mtc-modal-tktno').val(data.tktno),
+      $('#mtc-modal-mlo').val(data.mlo),
+      $('#mtc-modal-contyp').val(data.ctyp),
+      $('#mtc-modal-ffac').val(data.ffac),
+      $('#mtc-modal-action').val('MTC_DISCON'),
+ 
+    })
+  }
+  
 
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
-      let portCkid = $(this).parent().parent().find('span.port-ckid').text();
-      $('#setup-maint-modal').modal('show');
+      let ckid = $(this).parent().parent().find('span.port-ckid').text();
+
+      $('#mtc-modal').modal('show');
 
     });
 
