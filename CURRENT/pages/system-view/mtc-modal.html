@@ -208,9 +208,12 @@
 
 $(document).ready(function() {
   // Submit button click event
-  if ($('#mtc-modal-action') == 'MTC_DISCON') {
-    sysviewMtcDisconSubmit();
-  }
+  $('#mtc-modal-submit').click(function() {
+    if ($('#mtc-modal-action') == 'MTC_DISCON') {
+      sysviewMtcDisconSubmit();
+    }
+  })
+
   // Initialize inputmask
   $('#mtc-modal-ckid-tn').inputmask();
 
