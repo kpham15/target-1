@@ -292,9 +292,9 @@
   $(document).ready(function() {
     // Click event Port -> MT_DISCONNECT
     $('#mt-disconnect').click(function() {
-      console.log('disconnect modal show up');
+      console.log('i am here');
     });
-    
+
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
       let ptyp = $(this).attr('ptyp');
