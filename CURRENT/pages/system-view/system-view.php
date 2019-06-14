@@ -300,7 +300,7 @@
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
       let ckid = $(this).parent().parent().find('span.port-ckid').text();
-      sysviewMaintQueryCkid(ckid);
+      sysviewMtcDiscon(ckid);
       $('#mtc-modal').modal('show');
 
     });

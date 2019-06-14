@@ -138,7 +138,7 @@
 
 <script type="text/javascript">
 
- function sysviewMaintQueryCkid(ckid) {
+  function sysviewMtcDiscon(ckid) {
     $.ajax ({
       type:       'POST',
       url:        ipcDispatch,
@@ -155,13 +155,54 @@
       $('#mtc-modal-ckid').val(ckid);
       $('#mtc-modal-ckid-tn').val(ckid);
       $('#mtc-modal-cls').val(res[0].cls);
-      $('#mtc-modal-adsr').val(res.adsr);
-      $('#mtc-modal-prot').val(res.prot);
-      $('#mtc-modal-tktno').val(res.tktno);
-      $('#mtc-modal-mlo').val(res.mlo);
-      $('#mtc-modal-ctyp').val(res.ctyp);
-      $('#mtc-modal-ffac').val(res.ffac);
-      $('#mtc-modal-tfac').val(res.tfac);
+      $('#mtc-modal-adsr').val(res[0].adsr);
+      $('#mtc-modal-prot').val(res[0].prot);
+      $('#mtc-modal-tktno').val(res[0].tktno);
+      $('#mtc-modal-mlo').val(res[0].mlo);
+      $('#mtc-modal-ctyp').val(res[0].ctyp);
+      $('#mtc-modal-ffac').val(res[0].ffac);
+      $('#mtc-modal-tfac').val(res[0].tfac);
+    })
+  }
+
+  function sysviewMtcSubmit() {
+    let ckid = "";
+    if ($('#mtc-modal-cbx').prop('checked')) {
+        ckid = $('#mtc-modal-ckid-tn').val();
+      }
+      else {
+        ckid = $('#mtc-modal-ckid').val();
+      }
+
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcMaintDiscon",
+        "act":    "MTC_DISCON",
+        "user":   user.uname,
+        "ckid":   ckid,
+        "cls":    $('#mtc-modal-cls').val(),
+        "adsr":   $('#mtc-modal-adsr').val(),
+        "prot":   $('#mtc-modal-prot').val(),
+        "tktno":  $('#mtc-modal-tktno').val(),
+        "mlo":    $('#mtc-modal-mlo').val(),
+        "ctyp":   $('#mtc-modal-ctyp').val(),
+        "ffac":   $('#mtc-modal-ffac').val(),
+        "tfac":   $('#mtc-modal-tfac').val(),
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt == 'fail') {
+        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
+      else {
+        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        maintQueryTableCkts(ckid);
+        maintQueryTableCons(ckid);
+      }
     })
   }
 
