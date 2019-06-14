@@ -308,15 +308,18 @@
     $(document).on('click', '.mio-btn', function() {
       // new code
       let ptyp = $(this).attr('ptyp');
+      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       if ($(this).hasClass('active')) {
+
         console.log("test1"); //success
       }
-      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
+      else {        
+        $(this).button('toggle');
 
-      $(this).button('toggle');
+        $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      }
 
-
-      // $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      $()
 
     });
 
