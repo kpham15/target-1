@@ -16,7 +16,6 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
-    <?php include __DIR__ . "/mtc-modal.html"; ?>
 
     <!-- =========================================================== -->
 
@@ -307,16 +306,16 @@
     }).done(function(data) {
       let res = data.rows;
 
-      $('#mtc-modal-ckid').val(ckid),
-      $('#mtc-modal-ckid-tn').val(ckid),
-      $('#mtc-modal-cls').val(data.cls),
-      $('#mtc-modal-adsr').val(data.adsr),
-      $('#mtc-modal-prot').val(data.prot),
-      $('#mtc-modal-tktno').val(data.tktno),
-      $('#mtc-modal-mlo').val(data.mlo),
-      $('#mtc-modal-contyp').val(data.ctyp),
-      $('#mtc-modal-ffac').val(data.ffac),
-      $('#mtc-modal-action').val('MTC_DISCON'),
+      $('#setup-maint-modal-ckid').val(ckid),
+      $('#setup-maint-modal-ckid-tn').val(ckid),
+      $('#setup-maint-modal-cls').val(data.cls),
+      $('#setup-maint-modal-adsr').val(data.adsr),
+      $('#setup-maint-modal-prot').val(data.prot),
+      $('#setup-maint-modal-tktno').val(data.tktno),
+      $('#setup-maint-modal-mlo').val(data.mlo),
+      $('#setup-maint-modal-contyp').val(data.ctyp),
+      $('#setup-maint-modal-ffac').val(data.ffac),
+      $('#setup-maint-modal-action').val('MTC_DISCON'),
  
     })
   }
@@ -327,7 +326,7 @@
     $(document).on('click', '#mt-disconnect', function() {
       let ckid = $(this).parent().parent().find('span.port-ckid').text();
 
-      $('#mtc-modal').modal('show');
+      $('#setup-maint-modal').modal('show');
 
     });
 
