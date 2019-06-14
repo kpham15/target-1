@@ -339,7 +339,7 @@
       $("#matrix-modal-shelf").val(shelf);
       $("#matrix-modal-slot").val(slot);
       $("#matrix-modal-type").val(ptyp);
-      $("#matrix-modal-action").val("LCK");
+      $("#matrix-modal-action").val("LCK").attr('action', 'lck');
       $("#matrix-modal").modal();
       // popup modal
       // Set node, shelf, slot, type values
