@@ -398,12 +398,7 @@
       queryAndUpdatePorts(node, slot, ptyp);
     });
 
-    // Click events for Port Box Dropdowns
-    // $(document).on('click', '.port-box button', function() {
-    //   $(this).dropdown('toggle');
-    // });
-
-    // Click event for Port Box CONN = Green
+    // Click event for Port Box
     $(document).on('click', '.port-box button', function() {
       let stat = $(this).parent().attr('class');
       let portPsta = $(this).find('span.port-psta').text();
@@ -433,47 +428,5 @@
         .children('.mt-test')
         .attr('class', 'mt-test ' + mtTest);
     })
-    
-    // $(document).on('click', '.port-box.bg-green button', function() {
-    //   let portPsta = $(this).find('span.port-psta').text();
-
-    //   $(this).parent().find('.mt-disconnect').removeClass('disabled');
-    //   $(this).parent().find('.mt-restore').addClass('disabled');
-    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
-    //   $(this).parent().find('.mt-test').addClass('disabled');
-    // })
-
-    // // Click event for Port Box MTCD = Minor (Pale Yellow)
-    // $(document).on('click', '.port-box.bg-minor button', function() {
-    //   let portPsta = $(this).find('span.port-psta').text();
-
-    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
-    //   $(this).parent().find('.mt-restore').removeClass('disabled');
-    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
-    //   $(this).parent().find('.mt-test').addClass('disabled');
-    // })
-
-    // // Click event for Port Box MAINT = Orange
-    // $(document).on('click', '.port-box.bg-major button', function() {
-    //   let portPsta = $(this).find('span.port-psta').text();
-
-    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
-    //   $(this).parent().find('.mt-restore').addClass('disabled');
-    //   $(this).parent().find('.restore-mtcd').removeClass('disabled');
-    //   $(this).parent().find('.mt-test').addClass('disabled');
-
-    // })
-
-    // // Click event for Port Box Not CONN/MTCD/MAINT
-    // $(document).on('click', '.port-box.bg-aqua button, .bg-critical button, .bg-gray-active button', function() {
-
-    //   $(this).parent().find('.mt-disconnect').addClass('disabled');
-    //   $(this).parent().find('.mt-restore').addClass('disabled');
-    //   $(this).parent().find('.restore-mtcd').addClass('disabled');
-    //   $(this).parent().find('.mt-test').addClass('disabled');
-    // })
-
-
-
   });
 </script>
