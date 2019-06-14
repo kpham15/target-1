@@ -16,6 +16,8 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/find-conn.html"; ?>
+
 
     <!-- =========================================================== -->
 
@@ -301,7 +303,7 @@
       return item.node == nodeX
     })[0].MIOX.forEach(function(psta,i){
       let slotId = i +1;
-      $("#mio-btn[slot='"+slotId+"'][ptyp='x']").find('span').html(psta);
+      $(".mio-btn[slot='"+slotId+"'][ptyp='x']").find('span').html(psta);
 
     });
     //update mioy
@@ -309,7 +311,7 @@
       return item.node == nodeY
     })[0].MIOY.forEach(function(psta,i){
       let slotId = i +1;
-      $("#mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
+      $(".mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
     })
     
     //update ports Xside

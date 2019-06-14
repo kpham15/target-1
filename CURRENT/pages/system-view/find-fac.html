@@ -73,6 +73,9 @@ function sysview_findFac() {
 
 $("#find_fac_btn").click(function(){
     $("#sysview_findFac_modal").modal();
+})
+
+$('#sysview_findFac_modal').on('shown.bs.modal', function (e) {
     sysview_findFac()
 })
 
