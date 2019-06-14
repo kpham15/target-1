@@ -320,14 +320,26 @@
 
     // MIO dropdown menu lock card
     $(document).on('click',".dropdown-menu-lock-card", function() {
-      console.log($(this).closest(".mio-btn").attr('ptyp'));
+      console.log($(this).parent().parent().parent().children('button').attr('ptyp'));
+      console.log($(this).parent().parent().parent().children('button').attr('slot'));
+      let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
+      let slot = $(this).parent().parent().parent().children('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      if (ptyp == "x") {
+        let shelf = "1";
+      } else if (ptyp == "y") {
+        let shelf = "2";
+      }
+      console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
       // Set node, shelf, slot, type values
       // Display modal populated with values
     });
 
     // MIO dropdown menu unlock card
     $(document).on('click',".dropdown-menu-unlock-card", function() {
-      console.log($(this));
+      console.log($(this).parent().parent().parent().children('button').attr('ptyp'));
+      // Set node, shelf, slot, type values
+      // Display modal populated with values
     });
 
     // Click event for Port range buttons
