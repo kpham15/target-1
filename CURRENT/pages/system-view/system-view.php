@@ -347,7 +347,7 @@
     })
 
     // Click event for Port Box MTCD = Minor (Pale Yellow)
-    $(document).on('click', '.bg-minor', function() {
+    $(document).on('click', '.bg-minor button', function() {
       console.log('i am clicking a yellow box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
@@ -360,10 +360,16 @@
     })
 
     // Click event for Port Box MAINT = Orange
-    $(document).on('click', '.bg-orange', function() {
+    $(document).on('click', '.bg-orange button', function() {
       console.log('i am click on an orange box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
+
+      $(this).parent().find('#mt-dissconnect').addClass('disabled');
+      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#restore-mtcd').removeClass('disabled');
+      $(this).parent().find('#mt-test').addClass('disabled');
+
     })
   });
 </script>
