@@ -308,7 +308,7 @@
 
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
-    $(document).on('click', '#mt-disconnect', function() {
+    $(document).on('click', '.mt-disconnect', function() {
 
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
