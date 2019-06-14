@@ -295,10 +295,8 @@
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
-
-      console.log($(this).parent().parent().find('span.port-ckid').text());
-
       let portCkid = $(this).parent().parent().find('span.port-ckid').text();
+      console.log(portCkid);
 
     });
 
@@ -337,14 +335,14 @@
     // });
 
     // Click event for Port Box CONN = Green
-    $(document).on('click', '.bg-green button', function() {
+    $(document).on('click', '.bg-green', function() {
       console.log('i am clicking a green box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
 
-      $('#mt-disconnect').removeAttr('disabled');
-      $('#mt-restore').attr('disabled');
-      
+      $(this).parent().find('li#mt-dissconnect').removeClass('disabled');
+      $(this).parent().find('li#mt-restore').addClass('disabled');
+
       
     })
 
