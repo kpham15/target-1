@@ -278,8 +278,8 @@
                       <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-menu-lock-card">LOCK CARD</a></li>
-                      <li><a class="dropdown-menu-unlock-card">UNLOCK CARD</a></li>
+                      <li><a class="dropdown-menu-lock-card">LOCK-CARD</a></li>
+                      <li><a class="dropdown-menu-unlock-card">UNLOCK-CARD</a></li>
                     </ul>
                   </div>`;
 
@@ -320,7 +320,9 @@
 
     // MIO dropdown menu lock card
     $(document).on('click',".dropdown-menu-lock-card", function() {
-      console.log($(this));
+      console.log($(this).closest(".mio-btn").attr('ptyp'));
+      // Set node, shelf, slot, type values
+      // Display modal populated with values
     });
 
     // MIO dropdown menu unlock card
