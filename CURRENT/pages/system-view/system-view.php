@@ -363,7 +363,7 @@
       $("#matrix-modal-shelf").val(shelf);
       $("#matrix-modal-slot").val(slot);
       $("#matrix-modal-type").val(ptyp);
-      $("#matrix-modal-action").val("LCK").attr('action', 'lck');
+      $("#matrix-modal-action").val("UN-LCK").attr('action', 'unlck');
       $("#matrix-modal").modal();
     });
 
