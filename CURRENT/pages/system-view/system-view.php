@@ -342,6 +342,10 @@
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
 
+      $('#mt-disconnect').removeClass('disabled');
+      $('#mt-restore').addClass('disabled');
+      
+      
     })
 
     // Click event for Port Box MTCD = Minor (Pale Yellow)
