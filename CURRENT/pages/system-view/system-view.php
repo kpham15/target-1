@@ -292,7 +292,7 @@
   $(document).ready(function() {
     // Click event Port -> MT_DISCONNECT
     $(document).on('click', '#mt-disconnect', function() {
-      console.log('i am here');
+      console.log($('.fac-num'));
     });
 
     // Click event for Node Tabs
