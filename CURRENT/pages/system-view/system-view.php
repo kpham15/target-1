@@ -316,7 +316,7 @@
 
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
-
+      $(this).trigger('click');
 
     });
 
