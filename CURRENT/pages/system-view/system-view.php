@@ -310,13 +310,13 @@
       let ptyp = $(this).attr('ptyp');
       if ($(this).hasClass('active')) {
         console.log("test1"); //success
+        $(this).button('toggle');
       }
       $('.mio-btn.active[ptyp="'+ptyp+'"]').removeClass('active');
       $(this).addClass('active');
 
 
       $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
-      $(this).trigger('click');
 
     });
 
