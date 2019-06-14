@@ -166,13 +166,14 @@
   }
 
   function sysviewMtcDisconSubmit() {
+
     let ckid = "";
     if ($('#mtc-modal-cbx').prop('checked')) {
-        ckid = $('#mtc-modal-ckid-tn').val();
-      }
-      else {
-        ckid = $('#mtc-modal-ckid').val();
-      }
+      ckid = $('#mtc-modal-ckid-tn').val();
+    }
+    else {
+      ckid = $('#mtc-modal-ckid').val();
+    }
 
     $.ajax ({
       type:       'POST',
@@ -196,12 +197,10 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        $('#setup-maint-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        $('#mtc-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
-        $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        $('#mtc-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
       }
     })
   }
@@ -209,9 +208,13 @@
 $(document).ready(function() {
   // Submit button click event
   $('#mtc-modal-submit').click(function() {
-    if ($('#mtc-modal-action') == 'MTC_DISCON') {
+
+    let action = $('#mtc-modal-action').val();
+
+    if (action == "MTC_DISCON") {
       sysviewMtcDisconSubmit();
     }
+    
   })
 
   // Initialize inputmask
