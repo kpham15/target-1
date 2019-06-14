@@ -336,12 +336,10 @@
 
     // Click event for Port Box CONN = Green
     $(document).on('click', '.bg-green button', function() {
-      console.log('i am clicking a green box');
       let portPsta = $(this).find('span.port-psta').text();
-      console.log(portPsta);
 
-      $(this).parent().find('#mt-dissconnect').removeClass('disabled');
-      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#mt-dissconnect').addlass('disabled');
+      $(this).parent().find('#mt-restore').removeClass('disabled');
       $(this).parent().find('#restore-mtcd').addClass('disabled');
       $(this).parent().find('#mt-test').addClass('disabled');
 
@@ -353,6 +351,12 @@
       console.log('i am clicking a yellow box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
+
+
+      $(this).parent().find('#mt-dissconnect').removeClass('disabled');
+      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#restore-mtcd').addClass('disabled');
+      $(this).parent().find('#mt-test').addClass('disabled');
     })
 
     // Click event for Port Box MAINT = Orange
