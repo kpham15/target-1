@@ -338,8 +338,8 @@
     $(document).on('click', '.bg-green button', function() {
       let portPsta = $(this).find('span.port-psta').text();
 
-      $(this).parent().find('#mt-dissconnect').addlass('disabled');
-      $(this).parent().find('#mt-restore').removeClass('disabled');
+      $(this).parent().find('#mt-disconnect').removeClass('disabled');
+      $(this).parent().find('#mt-restore').addClass('disabled');
       $(this).parent().find('#restore-mtcd').addClass('disabled');
       $(this).parent().find('#mt-test').addClass('disabled');
 
@@ -353,8 +353,8 @@
       console.log(portPsta);
 
 
-      $(this).parent().find('#mt-dissconnect').removeClass('disabled');
-      $(this).parent().find('#mt-restore').addClass('disabled');
+      $(this).parent().find('#mt-disconnect').addClass('disabled');
+      $(this).parent().find('#mt-restore').removeClass('disabled');
       $(this).parent().find('#restore-mtcd').addClass('disabled');
       $(this).parent().find('#mt-test').addClass('disabled');
     })
@@ -365,7 +365,7 @@
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
 
-      $(this).parent().find('#mt-dissconnect').addClass('disabled');
+      $(this).parent().find('#mt-disconnect').addClass('disabled');
       $(this).parent().find('#mt-restore').addClass('disabled');
       $(this).parent().find('#restore-mtcd').removeClass('disabled');
       $(this).parent().find('#mt-test').addClass('disabled');
