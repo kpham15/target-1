@@ -335,7 +335,7 @@
     // });
 
     // Click event for Port Box CONN = Green
-    $(document).on('click', '.bg-green', function() {
+    $(document).on('click', '.bg-green button', function() {
       console.log('i am clicking a green box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
