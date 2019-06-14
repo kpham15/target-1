@@ -319,14 +319,15 @@
     });
 
     // MIO dropdown menu lock card
-    $(".dropdown-menu-lock-card").on('click', function() {
+    $(document).on('click',".dropdown-menu-lock-card", function() {
       console.log($(this));
     });
 
     // MIO dropdown menu unlock card
-    $(".dropdown-menu-unlock-card").on('click', function() {
+    $(document).on('click',".dropdown-menu-unlock-card", function() {
       console.log($(this));
     });
+
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
       let ptyp = $(this).attr('ptyp');
