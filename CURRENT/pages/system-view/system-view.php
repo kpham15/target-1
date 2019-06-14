@@ -330,8 +330,10 @@
       let shelf = "";
       if (ptyp == "x") {
         shelf = "1";
+        ptyp = "MIOX";
       } else if (ptyp == "y") {
         shelf = "2";
+        ptyp = "MIOY";
       }
       console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
 
