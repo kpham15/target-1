@@ -165,7 +165,7 @@
     })
   }
 
-  function sysviewMtcSubmit() {
+  function sysviewMtcDisconSubmit() {
     let ckid = "";
     if ($('#mtc-modal-cbx').prop('checked')) {
         ckid = $('#mtc-modal-ckid-tn').val();
@@ -208,7 +208,9 @@
 
 $(document).ready(function() {
   // Submit button click event
-
+  if ($('#mtc-modal-action') == 'MTC_DISCON') {
+    sysviewMtcDisconSubmit();
+  }
   // Initialize inputmask
   $('#mtc-modal-ckid-tn').inputmask();
 
