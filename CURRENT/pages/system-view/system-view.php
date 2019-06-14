@@ -316,7 +316,7 @@
       // $(this).button('toggle');
 
 
-      $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      // $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
 
     });
 
