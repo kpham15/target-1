@@ -193,7 +193,7 @@
           color = 'bg-minor';
           break;
         case "MAINT":
-          color = 'bg-minor';
+          color = 'bg-orange';
           break;
         default:
           color = 'bg-gray-active';
@@ -344,9 +344,16 @@
 
     })
 
-    // Click event for Port Box MTCD = Yellow
+    // Click event for Port Box MTCD = Minor (Pale Yellow)
     $(document).on('click', '.bg-minor', function() {
       console.log('i am clicking a yellow box');
+      let portPsta = $(this).find('span.port-psta').text();
+      console.log(portPsta);
+    })
+
+    // Click event for Port Box MAINT = Orange
+    $(document).on('click', '.bg-orange', function() {
+      console.log('i am click on an orange box');
       let portPsta = $(this).find('span.port-psta').text();
       console.log(portPsta);
     })
