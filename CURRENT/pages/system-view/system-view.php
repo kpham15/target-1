@@ -325,10 +325,11 @@
       let ptyp = $(this).parent().parent().parent().children('button').attr('ptyp');
       let slot = $(this).parent().parent().parent().children('button').attr('slot');
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      let shelf = "";
       if (ptyp == "x") {
-        let shelf = "1";
+        shelf = "1";
       } else if (ptyp == "y") {
-        let shelf = "2";
+        shelf = "2";
       }
       console.log(`node: ${node}; shelf: ${shelf}; slot: ${slot}; ptyp: ${ptyp}`);
       // Set node, shelf, slot, type values
