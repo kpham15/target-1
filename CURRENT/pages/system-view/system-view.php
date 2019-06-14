@@ -294,16 +294,8 @@
     $(document).on('click', '#mt-disconnect', function() {
 
       console.log($(this).parent().parent().find('span.port-ckid').text());
-      console.log($(this).parent().parent().find('span.port-num').text());
-      console.log($(this).parent().parent().find('span.port-psta').text());
-      console.log($(this).parent().parent().find('span.fac-num').text());
-      console.log($(this).parent().parent().find('span.fac-type').text());
 
       let portCkid = $(this).parent().parent().find('span.port-ckid').text();
-      let portNum = $(this).parent().parent().find('span.port-num').text();
-      let portPsta = $(this).parent().parent().find('span.port-psta').text();
-      let facNum = $(this).parent().parent().find('span.fac-num').text();
-      let facType = $(this).parent().parent().find('span.fac-type').text();
 
     });
 
@@ -340,5 +332,10 @@
     // $(document).on('click', '.port-box button', function() {
     //   $(this).dropdown('toggle');
     // });
+
+    // Click event for Port Box CONN = Green
+    $(document).on('click', '.bg-green', function() {
+      console.log('i am clicking a green box');
+    })
   });
 </script>
