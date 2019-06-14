@@ -278,8 +278,8 @@
                       <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
                     </button>
                     <ul class="dropdown-menu">
-                      <li class="dropdown-menu-lock-card"><a>LOCK CARD</a></li>
-                      <li class="dropdown-menu-unlock-card"><a>UNLOCK CARD</a></li>
+                      <li><a class="dropdown-menu-lock-card">LOCK CARD</a></li>
+                      <li><a class="dropdown-menu-unlock-card">UNLOCK CARD</a></li>
                     </ul>
                   </div>`;
 
