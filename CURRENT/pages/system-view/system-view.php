@@ -429,7 +429,9 @@
       $(this).siblings('ul')
         .children('.restore-mtcd')
         .attr('class', 'restore-mtcd ' + restoreMtcd);
-
+      $(this).siblings('ul')
+        .children('.mt-test')
+        .attr('class', 'mt-test ' + mtTest);
     })
     
     // $(document).on('click', '.port-box.bg-green button', function() {
