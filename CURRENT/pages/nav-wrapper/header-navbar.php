@@ -26,7 +26,7 @@
         <!-- Wire Center Information -->
         <span class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: </span>
         <span class="navbar-text dropdown" style="margin-top:15px; margin-bottom: 0; margin-left: 0;">
-          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
+          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="" aria-expanded="false"></button>
           <ul class="dropdown-menu" style="color: #000;">
             <li><a>ACK_ALARM</a></li>
             <li><a>UN-ACK_ALARM</a></li>
@@ -120,7 +120,6 @@
 
 <script type="text/javascript">
   $('#alarm-header-icon').click(function(e) {
-    e.preventDefault();
     $.ajax({
       type: "POST",
       url: ipcDispatch,
