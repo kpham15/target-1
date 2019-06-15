@@ -119,24 +119,25 @@
 <?php include __DIR__ . "/header-nav-modals.html"; ?>
 
 <script type="text/javascript">
-  // $('#alarm-header-icon').click(function() {
-  //   $.ajax({
-  //     type: "POST",
-  //     url: ipcDispatch,
-  //     data: {
-  //       api: "ipcAlm",
-  //       act: "query",
-  //       user: user.uname
-  //     },
-  //     dataType: 'json'
-  //   }).done(function(data) {
-  //     let res = data.rows;
+  $('#alarm-header-icon').click(function(e) {
+    e.preventDefaut();
+    $.ajax({
+      type: "POST",
+      url: ipcDispatch,
+      data: {
+        api: "ipcAlm",
+        act: "query",
+        user: user.uname
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
 
-  //     if (res.length > 0) {
-        
-  //     }
-  //   });
-  // });
+      if (res.length > 0) {
+        console.log(res);
+      }
+    });
+  });
 
   function updateUsername() {
     $('#top-nav-user-name, #profile-dropdown-user-name').text(user.fname + ' ' + user.lname);
