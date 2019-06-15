@@ -303,9 +303,6 @@
     return nodeTab;
   }
   
- 
-  
-
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
