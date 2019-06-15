@@ -120,6 +120,7 @@
 
 <script type="text/javascript">
   $('#alarm-header-icon').click(function(e) {
+    $(this).attr('data-toggle', '');
     $.ajax({
       type: "POST",
       url: ipcDispatch,
@@ -131,9 +132,16 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
+      let modal = {
+        title: 'ALARM',
+        body: 'THERE IS NO ACTIVE ALARM'
+      }
 
       if (res.length > 0) {
-        console.log(res);
+        $('#alarm-header-icon').attr('data-toggle', 'dropdown');
+        $('#alarm-header-icon').dropdown('toggle');
+      } else {
+        modalHandler(modal);
       }
     });
   });
