@@ -28,9 +28,9 @@
         <span class="navbar-text dropdown" style="margin-top:15px; margin-bottom: 0; margin-left: 0;">
           <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
           <ul class="dropdown-menu" style="color: #000;">
-            <li>ACK_ALARM</li>
-            <li>UN-ACK_ALARM</li>
-            <li>CLEAR_ALARM</li>
+            <li><a>ACK_ALARM</a></li>
+            <li><a>UN-ACK_ALARM</a></li>
+            <li><a>CLEAR_ALARM</a></li>
           </ul>
         </span>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
