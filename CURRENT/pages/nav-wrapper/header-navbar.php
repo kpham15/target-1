@@ -120,7 +120,7 @@
 
 <script type="text/javascript">
   $('#alarm-header-icon').click(function(e) {
-    e.preventDefaut();
+    e.preventDefault();
     $.ajax({
       type: "POST",
       url: ipcDispatch,
