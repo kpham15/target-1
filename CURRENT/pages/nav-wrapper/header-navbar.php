@@ -25,14 +25,14 @@
       <ul class="nav navbar-nav">
         <!-- Wire Center Information -->
         <span class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: </span>
-        <div class="dropdown">
+        <span class="dropdown">
           <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
           <ul class="dropdown-menu">
             <li>ACK_ALARM</li>
             <li>UN-ACK_ALARM</li>
             <li>CLEAR_ALARM</li>
           </ul>
-        </div>
+        </span>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
 
         <!-- Wire Center Information dropdown -->
