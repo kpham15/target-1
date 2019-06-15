@@ -313,7 +313,7 @@
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
       $('#mtc-modal-post-response-text').text('');
-      $('.mtc-modal').val('');
+      $('.mtc-modal-input').val('');
       sysviewMtcDiscon(ckid);
       $('#mtc-modal-action').val('MTC_DISCON');
       $('#mtc-modal').modal('show');
