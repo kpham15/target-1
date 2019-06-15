@@ -120,7 +120,6 @@
 
 <script type="text/javascript">
   $('#alarm-header-icon').click(function(e) {
-    $(this).attr('data-toggle', '');
     $.ajax({
       type: "POST",
       url: ipcDispatch,
@@ -144,6 +143,10 @@
         modalHandler(modal);
       }
     });
+  });
+
+  $('#alarm-header-icon').on('hidden.bs.dropdown', function() {
+    $('#alarm-header-icon').attr('data-toggle', '');
   });
 
   function updateUsername() {
