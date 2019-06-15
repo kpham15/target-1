@@ -145,7 +145,7 @@
     });
   });
 
-  $('#alarm-header-icon').on('hidden.bs.dropdown', function() {
+  $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
     $('#alarm-header-icon').attr('data-toggle', '');
   });
 
