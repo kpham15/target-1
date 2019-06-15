@@ -383,6 +383,8 @@
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
+      //remove previous highlighted port
+      $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
       queryAndUpdatePorts(node, slot, ptyp);
     });
 
