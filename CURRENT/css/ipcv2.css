@@ -41,6 +41,7 @@
   }
   .dropdown-menu li>a {
     color: #000;
+    cursor: pointer;
   }
   .nav.node-tabs>li>a {
     padding: 8px;
