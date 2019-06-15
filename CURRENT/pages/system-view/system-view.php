@@ -147,6 +147,10 @@
 
         updatePortRangeBtns(ptyp);
         updatePortGrid(ptyp);
+
+        //highlight the found ports
+        highlightPorts(ptyp, portHighLight);
+        
       }
     });
   }
@@ -158,7 +162,6 @@
     let portArray = [];
     let color = '';
 
-    
     if (ptyp === 'x') {
       portArray = portX.filter(function(port) {
         if (port.pnum >= 1+calculated && port.pnum <= 25+calculated) {
@@ -209,6 +212,7 @@
       grid.find(selector+' .fac-type').text(port.ftyp === '' ? '-' : port.ftyp);
       grid.find(selector+' .port-ckid').text(port.ckid === '' ? '-' : port.ckid);
     });
+    
   }
 
   function updatePortRangeBtns(ptyp) {
@@ -314,12 +318,44 @@
       $(".mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
     })
     
-    //update ports Xside
+    //update ports
     queryAndUpdatePorts(nodeX,slotX,'x')
     queryAndUpdatePorts(nodeY,slotY,'y')
 
 
   }
+
+  function highlightPorts(portType, portHighLight) {
+    for(let i=0; i<portHighLight.length; i++) {
+      let port = portHighLight[i];
+      let portExtract = port.split('-');
+      let ptyp = portExtract[2].toLowerCase();
+      // if not in the same displayed side, return
+      if(ptyp !== portType)
+        return;
+
+      let node = portExtract[0];
+      let slot = portExtract[1];
+      let pnum = portExtract[3];
+      let index = Math.floor((pnum-1)/25);
+      if(pnum > 25) 
+          portGrid_id = pnum - 25;
+      else 
+          portGrid_id = pnum;
+      
+      if($(".node-tab.active[ptyp='"+ptyp+"']").attr('node_id') == node &&
+        $(".mio-btn.active[ptyp='"+ptyp+"']").attr('slot') == slot && 
+        $(".port-range-btn.active[ptyp='"+ptyp+"']").attr('index') == index
+        ) {
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box[grid_num='"+portGrid_id+"']").addClass('addBorder')
+          //empty the portHighLight data
+          portHighLight.splice(i,1);
+        } 
+    }
+  }
+    
+  
 
   $(document).ready(function() {
     // Click event for Node Tabs
@@ -344,7 +380,6 @@
       let ptyp = $(this).attr('ptyp');
       let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
       let slot = $('.mio-btn.active[ptyp="'+ptyp+'"]').attr('slot');
-      console.log("ptyp",ptyp,"node",node,"slot",slot)
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 

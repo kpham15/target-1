@@ -94,20 +94,18 @@ $(document).on('click', '#sysview_findFac_table tbody tr', function() {
     $('#sysview_findFac_table tbody tr').removeClass('bg-primary');
     $(this).addClass('bg-primary');
 
-    $(".node-tab[node_id='"+node+"'][ptyp='"+ptyp+"']").find('a').trigger('click');
-    $(".mio-btn[slot='"+slot+"'][ptyp='"+ptyp+"']").trigger('click');
-    let portRangeIndex = Math.floor((pnum-1)/25);
-    $(".port-range-btn[index='"+portRangeIndex+"'][ptyp='"+ptyp.toLowerCase()+"']").trigger('click');
-    let portGrid_id = 0;
-    if(pnum > 25) 
-        portGrid_id = pnum - 25;
-    else 
-        portGrid_id = pnum;
-    if(portGrid_id > 0) {
-        $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder')
-        $(".port-grid[ptyp='"+ptyp+"'] > .port-box[grid_num='"+portGrid_id+"']").addClass('addBorder')
-    }
+    //add port into highlight list
+    portHighLight.push(port);
 
+    $(".node-tab[ptyp='"+ptyp+"']").removeClass('active');
+    $(".node-tab[node_id='"+node+"'][ptyp='"+ptyp+"']").addClass('active');
+
+    $(".mio-btn[ptyp='"+ptyp+"']").removeClass('active');
+    $(".mio-btn[slot='"+slot+"'][ptyp='"+ptyp+"']").addClass('active');
+
+    let portRangeIndex = Math.floor((pnum-1)/25);
+    $(".port-range-btn[index='"+portRangeIndex+"'][ptyp='"+ptyp+"']").trigger('click');
+    
 });
         
 

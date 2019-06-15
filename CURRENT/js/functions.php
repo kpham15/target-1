@@ -124,8 +124,9 @@
 				updateNodeStatus();
 				updateHeaderInfo();
 
-				//mxc update when nodeBtn, mxcbtn, portbtn are ready
-				updateMxcInfo();
+				//update mxc tab and ports only when sysview page is active
+				if($("#system-view-page").hasClass("active-page"))
+					updateMxcInfo();
 				
 				// Check if user is timed out
 				checkUserTimeout(res);
@@ -193,7 +194,6 @@
 
 
 	// ================ Encode Password ================= //
-	var keyId = "";
 	function encode(data) {
 		var header = {
 			"alg": "HS256",

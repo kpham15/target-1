@@ -32,4 +32,10 @@
 
   // First load boolean
   var firstload = true;
+
+  // store key used to decrypt and encrypt password
+  var keyId = "";
+ 
+  // store port infor need to be highlight
+  var portHighLight = []
 </script>
