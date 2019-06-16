@@ -19,6 +19,8 @@
     <?php include __DIR__ . "/find-conn.html"; ?>
 
 
+
+
     <!-- =========================================================== -->
 
     <div class="row">
@@ -279,7 +281,15 @@
 
   function createMioBtn(psta, index, ptyp) {
     let slot = index + 1;
-    let mioBtn = '<button type="button" class="mio-btn btn btn-default" slot="'+slot+'" ptyp="'+ptyp+'"><p>MIO'+ptyp.toUpperCase()+'-'+slot+'<br/><span class="mio-psta">'+psta+'</p></button>';
+    let mioBtn = `<div class="dropdown" style="float: left">
+                    <button type="button" class="mio-btn btn btn-default" data-toggle="dropdown" slot="${slot}" ptyp="${ptyp}">
+                      <p>MIO${ptyp.toUpperCase()}-${slot}<br/><span class="mio-psta">${psta}</p>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-menu-lock-card">LOCK-CARD</a></li>
+                      <li><a class="dropdown-menu-unlock-card">UNLOCK-CARD</a></li>
+                    </ul>
+                  </div>`;
 
     return mioBtn;
   }
@@ -366,13 +376,62 @@
 
     // Click event for MIO buttons
     $(document).on('click', '.mio-btn', function() {
+      // new code
       let ptyp = $(this).attr('ptyp');
+      if ($(this).hasClass('active')) {
+        return;
+      }
+      else {        
+        $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
+        $(this).button('toggle');
+        $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+      }
 
-      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
-      $(this).button('toggle');
+    });
 
-      $('.port-range-btn[ptyp="'+ptyp+'"]').first().trigger('click');
+    // MIO dropdown menu lock card
+    $(document).on('click',".dropdown-menu-lock-card", function() {
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      let shelf = "";
+      if (ptyp == "x") {
+        shelf = "1";
+        ptyp = "MIOX";
+      } else if (ptyp == "y") {
+        shelf = "2";
+        ptyp = "MIOY";
+      }
 
+      $("#matrix-modal-node").val(node);
+      $("#matrix-modal-shelf").val(shelf);
+      $("#matrix-modal-slot").val(slot);
+      $("#matrix-modal-type").val(ptyp);
+      $("#matrix-modal-action").val("LCK").attr('action', 'lck');
+      $("#matrix-modal").modal();
+
+    });
+
+    // MIO dropdown menu unlock card
+    $(document).on('click',".dropdown-menu-unlock-card", function() {
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      let shelf = "";
+      if (ptyp == "x") {
+        shelf = "1";
+        ptyp = "MIOX";
+      } else if (ptyp == "y") {
+        shelf = "2";
+        ptyp = "MIOY";
+      }
+
+      $("#matrix-modal-node").val(node);
+      $("#matrix-modal-shelf").val(shelf);
+      $("#matrix-modal-slot").val(slot);
+      $("#matrix-modal-type").val(ptyp);
+      $("#matrix-modal-action").val("UN-LCK").attr('action', 'unlck');
+      $("#matrix-modal").modal();
     });
 
     // Click event for Port range buttons
