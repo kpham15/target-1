@@ -274,7 +274,7 @@
     }
   }
 
-  function validateMtcRestore(obj, ckid) {
+  function validateMtcRestore(obj) {
 
     maintDefaultForms();
 
@@ -289,8 +289,8 @@
       return;
     }
     else {
-      $('#setup-maint-modal-ckid').val(ckid);
-      $('#setup-maint-modal-ckid-tn').val(ckid);
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
       $('#setup-maint-modal-cls').val(obj.cls);
       $('#setup-maint-modal-adsr').val(obj.adsr);
       $('#setup-maint-modal-prot').val(obj.prot);
@@ -496,7 +496,7 @@
       } else if (obj.action == "MTC_CONN") {
         validateMtcConnnect(obj, ckid);
       } else if (obj.action == "MTC_RESTORE") {
-        validateMtcRestore(obj, ckid);
+        validateMtcRestore(obj);
       } else if (obj.action == "RESTORE_MTCD") {
         validateRestoreMtcd(obj, ckid);
       } else if (obj.action == "MTC_TEST") {

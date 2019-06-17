@@ -562,7 +562,7 @@
     })
   }
 
-  function validateMtcRestoreModal(obj, ckid) {
+  function validateMtcRestoreModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -583,7 +583,7 @@
         "api":    "ipcMaintConnect",
         "act":    "MTC_RESTORE",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -602,8 +602,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
@@ -865,7 +865,7 @@
         validateRestoreMtcdModal(obj, ckid);
       }
       else if (obj.action == "MTC_RESTORE") {
-        validateMtcRestoreModal(obj, ckid);
+        validateMtcRestoreModal(obj);
       }
       else if (obj.action == "MTC_TEST"){
         validateMtcTestModal(obj, ckid);
