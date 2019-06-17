@@ -211,14 +211,7 @@ $(document).ready(function() {
       title:      $('#setup-users-modal-title').val(),
       group:      $('#setup-users-modal-group').val(),
     }
-
-    let tel = "";
-    if ($('#setup-users-modal-tn-cbx').prop('checked')) {
-      tel = $('#setup-users-modal-tel-tn').val();
-    }
-    else {
-      tel = $('#setup-users-modal-tel').val();
-    }
+    
     setupUsersModalSubmit(obj);
   })
 
