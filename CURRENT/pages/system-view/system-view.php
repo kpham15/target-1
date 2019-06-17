@@ -16,6 +16,8 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/find-conn.html"; ?>
+
 
 
 
@@ -147,6 +149,10 @@
 
         updatePortRangeBtns(ptyp);
         updatePortGrid(ptyp);
+
+        //highlight the found ports
+        highlightPorts(ptyp, portHighLight);
+        
       }
     });
   }
@@ -158,7 +164,6 @@
     let portArray = [];
     let color = '';
 
-    
     if (ptyp === 'x') {
       portArray = portX.filter(function(port) {
         if (port.pnum >= 1+calculated && port.pnum <= 25+calculated) {
@@ -209,6 +214,7 @@
       grid.find(selector+' .fac-type').text(port.ftyp === '' ? '-' : port.ftyp);
       grid.find(selector+' .port-ckid').text(port.ckid === '' ? '-' : port.ckid);
     });
+    
   }
 
   function updatePortRangeBtns(ptyp) {
@@ -298,6 +304,69 @@
     return nodeTab;
   }
 
+  function updateMxcInfo() {
+    let nodeX = $(".node-tab.active[ptyp='x']").attr("node_id");
+    let slotX = $(".mio-btn.active[ptyp='x']").attr("slot");
+    let nodeY = $(".node-tab.active[ptyp='y']").attr("node_id");
+    let slotY = $(".mio-btn.active[ptyp='y']").attr("slot");
+    //if sys-view not ready, don't do anything
+    if(nodeX == undefined || slotX == undefined || nodeY == undefined || slotY == undefined)
+      return;
+    //update miox
+    nodeInfo.filter(function(item) {
+      return item.node == nodeX
+    })[0].MIOX.forEach(function(psta,i){
+      let slotId = i +1;
+      $(".mio-btn[slot='"+slotId+"'][ptyp='x']").find('span').html(psta);
+
+    });
+    //update mioy
+    nodeInfo.filter(function(item) {
+      return item.node == nodeY
+    })[0].MIOY.forEach(function(psta,i){
+      let slotId = i +1;
+      $(".mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
+    })
+    
+    //update ports
+    queryAndUpdatePorts(nodeX,slotX,'x')
+    queryAndUpdatePorts(nodeY,slotY,'y')
+
+
+  }
+
+  function highlightPorts(portType, portHighLight) {
+    for(let i=0; i<portHighLight.length; i++) {
+      let port = portHighLight[i];
+      let portExtract = port.split('-');
+      let ptyp = portExtract[2].toLowerCase();
+      // if not in the same displayed side, return
+      if(ptyp !== portType)
+        return;
+
+      let node = portExtract[0];
+      let slot = portExtract[1];
+      let pnum = portExtract[3];
+      let index = Math.floor((pnum-1)/25);
+      if(pnum > 25) 
+          portGrid_id = pnum - 25;
+      else 
+          portGrid_id = pnum;
+      
+      if($(".node-tab.active[ptyp='"+ptyp+"']").attr('node_id') == node &&
+        $(".mio-btn.active[ptyp='"+ptyp+"']").attr('slot') == slot && 
+        $(".port-range-btn.active[ptyp='"+ptyp+"']").attr('index') == index
+        ) {
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box[grid_num='"+portGrid_id+"']").addClass('addBorder')
+          //empty the portHighLight data
+          portHighLight.splice(i,1);
+        } 
+    }
+  }
+    
+  
+
   $(document).ready(function() {
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
@@ -370,10 +439,11 @@
       let ptyp = $(this).attr('ptyp');
       let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
       let slot = $('.mio-btn.active[ptyp="'+ptyp+'"]').attr('slot');
-
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
+      //remove previous highlighted port
+      $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
       queryAndUpdatePorts(node, slot, ptyp);
     });
 
