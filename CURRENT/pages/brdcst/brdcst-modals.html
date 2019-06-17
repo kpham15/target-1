@@ -83,6 +83,11 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    // WHEN MODAL IS HIDDEN
+    $("#brdcst-modal").on('hidden.bs.modal', function() {
+      $("#brdcst-form-action").val("");
+    });
+
     $('#brdcst-modal-submit').click(function() {
       let action = $('#brdcst-modal-action').val();
       let id = $('#brdcst-form-id').val();

@@ -84,6 +84,10 @@ var brdcstId = '';
 
 $(document).ready(function(obj) {
 
+  $(".brdcst-form-input").on('click', function() {
+    clearErrors();
+  });
+
   function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
