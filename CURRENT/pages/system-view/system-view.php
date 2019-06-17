@@ -84,6 +84,17 @@
 </div>
 
 <script type="text/javascript">
+
+  // UPON LOAD PAGE FIRST TIME
+  var sysViewFirstLoad = true;
+  $(".menu-item[page_id='system-view-page']").click(async function() {
+    if (sysViewFirstLoad != true) {
+      return;
+    }
+    $("#header-bulletinBoard-modal").modal('show');
+    sysViewFirstLoad = false;
+  });
+
   function sysviewStartup() {
     // Create the Node tabs according to amount of nodes
     // @TODO
