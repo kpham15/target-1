@@ -16,12 +16,9 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
-<<<<<<< HEAD
     <?php include __DIR__ . "/mtc-modal.html"; ?>
-=======
     <?php include __DIR__ . "/find-conn.html"; ?>
 
->>>>>>> ipcv2
 
 
 
@@ -311,9 +308,6 @@
     // Return html string
     return nodeTab;
   }
-<<<<<<< HEAD
-  
-=======
 
   function updateMxcInfo() {
     let nodeX = $(".node-tab.active[ptyp='x']").attr("node_id");
@@ -378,7 +372,6 @@
     
   
 
->>>>>>> ipcv2
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
