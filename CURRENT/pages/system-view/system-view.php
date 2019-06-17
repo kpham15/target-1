@@ -370,6 +370,7 @@
     $(document).on('click', ".dropdown-menu-view-path", function() {
 
       // Save values for node and slot
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
       let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
