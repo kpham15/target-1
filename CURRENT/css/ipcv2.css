@@ -9,9 +9,11 @@
   margin: auto;
   text-align: left;
 }
-
 #login-title {
   line-height: 100%;
+}
+.login-box {
+  margin: 1% auto;
 }
 /* ============ END Login Page ===============*/
 
