@@ -472,10 +472,14 @@
     // Click even Port Box Menu -> MT_TEST
     $(document).on('click', '.mt-test', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+
+      // clear modal
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
+      // select correct divs to hide/show
       maintTestForms();
+      // set defaults to radio and selection box
       $('#setup-maint-modal-test-radio1').prop('checked', true);
       $('#setup-maint-modal-test-radio2').prop('checked', false);
       $('#setup-maint-modal-test-port1').prop('disabled', false);
