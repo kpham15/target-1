@@ -464,25 +464,6 @@
       $('.setup-maint-modal-input').val('');
       clearErrors();
       
-      // @TODO need to pass the correct ctyp to the modal so it fills in correctly
-      // cannot just take obj.contyp and put into both
-      let obj = {
-        action:     $('#setup-maint-forms-action').val(),
-        // ckid:     $('#setup-maint-forms-ckid').val(),
-        cls:        $('#setup-maint-forms-cls').val(),
-        adsr:       $('#setup-maint-forms-adsr').val(),
-        tktno:      $('#setup-maint-forms-tktno').val(),
-        mlo:        $('#setup-maint-forms-mlo').val(),
-        prot:       $('#setup-maint-forms-prot').val(),
-        ckid:       $('#setup-maint-forms-ckid').val(),
-        contyp:     $('#setup-maint-forms-contyp').val(),
-        ckid:       $('#setup-maint-forms-ckid').val(),
-        ffac:       $('#setup-maint-forms-ffac').val(),
-        tfac:       $('#setup-maint-forms-tfac').val(),
-        fport:      $('#setup-maint-forms-fport').val(),
-        tport:      $('#setup-maint-forms-tport').val(),
-      }
-
       let ckid = "";
       if ($('#setup-maint-forms-cbx').prop('checked')) {
         ckid = $('#setup-maint-forms-ckid-tn').val();
@@ -491,8 +472,27 @@
         ckid = $('#setup-maint-forms-ckid').val();
       }
 
+      let obj = {
+        action:     $('#setup-maint-forms-action').val(),
+        // ckid:     $('#setup-maint-forms-ckid').val(),
+        cls:        $('#setup-maint-forms-cls').val(),
+        adsr:       $('#setup-maint-forms-adsr').val(),
+        tktno:      $('#setup-maint-forms-tktno').val(),
+        mlo:        $('#setup-maint-forms-mlo').val(),
+        prot:       $('#setup-maint-forms-prot').val(),
+        ckid:       ckid,
+        contyp:     $('#setup-maint-forms-contyp').val(),
+        ckid:       $('#setup-maint-forms-ckid').val(),
+        ffac:       $('#setup-maint-forms-ffac').val(),
+        tfac:       $('#setup-maint-forms-tfac').val(),
+        fport:      $('#setup-maint-forms-fport').val(),
+        tport:      $('#setup-maint-forms-tport').val(),
+      }
+
+      
+
       if (obj.action == "MTC_DISCON") {
-        validateMtcDisconnect(obj, ckid);
+        validateMtcDisconnect(obj);
       } else if (obj.action == "MTC_CONN") {
         validateMtcConnnect(obj, ckid);
       } else if (obj.action == "MTC_RESTORE") {
