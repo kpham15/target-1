@@ -57,7 +57,7 @@
         <li class="notifications-menu">
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
+            <i class="far fa-bell"></i>
             <!-- <span class="label label-warning">10</span> -->
           </a>
         </li>
