@@ -108,7 +108,8 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/header-nav-modals.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-database.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
