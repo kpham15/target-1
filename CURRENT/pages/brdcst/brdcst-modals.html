@@ -119,7 +119,7 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          inputError("#brdcst-modal-action", data.reason);
+          inputError($("#brdcst-modal-action"), data.reason);
         } else {
           $('#brdcst-form-clear').trigger('click');
           
