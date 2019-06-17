@@ -2,7 +2,7 @@
 <header class="main-header">
 
   <!-- Logo -->
-  <a href="index2.html" class="logo">
+  <a class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><img src="../resources/Telepath_Logo_Part.JPG" height="50" width="50"/></span>
     <!-- logo for regular state and mobile devices -->
