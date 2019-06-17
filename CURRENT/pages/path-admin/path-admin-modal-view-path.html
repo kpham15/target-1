@@ -79,10 +79,9 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#pathAdmin-form-view_node_slot'),'No Record Found');
+      let res = [];
+      if (data.hasOwnProperty('rows')) {
+        res = data.rows;
       }
       pathAdminModalViewPathDatatable.clear().draw();
       pathAdminModalViewPathDatatable.rows.add(res);
