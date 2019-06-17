@@ -440,7 +440,7 @@
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
-      sysviewMtcPopulateModal(ckid, 'MTC_RETORE');
+      sysviewMtcPopulateModal(ckid, 'MTC_RESTORE');
       $('#setup-maint-modal-action').val('MTC_RESTORE');
       $('#setup-maint-modal').modal('show');
     });
