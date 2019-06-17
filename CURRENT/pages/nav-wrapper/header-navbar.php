@@ -82,13 +82,8 @@
             <!-- The user image in the menu -->
             <li class="user-header">
               <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-<<<<<<< HEAD
-              <img src="../resources/Telepath_Logo_Part.JPG" alt="User Image">
-
-=======
               <img id = "user_header_pic" src="../resources/userPic/defaultUser.jpeg" class="img-circle" alt="User Image">
               
->>>>>>> 86-ipcv2-home-page-update-miox-mioy
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
                 <small>Member since Nov. 2012</small>
