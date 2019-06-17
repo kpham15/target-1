@@ -144,11 +144,7 @@
       }
     });
   });
-
-  $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
-    $('#alarm-header-icon').attr('data-toggle', '');
-  });
-
+  
   function updateUsername() {
     $('#top-nav-user-name, #profile-dropdown-user-name').text(user.fname + ' ' + user.lname);
     $('#profile-dropdown-user-group').text(user.ugrp);
