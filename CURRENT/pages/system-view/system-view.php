@@ -413,9 +413,11 @@
         $('#setup-maint-modal-adsr').val(res[0].adsr);
         $('#setup-maint-modal-prot').val(res[0].prot);
         $('#setup-maint-modal-mlo').val(res[0].mlo);
-        $('#setup-maint-modal-contyp').val(res[0].ctyp);
-        $('#setup-maint-modal-ffac').val(res[0].ffac);
-        $('#setup-maint-modal-tfac').val(res[0].tfac);
+        $('#setup-maint-modal-test-ctyp1').val(res[0].contyp);
+        $('#setup-maint-modal-test-ctyp2').val(res[0].contyp);
+        $('#setup-maint-modal-test-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-test-tfac').val(res[0].tfac);
+        $('#setup-maint-modal-action').val(res[0].action);
 
         maintLoadTestPort(res[0].ffac, 'X');
         maintLoadTestPort(res[0].tfac, 'Y');
