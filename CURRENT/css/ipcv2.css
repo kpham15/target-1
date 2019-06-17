@@ -5,7 +5,7 @@
 
 /* ============ Login Page ============== */
 .login-page {
-  background-color: #ECF7FC;
+  background-color: #C5F8F9;
 }
 .login-logo {
   width: 180px;
@@ -58,7 +58,7 @@
     border-top: 1px solid #3c8dbc;
   }
   #main-section-content {
-    background-color: #ECF7FC;
+    background-color: #C5F8F9;
   }
   .skin-blue .main-sidebar {
     background-color: #1700CC;
