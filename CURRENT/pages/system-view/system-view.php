@@ -467,7 +467,7 @@
       $("#sysview_viewPath_modal").modal("show");
 
       // ajax
-      sysview_viewPath(node, slot);
+      // sysview_viewPath(node, slot);
 
     });
 
