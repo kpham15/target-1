@@ -169,6 +169,38 @@
 </div>
 <script type="text/javascript">
 
+  function maintDefaultForms() {
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').show();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+
+  function maintConnForms() {
+    $('#setup-maint-modal-mtccon1-div').show();
+    $('#setup-maint-modal-mtccon2-div').show();
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+  
+  function maintTestForms() {
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').show();
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+
+  function maintChangeForms() {
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').show();
+  }
+
   function validateMtcConnnect(obj, ckid) {
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
@@ -183,11 +215,7 @@
     }
     else {
 
-    $('#setup-maint-modal-mtccon1-div').show();
-    $('#setup-maint-modal-mtccon2-div').show();
-    $('#setup-maint-modal-row3-div').hide();
-    $('#setup-maint-modal-mtctest-div').hide();
-    $('#setup-maint-modal-change-div').hide();
+    maintConnForms();
 
     $('#setup-maint-modal-pick-conn1').prop('checked',true);
     $('#setup-maint-modal-pick-conn2').prop('checked',false);
@@ -217,11 +245,7 @@
 
   function validateRestoreMtcd(obj, ckid) {
 
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
-    $('#setup-maint-modal-row3-div').show();
-    $('#setup-maint-modal-mtctest-div').hide();
-    $('#setup-maint-modal-change-div').hide();
+    maintDefaultForms();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
@@ -252,11 +276,7 @@
 
   function validateMtcRestore(obj, ckid) {
 
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
-    $('#setup-maint-modal-row3-div').show();
-    $('#setup-maint-modal-mtctest-div').hide();
-    $('#setup-maint-modal-change-div').hide();
+    maintDefaultForms();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
@@ -287,11 +307,7 @@
 
   function validateMtcDisconnect(obj, ckid) {
 
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
-    $('#setup-maint-modal-row3-div').show();
-    $('#setup-maint-modal-mtctest-div').hide();
-    $('#setup-maint-modal-change-div').hide();
+    maintDefaultForms();
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
@@ -349,11 +365,7 @@
     maintLoadTestPort(obj.ffac, 'X');
     maintLoadTestPort(obj.tfac, 'Y');
 
-    $('#setup-maint-modal-row3-div').hide();
-    $('#setup-maint-modal-mtctest-div').show();
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
-    $('#setup-maint-modal-change-div').hide();
+    maintTestForms();
 
     $('#setup-maint-modal-test-radio1').prop('checked', true);
     $('#setup-maint-modal-test-radio2').prop('checked', false);
@@ -402,28 +414,24 @@
       return;
     }
     else {
-    $('#setup-maint-modal-mtccon1-div').hide();
-    $('#setup-maint-modal-mtccon2-div').hide();
-    $('#setup-maint-modal-row3-div').hide();
-    $('#setup-maint-modal-mtctest-div').hide();
-    $('#setup-maint-modal-change-div').show();
+      maintChangeForms();
 
-    $('#setup-maint-modal-ckid').val(ckid);
-    $('#setup-maint-modal-ckid-tn').val(ckid);
-    $('#setup-maint-modal-action').val(obj.action);
-    $('#setup-maint-modal-cls').val(obj.cls);
-    $('#setup-maint-modal-adsr').val(obj.adsr);
-    $('#setup-maint-modal-prot').val(obj.prot);
-    $('#setup-maint-modal-tktno').val(obj.tktno);
-    $('#setup-maint-modal-mlo').val(obj.mlo);
+      $('#setup-maint-modal-ckid').val(ckid);
+      $('#setup-maint-modal-ckid-tn').val(ckid);
+      $('#setup-maint-modal-action').val(obj.action);
+      $('#setup-maint-modal-cls').val(obj.cls);
+      $('#setup-maint-modal-adsr').val(obj.adsr);
+      $('#setup-maint-modal-prot').val(obj.prot);
+      $('#setup-maint-modal-tktno').val(obj.tktno);
+      $('#setup-maint-modal-mlo').val(obj.mlo);
 
-    $('#setup-maint-modal-change-out-ctyp').val(obj.contyp);
-    $('#setup-maint-modal-change-out-ffac').val(obj.ffac);
-    $('#setup-maint-modal-change-out-fport').val(obj.fport);
-    $('#setup-maint-modal-change-out-tfac').val(obj.tfac);
-    $('#setup-maint-modal-change-out-tport').val(obj.tport);
+      $('#setup-maint-modal-change-out-ctyp').val(obj.contyp);
+      $('#setup-maint-modal-change-out-ffac').val(obj.ffac);
+      $('#setup-maint-modal-change-out-fport').val(obj.fport);
+      $('#setup-maint-modal-change-out-tfac').val(obj.tfac);
+      $('#setup-maint-modal-change-out-tport').val(obj.tport);
 
-    $('#setup-maint-modal').modal('show');
+      $('#setup-maint-modal').modal('show');
     }
   }
 
