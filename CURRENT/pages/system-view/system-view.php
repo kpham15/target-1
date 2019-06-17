@@ -376,6 +376,7 @@
   
 
   $(document).ready(function() {
+
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
 
@@ -455,19 +456,24 @@
       $("#matrix-modal").modal();
     });
 
+    // variables to hold values
+    let sysview_node = "";
+    let sysview_slot = "";
+
     // MIO dropdown menu action: VIEW PATH
     $(document).on('click', ".dropdown-menu-view-path", function() {
 
       // Save values for node and slot
       let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
-      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
-      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      sysview_slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      sysview_node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
       // Display Modal containing table
       $("#sysview_viewPath_modal").modal("show");
 
-      // ajax
-      // sysview_viewPath(node, slot);
+      $("#sysview_viewPath_modal").on('shown.bs.modal', function(e) {
+        sysview_viewPath(sysview_node, sysview_slot);
+      });
 
     });
 
