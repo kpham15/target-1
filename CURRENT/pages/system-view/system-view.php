@@ -406,6 +406,22 @@
         $('#setup-maint-modal-ffac').val(res[1].ffac);
         $('#setup-maint-modal-tfac').val(res[1].tfac);
       }
+      else if (mtcAction == 'MTC_TEST') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-contyp').val(res[0].ctyp);
+        $('#setup-maint-modal-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-tfac').val(res[0].tfac);
+
+        maintLoadTestPort(res[0].ffac, 'X');
+        maintLoadTestPort(res[0].tfac, 'Y');
+
+        maintTestForms();
+      }
     })
   }
     
@@ -418,6 +434,7 @@
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
       sysviewMtcPopulateModal(ckid, 'MTC_DISCON');
       $('#setup-maint-modal-action').val('MTC_DISCON');
       $('#setup-maint-modal').modal('show');
@@ -429,6 +446,7 @@
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
       sysviewMtcPopulateModal(ckid, 'RESTORE_MTCD');
       $('#setup-maint-modal-action').val('RESTORE_MTCD');
       $('#setup-maint-modal').modal('show');
@@ -440,8 +458,25 @@
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
       sysviewMtcPopulateModal(ckid, 'MTC_RESTORE');
       $('#setup-maint-modal-action').val('MTC_RESTORE');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_TEST
+    $(document).on('click', '.mt-test', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintTestForms();
+      $('#setup-maint-modal-test-radio1').prop('checked', true);
+      $('#setup-maint-modal-test-radio2').prop('checked', false);
+      $('#setup-maint-modal-test-port1').prop('disabled', false);
+      $('#setup-maint-modal-test-port2').prop('disabled', true);
+      sysviewMtcPopulateModal(ckid, 'MTC_TEST');
+      $('#setup-maint-modal-action').val('MTC_TEST');
       $('#setup-maint-modal').modal('show');
     });
 
