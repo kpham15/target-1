@@ -86,14 +86,15 @@
 <script type="text/javascript">
 
   // UPON LOAD PAGE FIRST TIME
-  var sysViewFirstLoad = true;
-  $(".menu-item[page_id='system-view-page']").click(async function() {
-    if (sysViewFirstLoad != true) {
+  // bulletinBoard modal appear first load
+  function loadBulletinBoard() {
+    var bulletinBoardFirstLoad = true;
+    if (bulletinBoardFirstLoad != true) {
       return;
     }
     $("#header-bulletinBoard-modal").modal('show');
-    sysViewFirstLoad = false;
-  });
+    bulletinBoardFirstLoad = false;
+  }
 
   function sysviewStartup() {
     // Create the Node tabs according to amount of nodes
