@@ -136,7 +136,7 @@
 </div>
 
 <script type="text/javascript">
-function setupUsersModalSubmit(obj, tel) {
+function setupUsersModalSubmit(obj) {
 
   $.ajax({
     type:       'POST',
@@ -151,7 +151,7 @@ function setupUsersModalSubmit(obj, tel) {
       "fname":  obj.fname,
       "mi":     obj.mi,
       "lname":  obj.lname,
-      "tel":    tel,
+      "tel":    obj.tel,
       "email":  obj.email,
       "title":  obj.title,
       "ugrp":   obj.group
@@ -189,8 +189,18 @@ $(document).ready(function() {
 
   // Submit Button Click Event
   $('#setup-users-modal-submit').click(function() {
+
+    let tel = "";
+    if ($('#setup-users-modal-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-modal-tel-tn').val();
+    }
+    else {
+      tel = $('#setup-users-modal-tel').val();
+    }
+
     let obj = {
       action:     $('#setup-users-modal-action').val(),
+      tel:        tel,
       user:       $('#setup-users-modal-user').val(),
       ssn:        $('#setup-users-modal-ssn').val(),
       status:     $('#setup-users-modal-stat').val(),
@@ -209,7 +219,7 @@ $(document).ready(function() {
     else {
       tel = $('#setup-users-modal-tel').val();
     }
-    setupUsersModalSubmit(obj, tel);
+    setupUsersModalSubmit(obj);
   })
 
   // Modal Close Event Handler
