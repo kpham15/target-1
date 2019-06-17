@@ -39,6 +39,9 @@
     display: inline;
     width: auto;
   }
+  .dropdown-menu li>a {
+    color: #000;
+  }
   .nav.node-tabs>li>a {
     padding: 8px;
   }
