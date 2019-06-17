@@ -456,17 +456,13 @@
       $("#matrix-modal").modal();
     });
 
-    // variables to hold values
-    let sysview_node = "";
-    let sysview_slot = "";
-
     // MIO dropdown menu action: VIEW PATH
     $(document).on('click', ".dropdown-menu-view-path", function() {
 
       // Save values for node and slot
       let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
-      sysview_slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
-      sysview_node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
       // Display Modal containing table
       $("#sysview_viewPath_modal").modal("show");
