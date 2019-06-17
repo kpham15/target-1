@@ -365,6 +365,20 @@
       $("#matrix-modal").modal();
     });
 
+    // MIO dropdown menu action: VIEW PATH
+    $(document).on('click', ".dropdown-menu-view-path", function() {
+
+      // Save values for node and slot
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+
+      // ajax
+
+
+      // Display Modal containing table
+      $("#pathAdmin-modal-view-path").modal("show");
+    });
+
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
       let ptyp = $(this).attr('ptyp');
