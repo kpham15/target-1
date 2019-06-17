@@ -25,9 +25,6 @@
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
-.main-header .sidebar-toggle:before {
-  content: "\f0c9";
-}
 .nav-tabs-custom>.nav-tabs>li.active>a {
   border-left-color: #aaa;
   border-right-color: #aaa;
