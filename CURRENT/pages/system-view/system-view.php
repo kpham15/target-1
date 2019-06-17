@@ -468,6 +468,8 @@
 
       // ajax
       sysview_viewPath(node, slot);
+      sysview_viewPathDataTable.columns.adjust().draw();
+
     });
 
     // Click event for Port range buttons
