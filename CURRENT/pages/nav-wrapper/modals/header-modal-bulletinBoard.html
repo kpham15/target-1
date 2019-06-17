@@ -76,9 +76,19 @@ function queryBulletinBoard() {
 }
 
 $(document).ready(function() {
+  let bulletinBoardModalFirstLoad = true;
+  if (bulletinBoardModalFirstLoad) {
+    $("#header-bulletinBoard-modal").modal('show');
+    bulletinBoardModalFirstLoad = false;
+  } else {
+    return;
+  }
+
   // When modal opens
   $("#header-bulletinBoard-modal").on('shown.bs.modal', function() {
     queryBulletinBoard();
   });
+
+
 });
 </script>
