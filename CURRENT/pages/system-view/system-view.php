@@ -468,7 +468,6 @@
 
       // ajax
       sysview_viewPath(node, slot);
-      sysview_viewPathDataTable.columns.adjust().draw();
 
     });
 
