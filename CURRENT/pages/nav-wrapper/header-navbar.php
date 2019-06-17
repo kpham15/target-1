@@ -73,16 +73,14 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-            <img id = "dropdown_userPic" src="../resources/userPic/defaultUser.jpeg" class="user-image" alt="User Image">
+            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" class="user-image" alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-              <img id = "user_header_pic" src="../resources/userPic/defaultUser.jpeg" class="img-circle" alt="User Image">
+              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
               
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
