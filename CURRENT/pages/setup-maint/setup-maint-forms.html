@@ -201,7 +201,7 @@
     $('#setup-maint-modal-change-div').show();
   }
 
-  function validateMtcConnnect(obj, ckid) {
+  function validateMtcConnnect(obj) {
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
@@ -226,8 +226,8 @@
     maintLoadFacY();
     maintLoadFacX();
 
-    $('#setup-maint-modal-ckid').val(ckid);
-    $('#setup-maint-modal-ckid-tn').val(ckid);
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
     $('#setup-maint-modal-cls').val(obj.cls);
     $('#setup-maint-modal-adsr').val(obj.adsr);
     $('#setup-maint-modal-prot').val(obj.prot);
@@ -243,7 +243,7 @@
     }
   }
 
-  function validateRestoreMtcd(obj, ckid) {
+  function validateRestoreMtcd(obj) {
 
     maintDefaultForms();
 
@@ -258,8 +258,8 @@
       return;
     }
     else {
-      $('#setup-maint-modal-ckid').val(ckid);
-      $('#setup-maint-modal-ckid-tn').val(ckid);
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
       $('#setup-maint-modal-cls').val(obj.cls);
       $('#setup-maint-modal-adsr').val(obj.adsr);
       $('#setup-maint-modal-prot').val(obj.prot);
@@ -349,7 +349,7 @@
     }
   }
   
-  function validateMtcTest(obj, ckid) {
+  function validateMtcTest(obj) {
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
       $('#setup-maint-forms-action').val('');
@@ -381,8 +381,8 @@
     $('#setup-maint-modal-mlo').prop('disabled',true);
     $('#setup-maint-modal-action').prop('disabled',true);
 
-    $('#setup-maint-modal-ckid').val(ckid);
-    $('#setup-maint-modal-ckid-tn').val(ckid);
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
     $('#setup-maint-modal-cls').val(obj.cls);
     $('#setup-maint-modal-adsr').val(obj.adsr);
     $('#setup-maint-modal-prot').val(obj.prot);
@@ -401,7 +401,7 @@
 
   }
 
-  function validateMtcChange(obj, ckid) {
+  function validateMtcChange(obj) {
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
@@ -416,8 +416,8 @@
     else {
       maintChangeForms();
 
-      $('#setup-maint-modal-ckid').val(ckid);
-      $('#setup-maint-modal-ckid-tn').val(ckid);
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
       $('#setup-maint-modal-action').val(obj.action);
       $('#setup-maint-modal-cls').val(obj.cls);
       $('#setup-maint-modal-adsr').val(obj.adsr);
@@ -494,15 +494,15 @@
       if (obj.action == "MTC_DISCON") {
         validateMtcDisconnect(obj);
       } else if (obj.action == "MTC_CONN") {
-        validateMtcConnnect(obj, ckid);
+        validateMtcConnnect(obj);
       } else if (obj.action == "MTC_RESTORE") {
         validateMtcRestore(obj);
       } else if (obj.action == "RESTORE_MTCD") {
-        validateRestoreMtcd(obj, ckid);
+        validateRestoreMtcd(obj);
       } else if (obj.action == "MTC_TEST") {
-        validateMtcTest(obj, ckid);
+        validateMtcTest(obj);
       } else if (obj.action == "CHANGE") {
-        validateMtcChange(obj, ckid);
+        validateMtcChange(obj);
       }
 
     })

@@ -405,7 +405,7 @@
     ]
   })
 
-  function validateMtcConnModal(obj, ckid) {
+  function validateMtcConnModal(obj) {
 
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
@@ -444,7 +444,7 @@
         "api":    "ipcMaintConnect",
         "act":      obj.action,
         "user":     user.uname,
-        "ckid":     ckid,
+        "ckid":     obj.ckid,
         "cls":      obj.cls,
         "adsr":     obj.adsr,
         "prot":     obj.prot,
@@ -463,8 +463,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
 
@@ -516,7 +516,7 @@
     })
   }
 
-  function validateRestoreMtcdModal(obj, ckid) {
+  function validateRestoreMtcdModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -537,7 +537,7 @@
         "api":    "ipcMaintRestoreMtcd",
         "act":    "RESTORE_MTCD",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -556,8 +556,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
@@ -608,7 +608,7 @@
     })
   }
 
-  function validateMtcTestModal(obj, ckid) {
+  function validateMtcTestModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -645,7 +645,7 @@
         "api":    "ipcMaintConnect",
         "act":    obj.action,
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -664,13 +664,13 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
   
-  function validateChangeModal(obj, ckid) {
+  function validateChangeModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -704,7 +704,7 @@
         "api":      "ipcProv",
         "act":      "CHANGE",
         "user":     user.uname,
-        "ckid":     ckid,
+        "ckid":     obj.ckid,
         "cls":      obj.cls,
         "adsr":     obj.adsr,
         "prot":     obj.prot,
@@ -729,8 +729,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
@@ -856,22 +856,22 @@
 
 
       if (obj.action == "MTC_CONN") {
-        validateMtcConnModal(obj, ckid);
+        validateMtcConnModal(obj);
       }
       else if (obj.action == "MTC_DISCON") {
         validateMtcDisconModal(obj);
       }
       else if (obj.action == "RESTORE_MTCD") {
-        validateRestoreMtcdModal(obj, ckid);
+        validateRestoreMtcdModal(obj);
       }
       else if (obj.action == "MTC_RESTORE") {
         validateMtcRestoreModal(obj);
       }
       else if (obj.action == "MTC_TEST"){
-        validateMtcTestModal(obj, ckid);
+        validateMtcTestModal(obj);
       }
       else if (obj.action == "CHANGE") {
-        validateChangeModal(obj, ckid);
+        validateChangeModal(obj);
       }
     })
 
