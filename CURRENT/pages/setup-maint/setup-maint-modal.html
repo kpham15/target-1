@@ -470,7 +470,7 @@
 
   }
 
-  function validateMtcDisconModal(obj, ckid) {
+  function validateMtcDisconModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -491,7 +491,7 @@
         "api":    "ipcMaintDiscon",
         "act":    "MTC_DISCON",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -510,8 +510,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
@@ -823,7 +823,16 @@
     $('#setup-maint-modal-submit').click(function() {
       clearErrors();
 
+      let ckid = "";
+      if ($('#setup-maint-modal-cbx').prop('checked')) {
+        ckid = $('#setup-maint-modal-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-modal-ckid').val();
+      }
+
       let obj = {
+        ckid:     ckid,
         cls:      $('#setup-maint-modal-cls').val(),
         adsr:     $('#setup-maint-modal-adsr').val(),
         prot:     $('#setup-maint-modal-prot').val(),
@@ -843,20 +852,14 @@
         newTport: $('#setup-maint-modal-change-in-tport').val()
       }
 
-      let ckid = "";
-      if ($('#setup-maint-modal-cbx').prop('checked')) {
-        ckid = $('#setup-maint-modal-ckid-tn').val();
-      }
-      else {
-        ckid = $('#setup-maint-modal-ckid').val();
-      }
+      
 
 
       if (obj.action == "MTC_CONN") {
         validateMtcConnModal(obj, ckid);
       }
       else if (obj.action == "MTC_DISCON") {
-        validateMtcDisconModal(obj, ckid);
+        validateMtcDisconModal(obj);
       }
       else if (obj.action == "RESTORE_MTCD") {
         validateRestoreMtcdModal(obj, ckid);

@@ -305,7 +305,7 @@
     }
   }
 
-  function validateMtcDisconnect(obj, ckid) {
+  function validateMtcDisconnect(obj) {
 
     maintDefaultForms();
 
@@ -333,8 +333,8 @@
     $('#setup-maint-modal-tfac').prop('disabled',true);
     $('#setup-maint-modal-action').prop('disabled',true);
 
-    $('#setup-maint-modal-ckid').val(ckid);
-    $('#setup-maint-modal-ckid-tn').val(ckid);
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
     $('#setup-maint-modal-cls').val(obj.cls);
     $('#setup-maint-modal-adsr').val(obj.adsr);
     $('#setup-maint-modal-prot').val(obj.prot);
