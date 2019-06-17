@@ -470,12 +470,13 @@
 
       // Display Modal containing table
       $("#sysview_viewPath_modal").modal("show");
-
+  
+      $(document).off('shown.bs.modal', '#sysview_viewPath_modal');
+      $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
+        sysview_viewPath(sysview_node, sysview_slot);
+      });
     });
 
-    $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
-      sysview_viewPath(sysview_node, sysview_slot);
-    });
 
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
