@@ -456,21 +456,25 @@
       $("#matrix-modal").modal();
     });
 
+    // Variable to hold values
+    let sysview_node = "";
+    let sysview_slot = "";
+
     // MIO dropdown menu action: VIEW PATH
     $(document).on('click', ".dropdown-menu-view-path", function() {
 
       // Save values for node and slot
       let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
-      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
-      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+      sysview_slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      sysview_node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
       // Display Modal containing table
       $("#sysview_viewPath_modal").modal("show");
 
-      $("#sysview_viewPath_modal").on('shown.bs.modal', function(e) {
-        sysview_viewPath(node, slot);
-      });
+    });
 
+    $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
+      sysview_viewPath(sysview_node, sysview_slot);
     });
 
     // Click event for Port range buttons
