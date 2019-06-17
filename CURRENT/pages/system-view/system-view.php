@@ -369,7 +369,7 @@
     }
   }
 
-  function sysviewMtcDiscon(ckid) {
+  function sysviewMtcPopulateModal(ckid, mtcAction) {
     $.ajax ({
       type:       'POST',
       url:        ipcDispatch,
@@ -383,15 +383,28 @@
     }).done(function(data) {
       let res = data.rows;
 
-      $('#setup-maint-modal-ckid').val(ckid);
-      $('#setup-maint-modal-ckid-tn').val(ckid);
-      $('#setup-maint-modal-cls').val(res[0].cls);
-      $('#setup-maint-modal-adsr').val(res[0].adsr);
-      $('#setup-maint-modal-prot').val(res[0].prot);
-      $('#setup-maint-modal-mlo').val(res[0].mlo);
-      $('#setup-maint-modal-contyp').val(res[0].ctyp);
-      $('#setup-maint-modal-ffac').val(res[0].ffac);
-      $('#setup-maint-modal-tfac').val(res[0].tfac);
+      if (mtcAction == 'MTC_DISCON') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-contyp').val(res[0].ctyp);
+        $('#setup-maint-modal-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-tfac').val(res[0].tfac);
+      }
+      else if (mtcAction == 'RESTORE_MTCD') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[1].cls);
+        $('#setup-maint-modal-adsr').val(res[1].adsr);
+        $('#setup-maint-modal-prot').val(res[1].prot);
+        $('#setup-maint-modal-mlo').val(res[1].mlo);
+        $('#setup-maint-modal-contyp').val(res[1].ctyp);
+        $('#setup-maint-modal-ffac').val(res[1].ffac);
+        $('#setup-maint-modal-tfac').val(res[1].tfac);
+      }
     })
   }
     
@@ -400,15 +413,24 @@
   $(document).ready(function() {
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
-
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
-      sysviewMtcDiscon(ckid);
+      sysviewMtcPopulateModal(ckid, 'MTC_DISCON');
       $('#setup-maint-modal-action').val('MTC_DISCON');
       $('#setup-maint-modal').modal('show');
+    });
 
+    // Click event Port Box -> MT_DISCONNECT
+    $(document).on('click', '.restore-mtcd', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      sysviewMtcPopulateModal(ckid, 'RESTORE_MTCD');
+      $('#setup-maint-modal-action').val('RESTORE_MTCD');
+      $('#setup-maint-modal').modal('show');
     });
 
     // Click event for Node Tabs
