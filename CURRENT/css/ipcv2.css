@@ -55,7 +55,13 @@
   #main-section-content {
     background-color: #ECF7FC;
   }
-  .skin-blue .wrapper {
+  .skin-blue .main-sidebar {
+    background-color: #1700CC;
+  }
+  .skin-blue .sidebar-menu>li.active>a {
+    background-color: #1700CC;
+  }
+  .skin-blue .sidebar-menu>li.menu-open>a {
     background-color: #1700CC;
   }
   .skin-blue .sidebar-menu>li.header {
