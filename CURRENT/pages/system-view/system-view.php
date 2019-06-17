@@ -86,6 +86,8 @@
 <script type="text/javascript">
 
   // UPON LOAD PAGE FIRST TIME
+  loadBulletinBoard();
+  
   // bulletinBoard modal appear first load
   function loadBulletinBoard() {
     var bulletinBoardFirstLoad = true;
