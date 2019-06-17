@@ -7,7 +7,6 @@ UPDATE/*
 UPLOAD/*
 FTORDERS/*
 LOG/*
-resources/*
 !UPDATE/.readme
 !UPLOAD/.readme
 !FTORDERS/.readme
