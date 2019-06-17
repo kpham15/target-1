@@ -488,6 +488,7 @@
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
       let ptyp = $(this).attr('ptyp');
+      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $('.mio-btn[ptyp="'+ptyp+'"]').first().trigger('click');
     });
 

@@ -4,8 +4,12 @@
 }
 
 /* ============ Login Page ============== */
+.login-page {
+  background-color: #ECF7FC;
+}
 .login-logo {
-  width: 180px;
+  width: 450px;
+  transform: translateX(-30px);
   margin: auto;
   text-align: left;
 }
@@ -14,6 +18,7 @@
 }
 .login-box {
   margin: 1% auto;
+  margin-top: 5%;
 }
 /* ============ END Login Page ===============*/
 
@@ -78,7 +83,7 @@
     color: #eee;
   }
   .skin-blue .sidebar-menu>li>.treeview-menu {
-    background-color: #09004D;
+    background-color: #197BD9;
   }
   .skin-blue .sidebar-form input[type="text"] {
     background-color: #fff;
