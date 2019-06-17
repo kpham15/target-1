@@ -422,7 +422,7 @@
       $('#setup-maint-modal').modal('show');
     });
 
-    // Click event Port Box -> MT_DISCONNECT
+    // Click event Port Box -> RESTORE_MTCD
     $(document).on('click', '.restore-mtcd', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
@@ -525,6 +525,7 @@
         mtDisconnect = '';
       } else if (stat.includes('bg-minor')) {
         mtRestore = '';
+        mtTest = '';
       } else if (stat.includes('bg-major')) {
         restoreMtcd = '';
       }
