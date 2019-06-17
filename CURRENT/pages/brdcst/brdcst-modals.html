@@ -23,7 +23,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>MSG OWNER</label>
-                <select id="brdcst-modal-msgowner" class="form-control brdcst-modal-field" disabled="">
+                <input id="brdcst-modal-msgowner" type="text" class="form-control brdcst-modal-field" disabled="" />
                 </select>
               </div>
             </div>
@@ -83,11 +83,16 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    // WHEN MODAL IS HIDDEN
+    $("#brdcst-modal").on('hidden.bs.modal', function() {
+      $("#brdcst-form-action").val("");
+    });
+
     $('#brdcst-modal-submit').click(function() {
       let action = $('#brdcst-modal-action').val();
-      let id = $('#brdcst-form-id').val();
+      let id = brdcstId;
       let msg = $('#brdcst-modal-msgtitle').val();
-      let owner = $('#brdcst-modal-msgowner option:selected').text();
+      let owner = $('#brdcst-modal-msgowner').val();
       let ownerId = $('#brdcst-modal-msgowner').val();
       let sa = $('#brdcst-modal-sa').val();
       let detail = $('#brdcst-modal-details').val();
@@ -112,22 +117,13 @@
         dataType: 'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          title: data.rslt,
-          body: data.reason,
-        }
 
         if (data.rslt === 'fail') {
-          modal.type = 'danger'
-          modalHandler(modal);
+          inputError($("#brdcst-modal-action"), data.reason);
         } else {
           $('#brdcst-form-clear').trigger('click');
-          $('#brdcst-modal').modal('hide');
           
           queryBrdcst();
-          
-          modal.type = "success";
-          modalHandler(modal);
         }
       });
     });
