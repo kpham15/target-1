@@ -23,7 +23,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>MSG OWNER</label>
-                <select id="brdcst-modal-msgowner" class="form-control brdcst-modal-field" disabled="">
+                <input id="brdcst-modal-msgowner" type="text" class="form-control brdcst-modal-field" disabled="" />
                 </select>
               </div>
             </div>
@@ -92,7 +92,7 @@
       let action = $('#brdcst-modal-action').val();
       let id = $('#brdcst-form-id').val();
       let msg = $('#brdcst-modal-msgtitle').val();
-      let owner = $('#brdcst-modal-msgowner option:selected').text();
+      let owner = $('#brdcst-modal-msgowner').text();
       let ownerId = $('#brdcst-modal-msgowner').val();
       let sa = $('#brdcst-modal-sa').val();
       let detail = $('#brdcst-modal-details').val();
