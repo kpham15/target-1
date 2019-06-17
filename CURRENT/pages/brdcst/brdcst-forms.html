@@ -86,6 +86,7 @@ $(document).ready(function(obj) {
 
   $(".brdcst-form-input").on('click', function() {
     clearErrors();
+    brdcstDatatable.clear().draw();
   });
 
   function brdcstActionAdd() {
@@ -107,7 +108,7 @@ $(document).ready(function(obj) {
     
     $('#brdcst-modal-date').val(obj.date);
     $('#brdcst-modal-msgowner').val(obj.owner);
-    $('#brdcst-modal-msgtitle').val(obj.msg);
+    $('#brdcst-modal-msgtitle').val(obj.title);
     $('#brdcst-modal-sa').val(obj.sa);
     $('#brdcst-modal-details').val(obj.detail);
     $('#brdcst-modal-action').val('UPDATE');
@@ -141,7 +142,7 @@ $(document).ready(function(obj) {
       owner:      $('#brdcst-form-msgowner').val(),
       sa:         $('#brdcst-form-sa').val(),
       action:     $('#brdcst-form-action').val(),
-      title:      $('#brdcst-form-msg-title').val(),
+      title:      $('#brdcst-form-msgtitle').val(),
       date:       $('#brdcst-form-date').val(),
       detail:     $('#brdcst-form-details').val()
     }
