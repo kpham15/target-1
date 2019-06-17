@@ -373,7 +373,7 @@
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
       // ajax
-
+      pathAdminModalViewPathQueryByNodeSlot(node, slot);
 
       // Display Modal containing table
       $("#pathAdmin-modal-view-path").modal("show");
