@@ -1,81 +1,83 @@
-<div id="login-page" class="login-box" style="display: none;">
-  <div class="login-logo">
-    <a>
-      <p id="login-title">
-        <b>I</b>ntelligent<br/>
-        <b>P</b>rovisioning<br/>
-        <b>C</b>enter
-      </p>
-    </a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
-    <form>
-      <div id="login-forms">
-        <div class="form-group has-feedback">
-          <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
-          <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-          <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
-          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-      </div>
-      <div id="newpassword-forms" style="display:none;">
-        <div class="form-group has-feedback">
-          <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
-          <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-            <input id="login_confirmPassWord" type="password" class="login-input-fields form-control" placeholder="Retype Password">
-            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input id="login-remember" type="checkbox"> Remember Me
-            </label>
+<div id="login-page">
+  <div class="login-box" style="display: none;">
+    <div class="login-logo">
+      <a>
+        <p id="login-title">
+          <b>I</b>ntelligent<br/>
+          <b>P</b>rovisioning<br/>
+          <b>C</b>enter
+        </p>
+      </a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+  
+      <form>
+        <div id="login-forms">
+          <div class="form-group has-feedback">
+            <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
         </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div id="newpassword-forms" style="display:none;">
+          <div class="form-group has-feedback">
+            <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
+            <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+              <input id="login_confirmPassWord" type="password" class="login-input-fields form-control" placeholder="Retype Password">
+              <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
         </div>
-        <!-- /.col -->
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="checkbox icheck">
+              <label>
+                <input id="login-remember" type="checkbox"> Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-xs-4">
+            <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+  
+      <div class="login-bottom-actions text-center">
+        <p>- OR -</p>
+        <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
       </div>
-    </form>
-
-    <div class="login-bottom-actions text-center">
-      <p>- OR -</p>
-      <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
+  
     </div>
-
+    <!-- /.login-box-body -->
   </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-
-<!-- Jumbotron Warning -->
-<div class="container">
-  <div id="login-disclaimer" class="jumbotron">
-    <span class="text-center" style="color:red;">
-      <h1>WARNING</h1>
-    </span>
-    
-    <p class="text-center"><strong>PRIVATE/PROPRIETARY</strong></p>
-    <p>
-      <strong>
-        NO DISCLOSURE OUTSIDE TELEPATH NETWORKS EXCEPT BY WRITTEN AGREEMENT. ANY UNAUTHORIZED ACCESS TO, OR MISSUSE OF THE SYSTEM OR DATA MAY RESULT IN CIVIL AND/OR CRIMINAL PROSECUTION, EMPLOYEE DISCIPLINE UP TO AND INCLUDING DISCHARGE, OR TERMINATION OF VENDOR/SERVICE CONTRACTS.
-      </strong>
-    </p>
-    <p class="text-center"><strong>THIS SYSTEM ACCESS/USAGE IS MONITORED AND AUDITED.</strong></p>
+  <!-- /.login-box -->
+  
+  <!-- Jumbotron Warning -->
+  <div class="container">
+    <div id="login-disclaimer" class="jumbotron">
+      <span class="text-center" style="color:red;">
+        <h1>WARNING</h1>
+      </span>
+      
+      <p class="text-center"><strong>PRIVATE/PROPRIETARY</strong></p>
+      <p>
+        <strong>
+          NO DISCLOSURE OUTSIDE TELEPATH NETWORKS EXCEPT BY WRITTEN AGREEMENT. ANY UNAUTHORIZED ACCESS TO, OR MISSUSE OF THE SYSTEM OR DATA MAY RESULT IN CIVIL AND/OR CRIMINAL PROSECUTION, EMPLOYEE DISCIPLINE UP TO AND INCLUDING DISCHARGE, OR TERMINATION OF VENDOR/SERVICE CONTRACTS.
+        </strong>
+      </p>
+      <p class="text-center"><strong>THIS SYSTEM ACCESS/USAGE IS MONITORED AND AUDITED.</strong></p>
+    </div>
   </div>
+  <!-- END Jumbotron Warning -->
 </div>
-<!-- END Jumbotron Warning -->
 
 <!-- Successful Login Modal -->
 <div class="modal fade" id="login-success-modal">
