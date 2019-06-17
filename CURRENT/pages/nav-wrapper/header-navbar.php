@@ -45,7 +45,7 @@
         
         <!-- Messages: style can be found in dropdown.less-->
         <!-- Notifications Menu -->
-        <li class="bulletinBoard-icon">
+        <li id="bulletinBoard-icon">
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
@@ -189,7 +189,7 @@
       $('#header-database-download-modal').modal('show');
     });
 
-    $("#bulletinBoard-icon").click(function() {
+    $("#bulletinBoard-icon").click(function() { 
       $("#header-bulletinBoard-modal").modal('show');
     });
 
