@@ -417,7 +417,6 @@
         $('#setup-maint-modal-test-ctyp2').val(res[0].ctyp);
         $('#setup-maint-modal-test-ffac').val(res[0].ffac);
         $('#setup-maint-modal-test-tfac').val(res[0].tfac);
-        $('#setup-maint-modal-action').val(res[0].action);
 
         maintLoadTestPort(res[0].ffac, 'X');
         maintLoadTestPort(res[0].tfac, 'Y');
