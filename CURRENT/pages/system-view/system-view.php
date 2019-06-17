@@ -16,7 +16,6 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
-    <?php include __DIR__ . "/mtc-modal.html"; ?>
     <?php include __DIR__ . "/find-conn.html"; ?>
 
 
