@@ -122,12 +122,8 @@
           inputError("#brdcst-modal-action", data.reason);
         } else {
           $('#brdcst-form-clear').trigger('click');
-          $('#brdcst-modal').modal('hide');
           
           queryBrdcst();
-          
-          modal.type = "success";
-          modalHandler(modal);
         }
       });
     });
