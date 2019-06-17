@@ -61,7 +61,7 @@
     background-color: #C5F8F9;
   }
   .treeview-menu>li>a>.far,
-  .treeview-menu>li>a>.fab {
+  .sidebar-menu > li > a > .fab {
     width: 20px;
   }
   .skin-blue .main-sidebar {
