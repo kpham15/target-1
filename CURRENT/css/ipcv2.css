@@ -25,37 +25,40 @@
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
-  .nav-tabs-custom>.nav-tabs>li.active>a {
-    border-left-color: #aaa;
-    border-right-color: #aaa;
-  }
-  .nav-tabs-custom>.nav-tabs.node-tabs {
-    border-bottom-color: #aaa;
-  }
-  .nav.navbar-nav .navbar-text {
-    color: #FFF;
-  }
-  #alarm-header-icon {
-    display: inline;
-    width: auto;
-  }
-  .dropdown-menu li>a {
-    color: #000;
-    cursor: pointer;
-  }
-  .nav.node-tabs>li>a {
-    padding: 8px;
-  }
-  hr.content-page-divider {
-    margin-top: 0px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-top: 1px solid #3c8dbc;
-  }
-  .treeview-menu>li>a>.far {
-    width: 20px;
-  }
+.main-header .sidebar-toggle:before {
+  content: "\f0c9";
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+  border-left-color: #aaa;
+  border-right-color: #aaa;
+}
+.nav-tabs-custom>.nav-tabs.node-tabs {
+  border-bottom-color: #aaa;
+}
+.nav.navbar-nav .navbar-text {
+  color: #FFF;
+}
+#alarm-header-icon {
+  display: inline;
+  width: auto;
+}
+.dropdown-menu li>a {
+  color: #000;
+  cursor: pointer;
+}
+.nav.node-tabs>li>a {
+  padding: 8px;
+}
+hr.content-page-divider {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 1px solid #3c8dbc;
+}
+.treeview-menu>li>a>.far {
+  width: 20px;
+}
 /* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
