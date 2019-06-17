@@ -71,10 +71,10 @@
       },
       dataType: "json"
     }).done(function(data){
-      // let res = [];
-      // if (data.hasOwnProperty('rows')) {
+      let res = [];
+      if (data.hasOwnProperty('rows')) {
         res = data.rows;
-      // }
+      }
       sysview_viewPathDataTable.clear().draw();
       sysview_viewPathDataTable.rows.add(res);
       sysview_viewPathDataTable.columns.adjust().draw();
