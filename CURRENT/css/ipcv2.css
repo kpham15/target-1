@@ -69,6 +69,7 @@
   }
   .skin-blue .sidebar-menu>li.header {
     background-color: #10008C;
+    color: #ccc;
   }
   .skin-blue .sidebar-menu .treeview-menu>li>a {
     background-color: #197BD9;
