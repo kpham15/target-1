@@ -34,35 +34,29 @@
             <input type="text" id="alarm-admin-forms-condition" class="form-control alarm-admin-forms-input" disabled="">
           </div>
         </div>
-      </div>
-
-
-
-    
-
-
-
-    
-
-
-    <!-- ACTION -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-action" class="col-sm-2 control-label">ACTION:</label>
-      <div class="col-sm-9">
-        <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
-          <option value=""></option>
-          <option value="ACK">ACK</option>
-          <option value="UN-ACK">UN-ACK</option>
-          <option value="CLR">CLR</option>
-        </select>
-      </div>
     </div>
-
-    <div style="margin-bottom: 10px">
-      <!-- Refresh Button -->
-      <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat">
-        Refresh
-      </button>
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- ACTION -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION:</label>
+          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+              <option value=""></option>
+              <option value="ACK">ACK</option>
+              <option value="UN-ACK">UN-ACK</option>
+              <option value="CLR">CLR</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <!-- Refresh Button -->
+          <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+              Refresh
+            </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
