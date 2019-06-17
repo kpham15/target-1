@@ -123,6 +123,10 @@
 
 				updateNodeStatus();
 				updateHeaderInfo();
+
+				//update mxc tab and ports only when sysview page is active
+				if($("#system-view-page").hasClass("active-page"))
+					updateMxcInfo();
 				
 				// Check if user is timed out
 				checkUserTimeout(res);
@@ -133,6 +137,9 @@
 				startup();
 				firstload = false;
 			}
+
+
+
 		});
 	}
 
@@ -187,7 +194,6 @@
 
 
 	// ================ Encode Password ================= //
-	var keyId = "";
 	function encode(data) {
 		var header = {
 			"alg": "HS256",
