@@ -68,8 +68,8 @@
                 <label>TN:</label>
                 <input id="setup-users-modal-tn-cbx" type="checkbox" checked>
                 <div class="input-group">
-                  <input id="setup-users-modal-tel" type="text" class="form-control setup-users-modal-input" style="display:none;" />
-                  <input id="setup-users-modal-tel-tn" type="text" class="form-control setup-users-modal-input" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
+                  <input id="setup-users-modal-tel" type="text" class="form-control setup-users-modal-input users-modal-phonenum" style="display:none;" />
+                  <input id="setup-users-modal-tel-tn" type="text" class="form-control setup-users-modal-input users-modal-phonenum" placeholder="555-555-5555" data-inputmask='"mask":"999-999-9999"' data-mask="" />
                 </div>
               </div>
             </div>
@@ -221,6 +221,17 @@ $(document).ready(function() {
     }
     setupUsersModalSubmit(obj);
   })
+
+  //Initialize inputmask
+  $('#setup-users-modal-phonenum-tn').inputmask();
+
+  //TN Checkbox Handler
+  $('#setup-users-modal-tn-cbx').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#setup-users-modal-tn-cbx').on('ifToggled', function(){
+    $('.users-modal-phonenum').toggle();
+  });
 
   // Modal Close Event Handler
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
