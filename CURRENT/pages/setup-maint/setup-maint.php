@@ -20,9 +20,9 @@
 
       <!-- Setup Maint Modal -->
       <?php include __DIR__ . '/setup-maint-modal.html';?>
-
+      
+    </div>
   </div>
-</div>
 
 <script type="text/javascript">
 
