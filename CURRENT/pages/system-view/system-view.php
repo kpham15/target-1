@@ -85,12 +85,10 @@
 
 <script type="text/javascript">
 
-  // UPON LOAD PAGE FIRST TIME
-  loadBulletinBoard();
-  
   // bulletinBoard modal appear first load
+  var bulletinBoardFirstLoad = true;
+
   function loadBulletinBoard() {
-    var bulletinBoardFirstLoad = true;
     if (bulletinBoardFirstLoad != true) {
       return;
     }
@@ -99,6 +97,7 @@
   }
 
   function sysviewStartup() {
+    loadBulletinBoard();
     // Create the Node tabs according to amount of nodes
     // @TODO
     // Might need to add this bit of code to updates of nodes
