@@ -282,6 +282,7 @@
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-menu-lock-card">LOCK-CARD</a></li>
                       <li><a class="dropdown-menu-unlock-card">UNLOCK-CARD</a></li>
+                      <li><a class="dropdown-menu-view-path">VIEW PATH</a></li>
                     </ul>
                   </div>`;
 
