@@ -383,7 +383,8 @@
     }).done(function(data) {
       let res = data.rows;
 
-      if (mtcAction == 'MTC_DISCON') {
+      if (mtcAction == 'MTC_DISCON' || 
+          mtcAction == 'MTC_RESTORE') {
         $('#setup-maint-modal-ckid').val(ckid);
         $('#setup-maint-modal-ckid-tn').val(ckid);
         $('#setup-maint-modal-cls').val(res[0].cls);
@@ -411,7 +412,7 @@
   
 
   $(document).ready(function() {
-    // Click event Port Box -> MT_DISCONNECT
+    // Click event Port Box Menu -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
@@ -422,7 +423,7 @@
       $('#setup-maint-modal').modal('show');
     });
 
-    // Click event Port Box -> RESTORE_MTCD
+    // Click event Port Box Menu -> RESTORE_MTCD
     $(document).on('click', '.restore-mtcd', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
@@ -430,6 +431,17 @@
       $('.setup-maint-modal-input').val('');
       sysviewMtcPopulateModal(ckid, 'RESTORE_MTCD');
       $('#setup-maint-modal-action').val('RESTORE_MTCD');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_RESTORE
+    $(document).on('click', '.mt-restore', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      sysviewMtcPopulateModal(ckid, 'MTC_RETORE');
+      $('#setup-maint-modal-action').val('MTC_RESTORE');
       $('#setup-maint-modal').modal('show');
     });
 
