@@ -17,6 +17,8 @@
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
     <?php include __DIR__ . "/find-conn.html"; ?>
+    <?php include __DIR__ . '/view-path.html'; ?>
+
 
 
 
@@ -292,6 +294,7 @@
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-menu-lock-card">LOCK-CARD</a></li>
                       <li><a class="dropdown-menu-unlock-card">UNLOCK-CARD</a></li>
+                      <li><a class="dropdown-menu-view-path">VIEW PATH</a></li>
                     </ul>
                   </div>`;
 
@@ -429,7 +432,8 @@
   
 
   $(document).ready(function() {
-    // Click event Port Box Menu -> MT_DISCONNECT
+
+    // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
@@ -546,6 +550,24 @@
       $("#matrix-modal-action").val("UN-LCK").attr('action', 'unlck');
       $("#matrix-modal").modal();
     });
+
+    // MIO dropdown menu action: VIEW PATH
+    $(document).on('click', ".dropdown-menu-view-path", function() {
+
+      // Save values for node and slot
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+
+      // Display Modal containing table
+      $("#sysview_viewPath_modal").modal("show");
+  
+      $(document).off('shown.bs.modal', '#sysview_viewPath_modal');
+      $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
+        sysview_viewPath(node, slot);
+      });
+    });
+
 
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {

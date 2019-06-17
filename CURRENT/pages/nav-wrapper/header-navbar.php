@@ -2,7 +2,7 @@
 <header class="main-header">
 
   <!-- Logo -->
-  <a href="index2.html" class="logo">
+  <a class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><img src="../resources/Telepath_Logo_Part.JPG" height="50" width="50"/></span>
     <!-- logo for regular state and mobile devices -->
@@ -73,17 +73,15 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-            <img src="../resources/Telepath_Logo_Part.JPG" class="user-image" alt="User Image">
+            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" class="user-image" alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <!-- <img src="../LIBS/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-              <img src="../resources/Telepath_Logo_Part.JPG" alt="User Image">
-
+              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
+              
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
                 <small>Member since Nov. 2012</small>

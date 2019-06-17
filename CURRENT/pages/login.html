@@ -59,6 +59,24 @@
 </div>
 <!-- /.login-box -->
 
+<!-- Jumbotron Warning -->
+<div class="container">
+  <div id="login-disclaimer" class="jumbotron">
+    <span class="text-center" style="color:red;">
+      <h1>WARNING</h1>
+    </span>
+    
+    <p class="text-center"><strong>PRIVATE/PROPRIETARY</strong></p>
+    <p>
+      <strong>
+        NO DISCLOSURE OUTSIDE TELEPATH NETWORKS EXCEPT BY WRITTEN AGREEMENT. ANY UNAUTHORIZED ACCESS TO, OR MISSUSE OF THE SYSTEM OR DATA MAY RESULT IN CIVIL AND/OR CRIMINAL PROSECUTION, EMPLOYEE DISCIPLINE UP TO AND INCLUDING DISCHARGE, OR TERMINATION OF VENDOR/SERVICE CONTRACTS.
+      </strong>
+    </p>
+    <p class="text-center"><strong>THIS SYSTEM ACCESS/USAGE IS MONITORED AND AUDITED.</strong></p>
+  </div>
+</div>
+<!-- END Jumbotron Warning -->
+
 <!-- Successful Login Modal -->
 <div class="modal fade" id="login-success-modal">
   <div class="modal-dialog">
@@ -191,10 +209,16 @@
             user.grp = obj.rows[0].grp;
             user.ugrp = obj.rows[0].ugrp;
             user.idle_to = obj.rows[0].user_idle_to;
+            user.com = obj.rows[0].com;
             login.username.val("");
             login.password.val("");
             login.newpassword.val("");
             login.confirmPassword.val("");
+
+            if(user.com !== "") {
+              $("#user_header_pic").attr("src","../PROFILE/"+user.com);
+              $("#dropdown_userPic").attr("src","../PROFILE/"+user.com);
+            }
             if(newPw !== "") {
               $('#login-success-modal .modal-title').text(obj.rslt);
               $('#login-success-modal .modal-body').text(obj.reason);
