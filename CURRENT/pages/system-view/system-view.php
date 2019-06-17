@@ -16,7 +16,6 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
-    <?php include __DIR__ . "/mtc-modal.html"; ?>
     <?php include __DIR__ . "/find-conn.html"; ?>
     <?php include __DIR__ . '/view-path.html'; ?>
 
@@ -372,6 +371,63 @@
         } 
     }
   }
+
+  function sysviewMtcPopulateModal(ckid, mtcAction) {
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (mtcAction == 'MTC_DISCON' || 
+          mtcAction == 'MTC_RESTORE') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-contyp').val(res[0].ctyp);
+        $('#setup-maint-modal-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-tfac').val(res[0].tfac);
+      }
+      else if (mtcAction == 'RESTORE_MTCD') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[1].cls);
+        $('#setup-maint-modal-adsr').val(res[1].adsr);
+        $('#setup-maint-modal-prot').val(res[1].prot);
+        $('#setup-maint-modal-mlo').val(res[1].mlo);
+        $('#setup-maint-modal-contyp').val(res[1].ctyp);
+        $('#setup-maint-modal-ffac').val(res[1].ffac);
+        $('#setup-maint-modal-tfac').val(res[1].tfac);
+      }
+      else if (mtcAction == 'MTC_TEST') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-test-ctyp1').val(res[0].ctyp);
+        $('#setup-maint-modal-test-ctyp2').val(res[0].ctyp);
+        $('#setup-maint-modal-test-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-test-tfac').val(res[0].tfac);
+
+        maintLoadTestPort(res[0].ffac, 'X');
+        maintLoadTestPort(res[0].tfac, 'Y');
+
+        maintTestForms();
+      }
+    })
+  }
     
   
 
@@ -379,15 +435,58 @@
 
     // Click event Port Box -> MT_DISCONNECT
     $(document).on('click', '.mt-disconnect', function() {
-
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
-      $('#mtc-modal-post-response-text').text('');
-      $('.mtc-modal-input').val('');
-      sysviewMtcDiscon(ckid);
-      $('#mtc-modal-action').val('MTC_DISCON');
-      $('#mtc-modal').modal('show');
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'MTC_DISCON');
+      $('#setup-maint-modal-action').val('MTC_DISCON');
+      $('#setup-maint-modal').modal('show');
+    });
 
+    // Click event Port Box Menu -> RESTORE_MTCD
+    $(document).on('click', '.restore-mtcd', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'RESTORE_MTCD');
+      $('#setup-maint-modal-action').val('RESTORE_MTCD');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_RESTORE
+    $(document).on('click', '.mt-restore', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'MTC_RESTORE');
+      $('#setup-maint-modal-action').val('MTC_RESTORE');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_TEST
+    $(document).on('click', '.mt-test', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+
+      // clear modal
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      // select correct divs to hide/show
+      maintTestForms();
+      // set defaults to radio and selection box
+      $('#setup-maint-modal-test-radio1').prop('checked', true);
+      $('#setup-maint-modal-test-radio2').prop('checked', false);
+      $('#setup-maint-modal-test-port1').prop('disabled', false);
+      $('#setup-maint-modal-test-port2').prop('disabled', true);
+      sysviewMtcPopulateModal(ckid, 'MTC_TEST');
+      $('#setup-maint-modal-action').val('MTC_TEST');
+      $('#setup-maint-modal').modal('show');
     });
 
     // Click event for Node Tabs
@@ -501,6 +600,7 @@
         mtDisconnect = '';
       } else if (stat.includes('bg-minor')) {
         mtRestore = '';
+        mtTest = '';
       } else if (stat.includes('bg-major')) {
         restoreMtcd = '';
       }
