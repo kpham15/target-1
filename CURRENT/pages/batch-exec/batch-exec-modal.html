@@ -10,32 +10,31 @@
             </div>
       
             <div class="modal-body">
-                <form class="form">
-                    <div class="row" style="background-color: lightgray; padding:15px">
-                        <div class="col-sm-12">
-                            <h4>CHOOSE THE FILE FROM YOUR COMPUTER:</h4>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <label class="input-group-btn">
-                                    <span class="btn btn-primary">
-                                        Choose a csv file <input class="form-control" type="file" style="display:none" id="batchExcModal_file" accept=".csv">
-                                    </span>
-                                </label>
-                                <input id="batchExcModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
-                            </div>
+                <div class="row" style="background-color: lightgray; padding:15px">
+                    <div class="col-sm-12">
+                        <h4>CHOOSE A FILE FROM YOUR COMPUTER:</h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Choose a csv file <input class="form-control" type="file" style="display:none" id="batchExcModal_file" accept=".csv">
+                                </span>
+                            </label>
+                            <input id="batchExcModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
                         </div>
                     </div>
-                    
-                    <div class="modal-footer row">
-                        <button class="btn btn-primary" id="batchExcModal_submit_btn" style="width:13%;float:left">Submit</button>
-                        <button class="btn btn-primary" id="batchExcModal_clear_btn" style="width:10%;float:left">Clear</button>
-                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width:10%;float:left">Close</button>
-                        <div style="width:60%;float:left">
-                            <label id="batchExcModal_reslt"></label>
-                        </div>
+                </div>
+                
+                <div class="modal-footer row">
+                    <button class="btn btn-primary" id="batchExcModal_submit_btn" style="width:13%;float:left">Submit</button>
+                    <button class="btn btn-primary" id="batchExcModal_clear_btn" style="width:10%;float:left">Clear</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width:10%;float:left">Close</button>
+                    <div style="width:60%;float:left">
+                        <label id="batchExcModal_rslt"></label>
                     </div>
-                </form>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -52,12 +51,12 @@ $(document).on('change', '#batchExcModal_file', function() {
 
 function batchExcModal_add() {
     if($("#batchExcModal_file").val() == "") {
-        $("#batchExcModal_reslt").css("color","red").text("There is no file uploaded!")
+        $("#batchExcModal_rslt").css("color","red").text("There is no file uploaded!")
         return;
     }
     let file= document.getElementById("batchExcModal_file").files[0];
     if (file.size > 2097152) {
-        $("#batchExcModal_reslt").css("color","red").text("The file size must be less than 2MB!")
+        $("#batchExcModal_rslt").css("color","red").text("The file size must be less than 2MB!")
     }
     else {
         let data = new FormData();
@@ -79,11 +78,11 @@ function batchExcModal_add() {
         .done(function(data, status){
             let obj = JSON.parse(data);
             if (obj["rslt"] == "fail") {
-                $("#batchExcModal_reslt").css("color","red").text(obj.reason)
+                $("#batchExcModal_rslt").css("color","red").text(obj.reason)
             }
             else {
                 if (obj['rows'].length == 0) {
-                    $("#batchExcModal_reslt").css("color","red").text("No batch record found!")
+                    $("#batchExcModal_rslt").css("color","red").text("No batch record found!")
                 }
                 else {
                     let a = [];
@@ -97,7 +96,7 @@ function batchExcModal_add() {
 
                     $("#batchExc_file_sel").empty();
                     $("#batchExc_file_sel").html(a.join(""));
-                    $("#batchExcModal_reslt").css("color","green").text(obj.reason)
+                    $("#batchExcModal_rslt").css("color","green").text(obj.reason)
 
                 }  
             } 
@@ -109,10 +108,11 @@ function batchExcModal_add() {
 function batchExcModal_clearForm() {
     $("#batchExcModal_file").val("");
     $("#batchExcModal_fileText").val("");
-    $("#batchExcModal_reslt").text("")
+    $("#batchExcModal_rslt").text("")
 }
 
-$("#batchExcModal_clear_btn").click(function(){
+$("#batchExcModal_clear_btn").click(function(e){
+    e.preventDefault();
     batchExcModal_clearForm();
 })
 

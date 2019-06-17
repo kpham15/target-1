@@ -77,14 +77,12 @@
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
-          <ul class="dropdown-menu" style="width:max-content">
+          <ul class="dropdown-menu" style="width:max-content;">
             <!-- The user image in the menu -->
-            <li class="user-header">
+            <li class="user-header" style="height: max-content;">
               <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
-              
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
-                <small>Member since Nov. 2012</small>
               </p>
             </li>
             <!-- Menu Body -->
@@ -112,6 +110,7 @@
 </header>
 
 <?php include __DIR__ . "/header-nav-modals.html"; ?>
+<?php include __DIR__ . "/upload-userImg.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
@@ -128,6 +127,10 @@
     $('#nav-wrapper').hide()
     $('#login-page').show()
 
+  })
+
+  $("#uploadPic_btn").click(function(){
+    $("#header_uploadUserImage").modal();
   })
 
   

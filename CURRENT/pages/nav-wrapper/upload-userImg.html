@@ -1,0 +1,137 @@
+<!-- Modal -->
+<div class="modal fade" id="header_uploadUserImage">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">UPLOAD USER IMAGE</h4>
+            </div>
+      
+            <div class="modal-body">
+                <div class="row" style="background-color: lightgray; padding:15px">
+                    <div class="col-sm-12">
+                        <h4>CHOOSE A IMAGE FILE FROM YOUR COMPUTER:</h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Choose a png file <input class="form-control" type="file" style="display:none" id="header_uploadUserImage_file" accept=".png">
+                                </span>
+                            </label>
+                            <input id="header_uploadUserImage_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer row">
+                    <button class="btn btn-primary" id="header_uploadUserImage_submit_btn" style="width:13%;float:left">Submit</button>
+                    <button class="btn btn-primary" id="header_uploadUserImage_clear_btn" style="width:10%;float:left">Clear</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width:10%;float:left">Close</button>
+                    <div style="width:60%;float:left">
+                        <label id="header_uploadUserImage_rslt"></label>
+                    </div>
+                </div>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+
+$(document).on('change', '#header_uploadUserImage_file', function() {
+    var input = $(this),
+    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    $("#header_uploadUserImage_fileText").val(label);
+});
+
+function header_uploadUserImage_add() {
+    if($("#header_uploadUserImage_file").val() == "") {
+        $("#header_uploadUserImage_rslt").css("color","red").text("There is no image file uploaded!")
+        return;
+    }
+    let file= document.getElementById("header_uploadUserImage_file").files[0];
+
+    if (file.size > 1048576) {
+        $("#header_uploadUserImage_rslt").css("color","red").text("The image file size must be less than 1MB!")
+    }
+    else {
+        let data = new FormData();
+        data.append("api", "ipcUser");
+        data.append("user", user.uname);
+        data.append("grp", user.grp);
+        data.append("ugrp", user.ugrp);
+        data.append("act", "UPLOAD_IMG");
+        data.append("file", file);  
+
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            let obj = JSON.parse(data);
+            if (obj["rslt"] == "fail") {
+                $("#header_uploadUserImage_rslt").css("color","red").text(obj.reason)
+            }
+            else {
+                updateUserCom(file.name) 
+            } 
+        });
+
+    }
+}
+
+
+function updateUserCom(com) {
+    $.ajax({
+    type:       'POST',
+    url:        ipcDispatch,
+    data:       {
+        "api":    "ipcUser",
+        "user":   user.uname,
+        "uname":  user.uname,
+        "com":    com,
+        "act":    "UPDATE",
+    },
+    dataType: 'json',
+  }).done(function(obj) {
+        if (obj["rslt"] == "fail") {
+            $("#header_uploadUserImage_rslt").css("color","red").text(obj.reason)
+        }
+        else {
+            $("#header_uploadUserImage_rslt").css("color","green").text(obj.reason) 
+            //display image in user box
+            $("#user_header_pic").attr("src","../PROFILE/"+com);
+            $("#dropdown_userPic").attr("src","../PROFILE/"+com);
+        } 
+    
+  })
+}
+
+function header_uploadUserImage_clearForm() {
+    $("#header_uploadUserImage_file").val("");
+    $("#header_uploadUserImage_fileText").val("");
+    $("#header_uploadUserImage_rslt").text("")
+}
+
+$("#header_uploadUserImage_clear_btn").click(function(){
+    header_uploadUserImage_clearForm();
+})
+
+$("#header_uploadUserImage_submit_btn").click(function(e){
+    e.preventDefault();
+    header_uploadUserImage_add();
+});
+$("#header_uploadUserImage").on("hidden.bs.modal", function(){
+    batchExec_clearForm()
+});
+
+</script>
