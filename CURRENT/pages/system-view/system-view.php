@@ -16,6 +16,10 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/find-conn.html"; ?>
+    <?php include __DIR__ . '/view-path.html'; ?>
+
+
 
 
 
@@ -147,6 +151,10 @@
 
         updatePortRangeBtns(ptyp);
         updatePortGrid(ptyp);
+
+        //highlight the found ports
+        highlightPorts(ptyp, portHighLight);
+        
       }
     });
   }
@@ -158,7 +166,6 @@
     let portArray = [];
     let color = '';
 
-    
     if (ptyp === 'x') {
       portArray = portX.filter(function(port) {
         if (port.pnum >= 1+calculated && port.pnum <= 25+calculated) {
@@ -194,6 +201,9 @@
         case "MTCD":
           color = 'bg-minor';
           break;
+        case "MAINT":
+          color = 'bg-major';
+          break;
         default:
           color = 'bg-gray-active';
       }
@@ -209,6 +219,7 @@
       grid.find(selector+' .fac-type').text(port.ftyp === '' ? '-' : port.ftyp);
       grid.find(selector+' .port-ckid').text(port.ckid === '' ? '-' : port.ckid);
     });
+    
   }
 
   function updatePortRangeBtns(ptyp) {
@@ -264,9 +275,10 @@
                       '</div>' +
                     '</button>' +
                     '<ul class="dropdown-menu" aria-labelledby="dropdown'+gridNum+'">' +
-                      '<li><a>Item 1</a></li>' +
-                      '<li><a>Item 2</a></li>' +
-                      '<li><a>Item 3</a></li>' +
+                      '<li class="mt-disconnect"><a>MT_DISCONNECT</a></li>' +
+                      '<li class="mt-restore"><a>MT_RESTORE</a></li>' +
+                      '<li class="restore-mtcd"><a>RESTORE_MTCD</a></li>' +
+                      '<li class="mt-test"><a>MT_TEST</a></li>' +
                     '</ul>' +
                   '</div>';
 
@@ -282,6 +294,7 @@
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-menu-lock-card">LOCK-CARD</a></li>
                       <li><a class="dropdown-menu-unlock-card">UNLOCK-CARD</a></li>
+                      <li><a class="dropdown-menu-view-path">VIEW PATH</a></li>
                     </ul>
                   </div>`;
 
@@ -298,10 +311,188 @@
     return nodeTab;
   }
 
+  function updateMxcInfo() {
+    let nodeX = $(".node-tab.active[ptyp='x']").attr("node_id");
+    let slotX = $(".mio-btn.active[ptyp='x']").attr("slot");
+    let nodeY = $(".node-tab.active[ptyp='y']").attr("node_id");
+    let slotY = $(".mio-btn.active[ptyp='y']").attr("slot");
+    //if sys-view not ready, don't do anything
+    if(nodeX == undefined || slotX == undefined || nodeY == undefined || slotY == undefined)
+      return;
+    //update miox
+    nodeInfo.filter(function(item) {
+      return item.node == nodeX
+    })[0].MIOX.forEach(function(psta,i){
+      let slotId = i +1;
+      $(".mio-btn[slot='"+slotId+"'][ptyp='x']").find('span').html(psta);
+
+    });
+    //update mioy
+    nodeInfo.filter(function(item) {
+      return item.node == nodeY
+    })[0].MIOY.forEach(function(psta,i){
+      let slotId = i +1;
+      $(".mio-btn[slot='"+slotId+"'][ptyp='y']").find('span').html(psta);
+    })
+    
+    //update ports
+    queryAndUpdatePorts(nodeX,slotX,'x')
+    queryAndUpdatePorts(nodeY,slotY,'y')
+
+
+  }
+
+  function highlightPorts(portType, portHighLight) {
+    for(let i=0; i<portHighLight.length; i++) {
+      let port = portHighLight[i];
+      let portExtract = port.split('-');
+      let ptyp = portExtract[2].toLowerCase();
+      // if not in the same displayed side, return
+      if(ptyp !== portType)
+        return;
+
+      let node = portExtract[0];
+      let slot = portExtract[1];
+      let pnum = portExtract[3];
+      let index = Math.floor((pnum-1)/25);
+      if(pnum > 25) 
+          portGrid_id = pnum - 25;
+      else 
+          portGrid_id = pnum;
+      
+      if($(".node-tab.active[ptyp='"+ptyp+"']").attr('node_id') == node &&
+        $(".mio-btn.active[ptyp='"+ptyp+"']").attr('slot') == slot && 
+        $(".port-range-btn.active[ptyp='"+ptyp+"']").attr('index') == index
+        ) {
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
+          $(".port-grid[ptyp='"+ptyp+"'] > .port-box[grid_num='"+portGrid_id+"']").addClass('addBorder')
+          //empty the portHighLight data
+          portHighLight.splice(i,1);
+        } 
+    }
+  }
+
+  function sysviewMtcPopulateModal(ckid, mtcAction) {
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (mtcAction == 'MTC_DISCON' || 
+          mtcAction == 'MTC_RESTORE') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-contyp').val(res[0].ctyp);
+        $('#setup-maint-modal-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-tfac').val(res[0].tfac);
+      }
+      else if (mtcAction == 'RESTORE_MTCD') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[1].cls);
+        $('#setup-maint-modal-adsr').val(res[1].adsr);
+        $('#setup-maint-modal-prot').val(res[1].prot);
+        $('#setup-maint-modal-mlo').val(res[1].mlo);
+        $('#setup-maint-modal-contyp').val(res[1].ctyp);
+        $('#setup-maint-modal-ffac').val(res[1].ffac);
+        $('#setup-maint-modal-tfac').val(res[1].tfac);
+      }
+      else if (mtcAction == 'MTC_TEST') {
+        $('#setup-maint-modal-ckid').val(ckid);
+        $('#setup-maint-modal-ckid-tn').val(ckid);
+        $('#setup-maint-modal-cls').val(res[0].cls);
+        $('#setup-maint-modal-adsr').val(res[0].adsr);
+        $('#setup-maint-modal-prot').val(res[0].prot);
+        $('#setup-maint-modal-mlo').val(res[0].mlo);
+        $('#setup-maint-modal-test-ctyp1').val(res[0].ctyp);
+        $('#setup-maint-modal-test-ctyp2').val(res[0].ctyp);
+        $('#setup-maint-modal-test-ffac').val(res[0].ffac);
+        $('#setup-maint-modal-test-tfac').val(res[0].tfac);
+
+        maintLoadTestPort(res[0].ffac, 'X');
+        maintLoadTestPort(res[0].tfac, 'Y');
+
+        maintTestForms();
+      }
+    })
+  }
+    
+  
+
   $(document).ready(function() {
+
+    // Click event Port Box -> MT_DISCONNECT
+    $(document).on('click', '.mt-disconnect', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'MTC_DISCON');
+      $('#setup-maint-modal-action').val('MTC_DISCON');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click event Port Box Menu -> RESTORE_MTCD
+    $(document).on('click', '.restore-mtcd', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'RESTORE_MTCD');
+      $('#setup-maint-modal-action').val('RESTORE_MTCD');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_RESTORE
+    $(document).on('click', '.mt-restore', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      maintDefaultForms();
+      sysviewMtcPopulateModal(ckid, 'MTC_RESTORE');
+      $('#setup-maint-modal-action').val('MTC_RESTORE');
+      $('#setup-maint-modal').modal('show');
+    });
+
+    // Click even Port Box Menu -> MT_TEST
+    $(document).on('click', '.mt-test', function() {
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+
+      // clear modal
+      clearErrors();
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
+      // select correct divs to hide/show
+      maintTestForms();
+      // set defaults to radio and selection box
+      $('#setup-maint-modal-test-radio1').prop('checked', true);
+      $('#setup-maint-modal-test-radio2').prop('checked', false);
+      $('#setup-maint-modal-test-port1').prop('disabled', false);
+      $('#setup-maint-modal-test-port2').prop('disabled', true);
+      sysviewMtcPopulateModal(ckid, 'MTC_TEST');
+      $('#setup-maint-modal-action').val('MTC_TEST');
+      $('#setup-maint-modal').modal('show');
+    });
+
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
       let ptyp = $(this).attr('ptyp');
+      $('.mio-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $('.mio-btn[ptyp="'+ptyp+'"]').first().trigger('click');
     });
 
@@ -365,21 +556,67 @@
       $("#matrix-modal").modal();
     });
 
+    // MIO dropdown menu action: VIEW PATH
+    $(document).on('click', ".dropdown-menu-view-path", function() {
+
+      // Save values for node and slot
+      let ptyp = $(this).closest('.dropdown-menu').siblings('button').attr('ptyp');
+      let slot = $(this).closest('.dropdown-menu').siblings('button').attr('slot');
+      let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
+
+      // Display Modal containing table
+      $("#sysview_viewPath_modal").modal("show");
+  
+      $(document).off('shown.bs.modal', '#sysview_viewPath_modal');
+      $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
+        sysview_viewPath(node, slot);
+      });
+    });
+
+
     // Click event for Port range buttons
     $(document).on('click', '.port-range-btn', function() {
       let ptyp = $(this).attr('ptyp');
       let node = $('.node-tab.active[ptyp="'+ptyp+'"]').attr('node_id');
       let slot = $('.mio-btn.active[ptyp="'+ptyp+'"]').attr('slot');
-
       $('.port-range-btn.active[ptyp="'+ptyp+'"]').button('toggle');
       $(this).button('toggle');
 
+      //remove previous highlighted port
+      $(".port-grid[ptyp='"+ptyp+"'] > .port-box").removeClass('addBorder') 
       queryAndUpdatePorts(node, slot, ptyp);
     });
 
-    // Click events for Port Box Dropdowns
-    // $(document).on('click', '.port-box button', function() {
-    //   $(this).dropdown('toggle');
-    // });
+    // Click event for Port Box
+    $(document).on('click', '.port-box button', function() {
+      let stat = $(this).parent().attr('class');
+      let portPsta = $(this).find('span.port-psta').text();
+      let mtDisconnect = 'disabled';
+      let mtRestore = 'disabled';
+      let restoreMtcd = 'disabled';
+      let mtTest = 'disabled';
+
+      if (stat.includes('bg-green')) {
+        mtDisconnect = '';
+      } else if (stat.includes('bg-minor')) {
+        mtRestore = '';
+        mtTest = '';
+      } else if (stat.includes('bg-major')) {
+        restoreMtcd = '';
+      }
+
+      $(this).siblings('ul')
+        .children('.mt-disconnect')
+        .attr('class', 'mt-disconnect ' + mtDisconnect);
+      $(this).siblings('ul')
+        .children('.mt-restore')
+        .attr('class', 'mt-restore ' + mtRestore);
+      $(this).siblings('ul')
+        .children('.restore-mtcd')
+        .attr('class', 'restore-mtcd ' + restoreMtcd);
+      $(this).siblings('ul')
+        .children('.mt-test')
+        .attr('class', 'mt-test ' + mtTest);
+    })
   });
 </script>

@@ -18,11 +18,11 @@
       <!-- Setup Maint Table Ckts -->
       <?php include __DIR__ . '/setup-maint-table-ckts.html';?>
 
-      <!-- Setup Maint Modal -->
-      <?php include __DIR__ . '/setup-maint-modal.html';?>
-
+      
+    </div>
   </div>
-</div>
+  <!-- Setup Maint Modal -->
+  <?php include __DIR__ . '/setup-maint-modal.html';?>
 
 <script type="text/javascript">
 

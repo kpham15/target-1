@@ -158,6 +158,7 @@
                                         'grp'=>$userObj->grp, 
                                         'ugrp'=>$userObj->ugrp,
                                         'loginTime'=>$userObj->login,
+                                        'com'=>$userObj->com,
                                         'user_idle_to'=>$refObj->ref[0]['user_idle_to']));
             return $result;
             
