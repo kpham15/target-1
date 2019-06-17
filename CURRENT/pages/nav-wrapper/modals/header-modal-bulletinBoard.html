@@ -67,8 +67,10 @@ function queryBulletinBoard() {
     },
     dataType:   'json'
   }).done(function(data) {
-    let res = data.rows;
-
+    let res = [];
+    if (data.hasOwnProperty('rows')) {
+      res = data.rows;
+    }
     bulletinBoardDatatable.clear().draw();
     bulletinBoardDatatable.rows.add(res);
     bulletinBoardDatatable.columns.adjust().draw();
