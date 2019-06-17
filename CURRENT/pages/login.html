@@ -209,10 +209,16 @@
             user.grp = obj.rows[0].grp;
             user.ugrp = obj.rows[0].ugrp;
             user.idle_to = obj.rows[0].user_idle_to;
+            user.com = obj.rows[0].com;
             login.username.val("");
             login.password.val("");
             login.newpassword.val("");
             login.confirmPassword.val("");
+
+            if(user.com !== "") {
+              $("#user_header_pic").attr("src","../PROFILE/"+user.com);
+              $("#dropdown_userPic").attr("src","../PROFILE/"+user.com);
+            }
             if(newPw !== "") {
               $('#login-success-modal .modal-title').text(obj.rslt);
               $('#login-success-modal .modal-body').text(obj.reason);
