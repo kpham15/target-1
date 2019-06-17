@@ -53,6 +53,9 @@
     margin-right: 10px;
     border-top: 1px solid #3c8dbc;
   }
+  .treeview-menu>li>a>.far {
+    width: 20px;
+  }
 /* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
