@@ -55,6 +55,18 @@
   #main-section-content {
     background-color: #ECF7FC;
   }
+  .skin-blue .wrapper {
+    background-color: #1700CC;
+  }
+  .skin-blue .sidebar-menu>li.header {
+    background-color: #1700CC;
+  }
+  .skin-blue .sidebar-menu>li:hover>a {
+    background-color: #1700CC;
+  }
+  .skin-blue .sidebar-menu .treeview-menu>li>a {
+    background-color: #1700CC;
+  }
 /* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
