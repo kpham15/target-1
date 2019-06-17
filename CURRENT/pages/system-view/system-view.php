@@ -469,7 +469,7 @@
   
       $(document).off('shown.bs.modal', '#sysview_viewPath_modal');
       $(document).on('shown.bs.modal', '#sysview_viewPath_modal', function(e) {
-        sysview_viewPath(sysview_node, sysview_slot);
+        sysview_viewPath(node, slot);
       });
     });
 
