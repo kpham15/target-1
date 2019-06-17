@@ -4,6 +4,9 @@
 }
 
 /* ============ Login Page ============== */
+.login-page {
+  background-color: #ECF7FC;
+}
 .login-logo {
   width: 180px;
   margin: auto;
