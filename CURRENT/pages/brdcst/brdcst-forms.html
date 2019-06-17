@@ -86,7 +86,6 @@ $(document).ready(function(obj) {
 
   $(".brdcst-form-input").on('click', function() {
     clearErrors();
-    brdcstDatatable.clear().draw();
   });
 
   function brdcstActionAdd() {
@@ -173,6 +172,7 @@ $(document).ready(function(obj) {
     brdcstId = '';
 
     clearErrors();
+    brdcstDatatable.clear().draw();
   });
 });
 </script>
