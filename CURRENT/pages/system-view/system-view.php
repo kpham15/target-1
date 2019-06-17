@@ -16,6 +16,7 @@
     <!-- Find CKID Section -->
     <?php include __DIR__ . "/find-ckid.html"; ?>
     <?php include __DIR__ . "/find-fac.html"; ?>
+    <?php include __DIR__ . "/mtc-modal.html"; ?>
     <?php include __DIR__ . "/find-conn.html"; ?>
 
 
@@ -199,6 +200,9 @@
         case "MTCD":
           color = 'bg-minor';
           break;
+        case "MAINT":
+          color = 'bg-major';
+          break;
         default:
           color = 'bg-gray-active';
       }
@@ -270,9 +274,10 @@
                       '</div>' +
                     '</button>' +
                     '<ul class="dropdown-menu" aria-labelledby="dropdown'+gridNum+'">' +
-                      '<li><a>Item 1</a></li>' +
-                      '<li><a>Item 2</a></li>' +
-                      '<li><a>Item 3</a></li>' +
+                      '<li class="mt-disconnect"><a>MT_DISCONNECT</a></li>' +
+                      '<li class="mt-restore"><a>MT_RESTORE</a></li>' +
+                      '<li class="restore-mtcd"><a>RESTORE_MTCD</a></li>' +
+                      '<li class="mt-test"><a>MT_TEST</a></li>' +
                     '</ul>' +
                   '</div>';
 
@@ -368,6 +373,19 @@
   
 
   $(document).ready(function() {
+    // Click event Port Box -> MT_DISCONNECT
+    $(document).on('click', '.mt-disconnect', function() {
+
+      let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
+      clearErrors();
+      $('#mtc-modal-post-response-text').text('');
+      $('.mtc-modal-input').val('');
+      sysviewMtcDiscon(ckid);
+      $('#mtc-modal-action').val('MTC_DISCON');
+      $('#mtc-modal').modal('show');
+
+    });
+
     // Click event for Node Tabs
     $(document).on('click', '.node-tab', function() {
       let ptyp = $(this).attr('ptyp');
@@ -447,9 +465,35 @@
       queryAndUpdatePorts(node, slot, ptyp);
     });
 
-    // Click events for Port Box Dropdowns
-    // $(document).on('click', '.port-box button', function() {
-    //   $(this).dropdown('toggle');
-    // });
+    // Click event for Port Box
+    $(document).on('click', '.port-box button', function() {
+      let stat = $(this).parent().attr('class');
+      let portPsta = $(this).find('span.port-psta').text();
+      let mtDisconnect = 'disabled';
+      let mtRestore = 'disabled';
+      let restoreMtcd = 'disabled';
+      let mtTest = 'disabled';
+
+      if (stat.includes('bg-green')) {
+        mtDisconnect = '';
+      } else if (stat.includes('bg-minor')) {
+        mtRestore = '';
+      } else if (stat.includes('bg-major')) {
+        restoreMtcd = '';
+      }
+
+      $(this).siblings('ul')
+        .children('.mt-disconnect')
+        .attr('class', 'mt-disconnect ' + mtDisconnect);
+      $(this).siblings('ul')
+        .children('.mt-restore')
+        .attr('class', 'mt-restore ' + mtRestore);
+      $(this).siblings('ul')
+        .children('.restore-mtcd')
+        .attr('class', 'restore-mtcd ' + restoreMtcd);
+      $(this).siblings('ul')
+        .children('.mt-test')
+        .attr('class', 'mt-test ' + mtTest);
+    })
   });
 </script>
