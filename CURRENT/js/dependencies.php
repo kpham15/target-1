@@ -1,7 +1,7 @@
 <?php
   // Stylesheets
   echo '<link rel="stylesheet" href="../LIBS/bower_components/bootstrap/dist/css/bootstrap.min.css">';
-  echo '<link rel="stylesheet" href="../LIBS/bower_components/font-awesome/css/font-awesome.min.css">';
+  echo '<link rel="stylesheet" href="../LIBS/bower_components/font-awesome/css/all.min.css">';
   echo '<link rel="stylesheet" href="../LIBS/bower_components/Ionicons/css/ionicons.min.css">';
 
   echo '<link rel="stylesheet" href="../LIBS/dist/css/AdminLTE.min.css">';
