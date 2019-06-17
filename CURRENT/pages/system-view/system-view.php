@@ -369,6 +369,32 @@
         } 
     }
   }
+
+  function sysviewMtcDiscon(ckid) {
+    $.ajax ({
+      type:       'POST',
+      url:        ipcDispatch,
+      data:       {
+        "api":    "ipcProv",
+        "act":    "queryCktconByCkid",
+        "user":   user.uname,
+        "ckid":   ckid
+      },
+      dataType:   'json',
+    }).done(function(data) {
+      let res = data.rows;
+
+      $('#setup-maint-modal-ckid').val(ckid);
+      $('#setup-maint-modal-ckid-tn').val(ckid);
+      $('#setup-maint-modal-cls').val(res[0].cls);
+      $('#setup-maint-modal-adsr').val(res[0].adsr);
+      $('#setup-maint-modal-prot').val(res[0].prot);
+      $('#setup-maint-modal-mlo').val(res[0].mlo);
+      $('#setup-maint-modal-contyp').val(res[0].ctyp);
+      $('#setup-maint-modal-ffac').val(res[0].ffac);
+      $('#setup-maint-modal-tfac').val(res[0].tfac);
+    })
+  }
     
   
 
@@ -378,11 +404,11 @@
 
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
-      $('#mtc-modal-post-response-text').text('');
-      $('.mtc-modal-input').val('');
+      $('#setup-maint-modal-post-response-text').text('');
+      $('.setup-maint-modal-input').val('');
       sysviewMtcDiscon(ckid);
-      $('#mtc-modal-action').val('MTC_DISCON');
-      $('#mtc-modal').modal('show');
+      $('#setup-maint-modal-action').val('MTC_DISCON');
+      $('#setup-maint-modal').modal('show');
 
     });
 
