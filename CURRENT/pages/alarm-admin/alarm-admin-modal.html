@@ -67,7 +67,7 @@
             <!-- Invisible Label for Post Request Response -->
             <div class="col-md-6">
               <div class="form-group">
-                <label id="alarm-admin-modal-post-response-text" style="margin-top:35px;">I AM A POST REQUEST</label>
+                <label id="alarm-admin-modal-post-response-text" style="margin-top:32px;"></label>
               </div>
             </div>
           </div>
@@ -118,14 +118,10 @@
         }
 
         if (data.rslt === 'fail') {
-          modal.type = 'danger'
-          modalHandler(modal);
+          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         }
         else {
-          $('#alarm-admin-modal').modal('hide');
-
-          modal.type = "success";
-          modalHandler(modal);
+          $('#alarm-admin-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         }
       })
 
