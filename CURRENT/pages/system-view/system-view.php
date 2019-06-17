@@ -18,6 +18,8 @@
     <?php include __DIR__ . "/find-fac.html"; ?>
     <?php include __DIR__ . "/mtc-modal.html"; ?>
     <?php include __DIR__ . "/find-conn.html"; ?>
+    <?php include __DIR__ . '/view-path.html'; ?>
+
 
 
 
@@ -462,10 +464,10 @@
       let node = $(".node-tab.active[ptyp='" + ptyp + "']").attr('node_id');
 
       // Display Modal containing table
-      $("#pathAdmin-modal-view-path").modal("show");
+      $("#sysview_viewPath_modal").modal("show");
 
       // ajax
-      pathAdminModalViewPathQueryByNodeSlot(node, slot);
+      sysview_viewPath(node, slot);
     });
 
     // Click event for Port range buttons

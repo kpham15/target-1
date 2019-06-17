@@ -17,5 +17,3 @@
     
   </div>
 </div>
-
-<?php include __DIR__ . '/path-admin-modal-view-path.html'; ?>
