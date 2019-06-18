@@ -45,7 +45,7 @@
         
         <!-- Messages: style can be found in dropdown.less-->
         <!-- Notifications Menu -->
-        <li class="notifications-menu">
+        <li id="bulletinBoard-icon">
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
@@ -109,8 +109,9 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/header-nav-modals.html"; ?>
 <?php include __DIR__ . "/upload-userImg.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-database.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
 
 <script type="text/javascript">
   function updateUsername() {
@@ -195,6 +196,9 @@
       $('#header-database-download-modal').modal('show');
     });
 
+    $("#bulletinBoard-icon").click(function() { 
+      $("#header-bulletinBoard-modal").modal('show');
+    });
 
   })
 

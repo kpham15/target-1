@@ -172,7 +172,7 @@ function setupUserAdd(obj) {
   $('#setup-users-modal').modal('show');
 }
 
-function setupUserUpdate(obj, tel) {
+function setupUserUpdate(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
@@ -196,14 +196,14 @@ function setupUserUpdate(obj, tel) {
     $('#setup-users-modal-title').val(obj.title);
     $('#setup-users-modal-group').val(obj.group);
   
-    $('#setup-users-modal-tel').val(tel);
-    $('#setup-users-modal-tel-tn').val(tel);
+    $('#setup-users-modal-tel').val(obj.tel);
+    $('#setup-users-modal-tel-tn').val(obj.tel);
   
     $('#setup-users-modal').modal('show');
   }
 }
 
-function setupUserOther(obj, tel) {
+function setupUserOther(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
@@ -226,8 +226,8 @@ function setupUserOther(obj, tel) {
 
     $('.setup-users-modal-input').prop('disabled', true);
   
-    $('#setup-users-modal-tel').val(tel);
-    $('#setup-users-modal-tel-tn').val(tel);
+    $('#setup-users-modal-tel').val(obj.tel);
+    $('#setup-users-modal-tel-tn').val(obj.tel);
   
     $('#setup-users-modal').modal('show');
   }
@@ -239,8 +239,17 @@ $(document).ready(function() {
   $('#setup-users-forms-action').change(function() {
     $('.setup-users-modal-input').prop('disabled', false);
 
+    let tel = "";
+    if ($('#setup-users-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-forms-phonenum-tn').val();
+    }
+    else {
+      tel = $('#setup-users-forms-phonenum').val();
+    }
+
     let obj = {
       action:     $(this).val(),
+      tel:        tel,
       uname:      $('#setup-users-forms-user').val(),
       ssn:        $('#setup-users-forms-eid').val(),
       stat:       $('#setup-users-forms-stat').val(),
@@ -252,25 +261,16 @@ $(document).ready(function() {
       group:      $('#setup-users-forms-group').val(),
     }
 
-    let tel = "";
-
-    if ($('#setup-users-tn-cbx').prop('checked')) {
-      tel = $('#setup-users-forms-phonenum-tn').val();
-    }
-    else {
-      tel = $('#setup-users-forms-phonenum').val();
-    }
-
     clearErrors();
 
     if (obj.action === 'ADD') {
       setupUserAdd(obj);
     }
     else if (obj.action === 'UPDATE') {
-      setupUserUpdate(obj, tel);
+      setupUserUpdate(obj);
     }
     else {
-      setupUserOther(obj, tel);
+      setupUserOther(obj);
     }
     
   });

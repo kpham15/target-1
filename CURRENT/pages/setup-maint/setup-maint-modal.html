@@ -367,7 +367,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label id="setup-maint-modal-post-response-text" style="margin-top:35px;"></label>
+              <label id="setup-maint-modal-post-response-text" style="margin-top:32px;"></label>
             </div>
           </div>
           <!-- Footer -->
@@ -405,7 +405,7 @@
     ]
   })
 
-  function validateMtcConnModal(obj, ckid) {
+  function validateMtcConnModal(obj) {
 
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
@@ -444,7 +444,7 @@
         "api":    "ipcMaintConnect",
         "act":      obj.action,
         "user":     user.uname,
-        "ckid":     ckid,
+        "ckid":     obj.ckid,
         "cls":      obj.cls,
         "adsr":     obj.adsr,
         "prot":     obj.prot,
@@ -463,14 +463,14 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
 
   }
 
-  function validateMtcDisconModal(obj, ckid) {
+  function validateMtcDisconModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -491,7 +491,7 @@
         "api":    "ipcMaintDiscon",
         "act":    "MTC_DISCON",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -510,13 +510,13 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
 
-  function validateRestoreMtcdModal(obj, ckid) {
+  function validateRestoreMtcdModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -537,7 +537,7 @@
         "api":    "ipcMaintRestoreMtcd",
         "act":    "RESTORE_MTCD",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -556,13 +556,13 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
 
-  function validateMtcRestoreModal(obj, ckid) {
+  function validateMtcRestoreModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -583,7 +583,7 @@
         "api":    "ipcMaintConnect",
         "act":    "MTC_RESTORE",
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -602,13 +602,13 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
 
-  function validateMtcTestModal(obj, ckid) {
+  function validateMtcTestModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -645,7 +645,7 @@
         "api":    "ipcMaintConnect",
         "act":    obj.action,
         "user":   user.uname,
-        "ckid":   ckid,
+        "ckid":   obj.ckid,
         "cls":    obj.cls,
         "adsr":   obj.adsr,
         "prot":   obj.prot,
@@ -664,13 +664,13 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
   
-  function validateChangeModal(obj, ckid) {
+  function validateChangeModal(obj) {
     if ($('#setup-maint-modal-tktno').val() == "") {
       inputError($('#setup-maint-modal-tktno'),'Missing TKTNO');
       return;
@@ -704,7 +704,7 @@
         "api":      "ipcProv",
         "act":      "CHANGE",
         "user":     user.uname,
-        "ckid":     ckid,
+        "ckid":     obj.ckid,
         "cls":      obj.cls,
         "adsr":     obj.adsr,
         "prot":     obj.prot,
@@ -729,8 +729,8 @@
       }
       else {
         $('#setup-maint-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-        maintQueryTableCkts(ckid);
-        maintQueryTableCons(ckid);
+        maintQueryTableCkts(obj.ckid);
+        maintQueryTableCons(obj.ckid);
       }
     })
   }
@@ -823,7 +823,16 @@
     $('#setup-maint-modal-submit').click(function() {
       clearErrors();
 
+      let ckid = "";
+      if ($('#setup-maint-modal-cbx').prop('checked')) {
+        ckid = $('#setup-maint-modal-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-modal-ckid').val();
+      }
+
       let obj = {
+        ckid:     ckid,
         cls:      $('#setup-maint-modal-cls').val(),
         adsr:     $('#setup-maint-modal-adsr').val(),
         prot:     $('#setup-maint-modal-prot').val(),
@@ -843,32 +852,26 @@
         newTport: $('#setup-maint-modal-change-in-tport').val()
       }
 
-      let ckid = "";
-      if ($('#setup-maint-modal-cbx').prop('checked')) {
-        ckid = $('#setup-maint-modal-ckid-tn').val();
-      }
-      else {
-        ckid = $('#setup-maint-modal-ckid').val();
-      }
+      
 
 
       if (obj.action == "MTC_CONN") {
-        validateMtcConnModal(obj, ckid);
+        validateMtcConnModal(obj);
       }
       else if (obj.action == "MTC_DISCON") {
-        validateMtcDisconModal(obj, ckid);
+        validateMtcDisconModal(obj);
       }
       else if (obj.action == "RESTORE_MTCD") {
-        validateRestoreMtcdModal(obj, ckid);
+        validateRestoreMtcdModal(obj);
       }
       else if (obj.action == "MTC_RESTORE") {
-        validateMtcRestoreModal(obj, ckid);
+        validateMtcRestoreModal(obj);
       }
       else if (obj.action == "MTC_TEST"){
-        validateMtcTestModal(obj, ckid);
+        validateMtcTestModal(obj);
       }
       else if (obj.action == "CHANGE") {
-        validateChangeModal(obj, ckid);
+        validateChangeModal(obj);
       }
     })
 
