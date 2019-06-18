@@ -107,7 +107,6 @@
   $(document).ready(function() {
     $('#fac-modal-submit').click(function() {
       let id = $('#fac-form-id').val();
-
       let facId = $("#fac-modal-facId").val();
       let range = $("#fac-modal-range").val();
       let ftyp = $("#fac-modal-ftyp").val();
@@ -137,9 +136,18 @@
           postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
         } else {
           postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
+          facPopulateFormFromModal();
           queryFac();
         }
       });
     });
+
+    function facPopulateFormFromModal() {
+      $("#fac-form-facId").val($("#fac-modal-facId").val());
+      $("#fac-form-range").val($("#fac-modal-range").val());
+      $("#fac-form-ftyp").val($("#fac-modal-ftyp").val());
+      $("#fac-form-ort").val($("#fac-modal-ort").val());
+      $("#fac-form-spcfnc").val($("#fac-modal-spcfnc").val());
+    }
   });
 </script>
