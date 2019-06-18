@@ -64,6 +64,11 @@
                 <input id="alarm-admin-modal-action" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <label id="alarm-admin-modal-post-response-text" class="alarm-admin-modal-field"></label>
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -110,20 +115,14 @@
         dataType:   'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          title:  data.rslt,
-          body: data.reason,
-        }
 
         if (data.rslt === 'fail') {
-          modal.type = 'danger'
-          modalHandler(modal);
+          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + 
+          ' - ' + data.reason);
         }
         else {
-          $('#alarm-admin-modal').modal('hide');
-
-          modal.type = "success";
-          modalHandler(modal);
+          $('#alarm-admin-modal-post-response-text').css('color','green').text(data.rslt + 
+          ' - ' + data.reason);
         }
       })
 
