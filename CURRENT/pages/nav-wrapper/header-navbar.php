@@ -159,7 +159,7 @@
       url: ipcDispatch,
       data: {
         api: "ipcAlm",
-        act: "queryAlmByPsta",
+        act: "queryPsta",
         user: user.uname,
         psta: psta
       },
