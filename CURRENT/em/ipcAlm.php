@@ -30,6 +30,10 @@ $remark = "";
 if (isset($_POST['remark']))
 	$remark = $_POST['remark'];
 
+$psta = "";
+if (isset($_POST['psta']))
+	$psta = $_POST['psta'];
+
 $cond = "";
 if (isset($_POST['cond']))
 	$cond = $_POST['cond'];
@@ -74,6 +78,16 @@ if ($act == "query") {
 	$result["rslt"]   = $almObj->rslt;
 	$result["reason"] = $almObj->reason;
 	$result["rows"]   = $almObj->rows;
+	echo json_encode($result);
+	mysqli_close($db);
+	return;
+}
+
+if ($act == 'queryPsta') {
+	$almObj->queryAlmByPsta($psta);
+	$result['rslt'] = $almObj->rslt;
+	$result['reason'] = $almObj->reason;
+	$result['rows'] = $almObj->rows;
 	echo json_encode($result);
 	mysqli_close($db);
 	return;
@@ -159,7 +173,7 @@ function ackAlm($id, $almid, $ack, $remark, $user, $cond, $src, $userObj, $almOb
 	}
 
 
-	$almObj->ackAlm($ack, $remark);
+	$almObj->ackAlm($user, $remark);
 	$result["rslt"]   = $almObj->rslt;
 	$result["reason"] = $almObj->reason;
 	$result["rows"]   = $almObj->rows;

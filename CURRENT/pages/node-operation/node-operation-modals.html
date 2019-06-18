@@ -17,7 +17,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>NODE:</label>
-                <input id="node-operation-modal-node" type="text" class="form-control alarm-operation-modal-input" disabled="">
+                <input id="node-operation-modal-node" type="text" class="form-control node-operation-modal-input" disabled="">
               </div>
             </div>
 
@@ -25,7 +25,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>DEVICE:</label>
-                <input id="node-operation-modal-device" type="text" class="form-control alarm-operation-modal-input" disabled="">
+                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input" disabled="">
               </div>
             </div>
 
@@ -33,7 +33,7 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label>SERIAL NUMBER:</label>
-                <input id="node-operation-modal-serialnum" type="text" class="form-control alarm-operation-modal-input" disabled="">
+                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input" disabled="">
               </div>
             </div>
           </div>
@@ -43,15 +43,24 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label>ACTION:</label>
-                <input id="node-operation-modal-action" type="text" class="form-control alarm-operation-modal-input" disabled="">
+                <input id="node-operation-modal-action" type="text" class="form-control node-operation-modal-input" disabled="">
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <label id="node-operation-modal-post-response-text" style="margin-top:32px;"></label>
               </div>
             </div>
           </div>
 
           <!-- Footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button id="node-operation-modal-submit" type="button" class="btn btn-primary">Submit</button>
+            <button id="node-operation-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
           </div>
         </form>
       </div>
@@ -88,19 +97,12 @@ $(document).ready(function() {
       dataType:   'json'    
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:  data.rslt,
-        body:   data.reason,
-      }
 
       if (data.rslt === 'fail') {
-        modal.type = 'danger'
-        modalHandler(modal);
+        $('#node-operation-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
-        $('#node-operation-modal').modal('hide');
-        modal.type = "success";
-        modalHandler(modal);
+        $('#node-operation-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
       }
     });
   })

@@ -154,9 +154,21 @@
 		return;
 	}
 
+	function inputSuccess(selector, string) {
+		let helpBlock = '<span class="help-block">'+string+'</span>';
+		if (selector.closest('form').hasClass('form-horizontal')) {
+			selector.parent().append(helpBlock);
+		} else {
+			selector.closest('.form-group').append(helpBlock);
+		}
+		selector.closest('.form-group').addClass('has-success');
+		return;
+	}
+
 	function clearErrors() {
     $('span.help-block').remove();
     $('.form-group').removeClass('has-error');
+		$('.form-group').removeClass('has-success');
 	}
 	
 

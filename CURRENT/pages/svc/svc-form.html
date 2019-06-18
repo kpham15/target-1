@@ -268,11 +268,10 @@
         });
 
         $("#svc_clear_btn").click(function(e){
-            e.preventDefault();
             resetSvcPage();  
         })
 
-        $("#svc_ffacSearch_btn").click(function(){
+        $("#svc_ffacSearch_btn").click(function(e){
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
@@ -286,7 +285,7 @@
             searchFac();
         })
 
-        $("#svc_tfacSearch_btn").click(function(){
+        $("#svc_tfacSearch_btn").click(function(e){
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
