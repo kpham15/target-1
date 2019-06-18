@@ -7,6 +7,7 @@ UPDATE/*
 UPLOAD/*
 FTORDERS/*
 LOG/*
+DBBK/*
 !UPDATE/.readme
 !UPLOAD/.readme
 !FTORDERS/.readme
