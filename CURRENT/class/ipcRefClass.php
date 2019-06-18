@@ -147,7 +147,7 @@ class REF {
         //pw_expire = 0 - 90
         if(!($pw_expire >= 0 && $pw_expire <= 90)) {
             $this->rslt     = FAIL;
-            $this->reason   = "Pw_expire is out of range (0-90)";
+            $this->reason   = "pw_expire is out of range (0-90)";
         }
 
         $qry = "UPDATE t_ref SET val='$pw_expire' WHERE ref = 'pw_expire'";
