@@ -109,6 +109,7 @@ function updateUserCom(com) {
         else {
             $("#header_uploadUserImage_rslt").css("color","green").text(obj.reason) 
             //display image in user box
+            let url = "../PROFILE/"+com;
             let img = new Image();
             img.src = url;
             img.onload = function(){
