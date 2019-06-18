@@ -90,7 +90,8 @@
   .skin-blue .sidebar-form input[type="text"] {
     background-color: #fff;
   }
-  .skin-blue .sidebar-menu .treeview-menu>li>a:hover {
+  .skin-blue .sidebar-menu .treeview-menu>li>a:hover,
+  .skin-blue .sidebar-menu .treeview-menu>li.active>a {
     background-color: #125899;
   }
 /* ============ END Nav Wrapper Styling =============== */
