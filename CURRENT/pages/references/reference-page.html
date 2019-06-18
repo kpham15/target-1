@@ -92,7 +92,9 @@ function displayRefs(data) {
 $(document).ready(function() {
 	
 	// Click Any Select Box
-	$('.ref-select-box').on('change', function() {
+	$('.ref-select-box').on('change', function(e) {
+		e.stopPropagation();
+    e.stopImmediatePropagation();
 		$('#reference-page-post-response-text').text('');
 	})
 
