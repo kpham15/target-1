@@ -55,6 +55,7 @@ function header_uploadUserImage_add() {
         return;
     }
     let file= document.getElementById("header_uploadUserImage_file").files[0];
+    let filename = file.name;
 
     if (file.size > 1048576) {
         $("#header_uploadUserImage_rslt").css("color","red").text("The image file size must be less than 1MB!")
@@ -82,53 +83,29 @@ function header_uploadUserImage_add() {
                 $("#header_uploadUserImage_rslt").css("color","red").text(obj.reason)
             }
             else {
-                updateUserCom(file.name) 
+                $("#header_uploadUserImage_rslt").css("color","green").text(obj.reason) 
+                //display image in user box
+                let url = "../PROFILE/"+filename;
+                let img = new Image();
+                img.src = url;
+                img.onload = function(){
+                    let ratio = img.width/img.height;
+                    let imgDropbox_height = 135;
+                    let imgDropbox_width = Math.floor(135 * ratio);
+                    $("#user_header_pic").css("width",imgDropbox_width+"px");
+                    $("#user_header_pic").css("height",imgDropbox_height+"px");
+                    $("#user_header_pic").attr("src",url);
+
+                    let imgHeader_height = 25;
+                    let imgHeader_width = Math.floor(25 * ratio);
+                    $("#dropdown_userPic").attr("width",imgHeader_width);
+                    $("#dropdown_userPic").attr("height",imgHeader_height);
+                    $("#dropdown_userPic").attr("src",url);
+                } 
             } 
         });
 
     }
-}
-
-
-function updateUserCom(com) {
-    $.ajax({
-    type:       'POST',
-    url:        ipcDispatch,
-    data:       {
-        "api":    "ipcUser",
-        "user":   user.uname,
-        "uname":  user.uname,
-        "com":    com,
-        "act":    "UPDATE",
-    },
-    dataType: 'json',
-  }).done(function(obj) {
-        if (obj["rslt"] == "fail") {
-            $("#header_uploadUserImage_rslt").css("color","red").text(obj.reason)
-        }
-        else {
-            $("#header_uploadUserImage_rslt").css("color","green").text(obj.reason) 
-            //display image in user box
-            let url = "../PROFILE/"+com;
-            let img = new Image();
-            img.src = url;
-            img.onload = function(){
-                let ratio = img.width/img.height;
-                let imgDropbox_height = 135;
-                let imgDropbox_width = Math.floor(135 * ratio);
-                $("#user_header_pic").css("width",imgDropbox_width+"px");
-                $("#user_header_pic").css("height",imgDropbox_height+"px");
-                $("#user_header_pic").attr("src",url);
-
-                let imgHeader_height = 25;
-                let imgHeader_width = Math.floor(25 * ratio);
-                $("#dropdown_userPic").attr("width",imgHeader_width);
-                $("#dropdown_userPic").attr("height",imgHeader_height);
-                $("#dropdown_userPic").attr("src",url);
-            }
-        } 
-    
-  })
 }
 
 function header_uploadUserImage_clearForm() {
@@ -142,11 +119,8 @@ $("#header_uploadUserImage_clear_btn").click(function(){
 })
 
 $("#header_uploadUserImage_submit_btn").click(function(e){
-    e.preventDefault();
     header_uploadUserImage_add();
 });
-$("#header_uploadUserImage").on("hidden.bs.modal", function(){
-    batchExec_clearForm()
-});
+
 
 </script>

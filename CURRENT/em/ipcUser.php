@@ -261,7 +261,7 @@
 			if ($userObj->grpObj->setuser != "Y") {
 				throw new Exception('Permission Denied');
 			}
-		
+			//check the prerequisites
 			if ($_FILES["file"]["error"] > 0 || $fileName === "") {
 				throw new Exception("Error: " . $_FILES["file"]["error"]); 
 			} 
@@ -274,7 +274,13 @@
 				throw new Exception("FOLDER PROFILE NOT EXIST"); 
 				
 			}
-	
+			
+			//update database
+			$updateCom = updUser($userObj, $userObj->uname,"", "", "", "", "", "", "", "", $fileName);
+			if($updateCom['rslt'] == 'fail') {
+				return $updateCom;
+			}
+
 			if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
 				throw new Exception("UNABLE TO MOVE IMAGE FILE"); 
 			}
@@ -361,9 +367,6 @@
 			
 		if ($mi != $targetUserObj->mi)
 			$result['log'] .= " | MI=" . $targetUserObj->mi . " --> " . $mi;
-		
-		if ($ssn != $targetUserObj->ssn)
-			$result['log'] .= " | SSN=" . $targetUserObj->ssn . " --> " . $ssn;
 
 		if ($tel != $targetUserObj->tel)
 			$result['log'] .= " | TEL=" . $targetUserObj->tel . " --> " . $tel;

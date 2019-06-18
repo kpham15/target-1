@@ -89,7 +89,7 @@
             <!-- <li class="user-body">
             </li> -->
             <!-- Menu Footer-->
-            <li class="user-footer">
+            <li class="user-footer"  style="background-color: #3F8CBC;">
               <div class="pull-left">
                 <a id="changePw_btn" href="#" class="btn btn-default btn-flat">Change PW</a>
               </div>
@@ -130,6 +130,7 @@
   })
 
   $("#uploadPic_btn").click(function(){
+    header_uploadUserImage_clearForm()
     $("#header_uploadUserImage").modal();
   })
 
