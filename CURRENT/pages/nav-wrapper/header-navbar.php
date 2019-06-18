@@ -139,6 +139,7 @@
 
       if (res.length > 0) {
         data.rows.forEach(function(row) {
+          console.log(row);
           if (row.psta === 'NEW') {
             $('#almAck_alarm').removeClass('disabled');
           } else if (row.psta === 'ACK') {
