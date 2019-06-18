@@ -110,7 +110,7 @@ $(document).ready(function() {
         $('#database-backup-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
-        $('#database-backup-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        $('#database-backup-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         queryDatabaseBackup();
       }
         
