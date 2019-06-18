@@ -364,7 +364,7 @@ class USERS {
         }
     }
 
-    public function updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp){
+    public function updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com){
         global $db;
 			
 		$grp = $this->getGrpId($ugrp);
@@ -397,6 +397,10 @@ class USERS {
 		}
 		if ($email != "") {
 			$qry .= ",email='$email'";
+        }
+        
+        if ($com != "") {
+			$qry .= ",com='$com'";
 		}
 		
 		$qry .= " WHERE upper(uname)=upper('$this->uname')";

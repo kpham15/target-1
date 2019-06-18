@@ -44,6 +44,9 @@
         </button>
       </div>
     </div>
+    <div class="form-group">
+      <label id="node-operation-forms-post-response-text"></label>
+    </div>
   </form>
 </div>
 
@@ -60,19 +63,15 @@
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:  data.rslt,
-        body:   data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#node-operation-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       } 
       else {
       nodeOperationDatatable.clear().draw();
       nodeOperationDatatable.rows.add(res);
       nodeOperationDatatable.columns.adjust().draw();
+      $('#node-operation-forms-post-response-text').text('');
       }
 
     })
@@ -113,6 +112,10 @@
 
     // Action change event
     $('#node-operation-forms-action').change(function() {
+      $('.node-operation-modal-input').val('');
+      $('#node-operation-modal-post-response-text').text('');
+      $('#node-operation-forms-post-response-text').text('');
+
       let obj = {
         action:     $(this).val(),
         node:       $('#node-operation-forms-node').val(),
@@ -133,6 +136,7 @@
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
       $('.node-operation-forms-input').val('');
+      $('#node-operation-forms-post-response-text').text('');
 
       queryNodeOperation();
     })

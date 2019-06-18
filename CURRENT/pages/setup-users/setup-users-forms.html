@@ -237,6 +237,8 @@ $(document).ready(function() {
 
   // Action Change Event
   $('#setup-users-forms-action').change(function() {
+
+    $('#setup-users-modal-post-response-text').text('');
     $('.setup-users-modal-input').prop('disabled', false);
 
     let tel = "";

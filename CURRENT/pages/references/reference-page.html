@@ -1,5 +1,5 @@
 <!-- Dropdown selections -->
-<div class="col-md-7">
+<div id="ref-select-div" class="col-md-7">
     <!-- Selection Boxes Dyanamically Created -->
     <div class="row ref-select-row">
 		</div>
@@ -85,8 +85,7 @@ function displayRefs(data) {
 }
 
 $(document).ready(function() {
-	
-	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
+
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
 
@@ -137,15 +136,18 @@ $(document).ready(function() {
 		}).done(function(data) {
 			let res = data.rows;
 			let modal = {
-				title: data.rslt,
-				body: data.reason,
+				title: 	data.rslt,
+				body: 	data.reason,
 			}
 
 			if (data.rslt === 'fail') {
-				modal.type = 'danger'
+				modal.type = 'danger';
 				modalHandler(modal);
 			} else {
-				//@TODO Do we want a success modal here? It will show on start of page.
+				modal.type = 'success';
+				modalHandler(modal);
+				
+				$('#reference-page-action').val('');
 			}
 		});
 
@@ -157,6 +159,8 @@ $(document).ready(function() {
 
 		queryReferences();
 
+		$('#reference-page-post-response-text').text('');
+		$('#reference-page-action').val('');
 		clearErrors();
 	})
 

@@ -154,6 +154,7 @@
 		return;
 	}
 
+<<<<<<< HEAD
 	function postResponse(element, rslt, reason) {
 		$('.post-response').text("");
 		let color = "";
@@ -163,6 +164,17 @@
 			color = 'green';
 		}
 		element.css('color', color).text(`${rslt} - ${reason}`);
+=======
+	function inputSuccess(selector, string) {
+		let helpBlock = '<span class="help-block">'+string+'</span>';
+		if (selector.closest('form').hasClass('form-horizontal')) {
+			selector.parent().append(helpBlock);
+		} else {
+			selector.closest('.form-group').append(helpBlock);
+		}
+		selector.closest('.form-group').addClass('has-success');
+		return;
+>>>>>>> ipcv2
 	}
 
 	function clearErrors() {
