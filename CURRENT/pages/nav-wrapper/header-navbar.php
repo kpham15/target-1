@@ -177,10 +177,13 @@
       } else {
         if (psta === 'NEW') {
           $('#header-alarm-action-modal .modal-title').text('ACKNOWLEDGE ALARM');
+          $('#header-alarm-action').val('ACK');
         } else if (psta === 'ACK') {
           $('#header-alarm-action-modal .modal-title').text('UNACKNOWLEDGE ALARM');
+          $('#header-alarm-action').val('UN-ACK');
         } else if (psta === 'SYS-CLR') {
           $('#header-alarm-action-modal .modal-title').text('CLEAR ALARM');
+          $('#header-alarm-action').val('CLR');
         }
 
         $('#header-alarm-action-modal').modal('show');
