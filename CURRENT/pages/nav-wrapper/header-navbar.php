@@ -139,7 +139,6 @@
 
       if (res.length > 0) {
         data.rows.forEach(function(row) {
-          console.log(row);
           if (row.psta === 'NEW') {
             $('#almAck_alarm').removeClass('disabled');
           } else if (row.psta === 'ACK') {
@@ -154,9 +153,8 @@
     });
   });
 
-  $('#alarm-header-dropdown').on('hidden.bs.dropdown', function() {
-    console.log($(this));
-    $(this).children().addClass('disabled');
+  $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
+    $('#alarm-header-dropdown').children().addClass('disabled');
   });
   
   function updateUsername() {
