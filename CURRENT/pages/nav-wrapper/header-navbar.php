@@ -73,27 +73,28 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" class="user-image" alt="User Image">
+            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" width=25 height=25 alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="width:max-content;">
             <!-- The user image in the menu -->
-            <li class="user-header">
-              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
-              
+            <li class="user-header" style="height: max-content;">
+              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" alt="User Image">
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
-                <small>Member since Nov. 2012</small>
               </p>
             </li>
             <!-- Menu Body -->
             <!-- <li class="user-body">
             </li> -->
             <!-- Menu Footer-->
-            <li class="user-footer">
+            <li class="user-footer"  style="background-color: #3F8CBC;">
               <div class="pull-left">
                 <a id="changePw_btn" href="#" class="btn btn-default btn-flat">Change PW</a>
+              </div>
+              <div class="pull-left">
+                <a id="uploadPic_btn" href="#" class="btn btn-default btn-flat">Upload User Image</a>
               </div>
               <div class="pull-right">
                 <a id="logout-btn" href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -108,6 +109,7 @@
   </nav>
 </header>
 
+<?php include __DIR__ . "/upload-userImg.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-database.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
 
@@ -126,6 +128,11 @@
     $('#nav-wrapper').hide()
     $('#login-page').show()
 
+  })
+
+  $("#uploadPic_btn").click(function(){
+    header_uploadUserImage_clearForm()
+    $("#header_uploadUserImage").modal();
   })
 
   
