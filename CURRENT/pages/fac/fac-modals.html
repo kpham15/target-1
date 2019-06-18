@@ -142,5 +142,10 @@
         }
       });
     });
+
+    // remove error messages when click on modal field
+    $(".fac-modal-field").on('click', function() {
+      clearErrors();
+    });
   });
 </script>
