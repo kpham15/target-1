@@ -119,14 +119,19 @@
                 Clear
               </button>
             </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <label id="setup-users-modal-post-response-text" style="margin-top:32px;"></label>
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
-              Close
-            </button>
-            <button id="setup-users-modal-submit" type="button" class="btn btn-primary">
+            <button id="setup-users-modal-submit" type="button" class="btn btn-primary pull-left">
               Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
             </button>
           </div>
         </form>
@@ -159,24 +164,18 @@ function setupUsersModalSubmit(obj) {
     dataType: 'json',
   }).done(function(data) {
     let res = data.rows
-    let modal = {
-      title:  data.rslt,
-      body:   data.reason,
-    }
 
     if (data.rslt == 'fail') {
-      modal.type = 'danger';
-      modalHandler(modal);
+      $('#setup-users-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
     }
     else {
-      modal.type = 'success';
-      modalHandler(modal);
 
+      $('#setup-users-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+      
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
 
-      $('#setup-users-modal').modal('hide');
     }
   })
 }
