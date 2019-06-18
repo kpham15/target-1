@@ -56,6 +56,8 @@
     // Action Change event handler
     $('#database-backup-forms-action').change(function() {
 
+      $('.database-backup-modal-input').val('');
+      
       let user = $('#database-backup-forms-user').val();
       let fileName = $('#database-backup-forms-filename').val();
       let type = $('#database-backup-forms-type').val();
