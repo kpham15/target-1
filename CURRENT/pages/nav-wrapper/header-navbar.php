@@ -12,6 +12,7 @@
   <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <i class="fas fa-bars"></i>
       <span class="sr-only">Toggle navigation</span>
     </a>
     <!-- Navbar Left Menu -->
@@ -24,7 +25,15 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Wire Center Information -->
-        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs"></button></p>
+        <span class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: </span>
+        <span class="navbar-text dropdown" style="margin-top:15px; margin-bottom: 0; margin-left: 0;">
+          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
+          <ul id="alarm-header-dropdown" class="dropdown-menu" style="color: #000;">
+            <li id="almAck_alarm" class="alarm-header-dropdown-item disabled" psta="NEW"><a>ACK_ALARM</a></li>
+            <li id="almUnack_alarm" class="alarm-header-dropdown-item disabled" psta="ACK"><a>UN-ACK_ALARM</a></li>
+            <li id="almClr_alarm" class="alarm-header-dropdown-item disabled" psta="SYS-CLR"><a>CLEAR_ALARM</a></li>
+          </ul>
+        </span>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
 
         <!-- Wire Center Information dropdown -->
@@ -48,7 +57,7 @@
         <li id="bulletinBoard-icon">
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
+            <i class="far fa-bell"></i>
             <!-- <span class="label label-warning">10</span> -->
           </a>
         </li>
@@ -114,6 +123,53 @@
 <?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
 
 <script type="text/javascript">
+  $('#alarm-header-icon').click(function(e) {
+    $.ajax({
+      type: "POST",
+      url: ipcDispatch,
+      data: {
+        api: "ipcAlm",
+        act: "query",
+        user: user.uname
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: 'ALARM',
+        body: 'THERE IS NO ACTIVE ALARM'
+      }
+
+      if (res.length > 0) {
+        data.rows.forEach(function(row) {
+          if (row.psta === 'NEW') {
+            $('#almAck_alarm').removeClass('disabled');
+          } else if (row.psta === 'ACK') {
+            $('#almUnack_alarm').removeClass('disabled');
+          } else if (row.psta === 'SYS-CLR') {
+            $('#almClr_alarm').removeClass('disabled');
+          }
+        });
+      } else {
+        modalHandler(modal);
+      }
+    });
+  });
+
+  $('.alarm-header-dropdown-item').click(function() {
+    if ($(this).hasClass('disabled')) {
+      return;
+    } else {
+      let psta = $(this).attr('psta');
+
+      headerAlmQueryByPsta(psta);
+    }
+  });
+
+  $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
+    $('#alarm-header-dropdown').children().addClass('disabled');
+  });
+  
   function updateUsername() {
     $('#top-nav-user-name, #profile-dropdown-user-name').text(user.fname + ' ' + user.lname);
     $('#profile-dropdown-user-group').text(user.ugrp);
@@ -128,14 +184,12 @@
     $('#nav-wrapper').hide()
     $('#login-page').show()
 
-  })
+  });
 
   $("#uploadPic_btn").click(function(){
     header_uploadUserImage_clearForm()
     $("#header_uploadUserImage").modal();
-  })
-
-  
+  });
 
   function updateHeaderInfo() {
     let alarmText = '';

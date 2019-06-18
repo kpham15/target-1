@@ -1,10 +1,10 @@
 <?php
   // Stylesheets
   echo '<link rel="stylesheet" href="../LIBS/bower_components/bootstrap/dist/css/bootstrap.min.css">';
-  echo '<link rel="stylesheet" href="../LIBS/bower_components/font-awesome/css/font-awesome.min.css">';
+  echo '<link rel="stylesheet" href="../LIBS/bower_components/font-awesome/css/all.min.css">';
   echo '<link rel="stylesheet" href="../LIBS/bower_components/Ionicons/css/ionicons.min.css">';
 
-  echo '<link rel="stylesheet" href="../LIBS/dist/css/AdminLTE.min.css">';
+  echo '<link rel="stylesheet" href="../LIBS/dist/css/AdminLTE.css">';
   echo '<link rel="stylesheet" href="../LIBS/dist/css/skins/skin-blue.min.css">';
   echo '<link rel="stylesheet" href="../LIBS/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">';
   echo ' <link rel="stylesheet" href="../LIBS/bower_components/bootstrap-daterangepicker/daterangepicker.css">';
