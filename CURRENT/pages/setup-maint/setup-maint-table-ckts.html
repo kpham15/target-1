@@ -135,13 +135,8 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:  data.rslt,
-        body:   data.reason
-      }
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
         setupMaintTableCkts.clear().draw();
@@ -164,13 +159,9 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title:  data.rslt,
-        body:   data.reason
-      }
+
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
         setupMaintTableCons.clear().draw();
@@ -261,14 +252,9 @@
         dataType:   'json',
       }).done(function(data) {
         let res = data.rows;
-        let moda = {
-          header:   data.rslt,
-          body:     data.reason,
-        }
         
         if (data.rslt == 'fail') {
-          modal.type = 'danger';
-          modalHandler(modal);
+          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         }
         else {
           setupMaintTableCons.clear().draw();
