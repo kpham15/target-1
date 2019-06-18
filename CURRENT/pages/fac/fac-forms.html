@@ -165,8 +165,7 @@
     // WHEN CLEAR BUTTON IS CLICKED
     $('#fac-form-clear').click(function() {
       $('.fac-form-input').val('');
-      $('#fac-table tbody tr').removeClass('bg-primary');
-
+      facDatatable.clear().draw();
       clearErrors();
     });
 
