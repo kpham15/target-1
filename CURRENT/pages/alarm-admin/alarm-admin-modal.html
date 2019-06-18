@@ -64,9 +64,16 @@
                 <input id="alarm-admin-modal-action" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
+<<<<<<< HEAD
             <div class="col-md-8">
               <div class="form-group">
                 <label id="alarm-admin-modal-post-response-text"  style="margin-top:32px;"></label>
+=======
+            <!-- Invisible Label for Post Request Response -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label id="alarm-admin-modal-post-response-text" class="alarm-admin-modal-field" style="margin-top:32px;"></label>
+>>>>>>> ipcv2
               </div>
             </div>
           </div>
@@ -117,12 +124,10 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + 
-          ' - ' + data.reason);
+          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         }
         else {
-          $('#alarm-admin-modal-post-response-text').css('color','green').text(data.rslt + 
-          ' - ' + data.reason);
+          $('#alarm-admin-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
         }
       })
 
