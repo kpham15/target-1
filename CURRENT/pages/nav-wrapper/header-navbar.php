@@ -204,6 +204,48 @@
     }
   });
 
+  $('#header-alarm-submit').click(function() {
+    if ($('#header-alarm-table tbody tr.bg-primary').length === 0) {
+      inputError($('#header-alarm-action'), 'Must select an alarm from the table.');
+    } else if ($('#header-alarm-comments').val() === '') {
+      inputError($('#header-alarm-comments'), 'Must enter a comment.');
+    } else {
+      let action = $('#header-alarm-action').val();
+      let selectedRow = headerAlarmDatatable.row($('#header-alarm-table tbody tr.bg-primary')).data();
+
+      let almid = selectedRow.almid;
+      let source = selectedRow.src;
+      let ack = selectedRow.ack;
+      let condition = selectedRow.cond;
+      let comments = $('#header-alarm-comments').val();
+
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          "api":    "ipcAlm",
+          "act":    action,
+          "user":   user.uname,
+          "src":    source,
+          "ack":    ack,
+          "almid":  almid,
+          "cond":   condition,
+          "remark": comments
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt === 'fail') {
+          inputError($('#header-alarm-action'), data.reason);
+        } else {
+          inputSuccess($('#header-alarm-action'), data.reason);
+          headerAlmQueryByPsta(selectedRow.psta);
+        }
+      })
+    }
+  });
+
   $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
     $('#alarm-header-dropdown').children().addClass('disabled');
   });
