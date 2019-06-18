@@ -155,6 +155,7 @@
   });
 
   $('#alarm-header-dropdown').on('hidden.bs.dropdown', function() {
+    console.log($(this));
     $(this).children().addClass('disabled');
   });
   
