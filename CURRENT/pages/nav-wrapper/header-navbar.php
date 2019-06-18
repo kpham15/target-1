@@ -34,7 +34,7 @@
             <li id="almClr_alarm" class="alarm-header-dropdown-item disabled" psta="SYS-CLR"><a>CLEAR_ALARM</a></li>
           </ul>
         </span>
-        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
+        <p class="navbar-text" style="margin-top:15px; margin-bottom: 0; margin-right:0">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span>&nbsp;&nbsp;&nbsp;&nbsp;WCC:<span id="header-wcc"></span></p>
 
         <!-- Wire Center Information dropdown -->
         <li class="dropdown notifications-menu">
