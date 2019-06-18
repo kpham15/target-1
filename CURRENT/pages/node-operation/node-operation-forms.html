@@ -114,7 +114,7 @@
     // Action change event
     $('#node-operation-forms-action').change(function() {
       $('.node-operation-modal-input').val('');
-      $('.node-operation-modal-post-response-text').text('');
+      $('#node-operation-modal-post-response-text').text('');
 
       let obj = {
         action:     $(this).val(),
