@@ -205,6 +205,8 @@
   });
 
   $('#header-alarm-submit').click(function() {
+    clearErrors();
+    
     if ($('#header-alarm-table tbody tr.bg-primary').length === 0) {
       inputError($('#header-alarm-action'), 'Must select an alarm from the table.');
     } else if ($('#header-alarm-comments').val() === '') {
@@ -239,7 +241,6 @@
         if (data.rslt === 'fail') {
           inputError($('#header-alarm-action'), data.reason);
         } else {
-          clearErrors();
           inputSuccess($('#header-alarm-action'), data.reason);
           headerAlmQueryByPsta(selectedRow.psta);
         }
