@@ -17,7 +17,7 @@
           <label>PSTA</label>
           <select id="fac-form-psta" class="form-control fac-form-input">
             <option value=""></option>
-            <option value="AVAIL">AVAIL</option>
+            <option value="UAS">UAS</option>
             <option value="SF">SF</option>
             <option value="CONN">CONN</option>
             <option value="MTCD">MTCD</option>
@@ -165,7 +165,8 @@
     // WHEN CLEAR BUTTON IS CLICKED
     $('#fac-form-clear').click(function() {
       $('.fac-form-input').val('');
-      facDatatable.clear().draw();
+      $('#fac-table tbody tr').removeClass('bg-primary');
+
       clearErrors();
     });
 
