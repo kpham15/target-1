@@ -186,8 +186,8 @@ class REF {
 
     public function updPwReuse($pw_reuse) {
         global $db;
-        //pw_reuse = 2 - 4
-        if(!($pw_reuse >= 2 && $pw_reuse <= 4)) {
+        //pw_reuse = 0 - 4
+        if(!($pw_reuse >= 0 && $pw_reuse <= 4)) {
             $this->rslt     = FAIL;
             $this->reason   = "pw_reuse:Invalid Value ($pw_reuse)";
             return;
@@ -248,8 +248,8 @@ class REF {
 
     public function updUserDisable($user_disable) {
         global $db;
-        //user_disable = 0 - 365
-        if(!($user_disable >= 0 && $user_disable <= 365)) {
+        //user_disable = 0 - 240
+        if(!($user_disable >= 0 && $user_disable <= 240)) {
             $this->rslt     = FAIL;
             $this->reason   = "user_disable:Invalid Value ($user_disable)";
             return;
@@ -290,8 +290,8 @@ class REF {
 
     public function updAlmArchv($alm_archv) {
         global $db;
-        //alm_archv = 30 - 120
-        if(!($alm_archv >= 30 && $alm_archv <= 120)) {
+        //alm_archv = 60 - 120
+        if(!($alm_archv >= 60 && $alm_archv <= 120)) {
             $this->rslt     = FAIL;
             $this->reason   = "alm_archv:Invalid Value ($alm_archv)";
             return;
@@ -311,8 +311,8 @@ class REF {
 
     public function updAlmDel($alm_del) {
         global $db;
-        //alm_del = 250 - 400
-        if(!($alm_del >= 250 && $alm_del <= 400)) {
+        //alm_del = 340 - 440
+        if(!($alm_del >= 340 && $alm_del <= 440)) {
             $this->rslt     = FAIL;
             $this->reason   = "alm_del:Invalid Value ($alm_del)";
             return;
@@ -332,8 +332,8 @@ class REF {
 
     public function updCfgArchv($cfg_archv) {
         global $db;
-        //cfg_archv = 30 - 120
-        if(!($cfg_archv >= 30 && $cfg_archv <= 120)) {
+        //cfg_archv = 30 - 60
+        if(!($cfg_archv >= 30 && $cfg_archv <= 60)) {
             $this->rslt     = FAIL;
             $this->reason   = "cfg_archv:Invalid Value ($cfg_archv)";
             return;
@@ -353,8 +353,8 @@ class REF {
 
     public function updCfgDel($cfg_del) {
         global $db;
-        //cfg_del = 250 - 400
-        if(!($cfg_del >= 250 && $cfg_del <= 400)) {
+        //cfg_del = 130 - 230
+        if(!($cfg_del >= 130 && $cfg_del <= 230)) {
             $this->rslt     = FAIL;
             $this->reason   = "cfg_del:Invalid Value ($cfg_del)";
             return;
@@ -374,8 +374,8 @@ class REF {
 
     public function updProvArchv($prov_archv) {
         global $db;
-        //prov_archv = 30 - 120
-        if(!($prov_archv >= 30 && $prov_archv <= 120)) {
+        //prov_archv = 60 - 120
+        if(!($prov_archv >= 60 && $prov_archv <= 120)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_archv:Invalid Value ($prov_archv)";
             return;
@@ -395,8 +395,8 @@ class REF {
 
     public function updProvDel($prov_del) {
         global $db;
-        //prov_del = 250 - 400
-        if(!($prov_del >= 250 && $prov_del <= 400)) {
+        //prov_del = 340 - 440
+        if(!($prov_del >= 340 && $prov_del <= 440)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($prov_del)";
             return;
@@ -416,8 +416,8 @@ class REF {
 
     public function updMaintArchv($maint_archv) {
         global $db;
-        //maint_archv = 30 -120
-        if(!($maint_archv >= 30 && $maint_archv <= 120)) {
+        //maint_archv = 30 - 60
+        if(!($maint_archv >= 30 && $maint_archv <= 60)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($maint_archv)";
             return;
@@ -437,8 +437,8 @@ class REF {
 
     public function updMaintDel($maint_del) {
         global $db;
-        //maint_del = 250 - 400
-        if(!($maint_del >= 250 && $maint_del <= 400)) {
+        //maint_del = 130 - 230
+        if(!($maint_del >= 130 && $maint_del <= 230)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($maint_del)";
             return;
@@ -522,8 +522,8 @@ class REF {
 
     public function updMtcRestore($mtc_restore) {
         global $db;
-        //mtc_restore = 10 - 40
-        if(!($mtc_restore >= 10 && $mtc_restore <= 40)) {
+        //mtc_restore = 15 - 45
+        if(!($mtc_restore >= 15 && $mtc_restore <= 45)) {
             $this->rslt     = FAIL;
             $this->reason   = "mtc_restore:Invalid Value ($mtc_restore)";
             return;

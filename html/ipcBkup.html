@@ -215,7 +215,7 @@ var bkup = {
         
         $.post(ipcDispatch,
         {
-            api:        "coQueryBkup",
+            api:        "ipcBkup",
             act:        action,
             user:       $("#main_currentUser").text(),
         },
@@ -308,7 +308,7 @@ var bkupModal = {
         }
         $.post(ipcDispatch,
         {     
-            api:        "coQueryBkup",
+            api:        "ipcBkup",
             act:        action,
             user:       $("#main_currentUser").text(),
             id:         bkup.id.val(),
@@ -381,7 +381,7 @@ var bkupModal = {
         }
         else {
             var data = new FormData();
-            data.append("api","coQueryBkup")
+            data.append("api","ipcBkup")
             data.append("user",$("#main_currentUser").text())
             data.append("act","UPLOAD")
             data.append("file",file)   
