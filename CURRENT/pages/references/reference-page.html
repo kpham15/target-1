@@ -92,9 +92,7 @@ function displayRefs(data) {
 $(document).ready(function() {
 	
 	// Click Any Select Box
-	$('.ref-select-box').on('change', function(e) {
-		e.stopPropagation();
-    e.stopImmediatePropagation();
+	$('.ref-select-box').on('change', function() {
 		$('#reference-page-post-response-text').text('');
 	})
 
@@ -147,10 +145,6 @@ $(document).ready(function() {
 			dataType: 'json'
 		}).done(function(data) {
 			let res = data.rows;
-			let modal = {
-				title: data.rslt,
-				body: data.reason,
-			}
 
 			if (data.rslt === 'fail') {
 				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
