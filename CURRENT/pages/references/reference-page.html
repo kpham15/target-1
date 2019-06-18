@@ -92,10 +92,8 @@ function displayRefs(data) {
 $(document).ready(function() {
 	
 	// Click Any Select Box
-	$('.ref-select-box').on('change', function(e) {
-		e.stopPropagation();
-		e.stopImmediatePropagation();
-		$('#node-operation-forms-post-response-text').text('');
+	$('.ref-select-box').on('click', function() {
+		$('#reference-page-post-response-text').text('');
 	})
 
 	// Click event for submit button
