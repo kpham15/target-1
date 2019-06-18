@@ -1,62 +1,67 @@
 <!-- Forms Left Side -->
-<div class="col-md-5">
-  <form id="alarm-admin-forms-left" class="form-horizontal">
-
-    <!-- ALMID -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-almid" class="col-sm-2 control-label">ALMID:</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control alarm-admin-forms-input" id="alarm-admin-forms-almid" disabled="">
+<div class="col-md-6">
+  <form id="alarm-admin-forms-left">
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- ALMID -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ALMID:</label>
+          <input type="text" class="form-control alarm-admin-forms-input" id="alarm-admin-forms-almid" disabled="">
+        </div>
+      </div>
+      <!-- ACK -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACK:</label>
+          <input type="text" id="alarm-admin-forms-ack" class="form-control alarm-admin-forms-input" disabled="">
+        </div>
       </div>
     </div>
-
-    <!-- SOURCE -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-source" class="col-sm-2 control-label">SOURCE:</label>
-      <div class="col-sm-9">
-        <input type="text" id="alarm-admin-forms-source" class="form-control alarm-admin-forms-input" disabled="">
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- SOURCE -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>SOURCE:</label>
+          <input type="text" id="alarm-admin-forms-source" class="form-control alarm-admin-forms-input" disabled="">
+        </div>
       </div>
+        <!-- CONDITION -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>CONDITION:</label>
+            <input type="text" id="alarm-admin-forms-condition" class="form-control alarm-admin-forms-input" disabled="">
+          </div>
+        </div>
     </div>
-
-    <!-- ACK -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-ack" class="col-sm-2 control-label">ACK:</label>
-      <div class="col-sm-9">
-        <input type="text" id="alarm-admin-forms-ack" class="form-control alarm-admin-forms-input" disabled="">
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- ACTION -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION:</label>
+          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+              <option value=""></option>
+              <option value="ACK">ACK</option>
+              <option value="UN-ACK">UN-ACK</option>
+              <option value="CLR">CLR</option>
+            </select>
+        </div>
       </div>
-    </div>
-
-    <!-- CONDITION -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-condition" class="col-sm-2 control-label">CONDITION:</label>
-      <div class="col-sm-9">
-        <input type="text" id="alarm-admin-forms-condition" class="form-control alarm-admin-forms-input" disabled="">
+      <div class="col-md-2">
+        <div class="form-group">
+          <!-- Refresh Button -->
+          <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+              Refresh
+            </button>
+        </div>
       </div>
-    </div>
-
-    <!-- ACTION -->
-    <div class="form-group">
-      <label for="alarm-admin-forms-action" class="col-sm-2 control-label">ACTION:</label>
-      <div class="col-sm-9">
-        <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
-          <option value=""></option>
-          <option value="ACK">ACK</option>
-          <option value="UN-ACK">UN-ACK</option>
-          <option value="CLR">CLR</option>
-        </select>
-      </div>
-    </div>
-
-    <div style="margin-bottom: 10px">
-      <!-- Refresh Button -->
-      <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat">
-        Refresh
-      </button>
     </div>
   </form>
 </div>
 <!-- Forms Right Side -->
-<div class="col-md-7">
+<div class="col-md-6">
   <form id="alarm-admin-forms-right">
     <div class="row">
       <!-- Comments -->
@@ -164,6 +169,7 @@ $(document).ready(function() {
       condition:  $('#alarm-admin-forms-condition').val()
     }
     
+    $('.alarm-admin-modal-field').val('');
     clearErrors();
     
     

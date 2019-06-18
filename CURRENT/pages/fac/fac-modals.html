@@ -78,6 +78,12 @@
               </div>
             </div>
           </div>
+          <!-- Invisible Label for Post Request Response -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label id="fac-modal-post-response-text" class="fac-modal-field" style="margin-top:32px;"></label>
+            </div>
+          </div>
         </form>
       </div>
 
@@ -118,22 +124,13 @@
         dataType: 'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          title: data.rslt,
-          body: data.reason,
-        }
 
         if (data.rslt === 'fail') {
-          modal.type = 'danger'
-          modalHandler(modal);
+          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
           $('#fac-modal').modal('hide');
-          
           queryFac();
-          
-          modal.type = "success";
-          modalHandler(modal);
         }
       });
     });
