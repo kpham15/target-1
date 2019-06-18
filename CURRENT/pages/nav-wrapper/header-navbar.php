@@ -80,7 +80,7 @@
           <ul class="dropdown-menu" style="width:max-content;">
             <!-- The user image in the menu -->
             <li class="user-header" style="height: max-content;">
-              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
+              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image" style="width:135px;height:135px">
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
               </p>

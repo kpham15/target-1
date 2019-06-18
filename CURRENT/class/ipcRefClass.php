@@ -144,6 +144,11 @@ class REF {
 
     public function updPwExpire($pw_expire) {
         global $db;
+        //pw_expire = 0 - 90
+        if(!($pw_expire >= 0 && $pw_expire <= 90)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "Pw_expire is out of range (0-90)";
+        }
 
         $qry = "UPDATE t_ref SET val='$pw_expire' WHERE ref = 'pw_expire'";
         $res = $db->query($qry);
@@ -159,6 +164,11 @@ class REF {
     
     public function updPwAlert($pw_alert) {
         global $db;
+        //pw_alert = 0 - 7
+        if(!($pw_alert >= 0 && $pw_alert <= 7)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "pw_alert is out of range (0-90)";
+        }
 
         $qry = "UPDATE t_ref SET val='" . $pw_alert . "' WHERE ref = 'pw_alert'";
         $res = $db->query($qry);
