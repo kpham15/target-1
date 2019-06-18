@@ -118,7 +118,7 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/upload-userImg.html"; ?>
+<?php //include __DIR__ . "/upload-userImg.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-database.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-alarm.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
