@@ -239,6 +239,7 @@
         if (data.rslt === 'fail') {
           inputError($('#header-alarm-action'), data.reason);
         } else {
+          clearErrors();
           inputSuccess($('#header-alarm-action'), data.reason);
           headerAlmQueryByPsta(selectedRow.psta);
         }
