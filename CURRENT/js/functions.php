@@ -162,10 +162,6 @@
 		} else if (rslt == "success") {
 			color = 'green';
 		}
-		console.log(element);
-		console.log(color);
-		console.log(rslt);
-		console.log(reason);
 		element.css('color', color).text(`${rslt} - ${reason}`);
 	}
 

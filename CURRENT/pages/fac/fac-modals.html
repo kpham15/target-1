@@ -136,7 +136,6 @@
         if (data.rslt === 'fail') {
           postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
         } else {
-          $('#fac-form-clear').trigger('click');
           postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
           queryFac();
         }
