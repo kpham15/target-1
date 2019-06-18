@@ -15,6 +15,11 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-md-8">
+				<div class="form-group">
+					<label id="reference-page-post-response-text" style="margin-top:32px;"></label>
+				</div>
+			</div>
 		</div>
 
 		<!-- Submit Button -->
@@ -87,6 +92,7 @@ function displayRefs(data) {
 $(document).ready(function() {
 	
 	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
+
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
 
@@ -142,10 +148,9 @@ $(document).ready(function() {
 			}
 
 			if (data.rslt === 'fail') {
-				modal.type = 'danger'
-				modalHandler(modal);
+				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
 			} else {
-				//@TODO Do we want a success modal here? It will show on start of page.
+				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
 			}
 		});
 
@@ -157,6 +162,7 @@ $(document).ready(function() {
 
 		queryReferences();
 
+		$('#reference-page-post-response-text').text('');
 		clearErrors();
 	})
 
