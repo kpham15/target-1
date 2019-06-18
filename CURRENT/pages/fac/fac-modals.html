@@ -92,10 +92,10 @@
         <!-- END ROW 1 -->
 
         <!-- ROW 2: POST RESPONSE -->
-        <div id="fac-modal-post-response" class="row">
-          <div id="fac-modal-post-response-text" class="col-md-12 fac-modal-field pull-left">
+        <div class="row">
+          <label id="fac-modal-post-response-text" class="col-md-12 fac-modal-field post-response" style="text-align: left">
             <!-- CONTENT POPULATED BY POST RESPONSE FUNCTION -->
-          </div>
+          </label>
         </div>
         <!-- END ROW 2 -->
       </div>
@@ -134,10 +134,10 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          $('#fac-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          postResponse($("fac-modal-post-response-text"), data.rslt, data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
-          $('#fac-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+          postResponse($("fac-modal-post-response-text"), data.rslt, data.reason);
           queryFac();
         }
       });

@@ -154,9 +154,21 @@
 		return;
 	}
 
+	function postResponse(element, rslt, reason) {
+		$('.post-response').text("");
+		let color = "";
+		if (rslt == "fail") {
+			color = 'red';
+		} else if (rslt == "success") {
+			color = 'green';
+		}
+		element.css('color', color).text(`${rslt} - ${reason}`);
+	}
+
 	function clearErrors() {
     $('span.help-block').remove();
-    $('.form-group').removeClass('has-error');
+		$('.form-group').removeClass('has-error');
+		$('.post-response').text("");
 	}
 	
 
