@@ -151,6 +151,7 @@ $(document).ready(function() {
 				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
 			} else {
 				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+				$('#reference-page-action').val('');
 			}
 		});
 
@@ -163,6 +164,7 @@ $(document).ready(function() {
 		queryReferences();
 
 		$('#reference-page-post-response-text').text('');
+		$('#reference-page-action').val('');
 		clearErrors();
 	})
 
