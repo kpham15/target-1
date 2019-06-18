@@ -58,6 +58,19 @@
 	if (isset($_POST['ugrp']))
 		$ugrp = $_POST['ugrp'];
 
+	$com = "";
+	if (isset($_POST['com']))
+		$com = $_POST['com'];
+
+	$fileName = '';
+	if (isset($_FILES['file']['tmp_name'])) {
+		if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file']['tmp_name'])) 
+		{ 
+			$fileName = $_FILES["file"]["name"];
+		}
+	}
+
+	$uploadDir = '../../PROFILE';
 
     //$evtLog = new EVENTLOG($user, "USER MANAGEMENT", "SETUP USER", $act, $_POST);
 
@@ -91,22 +104,6 @@
 		mysqli_close($db);
 		return;
 	}
-	
-	// $userValidate = libValidateUser($userObj, $refObj);
-	// if ($userValidate['rslt'] == 'fail') {
-    //     $evtLog->log($userValidate["rslt"], $userValidate["reason"]);
-    //     $debugObj->logEvent($userValidate["rslt"], $userValidate["reason"]);
-	// 	$debugObj->closeLogfile();
-    //     echo json_encode($userValidate);
-    //     mysqli_close($db);
-    //     return;
-	// }
-
-	// $scanUserTimeout = libScanUserTimeout($userObj, $refObj);
-	// if($scanUserTimeout['rslt'] == 'fail') {
-	// 	$evtLog->log($scanUserTimeout["rslt"], $scanUserTimeout["reason"]);
-    //     $debugObj->logEvent($scanUserTimeout["rslt"], $scanUserTimeout["reason"]);
-	// }
 
 	$targetUserObj = new USERS();
 	$evtLog = new EVENTLOG($user, "USER MANAGEMENT", "SETUP USER", $act, '');
@@ -180,7 +177,7 @@
 	}
 
 	if ($act == "upd" || $act == "UPDATE") {
-		$result = updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp);
+		$result = updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com);
 
 		/* sample code for eventlog */
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
@@ -239,6 +236,14 @@
         return;
 	}
 
+	if ($act == "UPLOAD_IMG") {
+		$result = uploadImg($userObj, $fileName, $uploadDir);
+		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
+		echo json_encode($result);
+		mysqli_close($db);
+        return;
+	}
+
 	else {
  		$result["rslt"] = "fail";
 		$result["reason"] = $act . " is under development or not supported";
@@ -250,6 +255,48 @@
 	
 	
 	// Functions section
+	function uploadImg($userObj, $fileName, $uploadDir) {
+
+		try {
+			if ($userObj->grpObj->setuser != "Y") {
+				throw new Exception('Permission Denied');
+			}
+			//check the prerequisites
+			if ($_FILES["file"]["error"] > 0 || $fileName === "") {
+				throw new Exception("Error: " . $_FILES["file"]["error"]); 
+			} 
+		
+			if ($uploadDir ==="") {
+				throw new Exception("NO UPLOAD FOLDER INFORMATION"); 
+			}
+		
+			if (!file_exists($uploadDir)) {
+				throw new Exception("FOLDER PROFILE NOT EXIST"); 
+				
+			}
+			
+			//update database
+			$updateCom = updUser($userObj, $userObj->uname,"", "", "", "", "", "", "", "", $fileName);
+			if($updateCom['rslt'] == 'fail') {
+				return $updateCom;
+			}
+
+			if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
+				throw new Exception("UNABLE TO MOVE IMAGE FILE"); 
+			}
+	
+			$result["rslt"] = 'success';
+			$result["reason"] = "IMAGE_UPLOADED";
+			
+			return $result;
+		}
+		catch(Exception $e) {
+			$result["rslt"] = 'fail';
+			$result["reason"] = $e->getMessage();
+			return $result;
+		}
+		
+	}
 
 	function addUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $targetUserObj){
 
@@ -298,7 +345,7 @@
 		}
 	}
 
-	function updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp){
+	function updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com){
 
 		if ($userObj->grpObj->setuser != "Y") {
 			$result['rslt'] = 'fail';
@@ -320,9 +367,6 @@
 			
 		if ($mi != $targetUserObj->mi)
 			$result['log'] .= " | MI=" . $targetUserObj->mi . " --> " . $mi;
-		
-		if ($ssn != $targetUserObj->ssn)
-			$result['log'] .= " | SSN=" . $targetUserObj->ssn . " --> " . $ssn;
 
 		if ($tel != $targetUserObj->tel)
 			$result['log'] .= " | TEL=" . $targetUserObj->tel . " --> " . $tel;
@@ -332,6 +376,9 @@
 
 		if ($title != $targetUserObj->title)
 			$result['log'] .= " | TITLE=" . $targetUserObj->title . " --> " . $title;
+		
+		if ($com != $targetUserObj->com)
+			$result['log'] .= " | COM=" . $targetUserObj->com . " --> " . $com;
 
 		// end of sample code
 
@@ -345,16 +392,16 @@
 		if($userObj->uname == $targetUserObj->uname) {
 			// only admins can change their own names
 			if ($userObj->ugrp == "ADMIN")
-				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp);
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp, $com);
 				// other users cannot change their names
 			else {
-				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
+				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp,$com);
 			}
 		}
 		else {
 			// ADMIN and SUPERVISOR user can update other users in lower ugrp
 			if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
-				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp);
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp,$com);
 			}
 			else {
 				$result['rslt'] = 'fail';

@@ -137,14 +137,16 @@
                             <label for="wcModal_act_txt">ACTION</label>
                             <input type="text" class="form-control wcModal_form" id="wcModal_act_txt" readonly>
                         </div>
-                        <br>
+                        <div class="col-sm-10" style="margin-top:25px">
+                            <label id="wcModal_rslt" style="color: rgb(0, 128, 0);"></label>
+                        </div>  
                         <input type="hidden" id="wcModal_id_num" style="width:50px;">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" id="wcModal_submit_btn">Submit</button>
-                    <button class="btn btn-primary" id="wcModal_clear_btn" type="button" >Clear</button>
-                    <button class="btn btn-primary" id="wcModal_close_btn" data-dismiss="modal" aria-label="Close">Close</button>
+                    <button class="btn btn-primary" id="wcModal_submit_btn" style="float:left">Submit</button>
+                    <button class="btn btn-primary" id="wcModal_clear_btn" type="button" style="float:left">Clear</button>
+                    <button class="btn btn-primary" id="wcModal_close_btn" data-dismiss="modal" aria-label="Close" style="float:left">Close</button>
                 </div>
             </div>
         </div>
@@ -183,7 +185,6 @@
     }
     
     function wcModal_resetForm(){
-  
         $("#wcModal_id_num").        val(wcModal_tblRows[1].id);
         $("#wcModal_wcname_txt").    val(wcModal_tblRows[0].wcname);
         $("#wcModal_wcc_txt").       val(wcModal_tblRows[0].wcc);
@@ -206,6 +207,7 @@
         $("#wcModal_gateway_txt").   val(wcModal_tblRows[0].gateway);
         $("#wcModal_netmask_txt").   val(wcModal_tblRows[0].netmask);
         $("#wcModal_iport_txt").     val(wcModal_tblRows[0].iport);
+        $("#wcModal_rslt").val("");
     }
     
     
@@ -278,22 +280,12 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                let modal = {
-                    title:  obj.rslt,
-                    body: obj.reason,
-                    type : 'danger'
-                }
-                modalHandler(modal);
+                $("#wcModal_rslt").css("color","red").text(obj.reason)
             }
             else {
                 if (obj.rows.length === 0) {
                     if (action != "query") {
-                        let modal = {
-                            title:  'Error',
-                            body: "No Record Found",
-                            type : 'danger'
-                        }
-                        modalHandler(modal);
+                        $("#wcModal_rslt").css("color","red").text("No Record Found in Database!")
                         return;
                     }
                 }
@@ -302,14 +294,8 @@
                     wcModal_displayForm();
                     wc_tblRows = wcModal_tblRows;
                     wc_displayForm();
-                    $("#wcModal").modal("hide");
                     if(action !== 'query') {
-                        let modal = {
-                            title:  obj.rslt,
-                            body: obj.reason,
-                            type : 'success'
-                        }
-                        modalHandler(modal);
+                        $("#wcModal_rslt").css("color","green").text(obj.reason)
                     }
                    
 
@@ -337,21 +323,11 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                let modal = {
-                    title:  obj.rslt,
-                    body: obj.reason,
-                    type : 'danger'
-                }
-                modalHandler(modal);
+                $("#wcModal_rslt").css("color","red").text(obj.reason)
             }
             else {
                 wcModal_query('query');
-                let modal = {
-                    title:  obj.rslt,
-                    body: "WIRE CENTER TURNED-UP SUCCESSFULLY",
-                    type : 'success'
-                }
-                modalHandler(modal);
+                $("#wcModal_rslt").css("color","green").text("WIRE CENTER TURNED-UP SUCCESSFULLY")
             } 
     
         });
@@ -378,21 +354,11 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                let modal = {
-                    title:  obj.rslt,
-                    body: obj.reason,
-                    type : 'danger'
-                }
-                modalHandler(modal);
+                $("#wcModal_rslt").css("color","red").text(obj.reason)
             }
             else {
                 wcModal_query('query');
-                let modal = {
-                    title:  obj.rslt,
-                    body: "WIRE CENTER TURNED-UP SUCCESSFULLY",
-                    type : 'success'
-                }
-                modalHandler(modal);
+                $("#wcModal_rslt").css("color","green").text("WIRE CENTER TURNED-UP SUCCESSFULLY")
             } 
         });
     }
@@ -401,12 +367,7 @@
     // WCMODAL Events Handling
 $("#wcModal_submit_btn").click(function () {
     if ($("#wcModal_npanxx_txt").val().length < 6 || $("#wcModal_npanxx_txt").val().length > 6) {
-        let modal = {
-            title:  "Error",
-            body: "INVALID NPANXX: NPANXX MUST BE 6 DIGITS",
-            type : 'danger'
-        }
-        modalHandler(modal);
+        $("#wcModal_rslt").css("color","red").text("INVALID NPANXX: NPANXX MUST BE 6 DIGITS")
         return;
     }
     if ($("#wcModal_id_num").val() != "") {
@@ -421,12 +382,7 @@ $("#wcModal_submit_btn").click(function () {
         }
     }
     else {
-        let modal = {
-            title:  "Error",
-            body: "Missing WC ID",
-            type : 'danger'
-        }
-        modalHandler(modal);
+        $("#wcModal_rslt").css("color","red").text("Missing WC ID")
     }
 });
 

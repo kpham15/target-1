@@ -164,6 +164,11 @@
           </button>
         </div>
       </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label id="setup-maint-forms-post-response-text" style="margin-top:32px;"></label>
+        </div>
+      </div>
     </div>
   </form>
 </div>
@@ -439,6 +444,8 @@
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
+      $('#setup-maint-modal-post-response-text').text('');
+      $('#setup-maint-forms-post-response-text').text('');
       clearErrors();
       $('.setup-maint-forms-input').val('');
       $('.setup-maint-modal-input').val('');
@@ -460,6 +467,7 @@
 
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
+      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
       clearErrors();
@@ -510,6 +518,7 @@
     // View Button 1
     $('#setup-maint-forms-viewckid').click(function() {
 
+      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').show();
       $('#setup-maint-table-tkts-div').hide();
 
@@ -535,18 +544,13 @@
         dataType:   'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          header: data.rslt,
-          body:   data.reason,
-        }
 
         if (res.length == 0) {
           inputError($('#setup-maint-forms-ckid'),'No Results Found');
         }
 
         if (data.rslt == 'fail') {
-          modal.type = 'danger';
-          modalHandler(modal);
+          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         }
         else {
           setupMaintTableCkts.clear().draw();
@@ -560,6 +564,8 @@
     
     // View Button 2
     $('#setup-maint-forms-viewtkt').click(function() {
+
+      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').hide();
       $('#setup-maint-table-tkts-div').show();
       $('#setup-maint-table-cons-div').hide();
@@ -580,18 +586,13 @@
         dataType:   'json',
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          header:   data.rslt,
-          body:     data.reason,
-        }
 
         if (res.length == 0) {
           inputError($('#setup-maint-forms-tktno'),'No Results Found');
         }
 
         if (data.rslt == 'fail') {
-          modal.type = 'danger';
-          modalHandler(modal);
+          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         }
         else {
           setupMaintTableTkts.clear().draw();

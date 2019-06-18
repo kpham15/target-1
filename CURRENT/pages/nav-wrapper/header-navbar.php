@@ -54,7 +54,7 @@
         
         <!-- Messages: style can be found in dropdown.less-->
         <!-- Notifications Menu -->
-        <li class="notifications-menu">
+        <li id="bulletinBoard-icon">
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="far fa-bell"></i>
@@ -82,27 +82,28 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" class="user-image" alt="User Image">
+            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" width=25 height=25 alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="width:max-content;">
             <!-- The user image in the menu -->
-            <li class="user-header">
-              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" class="img-circle" alt="User Image">
-              
+            <li class="user-header" style="height: max-content;">
+              <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" alt="User Image">
               <p>
                 <span id="profile-dropdown-user-name">Alexander Pierce</span> - <span id="profile-dropdown-user-group">Web Developer</span>
-                <small>Member since Nov. 2012</small>
               </p>
             </li>
             <!-- Menu Body -->
             <!-- <li class="user-body">
             </li> -->
             <!-- Menu Footer-->
-            <li class="user-footer">
+            <li class="user-footer"  style="background-color: #3F8CBC;">
               <div class="pull-left">
                 <a id="changePw_btn" href="#" class="btn btn-default btn-flat">Change PW</a>
+              </div>
+              <div class="pull-left">
+                <a id="uploadPic_btn" href="#" class="btn btn-default btn-flat">Upload User Image</a>
               </div>
               <div class="pull-right">
                 <a id="logout-btn" href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -117,7 +118,9 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/header-nav-modals.html"; ?>
+<?php include __DIR__ . "/upload-userImg.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-database.html"; ?>
+<?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
 
 <script type="text/javascript">
   $('#alarm-header-icon').click(function(e) {
@@ -153,47 +156,6 @@
     });
   });
 
-  function headerAlmQueryByPsta(psta) {
-    $.ajax({
-      type: "POST",
-      url: ipcDispatch,
-      data: {
-        api: "ipcAlm",
-        act: "queryPsta",
-        user: user.uname,
-        psta: psta
-      },
-      dataType: 'json'
-    }).done(function(data) {
-      let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
-
-      if (data.rslt === 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
-      } else {
-        if (psta === 'NEW') {
-          $('#header-alarm-action-modal .modal-title').text('ACKNOWLEDGE ALARM');
-          $('#header-alarm-action').val('ACK');
-        } else if (psta === 'ACK') {
-          $('#header-alarm-action-modal .modal-title').text('UNACKNOWLEDGE ALARM');
-          $('#header-alarm-action').val('UN-ACK');
-        } else if (psta === 'SYS-CLR') {
-          $('#header-alarm-action-modal .modal-title').text('CLEAR ALARM');
-          $('#header-alarm-action').val('CLR');
-        }
-
-        $('#header-alarm-action-modal').modal('show');
-        headerAlarmDatatable.clear().draw();
-        headerAlarmDatatable.rows.add(res);
-        headerAlarmDatatable.columns.adjust().draw();
-      }
-    })
-  }
-
   $('.alarm-header-dropdown-item').click(function() {
     if ($(this).hasClass('disabled')) {
       return;
@@ -201,50 +163,6 @@
       let psta = $(this).attr('psta');
 
       headerAlmQueryByPsta(psta);
-    }
-  });
-
-  $('#header-alarm-submit').click(function() {
-    clearErrors();
-    
-    if ($('#header-alarm-table tbody tr.bg-primary').length === 0) {
-      inputError($('#header-alarm-action'), 'Must select an alarm from the table.');
-    } else if ($('#header-alarm-comments').val() === '') {
-      inputError($('#header-alarm-comments'), 'Must enter a comment.');
-    } else {
-      let action = $('#header-alarm-action').val();
-      let selectedRow = headerAlarmDatatable.row($('#header-alarm-table tbody tr.bg-primary')).data();
-
-      let almid = selectedRow.almid;
-      let source = selectedRow.src;
-      let ack = selectedRow.ack;
-      let condition = selectedRow.cond;
-      let comments = $('#header-alarm-comments').val();
-
-      $.ajax({
-        type: "POST",
-        url: ipcDispatch,
-        data: {
-          "api":    "ipcAlm",
-          "act":    action,
-          "user":   user.uname,
-          "src":    source,
-          "ack":    ack,
-          "almid":  almid,
-          "cond":   condition,
-          "remark": comments
-        },
-        dataType: 'json'
-      }).done(function(data) {
-        let res = data.rows;
-
-        if (data.rslt === 'fail') {
-          inputError($('#header-alarm-action'), data.reason);
-        } else {
-          inputSuccess($('#header-alarm-action'), data.reason);
-          headerAlmQueryByPsta(selectedRow.psta);
-        }
-      })
     }
   });
 
@@ -266,6 +184,11 @@
     $('#nav-wrapper').hide()
     $('#login-page').show()
 
+  });
+
+  $("#uploadPic_btn").click(function(){
+    header_uploadUserImage_clearForm()
+    $("#header_uploadUserImage").modal();
   });
 
   function updateHeaderInfo() {
@@ -327,6 +250,9 @@
       $('#header-database-download-modal').modal('show');
     });
 
+    $("#bulletinBoard-icon").click(function() { 
+      $("#header-bulletinBoard-modal").modal('show');
+    });
 
   })
 

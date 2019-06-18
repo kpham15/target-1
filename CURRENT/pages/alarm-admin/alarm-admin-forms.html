@@ -147,7 +147,8 @@ $(document).ready(function() {
   
   // Refresh Button Click Event
   $('#alarm-admin-forms-refresh').click(function() {
-    $('.alarm-admin-forms-input, .alarm-admin-modal-field').val('');
+    $('.alarm-admin-forms-input').val('');
+    $('#alarm-admin-modal-post-response-text').text('');
 
     clearErrors();
 
@@ -161,6 +162,9 @@ $(document).ready(function() {
   
   // Change event on Action
   $('#alarm-admin-forms-action').change(function() {
+
+    $('#alarm-admin-modal-post-response-text').text('');
+
     let obj = {
       value:      $(this).val(),
       almid:      $('#alarm-admin-forms-almid').val(),
@@ -169,6 +173,7 @@ $(document).ready(function() {
       condition:  $('#alarm-admin-forms-condition').val()
     }
     
+    $('.alarm-admin-modal-field').val('');
     clearErrors();
     
     

@@ -1,0 +1,174 @@
+<!-- Alarm Header Modals -->
+<div class="modal fade" id="header-alarm-action-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"></h4>
+
+        <div class="modal-body">
+          <table id="header-alarm-table" class="table table-striped table-bordered table-hover" style="width:100%">
+            <thead>
+              <tr>
+                <th>ALMID</th>
+                <th>SEV</th>
+                <th>ACK</th>
+                <th>SA</th>
+                <th>SRC</th>
+                <th>TYPE</th>
+                <th>COND</th>
+                <th>PSTA</th>
+                <th>DATETIME</th>
+              </tr>
+            </thead>
+          </table>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>COMMENTS:</label>
+                <textarea id="header-alarm-comments" class="form-control header-alarm-input-field" rows="5"></textarea>
+              </div>
+            </div>
+  
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="header-alarm-action" class="form-control header-alarm-input-field" disabled>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="button" id="header-alarm-submit" class="btn btn-primary">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var headerAlarmDatatable = $('#header-alarm-table').DataTable({
+  data: [],
+  columns: [
+    {data:"almid"},
+    {data:"sev"},
+    {data:"ack"},
+    {data:"sa"},
+    {data:"src"},
+    {data:"type"},
+    {data:"cond"},
+    {data:"psta"},
+    {
+      data:"datetime",
+      "render": function(data) {
+        let date = moment(data).format('MM-DD-YYY HH:mm:ss')
+
+        return date;
+      }
+    }
+  ]
+});
+
+$(document).on('click', '#header-alarm-table tbody tr', function() {
+  $('#header-alarm-table tbody tr').removeClass('bg-primary');
+  $(this).addClass('bg-primary');
+
+  clearErrors();
+});
+
+function headerAlmQueryByPsta(psta) {
+  $.ajax({
+    type: "POST",
+    url: ipcDispatch,
+    data: {
+      api: "ipcAlm",
+      act: "queryPsta",
+      user: user.uname,
+      psta: psta
+    },
+    dataType: 'json'
+  }).done(function(data) {
+    let res = data.rows;
+    let modal = {
+      title: data.rslt,
+      body: data.reason
+    }
+
+    if (data.rslt === 'fail') {
+      modal.type = 'danger';
+      modalHandler(modal);
+    } else {
+      if (psta === 'NEW') {
+        $('#header-alarm-action-modal .modal-title').text('ACKNOWLEDGE ALARM');
+        $('#header-alarm-action').val('ACK');
+      } else if (psta === 'ACK') {
+        $('#header-alarm-action-modal .modal-title').text('UNACKNOWLEDGE ALARM');
+        $('#header-alarm-action').val('UN-ACK');
+      } else if (psta === 'SYS-CLR') {
+        $('#header-alarm-action-modal .modal-title').text('CLEAR ALARM');
+        $('#header-alarm-action').val('CLR');
+      }
+
+      $('#header-alarm-action-modal').modal('show');
+      headerAlarmDatatable.clear().draw();
+      headerAlarmDatatable.rows.add(res);
+      headerAlarmDatatable.columns.adjust().draw();
+    }
+  })
+}
+
+$(document).ready(function() {
+
+  // Submit Btn Click Event Handler
+  $('#header-alarm-submit').click(function() {
+    clearErrors();
+    
+    if ($('#header-alarm-table tbody tr.bg-primary').length === 0) {
+      inputError($('#header-alarm-action'), 'Must select an alarm from the table.');
+    } else if ($('#header-alarm-comments').val() === '') {
+      inputError($('#header-alarm-comments'), 'Must enter a comment.');
+    } else {
+      let action = $('#header-alarm-action').val();
+      let selectedRow = headerAlarmDatatable.row($('#header-alarm-table tbody tr.bg-primary')).data();
+
+      let almid = selectedRow.almid;
+      let source = selectedRow.src;
+      let ack = selectedRow.ack;
+      let condition = selectedRow.cond;
+      let comments = $('#header-alarm-comments').val();
+
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          "api":    "ipcAlm",
+          "act":    action,
+          "user":   user.uname,
+          "src":    source,
+          "ack":    ack,
+          "almid":  almid,
+          "cond":   condition,
+          "remark": comments
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt === 'fail') {
+          inputError($('#header-alarm-action'), data.reason);
+        } else {
+          inputSuccess($('#header-alarm-action'), data.reason);
+          headerAlmQueryByPsta(selectedRow.psta);
+        }
+      })
+    }
+  });
+});
+</script>
