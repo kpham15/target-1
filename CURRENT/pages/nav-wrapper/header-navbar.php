@@ -168,7 +168,7 @@
       let res = data.rows;
       let modal = {
         title: data.rslt,
-        body: data.reason;
+        body: data.reason
       }
 
       if (data.rslt === 'fail') {
