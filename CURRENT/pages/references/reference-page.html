@@ -91,7 +91,10 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 	
-	//@TODO front end sends voltrange and maxtemp, but back end not ready to receive yet
+	// Click Any Select Box
+	$('.ref-select-box').on('click', function() {
+		$('#node-operation-forms-post-response-text').text('');
+	})
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
