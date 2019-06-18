@@ -133,7 +133,7 @@ var headerAlarmDatatable = $('#header-alarm-table').DataTable({
     {
       data:"datetime",
       "render": function(data) {
-        let date = moment(datA).format('MM-DD-YYY HH:mm:ss')
+        let date = moment(data).format('MM-DD-YYY HH:mm:ss')
 
         return date;
       }
