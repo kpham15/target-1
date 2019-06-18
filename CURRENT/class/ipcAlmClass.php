@@ -104,6 +104,28 @@ class ALMS {
         }
     }
 
+    public function queryAlmByPsta($psta) {
+        global $db;
+
+        $qry = "SELECT * FROM t_alms WHERE psta = '$psta' ORDER BY sev ASC";
+        $res = $db->query($qry);
+
+        if (!$res) {
+            $this->rslt = 'fail';
+            $this->reason = mysqli_error($db);
+        } else {
+            $rows = [];
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+            }
+            $this->rslt = 'success';
+            $this->reason = 'queryAlm Success';
+            $this->rows = $rows;
+        }
+    }
+
     public function queryAlmByNode($node) {
         global $db;
 

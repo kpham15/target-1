@@ -29,9 +29,9 @@
         <span class="navbar-text dropdown" style="margin-top:15px; margin-bottom: 0; margin-left: 0;">
           <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
           <ul id="alarm-header-dropdown" class="dropdown-menu" style="color: #000;">
-            <li id="almAck_alarm" class="disabled"><a>ACK_ALARM</a></li>
-            <li id="almUnack_alarm" class="disabled"><a>UN-ACK_ALARM</a></li>
-            <li id="almClr_alarm" class="disabled"><a>CLEAR_ALARM</a></li>
+            <li id="almAck_alarm" class="alarm-header-dropdown-item disabled" psta="NEW"><a>ACK_ALARM</a></li>
+            <li id="almUnack_alarm" class="alarm-header-dropdown-item disabled" psta="ACK"><a>UN-ACK_ALARM</a></li>
+            <li id="almClr_alarm" class="alarm-header-dropdown-item disabled" psta="SYS-CLR"><a>CLEAR_ALARM</a></li>
           </ul>
         </span>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
@@ -151,6 +151,54 @@
         modalHandler(modal);
       }
     });
+  });
+
+  function headerAlmQueryByPsta(psta) {
+    $.ajax({
+      type: "POST",
+      url: ipcDispatch,
+      data: {
+        api: "ipcAlm",
+        act: "queryAlmByPsta",
+        user: user.uname,
+        psta: psta
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason;
+      }
+
+      if (data.rslt === 'fail') {
+        modal.type = 'danger';
+        modalHandler(modal);
+      } else {
+        if (psta === 'NEW') {
+          $('#header-alarm-action-modal .modal-title').text('ACKNOWLEDGE ALARM');
+        } else if (psta === 'ACK') {
+          $('#header-alarm-action-modal .modal-title').text('UNACKNOWLEDGE ALARM');
+        } else if (psta === 'SYS-CLR') {
+          $('#header-alarm-action-modal .modal-title').text('CLEAR ALARM');
+        }
+
+        $('#header-alarm-action-modal').modal('show');
+        headerAlarmDatatable.clear().draw();
+        headerAlarmDatatable.rows.add(res);
+        headerAlarmDatatable.columns.adjust().draw();
+      }
+    })
+  }
+
+  $('.alarm-header-dropdown-item').click(function() {
+    if ($(this).hasClass('disabled')) {
+      return;
+    } else {
+      let psta = $(this).attr('psta');
+
+      headerAlmQueryByPsta(psta);
+    }
   });
 
   $('.navbar-text.dropdown').on('hidden.bs.dropdown', function() {
