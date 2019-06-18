@@ -73,7 +73,7 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" class="user-image" alt="User Image">
+            <img id = "dropdown_userPic" src="../PROFILE/defaultUser.jpeg" width=25 height=25 alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>

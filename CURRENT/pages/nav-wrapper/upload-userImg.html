@@ -114,12 +114,16 @@ function updateUserCom(com) {
             img.src = url;
             img.onload = function(){
                 let ratio = img.width/img.height;
-                let newHeight = 135;
-                let newWidth = Math.floor(135 * ratio);
-                $("#user_header_pic").css("width",newWidth+"px");
-                $("#user_header_pic").css("height",newHeight+"px");
-
+                let imgDropbox_height = 135;
+                let imgDropbox_width = Math.floor(135 * ratio);
+                $("#user_header_pic").css("width",imgDropbox_width+"px");
+                $("#user_header_pic").css("height",imgDropbox_height+"px");
                 $("#user_header_pic").attr("src",url);
+
+                let imgHeader_height = 25;
+                let imgHeader_width = Math.floor(25 * ratio);
+                $("#dropdown_userPic").attr("width",imgHeader_width);
+                $("#dropdown_userPic").attr("height",imgHeader_height);
                 $("#dropdown_userPic").attr("src",url);
             }
         } 
