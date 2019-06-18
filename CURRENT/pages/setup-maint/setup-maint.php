@@ -110,6 +110,7 @@
 
       if (data.rslt == 'fail') {
         $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+      }
       else {
         let a = [];
         a.push('<option value=""></option>');
