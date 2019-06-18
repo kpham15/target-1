@@ -126,7 +126,7 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          $('#fac-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
           $('#fac-modal').modal('hide');
