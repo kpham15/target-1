@@ -124,6 +124,11 @@ function headerAlmQueryByPsta(psta) {
   })
 }
 
+$('#header-alarm-action-modal').on('hidden.bs.modal', function() {
+  clearErrors();
+  $('.header-alarm-input-field').val('');
+});
+
 $(document).ready(function() {
 
   // Submit Btn Click Event Handler
@@ -165,9 +170,10 @@ $(document).ready(function() {
           inputError($('#header-alarm-action'), data.reason);
         } else {
           inputSuccess($('#header-alarm-action'), data.reason);
+          $('#header-alarm-comments').val('');
           headerAlmQueryByPsta(selectedRow.psta);
         }
-      })
+      });
     }
   });
 });

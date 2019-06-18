@@ -168,6 +168,7 @@
 	function clearErrors() {
     $('span.help-block').remove();
     $('.form-group').removeClass('has-error');
+		$('.form-group').removeClass('has-success');
 	}
 	
 
