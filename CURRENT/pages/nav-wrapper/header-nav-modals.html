@@ -92,17 +92,19 @@
             </thead>
           </table>
 
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>COMMENTS:</label>
-              <textarea id="header-alarm-comments" class="form-control header-alarm-input-field" rows="5"></textarea>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>COMMENTS:</label>
+                <textarea id="header-alarm-comments" class="form-control header-alarm-input-field" rows="5"></textarea>
+              </div>
             </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>ACTION:</label>
-              <input id="header-alarm-action" class="form-control header-alarm-input-field" disabled>
+  
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="header-alarm-action" class="form-control header-alarm-input-field" disabled>
+              </div>
             </div>
           </div>
 
@@ -112,6 +114,7 @@
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
           <button type="button" id="header-alarm-submit" class="btn btn-primary">Submit</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -154,6 +157,13 @@ var databaseDownloadDatatable = $('#header-database-download-table').DataTable({
     },
     {"data":"date"}
   ]
+});
+
+$(document).on('click', '#header-alarm-table tbody tr', function() {
+  $('#header-alarm-table tbody tr').removeClass('bg-primary');
+  $(this).addClass('bg-primary');
+
+  clearErrors();
 });
 
 function queryDatabaseDownload() {
