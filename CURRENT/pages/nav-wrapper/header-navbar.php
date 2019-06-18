@@ -27,11 +27,11 @@
         <!-- Wire Center Information -->
         <span class="navbar-text" style="margin-top:15px; margin-bottom: 0;">Alarm: </span>
         <span class="navbar-text dropdown" style="margin-top:15px; margin-bottom: 0; margin-left: 0;">
-          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="" aria-expanded="false"></button>
-          <ul class="dropdown-menu" style="color: #000;">
-            <li><a>ACK_ALARM</a></li>
-            <li><a>UN-ACK_ALARM</a></li>
-            <li><a>CLEAR_ALARM</a></li>
+          <button id="alarm-header-icon" type="button" class="btn btn-block btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
+          <ul id="alarm-header-dropdown" class="dropdown-menu" style="color: #000;">
+            <li id="almAck_alarm" class="disabled"><a>ACK_ALARM</a></li>
+            <li id="almUnack_alarm" class="disabled"><a>UN-ACK_ALARM</a></li>
+            <li id="almClr_alarm" class="disabled"><a>CLEAR_ALARM</a></li>
           </ul>
         </span>
         <p class="navbar-text" style="margin-top:15px; margin-bottom: 0;">IPC: (<span id="header-ipcstat"></span>) <span id="header-time"></span> <span id="header-timezone"></span></p>
@@ -138,12 +138,23 @@
       }
 
       if (res.length > 0) {
-        $('#alarm-header-icon').attr('data-toggle', 'dropdown');
-        $('#alarm-header-icon').dropdown('toggle');
+        data.rows.forEach(function(row) {
+          if (row.psta === 'NEW') {
+            $('#almAck_alarm').removeClass('disabled');
+          } else if (row.psta === 'ACK') {
+            $('#almUnack_alarm').removeClass('disabled');
+          } else if (row.psta === 'SYS-CLR') {
+            $('#almClr_alarm').removeClass('disabled');
+          }
+        });
       } else {
         modalHandler(modal);
       }
     });
+  });
+
+  $('#alarm-header-dropdown').on('hidden.bs.dropdown', function() {
+    $(this).children().addClass('disabled');
   });
   
   function updateUsername() {
