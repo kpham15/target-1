@@ -142,7 +142,7 @@
           $('#fac-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
-          $('#fac-modal').modal('hide');
+          $('#fac-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
           queryFac();
         }
       });
