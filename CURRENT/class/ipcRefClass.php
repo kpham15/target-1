@@ -138,12 +138,18 @@ class REF {
         
         $this->queryRefs();
         $this->rslt     =   SUCCESS;
-        $this->reason   =   "REFS HAVE BEEN UPDATED";
+        $this->reason   =   "UPDATE SUCCESSFUL";
         return;
     }
 
     public function updPwExpire($pw_expire) {
         global $db;
+        //pw_expire = 0 - 90
+        if(!($pw_expire >= 0 && $pw_expire <= 90)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "pw_expire:Invalid Value ($pw_expire)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='$pw_expire' WHERE ref = 'pw_expire'";
         $res = $db->query($qry);
@@ -159,6 +165,12 @@ class REF {
     
     public function updPwAlert($pw_alert) {
         global $db;
+        //pw_alert = 0 - 7
+        if(!($pw_alert >= 0 && $pw_alert <= 7)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "pw_alert:Invalid Value ($pw_alert)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $pw_alert . "' WHERE ref = 'pw_alert'";
         $res = $db->query($qry);
@@ -174,6 +186,12 @@ class REF {
 
     public function updPwReuse($pw_reuse) {
         global $db;
+        //pw_reuse = 2 - 4
+        if(!($pw_reuse >= 2 && $pw_reuse <= 4)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "pw_reuse:Invalid Value ($pw_reuse)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $pw_reuse . "' WHERE ref = 'pw_reuse'";
         $res = $db->query($qry);
@@ -189,6 +207,12 @@ class REF {
 
     public function updPwRepeat($pw_repeat) {
         global $db;
+        //pw_repeat = 0 - 365
+        if(!($pw_repeat >= 0 && $pw_repeat <= 365)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "pw_repeat:Invalid Value ($pw_repeat)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $pw_repeat . "' WHERE ref = 'pw_repeat'";
         $res = $db->query($qry);
@@ -204,7 +228,12 @@ class REF {
 
     public function updBrdcstDel($brdcst_del) {
         global $db;
-
+        //brdcst_del = 0 - 14
+        if(!($brdcst_del >= 0 && $brdcst_del <= 14)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "brdcst_del:Invalid Value ($brdcst_del)";
+            return;
+        }
         $qry = "UPDATE t_ref SET val='" . $brdcst_del . "' WHERE ref = 'brdcst_del'";
         $res = $db->query($qry);
         if (!$res) {
@@ -219,6 +248,12 @@ class REF {
 
     public function updUserDisable($user_disable) {
         global $db;
+        //user_disable = 0 - 365
+        if(!($user_disable >= 0 && $user_disable <= 365)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "user_disable:Invalid Value ($user_disable)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $user_disable . "' WHERE ref = 'user_disable'";
         $res = $db->query($qry);
@@ -234,6 +269,12 @@ class REF {
 
     public function updUserIdleTo($user_idle_to) {
         global $db;
+        //user_idle_to = 0 - 60
+        if(!($user_idle_to >= 0 && $user_idle_to <= 60)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "user_idle_to:Invalid Value ($user_idle_to)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $user_idle_to . "' WHERE ref = 'user_idle_to'";
         $res = $db->query($qry);
@@ -249,6 +290,12 @@ class REF {
 
     public function updAlmArchv($alm_archv) {
         global $db;
+        //alm_archv = 30 - 120
+        if(!($alm_archv >= 30 && $alm_archv <= 120)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "alm_archv:Invalid Value ($alm_archv)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $alm_archv . "' WHERE ref = 'alm_archv'";
         $res = $db->query($qry);
@@ -264,6 +311,12 @@ class REF {
 
     public function updAlmDel($alm_del) {
         global $db;
+        //alm_del = 250 - 400
+        if(!($alm_del >= 250 && $alm_del <= 400)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "alm_del:Invalid Value ($alm_del)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $alm_del . "' WHERE ref = 'alm_del'";
         $res = $db->query($qry);
@@ -279,6 +332,12 @@ class REF {
 
     public function updCfgArchv($cfg_archv) {
         global $db;
+        //cfg_archv = 30 - 120
+        if(!($cfg_archv >= 30 && $cfg_archv <= 120)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "cfg_archv:Invalid Value ($cfg_archv)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $cfg_archv . "' WHERE ref = 'cfg_archv'";
         $res = $db->query($qry);
@@ -294,6 +353,12 @@ class REF {
 
     public function updCfgDel($cfg_del) {
         global $db;
+        //cfg_del = 250 - 400
+        if(!($cfg_del >= 250 && $cfg_del <= 400)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "cfg_del:Invalid Value ($cfg_del)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $cfg_del . "' WHERE ref = 'cfg_del'";
         $res = $db->query($qry);
@@ -309,6 +374,12 @@ class REF {
 
     public function updProvArchv($prov_archv) {
         global $db;
+        //prov_archv = 30 - 120
+        if(!($prov_archv >= 30 && $prov_archv <= 120)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "prov_archv:Invalid Value ($prov_archv)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $prov_archv . "' WHERE ref = 'prov_archv'";
         $res = $db->query($qry);
@@ -324,6 +395,12 @@ class REF {
 
     public function updProvDel($prov_del) {
         global $db;
+        //prov_del = 250 - 400
+        if(!($prov_del >= 250 && $prov_del <= 400)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "prov_del:Invalid Value ($prov_del)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $prov_del . "' WHERE ref = 'prov_del'";
         $res = $db->query($qry);
@@ -339,6 +416,12 @@ class REF {
 
     public function updMaintArchv($maint_archv) {
         global $db;
+        //maint_archv = 30 -120
+        if(!($maint_archv >= 30 && $maint_archv <= 120)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "prov_del:Invalid Value ($maint_archv)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $maint_archv . "' WHERE ref = 'maint_archv'";
         $res = $db->query($qry);
@@ -354,6 +437,12 @@ class REF {
 
     public function updMaintDel($maint_del) {
         global $db;
+        //maint_del = 250 - 400
+        if(!($maint_del >= 250 && $maint_del <= 400)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "prov_del:Invalid Value ($maint_del)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $maint_del . "' WHERE ref = 'maint_del'";
         $res = $db->query($qry);
@@ -369,6 +458,13 @@ class REF {
 
     public function updAutoCkid($auto_ckid) {
         global $db;
+        //auto_ckid = N/Y
+        if(!($auto_ckid == 'Y' || $auto_ckid == 'N')) {
+            $this->rslt     = FAIL;
+            $this->reason   = "auto_ckid:Invalid Value ($auto_ckid)";
+            return;
+        }
+
 
         $qry = "UPDATE t_ref SET val='" . $auto_ckid . "' WHERE ref = 'auto_ckid'";
         $res = $db->query($qry);
@@ -384,6 +480,12 @@ class REF {
 
     public function updAutoOrdno($auto_ordno) {
         global $db;
+        //auto_ordno = N/Y
+        if(!($auto_ordno == 'Y' || $auto_ordno == 'N')) {
+            $this->rslt     = FAIL;
+            $this->reason   = "auto_ordno:Invalid Value ($auto_ordno)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $auto_ordno . "' WHERE ref = 'auto_ordno'";
         $res = $db->query($qry);
@@ -399,6 +501,12 @@ class REF {
 
     public function updDateFormat($date_format) {
         global $db;
+        //date_format = MM-DD-YYYY, MM-DD-YY, YYYY-MM-DD
+        if(!($date_format == 'MM-DD-YYYY' || $date_format == 'MM-DD-YY' || $date_format == 'YYYY-MM-DD')) {
+            $this->rslt     = FAIL;
+            $this->reason   = "date_format:Invalid Value ($date_format)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $date_format . "' WHERE ref = 'date_format'";
         $res = $db->query($qry);
@@ -414,6 +522,12 @@ class REF {
 
     public function updMtcRestore($mtc_restore) {
         global $db;
+        //mtc_restore = 10 - 40
+        if(!($mtc_restore >= 10 && $mtc_restore <= 40)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "mtc_restore:Invalid Value ($mtc_restore)";
+            return;
+        }
 
         $qry = "UPDATE t_ref SET val='" . $mtc_restore . "' WHERE ref = 'mtc_restore'";
         $res = $db->query($qry);
@@ -427,6 +541,68 @@ class REF {
         }
     }
 
+    public function updEvtDel($evt_del) {
+        global $db;
+        //evt_del = 5 - 30
+        if(!($evt_del >= 5 && $evt_del <= 30)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "evt_del:Invalid Value ($evt_del)";
+            return;
+        }
+
+        $qry = "UPDATE t_ref SET val='" . $evt_del . "' WHERE ref = 'evt_del'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt     = FAIL;
+            $this->reason   = mysqli_error($db);
+        }
+        else {
+            $this->rslt     = SUCCESS;
+            $this->reason = "EVT_DEL_UPDATED";
+        }
+    }
+
+    public function updTempMax($temp_max) {
+        global $db;
+        //temp_max = 70 - 80
+        if(!($temp_max >= 70 && $temp_max <= 80)) {
+            $this->rslt     = FAIL;
+            $this->reason   = "temp_max:Invalid Value ($temp_max)";
+            return;
+        }
+
+        $qry = "UPDATE t_ref SET val='" . $temp_max . "' WHERE ref = 'temp_max'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt     = FAIL;
+            $this->reason   = mysqli_error($db);
+        }
+        else {
+            $this->rslt     = SUCCESS;
+            $this->reason = "TEMP_MAX_UPDATED";
+        }
+    }
+
+    public function updVoltRange($volt_range) {
+        global $db;
+        //volt_range = 35-50, 40-50, 45-55
+        if(!(($volt_range >= 35 && $volt_range <= 50) || ($volt_range >= 40 && $volt_range <= 50) || ($volt_range >= 45 && $volt_range <= 55))) {
+            $this->rslt     = FAIL;
+            $this->reason   = "volt_range:Invalid Value ($volt_range)";
+            return;
+        }
+
+        $qry = "UPDATE t_ref SET val='" . $volt_range . "' WHERE ref = 'volt_range'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt     = FAIL;
+            $this->reason   = mysqli_error($db);
+        }
+        else {
+            $this->rslt     = SUCCESS;
+            $this->reason = "VOLT_RANGE_UPDATED";
+        }
+    }
 }   //end of REF CLASS
 
 ?>
