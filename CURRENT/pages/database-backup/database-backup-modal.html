@@ -58,6 +58,11 @@
                 <input id="database-backup-modal-action" type="input" class="form-control database-backup-modal-action" disabled="">
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label id="database-backup-modal-post-response-text" class="databse-backup-modal-input" style="margin-top:32px;"></label>
+              </div>
+            </div>
           </div>
 
           <!-- Footer -->
@@ -72,16 +77,6 @@
 </div>
 
 <script type="text/javascript">
-
-function databaseBackupReturn(modal) {
-  $('#database-backup-modal').modal('hide');
-
-  queryDatabaseBackup();
-
-  modal.type = "success"
-  modalHandler(modal);
-}
-
 
 $(document).ready(function() {
 
@@ -112,25 +107,13 @@ $(document).ready(function() {
       }
       
       if (data.rslt == 'fail') { 
-        modal.type = 'danger'
-        modalHandler(modal);
+        $('#database-backup-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
-
-      if (action == "DELETE") {
-        let modal = {
-          title:  data.rslt,
-          body:   "File Deleted"
-        }
-        databaseBackupReturn(modal);
+      else {
+        $('#database-backup-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        queryDatabaseBackup();
       }
-
-      if (action == "MANUAL") {
-        let modal = {
-          title: data.rslt,
-          body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
-        }
-        databaseBackupReturn(modal);
-      }
+        
     })
 
   })
