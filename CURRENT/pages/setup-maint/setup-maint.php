@@ -39,14 +39,9 @@
       dataType:   'json',
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        header:   data.rslt,
-        body:     data.reason,
-      }
       
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
         var a = [];
@@ -80,14 +75,9 @@
       dataType:  'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        header: data.rslt,
-        body:   data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
         let a = [];
@@ -117,15 +107,9 @@
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        header:   data.rslt,
-        body:     data.reason,
-      }
 
       if (data.rslt == 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
-      }
+        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       else {
         let a = [];
         a.push('<option value=""></option>');
