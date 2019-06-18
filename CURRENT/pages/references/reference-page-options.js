@@ -29,10 +29,6 @@ var refOptions = [
 		ref_id:     "alm_archv",
 		options: 		[
 			{
-				value:	"30",
-				text: 	"ARCHIVE AFTER 30 DAYS"
-			},
-			{
 				value: 	"60",
 				text: 	"ARCHIVE AFTER 60 DAYS"
 			},
@@ -52,20 +48,16 @@ var refOptions = [
 		ref_id:     "maint_del",
 		options: 		[
 			{
-				value:	"60",
-				text: 	"DELETE AFTER 60 DAYS"
-			},
-			{
-				value: 	"120",
-				text: 	"DELETE AFTER 120 DAYS"
+				value: 	"130",
+				text: 	"DELETE AFTER 230 DAYS"
 			},
 			{
 				value: 	"180",
 				text: 	"DELETE AFTER 180 DAYS"
 			},
 			{
-				value: 	"240",
-				text: 	"DELETE AFTER 240 DAYS"
+				value: 	"230",
+				text: 	"DELETE AFTER 230 DAYS"
 			},
 		]
 	},
@@ -98,20 +90,16 @@ var refOptions = [
 		ref_id:     "alm_del",
 		options: 		[
 			{
-				value:	"250",
-				text: 	"DELETE AFTER 250 DAYS"
-			},
-			{
-				value: 	"300",
-				text: 	"DELETE AFTER 300 DAYS"
+				value: 	"340",
+				text: 	"DELETE AFTER 340 DAYS"
 			},
 			{
 				value: 	"390",
 				text: 	"DELETE AFTER 390 DAYS"
 			},
 			{
-				value: 	"400",
-				text: 	"DELETE AFTER 400 DAYS"
+				value: 	"440",
+				text: 	"DELETE AFTER 440 DAYS"
 			}
 		]
 	},
@@ -136,6 +124,10 @@ var refOptions = [
 		ref_id:     "pw_reuse",
 		options: 		[
 			{
+				value: 	"0",
+				text: 	"N/A"
+			},
+			{
 				value: 	"2",
 				text: 	"NO REUSE LAST 2 PW"
 			},
@@ -154,10 +146,6 @@ var refOptions = [
 		selectId: 	"reference-page-cfgarchive",
 		ref_id:     "cfg_archv",
 		options: 		[
-			{
-				value:	"15",
-				text: 	"ARCHIVE AFTER 15 DAYS"
-			},
 			{
 				value: 	"30",
 				text: 	"ARCHIVE AFTER 30 DAYS"
@@ -216,20 +204,16 @@ var refOptions = [
 		ref_id:     "cfg_del",
 		options: 		[
 			{
-				value:	"60",
-				text: 	"DELETE AFTER 60 DAYS"
-			},
-			{
-				value: 	"120",
-				text: 	"DELETE AFTER 120 DAYS"
+				value: 	"130",
+				text: 	"DELETE AFTER 130 DAYS"
 			},
 			{
 				value: 	"180",
 				text: 	"DELETE AFTER 180 DAYS"
 			},
 			{
-				value: 	"240",
-				text: 	"DELETE AFTER 240 DAYS"
+				value: 	"230",
+				text: 	"DELETE AFTER 230 DAYS"
 			}
 		]
 	},
@@ -281,10 +265,6 @@ var refOptions = [
 		ref_id:     "prov_archv",
 		options: 		[
 			{
-				value:	"30",
-				text: 	"ARCHIVE AFTER 30 DAYS"
-			},
-			{
 				value: 	"60",
 				text: 	"ARCHIVE AFTER 60 DAYS"
 			},
@@ -304,20 +284,16 @@ var refOptions = [
 		ref_id:     "mtc_restore",
 		options: 		[
 			{
-				value:	"10",
-				text: 	"RESTORE AFTER 10 MINUTES"
-			},
-			{
-				value: 	"20",
-				text: 	"RESTORE AFTER 20 MINUTES"
+				value: 	"15",
+				text: 	"RESTORE AFTER 15 MINUTES"
 			},
 			{
 				value: 	"30",
 				text: 	"RESTORE AFTER 30 MINUTES"
 			},
 			{
-				value: 	"40",
-				text: 	"RESTORE AFTER 40 MINUTES"
+				value: 	"45",
+				text: 	"RESTORE AFTER 45 MINUTES"
 			},
 		]
 	},
@@ -331,8 +307,8 @@ var refOptions = [
         text:   "NEVER DISABLE"
       },
 			{
-				value:	"90",
-				text: 	"DISABLE AFTER 90 DAYS"
+				value:	"120",
+				text: 	"DISABLE AFTER 120 DAYS"
 			},
 			{
 				value: 	"180",
@@ -342,10 +318,6 @@ var refOptions = [
 				value: 	"240",
 				text: 	"DISABLE AFTER 240 DAYS"
 			},
-			{
-				value: 	"365",
-				text: 	"DISABLE AFTER 365 DAYS"
-			},
 		]
 	},
 	{
@@ -354,20 +326,16 @@ var refOptions = [
 		ref_id:     "prov_del",
 		options: 		[
 			{
-				value:	"250",
-				text: 	"DELETE AFTER 250 DAYS"
-			},
-			{
-				value: 	"300",
-				text: 	"DELETE AFTER 300 DAYS"
+				value: 	"340",
+				text: 	"DELETE AFTER 340 DAYS"
 			},
 			{
 				value: 	"390",
 				text: 	"DELETE AFTER 390 DAYS"
 			},
 			{
-				value: 	"400",
-				text: 	"DELETE AFTER 400 DAYS"
+				value: 	"440",
+				text: 	"DELETE AFTER 440 DAYS"
 			},
 		]
 	},
@@ -404,12 +372,12 @@ var refOptions = [
 				text: 	"TIMEOUT AFTER 30 MINUTES"
 			},
 			{
-				value: 	"45",
-				text: 	"TIMEOUT AFTER 45 MINUTES"
-			},
-			{
 				value: 	"60",
 				text: 	"TIMEOUT AFTER 60 MINUTES"
+			},
+			{
+				value: 	"90",
+				text: 	"TIMEOUT AFTER 90 MINUTES"
 			},
 		]
 	},
@@ -418,10 +386,6 @@ var refOptions = [
 		selectId: 	"reference-page-maintarchive",
 		ref_id:     "maint_archv",
 		options: 		[
-			{
-				value:	"15",
-				text: 	"ARCHIVE AFTER 15 DAYS"
-			},
 			{
 				value: 	"30",
 				text: 	"ARCHIVE AFTER 30 DAYS"
