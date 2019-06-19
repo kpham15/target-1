@@ -316,10 +316,8 @@
             }
             else {
                 if(cktId == "" || cktId == 0) {
-                    
                     inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
                     $("#svc_act_sel").val("");
-
                     return;
                 }
                 if(act == "UPDATE_CKT") {
@@ -329,12 +327,7 @@
                 }
                 else if(act == "DISCONNECT") {
                     if(idx == "" || idx == 0) {
-                        let modal = {
-                            title: "Error",
-                            body: "Please select a CON from the LIST OF CONNECTIONS",
-                            type: 'danger'
-                        }
-                        modalHandler(modal);
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                         $("#svc_act_sel").val("");
                         return;
                     }
@@ -345,12 +338,7 @@
                 }
                 else if(act == "CHANGE") {
                     if(idx == "" || idx == 0) {
-                        let modal = {
-                            title: "Error",
-                            body: "Please select a CON from the LIST OF CONNECTIONS",
-                            type: 'danger'
-                        }
-                        modalHandler(modal);
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                         $("#svc_act_sel").val("");
                         return;
                     }
