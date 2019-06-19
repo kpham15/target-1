@@ -154,6 +154,26 @@
 		return;
 	}
 
+	function postResponse(element, rslt, reason) {
+		let html = 	'<div class="row post-response">' +
+          				'<div class="col-md-12">' +
+            				'<label style="text-align:left"></label>' +
+          				'</div>' +
+        				'</div>';
+		
+		$('.post-response').remove();
+		element.append(html);
+
+		let color = "";
+		if (rslt == "fail") {
+			color = 'response-fail';
+		} else if (rslt == "success") {
+			color = 'response-success';
+		}
+		$('.post-response').addClass(color);
+		$('.post-response label').text(`${rslt} - ${reason}`);
+	}
+	
 	function inputSuccess(selector, string) {
 		let helpBlock = '<span class="help-block">'+string+'</span>';
 		if (selector.closest('form').hasClass('form-horizontal')) {
@@ -167,8 +187,9 @@
 
 	function clearErrors() {
     $('span.help-block').remove();
-    $('.form-group').removeClass('has-error');
+		$('.form-group').removeClass('has-error');
 		$('.form-group').removeClass('has-success');
+		$('.post-response').remove();
 	}
 	
 
