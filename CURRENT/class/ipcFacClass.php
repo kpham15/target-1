@@ -71,6 +71,8 @@
             if ($fac == NULL)
                 $fac = "";
 
+            $fac = str_replace('?','%',$fac);
+
             $qry = "SELECT * FROM t_facs WHERE fac LIKE '$fac' ORDER BY fac";
             $res = $db->query($qry);
             if (!$res) {
@@ -118,6 +120,8 @@
 
         public function findFacLike($fac, $ftyp, $ort, $spcfnc, $psta) {
             global $db;
+
+            $fac = str_replace('?','%',$fac);
 
             $qry = "SELECT t_facs.id, t_facs.fac, t_facs.ftyp, t_facs.ort, t_facs.spcfnc, t_facs.port, t_ports.psta";
             $qry .= " FROM t_facs LEFT JOIN t_ports ON t_facs.port_id = t_ports.id WHERE t_facs.fac LIKE '$fac'";
