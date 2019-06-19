@@ -58,7 +58,7 @@ class REF {
         $this->reason = "REF has been reset";
     }
     
-    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore) {
+    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max) {
         $this->updPwExpire      ($pw_expire);
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
@@ -133,6 +133,10 @@ class REF {
         }
         $this->updMtcRestore    ($mtc_restore);
         if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
+        $this->updTempMax       ($temp_max);
+        if ($this->rslt == SUCCESS) {
             return $this->rslt . $this->reason;
         }
         
