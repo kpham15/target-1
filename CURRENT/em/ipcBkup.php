@@ -4,7 +4,7 @@
  * Copy Right @ 2018
  * BHD Solutions, LLC.
  * Project: CO-IPC
- * Filename: coQueryBkup.php
+ * Filename: ipcBkup.php
  * Change history: 
  * 2018-11-09: created (Thanh)
  */
@@ -57,26 +57,41 @@
 	if ($act == "query") {
 		$result = queryBkup();
 		echo json_encode($result);
+		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	else if ($act == "MANUAL") {
-		$result = manualBkup();
+		$result = manualBkup($userObj, $ipAddress, $co5kDb);
 		echo json_encode($result);
+		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	else if ($act == "UPLOAD") {
-		$result = uploadBkup();
+		$result = uploadBkup($userObj, $ipAddress, $fileName);
 		echo json_encode($result);
+		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	else if ($act == "DELETE") {
-		$result = deleteBkup();
+		$result = deleteBkup($id, $dbfile, $userObj);
 		echo json_encode($result);
+		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	else if ($act == "RESTORE") {
-		$result = restoreDb();
+		$result = restoreDb($co5kDb, $dbfile, $userObj);
 		echo json_encode($result);
+		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	else {
@@ -84,6 +99,8 @@
 		$result["reason"] = "ACTION " . $act . " is under development or not supported";
 		echo json_encode($result);
 		mysqli_close($ipcCon);
+		mysqli_close($db);
+		mysqli_close($co5kDb);
 		return;
 	}
 	
@@ -108,13 +125,18 @@
             }
             $result["rows"] = $rows;
         }
-		mysqli_close($ipcCon);
 		return $result;
 	}
 
-	function manualBkup() {
+	function manualBkup($userObj, $ipAddress, $co5kDb) {
 		// Note: the folder ../../DBBK must be open for the permission of execution
-		global $ipcCon, $ipcDb, $user, $ipAddress, $co5kDb;
+		global $ipcCon;
+
+		if ($userObj->grpObj->bkupdb != "Y") {
+			$result['rslt'] = 'fail';
+        	$result['reason'] = 'Permission Denied';
+			return $result;
+		}
 
 		$wc = new WC();
 		$bkupName = $wc->wcc . '_' . $wc->getWCTime() . '.sql';
@@ -136,7 +158,7 @@
 
 		exec($command,$output,$return);
 		if(!$return) {
-			$qry = "insert into t_dbbk values(0,'$user','$time','$bkupName','$fullpath', 'M')";
+			$qry = "insert into t_dbbk values(0,'$userObj->uname','$time','$bkupName','$fullpath', 'M')";
 			$res = $ipcCon->query($qry);
 			if (!$res) {
 				$result["rslt"] = "fail";
@@ -161,7 +183,6 @@
 					$result["rows"] = $rows;
 				}	
 			}
-			mysqli_close($ipcCon);
 		}
 		else {
 			$result["rslt"] = "fail";
@@ -174,8 +195,13 @@
 	}
 	
 
-	function uploadBkup() {
-		global $ipcCon, $user, $ipAddress, $fileName;
+	function uploadBkup($userObj, $ipAddress, $fileName) {
+		global $ipcCon;
+		if ($userObj->grpObj->bkupdb != "Y") {
+			$result['rslt'] = 'fail';
+        	$result['reason'] = 'Permission Denied';
+			return $result;
+		}
 
 		$time = date("Y-m-d H:i:s");
 
@@ -194,7 +220,7 @@
 		}
 		$fullpath .= '../DBBK/' . $fileName;
 
-		$qry = "insert into t_dbbk values(0,'$user','$time','$fileName','$fullpath', 'U')";
+		$qry = "insert into t_dbbk values(0,'$userObj->uname','$time','$fileName','$fullpath', 'U')";
 
 		$res = $ipcCon->query($qry);
 		if (!$res) {
@@ -220,12 +246,16 @@
 				$result["rows"] = $rows;
 			}	
 		}
-		mysqli_close($ipcCon);
 		return $result;
 	}
 
-	function deleteBkup() {
-		global $ipcCon, $id, $dbfile;
+	function deleteBkup($id, $dbfile, $userObj) {
+		global $ipcCon;
+		if ($userObj->grpObj->bkupdb != "Y") {
+			$result['rslt'] = 'fail';
+        	$result['reason'] = 'Permission Denied';
+			return $result;
+		}
 
 		if (unlink("../../DBBK/" . $dbfile)) {
 			$qry = "delete from t_dbbk where id='$id' or dbfile='$dbfile'";
@@ -254,7 +284,6 @@
 					$result["rows"] = $rows;
 				}	
 			}
-			mysqli_close($ipcCon);
 			
 		}
 		else {
@@ -264,9 +293,13 @@
 		return $result;
 	}
 
-	function restoreDb() {
-		global $co5kDb, $dbfile;
+	function restoreDb($co5kDb, $dbfile, $userObj) {
 
+		if ($userObj->grpObj->bkupdb != "Y") {
+			$result['rslt'] = 'fail';
+			$result['reason'] = 'Permission Denied';
+			return $result;
+		}
 
 		$dir = "../../DBBK/" . $dbfile;
 
