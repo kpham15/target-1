@@ -67,7 +67,7 @@ var refOptions = [
 		ref_id:     "pw_alert",
 		options: 		[
 			{
-				value:	"99999",
+				value:	"0",
 				text: 	"NEVER PROMPT"
 			},
 			{
@@ -242,7 +242,7 @@ var refOptions = [
 		ref_id:     "brdcst_del",
 		options: 		[
 			{
-				value:	"99999",
+				value:	"0",
 				text: 	"DO NOT AUTO DELETE"
 			},
 			{
@@ -303,7 +303,7 @@ var refOptions = [
 		ref_id:     "user_disable",
 		options: 		[
       {
-        value:  "99999",
+        value:  "0",
         text:   "NEVER DISABLE"
       },
 			{
@@ -364,7 +364,7 @@ var refOptions = [
 		ref_id:     "user_idle_to",
 		options: 		[
 			{
-				value:	"99999",
+				value:	"0",
 				text: 	"DO NOT TIMEOUT"
 			},
 			{
