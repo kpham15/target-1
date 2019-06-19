@@ -82,22 +82,8 @@
       </div>
 
       <div class="modal-footer">
-        <!-- ROW 1: SUBMIT and CLOSE buttons -->
-        <div class="row">
-          <div class="col-md-12">
-            <button id="fac-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        <!-- END ROW 1 -->
-
-        <!-- ROW 2: POST RESPONSE -->
-        <div class="row">
-          <label id="fac-modal-post-response-text" class="col-md-12 fac-modal-field post-response" style="text-align: left">
-            <!-- CONTENT POPULATED BY POST RESPONSE FUNCTION -->
-          </label>
-        </div>
-        <!-- END ROW 2 -->
+        <button id="fac-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -134,10 +120,10 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
+          postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
-          postResponse($("#fac-modal-post-response-text"), data.rslt, data.reason);
+          postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
           queryFac();
         }
       });

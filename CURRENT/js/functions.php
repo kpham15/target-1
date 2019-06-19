@@ -155,14 +155,23 @@
 	}
 
 	function postResponse(element, rslt, reason) {
-		$('.post-response').text("");
+		let html = 	'<div class="row post-response">' +
+          				'<div class="col-md-12">' +
+            				'<label style="text-align:left"></label>' +
+          				'</div>' +
+        				'</div>';
+		
+		$('.post-response').remove();
+		element.append(html);
+
 		let color = "";
 		if (rslt == "fail") {
-			color = 'red';
+			color = 'response-fail';
 		} else if (rslt == "success") {
-			color = 'green';
+			color = 'response-success';
 		}
-		element.css('color', color).text(`${rslt} - ${reason}`);
+		$('.post-response').addClass(color);
+		$('.post-response label').text(`${rslt} - ${reason}`);
 	}
 	
 	function inputSuccess(selector, string) {
@@ -179,7 +188,7 @@
 	function clearErrors() {
     $('span.help-block').remove();
 		$('.form-group').removeClass('has-error');
-		$('.post-response').text("");
+		$('.post-response').remove();
 	}
 	
 
