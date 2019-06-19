@@ -15,6 +15,11 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label id="reference-page-post-response-text" style="margin-top: 32px;"></label>
+				</div>
+			</div>
 		</div>
 
 		<!-- Submit Button -->
@@ -86,6 +91,11 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	// Change any option to clear the red/green text
+	$('#ref-select-div').on('change', function() {
+		$('#reference-page-post-response-text').text('');
+	})
+
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
 
@@ -135,17 +145,12 @@ $(document).ready(function() {
 			dataType: 'json'
 		}).done(function(data) {
 			let res = data.rows;
-			let modal = {
-				title: 	data.rslt,
-				body: 	data.reason,
-			}
 
 			if (data.rslt === 'fail') {
-				modal.type = 'danger';
-				modalHandler(modal);
+				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
 			} else {
-				modal.type = 'success';
-				modalHandler(modal);
+				
+				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
 				
 				$('#reference-page-action').val('');
 			}
