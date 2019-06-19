@@ -93,6 +93,8 @@
         public function queryCkid($ckid, $cls, $adsr, $prot) {
 
             global $db;
+
+            $ckid = str_replace('?','%',$ckid);
           
             $qry = "SELECT * FROM t_ckts WHERE ckid LIKE '%$ckid%' AND cls LIKE '%$cls%' AND adsr LIKE '%$adsr%' AND prot LIKE '%$prot%'";
             $res = $db->query($qry);

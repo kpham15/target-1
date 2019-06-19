@@ -118,13 +118,16 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          postResponse($('#alarm-admin-modal .modal-footer'), data.rslt, data.reason);
         }
         else {
-          $('#alarm-admin-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+          postResponse($('#alarm-admin-modal .modal-footer'), data.rslt, data.reason);
         }
-      })
+      });
+    });
+  });
 
-    })
+  $(".alarm-admin-modal-input").on('click', function() {
+    clearErrors();
   });
 </script>
