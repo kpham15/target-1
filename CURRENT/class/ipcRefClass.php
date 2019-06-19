@@ -146,7 +146,7 @@ class REF {
         
         $this->queryRefs();
         $this->rslt     =   SUCCESS;
-        $this->reason   =   "VOLT_RANGE = " . $volt_range;
+        $this->reason   =   "UPDATE SUCCESSFUL";
         return;
     }
 
