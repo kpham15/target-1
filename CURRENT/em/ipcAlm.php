@@ -173,7 +173,7 @@ function ackAlm($id, $almid, $ack, $remark, $user, $cond, $src, $userObj, $almOb
 	}
 
 
-	$almObj->ackAlm($ack, $remark);
+	$almObj->ackAlm($user, $remark);
 	$result["rslt"]   = $almObj->rslt;
 	$result["reason"] = $almObj->reason;
 	$result["rows"]   = $almObj->rows;
