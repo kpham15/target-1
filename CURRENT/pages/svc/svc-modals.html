@@ -440,11 +440,11 @@ $(document).ready(function(){
             let res = data.rows;
 
             if (data.rslt === 'fail') {
-                $("#svcModal_rslt").css("color","red").text(data.reason)
+                postResponse($('#svc_modal .modal-footer'), data.rslt, data.reason);
             } else {
                 svcQueryCkid();
-                svcQueryCktConByCkid(ckid)
-                $("#svcModal_rslt").css("color","green").text(data.reason)
+                svcQueryCktConByCkid(ckid);
+                postResponse($('#svc_modal .modal-footer'), data.rslt, data.reason);
 
             }
         })
