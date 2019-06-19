@@ -225,6 +225,8 @@ class PORT {
     public function findPortByCkid($ckid) {
         global $db;
 
+        $ckid = str_replace('?','%',$ckid);
+
         $qry = "SELECT t_ports.id as id, t_ports.port, t_ports.node, t_ports.slot, t_ports.pnum, t_ports.ptyp, t_ports.psta, ";
 		$qry .= "t_ports.con_idx, t_facs.id as fac_id, t_facs.fac, t_facs.ftyp, t_facs.ort, t_facs.spcfnc, t_ckts.ckid ";
 		$qry .= "FROM t_ports LEFT JOIN t_facs ON t_ports.fac_id = t_facs.id LEFT JOIN t_ckts ON t_ports.ckt_id = t_ckts.id";
@@ -265,6 +267,8 @@ class PORT {
 
     public function findPortByFac($fac) {
         global $db;
+
+        $fac = str_replace('?','%',$fac);
 
         $qry = "SELECT t_ports.id as id, t_ports.port, t_ports.node, t_ports.slot, t_ports.pnum, t_ports.ptyp, t_ports.psta, ";
 		$qry .= "t_facs.id as fac_id, t_facs.fac, t_facs.ftyp, t_facs.ort, t_facs.spcfnc, t_ckts.ckid ";

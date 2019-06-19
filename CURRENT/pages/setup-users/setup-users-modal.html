@@ -166,11 +166,10 @@ function setupUsersModalSubmit(obj) {
     let res = data.rows
 
     if (data.rslt == 'fail') {
-      $('#setup-users-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#setup-users-modal .modal-footer'), data.rslt, data.reason);
     }
     else {
-
-      $('#setup-users-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+      postResponse($('#setup-users-modal .modal-footer'), data.rslt, data.reason);
       
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);

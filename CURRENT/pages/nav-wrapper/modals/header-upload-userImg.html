@@ -80,10 +80,10 @@ function header_uploadUserImage_add() {
         .done(function(data, status){
             let obj = JSON.parse(data);
             if (obj["rslt"] == "fail") {
-                $("#header_uploadUserImage_rslt").css("color","red").text(obj.reason)
+                postResponse($('#header_uploadUserImage .modal-footer'), data.rslt, data.reason);
             }
             else {
-                $("#header_uploadUserImage_rslt").css("color","green").text(obj.reason) 
+                postResponse($('#header_uploadUserImage .modal-footer'), data.rslt, data.reason);
                 //display image in user box
                 let url = "../PROFILE/"+filename;
                 let img = new Image();

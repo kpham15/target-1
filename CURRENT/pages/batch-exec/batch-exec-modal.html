@@ -78,11 +78,11 @@ function batchExcModal_add() {
         .done(function(data, status){
             let obj = JSON.parse(data);
             if (obj["rslt"] == "fail") {
-                $("#batchExcModal_rslt").css("color","red").text(obj.reason)
+                postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
             }
             else {
                 if (obj['rows'].length == 0) {
-                    $("#batchExcModal_rslt").css("color","red").text("No batch record found!")
+                postResponse($('#batchExcModal .modal-footer'), "", "No batch record found!");
                 }
                 else {
                     let a = [];
@@ -96,7 +96,7 @@ function batchExcModal_add() {
 
                     $("#batchExc_file_sel").empty();
                     $("#batchExc_file_sel").html(a.join(""));
-                    $("#batchExcModal_rslt").css("color","green").text(obj.reason)
+                    postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
 
                 }  
             } 

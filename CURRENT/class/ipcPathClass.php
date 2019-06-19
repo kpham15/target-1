@@ -1826,6 +1826,8 @@ class PATHS {
 
     public function queryPathsByCkid($ckid) {
     
+        $ckid = str_replace('?','%',$ckid);
+        
         $qry = "SELECT  t_path.id, x, y, s1, s1y, s2, s2y, s3f, s3fy, sco, scoy, s4, s4y, sci, sciy, s3t, s3ty, s5, s5y, s6, s6y, s7, s7y,
                      t_cktcon.path, t_cktcon.ckid, t_cktcon.idx, t_cktcon.ctyp FROM t_path LEFT JOIN t_cktcon ON
                      t_path.id = t_cktcon.path WHERE t_cktcon.ckid LIKE '$ckid'";

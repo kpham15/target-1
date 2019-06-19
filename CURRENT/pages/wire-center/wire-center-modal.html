@@ -280,12 +280,12 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                $("#wcModal_rslt").css("color","red").text(obj.reason)
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
                 if (obj.rows.length === 0) {
                     if (action != "query") {
-                        $("#wcModal_rslt").css("color","red").text("No Record Found in Database!")
+                        postResponse($('#wcModal .modal-footer'), data.rslt, "No Record Found in Database!");
                         return;
                     }
                 }
@@ -295,7 +295,7 @@
                     wc_tblRows = wcModal_tblRows;
                     wc_displayForm();
                     if(action !== 'query') {
-                        $("#wcModal_rslt").css("color","green").text(obj.reason)
+                        postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
                     }
                    
 
@@ -323,11 +323,11 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                $("#wcModal_rslt").css("color","red").text(obj.reason)
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
                 wcModal_query('query');
-                $("#wcModal_rslt").css("color","green").text("WIRE CENTER TURNED-UP SUCCESSFULLY")
+                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER TURNED-UP SUCCESSFULLY");
             } 
     
         });
@@ -354,11 +354,11 @@
             dataType: "json"
         }).done(function (obj) {       
             if (obj.rslt == "fail") {
-                $("#wcModal_rslt").css("color","red").text(obj.reason)
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
                 wcModal_query('query');
-                $("#wcModal_rslt").css("color","green").text("WIRE CENTER TURNED-UP SUCCESSFULLY")
+                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER TURNED-UP SUCCESSFULLY");
             } 
         });
     }

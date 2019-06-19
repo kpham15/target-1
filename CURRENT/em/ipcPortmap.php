@@ -404,6 +404,8 @@
     }
 
 	function pmQueryPort($port, $psta, $ptyp) {
+
+        $port = str_replace('?','%',$port);
         
         $node = '';
         $slot = '';

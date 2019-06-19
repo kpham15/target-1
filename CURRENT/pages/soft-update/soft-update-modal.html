@@ -73,10 +73,12 @@ function swUpdModal_add() {
     })
     .done(function(data, status){
         let obj = JSON.parse(data);
-        if(obj.rslt == 'fail') 
-            $("#swUpdModal_rslt").css("color","red").text(obj.reason);
-        else 
-            $("#swUpdModal_rslt").css("color","green").text(obj.reason);
+        if(obj.rslt == 'fail') {
+            postResponse($('#swUpdModal .modal-footer'), obj.rslt, obj.reason);
+        }
+        else {
+            postResponse($('#swUpdModal .modal-footer'), obj.rslt, obj.reason);
+        }
 
     });
 

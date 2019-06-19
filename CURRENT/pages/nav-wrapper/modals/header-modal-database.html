@@ -87,7 +87,7 @@ function queryDatabaseDownload() {
     type:     'POST',
     url:      ipcDispatch,
     data:     {
-      "api":    "coQueryBkup",
+      "api":    "ipcBkup",
       "act":    "query",
       "user":   user.uname
     },
@@ -123,7 +123,7 @@ $(document).ready(function() {
       type:     'POST',
       url:      ipcDispatch,
       data:     {
-        "api":    "coQueryBkup",
+        "api":    "ipcBkup",
         "act":    action,
         "user":   user.uname,
         "dbfile": fileName
@@ -131,30 +131,17 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason,
-      }
       
       if (data.rslt == 'fail') { 
-        modal.type = 'danger'
-        modalHandler(modal);
+        postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, data.reason);
       }
 
       if (action == "DELETE") {
-        let modal = {
-          title:  data.rslt,
-          body:   "File Deleted"
-        }
-        headerDatabaseBackupReturn(modal);
+        postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "File Deleted");
       }
 
       if (action == "MANUAL") {
-        let modal = {
-          title: data.rslt,
-          body:   "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile,
-        }
-        headerDatabaseBackupReturn(modal);
+        postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile);
       }
     });
 

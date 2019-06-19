@@ -78,18 +78,12 @@
               </div>
             </div>
           </div>
-          <!-- Invisible Label for Post Request Response -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label id="fac-modal-post-response-text" class="fac-modal-field" style="margin-top:32px;"></label>
-            </div>
-          </div>
         </form>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button id="fac-modal-submit" type="button" class="btn btn-primary">Submit</button>
+        <button id="fac-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -126,13 +120,18 @@
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          $('#alarm-admin-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
         } else {
           $('#fac-form-clear').trigger('click');
-          $('#fac-modal').modal('hide');
+          postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
           queryFac();
         }
       });
+    });
+
+    // remove error messages when click on modal field
+    $(".fac-modal-field").on('click', function() {
+      clearErrors();
     });
   });
 </script>
