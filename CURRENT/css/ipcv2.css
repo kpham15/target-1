@@ -30,71 +30,77 @@
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
-  .nav-tabs-custom>.nav-tabs>li.active>a {
-    border-left-color: #aaa;
-    border-right-color: #aaa;
-  }
-  .nav-tabs-custom>.nav-tabs.node-tabs {
-    border-bottom-color: #aaa;
-  }
-  .nav.navbar-nav .navbar-text {
-    color: #FFF;
-  }
-  #alarm-header-icon {
-    display: inline;
-    width: auto;
-  }
-  .dropdown-menu li>a {
-    color: #000;
-  }
-  .nav.node-tabs>li>a {
-    padding: 8px;
-  }
-  hr.content-page-divider {
-    margin-top: 0px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-top: 1px solid #3c8dbc;
-  }
-  #main-section-content {
-    background-color: #C5F8F9;
-  }
-  .treeview-menu>li>a>.far,
-  .sidebar-menu > li > a > .fab,
-  .sidebar-menu > li > a > .fas {
-    width: 20px;
-  }
-  .skin-blue .main-sidebar {
-    background-color: #1700CC;
-  }
-  .skin-blue .sidebar-menu>li.active>a {
-    background-color: #1500B3;
-  }
-  .skin-blue .sidebar-menu>li.menu-open>a {
-    background-color: #1500B3;
-  }
-  .skin-blue .sidebar-menu>li:hover>a {
-    background-color: #1500B3;
-  }
-  .skin-blue .sidebar-menu>li.header {
-    background-color: #10008C;
-    color: #ccc;
-  }
-  .skin-blue .sidebar-menu .treeview-menu>li>a {
-    background-color: #197BD9;
-    color: #eee;
-  }
-  .skin-blue .sidebar-menu>li>.treeview-menu {
-    background-color: #197BD9;
-  }
-  .skin-blue .sidebar-form input[type="text"] {
-    background-color: #fff;
-  }
-  .skin-blue .sidebar-menu .treeview-menu>li>a:hover,
-  .skin-blue .sidebar-menu .treeview-menu>li.active>a {
-    background-color: #125899;
-  }
+.skin-blue .main-header .logo {
+  background-color: #1700CC;
+}
+.skin-blue .main-header .navbar {
+  background-color: #1700CC;
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+  border-left-color: #aaa;
+  border-right-color: #aaa;
+}
+.nav-tabs-custom>.nav-tabs.node-tabs {
+  border-bottom-color: #aaa;
+}
+.nav.navbar-nav .navbar-text {
+  color: #FFF;
+}
+#alarm-header-icon {
+  display: inline;
+  width: auto;
+}
+.dropdown-menu li>a {
+  color: #000;
+}
+.nav.node-tabs>li>a {
+  padding: 8px;
+}
+hr.content-page-divider {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 1px solid #3c8dbc;
+}
+#main-section-content {
+  background-color: #C5F8F9;
+}
+.treeview-menu>li>a>.far,
+.sidebar-menu > li > a > .fab,
+.sidebar-menu > li > a > .fas {
+  width: 20px;
+}
+.skin-blue .main-sidebar {
+  background-color: #1700CC;
+}
+.skin-blue .sidebar-menu>li.active>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li.menu-open>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li:hover>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li.header {
+  background-color: #10008C;
+  color: #ccc;
+}
+.skin-blue .sidebar-menu .treeview-menu>li>a {
+  background-color: #197BD9;
+  color: #eee;
+}
+.skin-blue .sidebar-menu>li>.treeview-menu {
+  background-color: #197BD9;
+}
+.skin-blue .sidebar-form input[type="text"] {
+  background-color: #fff;
+}
+.skin-blue .sidebar-menu .treeview-menu>li>a:hover,
+.skin-blue .sidebar-menu .treeview-menu>li.active>a {
+  background-color: #125899;
+}
 /* ============ END Nav Wrapper Styling =============== */
 
 /* ============= Modal Styling ============== */
