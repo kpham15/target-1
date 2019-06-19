@@ -99,12 +99,16 @@ $(document).ready(function() {
       let res = data.rows;
 
       if (data.rslt === 'fail') {
-        $('#node-operation-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#node-operation-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
-        $('#node-operation-modal-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#node-operation-modal .modal-footer'), data.rslt, data.reason);
       }
     });
-  })
+  });
+
+  $(".node-operation-modal-input").on('click', function() {
+    clearErrors();
+  });
 });
 </script>
