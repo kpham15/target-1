@@ -215,6 +215,7 @@
     
         $('#svc_findCkid_btn').click(function(e) {
             e.preventDefault();
+            clearErrors();
             $("#svc_cktArea").show();
             $("#svc_ordArea").hide();
             svcQueryCkid();
@@ -222,6 +223,7 @@
 
         $("#svc_findOrd_btn").click(function(e) {
             e.preventDefault();
+            clearErrors();
             $("#svc_cktArea").hide();
             $("#svc_cktconArea").hide();
             $("#svc_ordArea").show();
@@ -231,7 +233,7 @@
     
         // Click events on table rows
         $(document).on('click', '#svc_ckt_table tbody tr', function() {
-
+            clearErrors();
             let data = svcCktDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -266,6 +268,7 @@
         });
         
         $(document).on('click', '#svc_ord_table tbody tr', function() {
+            clearErrors();
             let data = svcOrdDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -297,6 +300,7 @@
         
 
         $(document).on('click', '#svc_cktcon_table tbody tr', function() {
+            clearErrors();
             let data = svcCktconDatatable.row(this).data();
             if(data == undefined)
                 return;
