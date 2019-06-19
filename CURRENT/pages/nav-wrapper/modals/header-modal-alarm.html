@@ -44,8 +44,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" id="header-alarm-submit" class="btn btn-primary">Submit</button>
+          <button id="header-alarm-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
       </div>
@@ -96,14 +96,9 @@ function headerAlmQueryByPsta(psta) {
     dataType: 'json'
   }).done(function(data) {
     let res = data.rows;
-    let modal = {
-      title: data.rslt,
-      body: data.reason
-    }
 
     if (data.rslt === 'fail') {
-      modal.type = 'danger';
-      modalHandler(modal);
+      postResponse($('#header-alarm-action-modal .modal-footer'), data.rslt, data.reason);
     } else {
       if (psta === 'NEW') {
         $('#header-alarm-action-modal .modal-title').text('ACKNOWLEDGE ALARM');
@@ -167,9 +162,9 @@ $(document).ready(function() {
         let res = data.rows;
 
         if (data.rslt === 'fail') {
-          inputError($('#header-alarm-action'), data.reason);
+          postResponse($('#header-alarm-action-modal .modal-footer'), data.rslt, data.reason);
         } else {
-          inputSuccess($('#header-alarm-action'), data.reason);
+          postResponse($('#header-alarm-action-modal .modal-footer'), data.rslt, data.reason);
           $('#header-alarm-comments').val('');
           headerAlmQueryByPsta(selectedRow.psta);
         }
