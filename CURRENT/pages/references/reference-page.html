@@ -15,6 +15,11 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label id="reference-page-post-response-text" style="margin-top: 32px;"></label>
+				</div>
+			</div>
 		</div>
 
 		<!-- Submit Button -->
@@ -86,6 +91,11 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	// Change any option to clear the red/green text
+	$('#ref-select-div').on('change', function() {
+		$('#reference-page-post-response-text').text('');
+	})
+
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
 
@@ -121,7 +131,6 @@ $(document).ready(function() {
 				"date_format": 		refObj.date_format,
 				"maint_archv": 		refObj.maint_archv,
 				"maint_del": 			refObj.maint_del,
-				"temp_max": 			refObj.temp_max,
 				"mtc_restore": 		refObj.mtc_restore,
 				"prov_archv": 		refObj.prov_archv,
 				"prov_del": 			refObj.prov_del,
@@ -129,23 +138,20 @@ $(document).ready(function() {
 				"pw_expire": 			refObj.pw_expire,
 				"pw_repeat": 			refObj.pw_repeat,
 				"pw_reuse": 			refObj.pw_reuse,
+				"temp_max": 			refObj.temp_max,
 				"user_disable": 	refObj.user_disable,
-				"user_idle_to": 	refObj.user_idle_to
+				"user_idle_to": 	refObj.user_idle_to,
+				"volt_range": 		refObj.volt_range
 			},
 			dataType: 'json'
 		}).done(function(data) {
 			let res = data.rows;
-			let modal = {
-				title: 	data.rslt,
-				body: 	data.reason,
-			}
 
 			if (data.rslt === 'fail') {
-				modal.type = 'danger';
-				modalHandler(modal);
+				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
 			} else {
-				modal.type = 'success';
-				modalHandler(modal);
+				
+				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
 				
 				$('#reference-page-action').val('');
 			}
