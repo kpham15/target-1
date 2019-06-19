@@ -68,7 +68,7 @@
         public function queryCkidByOrdno($ordno) {
             global $db;
 
-            $qry = "SELECT * FROM t_ckts WHERE ORDNO='$ordno'";
+            $qry = "SELECT * FROM t_ckts WHERE ordno='$ordno'";
             $res = $db->query($qry);
             if (!$res) {
                 $this->rslt    = FAIL;
