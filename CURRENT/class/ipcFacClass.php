@@ -274,7 +274,7 @@
 
             $qry = "INSERT INTO 
                     t_facs 
-                    (fac, ftyp, ort, spcnfc) 
+                    (fac, ftyp, ort, spcfnc) 
                     VALUES 
                     ('$fac', '$ftyp', '$ort', '$spcfnc')";
                     
