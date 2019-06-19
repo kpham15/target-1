@@ -110,8 +110,7 @@ $volt_range = "";
 if (isset($_POST['volt_range'])) {
     $volt_range = $_POST['volt_range'];
 }
-print_r($volt_range);
-return;
+
 
 $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, $_POST);
 
