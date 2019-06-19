@@ -55,7 +55,7 @@ function sysview_findFac() {
       type: 'POST',
       url: ipcDispatch,
       data: {
-        api:    "ipcPortmap",
+        api:    "ipcFacilities",
         act:    "findFac",
         user:   user.uname,
         grp:    user.grp,
@@ -85,26 +85,36 @@ $(document).on('click', '#sysview_findFac_table tbody tr', function() {
     if(data == undefined)
         return;
     let port = data.port;
-    let portExtract = port.split('-');
-    let node = portExtract[0];
-    let slot = portExtract[1];
-    let ptyp = portExtract[2].toLowerCase();
-    let pnum = portExtract[3];
-    // give selected class
-    $('#sysview_findFac_table tbody tr').removeClass('bg-primary');
-    $(this).addClass('bg-primary');
+    if(port != "") {
+        let portExtract = port.split('-');
+        let node = portExtract[0];
+        let slot = portExtract[1];
+        let ptyp = portExtract[2].toLowerCase();
+        let pnum = portExtract[3];
+        // give selected class
+        $('#sysview_findFac_table tbody tr').removeClass('bg-primary');
+        $(this).addClass('bg-primary');
 
-    //add port into highlight list
-    portHighLight.push(port);
+        //add port into highlight list
+        portHighLight.push(port);
 
-    $(".node-tab[ptyp='"+ptyp+"']").removeClass('active');
-    $(".node-tab[node_id='"+node+"'][ptyp='"+ptyp+"']").addClass('active');
+        $(".node-tab[ptyp='"+ptyp+"']").removeClass('active');
+        $(".node-tab[node_id='"+node+"'][ptyp='"+ptyp+"']").addClass('active');
 
-    $(".mio-btn[ptyp='"+ptyp+"']").removeClass('active');
-    $(".mio-btn[slot='"+slot+"'][ptyp='"+ptyp+"']").addClass('active');
+        $(".mio-btn[ptyp='"+ptyp+"']").removeClass('active');
+        $(".mio-btn[slot='"+slot+"'][ptyp='"+ptyp+"']").addClass('active');
 
-    let portRangeIndex = Math.floor((pnum-1)/25);
-    $(".port-range-btn[index='"+portRangeIndex+"'][ptyp='"+ptyp+"']").trigger('click');
+        let portRangeIndex = Math.floor((pnum-1)/25);
+        $(".port-range-btn[index='"+portRangeIndex+"'][ptyp='"+ptyp+"']").trigger('click');
+    }
+    else {
+
+        //if there is no port info for this facility, remove class "addBorder" from previous display
+        $(".port-grid[ptyp='x'] > .port-box").removeClass('addBorder') 
+        $(".port-grid[ptyp='y'] > .port-box").removeClass('addBorder') 
+
+    }
+    
     
 });
         
