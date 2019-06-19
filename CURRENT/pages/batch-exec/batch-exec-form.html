@@ -118,13 +118,8 @@ function batchExec_query(action){
 }
 
 function batchExec_executeCommand() {
-    if($("#batchExc_id_num").val() == "") {
-        let modal = {
-            title: "Error",
-            body:  "Please choose a batch file to execute!",
-            type : 'danger'
-        }
-        modalHandler(modal);
+    if ($("#batchExc_id_num").val() == "") {
+        inputError($("#batchExc_execute_btn"), "Please choose a batch file to execute!");
         return;
     }
 
@@ -203,8 +198,9 @@ function batchExec_recurExecute(i) {
         
     
 $("#batchExc_execute_btn").click(function(){
+    clearErrors();
     batchExec_executeCommand();
-})
+});
 
 $("#batchExc_act_sel").change(function() {
     if ($("#batchExc_act_sel").val() !="") {
@@ -218,12 +214,7 @@ $("#batchExc_act_sel").change(function() {
                 batchExec_query('DELETE');
             }
             else {
-                let modal = {
-                    title:  "Error",
-                    body: "Please select a batch file!",
-                    type : 'danger'
-                }
-                modalHandler(modal);
+                inputError($(this), "Please select a batch file!")
             }
             
             batchExec_clearForm();
