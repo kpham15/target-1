@@ -101,6 +101,17 @@ if (isset($_POST['mtc_restore'])) {
     $mtc_restore = $_POST['mtc_restore'];
 }
 
+$temp_max = "";
+if (isset($_POST['temp_max'])) {
+    $temp_max = $_POST['temp_max'];
+}
+
+$volt_range = "";
+if (isset($_POST['volt_range'])) {
+    $volt_range = $_POST['volt_range'];
+}
+
+
 $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, $_POST);
 
 $refObj = new REF();
@@ -123,7 +134,7 @@ if ($action == "query") {
 }
 
 if ($action == "update") {
-    $result = updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore);
+    $result = updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range);
     $evtLog->log($result["rslt"], $result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
@@ -151,7 +162,7 @@ function queryRefs($refObj) {
 
 }
 
-function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore) {
+function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range) {
 
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
@@ -159,7 +170,7 @@ function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repe
         return $result;
     }
 
-    $refObj->updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore);
+    $refObj->updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range);
     $result['rslt']   = $refObj->rslt;
     $result['reason'] = $refObj->reason;
     $result['rows']   = $refObj->ref;
