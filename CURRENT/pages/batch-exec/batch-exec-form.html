@@ -7,14 +7,17 @@
         </div>
 
         <div class="col-sm-6 " style="padding:2px;">
-            <label for="batchExc_act_sel">ACTION</label>
-            <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
-                <option></option>
-                <option>UPLOAD</option>
-                <option>DELETE</option>
-            </select>
-            <br>
-            <input type="hidden" id="batchExc_id_num" style="width:50px;">
+            <div class="form-group">
+                <label for="batchExc_act_sel">ACTION</label>
+                <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
+                    <option></option>
+                    <option>UPLOAD</option>
+                    <option>DELETE</option>
+                </select>
+                <br>
+                <input type="hidden" id="batchExc_id_num" style="width:50px;">
+
+            </div>
         </div>
 
     </div>
@@ -209,8 +212,9 @@ $("#batchExc_act_sel").change(function() {
                 batchExec_query('DELETE');
             }
             else {
-                inputError($("#batchExc_act_sel"), "Please select a batch file!")
+                inputError($("#batchExc_act_sel"), "Please select a batch file!");
             }
+            $("#batchExc_act_sel").val("");
         }
     }
 
