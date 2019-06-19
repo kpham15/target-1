@@ -594,7 +594,7 @@ class REF {
     public function updVoltRange($volt_range) {
         global $db;
         //volt_range = 35-50, 40-50, 45-55
-        if($volt_range === "" || !($volt_range = "35-50" || $volt_range == "40-50" || $volt_range == "45-55")) {
+        if($volt_range === "" || !($volt_range == "35-50" || $volt_range == "40-50" || $volt_range == "45-55")) {
             $this->rslt     = FAIL;
             $this->reason   = "volt_range:Invalid Value ($volt_range)";
             return;
