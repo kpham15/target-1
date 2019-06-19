@@ -20,6 +20,7 @@
 
   <!-- Setup Users Modal -->  
   <?php include __DIR__ .'/setup-users-modal.html'; ?>
+  <?php include __DIR__ .'/setup-users-uploadImg.html'; ?>
 
   </div>
 </div>
