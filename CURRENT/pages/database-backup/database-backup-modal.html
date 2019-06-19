@@ -105,10 +105,6 @@ $(document).ready(function() {
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason,
-      }
       
       if (data.rslt == 'fail') { 
         $('#database-backup-modal-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
