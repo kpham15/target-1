@@ -67,7 +67,7 @@ var refOptions = [
 		ref_id:     "pw_alert",
 		options: 		[
 			{
-				value:	"0",
+				value:	"99999",
 				text: 	"NEVER PROMPT"
 			},
 			{
@@ -242,7 +242,7 @@ var refOptions = [
 		ref_id:     "brdcst_del",
 		options: 		[
 			{
-				value:	"0",
+				value:	"99999",
 				text: 	"DO NOT AUTO DELETE"
 			},
 			{
@@ -303,7 +303,7 @@ var refOptions = [
 		ref_id:     "user_disable",
 		options: 		[
       {
-        value:  "0",
+        value:  "99999",
         text:   "NEVER DISABLE"
       },
 			{
@@ -364,7 +364,7 @@ var refOptions = [
 		ref_id:     "user_idle_to",
 		options: 		[
 			{
-				value:	"0",
+				value:	"99999",
 				text: 	"DO NOT TIMEOUT"
 			},
 			{
@@ -372,12 +372,12 @@ var refOptions = [
 				text: 	"TIMEOUT AFTER 30 MINUTES"
 			},
 			{
-				value: 	"60",
-				text: 	"TIMEOUT AFTER 60 MINUTES"
+				value: 	"45",
+				text: 	"TIMEOUT AFTER 45 MINUTES"
 			},
 			{
-				value: 	"90",
-				text: 	"TIMEOUT AFTER 90 MINUTES"
+				value: 	"60",
+				text: 	"TIMEOUT AFTER 60 MINUTES"
 			},
 		]
 	},
