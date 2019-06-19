@@ -273,6 +273,7 @@
         })
 
         $("#svc_ffacSearch_btn").click(function(e){
+            clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
@@ -287,6 +288,7 @@
         })
 
         $("#svc_tfacSearch_btn").click(function(e){
+            clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
@@ -359,6 +361,7 @@
         })
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
+            clearErrors();
             let data = svcFacSearchDatatable.row(this).data();
             if(data == undefined)
                 return;
