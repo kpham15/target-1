@@ -78,7 +78,7 @@ function batchExcModal_add() {
         .done(function(data, status){
             let obj = JSON.parse(data);
             if (obj["rslt"] == "fail") {
-                postResponse($('#batchExcModal .modal-footer'), data.rslt, data.reason);
+                postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
             }
             else {
                 if (obj['rows'].length == 0) {
@@ -96,7 +96,7 @@ function batchExcModal_add() {
 
                     $("#batchExc_file_sel").empty();
                     $("#batchExc_file_sel").html(a.join(""));
-                    postResponse($('#batchExcModal .modal-footer'), data.rslt, data.reason);
+                    postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
 
                 }  
             } 
