@@ -43,14 +43,18 @@ $(document).on('change', '#batchExcModal_file', function() {
         $("#batchExcModal_fileText").val(label);
 });
 
+$(document).on('click', '#batchExcModal_file', function() {
+    clearErrors();
+});
+
 function batchExcModal_add() {
-    if($("#batchExcModal_file").val() == "") {
-        $("#batchExcModal_rslt").css("color","red").text("There is no file uploaded!")
+    if ($("#batchExcModal_file").val() == "") {
+        postResponse($('#batchExcModal .modal-footer'), "fail", "There is no file uploaded!");
         return;
     }
     let file= document.getElementById("batchExcModal_file").files[0];
     if (file.size > 2097152) {
-        $("#batchExcModal_rslt").css("color","red").text("The file size must be less than 2MB!")
+        postResponse($('#batchExcModal .modal-footer'), "fail", "The file size must be less than 2MB!");
     }
     else {
         let data = new FormData();
@@ -76,7 +80,7 @@ function batchExcModal_add() {
             }
             else {
                 if (obj['rows'].length == 0) {
-                postResponse($('#batchExcModal .modal-footer'), "", "No batch record found!");
+                postResponse($('#batchExcModal .modal-footer'), "fail", "No batch record found!");
                 }
                 else {
                     let a = [];
@@ -102,7 +106,7 @@ function batchExcModal_add() {
 function batchExcModal_clearForm() {
     $("#batchExcModal_file").val("");
     $("#batchExcModal_fileText").val("");
-    $("#batchExcModal_rslt").text("")
+    clearErrors();
 }
 
 $("#batchExcModal_clear_btn").click(function(e){
@@ -114,8 +118,9 @@ $("#batchExcModal_submit_btn").click(function(e){
     e.preventDefault();
     batchExcModal_add();
 });
+
 $("#batchExcModal").on("hidden.bs.modal", function(){
-    batchExec_clearForm()
+    batchExec_clearForm();
 });
 
 </script>
