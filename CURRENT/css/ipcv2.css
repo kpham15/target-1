@@ -101,6 +101,9 @@
 .modal-footer .modal-confirm-btn {
   display: none;
 }
+.post-response {
+  text-align: left;
+}
 /* ============= END Modal Styling =============*/
 
 /* ============ IPC Colors ============ */
