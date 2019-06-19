@@ -58,7 +58,7 @@ class REF {
         $this->reason = "REF has been reset";
     }
     
-    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore) {
+    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range) {
         $this->updPwExpire      ($pw_expire);
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
@@ -135,6 +135,14 @@ class REF {
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
         }
+        $this->updTempMax       ($temp_max);
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
+        $this->updVoltRange     ($volt_range);
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
         
         $this->queryRefs();
         $this->rslt     =   SUCCESS;
@@ -145,7 +153,7 @@ class REF {
     public function updPwExpire($pw_expire) {
         global $db;
         //pw_expire = 0 - 90
-        if(!($pw_expire >= 0 && $pw_expire <= 90)) {
+        if($pw_expire === "" || !($pw_expire >= 0 && $pw_expire <= 90)) {
             $this->rslt     = FAIL;
             $this->reason   = "pw_expire:Invalid Value ($pw_expire)";
             return;
@@ -166,7 +174,7 @@ class REF {
     public function updPwAlert($pw_alert) {
         global $db;
         //pw_alert = 0 - 7
-        if(!($pw_alert >= 0 && $pw_alert <= 7)) {
+        if($pw_alert === "" || !($pw_alert >= 0 && $pw_alert <= 7)) {
             $this->rslt     = FAIL;
             $this->reason   = "pw_alert:Invalid Value ($pw_alert)";
             return;
@@ -187,7 +195,7 @@ class REF {
     public function updPwReuse($pw_reuse) {
         global $db;
         //pw_reuse = 0 - 4
-        if(!($pw_reuse >= 0 && $pw_reuse <= 4)) {
+        if($pw_reuse === "" || !($pw_reuse >= 0 && $pw_reuse <= 4)) {
             $this->rslt     = FAIL;
             $this->reason   = "pw_reuse:Invalid Value ($pw_reuse)";
             return;
@@ -208,7 +216,7 @@ class REF {
     public function updPwRepeat($pw_repeat) {
         global $db;
         //pw_repeat = 0 - 365
-        if(!($pw_repeat >= 0 && $pw_repeat <= 365)) {
+        if($pw_repeat === "" || !($pw_repeat >= 0 && $pw_repeat <= 365)) {
             $this->rslt     = FAIL;
             $this->reason   = "pw_repeat:Invalid Value ($pw_repeat)";
             return;
@@ -229,7 +237,7 @@ class REF {
     public function updBrdcstDel($brdcst_del) {
         global $db;
         //brdcst_del = 0 - 14
-        if(!($brdcst_del >= 0 && $brdcst_del <= 14)) {
+        if($brdcst_del === "" || !($brdcst_del >= 0 && $brdcst_del <= 14)) {
             $this->rslt     = FAIL;
             $this->reason   = "brdcst_del:Invalid Value ($brdcst_del)";
             return;
@@ -249,7 +257,7 @@ class REF {
     public function updUserDisable($user_disable) {
         global $db;
         //user_disable = 0 - 240
-        if(!($user_disable >= 0 && $user_disable <= 240)) {
+        if($user_disable === "" || !($user_disable >= 0 && $user_disable <= 240)) {
             $this->rslt     = FAIL;
             $this->reason   = "user_disable:Invalid Value ($user_disable)";
             return;
@@ -270,7 +278,7 @@ class REF {
     public function updUserIdleTo($user_idle_to) {
         global $db;
         //user_idle_to = 0 - 60
-        if(!($user_idle_to >= 0 && $user_idle_to <= 60)) {
+        if($user_idle_to === "" || !($user_idle_to >= 0 && $user_idle_to <= 60)) {
             $this->rslt     = FAIL;
             $this->reason   = "user_idle_to:Invalid Value ($user_idle_to)";
             return;
@@ -291,7 +299,7 @@ class REF {
     public function updAlmArchv($alm_archv) {
         global $db;
         //alm_archv = 60 - 120
-        if(!($alm_archv >= 60 && $alm_archv <= 120)) {
+        if($alm_archv === "" || !($alm_archv >= 60 && $alm_archv <= 120)) {
             $this->rslt     = FAIL;
             $this->reason   = "alm_archv:Invalid Value ($alm_archv)";
             return;
@@ -312,7 +320,7 @@ class REF {
     public function updAlmDel($alm_del) {
         global $db;
         //alm_del = 340 - 440
-        if(!($alm_del >= 340 && $alm_del <= 440)) {
+        if($alm_del === "" || !($alm_del >= 340 && $alm_del <= 440)) {
             $this->rslt     = FAIL;
             $this->reason   = "alm_del:Invalid Value ($alm_del)";
             return;
@@ -333,7 +341,7 @@ class REF {
     public function updCfgArchv($cfg_archv) {
         global $db;
         //cfg_archv = 30 - 60
-        if(!($cfg_archv >= 30 && $cfg_archv <= 60)) {
+        if($cfg_archv === "" || !($cfg_archv >= 30 && $cfg_archv <= 60)) {
             $this->rslt     = FAIL;
             $this->reason   = "cfg_archv:Invalid Value ($cfg_archv)";
             return;
@@ -354,7 +362,7 @@ class REF {
     public function updCfgDel($cfg_del) {
         global $db;
         //cfg_del = 130 - 230
-        if(!($cfg_del >= 130 && $cfg_del <= 230)) {
+        if($cfg_del === "" || !($cfg_del >= 130 && $cfg_del <= 230)) {
             $this->rslt     = FAIL;
             $this->reason   = "cfg_del:Invalid Value ($cfg_del)";
             return;
@@ -375,7 +383,7 @@ class REF {
     public function updProvArchv($prov_archv) {
         global $db;
         //prov_archv = 60 - 120
-        if(!($prov_archv >= 60 && $prov_archv <= 120)) {
+        if($prov_archv === "" || !($prov_archv >= 60 && $prov_archv <= 120)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_archv:Invalid Value ($prov_archv)";
             return;
@@ -396,7 +404,7 @@ class REF {
     public function updProvDel($prov_del) {
         global $db;
         //prov_del = 340 - 440
-        if(!($prov_del >= 340 && $prov_del <= 440)) {
+        if($prov_del === "" || !($prov_del >= 340 && $prov_del <= 440)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($prov_del)";
             return;
@@ -417,7 +425,7 @@ class REF {
     public function updMaintArchv($maint_archv) {
         global $db;
         //maint_archv = 30 - 60
-        if(!($maint_archv >= 30 && $maint_archv <= 60)) {
+        if($maint_archv === "" || !($maint_archv >= 30 && $maint_archv <= 60)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($maint_archv)";
             return;
@@ -438,7 +446,7 @@ class REF {
     public function updMaintDel($maint_del) {
         global $db;
         //maint_del = 130 - 230
-        if(!($maint_del >= 130 && $maint_del <= 230)) {
+        if($maint_del === "" || !($maint_del >= 130 && $maint_del <= 230)) {
             $this->rslt     = FAIL;
             $this->reason   = "prov_del:Invalid Value ($maint_del)";
             return;
@@ -459,7 +467,7 @@ class REF {
     public function updAutoCkid($auto_ckid) {
         global $db;
         //auto_ckid = N/Y
-        if(!($auto_ckid == 'Y' || $auto_ckid == 'N')) {
+        if($auto_ckid === "" || !($auto_ckid == 'Y' || $auto_ckid == 'N')) {
             $this->rslt     = FAIL;
             $this->reason   = "auto_ckid:Invalid Value ($auto_ckid)";
             return;
@@ -481,7 +489,7 @@ class REF {
     public function updAutoOrdno($auto_ordno) {
         global $db;
         //auto_ordno = N/Y
-        if(!($auto_ordno == 'Y' || $auto_ordno == 'N')) {
+        if($auto_ordno === "" || !($auto_ordno == 'Y' || $auto_ordno == 'N')) {
             $this->rslt     = FAIL;
             $this->reason   = "auto_ordno:Invalid Value ($auto_ordno)";
             return;
@@ -502,7 +510,7 @@ class REF {
     public function updDateFormat($date_format) {
         global $db;
         //date_format = MM-DD-YYYY, MM-DD-YY, YYYY-MM-DD
-        if(!($date_format == 'MM-DD-YYYY' || $date_format == 'MM-DD-YY' || $date_format == 'YYYY-MM-DD')) {
+        if($date_format === "" || !($date_format == 'MM-DD-YYYY' || $date_format == 'MM-DD-YY' || $date_format == 'YYYY-MM-DD')) {
             $this->rslt     = FAIL;
             $this->reason   = "date_format:Invalid Value ($date_format)";
             return;
@@ -523,7 +531,7 @@ class REF {
     public function updMtcRestore($mtc_restore) {
         global $db;
         //mtc_restore = 15 - 45
-        if(!($mtc_restore >= 15 && $mtc_restore <= 45)) {
+        if($mtc_restore === "" || !($mtc_restore >= 15 && $mtc_restore <= 45)) {
             $this->rslt     = FAIL;
             $this->reason   = "mtc_restore:Invalid Value ($mtc_restore)";
             return;
@@ -544,7 +552,7 @@ class REF {
     public function updEvtDel($evt_del) {
         global $db;
         //evt_del = 5 - 30
-        if(!($evt_del >= 5 && $evt_del <= 30)) {
+        if($evt_del === "" || !($evt_del >= 5 && $evt_del <= 30)) {
             $this->rslt     = FAIL;
             $this->reason   = "evt_del:Invalid Value ($evt_del)";
             return;
@@ -565,7 +573,7 @@ class REF {
     public function updTempMax($temp_max) {
         global $db;
         //temp_max = 70 - 80
-        if(!($temp_max >= 70 && $temp_max <= 80)) {
+        if($temp_max === "" || !($temp_max >= 70 && $temp_max <= 80)) {
             $this->rslt     = FAIL;
             $this->reason   = "temp_max:Invalid Value ($temp_max)";
             return;
@@ -586,7 +594,7 @@ class REF {
     public function updVoltRange($volt_range) {
         global $db;
         //volt_range = 35-50, 40-50, 45-55
-        if(!(($volt_range >= 35 && $volt_range <= 50) || ($volt_range >= 40 && $volt_range <= 50) || ($volt_range >= 45 && $volt_range <= 55))) {
+        if($volt_range === "" || !($volt_range == "35-50" || $volt_range == "40-50" || $volt_range == "45-55")) {
             $this->rslt     = FAIL;
             $this->reason   = "volt_range:Invalid Value ($volt_range)";
             return;
