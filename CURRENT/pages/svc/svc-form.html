@@ -268,6 +268,7 @@
         });
 
         $("#svc_clear_btn").click(function(e){
+            clearErrors();
             resetSvcPage();  
         })
 
@@ -300,6 +301,8 @@
         })
     
         $("#svc_act_sel").change(function(){
+            clearErrors();
+
             let act = $("#svc_act_sel").val();
             let cktId = $("#svc_cktId_num").val();
             let idx = $("#svc_cktconIdx_num").val();
@@ -313,13 +316,10 @@
             }
             else {
                 if(cktId == "" || cktId == 0) {
-                    let modal = {
-                        title: "Error",
-                        body: "Please select a CKT from the LIST OF CKTs",
-                        type: 'danger'
-                    }
-                    modalHandler(modal);
+                    
+                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
                     $("#svc_act_sel").val("");
+
                     return;
                 }
                 if(act == "UPDATE_CKT") {
