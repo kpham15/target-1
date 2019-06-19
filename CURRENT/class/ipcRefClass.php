@@ -136,7 +136,11 @@ class REF {
             return $this->rslt . $this->reason;
         }
         $this->updTempMax       ($temp_max);
-        if ($this->rslt == SUCCESS) {
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
+        $this->updVoltRange     ($volt_range);
+        if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
         }
         
