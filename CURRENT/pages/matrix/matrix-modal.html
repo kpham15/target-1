@@ -58,8 +58,6 @@
         <form class="form">
           <div class="form-group">
             <button id="matrix-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
-          </div>
-          <div class="form-group">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </form>
@@ -105,21 +103,27 @@
           body: data.reason,
         }
         if (data.rslt === 'fail') {
-          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+          postResponse($('#matrix-modal .modal-footer'), data.rslt, data.reason);
         } else {
           if (action == "VIEW_PORT_STATUS") {
             if (res.length === 0) {
-              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'red');
+              postResponse($('#matrix-modal .modal-footer'), data.rslt, data.reason);
             } else {
-              $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+              postResponse($('#matrix-modal .modal-footer'), data.rslt, data.reason);
             }
             $("#matrix-form-action").val("");
             return;
           }
-          $("#matrix-modal-result").text(data.rslt + ": " + data.reason).css('color', 'green');
+          postResponse($('#matrix-modal .modal-footer'), data.rslt, data.reason);
           queryMatrixCards();
         }
       });
     });
+
+    // remove error messages when click on modal field
+    $(".matrix-modal-input").on("click", function() {
+      clearErrors();
+    });
+
   });
 </script>
