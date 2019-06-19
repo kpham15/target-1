@@ -103,12 +103,7 @@ function batchExec_query(action){
                 $("#batchExc_file_sel").empty();
                 $("#batchExc_file_sel").html(a.join(""));
                 if (action == "DELETE") {
-                    let modal = {
-                        title:  data.rslt,
-                        body: data.reason,
-                        type : 'success'
-                    }
-                    modalHandler(modal);
+                    inputSuccess($("#batchExc_act_sel"), data.rslt + " - " + data.reason);
                 }
             }
     
@@ -214,7 +209,7 @@ $("#batchExc_act_sel").change(function() {
                 batchExec_query('DELETE');
             }
             else {
-                inputError($(this), "Please select a batch file!")
+                inputError($("#batchExc_act_sel"), "Please select a batch file!")
             }
             
             batchExec_clearForm();
