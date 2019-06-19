@@ -123,8 +123,11 @@
         else {
           postResponse($('#alarm-admin-modal .modal-footer'), data.rslt, data.reason);
         }
-      })
+      });
+    });
+  });
 
-    })
+  $(".alarm-admin-modal-input").on('click', function() {
+    clearErrors();
   });
 </script>
