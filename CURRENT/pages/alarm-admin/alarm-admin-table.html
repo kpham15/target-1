@@ -44,15 +44,16 @@
           let date = moment(data).format('MM-DD-YYYY HH:mm:ss')
 
           return date;
+        },
+        rowCallback: function (row, data) {
+          if (data == 'MAJ') {
+            $(row).find('td:eq(1)').css('background-color', 'red');
+          }
         }
-      },
+      }
     ],
 
-    rowCallback: function (row, data, index) {
-      if (data[1] == 'MAJ') {
-        $(row).find('td:eq(1)').css('background-color', 'red');
-      }
-    }
+    
   });
 
   function queryAlarmAdmin() {
