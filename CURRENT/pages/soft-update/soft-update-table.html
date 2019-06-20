@@ -34,7 +34,7 @@ var softUpdDataTable = $('#swUpd_tbl').DataTable({
             "data":"date",
             "render": function(data) {
                 if(!data) return data;
-                let date = moment(data,"MM-DD-YYYY HH:mm:ss").format('MM-DD-YYYY HH:mm:ss');
+                let date = moment(data,"MM-DD-YYYY HH:mm:ss").format(wcInfo.date_format + ' HH:mm:ss');
                 return date;
             }
         }
