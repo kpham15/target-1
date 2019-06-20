@@ -48,9 +48,16 @@
       }
     ],
 
+    // add color to sev column
     rowCallback: function (row, data) {
+      if (data.sev == 'CRI') {
+        $(row).find('td:eq(1)').css('background-color', '#FF0000');
+      }
       if (data.sev == 'MAJ') {
-        $(row).find('td:eq(1)').css('background-color', 'red');
+        $(row).find('td:eq(1)').css('background-color', '#FA693C');
+      }
+      else if (data.sev == 'MIN'){
+        $(row).find('td:eq(1)').css('background-color', '#FFFF00');
       }
     }
 
