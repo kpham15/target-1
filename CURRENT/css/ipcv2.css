@@ -120,19 +120,19 @@ hr.content-page-divider {
 
 /* ============ IPC Colors ============ */
 .bg-critical {
-  background-color: #dd4b39 !important;
+  background-color: #FF0000 !important;
   color: #fff !important;
 }
 .bg-major {
-  background-color: #ff7700 !important;
+  background-color: #FA693C !important;
   color: #fff !important;
 }
 .bg-minor {
-  background-color: #d4c401 !important;
+  background-color: #FFFF00 !important;
   color: #fff !important;
 }
 .bg-no-alarm {
-  background-color: #00a65a !important;
+  background-color: #00FF00 !important;
   color: #fff !important;
 }
 .response-success {
