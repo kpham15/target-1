@@ -38,6 +38,8 @@
     <?php include __DIR__ . '/../soft-update/soft-update.php'; ?>
     <?php include __DIR__ .'/../setup-maint/setup-maint.php'; ?>
     <?php include __DIR__ . '/../matrix/matrix.php'; ?>
+    <?php include __DIR__ . '/../ft-release/ft-release.php'; ?>
+
 
     <!-- /.content -->
   </div>

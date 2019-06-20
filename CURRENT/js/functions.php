@@ -224,7 +224,32 @@
 
         return result;
 	}
+	
+	// Used in all report pages to convert their data into csv format
+	function downloadCSV(args) {
+		var data, filename, link;
 
+		var csv = convertArrayOfObjectsToCSV({
+			data: provReportDataTable.data().toArray()
+		});
+
+		if (csv == null) {
+			inputError($('#provReport_report_sel'),'No Report To Create');
+			return;
+		}
+
+		filename = args.filename || 'export.csv';
+
+		if (!csv.match(/^data:text\/csv/i)) {
+			csv = 'data:text/csv;charset=utf-8,' + csv;
+		}            
+		data = encodeURI(csv);
+
+		link = document.createElement('a');
+		link.setAttribute('href', data);
+		link.setAttribute('download', filename);
+		link.click();
+	}
 
 	// ================ Encode Password ================= //
 	function encode(data) {
