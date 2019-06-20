@@ -51,16 +51,16 @@
     // add color to sev column
     rowCallback: function (row, data) {
       if (data.sev == 'CRI') {
-        $(row).find('td:eq(1)').css('background-color', '#FF0000');
+        $(row).find('td:eq(1)').addClass('bg-critical');
       }
       if (data.sev == 'MAJ') {
         $(row).find('td:eq(1)').addClass('bg-major');
       }
       else if (data.sev == 'MIN'){
-        $(row).find('td:eq(1)').css('background-color', '#FFFF00');
+        $(row).find('td:eq(1)').addClass('bg-minor');
       }
       else if (data.sev == ''){
-        $(row).find('td:eq(1)').css('background-color', '#00FF00');
+        $(row).find('td:eq(1)').addClass('bg-no-alarm');
       }
     }
 
