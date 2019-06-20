@@ -54,7 +54,14 @@
               $(nTd).html("<a href='"+oData.dbpath+"'>DOWNLOAD</a>");
           }
       },
-			{"data":"date"}
+			{
+        "data":"date",
+        "render": function(data) {
+            if(!data) return data;
+            let date = moment(data,'YYYY-MM-DD HH:mm:ss').format(wcInfo.date_format + ' HH:mm:ss');
+            return date;
+        }
+      }
     ]
   });
 
