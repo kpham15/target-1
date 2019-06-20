@@ -30,7 +30,7 @@
       {
         "data":"date",
         "render": function(data) {
-          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss');
 
           return date;
         }
@@ -79,7 +79,7 @@
       $('#brdcst-form-msgowner').val(data.owner);
       $('#brdcst-form-sa').val(data.sa);
       $('#brdcst-form-msgtitle').val(data.msg);
-      $('#brdcst-form-date').val(moment(data.date).format('MM-DD-YYYY HH:mm:ss'));
+      $('#brdcst-form-date').val(moment(data.date).format(wcInfo.date_format + ' HH:mm:ss'));
       $('#brdcst-form-details').val(data.detail);
 
       // give selected class
