@@ -54,10 +54,13 @@
         $(row).find('td:eq(1)').css('background-color', '#FF0000');
       }
       if (data.sev == 'MAJ') {
-        $(row).find('td:eq(1)').css('background-color', '#FA693C');
+        $(row).find('td:eq(1)').css('background-color', '#FF0000');
       }
       else if (data.sev == 'MIN'){
         $(row).find('td:eq(1)').css('background-color', '#FFFF00');
+      }
+      else if (data.sev == ''){
+        $(row).find('td:eq(1)').css('background-color', '#00FF00');
       }
     }
 
