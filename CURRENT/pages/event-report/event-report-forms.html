@@ -142,8 +142,8 @@ function downloadConfigReports(args) {
 
 $(document).ready(function() {
   
-  var eventReportStartDate = moment(new Date()).format('YYYY-MM-DD');
-  var eventReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+  var eventReportStartDate = moment(new Date()).format(wcInfo.date_format);
+  var eventReportEndDate = moment(new Date()).format(wcInfo.date_format);
 
   // Initialze daterangepicker and assign values to start and from dates
   function initializeConfigReportDateRangePicker () {
@@ -151,8 +151,8 @@ $(document).ready(function() {
       opens: 'bottom',
       startDate: moment(),
     }, function(start, end, label) {
-      eventReportStartDate  = start.format('YYYY-MM-DD');
-      eventReportEndDate    = end.format('YYYY-MM-DD');
+      eventReportStartDate  = start.format(wcInfo.date_format);
+      eventReportEndDate    = end.format(wcInfo.date_format);
     });
   }
 
@@ -193,7 +193,7 @@ $(document).ready(function() {
   // Click Event For 'Clear Button'
   $('#eventReport-form-clear').click(function() {
 
-    let currDate = moment(new Date()).format('YYYY-MM-DD');
+    let currDate = moment(new Date()).format(wcInfo.date_format);
 
     $('.eventReport-form-input').val('').change();
     $('#eventReport-form-report').val("VIEW REPORT");
