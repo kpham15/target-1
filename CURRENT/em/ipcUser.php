@@ -237,7 +237,7 @@
 	}
 
 	if ($act == "UPLOAD_IMG") {
-		$result = uploadImg($userObj, $fileName, $uploadDir);
+		$result = uploadImg($userObj, $uname, $fileName, $uploadDir);
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
@@ -255,12 +255,20 @@
 	
 	
 	// Functions section
-	function uploadImg($userObj, $fileName, $uploadDir) {
+	function uploadImg($userObj, $uname, $fileName, $uploadDir) {
 
 		try {
-			if ($userObj->grpObj->setuser != "Y") {
+			if ($userObj->ugrp != 'ADMIN' || $userObj->grpObj->setuser != "Y") {
 				throw new Exception('Permission Denied');
 			}
+
+			$targetUserObj = new USERS($uname);
+			if ($targetUserObj->rslt != SUCCESS) {
+				$result['rslt'] = $targetUserObj->rslt;
+				$result['reason'] = "UPLOAD_IMG: ".$targetUserObj->reason;
+				return $result;
+			}
+
 			//check the prerequisites
 			if ($_FILES["file"]["error"] > 0 || $fileName === "") {
 				throw new Exception("Error: " . $_FILES["file"]["error"]); 
@@ -276,7 +284,7 @@
 			}
 			
 			//update database
-			$updateCom = updUser($userObj, $userObj->uname,"", "", "", "", "", "", "", "", $fileName);
+			$updateCom = updUser($userObj, $uname,"", "", "", "", "", "", "", $targetUserObj->ugrp, $fileName);
 			if($updateCom['rslt'] == 'fail') {
 				return $updateCom;
 			}

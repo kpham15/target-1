@@ -274,23 +274,23 @@ class BRDCST{
         }
     }
     //delete record based on ipcRef setting
-		//expire_date format should be 'YYYY-MM-DD'
-		public function deleteExpiredLog($expired_date) {
-			global $db;
-			
-			$qry = "DELETE FROM t_brdcst WHERE date < '$expired_date'";
-			$res = $db->query($qry);
-			if (!$res) {
-				$this->rslt = "fail";
-				$this->reason = mysqli_error($db);
-			}
-			else {
-				$rows = [];
-				$this->rslt = "success";
-				$this->reason = "EXPIRED LOGS DELETED";
-			}
-				
-		}
+    //expire_date format should be 'YYYY-MM-DD'
+    public function deleteExpiredLog($expired_date) {
+        global $db;
+        
+        $qry = "DELETE FROM t_brdcst WHERE date < '$expired_date'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = "fail";
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $rows = [];
+            $this->rslt = "success";
+            $this->reason = "EXPIRED LOGS DELETED";
+        }
+            
+    }
 
 }
 

@@ -150,6 +150,7 @@
             <option value="DISABLE">DISABLE</option>
             <option value="DELETE">DELETE</option>
             <option value="RESET_PW">RESET PASSWORD</option>
+            <option value="UPLOAD_IMAGE">UPLOAD_IMAGE</option>
           </select>
         </div>
       </div>
@@ -233,6 +234,18 @@ function setupUserOther(obj) {
   }
 }
 
+function setupUserUploadImg(obj) {
+  if (obj.uname == "") {
+    inputError($('#setup-users-forms-action'),'Select a user from the list');
+    $('#setup-users-forms-action').val('');
+    return;
+  }
+  setup_users_uploadUserImage_clearForm();
+  $('#setup_users_uploadUserImage').modal('show');
+
+}
+
+
 $(document).ready(function() {
 
   // Action Change Event
@@ -270,6 +283,9 @@ $(document).ready(function() {
     }
     else if (obj.action === 'UPDATE') {
       setupUserUpdate(obj);
+    }
+    else if (obj.action === 'UPLOAD_IMAGE') {
+      setupUserUploadImg(obj);
     }
     else {
       setupUserOther(obj);

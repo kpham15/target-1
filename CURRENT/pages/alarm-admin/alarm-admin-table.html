@@ -82,6 +82,9 @@
       // give selected class
       $('#alarm-admin-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+
+      // Clear Errors when click on table row
+      clearErrors();
     })
   });
 </script>
