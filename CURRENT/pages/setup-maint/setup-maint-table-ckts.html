@@ -144,7 +144,7 @@
         "api":    "ipcProv",
         "act":    "queryCkid",
         "user":   user.uname,
-        "ckid":   ckid
+        "ckid":   ckid.toUpperCase()
       },
       dataType:   'json',
     }).done(function(data) {
@@ -168,7 +168,7 @@
         "api":    "ipcProv",
         "act":    "queryCktconByCkid",
         "user":   user.uname,
-        "ckid":   ckid
+        "ckid":   ckid.toUpperCase()
       },
       dataType:   'json',
     }).done(function(data) {
@@ -261,7 +261,7 @@
           "api":    "ipcProv",
           "act":    "queryCktconByCkid",
           "user":   user.uname,
-          "ckid":   data.ckid,
+          "ckid":   data.ckid.toUpperCase(),
         },
         dataType:   'json',
       }).done(function(data) {
