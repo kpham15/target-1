@@ -27,7 +27,7 @@
 <script type="text/javascript">
   // Initialize Datatable
   var alarmAdminDatatable = $('#alarm-admin-table').DataTable({
-		
+    
     "data": [],
     "columns": [
       {"data":"almid"},
@@ -46,7 +46,13 @@
           return date;
         }
       },
-    ]
+    ],
+
+    rowCallback: function (row, data, index) {
+      if (data[1] == 'MAJ') {
+        $(row).find('td:eq(1)').css('background-color', '#FA693C');
+      }
+    }
   });
 
   function queryAlarmAdmin() {
