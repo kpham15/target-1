@@ -11,13 +11,16 @@
           <li class="active">Setup Maintenance Connection</li>
         </ol>
       </section>
-
+      
+      <div class="col-md-4">
       <!-- Setup Maint Forms -->
       <?php include __DIR__ . '/setup-maint-forms.html'; ?>
+      </div>
 
+      <div class="col-md-8">
       <!-- Setup Maint Table Ckts -->
       <?php include __DIR__ . '/setup-maint-table-ckts.html';?>
-
+      </div>
       
     </div>
   </div>
