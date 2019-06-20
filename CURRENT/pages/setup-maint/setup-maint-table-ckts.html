@@ -78,6 +78,7 @@
 <script type="text/javascript">
   // Initialize Datatable for Cons
   var setupMaintTableCons = $('#setup-maint-table-cons').DataTable({
+    "scrollY":    "150px",
     "data":       [],
     "columns":    [
       {"data":"idx"},
@@ -100,12 +101,19 @@
       {"data":"ctyp"},
       {"data":"ffac"},
       {"data":"tfac"},
-      {"data":"date"},
+      {"data":"date",
+      "render":function(data) {
+        if (!data) return data;
+        let date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('MM-DD-YYYY HH:mm:ss')
+        return date;
+      }
+      }
     ]
   })
 
   // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
+    "scrollY":    "150px",
     "data":       [],
     "columns":    [
       {"data":"ckid"},
@@ -114,7 +122,13 @@
       {"data":"prot"},
       {"data":"ordno"},
       {"data":"tktno"},
-      {"data":"date"},
+      {"data":"date",
+      "render":function(data) {
+        if (!data) return data;
+        let date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('MM-DD-YYYY HH:mm:ss')
+        return date;
+      }
+      }
     ]
   });
 
