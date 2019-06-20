@@ -122,9 +122,6 @@
 		// Initialze daterangepicker and assign values to start and from dates
 		function initializeAlarmreportDateRangePicker () {
 			$('input[id="alarmreport-daterange"]').daterangepicker({
-				locale: {
-					format: wcInfo.date_format
-				},
 				opens: 'bottom',
         startDate: moment(),
 			}, function(start, end, label) {
