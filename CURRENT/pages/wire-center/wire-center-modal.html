@@ -311,9 +311,9 @@
                 data: {
                 api:        "ipcWc",
                 act:        'TURN_UP',
-                user:     user.uname,
-                grp:      user.grp,
-                ugrp:     user.ugrp,
+                user:       user.uname,
+                grp:        user.grp,
+                ugrp:       user.ugrp,
                 wcname:     $("#wc_wcname_txt").val(),
                 wcc:        $("#wc_wcc_txt").val(),
                 clli:       $("#wc_clli_txt").val(),
@@ -321,8 +321,8 @@
                 frloc:      $("#wc_frloc_txt").val(),
             },
             dataType: "json"
-        }).done(function (obj) {       
-            if (obj.rslt == "fail") {
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
                 postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
@@ -342,9 +342,9 @@
             data: {     
                 api:        "ipcWc",
                 act:        'HOLD',
-                user:     user.uname,
-                grp:      user.grp,
-                ugrp:     user.ugrp,
+                user:       user.uname,
+                grp:        user.grp,
+                ugrp:       user.ugrp,
                 wcname:     $("#wcModal_wcname_txt").val(),
                 wcc:        $("#wcModal_wcc_txt").val(),
                 clli:       $("#wcModal_clli_txt").val(),
@@ -352,8 +352,8 @@
                 frloc:      $("#wcModal_frloc_txt").val()
             },
             dataType: "json"
-        }).done(function (obj) {       
-            if (obj.rslt == "fail") {
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
                 postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
