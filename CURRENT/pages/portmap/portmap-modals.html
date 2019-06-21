@@ -255,18 +255,18 @@
     $('#portmap-modal-submit').click(function() {
       let action = $('#portmap-modal-action').val();
 
-      if (action === 'MAP') {
-        if (!(portmapFacid > 0)) { 
-          $('.portmap-modal-fac-forms').each(function() {
-            if ($(this).attr('target') === 'fac') {
-              inputError($(this), 'Must select a facility to map to.');
-            } else {
-              inputError($(this),'');
-            }
-          });
-          return;
-        }
-      }
+      // if (action === 'MAP') {
+      //   if (!(portmapFacid > 0)) { 
+      //     $('.portmap-modal-fac-forms').each(function() {
+      //       if ($(this).attr('target') === 'fac') {
+      //         inputError($(this), 'Must select a facility to map to.');
+      //       } else {
+      //         inputError($(this),'');
+      //       }
+      //     });
+      //     return;
+      //   }
+      // }
 
       portmapSubmit(action);
     });
