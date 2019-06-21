@@ -151,6 +151,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="./pages/wire-center/wire-center-options.js"></script>
 
 <script>
 var wc_ipcTime = "";
@@ -231,6 +232,7 @@ function wc_query(action) {
 
 
 $("#wc_act_sel").change(function() {
+    wcModalInsertStatesOption(wcOptionsState);
     if ($("#wc_id_num").val() != "") {
         if ($("#wc_act_sel").val()  ==  "UPDATE") {
             wcModal_tblRows = wc_tblRows;

@@ -156,6 +156,17 @@
     
 <script>
     
+    function wcModalInsertStatesOption(data) {
+        let a = [];
+        a.push('<option value=""></option>');
+
+        for (let i=0; i<data.length; i++) {
+            a.push('<option>' + data.text + '</option>')
+        }
+
+        $('#wcModal_state_sel').empty();
+        $('#wcModal_state_sel').html(a.join(""));
+    }
     var wcModal_tblRows = []
 
     function wcModal_displayForm() {
@@ -263,7 +274,7 @@
                 stat:       $("#wcModal_stat_sel").val().toUpperCase(),
                 addr:       $("#wcModal_addr_txt").val().toUpperCase(),
                 city:       $("#wcModal_city_txt").val().toUpperCase(),
-                state:      $("#wcModal_state_sel").val().toUpperCase(),
+                state:      $("#wcModal_state_sel").val(),
                 zip:        $("#wcModal_zip_txt").val().toUpperCase(),
                 gps:        $("#wcModal_gps_txt").val().toUpperCase(),
                 company:    $("#wcModal_company_txt").val().toUpperCase(),
