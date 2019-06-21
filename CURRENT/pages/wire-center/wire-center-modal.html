@@ -9,7 +9,7 @@
                     <div class="col-sm-12">
                         <div class="col-sm-2 " style="padding:2px">
                             <label for="wcModal_wcname_txt">WCNAME</label>
-                            <input style="text-transform: uppercase" type="text" class="form-control wcModal_form" id="wcModal_wcname_txt" >
+                            <input type="text" class="form-control wcModal_form" id="wcModal_wcname_txt" >
                         </div>
                         <div class="col-sm-1 " style="padding:2px">
                             <label for="wcModal_wcc_txt">WCC</label>
@@ -151,6 +151,8 @@
     
     
 <script>
+
+    $('.wcModal_form').addEventListener('keypress', forceKeyPressUppercase, false);
     
     function wcModalInsertStatesOption(data) {
         let a = [];
