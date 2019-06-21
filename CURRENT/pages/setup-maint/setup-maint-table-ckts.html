@@ -95,7 +95,9 @@
 
   // Initialize Datatable for Tkts
   var setupMaintTableTkts = $('#setup-maint-table-tkts').DataTable({
-    "data":       [],
+    dom: "frtip",
+    "data": [],
+    "pageLength": 3,
     "columns":    [
       {"data":"tktno"},
       {"data":"ckid"},
@@ -108,7 +110,9 @@
 
   // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
-    "data":       [],
+    dom: "frtip",
+    "data": [],
+    "pageLength": 3,
     "columns":    [
       {"data":"ckid"},
       {"data":"cls"},
