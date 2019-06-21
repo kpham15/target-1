@@ -278,19 +278,19 @@
         
             },
             dataType: "json"
-        }).done(function (obj) {       
-            if (obj.rslt == "fail") {
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
                 postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
             }
             else {
-                if (obj.rows.length === 0) {
+                if (data.rows.length === 0) {
                     if (action != "query") {
                         postResponse($('#wcModal .modal-footer'), data.rslt, "No Record Found in Database!");
                         return;
                     }
                 }
                 else {
-                    wcModal_tblRows = obj.rows;
+                    wcModal_tblRows = data.rows;
                     wcModal_displayForm();
                     wc_tblRows = wcModal_tblRows;
                     wc_displayForm();
