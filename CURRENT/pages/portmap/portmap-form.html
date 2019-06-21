@@ -104,6 +104,9 @@
           $('#portmap-form-action').val('');
           return;
         } else {
+          loadFacOptions("queryFtyp", "ftyp");
+          loadFacOptions("queryOrt", "ort");
+          loadFacOptions("querySpcfnc", "spcfnc");
           portmapModalClear();
           $('.portmap-modal-fac-forms').prop('disabled', false);
           portmapPopulateModal(obj);
