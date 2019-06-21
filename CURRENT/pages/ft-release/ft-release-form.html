@@ -5,7 +5,7 @@
     <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
         <div class="form-group">
             <label for="rt_action_sel">ACTION</label>
-            <select id="rt_action_sel" class="form-control ft_release_form">
+            <select id="rt_action_sel" class="form-control">
                 <option></option>
                 <option>ADD</option>
                 <option>DELETE</option>
@@ -21,64 +21,92 @@
     </div>
 </div>
 
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_sot_sel">SOT</label>
-    <select style="text-align-last: center" id="rt_sot_sel" class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_sot_sel">SOT</label>
+    <select style="padding:2px" id="rt_sot_sel" class="form-control ft_release_form">
         <option></option>
-    </select>
-</div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_ot_sel">OT</label>
-    <select style="text-align-last: center" id="rt_ot_sel" class="form-control ft_release_form">
-        <option></option>
-        <option>CD</option>
-        <option>CH</option>
-    </select>
-</div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_rot_sel">ROT</label>
-    <select style="text-align-last: center" id="rt_rot_sel" class="form-control ft_release_form">
-        <option></option>
-        <option>CH</option>
-        <option>NC</option>
+        <option>N</option>
         <option>T</option>
+        <option>C</option>
+        <option>D</option>
+        <option>F</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_cls_sel">CLS</label>
-    <select style="text-align-last: center" id="rt_cls_sel" class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_ot_sel">OT</label>
+    <select style="padding:2px" id="rt_ot_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>NC</option>
+        <option>CH</option>
+        <option>CD</option>
+        <option>T</option>
+        <option>F</option>
+        <option>CPT</option>
+        <option>DTR</option>
+        <option>JAM</option>
+        <option>LST</option>
+        <option>SET</option>
+        <option>WAO</option>
+        <option>ATR</option>
+        <option>FTR</option>
+        <option>CIO</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rot_sel">ROT</label>
+    <select style="padding:2px" id="rt_rot_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>N</option>
+        <option>C</option>
+        <option>D</option>
+        <option>T</option>
+        <option>F</option>
+        <option>CPT</option>
+        <option>DTR</option>
+        <option>JAM</option>
+        <option>LST</option>
+        <option>SET</option>
+        <option>WAO</option>
+        <option>ATR</option>
+        <option>FTR</option>
+        <option>CIO</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_cls_sel">CLS</label>
+    <select style="padding:2px" id="rt_cls_sel" class="form-control ft_release_form">
         <option></option>
         <option>B</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_oc_sel">OC</label>
-    <select style="text-align-last: center" id="rt_oc_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_oc_sel">OC</label>
+    <select style="padding:2px" id="rt_oc_sel"  class="form-control ft_release_form">
         <option></option>
         <option>BTH</option>
         <option>CMB</option>
         <option>UNE</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_adsr_sel">ADSR</label>
-    <select style="text-align-last: center" id="rt_adsr_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_adsr_sel">ADSR</label>
+    <select style="padding:2px" id="rt_adsr_sel"  class="form-control ft_release_form">
         <option></option>
         <option>Y</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_rtAct_sel">ACT</label>
-    <select style="text-align-last: center" id="rt_rtAct_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rtAct_sel">ACT</label>
+    <select style="padding:2px" id="rt_rtAct_sel"  class="form-control ft_release_form">
         <option></option>
         <option>C</option>
         <option>I</option>
         <option>O</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_facType_sel">FAC_TYPE</label>
-    <select style="text-align-last: center" id="rt_facType_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_facType_sel">FAC_TYPE</label>
+    <select style="padding:2px" id="rt_facType_sel"  class="form-control ft_release_form">
         <option></option>
         <option>OE</option>
         <option>CP</option>
@@ -86,41 +114,41 @@
         <option>TRE</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_facId_sel">FAC_ID</label>
-    <select style="text-align-last: center" id="rt_facId_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_facId_sel">FAC_ID</label>
+    <select style="padding:2px" id="rt_facId_sel"  class="form-control ft_release_form">
         <option></option>
         <option>SL*</option>
         <option>ADSL*</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_fddInt_sel">FDD_INT</label>
-    <select style="text-align-last: center" id="rt_fddInt_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_fddInt_sel">FDD_INT</label>
+    <select style="padding:2px" id="rt_fddInt_sel"  class="form-control ft_release_form">
         <option></option>
         <option>0</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_ddInt_sel">DD_INT</label>
-    <select style="text-align-last: center" id="rt_ddInt_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_ddInt_sel">DD_INT</label>
+    <select style="padding:2px" id="rt_ddInt_sel"  class="form-control ft_release_form">
         <option></option>
         <option>+1</option>
         <option>0</option>
         <option>-1</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_rtyp_sel">RTYPE</label>
-    <select style="text-align-last: center" id="rt_rtyp_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rtyp_sel">RTYPE</label>
+    <select style="padding:2px" id="rt_rtyp_sel"  class="form-control ft_release_form">
         <option></option>
         <option>AUTO</option>
         <option>MANUAL</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_rt_sel">RT</label>
-    <select style="text-align-last: center" id="rt_rt_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rt_sel">RT</label>
+    <select style="padding:2px" id="rt_rt_sel"  class="form-control ft_release_form">
         <option></option>
         <option>01:00</option>
         <option>08:00</option>
@@ -128,16 +156,16 @@
         <option>10:00</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_jeopCond_sel">JCOND</label>
-    <select style="text-align-last: center" id="rt_jeopCond_sel"  class="form-control ft_release_form">
+<div style="width:12%; float:left; padding:3px;">
+    <label for="rt_jeopCond_sel">JCOND</label>
+    <select style="padding:2px" id="rt_jeopCond_sel"  class="form-control ft_release_form">
         <option></option>
         <option>Hold For Call</option>
     </select>
 </div>
-<div style="width:6%; float:left">
-    <label style="padding-right: 7px"for="rt_jeop_sel">JEOP</label>
-    <select style="text-align-last: center" id="rt_jeop_sel"  class="form-control ft_release_form">
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_jeop_sel">JEOP</label>
+    <select style="padding:2px" id="rt_jeop_sel"  class="form-control ft_release_form">
         <option></option>
         <option>ID</option>
     </select>
@@ -199,22 +227,12 @@ var ft_releaseDataTable = $("#ft_release_table").DataTable({
         {"data":"jeop"},
     ],
    
-    // "order":[[0,"desc"]]
 });
-
-$("#system-view-page").resize(function(){
-    alert("adfs");
-})
   
 var ft_release_id = ""
 
-function ft_release_start() {
-    ft_release_clearForm();
-    ft_release_query('query');
-}
-
 function ft_release_clearForm() {
-    $(".ft_release_form").val("");
+    $("select").val("");
     ft_release_id = 0;
 }
 
@@ -302,13 +320,14 @@ $(document).on("click","#ft_release_table tbody tr", function(){
     $("#rt_rt_sel").val(data.rt); 
     $("#rt_jeopCond_sel").val(data.jcond); 
     $("#rt_jeop_sel").val(data.jeop);
-
     ft_release_id = data.id;
    
+    //this code is to prevent user pick one row and submit ADD
+    $("#rt_action_sel").val("");
 })
 
 
-$(".ft_release_form").on("mousedown",function(){
+$("select").on("mousedown",function(){
     clearErrors();
 })
 
@@ -324,7 +343,7 @@ $("#rt_clear_btn").click(function() {
 $("#rt_submit_btn").click(function() {
     clearErrors();
     if ($("#rt_action_sel").val() == "ADD") {
-        if($("#rt_ot_sel").val() !== "" || $("#rt_rt_sel").val() !== "") {
+        if($("#rt_ot_sel").val() == "" || $("#rt_rt_sel").val() == "") {
             inputError($('#rt_submit_btn'),'OT AND RT MUST NOT BE EMPTY');
             return;
         }
@@ -345,6 +364,11 @@ $("#rt_submit_btn").click(function() {
     }
 });
 
-
+//this code is to prevent user pick one row and submit ADD
+$("#rt_action_sel").change(function(){
+    if($("#rt_action_sel").val() == "ADD") {
+        $(".ft_release_form").val("");
+    }
+})
 
 </script>

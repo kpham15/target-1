@@ -150,6 +150,8 @@
 <script type="text/javascript">
   // Initialize Datatable
   var portmapModalFacDatatable = $('#portmap-modal-fac-table').DataTable({
+    "dom":  "frtip",
+    "pageLength": 4,
     "data": [],
     "columns": [
       {"data":"id"},
@@ -158,15 +160,7 @@
       {"data":"ort"},
       {"data":"spcfnc"}
     ],
-    "columnDefs": [
-      {
-        "targets": [0],
-        "visible": false,
-        "searchable": false
-      }
-    ],
     "order": [[ 0, 'asc' ]],
-    "scrollY": "200px"
   });
 
   function portmapModalClear() {

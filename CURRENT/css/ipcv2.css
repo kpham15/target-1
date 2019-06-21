@@ -214,11 +214,4 @@ table {
   table-layout: fixed;
   width: 100% !important;
 }
-
-table td,
-table th{
-  width: auto !important;
-  white-space: normal;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+/* =============END DataTable CSS=============== */
