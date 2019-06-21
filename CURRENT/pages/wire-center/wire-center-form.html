@@ -219,7 +219,9 @@ function wc_query(action) {
 
 
 $("#wc_act_sel").change(function() {
+    
     wcModalInsertStatesOption(wcOptionsState);
+
     if ($("#wc_id_num").val() != "") {
         if ($("#wc_act_sel").val()  ==  "UPDATE") {
             wcModal_tblRows = wc_tblRows;
