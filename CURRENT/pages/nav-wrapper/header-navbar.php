@@ -11,7 +11,7 @@
   <!-- Header Navbar -->
   <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
-    <a href="#" id="toggleMenu" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <i class="fas fa-bars"></i>
       <span class="sr-only">Toggle navigation</span>
     </a>
@@ -220,18 +220,6 @@
     $('#header-timezone').text(wcInfo.tzone);
   }
 
-  // Click Event for menu button 
-  $("#toggleMenu").click(function(){
-    console.log("let's do it")
-    let displayedTables = $(".content-page.active-page").find(".dataTables_wrapper:visible").toArray()
-    console.log(displayedTables)
-    displayedTables.forEach(selector => {
-      let id = $(selector).attr("id").replace("_wrapper","");
-      console.log(id)
-      let dataTable = $("#"+id).DataTable();
-      dataTable.columns.adjust().draw();
-    });
-  })
 
   $(document).ready(function() {
 
