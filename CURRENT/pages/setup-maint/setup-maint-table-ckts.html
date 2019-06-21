@@ -1,5 +1,5 @@
 <!-- CKT Table -->
-<div class="col-md-7" id="setup-maint-table-ckts-div">
+<div class="col-md-12" id="setup-maint-table-ckts-div">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF CKID(S)</h3>
@@ -23,7 +23,7 @@
 </div>
 
 <!-- TKT Table -->
-<div class="col-md-7" id="setup-maint-table-tkts-div" style="display:none;">
+<div class="col-md-12" id="setup-maint-table-tkts-div" style="display:none;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF TKTNO(S)</h3>
@@ -46,7 +46,7 @@
 </div>
 
 <!-- List of connections -->
-<div class="col-md-7" id="setup-maint-table-cons-div" style="display:none;">
+<div class="col-md-12" id="setup-maint-table-cons-div" style="display:none;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF CONNECTION(S)</h3>
@@ -78,6 +78,7 @@
 <script type="text/javascript">
   // Initialize Datatable for Cons
   var setupMaintTableCons = $('#setup-maint-table-cons').DataTable({
+    "scrollY":    "150px",
     "data":       [],
     "columns":    [
       {"data":"idx"},
@@ -100,12 +101,19 @@
       {"data":"ctyp"},
       {"data":"ffac"},
       {"data":"tfac"},
-      {"data":"date"},
+      {"data":"date",
+      "render":function(data) {
+        if (!data) return data;
+        let date = moment(data, 'YYYY-MM-DD HH:mm:ss').format(wcInfo.date_format + ' HH:mm:ss')
+        return date;
+      }
+      }
     ]
   })
 
   // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
+    "scrollY":    "150px",
     "data":       [],
     "columns":    [
       {"data":"ckid"},
@@ -114,7 +122,13 @@
       {"data":"prot"},
       {"data":"ordno"},
       {"data":"tktno"},
-      {"data":"date"},
+      {"data":"date",
+      "render":function(data) {
+        if (!data) return data;
+        let date = moment(data, 'YYYY-MM-DD HH:mm:ss').format(wcInfo.date_format + ' HH:mm:ss')
+        return date;
+      }
+      }
     ]
   });
 
@@ -130,7 +144,7 @@
         "api":    "ipcProv",
         "act":    "queryCkid",
         "user":   user.uname,
-        "ckid":   ckid
+        "ckid":   ckid.toUpperCase()
       },
       dataType:   'json',
     }).done(function(data) {
@@ -154,7 +168,7 @@
         "api":    "ipcProv",
         "act":    "queryCktconByCkid",
         "user":   user.uname,
-        "ckid":   ckid
+        "ckid":   ckid.toUpperCase()
       },
       dataType:   'json',
     }).done(function(data) {
@@ -247,7 +261,7 @@
           "api":    "ipcProv",
           "act":    "queryCktconByCkid",
           "user":   user.uname,
-          "ckid":   data.ckid,
+          "ckid":   data.ckid.toUpperCase(),
         },
         dataType:   'json',
       }).done(function(data) {

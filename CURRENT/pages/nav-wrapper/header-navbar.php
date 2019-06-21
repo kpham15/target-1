@@ -86,7 +86,7 @@
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span id="top-nav-user-name" class="hidden-xs">Alexander Pierce</span>
           </a>
-          <ul class="dropdown-menu" style="width:max-content;">
+          <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header" style="height: max-content;">
               <img id = "user_header_pic" src="../PROFILE/defaultUser.jpeg" alt="User Image">
@@ -102,9 +102,7 @@
               <div class="pull-left">
                 <a id="changePw_btn" href="#" class="btn btn-default btn-flat">Change PW</a>
               </div>
-              <div class="pull-left">
-                <a id="uploadPic_btn" href="#" class="btn btn-default btn-flat">Upload User Image</a>
-              </div>
+
               <div class="pull-right">
                 <a id="logout-btn" href="#" class="btn btn-default btn-flat">Sign out</a>
               </div>
@@ -118,7 +116,6 @@
   </nav>
 </header>
 
-<?php include __DIR__ . "/modals/header-upload-userImg.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-database.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-alarm.html"; ?>
 <?php include __DIR__ . "/modals/header-modal-bulletinBoard.html"; ?>
@@ -187,11 +184,6 @@
 
   });
 
-  $("#uploadPic_btn").click(function(){
-    header_uploadUserImage_clearForm()
-    $("#header_uploadUserImage").modal();
-  });
-
   function updateHeaderInfo() {
     let alarmText = '';
     let alarmColor = '';
@@ -224,7 +216,7 @@
     
     let time = moment(wcInfo.time);
 
-    $('#header-time').text(moment().format('MM-DD-YYYY HH:mm'));
+    $('#header-time').text(moment().format(wcInfo.date_format + ' HH:mm'));
     $('#header-timezone').text(wcInfo.tzone);
   }
 
