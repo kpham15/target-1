@@ -69,7 +69,7 @@
       {
         "data":"date",
         "render": function(data) {
-          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss');
           return date;
         }
       },
@@ -92,7 +92,7 @@
       {
         "data":"time",
         "render": function(data) {
-          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss');
           return date;
         }
       },
@@ -112,7 +112,7 @@
       {
         "data":"time",
         "render": function(data) {
-          let date = moment(data).format('MM-DD-YYYY HH:mm:ss');
+          let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss');
           return date;
         }
       },
