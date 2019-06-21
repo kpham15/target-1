@@ -27,7 +27,7 @@
 .content-header {
   margin-bottom: 10px;
 }
-input {
+input:not(.lowercase) {
   text-transform: uppercase;
 }
 /* =========== END All Page Stylings ============= */
