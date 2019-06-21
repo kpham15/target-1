@@ -63,8 +63,9 @@
 
 <script>
   var configReportPortmapDatatable = $("#configReport-portmap-table").DataTable({
-    "scrollY": "200px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 4,
     "columns": [
       {
         "data":"date",

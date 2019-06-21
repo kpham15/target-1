@@ -23,7 +23,9 @@
 <script type="text/javascript">
 // Initialize Datatable
   var nodeOperationDatatable = $('#node-operation-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"node"},
       {"data":"serial_no"},

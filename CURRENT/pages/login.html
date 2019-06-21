@@ -218,7 +218,8 @@
             login.confirmPassword.val("");
 
             if(user.com !== "") {
-              let url = "../PROFILE/"+user.com;
+              let randomNum = Math.floor(Math.random() * 100000);
+              let url = "../PROFILE/"+user.com+"?"+randomNum;
               let img = new Image();
               img.src = url;
               img.onload = function(){

@@ -73,9 +73,9 @@
 <script type="text/javascript">
     // Initialize Datatable
     var svcCktDatatable = $('#svc_ckt_table').DataTable({
-        "scrollY":        "100px",
-        // "scrollCollapse": true,
+        dom: "frtip",
         "data": [],
+        "pageLength": 3,
         "columns": [
             {"data":"ckid"},
             {"data":"cls"},
@@ -96,9 +96,9 @@
     });
   
     var svcOrdDatatable = $("#svc_ord_table").DataTable({
-        "scrollY":        "100px",
-        // "scrollCollapse": true,
-        "data" : [],
+        dom: "frtip",
+        "data": [],
+        "pageLength": 3,
         "columns" : [
             {"data":"ordno"},
             {"data":"ckid"},
@@ -118,9 +118,9 @@
     })
     
     var svcCktconDatatable = $("#svc_cktcon_table").DataTable({
-        "scrollY":        "100px",
-        // "scrollCollapse": true,
-        "data" : [],
+        dom: "frtip",
+        "data": [],
+        "pageLength": 3,
         "columns" : [
             {"data":"idx"},
             {"data":"ctyp"},

@@ -44,7 +44,9 @@
   // Initialize Datatable
   var databaseBackupDatatable = $('#database-backup-table').DataTable({
 		
+    dom: "frtip",
     "data": [],
+    "pageLength": 5,
     "columns": [
       {"data":"user"},
 			{"data":"dbfile"},

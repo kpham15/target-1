@@ -292,6 +292,11 @@
 			if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
 				throw new Exception("UNABLE TO MOVE IMAGE FILE"); 
 			}
+
+			exec("chmod -R 755 ".$uploadDir.'/'.$fileName, $output, $return);
+			if($return !== 0) {
+			    throw new Exception('UNABLE TO CHANGE PERMISSION OF IMG FILE');
+			}
 	
 			$result["rslt"] = 'success';
 			$result["reason"] = "IMAGE_UPLOADED";

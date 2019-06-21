@@ -23,7 +23,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var setupUsersDatatable = $('#setup-users-table').DataTable({
-    "data":     [],
+    dom: "frtip",
+    "data": [],
+    "pageLength": 3,
     "columns":  [
       {"data":"uname"},
       {"data":"stat"},

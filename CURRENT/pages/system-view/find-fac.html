@@ -37,8 +37,9 @@
 
 <script>
 var sysview_findFacDataTable = $('#sysview_findFac_table').DataTable({
-    "scrollY": "100px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
         {"data":"fac"},
         {"data":"ftyp"},
