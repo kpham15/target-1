@@ -212,7 +212,7 @@
           color = 'bg-green';
           break;
         case "MTCD":
-          color = 'bg-minor';
+          color = 'bg-major';
           break;
         case "MAINT":
           color = 'bg-major';

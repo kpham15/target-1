@@ -56,7 +56,14 @@
               $(nTd).html("<a href='"+oData.dbpath+"'>DOWNLOAD</a>");
           }
       },
-			{"data":"date"}
+			{
+        "data":"date",
+        "render": function(data) {
+            if(!data) return data;
+            let date = moment(data,'YYYY-MM-DD HH:mm:ss').format(wcInfo.date_format + ' HH:mm:ss');
+            return date;
+        }
+      }
     ]
   });
 
@@ -68,11 +75,13 @@
       $('#database-backup-forms-user').val(data.user);
       $('#database-backup-forms-filename').val(data.dbfile);
       $('#database-backup-forms-type').val(data.bktyp);
-      $('#database-backup-forms-date').val(data.date);
+      $('#database-backup-forms-date').val(moment(data.date).format(wcInfo.date_format + ' HH:mm:ss'));
 
       // give selected class
       $('#database-backup-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
-    })
-  })
+
+      clearErrors();
+    });
+  });
 </script>

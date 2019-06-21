@@ -2,19 +2,21 @@
     <div class="col-sm-3">
         <div class="col-sm-12 " style="padding:2px;">
             <label for="batchExc_file_sel">BATCH FILE</label>
-            <select id="batchExc_file_sel" class="form-control" style="padding: 2px">  
+            <select id="batchExc_file_sel" class="form-control batchExc_field" style="padding: 2px">  
             </select>
         </div>
 
         <div class="col-sm-6 " style="padding:2px;">
-            <label for="batchExc_act_sel">ACTION</label>
-            <select id="batchExc_act_sel" class="form-control" style="padding: 2px">
-                <option></option>
-                <option>UPLOAD</option>
-                <option>DELETE</option>
-            </select>
-            <br>
-            <input type="hidden" id="batchExc_id_num" style="width:50px;">
+            <div class="form-group">
+                <label for="batchExc_act_sel">ACTION</label>
+                <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
+                    <option></option>
+                    <option>UPLOAD</option>
+                    <option>DELETE</option>
+                </select>
+                <input type="hidden" id="batchExc_id_num" style="width:50px;">
+
+            </div>
         </div>
 
     </div>
@@ -23,11 +25,12 @@
             <label>SCRIPTS:</label>
             <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid"></div>
         </div>
-
-        <button style="float:left; margin:25px" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
-   
-        <button style="float:right; margin:25px" class="btn btn-primary" id="batchExc_download_btn">DOWNLOAD RESULT</button>    
-   
+        <div class="form-group" style="float: left">
+            <button style="margin:25px" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
+        </div>
+        <div class="form-group" style="float:right">
+            <button style="margin:25px" class="btn btn-primary" id="batchExc_download_btn">DOWNLOAD RESULT</button>    
+        </div>
     </div>
 </div>
 
@@ -103,12 +106,7 @@ function batchExec_query(action){
                 $("#batchExc_file_sel").empty();
                 $("#batchExc_file_sel").html(a.join(""));
                 if (action == "DELETE") {
-                    let modal = {
-                        title:  data.rslt,
-                        body: data.reason,
-                        type : 'success'
-                    }
-                    modalHandler(modal);
+                    inputSuccess($("#batchExc_act_sel"), data.rslt + " - " + data.reason);
                 }
             }
     
@@ -118,13 +116,8 @@ function batchExec_query(action){
 }
 
 function batchExec_executeCommand() {
-    if($("#batchExc_id_num").val() == "") {
-        let modal = {
-            title: "Error",
-            body:  "Please choose a batch file to execute!",
-            type : 'danger'
-        }
-        modalHandler(modal);
+    if ($("#batchExc_id_num").val() == "") {
+        inputError($("#batchExc_execute_btn"), "Please choose a batch file to execute!");
         return;
     }
 
@@ -203,8 +196,9 @@ function batchExec_recurExecute(i) {
         
     
 $("#batchExc_execute_btn").click(function(){
+    clearErrors();
     batchExec_executeCommand();
-})
+});
 
 $("#batchExc_act_sel").change(function() {
     if ($("#batchExc_act_sel").val() !="") {
@@ -218,17 +212,10 @@ $("#batchExc_act_sel").change(function() {
                 batchExec_query('DELETE');
             }
             else {
-                let modal = {
-                    title:  "Error",
-                    body: "Please select a batch file!",
-                    type : 'danger'
-                }
-                modalHandler(modal);
+                inputError($("#batchExc_act_sel"), "Please select a batch file!");
             }
-            
-            batchExec_clearForm();
+            $("#batchExc_act_sel").val("");
         }
-        
     }
 
 });
@@ -279,5 +266,9 @@ $(document).ready(function(){
     $(".menu-item[page_id='batch-exec-page']").click(function() {
         batchExec_start();
     });
-})
+});
+
+$(".batchExc_field").on('click', function() {
+    clearErrors();
+});
 </script>

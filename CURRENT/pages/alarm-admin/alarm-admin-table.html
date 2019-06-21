@@ -27,7 +27,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var alarmAdminDatatable = $('#alarm-admin-table').DataTable({
-		
+    
+    "dom":  "frtip",
+    "pageLength": 5,
     "data": [],
     "columns": [
       {"data":"almid"},
@@ -41,12 +43,30 @@
       {
         "data":"datetime",
         "render": function(data) {
-          let date = moment(data).format('MM-DD-YYYY HH:mm:ss')
+          let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss')
 
           return date;
-        }
-      },
-    ]
+        },
+      }
+    ],
+
+    // add color to sev column
+    rowCallback: function (row, data) {
+      if (data.sev == 'CRI') {
+        $(row).find('td:eq(1)').addClass('bg-critical');
+      }
+      if (data.sev == 'MAJ') {
+        $(row).find('td:eq(1)').addClass('bg-major');
+      }
+      else if (data.sev == 'MIN'){
+        $(row).find('td:eq(1)').addClass('bg-minor');
+      }
+      else if (data.sev == ''){
+        $(row).find('td:eq(1)').addClass('bg-no-alarm');
+      }
+    }
+
+    
   });
 
   function queryAlarmAdmin() {
@@ -82,6 +102,9 @@
       // give selected class
       $('#alarm-admin-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+
+      // Clear Errors when click on table row
+      clearErrors();
     })
   });
 </script>

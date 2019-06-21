@@ -216,7 +216,7 @@
     
     let time = moment(wcInfo.time);
 
-    $('#header-time').text(moment().format('MM-DD-YYYY HH:mm'));
+    $('#header-time').text(moment().format(wcInfo.date_format + ' HH:mm'));
     $('#header-timezone').text(wcInfo.tzone);
   }
 

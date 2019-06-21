@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <!-- SA -->
+            <!-- SA select-->
             <div class="col-md-4">
               <div class="form-group">
                 <label>SA</label>
@@ -49,6 +49,15 @@
                 </select>
               </div>
             </div>
+
+            <!-- SA input-->
+            <!-- <div class="col-md-4" style="display: none">
+              <div class="form-group">
+                <label>SA</label>
+                <input id="brdcst-modal-sa" class="form-control brdcst-modal-field" disabled="">
+              </div>
+            </div> -->
+
           </div>
 
           <div class="row">
@@ -127,6 +136,10 @@
           queryBrdcst();
         }
       });
+    });
+
+    $(".brdcst-modal-field").on('click', function() {
+      clearErrors();
     });
   });
 </script>

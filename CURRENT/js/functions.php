@@ -25,6 +25,10 @@
 		});
 	}
 
+	window.addEventListener('beforeunload', function(e) {
+		logout('close');
+	});
+
 	function logout(action) {
 		clearInterval(systemInfoInterval);
 		$.post(ipcDispatch,
@@ -46,6 +50,8 @@
 				if (action === 'manual logout') {
 					$('#logout-modal .modal-body').text('You have logged out.');
 					$('#logout-modal').modal('show');
+				} else if (action === 'close') {
+					return;
 				} else {
 					$('#logout-modal .modal-body').text('Your session has timed out, please log in again!');
 					$('#logout-modal').modal('show');

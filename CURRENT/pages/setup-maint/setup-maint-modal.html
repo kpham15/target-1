@@ -14,7 +14,7 @@
           <!-- Top Row -->
           <div class="row" id="setup-maint-modal-row1-div">
             <!-- CKID -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>CKID:</label>
                 <label>TN:</label>
@@ -24,85 +24,62 @@
               </div>
             </div>
             <!-- CLS -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>CLS:</label>
-                <select id="setup-maint-modal-cls" class="form-control setup-maint-modal-input" disabled="">
-                  <option value=""></option>
-                  <option value="RES">RES</option>
-                  <option value="BUS">BUS</option>
-                </select>
+                <input id="setup-maint-modal-cls" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
             <!-- ADSR -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>ADSR:</label>
-                <select id="setup-maint-modal-adsr" class="form-control setup-maint-modal-input" disabled="">
-                  <option value=""></option>
-                  <option value="Y">Y</option>
-                  <option value="N">N</option>
-                </select>
+                <input id="setup-maint-modal-adsr" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
             <!-- PROT -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>PROT:</label>
-                <select id="setup-maint-modal-prot" class="form-control setup-maint-modal-input" disabled="">
-                  <option value=""></option>
-                  <option value="SSM">SSM</option>
-                  <option value="SSB">SSB</option>
-                </select>
+                <input id="setup-maint-modal-prot" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
           </div>
           <!-- Row 2 -->
           <div class="row" id="setup-maint-modal-row2-div">
             <!-- TKTNO -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>TKTNO</label>
-                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" />
+                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" style="text-transform: uppercase;" />
               </div>
             </div>
             <!-- MLO -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>MLO:</label>
-                <select id="setup-maint-modal-mlo" class="form-control setup-maint-modal-input" disabled="">
-                  <option value=""></option>
-                  <option value="N">N</option>
-                  <option value="Y">Y</option>
-                </select>
+                <input id="setup-maint-modal-mlo" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
           </div>
           <!-- Row 3 -->
           <div class="row" id="setup-maint-modal-row3-div">
             <!-- CONTYP -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>CONTYP:</label>
-                <select id="setup-maint-modal-contyp" class="form-control setup-maint-modal-input" disabled="">
-                  <option value=""></option>
-                  <option value="GEN">GEN</option>
-                  <option value="LPBK">LPBK</option>
-                  <option value="MLPT">MLPT</option>
-                  <option value="MTCD">MTCD</option>
-                  <option value="MAINT">MAINT</option>
-                </select>
+                <input id="setup-maint-modal-contyp" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
             <!-- FAC(X) -->
-            <div class="col-md-5">
+            <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(X):</label>
                 <input id="setup-maint-modal-ffac" type="text" class="form-control setup-maint-modal-input" disabled="">
               </div>
             </div>
             <!-- FAC(Y) -->
-            <div class="col-md-5">
+            <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(Y):</label>
                 <input id="setup-maint-modal-tfac" type="text" class="form-control setup-maint-modal-input" disabled="">
@@ -113,35 +90,30 @@
           <div id="setup-maint-modal-change-div" class="row" style="display:none">
             <div id="setup-maint-modal-change-out" class="col-md-12">
               <div class="form-group">
-                <label class="col-md-1">OUT:</label>
+                <label class="col-md-1" style="padding: 0px 2px 0px 20px;">OUT:</label>
                 <!-- Border for Out -->
                 <div class="col-md-11" style="border:lightgray solid 1px;">
                   <!-- CONTYP -->
-                  <div class="col-md-2">
+                  <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
                     <div class="form-group">
                       <label>CONTYP</label>
-                      <select id="setup-maint-modal-change-out-ctyp" class="form-control setup-maint-modal-input" disabled="">
-                        <option value=""></option>
-                        <option value="GEN">GEN</option>
-                        <option value="LPBK">LPBK</option>
-                        <option value="MLPT">MLPT</option>
-                      </select>
+                      <input id="setup-maint-modal-change-out-ctyp" class="form-control setup-maint-modal-input" disabled="" />
                     </div>
                   </div>
                   <!-- FAC(X) -->
                   <div class="col-md-5">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(X):</label>
                         <input id="setup-maint-modal-change-out-ffac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(X):</label>
                       </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-out-fport" type="text" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
@@ -149,18 +121,18 @@
                   </div>
                   <!-- FAC(Y) -->
                   <div class="col-md-5">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(Y):</label>
                         <input id="setup-maint-modal-change-out-tfac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(Y):</label>
                       </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-out-tport" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
@@ -171,11 +143,11 @@
             </div>
             <div id="setup-maint-modal-change-in" class="col-md-12">
               <div class="form-group">
-                <label class="col-md-1">IN:</label>
+                <label class="col-md-1" style="padding: 0px 2px 0px 20px;">IN:</label>
                 <!-- Border for IN -->
                 <div class="col-md-11" style="border:lightgray solid 1px;">
                   <!-- CONTYP -->
-                  <div class="col-md-2">
+                  <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
                     <div class="form-group">
                       <label>CONTYP</label>
                       <select id="setup-maint-modal-change-in-ctyp" class="form-control setup-maint-modal-input">
@@ -188,19 +160,19 @@
                   </div>
                   <!-- FAC(X) -->
                   <div class="col-md-5">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(X):</label>
                         <a id="setup-maint-modal-change-in-search-ffac" class="pull-right">Search</a>
                         <input id="setup-maint-modal-change-in-ffac" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(X):</label>
                       </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-in-fport" type="text" class="form-control setup-maint-modal-input" />
                       </div>
@@ -208,19 +180,19 @@
                   </div>
                   <!-- FAC(Y) -->
                   <div class="col-md-5">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(Y):</label>
                         <a id="setup-maint-modal-change-in-search-tfac" class="pull-right">Search</a>
                         <input id="setup-maint-modal-change-in-tfac" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(Y):</label>
                       </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-in-tport" type="text" class="form-control setup-maint-modal-input" />
                       </div>
@@ -245,6 +217,7 @@
           </div>
           <!-- MTC Test Div -->
           <div id="setup-maint-modal-mtctest-div" style="display:none;">
+            <div class="row">
             <!-- Radio 1 -->
             <div class="col-md-1">
               <div class="form-group">
@@ -252,27 +225,29 @@
               </div>
             </div>
             <!-- CTYP -->
-            <div class="col-md-3">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>CTYP:</label>
                 <input id="setup-maint-modal-test-ctyp1" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
             <!-- FAC(X) -->
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(X):</label>
                 <input id="setup-maint-modal-test-ffac" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
             <!-- TEST PORT X -->
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>TEST PORT</label>
                 <select id="setup-maint-modal-test-port1" class="form-control setup-maint-modal-input">
                 </select>
               </div>
             </div>
+          </div>
+          <div class="row">
             <!-- Radio 2 -->
             <div class="col-md-1">
                 <div class="form-group">
@@ -280,27 +255,28 @@
                 </div>
               </div>
               <!-- CTYP -->
-              <div class="col-md-3">
+              <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
                 <div class="form-group">
                   <label>CTYP:</label>
                   <input id="setup-maint-modal-test-ctyp2" type="text" class="form-control setup-maint-modal-input" disabled="" />
                 </div>
               </div>
               <!-- FAC(Y) -->
-              <div class="col-md-4">
+              <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                 <div class="form-group">
                   <label>FAC(Y):</label>
                   <input id="setup-maint-modal-test-tfac" type="text" class="form-control setup-maint-modal-input" disabled="" />
                 </div>
               </div>
               <!-- TEST PORT Y -->
-              <div class="col-md-4">
+              <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
                 <div class="form-group">
                   <label>TEST PORT</label>
                   <select id="setup-maint-modal-test-port2" class="form-control setup-maint-modal-input">
                   </select>
                 </div>
               </div>
+            </div>
           </div>
           <!-- MTC Connect Row 3 -->
           <div class="row" id="setup-maint-modal-mtccon1-div" style="display:none;">
@@ -310,19 +286,19 @@
                 <input id="setup-maint-modal-pick-conn1" type="radio" class="pull-right" name="select-test-fac" style="margin-top:35px;">
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>CTYP:</label>
                 <input id="setup-maint-modal-conn1-ctyp" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(X)</label>
                 <input id="setup-maint-modal-conn1-ffac" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(Y)</label>
                 <select id="setup-maint-modal-conn1-tfac" class="form-control setup-maint-modal-input">
@@ -338,19 +314,19 @@
                 <input id="setup-maint-modal-pick-conn2" type="radio" class="pull-right" name="select-test-fac" style="margin-top:35px;">
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>CTYP:</label>
                 <input id="setup-maint-modal-conn2-ctyp" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(Y)</label>
                 <input id="setup-maint-modal-conn2-tfac" type="text" class="form-control setup-maint-modal-input" disabled="" />
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>FAC(X)</label>
                 <select id="setup-maint-modal-conn2-ffac" class="form-control setup-maint-modal-input">
@@ -360,7 +336,7 @@
           </div>
           <!-- Action Row -->
           <div class="row" id="setup-maint-modal-row5-div">
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>ACTION:</label>
                 <input id="setup-maint-modal-action" type="text" class="form-control setup-maint-modal-input" disabled=""/>
@@ -444,13 +420,13 @@
         "api":    "ipcMaintConnect",
         "act":      obj.action,
         "user":     user.uname,
-        "ckid":     obj.ckid,
-        "cls":      obj.cls,
-        "adsr":     obj.adsr,
-        "prot":     obj.prot,
-        "tktno":    obj.tktno,
-        "mlo":      obj.mlo,
-        "ctyp":     obj.ctyp,
+        "ckid":     obj.ckid.toUpperCase(),
+        "cls":      obj.cls.toUpperCase(),
+        "adsr":     obj.adsr.toUpperCase(),
+        "prot":     obj.prot.toUpperCase(),
+        "tktno":    obj.tktno.toUpperCase(),
+        "mlo":      obj.mlo.toUpperCase(),
+        "ctyp":     obj.ctyp.toUpperCase(),
         "ffac":     maintPickedFfac,
         "tfac":     maintPickedTfac,
       },
@@ -491,15 +467,15 @@
         "api":    "ipcMaintDiscon",
         "act":    "MTC_DISCON",
         "user":   user.uname,
-        "ckid":   obj.ckid,
-        "cls":    obj.cls,
-        "adsr":   obj.adsr,
-        "prot":   obj.prot,
-        "tktno":  obj.tktno,
-        "mlo":    obj.mlo,
-        "ctyp":   obj.ctyp,
-        "ffac":   obj.ffac,
-        "tfac":   obj.tfac,
+        "ckid":   obj.ckid.toUpperCase(),
+        "cls":    obj.cls.toUpperCase(),
+        "adsr":   obj.adsr.toUpperCase(),
+        "prot":   obj.prot.toUpperCase(),
+        "tktno":  obj.tktno.toUpperCase(),
+        "mlo":    obj.mlo.toUpperCase(),
+        "ctyp":   obj.ctyp.toUpperCase(),
+        "ffac":   obj.ffac.toUpperCase(),
+        "tfac":   obj.tfac.toUpperCase(),
       },
       dataType:   'json',
     }).done(function(data) {
@@ -537,15 +513,15 @@
         "api":    "ipcMaintRestoreMtcd",
         "act":    "RESTORE_MTCD",
         "user":   user.uname,
-        "ckid":   obj.ckid,
-        "cls":    obj.cls,
-        "adsr":   obj.adsr,
-        "prot":   obj.prot,
-        "tktno":  obj.tktno,
-        "mlo":    obj.mlo,
-        "ctyp":   obj.ctyp,
-        "ffac":   obj.ffac,
-        "tfac":   obj.tfac,
+        "ckid":   obj.ckid.toUpperCase(),
+        "cls":    obj.cls.toUpperCase(),
+        "adsr":   obj.adsr.toUpperCase(),
+        "prot":   obj.prot.toUpperCase(),
+        "tktno":  obj.tktno.toUpperCase(),
+        "mlo":    obj.mlo.toUpperCase(),
+        "ctyp":   obj.ctyp.toUpperCase(),
+        "ffac":   obj.ffac.toUpperCase(),
+        "tfac":   obj.tfac.toUpperCase(),
       },
       dataType:   'json',
     }).done(function(data) {
@@ -583,15 +559,15 @@
         "api":    "ipcMaintConnect",
         "act":    "MTC_RESTORE",
         "user":   user.uname,
-        "ckid":   obj.ckid,
-        "cls":    obj.cls,
-        "adsr":   obj.adsr,
-        "prot":   obj.prot,
-        "tktno":  obj.tktno,
-        "mlo":    obj.mlo,
-        "ctyp":   obj.ctyp,
-        "ffac":   obj.ffac,
-        "tfac":   obj.tfac,
+        "ckid":   obj.ckid.toUpperCase(),
+        "cls":    obj.cls.toUpperCase(),
+        "adsr":   obj.adsr.toUpperCase(),
+        "prot":   obj.prot.toUpperCase(),
+        "tktno":  obj.tktno.toUpperCase(),
+        "mlo":    obj.mlo.toUpperCase(),
+        "ctyp":   obj.ctyp.toUpperCase(),
+        "ffac":   obj.ffac.toUpperCase(),
+        "tfac":   obj.tfac.toUpperCase(),
       },
       dataType:   'json',
     }).done(function(data) {
@@ -645,13 +621,13 @@
         "api":    "ipcMaintConnect",
         "act":    obj.action,
         "user":   user.uname,
-        "ckid":   obj.ckid,
-        "cls":    obj.cls,
-        "adsr":   obj.adsr,
-        "prot":   obj.prot,
-        "tktno":  obj.tktno,
-        "mlo":    obj.mlo,
-        "ctyp":   obj.ctyp,
+        "ckid":   obj.ckid.toUpperCase(),
+        "cls":    obj.cls.toUpperCase(),
+        "adsr":   obj.adsr.toUpperCase(),
+        "prot":   obj.prot.toUpperCase(),
+        "tktno":  obj.tktno.toUpperCase(),
+        "mlo":    obj.mlo.toUpperCase(),
+        "ctyp":   obj.ctyp.toUpperCase(),
         "ffac":   maintTestFac,
         "tstfac": maintTestPort,
       },
@@ -704,21 +680,21 @@
         "api":      "ipcProv",
         "act":      "CHANGE",
         "user":     user.uname,
-        "ckid":     obj.ckid,
-        "cls":      obj.cls,
-        "adsr":     obj.adsr,
-        "prot":     obj.prot,
-        "tktno":    obj.tktno,
-        "mlo":      obj.mlo,
-        "ctyp":     obj.ctyp,
-        "ffac":     obj.oldFfac,
-        "tfac":     obj.oldTfac,
-        "newffac":  obj.newFfac,
-        "newtfac":  obj.newTfac,
-        "fport":    obj.fport,
-        "tport":    obj.tport,
-        "newfport": obj.newFport,
-        "newtport": obj.newTport,
+        "ckid":     obj.ckid.toUpperCase(),
+        "cls":      obj.cls.toUpperCase(),
+        "adsr":     obj.adsr.toUpperCase(),
+        "prot":     obj.prot.toUpperCase(),
+        "tktno":    obj.tktno.toUpperCase(),
+        "mlo":      obj.mlo.toUpperCase(),
+        "ctyp":     obj.ctyp.toUpperCase(),
+        "ffac":     obj.oldFfac.toUpperCase(),
+        "tfac":     obj.oldTfac.toUpperCase(),
+        "newffac":  obj.newFfac.toUpperCase(),
+        "newtfac":  obj.newTfac.toUpperCase(),
+        "fport":    obj.fport.toUpperCase(),
+        "tport":    obj.tport.toUpperCase(),
+        "newfport": obj.newFport.toUpperCase(),
+        "newtport": obj.newTport.toUpperCase(),
       },
       dataType:     'json',
     }).done(function(data) {

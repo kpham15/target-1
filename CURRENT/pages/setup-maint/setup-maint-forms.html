@@ -1,42 +1,34 @@
 <!-- Forms -->
-<div class="col-md-5">
+<div class="col-md-12">
   <form id="setup-maint-forms">
     <!-- Top Row -->
     <div class="row">
       <!-- CKID -->
-      <div class="col-md-4">
+      <div class="col-md-6" style="padding:2px;">
         <div class="form-group">
           <label>CKID:</label>
           <label>TN:</label>
           <input id="setup-maint-forms-cbx" type="checkbox" checked />
-          <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none;"/>
+          <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none; text-transform: uppercase;"/>
           <input id="setup-maint-forms-ckid-tn" type="text" class="form-control maint-ckid setup-maint-forms-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
         </div>
       </div>
       <!-- CLS -->
-      <div class="col-md-3">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>CLS:</label>
-          <select id="setup-maint-forms-cls" class="form-control setup-maint-forms-input">
-            <option value=""></option>
-            <option value="RES">RES</option>
-            <option value="BUS">BUS</option>
-          </select>
+          <input id="setup-maint-forms-cls" class="form-control setup-maint-forms-input" disabled=""/>
         </div>
       </div>
       <!-- ADSR -->
-      <div class="col-md-3">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>ADSR:</label>
-          <select id="setup-maint-forms-adsr" class="form-control">
-            <option value=""></option>
-            <option value="Y">Y</option>
-            <option value="N">N</option>
-          </select>
+          <input id="setup-maint-forms-adsr" class="form-control setup-maint-forms-input" disabled="" />
         </div>
       </div>
       <!-- View Button -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <button id="setup-maint-forms-viewckid" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
             View
@@ -47,36 +39,28 @@
     <!-- Row 2 -->
     <div class="row">
       <!-- TKTNO -->
-      <div class="col-md-4">
+      <div class="col-md-6" style="padding:2px;">
         <div class="form-group">
           <label>TKTNO</label>
-          <input id="setup-maint-forms-tktno" type="text" class="form-control setup-maint-forms-input">
+          <input id="setup-maint-forms-tktno" type="text" class="form-control setup-maint-forms-input" style="text-transform: uppercase;">
         </div>
       </div>
       <!-- MLO -->
-      <div class="col-md-3">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>MLO</label>
-          <select id="setup-maint-forms-mlo" class="form-control setup-maint-forms-input">
-            <option value=""></option>
-            <option value="N" selected="selected">N</option>
-            <option value="Y">Y</option>
-          </select>
+          <input id="setup-maint-forms-mlo" class="form-control setup-maint-forms-input" disabled="" />
         </div>
       </div>
       <!-- PROT -->
-      <div class="col-md-3">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>PROT:</label>
-          <select id="setup-maint-forms-prot" class="form-control setup-maint-forms-input">
-            <option value=""></option>
-            <option value="SSM">SSM</option>
-            <option value="SSP">SSP</option>
-          </select>
+          <input id="setup-maint-forms-prot" class="form-control setup-maint-forms-input" disabled="" />
         </div>
       </div>
       <!-- View Button -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <button id="setup-maint-forms-viewtkt" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
             View
@@ -87,54 +71,47 @@
     <!-- Row 3 -->
     <div class="row">
       <!-- CONTYP -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>CONTYP</label>
-          <select id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="">
-            <option value=""></option>
-            <option value="GEN">GEN</option>
-            <option value="LPBK">LPBK</option>
-            <option value="MLPT">MLPT</option>
-            <option value="MTCD">MTCD</option>
-            <option value="MAINT">MAINT</option>
-          </select>
+          <input id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="" />
         </div>
       </div>
       <!-- FAC(X) -->
-      <div class="col-md-5">
-        <div class="col-md-12">
+      <div class="col-md-5" style="padding:2px;">
+        <div class="col-md-12" style="padding:2px; margin-bottom:-15px;">
           <div class="form-group">
             <label>FAC(X):</label>
             <input id="setup-maint-forms-ffac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
         </div>
         <!-- PORT(X) -->
-        <div class="col-md-3">
+        <div class="col-md-4" style="padding:2px;">
           <div class="form-group">
             <label>PORT(X):</label>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8" style="padding:2px;">
           <div class="form-group">
             <input id="setup-maint-forms-fport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
         </div>
       </div>
       <!-- FAC(Y) -->
-      <div class="col-md-5">
-        <div class="col-md-12">
+      <div class="col-md-5" style="padding:2px;">
+        <div class="col-md-12" style="padding:2px; margin-bottom:-15px;">
           <div class="form-group">
             <label>FAC(Y):</label>
             <input id="setup-maint-forms-tfac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
         </div>
         <!-- PORT(Y) -->
-        <div class="col-md-3">
+        <div class="col-md-4" style="padding:2px;">
           <div class="form-group">
             <label>PORT(Y):</label>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8" style="padding:2px;">
           <div class="form-group">
             <input id="setup-maint-forms-tport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
@@ -143,7 +120,7 @@
     </div>
     <!-- ACTION Row -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
           <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
@@ -157,7 +134,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form group">
           <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
             Clear
@@ -172,6 +149,8 @@
     </div>
   </form>
 </div>
+
+
 <script type="text/javascript">
 
   function maintDefaultForms() {
@@ -539,7 +518,7 @@
           "api":    "ipcProv",
           "act":    "queryCkid",
           "user":   user.uname,
-          "ckid":   ckid
+          "ckid":   ckid.toUpperCase()
         },
         dataType:   'json'
       }).done(function(data) {
@@ -581,7 +560,7 @@
           "api":    "ipcMaintReport",
           "act":    "queryTkt",
           "user":   user.uname,
-          "tktno":  tktno
+          "tktno":  tktno.toUpperCase()
         },
         dataType:   'json',
       }).done(function(data) {

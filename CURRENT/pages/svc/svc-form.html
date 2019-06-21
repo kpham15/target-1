@@ -268,10 +268,12 @@
         });
 
         $("#svc_clear_btn").click(function(e){
+            clearErrors();
             resetSvcPage();  
         })
 
         $("#svc_ffacSearch_btn").click(function(e){
+            clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
@@ -286,6 +288,7 @@
         })
 
         $("#svc_tfacSearch_btn").click(function(e){
+            clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
@@ -300,6 +303,8 @@
         })
     
         $("#svc_act_sel").change(function(){
+            clearErrors();
+
             let act = $("#svc_act_sel").val();
             let cktId = $("#svc_cktId_num").val();
             let idx = $("#svc_cktconIdx_num").val();
@@ -313,12 +318,7 @@
             }
             else {
                 if(cktId == "" || cktId == 0) {
-                    let modal = {
-                        title: "Error",
-                        body: "Please select a CKT from the LIST OF CKTs",
-                        type: 'danger'
-                    }
-                    modalHandler(modal);
+                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
                     $("#svc_act_sel").val("");
                     return;
                 }
@@ -329,12 +329,7 @@
                 }
                 else if(act == "DISCONNECT") {
                     if(idx == "" || idx == 0) {
-                        let modal = {
-                            title: "Error",
-                            body: "Please select a CON from the LIST OF CONNECTIONS",
-                            type: 'danger'
-                        }
-                        modalHandler(modal);
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                         $("#svc_act_sel").val("");
                         return;
                     }
@@ -345,12 +340,7 @@
                 }
                 else if(act == "CHANGE") {
                     if(idx == "" || idx == 0) {
-                        let modal = {
-                            title: "Error",
-                            body: "Please select a CON from the LIST OF CONNECTIONS",
-                            type: 'danger'
-                        }
-                        modalHandler(modal);
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                         $("#svc_act_sel").val("");
                         return;
                     }
@@ -371,6 +361,7 @@
         })
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
+            clearErrors();
             let data = svcFacSearchDatatable.row(this).data();
             if(data == undefined)
                 return;

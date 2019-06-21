@@ -27,13 +27,14 @@
 <script type="text/javascript">
 	// Intialize Datatable
 	var alarmreportDatatable = $('#alarmreport-table').DataTable({
-		
+		"dom":  "frtip",
+    "pageLength": 4,
     "data": [],
     "columns": [
       {
 				"data":"date",
 				"render": function(data) {
-					let date = moment(data).format('MM-DD-YYYY HH:mm:ss')
+					let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss')
 
 					return date;
 				}
