@@ -924,6 +924,10 @@
     // Modal Close Event Handler
     $('#setup-maint-modal').on('hidden.bs.modal', function(e) {
       $('#setup-maint-forms-action').val('');
-    })
-  })
+    });
+
+    $("#setup-maint-modal-input").on('click', function() {
+      clearErrors();
+    });
+  });
 </script>
