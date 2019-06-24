@@ -375,6 +375,10 @@
                 $("#svc_portY_txt").val(data.port);
             }
         })
+
+        $('#svc_tn_cbx').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue'
+        });
     
         $("#svc_tn_cbx").change(function(){
             if($("#svc_tn_cbx").is(':checked')){
