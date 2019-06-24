@@ -244,6 +244,14 @@
         return;
 	}
 
+	if ($act == "REMOVE_USER_IMAGE") {
+		$result = removeImg($userObj, $uname, $uploadDir);
+		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
+		echo json_encode($result);
+		mysqli_close($db);
+        return;
+	}
+
 	else {
  		$result["rslt"] = "fail";
 		$result["reason"] = $act . " is under development or not supported";
@@ -255,8 +263,7 @@
 	
 	
 	// Functions section
-	function uploadImg($userObj, $uname, $fileName, $uploadDir) {
-
+	function removeImg($userObj, $uname, $uploadDir) {
 		try {
 			if ($userObj->ugrp != 'ADMIN' || $userObj->grpObj->setuser != "Y") {
 				throw new Exception('Permission Denied');
@@ -264,17 +271,15 @@
 
 			$targetUserObj = new USERS($uname);
 			if ($targetUserObj->rslt != SUCCESS) {
-				$result['rslt'] = $targetUserObj->rslt;
-				$result['reason'] = "UPLOAD_IMG: ".$targetUserObj->reason;
-				return $result;
+				throw new Exception("REMOVE_IMG: ".$targetUserObj->reason); 
 			}
 
 			//check the prerequisites
-			if ($_FILES["file"]["error"] > 0 || $fileName === "") {
-				throw new Exception("Error: " . $_FILES["file"]["error"]); 
+			if ($targetUserObj->com === "") {
+				throw new Exception("NO IMAGE INFORMATION FOR USER ".$uname); 
 			} 
 		
-			if ($uploadDir ==="") {
+			if ($uploadDir =="") {
 				throw new Exception("NO UPLOAD FOLDER INFORMATION"); 
 			}
 		
@@ -284,9 +289,59 @@
 			}
 			
 			//update database
-			$updateCom = updUser($userObj, $uname,"", "", "", "", "", "", "", $targetUserObj->ugrp, $fileName);
-			if($updateCom['rslt'] == 'fail') {
-				return $updateCom;
+			$targetUserObj->updateUserImage("");
+			if($targetUserObj->rslt == 'fail') {
+				throw new Exception("REMOVE_IMG: ".$targetUserObj->reason); 
+			}
+			if (!unlink($uploadDir.'/'.$targetUserObj->com)) {
+				throw new Exception("UNABLE TO DELETE IMAGE FILE"); 
+			}
+	
+
+			$targetUserObj->queryByUName("","");
+			$result["rslt"] = 'success';
+			$result["reason"] = "IMAGE_DELETED";
+			$result['rows'] = libFilterUsers($userObj, $targetUserObj->rows);	
+			return $result;
+		}
+		catch(Exception $e) {
+			$result["rslt"] = 'fail';
+			$result["reason"] = $e->getMessage();
+			return $result;
+		}
+	}
+
+
+	function uploadImg($userObj, $uname, $fileName, $uploadDir) {
+
+		try {
+			if ($userObj->ugrp != 'ADMIN' || $userObj->grpObj->setuser != "Y") {
+				throw new Exception('Permission Denied');
+			}
+
+			$targetUserObj = new USERS($uname);
+			if ($targetUserObj->rslt != SUCCESS) {
+				throw new Exception("UPLOAD_IMG: ".$targetUserObj->reason); 
+			}
+
+			//check the prerequisites
+			if ($_FILES["file"]["error"] > 0 || $fileName == "") {
+				throw new Exception("Error: " . $_FILES["file"]["error"]); 
+			} 
+		
+			if ($uploadDir =="") {
+				throw new Exception("NO UPLOAD FOLDER INFORMATION"); 
+			}
+		
+			if (!file_exists($uploadDir)) {
+				throw new Exception("FOLDER PROFILE NOT EXIST"); 
+				
+			}
+			
+			//update database
+			$targetUserObj->updateUserImage($fileName);
+			if($targetUserObj->rslt == 'fail') {
+				throw new Exception("REMOVE_IMG: ".$targetUserObj->reason); 
 			}
 
 			if(!move_uploaded_file($_FILES["file"]["tmp_name"],$uploadDir.'/'.$fileName)) {
@@ -408,7 +463,7 @@
 				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp, $com);
 				// other users cannot change their names
 			else {
-				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp,$com);
+				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp,"");
 			}
 		}
 		else {

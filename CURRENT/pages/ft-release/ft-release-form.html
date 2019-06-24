@@ -351,15 +351,23 @@ $("#rt_submit_btn").click(function() {
         $("#rt_action_sel").val("");
     }
     else if ($("#rt_action_sel").val() == "UPDATE") {
+        if(ft_release_id === 0) {
+            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            return;
+        }
         ft_release_query("UPDATE");
         $("#rt_action_sel").val("");
     }
     else if ($("#rt_action_sel").val() == "DELETE") {
+        if(ft_release_id === 0) {
+            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            return;
+        }
         ft_release_query("DELETE");
         $("#rt_action_sel").val("");
     }
     else {
-        inputError($('#rt_action_sel'),'Select An Option');
+        inputError($('#rt_action_sel'),'SELECT AN OPTION');
        
     }
 });
@@ -368,6 +376,7 @@ $("#rt_submit_btn").click(function() {
 $("#rt_action_sel").change(function(){
     if($("#rt_action_sel").val() == "ADD") {
         $(".ft_release_form").val("");
+        ft_release_id = 0
     }
 })
 
