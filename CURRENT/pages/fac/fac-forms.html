@@ -111,6 +111,9 @@
 
         $('#fac-modal-action').val('ADD');
 
+        $("#fac-modal-range").parent().parent().show();
+
+
         $('#fac-modal').modal('show');
       }
       // UPDATE Action
@@ -131,6 +134,8 @@
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
 
+        $("#fac-modal-range").parent().parent().hide();
+
         $('#fac-modal-action').val('UPDATE');
 
         $('#fac-modal').modal('show');
@@ -149,6 +154,8 @@
         $("#fac-modal-ort").val(ort);
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
+
+        $("#fac-modal-range").parent().parent().hide();
 
         $('#fac-modal-action').val('DELETE');
 
