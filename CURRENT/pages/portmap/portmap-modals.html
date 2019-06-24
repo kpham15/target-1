@@ -140,8 +140,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button id="portmap-modal-submit" type="button" class="btn btn-primary">Submit</button>
+        <button id="portmap-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -186,14 +186,9 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
 
       if (data.rslt === 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
         portmapModalFacDatatable.clear().draw();
         portmapModalFacDatatable.rows.add(res);
@@ -227,19 +222,12 @@
       data: formData,
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows
-      let modal = {
-        title:  data.rslt,
-        body: data.reason
-      }
+      let res = data.rows;
 
       if (data.rslt === 'fail') {
-        modal.type = "danger";
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
-        $('#setup-portmap-modal').modal('hide');
-        modal.type = "success";
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
         
         let page = portmapDatatable.page();
 
@@ -299,5 +287,7 @@
     });
   });
 
-
+  $(".portmap-modal-field").on('click', function() {
+    clearErrors();
+  });
 </script>
