@@ -363,43 +363,43 @@ $(document).ready(function(){
     
     
     $("#svc-modal-submit").click(function(){
-        let act = $("#svcModal_act_txt").val();
-        let ckid = $("#svcModal_ckid").val();
-        let cls = $("#svcModal_cls_sel").val();
-        let adsr = $("#svcModal_adsr_sel").val();
-        let prot = $("#svcModal_prot_sel").val();
-        let ordno = $("#svcModal_ordno_txt").val();
-        let mlo = $("#svcModal_mlo_sel").val();
+        let act = $("#svcModal_act_txt").val().toUpperCase();
+        let ckid = $("#svcModal_ckid").val().toUpperCase();
+        let cls = $("#svcModal_cls_sel").val().toUpperCase();
+        let adsr = $("#svcModal_adsr_sel").val().toUpperCase();
+        let prot = $("#svcModal_prot_sel").val().toUpperCase();
+        let ordno = $("#svcModal_ordno_txt").val().toUpperCase();
+        let mlo = $("#svcModal_mlo_sel").val().toUpperCase();
         
         let ctyp, ffac, tfac, fport, tport;
         if(act == "CONNECT") {
-            ctyp = $("#svcModal_ctyp_sel").val();
-            ffac = $("#svcModal_ffac_text").val();
-            tfac = $("#svcModal_tfac_text").val();
+            ctyp = $("#svcModal_ctyp_sel").val().toUpperCase();
+            ffac = $("#svcModal_ffac_text").val().toUpperCase();
+            tfac = $("#svcModal_tfac_text").val().toUpperCase();
 
-            fport=  $("#svc_portX_txt").val();
-            tport=  $("#svc_portY_txt").val();
+            fport=  $("#svc_portX_txt").val().toUpperCase();
+            tport=  $("#svc_portY_txt").val().toUpperCase();
         }
         else if(act == "DISCONNECT"){
-            ctyp = $("#svcModal_discCtyp_txt").val();
-            ffac = $("#svcModal_discFfac_txt").val();
-            tfac = $("#svcModal_discTfac_txt").val();
+            ctyp = $("#svcModal_discCtyp_txt").val().toUpperCase();
+            ffac = $("#svcModal_discFfac_txt").val().toUpperCase();
+            tfac = $("#svcModal_discTfac_txt").val().toUpperCase();
 
-            fport=  $("#svc_portX_txt").val();
-            tport=  $("#svc_portY_txt").val();
+            fport=  $("#svc_portX_txt").val().toUpperCase();
+            tport=  $("#svc_portY_txt").val().toUpperCase();
         }
         else if(act == "CHANGE") {
-            ffac = $("#svcModal_oldFfac_txt").val();
-            fport = $("#svcModal_oldPortX_txt").val();
-            tfac = $("#svcModal_oldTfac_txt").val();
-            tport = $("#svcModal_oldPortY_txt").val();
+            ffac = $("#svcModal_oldFfac_txt").val().toUpperCase();
+            fport = $("#svcModal_oldPortX_txt").val().toUpperCase();
+            tfac = $("#svcModal_oldTfac_txt").val().toUpperCase();
+            tport = $("#svcModal_oldPortY_txt").val().toUpperCase();
 
-            ctyp = $("#svcModal_newCtyp_sel").val();
+            ctyp = $("#svcModal_newCtyp_sel").val().toUpperCase();
         }
-        let newffac = $("#svcModal_newFfac_txt").val();
-        let newtfac = $("#svcModal_newTfac_txt").val();
-        let newfport = $("#svcModal_newPortX_txt").val();
-        let newtport = $("#svcModal_newPortY_txt").val();
+        let newffac = $("#svcModal_newFfac_txt").val().toUpperCase();
+        let newtfac = $("#svcModal_newTfac_txt").val().toUpperCase();
+        let newfport = $("#svcModal_newPortX_txt").val().toUpperCase();
+        let newtport = $("#svcModal_newPortY_txt").val().toUpperCase();
 
         let ckt_id=	$("#svc_cktId_txt").val();
         let cktcon= $("#svc_cktconId_num").val();
@@ -411,11 +411,11 @@ $(document).ready(function(){
             data:{
                 api:    "ipcProv",
                 act:	act,
-                ckid:	ckid.toUpperCase(),
+                ckid:	ckid,
                 cls:	cls,
                 adsr:	adsr,
                 prot:	prot,
-                ordno:	ordno.toUpperCase(),
+                ordno:	ordno,
                 mlo:	mlo,
                 ctyp:   ctyp,
                 ffac:   ffac,
