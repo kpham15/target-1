@@ -205,7 +205,7 @@
     }
     $('.portmap-modal-field[target]').each(function() {
       let target = $(this).attr('target');
-      formData[target] = $(this).val().toUpperCase();
+      formData[target] = $(this).val();
     });
 
     $.ajax({
