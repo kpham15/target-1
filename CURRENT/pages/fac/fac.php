@@ -30,7 +30,7 @@
   var facFirstLoad = true;
 
   // FAC menu item click event
-  $(".menu-item[page_id='fac-page']").click(async function() {
+  $(".menu-item[page_id='fac-page']").click(function() {
     if (facFirstLoad != true) {
       return;
     }
