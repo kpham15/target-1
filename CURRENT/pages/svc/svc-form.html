@@ -312,6 +312,7 @@
             clearSvcModal();
 
             if(act == "CONNECT") {
+                $('.svcModal-form').prop('disabled',false);
                 $("#svcModal_newConForm").show();
                 $("#svcModal_discConForm").hide();
                 $("#svcModal_changeConForm").hide();
@@ -323,6 +324,7 @@
                     return;
                 }
                 if(act == "UPDATE_CKT") {
+                    $('.svcModal-form').prop('disabled',false);
                     $("#svcModal_newConForm").hide();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
@@ -333,6 +335,7 @@
                         $("#svc_act_sel").val("");
                         return;
                     }
+                    $('.svcModal-form').prop('disabled',true);
                     $("#svcModal_newConForm").hide();
                     $("#svcModal_discConForm").show();
                     $("#svcModal_changeConForm").hide();
@@ -344,6 +347,7 @@
                         $("#svc_act_sel").val("");
                         return;
                     }
+                    $('.svcModal-form').prop('disabled',false);
                     $("#svcModal_newConForm").hide();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").show();
