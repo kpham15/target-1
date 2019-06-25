@@ -212,7 +212,7 @@
           color = 'bg-green';
           break;
         case "MTCD":
-          color = 'bg-minor';
+          color = 'bg-orange';
           break;
         case "MAINT":
           color = 'bg-major';
@@ -611,7 +611,7 @@
 
       if (stat.includes('bg-green')) {
         mtDisconnect = '';
-      } else if (stat.includes('bg-minor')) {
+      } else if (stat.includes('bg-orange')) {
         mtRestore = '';
         mtTest = '';
       } else if (stat.includes('bg-major')) {
