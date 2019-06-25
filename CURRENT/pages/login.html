@@ -44,7 +44,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat login-input-fields">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
@@ -52,7 +52,7 @@
   
       <div class="login-bottom-actions text-center">
         <p>- OR -</p>
-        <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
+        <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button login-input-fields">First Login / Change Password</button>
       </div>
       <div id= "login_warning" style="text-align: center; display:none;">
         <label style="color:red;"></label>
@@ -272,6 +272,11 @@
           login.loginBtn.trigger('click');
       }
     });
+
+    $(document).on("mousedown",".login-input-fields", function(){
+      clearErrors();
+      $("#login_warning").hide()
+    })
   
     // @TODO create register user/first login functionality
 
