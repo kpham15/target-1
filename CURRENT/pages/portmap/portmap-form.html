@@ -123,11 +123,11 @@
     function portmapActionUnmap(obj) {
       if (portmapPortid > 0) {
         if (portmapFacid > 0) {
+          portmapModalClear();
+          $('.portmap-modal-fac-forms').prop('disabled',true);
           loadFacOptions("queryFtyp", "ftyp");
           loadFacOptions("queryOrt", "ort");
           loadFacOptions("querySpcfnc", "spcfnc");
-          portmapModalClear();
-          $('.portmap-modal-fac-forms').prop('disabled',true);
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').hide();
           $('#setup-portmap-modal').modal('show');
