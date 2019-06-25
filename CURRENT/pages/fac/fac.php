@@ -30,16 +30,16 @@
   var facFirstLoad = true;
 
   // FAC menu item click event
-  $(".menu-item[page_id='fac-page']").click(async function() {
+  $(".menu-item[page_id='fac-page']").click(function() {
     $("#fac-page select").css('-webkit-appearance', 'menulist');
     $("#fac-page select:disabled").css('-webkit-appearance', 'none');
     if (facFirstLoad != true) {
       return;
     }
     // loads options for ftyp, ort, spcfnc selection fields in setup facility
-    loadFacOptions("queryFtyp", "ftyp");
-    loadFacOptions("queryOrt", "ort");
-    loadFacOptions("querySpcfnc", "spcfnc");
+    loadFacOptions("queryFtyp", "ftyp", createFacOptions);
+    loadFacOptions("queryOrt", "ort", createFacOptions);
+    loadFacOptions("querySpcfnc", "spcfnc", createFacOptions);
 
     // load fac table upon visiting page
     queryFac();
@@ -47,7 +47,7 @@
     facFirstLoad = false;
   });
   
-  function loadFacOptions(action, type) {
+  function loadFacOptions(action, type, callback) {
     $.ajax({
       type: 'POST',
       url: "./em/ipcDispatch.php",
@@ -68,7 +68,7 @@
         modal.type = 'danger',
         modalHandler(modal);
       } else {
-        createFacOptions(res, type);
+        callback(res, type);
       }
     });
   }
@@ -84,6 +84,5 @@
     
     $('#fac-form-'+type).html(a.join(''));
     $('#fac-modal-'+type).html(a.join(''));
-    $('#portmap-modal-'+type).html(a.join(''));
   }
 </script>

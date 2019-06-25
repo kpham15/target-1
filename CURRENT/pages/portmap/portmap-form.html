@@ -93,7 +93,7 @@
         let target = $(this).attr('target');
         $(this).val(obj[target]);
       });
-
+      $('#portmap-modal-ftyp').val(obj.ftyp);
       $('#portmap-modal-action').val(obj.value.toUpperCase());
     }
 
@@ -104,9 +104,6 @@
           $('#portmap-form-action').val('');
           return;
         } else {
-          loadFacOptions("queryFtyp", "ftyp");
-          loadFacOptions("queryOrt", "ort");
-          loadFacOptions("querySpcfnc", "spcfnc");
           portmapModalClear();
           $('.portmap-modal-fac-forms').prop('disabled', false);
           portmapPopulateModal(obj);
@@ -186,6 +183,9 @@
         port:     $('#portmap-form-port').val(),
         psta:     $('#portmap-form-psta').val(),
         fac:      $('#portmap-form-fac').val(),
+        ftyp:     portmapFtyp,
+        ort:      portmapOrt,
+        spcfnc:   portmapSpcfnc
       }
 
       if ($('#portmap-tn-check').prop('checked')) {
