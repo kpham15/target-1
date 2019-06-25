@@ -374,7 +374,7 @@
     // WCMODAL Events Handling
 $("#wcModal_submit_btn").click(function () {
     if ($("#wcModal_npanxx_txt").val().length < 6 || $("#wcModal_npanxx_txt").val().length > 6) {
-        $("#wcModal_rslt").css("color","red").text("INVALID NPANXX: NPANXX MUST BE 6 DIGITS")
+        postResponse($('#wcModal .modal-footer'), "fail", "INVALID NPANXX: NPANXX MUST BE 6 DIGITS");
         return;
     }
     if ($("#wcModal_id_num").val() != "") {
@@ -389,7 +389,7 @@ $("#wcModal_submit_btn").click(function () {
         }
     }
     else {
-        $("#wcModal_rslt").css("color","red").text("Missing WC ID")
+        postResponse($('#wcModal .modal-footer'), "fail", "Missing WC ID");
     }
 });
 
@@ -410,5 +410,7 @@ $("#wcModal").on("hidden.bs.modal", function(){
     $("#wc_act_sel").val("");
 });
 
-    
+$(".wcModal_form").on('click', function() {
+    clearErrors();
+});
 </script>
