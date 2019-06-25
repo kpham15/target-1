@@ -129,21 +129,18 @@
                     
 
                     <div class="col-sm-10 ">
-                        <div class="col-sm-2 " style="padding:2px">
+                        <div class="col-md-3" style="padding:2px">
                             <label for="wcModal_act_txt">ACTION</label>
                             <input type="text" class="form-control wcModal_form uppercase" id="wcModal_act_txt" readonly>
                         </div>
-                        <div class="col-sm-10" style="margin-top:25px">
-                            <label id="wcModal_rslt" style="color: rgb(0, 128, 0);"></label>
-                        </div>  
                         <input type="hidden" id="wcModal_id_num" style="width:50px;">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" id="wcModal_submit_btn" style="float:left">Submit</button>
-                    <button class="btn btn-primary" id="wcModal_clear_btn" type="button" style="float:left">Clear</button>
-                    <button class="btn btn-primary" id="wcModal_close_btn" data-dismiss="modal" aria-label="Close" style="float:left">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="wcModal_submit_btn" style="float:left">Submit</button>
+                <button class="btn btn-primary" id="wcModal_clear_btn" type="button" style="float:left">Clear</button>
+                <button class="btn btn-primary" id="wcModal_close_btn" data-dismiss="modal" aria-label="Close">Close</button>
             </div>
         </div>
     </div>  
@@ -365,7 +362,7 @@
             }
             else {
                 wcModal_query('query');
-                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER TURNED-UP SUCCESSFULLY");
+                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER HOLD SUCCESSFULLY");
             } 
         });
     }
@@ -374,7 +371,7 @@
     // WCMODAL Events Handling
 $("#wcModal_submit_btn").click(function () {
     if ($("#wcModal_npanxx_txt").val().length < 6 || $("#wcModal_npanxx_txt").val().length > 6) {
-        $("#wcModal_rslt").css("color","red").text("INVALID NPANXX: NPANXX MUST BE 6 DIGITS")
+        postResponse($('#wcModal .modal-footer'), "fail", "INVALID NPANXX: NPANXX MUST BE 6 DIGITS");
         return;
     }
     if ($("#wcModal_id_num").val() != "") {
@@ -389,7 +386,7 @@ $("#wcModal_submit_btn").click(function () {
         }
     }
     else {
-        $("#wcModal_rslt").css("color","red").text("Missing WC ID")
+        postResponse($('#wcModal .modal-footer'), "fail", "Missing WC ID");
     }
 });
 
@@ -409,5 +406,8 @@ $("#wcModal_close_btn").click(function () {
 $("#wcModal").on("hidden.bs.modal", function(){
     $("#wc_act_sel").val("");
 });
-    
+
+$(".wcModal_form").on('click', function() {
+    clearErrors();
+});
 </script>
