@@ -185,7 +185,7 @@
             if ($fNodeObj->stat !== 'INS') {
                 $result['rslt'] = 'fail';
                 $result['jeop'] = "SP5:ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";            
-                $result['reason'] = "ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";
+                $result['reason'] = "PROVISIONING CONNECT - " ."ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";
                 return $result;
             }
 
@@ -193,7 +193,7 @@
             if ($tNodeObj->stat !== 'INS') {
                 $result['rslt'] = 'fail';
                 $result['jeop'] = "SP5:ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";            
-                $result['reason'] = "ACCESS DENIED; NODE ($tNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $tNodeObj->user";
+                $result['reason'] = "PROVISIONING CONNECT - " ."ACCESS DENIED; NODE ($tNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $tNodeObj->user";
                 return $result;
             }
 
@@ -204,7 +204,7 @@
             if ($sms->rslt == FAIL) {
                 $result['rslt'] = FAIL;
                 $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
-                $result['reason'] = "PROVISIONING CONNECT - " . $sms->reason;
+                $result['reason'] = "PROVISIONING CONNECT - " . "INVALID PSTA ($sms->psta)";
                 return $result;
             }
             $ffacObj->portObj->npsta = $sms->npsta;
@@ -214,7 +214,7 @@
             if ($sms->rslt == FAIL) {
                 $result['rslt'] = FAIL;
                 $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
-                $result['reason'] = "PROVISIONING CONNECT - " . $sms->reason;
+                $result['reason'] = "PROVISIONING CONNECT - " . "INVALID PSTA ($sms->psta)";
                 return $result;
             }
             $tfacObj->portObj->npsta = $sms->npsta;
@@ -331,7 +331,7 @@
             return $result;
         } catch (Throwable $e) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $e->getMessage();
+            $result['reason'] = "PROVISIONING CONNECT - " .$e->getMessage();
             return $result;
         }
 

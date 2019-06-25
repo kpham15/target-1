@@ -187,7 +187,7 @@ function cps_disconnected($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-DISCONNECTED";
     return $result;
 }
 
@@ -224,7 +224,7 @@ function cps_connected($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-CONNECTED";
     return $result;
 }
 
@@ -261,7 +261,7 @@ function cps_online($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-ONLINE";
     return $result;
 }
 

@@ -165,7 +165,7 @@
 		if ($sms->rslt != SUCCESS) {
 			$result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$fpObj->psta.")";            
-			$result['reason'] = "MAINTENANCE DISCONNECT - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE DISCONNECT - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$fpObj->npsta = $sms->npsta;
@@ -175,7 +175,7 @@
 		if ($sms->rslt != SUCCESS) {
 			$result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$tpObj->psta.")";            
-			$result['reason'] = "MAINTENANCE DISCONNECT - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE DISCONNECT - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$tpObj->npsta = $sms->npsta;
