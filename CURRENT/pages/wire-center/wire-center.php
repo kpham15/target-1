@@ -10,7 +10,12 @@
         </ol>
       </section>
        <?php include __DIR__."/wire-center-form.html"   ?>
-       <?php include __DIR__."/wire-center-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-update-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-reset-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-network-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-turnup-modal.html"   ?>
+       <?php include __DIR__."/modals/wire-center-hold-modal.html"   ?>
 
     </div>
 </div>

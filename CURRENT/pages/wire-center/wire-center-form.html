@@ -237,7 +237,7 @@ $("#wc_act_sel").change(function() {
             wcModal_displayForm();
             wcModal_enableForm();
             wcModal_disableNetworkData();
-            $("#wcModal").modal();
+            $("#wcModal_modal").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "RESET") {
             wcModal_tblRows = wc_tblRows;
@@ -245,21 +245,21 @@ $("#wc_act_sel").change(function() {
             $("#wcModal_act_txt").val($("#wc_act_sel").val());
             wcModal_disableForm();
             wcModal_disableNetworkData();
-            $("#wcModal").modal();
+            $("#wcModal_reset").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "UPDATE_NETWORK") {
             wcModal_tblRows = wc_tblRows;
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_enableNetworkData();
-            $("#wcModal").modal();
+            $("#wcModal_network").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "TURN_UP") {
             wcModal_tblRows = wc_tblRows;
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_disableNetworkData();
-            $("#wcModal").modal();
+            $("#wcModal_turnup").modal();
 
         }
         else if ($("#wc_act_sel").val()  ==  "HOLD") {
@@ -267,7 +267,7 @@ $("#wc_act_sel").change(function() {
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_disableNetworkData();
-            $("#wcModal").modal();
+            $("#wcModal_hold").modal();
         }  
     }   
 });
