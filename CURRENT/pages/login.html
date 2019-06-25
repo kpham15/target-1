@@ -54,7 +54,10 @@
         <p>- OR -</p>
         <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button">First Login / Change Password</button>
       </div>
-  
+      <div id= "login_warning" style="text-align: center; display:none;">
+        <label style="color:red;"></label>
+        <div><a id="login_continue">(Change Password Later)</a></div>
+      </div>
     </div>
     <!-- /.login-box-body -->
   </div>
@@ -229,6 +232,13 @@
             }
             else{
               if (user.uname !== '') {
+                if(obj.hasOwnProperty("pw_exp_alert")){
+                  if(obj["pw_exp_alert"] !== "") {
+                    $("#login_warning > label").text("YOUR PASSWORD WILL EXPIRE IN "+obj["pw_exp_alert"]+" DAYS")
+                    $("#login_warning").show();
+                    return;
+                  }
+                }
                 loginSuccess();
               }
   
@@ -245,7 +255,11 @@
     }
   
     // ================ Click Events ================= //
-  
+    $("#login_continue").click(function(){
+      loginSuccess();
+      $("#login_warning").hide();
+    })
+
     login.loginBtn.click(function(e) {
       e.preventDefault();
       
@@ -295,6 +309,10 @@
       } else if (error.reason.toLowerCase().includes('locked')) {
         inputError(login.username, '');
         inputError(login.password, 'Too many login attempts, user locked.');
+      }
+      else {
+        inputError(login.username, '');
+        inputError(login.password, error.reason);
       }
     }
 

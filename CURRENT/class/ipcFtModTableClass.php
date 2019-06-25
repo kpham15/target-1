@@ -99,19 +99,19 @@ class FTMODTABLE {
 
         if($ot == "") {
             $this->rslt = "fail";
-            $this->reason = "OT must not be empty";
+            $this->reason = "MISSING OT";
             return;
         }
 
         if($rtype == "") {
             $this->rslt = "fail";
-            $this->reason = "RTYPE must not be empty";
+            $this->reason = "MISSING RTYPE";
             return;
         }
 
         if($processingfile == "") {
             $this->rslt = "fail";
-            $this->reason = "Processing file must not be empty";
+            $this->reason = "MISSING PROCESSING FILE";
             return;
         }
 
@@ -168,19 +168,19 @@ class FTMODTABLE {
         global $db;
         if($ot == "") {
             $this->rslt = "fail";
-            $this->reason = "OT must not be empty";
+            $this->reason = "MISSING OT";
             return;
         }
 
         if($rtype == "") {
             $this->rslt = "fail";
-            $this->reason = "RTYPE must not be empty";
+            $this->reason = "MISSING RTYPE";
             return;
         }
 
         if($processingfile == "") {
             $this->rslt = "fail";
-            $this->reason = "Processing file must not be empty";
+            $this->reason = "MISSING PROCESSING FILE";
             return;
         }
 

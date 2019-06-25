@@ -118,13 +118,13 @@ class FTRELEASE {
         global $db;
         if($ot == "") {
             $this->rslt = "fail";
-            $this->reason = "OT must not be empty";
+            $this->reason = "MISSING OT";
             return;
         }
 
         if($rt == "") {
             $this->rslt = "fail";
-            $this->reason = "RT must not be empty";
+            $this->reason = "MISSING RT";
             return;
         }
 
@@ -190,13 +190,13 @@ class FTRELEASE {
         global $db;
         if($ot == "") {
             $this->rslt = "fail";
-            $this->reason = "OT must not be empty";
+            $this->reason = "MISSING OT";
             return;
         }
 
         if($rt == "") {
             $this->rslt = "fail";
-            $this->reason = "RT must not be empty";
+            $this->reason = "MISSING RT";
             return;
         }
 
