@@ -66,6 +66,16 @@ else if ($userObj->uname != 'SYSTEM') {
     }
 }
 
+//check WC status
+$wcObj = new WC();
+if($wcObj->stat == "OOS") {
+    if($userObj->ugrp != 'ADMIN') {
+        $result["rslt"]     = FAIL;
+        $result["reason"]   = "DENIED - WIRE CENTER IS OOS";
+        return $result;
+    }
+}
+
 // Dispatch to API
 if($api =='ipcAlm') {
     include "ipcAlm.php";

@@ -96,6 +96,15 @@
                 return $result;
             }
 
+            $wcObj = new WC();
+            if($wcObj->stat == "OOS") {
+                if($userObj->ugrp != 'ADMIN') {
+                    $result["rslt"]     = FAIL;
+                    $result["reason"]   = "DENIED - WIRE CENTER IS OOS";
+                    return $result;
+                }
+            }
+
             // Deny if user is currently LOCKED or DISABLED
             if ($userObj->stat == "LOCKED" || $userObj->stat == "DISABLED") {
                 $result['rslt'] = FAIL;
