@@ -207,8 +207,6 @@
       let target = $(this).attr('target');
       formData[target] = $(this).val();
     });
-    
-    formData['fac'] = $('$portmap-modal-fac').val().toUpperCase()
 
     $.ajax({
       type: "POST",
