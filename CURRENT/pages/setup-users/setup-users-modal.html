@@ -119,11 +119,6 @@
                 Clear
               </button>
             </div>
-            <div class="col-md-7">
-              <div class="form-group">
-                <label id="setup-users-modal-post-response-text" style="margin-top:32px;"></label>
-              </div>
-            </div>
           </div>
 
           <div class="modal-footer">
@@ -228,6 +223,11 @@ $(document).ready(function() {
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
     $('.setup-users-forms-input').val('');
     $('.setup-users-modal-input').val('');
-  })
+    setupUsersDatatable.clear().draw();
+  });
+
+  $(".setup-users-modal-input").on('click', function() {
+    clearErrors();
+  });
 });
 </script>
