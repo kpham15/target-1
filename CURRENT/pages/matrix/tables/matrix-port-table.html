@@ -20,7 +20,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var matrixPortDatatable = $('#matrix-port-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 7,
     "columns": [
       {"data":"port"},
       {"data":"psta"},

@@ -138,7 +138,7 @@
     </div>
     <!-- Action Row -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <div class="form-group">
           <label>ACTION:</label>
           <select id="setup-users-forms-action" class="form-control setup-users-forms-input">
@@ -151,6 +151,7 @@
             <option value="DELETE">DELETE</option>
             <option value="RESET_PW">RESET PASSWORD</option>
             <option value="UPLOAD_IMAGE">UPLOAD_IMAGE</option>
+            <option value="REMOVE_USER_IMAGE">REMOVE_USER_IMAGE</option>
           </select>
         </div>
       </div>
@@ -286,6 +287,9 @@ $(document).ready(function() {
     }
     else if (obj.action === 'UPLOAD_IMAGE') {
       setupUserUploadImg(obj);
+    }
+    else if (obj.action === 'REMOVE_USER_IMAGE') {
+      setupUserOther(obj);
     }
     else {
       setupUserOther(obj);

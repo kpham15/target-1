@@ -68,7 +68,9 @@
 <script type="text/javascript">
 
 var databaseDownloadDatatable = $('#header-database-download-table').DataTable({
+  dom: "frtip",
   "data": [],
+  "pageLength": 4,
   "columns": [
     {"data":"user"},
     {"data":"dbfile"},

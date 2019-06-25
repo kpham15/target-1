@@ -76,7 +76,7 @@ class FTRELEASE {
         }
     }
 
-    public function queryFtRelease($sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop) {
+    public function queryFtRelease($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop) {
         global $db;
         
         $qry = "SELECT * FROM t_ftrelease WHERE 
@@ -86,17 +86,17 @@ class FTRELEASE {
                 cls      LIKE '%$cls%'      AND 
                 oc       LIKE '%$oc%'       AND 
                 adsr     LIKE '%$adsr%'     AND 
-                act      LIKE '%$rtAct%'    AND 
-                ftyp     LIKE '%$facType%'  AND 
-                fac      LIKE '%$facId%'    AND 
-                fdd_int  LIKE '%$fddInt%'   AND 
-                dd_int   LIKE '%$ddInt%'    AND 
+                act      LIKE '%$act%'    AND 
+                ftyp     LIKE '%$ftyp%'  AND 
+                fac      LIKE '%$fac%'    AND 
+                fdd_int  LIKE '%$fdd_int%'   AND 
+                dd_int   LIKE '%$dd_int%'    AND 
                 rtyp     LIKE '%$rtyp%'     AND 
                 rt       LIKE '%$rt%'       AND 
-                jcond    LIKE '%$jCond%'    AND 
+                jcond    LIKE '%$jcond%'    AND 
                 jeop     LIKE '%$jeop%'
                 ";
-        
+
         $res = $db->query($qry);
         if (!$res) {
             $this->rslt = "fail";
@@ -116,6 +116,29 @@ class FTRELEASE {
 
     public function add($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop) {
         global $db;
+        if($ot == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING OT";
+            return;
+        }
+
+        if($rt == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING RT";
+            return;
+        }
+
+        $this->checkDuplication($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop);
+        if($this->rslt == "fail") {
+            return;
+        }
+
+        if ($fdd_int == "") {
+            $fdd_int = 0;
+        }
+        if ($dd_int == "") {
+            $dd_int = 0;
+        }
 
         $qry = "INSERT INTO 
                 t_ftrelease 
@@ -163,8 +186,33 @@ class FTRELEASE {
         }
     }
 
-    public function update($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop) {
+    public function update($id, $sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop) {
         global $db;
+        if($ot == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING OT";
+            return;
+        }
+
+        if($rt == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING RT";
+            return;
+        }
+
+        $duplicationList = $this->checkDuplication($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop);
+        if($this->rslt == "fail") {
+            if(in_array($id,$duplicationList)) {
+                $this->reason = "There is no change in all inputs";
+            }
+            return;
+        }
+        if ($fdd_int == "") {
+            $fdd_int = 0;
+        }
+        if ($dd_int == "") {
+            $dd_int = 0;
+        }
 
         $qry = "UPDATE t_ftrelease SET 
                 sot      = '$sot', 
@@ -173,14 +221,14 @@ class FTRELEASE {
                 cls      = '$cls', 
                 oc       = '$oc', 
                 adsr     = '$adsr', 
-                act      = '$rtAct', 
-                ftyp     = '$facType', 
-                fac      = '$facId', 
-                fdd_int  = '$fddInt', 
-                dd_int   = '$ddInt', 
+                act      = '$act', 
+                ftyp     = '$ftyp', 
+                fac      = '$fac', 
+                fdd_int  = '$fdd_int', 
+                dd_int   = '$dd_int', 
                 rtyp     = '$rtyp', 
                 rt       = '$rt', 
-                jcond    = '$jCond', 
+                jcond    = '$jcond', 
                 jeop     = '$jeop' 
                 WHERE id = '$id'";
                 
@@ -195,6 +243,51 @@ class FTRELEASE {
 		}
 
  
+    }
+
+    public function checkDuplication($sot, $ot, $rot, $cls, $oc, $adsr, $act, $ftyp, $fac, $fdd_int, $dd_int, $rtyp, $rt, $jcond, $jeop) {
+        global $db;
+        $duplication_list = [];
+
+        $qry = "SELECT * FROM t_ftrelease WHERE 
+                sot      = '$sot'      AND 
+                ot       = '$ot'       AND 
+                rot      = '$rot'      AND 
+                cls      = '$cls'      AND 
+                oc       = '$oc'       AND 
+                adsr     = '$adsr'     AND 
+                act      = '$act'    AND 
+                ftyp     = '$ftyp'  AND 
+                fac      = '$fac'    AND 
+                fdd_int  = '$fdd_int'   AND 
+                dd_int   = '$dd_int'    AND 
+                rtyp     = '$rtyp'     AND 
+                rt       = '$rt'       AND 
+                jcond    = '$jcond'    AND 
+                jeop     = '$jeop'
+                ";
+        
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = "fail";
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $this->rslt = "success";
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $duplication_list[] = $row['id'];
+                }
+                $this->rslt = "fail";
+                $this->reason = "Duplication Error";
+            }
+            else {
+                $this->rslt = "success";
+                $this->reason = "Ready to proceed task";
+            }
+            
+        }
+        return $duplication_list;
     }
 }
 

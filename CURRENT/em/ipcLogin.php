@@ -111,13 +111,30 @@
                 return $result;
             } 
             
-            // Deny if first time login without providing a newPw
+            $refObj = new REF();
+
+            //if not the case of changing password
             if (decryptData($newPw) == "") {
+                // Deny if first time login without providing a newPw
                 if (decryptData($userObj->pw) == $userObj->ssn) {   
                     $result['rslt'] = FAIL;
                     $result['reason'] = "FIRST TIME LOGIN, PLEASE PROVIDE NEW PASSWORD";
                     return $result;
                 }
+                //if not first time login, Deny if password has expired
+                $pwDurationSec = strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate) ;
+                $pwDurationDay = $pwDurationSec/(60*60*24);
+                if($pwDurationDay >= $refObj->ref[0]["pw_expire"]) {
+                    $result['rslt'] = FAIL;
+                    $result['reason'] = "PLEASE CHANGE PASSWORD, CURRENT PASSWORD HAS EXPIRED";
+                    return $result;
+                }
+                
+                $pwAlertDay = $refObj->ref[0]["pw_expire"] - ((strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate))/(60*60*24));
+                if($pwAlertDay > 0 && $pwAlertDay <= $refObj->ref[0]["pw_alert"]) {
+                    $result['pw_exp_alert'] = (int)$pwAlertDay;
+                }
+
             }
             // otherwise, update user pw
             else {
@@ -141,8 +158,6 @@
                 $result["reason"]   = $userObj->reason;
                 return $result;
             }    
-
-            $refObj = new REF();
 
             $result["rslt"]     = SUCCESS;
             if ($userObj->pw == $newPw) {

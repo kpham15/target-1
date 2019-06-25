@@ -26,8 +26,9 @@
 
 <script>
     var provReportDataTable = $("#provReport_tbl").DataTable({
-        "scrollY": "200px",
+        dom: "frtip",
         "data": [],
+        "pageLength": 4,
         "columns":[
             {
                 "data":"date",

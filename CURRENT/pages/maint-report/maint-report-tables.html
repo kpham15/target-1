@@ -22,8 +22,9 @@
 
 <script>
   var maintReportDatatable = $("#maintReport-table").DataTable({
-    "scrollY": "200px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 4,
     "columns": [
       {
         "data":"date",

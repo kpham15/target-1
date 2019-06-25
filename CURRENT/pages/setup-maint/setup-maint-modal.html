@@ -369,8 +369,8 @@
   // Initialize DataTable for Change->Search
   var maintChangeSearchDatatable = $('#setup-maint-modal-change-table').DataTable({
     "dom":      "frtip",
-    "scrollY":  "100px",
-    "data":      [],
+    "data": [],
+    "pageLength": 3,
     "columns":   [
       {"data":"fac"},
       {"data":"psta"},

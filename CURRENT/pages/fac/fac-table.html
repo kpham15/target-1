@@ -24,7 +24,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var facDatatable = $('#fac-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 8,
     "columns": [
       {"data":"fac"},
       {"data":"ftyp"},
@@ -34,7 +36,6 @@
       {"data":"psta"},
     ],
     "order": [[ 0, "asc" ]],
-    "scrollY": "400px",
   });
 
   function queryFac() {
