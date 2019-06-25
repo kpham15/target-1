@@ -93,7 +93,7 @@
         let target = $(this).attr('target');
         $(this).val(obj[target]);
       });
-      $('#portmap-modal-ftyp').val(obj.ftyp).change();
+      $('#portmap-modal-ftyp').val(obj.ftyp);
       $('#portmap-modal-action').val(obj.value.toUpperCase());
     }
 
@@ -121,7 +121,7 @@
       if (portmapPortid > 0) {
         if (portmapFacid > 0) {
           portmapModalClear();
-          $('.portmap-modal-fac-forms').prop('disabled',true);
+          $('.portmap-modal-fac-forms').prop('disabled',false);
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').hide();
           $('#setup-portmap-modal').modal('show');
