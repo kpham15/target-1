@@ -94,7 +94,7 @@
         $(this).val(obj[target]);
       });
       $('#portmap-modal-ftyp').val(obj.ftyp);
-      $('#portmap-modal-action').val(obj.value);
+      $('#portmap-modal-action').val(obj.value.toUpperCase());
     }
 
     function portmapActionMap(obj) {
@@ -201,11 +201,11 @@
       clearErrors();
       
       // MAP Action
-      if (obj.value === 'MAP') {
+      if (obj.value === 'map') {
         portmapActionMap(obj);
       }
       // UNMAP Action
-      else if (obj.value === 'UNMAP') {
+      else if (obj.value === 'unmap') {
         portmapActionUnmap(obj);
       }
     });
