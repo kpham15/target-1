@@ -609,12 +609,12 @@
       let restoreMtcd = 'disabled';
       let mtTest = 'disabled';
 
-      if (stat.includes('bg-green')) {
+      if (stat.includes('mt-disconnect')) {
         mtDisconnect = '';
-      } else if (stat.includes('bg-minor')) {
+      } else if (stat.includes('mt-restore mt-test')) {
         mtRestore = '';
         mtTest = '';
-      } else if (stat.includes('bg-major')) {
+      } else if (stat.includes('restore-mtcd')) {
         restoreMtcd = '';
       }
 
