@@ -42,11 +42,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>PORT_TYP</label>
-                <select class="form-control portmap-modal-field portmap-modal-port-forms" id="portmap-modal-ptyp" target="ptyp" disabled>
-                  <option value=""></option>
-                  <option value="x">X</option>
-                  <option value="y">Y</option>
-                </select>
+                <input type="text" class="form-control portmap-modal-field portmap-modal-port-forms uppercase" id="portmap-modal-ptyp" target="ptyp" disabled>
               </div>
             </div>
   
@@ -54,16 +50,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>PSTA</label>
-                <select class="form-control portmap-modal-field portmap-modal-port-forms" id="portmap-modal-psta" target="psta" disabled>
-                  <option value=""></option>
-                  <option value="uas">UAS</option>
-                  <option value="sf">SF</option>
-                  <option value="conn">CONN</option>
-                  <option value="def">DEF</option>
-                  <option value="mtcd">MTCD</option>
-                  <option value="maint">MAINT</option>
-                  <option value="unq">UNQ</option>
-                </select>
+                <input type="text" class="form-control portmap-modal-field portmap-modal-port-forms uppercase" id="portmap-modal-psta" target="psta" disabled>
               </div>
             </div>
   
@@ -80,7 +67,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>FAC_TYP</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="ftyp" id="portmap-modal-ftyp">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="ftyp" id="portmap-modal-ftyp"></select>
               </div>
             </div>
   
@@ -88,7 +75,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>ORT</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="ort" id="portmap-modal-ort">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="ort" id="portmap-modal-ort"></select>
               </div>
             </div>
   
@@ -96,7 +83,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>SPCFNC</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="spcfnc" id="portmap-modal-spcfnc">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="spcfnc" id="portmap-modal-spcfnc"></select>
               </div>
             </div>
           </form>
@@ -262,18 +249,18 @@
     $('#portmap-modal-submit').click(function() {
       let action = $('#portmap-modal-action').val();
 
-      if (action === 'MAP') {
-        if (!(portmapFacid > 0)) { 
-          $('.portmap-modal-fac-forms').each(function() {
-            if ($(this).attr('target') === 'fac') {
-              inputError($(this), 'Must select a facility to map to.');
-            } else {
-              inputError($(this),'');
-            }
-          });
-          return;
-        }
-      }
+      // if (action === 'MAP') {
+      //   if (!(portmapFacid > 0)) { 
+      //     $('.portmap-modal-fac-forms').each(function() {
+      //       if ($(this).attr('target') === 'fac') {
+      //         inputError($(this), 'Must select a facility to map to.');
+      //       } else {
+      //         inputError($(this),'');
+      //       }
+      //     });
+      //     return;
+      //   }
+      // }
 
       portmapSubmit(action);
     });
