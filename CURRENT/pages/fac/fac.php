@@ -82,5 +82,6 @@
     
     $('#fac-form-'+type).html(a.join(''));
     $('#fac-modal-'+type).html(a.join(''));
+    $('#portmap-modal-'+type).html(a.join(''));
   }
 </script>

@@ -14,8 +14,9 @@
           <label>PORT_TYP</label>
           <select id="portmap-form-ptyp" class="form-control portmap-form-input portmap-form-select">
             <option value=""></option>
-            <option value="x">X</option>
-            <option value="y">Y</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
           </select>
         </div>
       </div>
@@ -25,13 +26,13 @@
           <label>PSTA</label>
           <select id="portmap-form-psta" class="form-control portmap-form-input portmap-form-select">
             <option value=""></option>
-            <option value="uas">UAS</option>
-            <option value="sf">SF</option>
-            <option value="conn">CONN</option>
-            <option value="def">DEF</option>
-            <option value="mtcd">MTCD</option>
-            <option value="maint">MAINT</option>
-            <option value="unq">UNQ</option>
+            <option value="UAS">UAS</option>
+            <option value="SF">SF</option>
+            <option value="CONN">CONN</option>
+            <option value="DEF">DEF</option>
+            <option value="MTCD">MTCD</option>
+            <option value="MAINT">MAINT</option>
+            <option value="UNQ">UNQ</option>
           </select>
         </div>
       </div>
@@ -103,6 +104,9 @@
           $('#portmap-form-action').val('');
           return;
         } else {
+          loadFacOptions("queryFtyp", "ftyp");
+          loadFacOptions("queryOrt", "ort");
+          loadFacOptions("querySpcfnc", "spcfnc");
           portmapModalClear();
           $('.portmap-modal-fac-forms').prop('disabled', false);
           portmapPopulateModal(obj);
