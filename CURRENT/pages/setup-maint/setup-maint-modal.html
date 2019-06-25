@@ -342,9 +342,6 @@
                 <input id="setup-maint-modal-action" type="text" class="form-control setup-maint-modal-input" disabled=""/>
               </div>
             </div>
-            <div class="form-group">
-              <label id="setup-maint-modal-post-response-text" style="margin-top:32px;"></label>
-            </div>
           </div>
           <!-- Footer -->
           <div class="modal-footer">
@@ -372,8 +369,8 @@
   // Initialize DataTable for Change->Search
   var maintChangeSearchDatatable = $('#setup-maint-modal-change-table').DataTable({
     "dom":      "frtip",
-    "scrollY":  "100px",
-    "data":      [],
+    "data": [],
+    "pageLength": 3,
     "columns":   [
       {"data":"fac"},
       {"data":"psta"},
@@ -927,6 +924,10 @@
     // Modal Close Event Handler
     $('#setup-maint-modal').on('hidden.bs.modal', function(e) {
       $('#setup-maint-forms-action').val('');
-    })
-  })
+    });
+
+    $("#setup-maint-modal-input").on('click', function() {
+      clearErrors();
+    });
+  });
 </script>

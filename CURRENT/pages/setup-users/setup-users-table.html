@@ -23,7 +23,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var setupUsersDatatable = $('#setup-users-table').DataTable({
-    "data":     [],
+    dom: "frtip",
+    "data": [],
+    "pageLength": 8,
     "columns":  [
       {"data":"uname"},
       {"data":"stat"},
@@ -37,7 +39,8 @@
     // Click Event on Table Rows
     $(document).on('click', '#setup-users-table tbody tr', function() {
       let data = setupUsersDatatable.row(this).data();
-
+      if(data == undefined)
+          return;
       $('#setup-users-forms-user').val(data.uname);
       $('#setup-users-forms-stat').val(data.stat);
       $('#setup-users-forms-lastlogin').val(data.lastlogin);

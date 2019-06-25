@@ -207,3 +207,11 @@ hr.content-page-divider {
   margin-bottom: 15px;
 }
 /* ============ END Sysview Page CSS ============ */
+
+
+/* ============ DataTable extra style=========== */
+table {
+  table-layout: fixed;
+  width: 100% !important;
+}
+/* =============END DataTable CSS=============== */

@@ -31,7 +31,9 @@
 
   // Initialize Datatable
   var portmapDatatable = $('#portmap-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 8,
     "columns": [
       {"data":"id"},
       {"data":"port"},
