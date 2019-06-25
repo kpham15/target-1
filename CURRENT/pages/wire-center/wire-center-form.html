@@ -277,6 +277,8 @@ $("#wc_act_sel").change(function() {
 $(document).ready(function(){
     $(".menu-item[page_id='wire-center-page']").click(function() {
         wc_query('query');
+        $("#wire-center-page select").css("-webkit-appearance", "menulist");
+        $("#wire-center-page select:disabled").css("-webkit-appearance", "none");
     });
 })
 </script>
