@@ -52,6 +52,11 @@
           <option value=""></option>
         </select>
       </div>
+
+      <div class="col-md-3">
+        <label>PORT</label>
+        <input type="text" id="fac-form-port" class="form-control fac-form-input" disabled>
+      </div>
     </div>
 
     <!-- Row 3 -->
@@ -101,6 +106,7 @@
       let ort = $("#fac-form-ort").val();
       let psta = $("#fac-form-psta").val();
       let spcfnc = $("#fac-form-spcfnc").val();
+      let port = $("#fac-form-port").val();
 
       clearErrors();
 
@@ -135,6 +141,7 @@
         $("#fac-modal-ort").val(ort);
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
+        $("#fac-modal-port").val(port);
 
         $("#fac-modal-range").parent().parent().hide();
 
@@ -159,6 +166,7 @@
         $("#fac-modal-ort").val(ort);
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
+        $("#fac-modal-port").val(port);
 
         $("#fac-modal-range").parent().parent().hide();
 
