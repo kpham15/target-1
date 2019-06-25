@@ -108,7 +108,7 @@
           <!-- Action Row -->
           <div class="row">
             <!-- ACTION -->
-            <div class="col-md-3">
+            <div class="col-md-5">
               <div class="form-group">
                 <label>ACTION</label>
                 <input id="setup-users-modal-action" type="text" class="form-control" disabled="" />
@@ -119,7 +119,7 @@
                 Clear
               </button>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-5">
               <div class="form-group">
                 <label id="setup-users-modal-post-response-text" style="margin-top:32px;"></label>
               </div>
@@ -174,6 +174,10 @@ function setupUsersModalSubmit(obj) {
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
+
+      if($("#setup-users-forms-user").val() == user.uname && obj.action == "REMOVE_USER_IMAGE") {
+        displayUserImg("defaultUser.jpeg")
+      }
 
     }
   })

@@ -19,7 +19,9 @@
 
 <script type="text/javascript">
   var helpSearchDatatable = $('#helpsearch-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 5,
     "columns": [
       {"data":"item"},
       {"data":"descr"},

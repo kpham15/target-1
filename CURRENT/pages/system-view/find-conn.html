@@ -73,8 +73,9 @@
 var sysview_findConn_ckid = "";
 
 var sysview_findConn_cktDatatable = $('#sysview_findConn_cktTable').DataTable({
-    "scrollY":        "100px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
         {"data":"ckid"},
         {"data":"cls"},
@@ -95,9 +96,9 @@ var sysview_findConn_cktDatatable = $('#sysview_findConn_cktTable').DataTable({
 });
   
 var sysview_findConn_cktconDatatable = $("#sysview_findConn_cktconTable").DataTable({
-    "scrollY":        "100px",
-    // "scrollCollapse": true,
-    "data" : [],
+    dom: "frtip",
+    "data": [],
+    "pageLength": 3,
     "columns" : [
         {"data":"idx"},
         {"data":"ctyp"},

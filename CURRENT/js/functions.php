@@ -230,7 +230,32 @@
 
         return result;
 	}
+	
+	// Used in all report pages to convert their data into csv format
+	function downloadCSV(args) {
+		var data, filename, link;
 
+		var csv = convertArrayOfObjectsToCSV({
+			data: provReportDataTable.data().toArray()
+		});
+
+		if (csv == null) {
+			inputError($('#provReport_report_sel'),'No Report To Create');
+			return;
+		}
+
+		filename = args.filename || 'export.csv';
+
+		if (!csv.match(/^data:text\/csv/i)) {
+			csv = 'data:text/csv;charset=utf-8,' + csv;
+		}            
+		data = encodeURI(csv);
+
+		link = document.createElement('a');
+		link.setAttribute('href', data);
+		link.setAttribute('download', filename);
+		link.click();
+	}
 
 	// ================ Encode Password ================= //
 	function encode(data) {
@@ -263,6 +288,27 @@
 		encodedSource = encodedSource.replace(/\//g, '_');
 	
 		return encodedSource;
-    }
+	}
+	
+	function displayUserImg(fileName) {
+		let randomNum = Math.floor(Math.random() * 100000);
+        let url = "../PROFILE/"+fileName+"?"+randomNum ;
+        let img = new Image();
+        img.src = url;
+        img.onload = function(){
+            let ratio = img.width/img.height;
+            let imgDropbox_height = 135;
+            let imgDropbox_width = Math.floor(135 * ratio);
+            $("#user_header_pic").css("width",imgDropbox_width+"px");
+            $("#user_header_pic").css("height",imgDropbox_height+"px");
+            $("#user_header_pic").attr("src",url);
+
+            let imgHeader_height = 25;
+            let imgHeader_width = Math.floor(25 * ratio);
+            $("#dropdown_userPic").attr("width",imgHeader_width);
+            $("#dropdown_userPic").attr("height",imgHeader_height);
+            $("#dropdown_userPic").attr("src",url);
+        } 
+	}
   
 </script>
