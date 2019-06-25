@@ -35,13 +35,9 @@
       return;
     }
     // loads options for ftyp, ort, spcfnc selection fields in setup facility
-    let ftypOptions = loadFacOptions("queryFtyp");
-    let ortOptions = loadFacOptions("queryOrt");
-    let spcfncOptions = loadFacOptions("querySpcfnc");
-
-    createFacOptions(ftypOptions, 'ftyp');
-    createFacOptions(ortOptions,'ort');
-    createFacOptions(spcfncOptions, 'spcfnc');
+    loadFacOptions("queryFtyp", "ftyp", createFacOptions);
+    loadFacOptions("queryOrt", "ort", createFacOptions);
+    loadFacOptions("querySpcfnc", "spcfnc", createFacOptions);
 
     // load fac table upon visiting page
     queryFac();
@@ -49,7 +45,7 @@
     facFirstLoad = false;
   });
   
-  function loadFacOptions(action) {
+  function loadFacOptions(action, type, callback) {
     $.ajax({
       type: 'POST',
       url: "./em/ipcDispatch.php",
@@ -70,7 +66,7 @@
         modal.type = 'danger',
         modalHandler(modal);
       } else {
-        return res;
+        callback(res, type);
       }
     });
   }
