@@ -125,9 +125,6 @@
         if (portmapFacid > 0) {
           portmapModalClear();
           $('.portmap-modal-fac-forms').prop('disabled',true);
-          loadFacOptions("queryFtyp", "ftyp");
-          loadFacOptions("queryOrt", "ort");
-          loadFacOptions("querySpcfnc", "spcfnc");
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').hide();
           $('#setup-portmap-modal').modal('show');
