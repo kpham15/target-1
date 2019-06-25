@@ -114,6 +114,8 @@
         $("#fac-modal-range").parent().parent().show();
 
 
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
         $('#fac-modal').modal('show');
       }
       // UPDATE Action
@@ -138,6 +140,9 @@
 
         $('#fac-modal-action').val('UPDATE');
 
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
+
         $('#fac-modal').modal('show');
       }
       // DELETE Action
@@ -158,6 +163,8 @@
         $("#fac-modal-range").parent().parent().hide();
 
         $('#fac-modal-action').val('DELETE');
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
 
         $('#fac-modal').modal('show');
       }
