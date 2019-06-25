@@ -123,6 +123,9 @@
     function portmapActionUnmap(obj) {
       if (portmapPortid > 0) {
         if (portmapFacid > 0) {
+          loadFacOptions("queryFtyp", "ftyp");
+          loadFacOptions("queryOrt", "ort");
+          loadFacOptions("querySpcfnc", "spcfnc");
           portmapModalClear();
           $('.portmap-modal-fac-forms').prop('disabled',true);
           portmapPopulateModal(obj);
@@ -186,6 +189,9 @@
         port:     $('#portmap-form-port').val(),
         psta:     $('#portmap-form-psta').val(),
         fac:      $('#portmap-form-fac').val(),
+        ftyp:     portmapFtyp,
+        ort:      portmapOrt,
+        spcfnc:   portmapSpcfnc
       }
 
       if ($('#portmap-tn-check').prop('checked')) {
