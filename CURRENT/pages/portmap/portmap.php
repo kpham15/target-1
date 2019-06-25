@@ -22,3 +22,34 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+
+var portmapFirstLoad = true;
+
+$('.menu-item[page_id="portmap-page"]').click(function() {
+    if (portmapFirstLoad != true) {
+        return;
+    }
+
+    loadFacOptions("queryFtyp", "ftyp", createPortOptions);
+    loadFacOptions("queryOrt", "ort", createPortOptions);
+    loadFacOptions("querySpcfnc", "spcfnc", createPortOptions);
+
+    portmapFirstLoad = false;
+})
+
+function createPortOptions(data, type) {
+    var a = [];
+    a.push('<option value=""></option>');
+    
+    data.forEach(function(option) {
+      let html = `<option value="${option[type]}">${option[type]}</option>`;
+      a.push(html);
+    });
+    
+    $('#portmap-modal-'+type).html(a.join(''));
+
+  }
+</script>
+

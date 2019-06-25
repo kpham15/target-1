@@ -33,8 +33,9 @@
 <script type="text/javascript">
 
 var bulletinBoardDatatable = $('#header-bulletinBoard-table').DataTable({
-  "scrollY": "100px",
+  dom: "frtip",
   "data": [],
+  "pageLength": 4,
   "columns": [
     {
       "data":"date",

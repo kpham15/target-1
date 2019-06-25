@@ -21,7 +21,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var ftOrdersOrdDatatable = $('#ftOrders-ordTable').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"stat"},
       {"data":"ordno"},

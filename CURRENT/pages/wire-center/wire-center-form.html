@@ -33,23 +33,11 @@
         </div>
         <div class="col-sm-1 " style="padding:2px">
             <label for="wc_tzone_sel">TZONE</label>
-            <select class="form-control" id="wc_tzone_sel" disabled>
-                <option></option>
-                <option>AKST</option>
-                <option>CST</option>
-                <option>EST</option>
-                <option>HST</option>
-                <option>MST</option>
-                <option>PST</option>
-            </select>
+            <input class="form-control" id="wc_tzone_sel" disabled>
         </div>
         <div class="col-sm-2 " style="padding:2px">
             <label for="wc_stat_sel">STAT</label>
-            <select class="form-control" id="wc_stat_sel" disabled="">
-                <option></option>
-                <option>INS</option>
-                <option>OOS</option>
-            </select>
+            <input class="form-control" id="wc_stat_sel" disabled="">
         </div>
     </div>
 
@@ -66,8 +54,7 @@
 
         <div class="col-sm-1 " style="padding:2px">
             <label for="wc_state_sel">STATE</label>
-            <select class="form-control" id="wc_state_sel" disabled>
-            </select>
+            <input class="form-control" id="wc_state_sel" disabled>
         </div>
 
         <div class="col-sm-2 " style="padding:2px">
@@ -151,6 +138,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="./pages/wire-center/wire-center-options.js"></script>
 
 <script>
 var wc_ipcTime = "";
@@ -231,12 +219,17 @@ function wc_query(action) {
 
 
 $("#wc_act_sel").change(function() {
+    
+    wcModalInsertStatesOption(wcOptionsState);
+
     if ($("#wc_id_num").val() != "") {
         if ($("#wc_act_sel").val()  ==  "UPDATE") {
             wcModal_tblRows = wc_tblRows;
             wcModal_displayForm();
             wcModal_enableForm();
             wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
             $("#wcModal").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "RESET") {
@@ -245,6 +238,8 @@ $("#wc_act_sel").change(function() {
             $("#wcModal_act_txt").val($("#wc_act_sel").val());
             wcModal_disableForm();
             wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
             $("#wcModal").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "UPDATE_NETWORK") {
@@ -252,6 +247,8 @@ $("#wc_act_sel").change(function() {
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_enableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
             $("#wcModal").modal();
         } 
         else if ($("#wc_act_sel").val()  ==  "TURN_UP") {
@@ -259,6 +256,8 @@ $("#wc_act_sel").change(function() {
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
             $("#wcModal").modal();
 
         }
@@ -267,6 +266,8 @@ $("#wc_act_sel").change(function() {
             wcModal_displayForm();
             wcModal_disableForm();
             wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
             $("#wcModal").modal();
         }  
     }   
@@ -276,6 +277,8 @@ $("#wc_act_sel").change(function() {
 $(document).ready(function(){
     $(".menu-item[page_id='wire-center-page']").click(function() {
         wc_query('query');
+        $("#wire-center-page select").css("-webkit-appearance", "menulist");
+        $("#wire-center-page select:disabled").css("-webkit-appearance", "none");
     });
 })
 </script>

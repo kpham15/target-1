@@ -534,7 +534,7 @@
 
         $result['rows'] = $cktconObj->rows;
         $result["rslt"] = SUCCESS;
-        $result["reason"] = "MAINTENANCE RESORE - " . "SUCCESSFUL";
+        $result["reason"] = "MAINTENANCE RESTORE - " . "SUCCESSFUL";
         return $result;
     }
     

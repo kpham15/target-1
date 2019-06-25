@@ -27,6 +27,9 @@
 .content-header {
   margin-bottom: 10px;
 }
+input:not(.lowercase) {
+  text-transform: uppercase;
+}
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
@@ -204,3 +207,11 @@ hr.content-page-divider {
   margin-bottom: 15px;
 }
 /* ============ END Sysview Page CSS ============ */
+
+
+/* ============ DataTable extra style=========== */
+table {
+  table-layout: fixed;
+  width: 100% !important;
+}
+/* =============END DataTable CSS=============== */
