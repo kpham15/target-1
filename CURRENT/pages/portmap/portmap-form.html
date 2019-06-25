@@ -121,7 +121,7 @@
       if (portmapPortid > 0) {
         if (portmapFacid > 0) {
           portmapModalClear();
-          $('.portmap-modal-fac-forms').prop('disabled',false);
+          $('.portmap-modal-fac-forms').prop('disabled',true);
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').hide();
           $('#setup-portmap-modal').modal('show');
@@ -187,10 +187,6 @@
         ort:      portmapOrt,
         spcfnc:   portmapSpcfnc
       }
-
-      loadFacOptions("queryFtyp", "ftyp");
-      loadFacOptions("queryOrt", "ort");
-      loadFacOptions("querySpcfnc", "spcfnc");
 
       if ($('#portmap-tn-check').prop('checked')) {
         obj.ckid = $('#portmap-form-ckid-tn').val();

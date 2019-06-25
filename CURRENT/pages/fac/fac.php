@@ -35,9 +35,13 @@
       return;
     }
     // loads options for ftyp, ort, spcfnc selection fields in setup facility
-    loadFacOptions("queryFtyp", "ftyp");
-    loadFacOptions("queryOrt", "ort");
-    loadFacOptions("querySpcfnc", "spcfnc");
+    let ftypOptions = loadFacOptions("queryFtyp");
+    let ortOptions = loadFacOptions("queryOrt");
+    let spcfncOptions = loadFacOptions("querySpcfnc");
+
+    createFacOptions(ftypOptions, 'ftyp');
+    createFacOptions(ortOptions,'ort');
+    createFacOptions(spcfncOptions, 'spcfnc');
 
     // load fac table upon visiting page
     queryFac();
@@ -45,7 +49,7 @@
     facFirstLoad = false;
   });
   
-  function loadFacOptions(action, type) {
+  function loadFacOptions(action) {
     $.ajax({
       type: 'POST',
       url: "./em/ipcDispatch.php",
@@ -66,7 +70,7 @@
         modal.type = 'danger',
         modalHandler(modal);
       } else {
-        createFacOptions(res, type);
+        return res;
       }
     });
   }
@@ -82,6 +86,5 @@
     
     $('#fac-form-'+type).html(a.join(''));
     $('#fac-modal-'+type).html(a.join(''));
-    $('#portmap-modal-'+type).html(a.join(''));
   }
 </script>
