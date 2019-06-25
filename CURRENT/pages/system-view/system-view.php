@@ -212,7 +212,7 @@
           color = 'bg-green';
           break;
         case "MTCD":
-          color = 'bg-major';
+          color = 'bg-minor';
           break;
         case "MAINT":
           color = 'bg-major';
@@ -609,12 +609,12 @@
       let restoreMtcd = 'disabled';
       let mtTest = 'disabled';
 
-      if (stat.includes('mt-disconnect')) {
+      if (stat.includes('bg-green')) {
         mtDisconnect = '';
-      } else if (stat.includes('mt-restore mt-test')) {
+      } else if (stat.includes('bg-minor')) {
         mtRestore = '';
         mtTest = '';
-      } else if (stat.includes('restore-mtcd')) {
+      } else if (stat.includes('bg-major')) {
         restoreMtcd = '';
       }
 
