@@ -342,6 +342,7 @@ $(document).ready(function() {
     clearErrors();
 
     let fname = $('#setup-users-forms-fname').val().toUpperCase();
+    let mi = $('#setup-users-forms-mi').val().toUpperCase();
     let lname = $('#setup-users-forms-lname').val().toUpperCase();
 
     $.ajax({
@@ -352,6 +353,7 @@ $(document).ready(function() {
         "act":      "findNameSsn",
         "user":     user.uname,
         "fname":    fname,
+        "mi":       mi,
         "lname":    lname,
     },
       dataType:     'json'
