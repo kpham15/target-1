@@ -190,7 +190,32 @@
             
             </div>
             <!-- DD and FDD row -->
-            <div class="row">
+
+            <div class="col-sm-5" style="padding:2px;">
+                <div class="form-group">
+                    <label>DD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svcModal_dd_date">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5" style="padding:2px;">
+                <div class="form-group">
+                    <label>FDD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svcModal_fdd_date">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="row">
                 <div class="col-sm-5 " style="padding: 0px 2px 0px 20px;">
                     <label for="svcModal_dd_date">DD</label>
                     <input type="date" class="form-control svcModal-form" id="svcModal_dd_date">
@@ -199,7 +224,7 @@
                     <label for="svcModal_fdd_date">FDD</label>
                     <input type="date" class="form-control svcModal-form" id="svcModal_fdd_date">
                 </div>
-            </div>            
+            </div>             -->
             <!-- Action row -->
             <div class="row">
                 <div class="col-sm-3 " style="padding: 0px 2px 0px 20px;"> 
@@ -323,6 +348,15 @@ function clearSvcModalFacSearch(){
 }
 
 $(document).ready(function(){
+
+    $("#svcModal_dd_date").datepicker({
+        orientation: "bottom"
+    });
+
+    $("#svcModal_fdd_date").datepicker({
+        orientation: "bottom"
+    });
+
     $(".svcModal-ckid-tn").inputmask();
 
     $("#svcModal_newFfacSearch_btn").click(function(){
