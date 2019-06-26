@@ -211,8 +211,12 @@
         </div>
     
         <div class="modal-footer">
-            <button id="svc-modal-submit" type="button" class="btn btn-primary" style="float:left">Submit</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:left">Close</button>
+            <button id="svc-modal-submit" type="button" class="btn btn-primary" style="float:left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
         </div>
         </div>
     </div>
@@ -308,7 +312,6 @@ function clearSvcModal() {
     $("#svcModal_cls_sel").val("RES");
     $("#svcModal_adsr_sel").val("N");
     $("#svcModal_mlo_sel").val("N");
-    $("#svcModal_rslt").text("")
     clearSvcModalFacSearch();
 }
 
