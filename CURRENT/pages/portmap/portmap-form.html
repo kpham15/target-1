@@ -205,7 +205,7 @@
       }
     });
 
-    $(".portmap-form-input").on('click', function() {
+    $(".portmap-form-input not:(#portmap-form-action)").on('click', function() {
       clearErrors();
       $("#portmap-form-action").val("").change();
     });
