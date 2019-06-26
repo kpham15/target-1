@@ -214,7 +214,6 @@ $("#batchExc_act_sel").change(function() {
             else {
                 inputError($("#batchExc_act_sel"), "Please select a batch file!");
             }
-            $("#batchExc_act_sel").val("");
         }
     }
 
@@ -270,5 +269,6 @@ $(document).ready(function(){
 
 $(".batchExc_field").on('click', function() {
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
 });
 </script>
