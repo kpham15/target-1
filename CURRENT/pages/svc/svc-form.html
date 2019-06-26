@@ -350,12 +350,14 @@
                         return;
                     }
                 }
+                // $("#svc_modal input,#svc_modal select").val("");
+                populateSvcModal();
+                $("#svc_modal").modal("show");
+            } else {
+                return;
             }
 
             
-            // $("#svc_modal input,#svc_modal select").val("");
-            populateSvcModal();
-            $("#svc_modal").modal("show");
         })
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
