@@ -310,44 +310,45 @@
             let idx = $("#svc_cktconIdx_num").val();
             
             clearSvcModal();
-
-            if(act == "CONNECT") {
-                $("#svcModal_newConForm").show();
-                $("#svcModal_discConForm").hide();
-                $("#svcModal_changeConForm").hide();
-            }
-            else {
-                if(cktId == "" || cktId == 0) {
-                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
-                    return;
-                }
-                if(act == "UPDATE_CKT") {
-                    $("#svcModal_newConForm").hide();
+            if (act != "") {
+                if(act == "CONNECT") {
+                    $("#svcModal_newConForm").show();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
-                }
-                else if(act == "DISCONNECT") {
-                    if(idx == "" || idx == 0) {
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        return;
-                    }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").show();
-                    $("#svcModal_changeConForm").hide();
-
-                }
-                else if(act == "CHANGE") {
-                    if(idx == "" || idx == 0) {
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        return;
-                    }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").hide();
-                    $("#svcModal_changeConForm").show();
                 }
                 else {
-                    $("#svc_act_sel").val("");
-                    return;
+                    if(cktId == "" || cktId == 0) {
+                        inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
+                        return;
+                    }
+                    if(act == "UPDATE_CKT") {
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").hide();
+                    }
+                    else if(act == "DISCONNECT") {
+                        if(idx == "" || idx == 0) {
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").show();
+                        $("#svcModal_changeConForm").hide();
+
+                    }
+                    else if(act == "CHANGE") {
+                        if(idx == "" || idx == 0) {
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").show();
+                    }
+                    else {
+                        $("#svc_act_sel").val("");
+                        return;
+                    }
                 }
             }
 
