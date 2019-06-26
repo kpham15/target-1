@@ -386,7 +386,7 @@ $(document).ready(function() {
       tel = $('#setup-users-forms-phonenum').val();
     }
 
-    let email = $('#setup-users-forms-email').val();
+    let email = $('#setup-users-forms-email').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
