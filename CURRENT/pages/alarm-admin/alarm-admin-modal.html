@@ -88,12 +88,12 @@
 
     //click event for submit button
     $('#alarm-admin-modal-submit').click(function() {
-      let action = $('#alarm-admin-modal-action').val();
-      let almid = $('#alarm-admin-modal-almid').val();
-      let source = $('#alarm-admin-modal-source').val();
-      let ack = $('#alarm-admin-modal-ack').val();
-      let condition = $('#alarm-admin-modal-condition').val();
-      let comments = $('#alarm-admin-modal-comments').val();
+      let action = $('#alarm-admin-modal-action').val().toUpperCase();
+      let almid = $('#alarm-admin-modal-almid').val().toUpperCase();
+      let source = $('#alarm-admin-modal-source').val().toUpperCase();
+      let ack = $('#alarm-admin-modal-ack').val().toUpperCase();
+      let condition = $('#alarm-admin-modal-condition').val().toUpperCase();
+      let comments = $('#alarm-admin-modal-comments').val().toUpperCase();
 
       $.ajax({
         type:     "POST",
