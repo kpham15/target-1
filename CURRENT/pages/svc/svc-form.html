@@ -264,13 +264,13 @@
         $(".svc-ckid-tn").inputmask();
 
         $(".menu-item[page_id='svc-page']").click(function() {
-            resetSvcPage()
+            resetSvcPage();
         });
 
         $("#svc_clear_btn").click(function(e){
             clearErrors();
-            resetSvcPage();  
-        })
+            resetSvcPage();
+        });
 
         $("#svc_ffacSearch_btn").click(function(e){
             clearErrors();
@@ -319,7 +319,6 @@
             else {
                 if(cktId == "" || cktId == 0) {
                     inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
-                    $("#svc_act_sel").val("");
                     return;
                 }
                 if(act == "UPDATE_CKT") {
@@ -330,7 +329,6 @@
                 else if(act == "DISCONNECT") {
                     if(idx == "" || idx == 0) {
                         inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        $("#svc_act_sel").val("");
                         return;
                     }
                     $("#svcModal_newConForm").hide();
@@ -341,7 +339,6 @@
                 else if(act == "CHANGE") {
                     if(idx == "" || idx == 0) {
                         inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        $("#svc_act_sel").val("");
                         return;
                     }
                     $("#svcModal_newConForm").hide();
@@ -385,9 +382,13 @@
                 $(".svc-ckid-tn").attr("id","").hide();
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
-        })
+        });
     
-    })
+        $(".svc-form").on('click', function() {
+            clearErrors();
+            $("#svc_act_sel").val("").change();
+        });
+    });
     
 
 </script>
