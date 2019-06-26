@@ -163,6 +163,9 @@
       $("#pathAdmin-form-ckid").val(data.ckid);
       $("#pathAdmin-form-ckid-tn").val(data.ckid);
       $("#pathAdmin-form-path").val(data.path);
+
+      clearErrors();
+      $("#pathAdmin-form-action").val("").change();
       
     });
   });
