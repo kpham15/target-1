@@ -290,12 +290,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -331,12 +329,10 @@
   function validateMtcTest(obj) {
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -384,12 +380,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -518,7 +512,7 @@
         }
 
         if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+          inputError($('#setup-maint-forms-viewckid'), data.rslt + " - " + data.reason);
         }
         else {
           setupMaintTableCkts.clear().draw();
@@ -532,8 +526,6 @@
     
     // View Button 2
     $('#setup-maint-forms-viewtkt').click(function() {
-
-      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').hide();
       $('#setup-maint-table-tkts-div').show();
       $('#setup-maint-table-cons-div').hide();
@@ -560,15 +552,15 @@
         }
 
         if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+          inputError($('#setup-maint-forms-viewtkt'), data.rslt + " - " + data.reason);
         }
         else {
           setupMaintTableTkts.clear().draw();
           setupMaintTableTkts.rows.add(res);
           setupMaintTableTkts.columns.adjust().draw();
         }
-      })
-    })
+      });
+    });
     
     // Initialize inputmask
     $('#setup-maint-forms-ckid-tn').inputmask();
@@ -588,6 +580,7 @@
 
     $(".setup-maint-form-input").on('click', function() {
       clearErrors();
+      $("#setup-maint-form-action").val("").change();
     });
-  })
+  });
 </script>
