@@ -86,18 +86,18 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right svc-form" id="svc_dd_date">
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svc_dd_date">
                     </div>
                 </div>
             </div>
             <div class="col-sm-5" style="padding:2px;">
                     <div class="form-group">
                         <label>FDD:</label>
-                        <div class="input-group datepicker">
+                        <div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right svc-form" id="svc_fdd_date">
+                            <input type="text" class="form-control pull-right svc-form datepicker" id="svc_fdd_date">
                         </div>
                     </div>
                 </div>
@@ -286,9 +286,11 @@
     $(document).ready(function(){
 
         $("#svc_dd_date").datepicker({
+            orientation: "bottom"
         });
 
         $("#svc_fdd_date").datepicker({
+            orientation: "bottom"
         });
 
         $(".svc-ckid-tn").inputmask();
