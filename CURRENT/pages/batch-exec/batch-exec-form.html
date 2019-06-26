@@ -178,10 +178,10 @@ function batchExec_recurExecute(i) {
             }
 
     
-            if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
-                $("#batchExc_download_btn").prop("disabled", false);
-                return;
-            }
+            // if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
+            //     $("#batchExc_download_btn").prop("disabled", false);
+            //     return;
+            // }
 
             batchExec_recurExecute(i+1);
         });
