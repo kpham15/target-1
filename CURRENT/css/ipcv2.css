@@ -30,6 +30,9 @@
 input:not(.lowercase) {
   text-transform: uppercase;
 }
+textarea:not(.lowercase) {
+  text-transform: uppercase;
+}
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
@@ -210,7 +213,7 @@ hr.content-page-divider {
 
 
 /* ============ DataTable extra style=========== */
-table {
+table:not(.table-condensed) {
   table-layout: fixed;
   width: 100% !important;
 }
