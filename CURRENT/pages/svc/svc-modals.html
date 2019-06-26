@@ -396,6 +396,8 @@ $(document).ready(function(){
         let prot = $("#svcModal_prot_sel").val().toUpperCase();
         let ordno = $("#svcModal_ordno_txt").val().toUpperCase();
         let mlo = $("#svcModal_mlo_sel").val().toUpperCase();
+        let dd = $('#svcModal_dd_date').val();
+        let fdd = $('#svcModal_fdd_date').val();
         
         let ctyp, ffac, tfac, fport, tport;
         if(act == "CONNECT") {
@@ -448,6 +450,8 @@ $(document).ready(function(){
                 tfac:   tfac,
                 fport:  fport,
                 tport:  tport,
+                dd:     dd,
+                fdd:    fdd,
                 ckt_id:	ckt_id,
                 cktcon: cktcon,
                 idx:	idx,
