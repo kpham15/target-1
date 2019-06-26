@@ -1,0 +1,215 @@
+<div class="col-md-5">
+  <form id="portmap-forms">
+    <div class="row">
+
+      <div class="col-md-5" style="padding-right: 2px">
+        <div class="form-group">
+          <label>PORT</label>
+          <input id="portmap-form-port" type="text" class="form-control portmap-form-input">
+        </div>
+      </div>
+
+      <div class="col-md-2" style="padding-right: 2px; padding-left: 2px">
+        <div class="form-group">
+          <label>PORT_TYP</label>
+          <select id="portmap-form-ptyp" class="form-control portmap-form-input portmap-form-select" style="padding-left: 2px">
+            <option value=""></option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2" style="padding-right: 15px; padding-left: 2px">
+        <div class="form-group">
+          <label>PSTA</label>
+          <select id="portmap-form-psta" class="form-control portmap-form-input portmap-form-select" style="padding-left: 2px">
+            <option value=""></option>
+            <option value="UAS">UAS</option>
+            <option value="SF">SF</option>
+            <option value="CONN">CONN</option>
+            <option value="DEF">DEF</option>
+            <option value="MTCD">MTCD</option>
+            <option value="MAINT">MAINT</option>
+            <option value="UNQ">UNQ</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col-md-2">
+        <button type="button" id="pm_findPort_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
+      </div>
+
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>FAC_ID</label>
+          <input id="portmap-form-fac" type="text" class="form-control portmap-form-input">
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" id="pm_findFac_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
+      </div>
+
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>CKID TN: </label>
+          <input id="portmap-tn-check" type="checkbox" checked>
+          <input id="portmap-form-ckid" type="text" class="form-control portmap-form-input portmap-form-ckid-num" style="display:none;">
+          <input id="portmap-form-ckid-tn" type="text" class="form-control portmap-form-input portmap-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" id="pm_findCkid_btn" class="btn btn-primary" style="margin-top:25px;">View</button>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="portmap-form-action" class="form-control portmap-form-input">
+            <option value=""></option>
+            <option value="MAP">MAP</option>
+            <option value="UNMAP">UNMAP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" id="portmap-form-clear" class="btn btn-primary btn-block" style="margin-top:25px;">Clear</button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    function portmapPopulateModal(obj) {
+      $('.portmap-modal-field').each(function() {
+        let target = $(this).attr('target');
+        $(this).val(obj[target]);
+      });
+      $('#portmap-modal-action').val(obj.value);
+    }
+
+    function portmapActionMap(obj) {
+      if (portmapPortid > 0) {
+        if (portmapFacid > 0) {
+          inputError($('#portmap-form-action'),'This PORT is already MAPPED');
+          return;
+        } else {
+          portmapModalClear();
+          $('.portmap-modal-fac-forms').prop('disabled', false);
+          portmapPopulateModal(obj);
+          $('#portmap-modal-factbl-row').show();
+          portmapQueryAvailFac();
+          $("#setup-portmap-modal select").css('-webkit-appearance', 'menulist');
+          $("#setup-portmap-modal select:disabled").css('-webkit-appearance', 'none');
+          $('#setup-portmap-modal').modal('show');
+        }
+      } else {
+        inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
+      }
+    }
+
+    function portmapActionUnmap(obj) {
+      if (portmapPortid > 0) {
+        if (portmapFacid > 0) {
+          portmapModalClear();
+          $('.portmap-modal-fac-forms').prop('disabled',true);
+          portmapPopulateModal(obj);
+          $('#portmap-modal-factbl-row').hide();
+          $("#setup-portmap-modal select").css('-webkit-appearance', 'menulist');
+          $("#setup-portmap-modal select:disabled").css('-webkit-appearance', 'none');
+          $('#setup-portmap-modal').modal('show');
+        } else {
+          inputError($('#portmap-form-action'),'This PORT has not been MAPPED');
+        }
+      } else {
+        inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
+      }
+    }
+
+    // Initialize inputmask
+    $('#portmap-form-ckid-tn').inputmask();
+
+    // TN Checkbox Handler
+    $('#portmap-tn-check').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue'
+    });
+    $('#portmap-tn-check').on('ifToggled', function() {
+      $('.portmap-form-ckid-num').toggle();
+    });
+
+    // Find port button click handler
+    $('#pm_findPort_btn').click(function() {
+      queryPort('findPort');
+    });
+
+    // Find fac button click handler
+    $('#pm_findFac_btn').click(function() {
+      queryPort('findFac');
+    });
+
+    // Find ckid button click handler
+    $('#pm_findCkid_btn').click(function() {
+      queryPort('findCkid');
+    });
+
+    // Clear button click handler
+    $('#portmap-form-clear').click(function() {
+      $('.portmap-form-input').val('');
+      portmapDatatable.clear().draw();
+
+      clearErrors();
+    });
+
+    // ACTION change listener
+    $('#portmap-form-action').change(function() {
+
+      let obj = {
+        value:    $(this).val(),
+        portId:   portmapPortid,
+        facId:    portmapFacid,
+        node:     portmapNode,
+        slot:     portmapSlot,
+        pnum:     portmapPnum,
+        ptyp:     $('#portmap-form-ptyp').val(),
+        port:     $('#portmap-form-port').val(),
+        psta:     $('#portmap-form-psta').val(),
+        fac:      $('#portmap-form-fac').val(),
+        ftyp:     portmapFtyp,
+        ort:      portmapOrt,
+        spcfnc:   portmapSpcfnc
+      }
+
+      if ($('#portmap-tn-check').prop('checked')) {
+        obj.ckid = $('#portmap-form-ckid-tn').val();
+      } else {
+        obj.ckid = $('#portmap-form-ckid').val();
+      }
+
+      clearErrors();
+      
+      // MAP Action
+      if (obj.value === 'MAP') {
+        portmapActionMap(obj);
+      }
+      // UNMAP Action
+      else if (obj.value === 'UNMAP') {
+        portmapActionUnmap(obj);
+      }
+    });
+
+    $(".portmap-form-input").on('click', function() {
+      // clearErrors();
+      // $("#portmap-form-action").val("").change();
+    });
+  });
+
+
+</script>

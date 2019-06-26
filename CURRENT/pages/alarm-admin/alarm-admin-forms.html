@@ -1,0 +1,193 @@
+<!-- Forms Left Side -->
+<div class="col-md-6">
+  <form id="alarm-admin-forms-left">
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- ALMID -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ALMID:</label>
+          <input type="text" class="form-control alarm-admin-forms-input" id="alarm-admin-forms-almid" disabled="">
+        </div>
+      </div>
+      <!-- ACK -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACK:</label>
+          <input type="text" id="alarm-admin-forms-ack" class="form-control alarm-admin-forms-input" disabled="">
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- SOURCE -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>SOURCE:</label>
+          <input type="text" id="alarm-admin-forms-source" class="form-control alarm-admin-forms-input" disabled="">
+        </div>
+      </div>
+        <!-- CONDITION -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>CONDITION:</label>
+            <input type="text" id="alarm-admin-forms-condition" class="form-control alarm-admin-forms-input" disabled="">
+          </div>
+        </div>
+    </div>
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- ACTION -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>ACTION:</label>
+          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+              <option value=""></option>
+              <option value="ACK">ACK</option>
+              <option value="UN-ACK">UN-ACK</option>
+              <option value="CLR">CLR</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <!-- Refresh Button -->
+          <button id="alarm-admin-forms-refresh" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+              Refresh
+            </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Forms Right Side -->
+<div class="col-md-6">
+  <form id="alarm-admin-forms-right">
+    <div class="row">
+      <!-- Comments -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>COMMENTS:</label>
+          <textarea id="alarm-admin-forms-comments" class="form-control alarm-admin-forms-input" rows="5" disabled=""></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+function validateAck(obj) {
+
+  if (obj.almid !== "") {
+    if (obj.ack !== "") {
+      inputError($('#alarm-admin-forms-ack'),'Alarm already Acknowledged');
+      $('#alarm-admin-forms-action').val('');
+      return;
+    }
+    else {
+      $('#alarm-admin-modal-almid').val(obj.almid);
+      $('#alarm-admin-modal-source').val(obj.source);
+      $('#alarm-admin-modal-ack').val(user.uname);
+      $('#alarm-admin-modal-condition').val(obj.condition);
+      $('#alarm-admin-modal-action').val(obj.value);
+
+      $('#alarm-admin-modal').modal('show');
+    }
+  }
+  else {
+    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    $('#alarm-admin-forms-action').val('');
+    return;
+  }
+}
+
+function validateUnack(obj) {
+  if (obj.almid  !== "") {
+    if (obj.ack == "") {
+      inputError($('#alarm-admin-forms-ack'),'Alarm has not been Acknowledged!');
+      $('#alarm-admin-forms-action').val('');
+      return;
+    }
+    else {
+      $('#alarm-admin-modal-almid').val(obj.almid);
+      $('#alarm-admin-modal-source').val(obj.source);
+      $('#alarm-admin-modal-ack').val(user.uname);
+      $('#alarm-admin-modal-condition').val(obj.condition);
+      $('#alarm-admin-modal-action').val(obj.value);
+
+      $('#alarm-admin-modal').modal('show');
+    }
+  }
+  else {
+    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    $('#alarm-admin-forms-action').val('');
+    return;
+  }
+}
+
+function validateClr(obj) {
+  if (obj.almid !== "") {
+    $('#alarm-admin-modal-almid').val(obj.almid);
+    $('#alarm-admin-modal-source').val(obj.source);
+    $('#alarm-admin-modal-ack').val(user.uname);
+    $('#alarm-admin-modal-condition').val(obj.condition);
+    $('#alarm-admin-modal-action').val(obj.value);
+
+    $('#alarm-admin-modal').modal('show');
+  }
+  else {
+    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    $('#alarm-admin-forms-action').val('');
+    return;
+  }
+}
+
+$(document).ready(function() {
+  
+  // Refresh Button Click Event
+  $('#alarm-admin-forms-refresh').click(function() {
+    $('.alarm-admin-forms-input').val('');
+
+    clearErrors();
+
+    queryAlarmAdmin();
+  })
+
+  // Click event for sidebar, loads page first time
+	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
+		queryAlarmAdmin();
+  })
+  
+  // Change event on Action
+  $('#alarm-admin-forms-action').change(function() {
+
+    let obj = {
+      value:      $(this).val(),
+      almid:      $('#alarm-admin-forms-almid').val(),
+      source:     $('#alarm-admin-forms-source').val(),
+      ack:        $('#alarm-admin-forms-ack').val(),
+      condition:  $('#alarm-admin-forms-condition').val()
+    }
+    
+    $('.alarm-admin-modal-field').val('');
+    clearErrors();
+    
+    
+    if (obj.value === 'ACK') {
+      // ACKNOWLEDGE action
+      validateAck(obj);
+    } else if (obj.value === 'UN-ACK') {
+      // UN-ACKNOWLEDGE action
+      validateUnack(obj);
+    } else if (obj.value === "CLR") {
+      validateClr(obj);
+    }
+
+  });
+
+  $('#alarm-admin-modal').on('hidden.bs.modal', function(e) {
+    $('#alarm-admin-forms-refresh').trigger('click');
+  })
+});
+</script>

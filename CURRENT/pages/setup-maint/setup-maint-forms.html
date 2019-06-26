@@ -1,0 +1,593 @@
+<!-- Forms -->
+<div class="col-md-12">
+  <form id="setup-maint-forms">
+    <!-- Top Row -->
+    <div class="row">
+      <!-- CKID -->
+      <div class="col-md-6" style="padding:2px;">
+        <div class="form-group">
+          <label>CKID:</label>
+          <label>TN:</label>
+          <input id="setup-maint-forms-cbx" type="checkbox" checked />
+          <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none; text-transform: uppercase;"/>
+          <input id="setup-maint-forms-ckid-tn" type="text" class="form-control maint-ckid setup-maint-forms-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+        </div>
+      </div>
+      <!-- CLS -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <label>CLS:</label>
+          <input id="setup-maint-forms-cls" class="form-control setup-maint-forms-input" disabled=""/>
+        </div>
+      </div>
+      <!-- ADSR -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <label>ADSR:</label>
+          <input id="setup-maint-forms-adsr" class="form-control setup-maint-forms-input" disabled="" />
+        </div>
+      </div>
+      <!-- View Button -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <button id="setup-maint-forms-viewckid" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- TKTNO -->
+      <div class="col-md-6" style="padding:2px;">
+        <div class="form-group">
+          <label>TKTNO</label>
+          <input id="setup-maint-forms-tktno" type="text" class="form-control setup-maint-forms-input" style="text-transform: uppercase;">
+        </div>
+      </div>
+      <!-- MLO -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <label>MLO</label>
+          <input id="setup-maint-forms-mlo" class="form-control setup-maint-forms-input" disabled="" />
+        </div>
+      </div>
+      <!-- PROT -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <label>PROT:</label>
+          <input id="setup-maint-forms-prot" class="form-control setup-maint-forms-input" disabled="" />
+        </div>
+      </div>
+      <!-- View Button -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <button id="setup-maint-forms-viewtkt" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- CONTYP -->
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form-group">
+          <label>CONTYP</label>
+          <input id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+        </div>
+      </div>
+      <!-- FAC(X) -->
+      <div class="col-md-5" style="padding:2px;">
+        <div class="col-md-12" style="padding:2px; margin-bottom:-15px;">
+          <div class="form-group">
+            <label>FAC(X):</label>
+            <input id="setup-maint-forms-ffac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+        <!-- PORT(X) -->
+        <div class="col-md-4" style="padding:2px;">
+          <div class="form-group">
+            <label>PORT(X):</label>
+          </div>
+        </div>
+        <div class="col-md-8" style="padding:2px;">
+          <div class="form-group">
+            <input id="setup-maint-forms-fport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+      </div>
+      <!-- FAC(Y) -->
+      <div class="col-md-5" style="padding:2px;">
+        <div class="col-md-12" style="padding:2px; margin-bottom:-15px;">
+          <div class="form-group">
+            <label>FAC(Y):</label>
+            <input id="setup-maint-forms-tfac" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+        <!-- PORT(Y) -->
+        <div class="col-md-4" style="padding:2px;">
+          <div class="form-group">
+            <label>PORT(Y):</label>
+          </div>
+        </div>
+        <div class="col-md-8" style="padding:2px;">
+          <div class="form-group">
+            <input id="setup-maint-forms-tport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ACTION Row -->
+    <div class="row">
+      <div class="col-md-4" style="padding:2px;">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
+            <option value=""></option>
+            <option value="MTC_DISCON">MTC_DISCON</option>
+            <option value="MTC_CONN">MTC_CONN</option>
+            <option value="MTC_RESTORE">MTC_RESTORE</option>
+            <option value="RESTORE_MTCD">RESTORE_MTCD</option>
+            <option value="MTC_TEST">MTC_TEST</option>
+            <option value="CHANGE">CHANGE</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2" style="padding:2px;">
+        <div class="form group">
+          <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<script type="text/javascript">
+
+  function maintDefaultForms() {
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').show();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+
+  function maintConnForms() {
+    $('#setup-maint-modal-mtccon1-div').show();
+    $('#setup-maint-modal-mtccon2-div').show();
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+  
+  function maintTestForms() {
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').show();
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-change-div').hide();
+  }
+
+  function maintChangeForms() {
+    $('#setup-maint-modal-mtccon1-div').hide();
+    $('#setup-maint-modal-mtccon2-div').hide();
+    $('#setup-maint-modal-row3-div').hide();
+    $('#setup-maint-modal-mtctest-div').hide();
+    $('#setup-maint-modal-change-div').show();
+  }
+
+  function validateMtcConnnect(obj) {
+
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+
+    maintConnForms();
+
+    $('#setup-maint-modal-pick-conn1').prop('checked',true);
+    $('#setup-maint-modal-pick-conn2').prop('checked',false);
+    $('#setup-maint-modal-conn1-tfac').prop('disabled',false);
+    $('#setup-maint-modal-conn2-ffac').prop('disabled',true);
+
+
+    maintLoadFacY();
+    maintLoadFacX();
+
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    $('#setup-maint-modal-action').val(obj.action);
+    $('#setup-maint-modal-conn1-ctyp').val(obj.contyp);
+    $('#setup-maint-modal-conn1-ffac').val(obj.ffac);
+    $('#setup-maint-modal-conn2-ctyp').val(obj.contyp);
+    $('#setup-maint-modal-conn2-tfac').val(obj.tfac);
+
+    $('#setup-maint-modal').modal('show');
+    }
+  }
+
+  function validateRestoreMtcd(obj) {
+
+    maintDefaultForms();
+
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+      $('#setup-maint-modal-cls').val(obj.cls);
+      $('#setup-maint-modal-adsr').val(obj.adsr);
+      $('#setup-maint-modal-prot').val(obj.prot);
+      $('#setup-maint-modal-tktno').val(obj.tktno);
+      $('#setup-maint-modal-mlo').val(obj.mlo);
+      $('#setup-maint-modal-contyp').val(obj.contyp);
+      $('#setup-maint-modal-ffac').val(obj.ffac);
+      $('#setup-maint-modal-tfac').val(obj.tfac);
+      $('#setup-maint-modal-action').val(obj.action);
+      
+      $('#setup-maint-modal').modal('show');
+    }
+  }
+
+  function validateMtcRestore(obj) {
+
+    maintDefaultForms();
+
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+      $('#setup-maint-modal-cls').val(obj.cls);
+      $('#setup-maint-modal-adsr').val(obj.adsr);
+      $('#setup-maint-modal-prot').val(obj.prot);
+      $('#setup-maint-modal-tktno').val(obj.tktno);
+      $('#setup-maint-modal-mlo').val(obj.mlo);
+      $('#setup-maint-modal-contyp').val(obj.contyp);
+      $('#setup-maint-modal-ffac').val(obj.ffac);
+      $('#setup-maint-modal-tfac').val(obj.tfac);
+      $('#setup-maint-modal-action').val(obj.action);
+      
+      $('#setup-maint-modal').modal('show');
+    }
+  }
+
+  function validateMtcDisconnect(obj) {
+
+    maintDefaultForms();
+
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+    
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-ckid-tn').prop('disabled',true);
+    $('#setup-maint-modal-cls').prop('disabled',true);
+    $('#setup-maint-modal-adsr').prop('disabled',true);
+    $('#setup-maint-modal-prot').prop('disabled',true);
+    $('#setup-maint-modal-tktno').prop('disabled',false);
+    $('#setup-maint-modal-mlo').prop('disabled',true);
+    $('#setup-maint-modal-contyp').prop('disabled',true);
+    $('#setup-maint-modal-ffac').prop('disabled',true);
+    $('#setup-maint-modal-tfac').prop('disabled',true);
+    $('#setup-maint-modal-action').prop('disabled',true);
+
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    $('#setup-maint-modal-contyp').val(obj.contyp);
+    $('#setup-maint-modal-ffac').val(obj.ffac);
+    $('#setup-maint-modal-tfac').val(obj.tfac);
+    $('#setup-maint-modal-action').val(obj.action);
+    
+    $('#setup-maint-modal').modal('show');
+    }
+  }
+  
+  function validateMtcTest(obj) {
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+
+    maintLoadTestPort(obj.ffac, 'X');
+    maintLoadTestPort(obj.tfac, 'Y');
+
+    maintTestForms();
+
+    $('#setup-maint-modal-test-radio1').prop('checked', true);
+    $('#setup-maint-modal-test-radio2').prop('checked', false);
+    $('#setup-maint-modal-test-port1').prop('disabled', false);
+    $('#setup-maint-modal-test-port2').prop('disabled', true);
+
+    $('#setup-maint-modal-ckid').prop('disabled',true);
+    $('#setup-maint-modal-ckid-tn').prop('disabled',true);
+    $('#setup-maint-modal-cls').prop('disabled',true);
+    $('#setup-maint-modal-adsr').prop('disabled',true);
+    $('#setup-maint-modal-prot').prop('disabled',true);
+    $('#setup-maint-modal-tktno').prop('disabled',false);
+    $('#setup-maint-modal-mlo').prop('disabled',true);
+    $('#setup-maint-modal-action').prop('disabled',true);
+
+    $('#setup-maint-modal-ckid').val(obj.ckid);
+    $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+    $('#setup-maint-modal-cls').val(obj.cls);
+    $('#setup-maint-modal-adsr').val(obj.adsr);
+    $('#setup-maint-modal-prot').val(obj.prot);
+    $('#setup-maint-modal-tktno').val(obj.tktno);
+    $('#setup-maint-modal-mlo').val(obj.mlo);
+    // @TODO change here where contyp is individual of each other being shown
+    // values may be different (ex, tfac == MAINT, ffac == MTCD)
+    $('#setup-maint-modal-test-ctyp1').val(obj.contyp);
+    $('#setup-maint-modal-test-ctyp2').val(obj.contyp);
+    $('#setup-maint-modal-test-ffac').val(obj.ffac);
+    $('#setup-maint-modal-test-tfac').val(obj.tfac);
+    $('#setup-maint-modal-action').val(obj.action);
+    
+    $('#setup-maint-modal').modal('show');
+    }
+
+  }
+
+  function validateMtcChange(obj) {
+
+    if (maintTableCktsId == "" || maintTableCktsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    } 
+    else if (maintTableConsId == "" || maintTableConsId == 0) {
+      inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
+      $('#setup-maint-forms-action').val('');
+      return;
+    }
+    else {
+      maintChangeForms();
+
+      $('#setup-maint-modal-ckid').val(obj.ckid);
+      $('#setup-maint-modal-ckid-tn').val(obj.ckid);
+      $('#setup-maint-modal-action').val(obj.action);
+      $('#setup-maint-modal-cls').val(obj.cls);
+      $('#setup-maint-modal-adsr').val(obj.adsr);
+      $('#setup-maint-modal-prot').val(obj.prot);
+      $('#setup-maint-modal-tktno').val(obj.tktno);
+      $('#setup-maint-modal-mlo').val(obj.mlo);
+
+      $('#setup-maint-modal-change-out-ctyp').val(obj.contyp);
+      $('#setup-maint-modal-change-out-ffac').val(obj.ffac);
+      $('#setup-maint-modal-change-out-fport').val(obj.fport);
+      $('#setup-maint-modal-change-out-tfac').val(obj.tfac);
+      $('#setup-maint-modal-change-out-tport').val(obj.tport);
+
+      $('#setup-maint-modal').modal('show');
+    }
+  }
+
+  $(document).ready(function() {
+
+    // Clear Button Click Event
+    $('#setup-maint-forms-clear').click(function() {
+      clearErrors();
+      $('.setup-maint-forms-input').val('');
+      $('.setup-maint-modal-input').val('');
+      $('#setup-maint-table-cons-div').hide();
+      $('#setup-maint-table-tkts-div').hide();
+      $('#setup-maint-table-ckts-div').show();
+      $('#setup-maint-forms-action').prop('disabled',false);
+      maintTableConsId = "";
+      maintTableTktsId = "";
+      maintTableCktsId = "";
+      maintPickedTfac = "";
+      maintPickedFfac = "";
+      maintPstaTfac = "";
+      maintPstaFfac = "";
+      maintTestFac = "";
+      maintTestPort = "";
+      $('#setup-maint-forms-viewckid').trigger('click');
+    })
+
+    // Action Change Event
+    $('#setup-maint-forms-action').change(function() {
+      $('.setup-maint-modal-input').val('');
+      clearErrors();
+      
+      let ckid = "";
+      if ($('#setup-maint-forms-cbx').prop('checked')) {
+        ckid = $('#setup-maint-forms-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-forms-ckid').val();
+      }
+
+      let obj = {
+        action:     $('#setup-maint-forms-action').val(),
+        // ckid:     $('#setup-maint-forms-ckid').val(),
+        cls:        $('#setup-maint-forms-cls').val(),
+        adsr:       $('#setup-maint-forms-adsr').val(),
+        tktno:      $('#setup-maint-forms-tktno').val(),
+        mlo:        $('#setup-maint-forms-mlo').val(),
+        prot:       $('#setup-maint-forms-prot').val(),
+        ckid:       ckid,
+        contyp:     $('#setup-maint-forms-contyp').val(),
+        ckid:       $('#setup-maint-forms-ckid').val(),
+        ffac:       $('#setup-maint-forms-ffac').val(),
+        tfac:       $('#setup-maint-forms-tfac').val(),
+        fport:      $('#setup-maint-forms-fport').val(),
+        tport:      $('#setup-maint-forms-tport').val(),
+      }
+
+      
+
+      if (obj.action == "MTC_DISCON") {
+        validateMtcDisconnect(obj);
+      } else if (obj.action == "MTC_CONN") {
+        validateMtcConnnect(obj);
+      } else if (obj.action == "MTC_RESTORE") {
+        validateMtcRestore(obj);
+      } else if (obj.action == "RESTORE_MTCD") {
+        validateRestoreMtcd(obj);
+      } else if (obj.action == "MTC_TEST") {
+        validateMtcTest(obj);
+      } else if (obj.action == "CHANGE") {
+        validateMtcChange(obj);
+      }
+
+    })
+
+    // View Button 1
+    $('#setup-maint-forms-viewckid').click(function() {
+      $('#setup-maint-table-ckts-div').show();
+      $('#setup-maint-table-tkts-div').hide();
+
+      clearErrors();
+
+      let ckid = "";
+      if ($('#setup-maint-forms-cbx').prop('checked')) {
+        ckid = $('#setup-maint-forms-ckid-tn').val();
+      }
+      else {
+        ckid = $('#setup-maint-forms-ckid').val();
+      }
+
+      $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcProv",
+          "act":    "queryCkid",
+          "user":   user.uname,
+          "ckid":   ckid.toUpperCase()
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (res.length == 0) {
+          inputError($('#setup-maint-forms-ckid'),'No Results Found');
+        }
+
+        if (data.rslt == 'fail') {
+          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+        }
+        else {
+          setupMaintTableCkts.clear().draw();
+          setupMaintTableCkts.rows.add(res);
+          setupMaintTableCkts.columns.adjust().draw();
+        }
+
+        
+      })
+    })
+    
+    // View Button 2
+    $('#setup-maint-forms-viewtkt').click(function() {
+
+      $('#setup-maint-forms-post-response-text').text('');
+      $('#setup-maint-table-ckts-div').hide();
+      $('#setup-maint-table-tkts-div').show();
+      $('#setup-maint-table-cons-div').hide();
+
+      clearErrors();
+
+      let tktno = $('#setup-maint-forms-tktno').val();
+
+      $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcMaintReport",
+          "act":    "queryTkt",
+          "user":   user.uname,
+          "tktno":  tktno.toUpperCase()
+        },
+        dataType:   'json',
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (res.length == 0) {
+          inputError($('#setup-maint-forms-tktno'),'No Results Found');
+        }
+
+        if (data.rslt == 'fail') {
+          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+        }
+        else {
+          setupMaintTableTkts.clear().draw();
+          setupMaintTableTkts.rows.add(res);
+          setupMaintTableTkts.columns.adjust().draw();
+        }
+      })
+    })
+    
+    // Initialize inputmask
+    $('#setup-maint-forms-ckid-tn').inputmask();
+
+    // TN Checkbox Handler
+    $('#setup-maint-forms-cbx').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue'
+    });
+    $('#setup-maint-forms-cbx').on('ifToggled', function(){
+      $('.maint-ckid').toggle();
+    });
+
+    // side navbar click event
+    $('.menu-item[page_id="setup-maint-page"]').click(function() {
+      $('#setup-maint-forms-viewckid').trigger('click');
+    });
+
+    $(".setup-maint-form-input").on('click', function() {
+      clearErrors();
+    });
+  })
+</script>

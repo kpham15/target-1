@@ -1,0 +1,413 @@
+<div id="wcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SETUP WIRECENTER</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_wcname_txt">WCNAME</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_wcname_txt" >
+                        </div>
+                        <div class="col-sm-1 " style="padding:2px">
+                            <label for="wcModal_wcc_txt">WCC</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_wcc_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_clli_txt">CLLI</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_clli_txt" >
+                        </div>
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_npanxx_txt">NPANXX</label>
+                            <input type="number" class="form-control wcModal_form uppercase" id="wcModal_npanxx_txt" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                        </div>
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_frloc_txt">FRLOC</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_frloc_txt" >
+                        </div>
+                        <div class="col-sm-1 " style="padding:2px">
+                            <label for="wcModal_tzone_sel">TZONE</label>
+                            <select class="form-control wcModal_form" id="wcModal_tzone_sel">
+                                <option></option>
+                                <option>AKST</option>
+                                <option>CST</option>
+                                <option>EST</option>
+                                <option>HST</option>
+                                <option>MST</option>
+                                <option>PST</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_stat_sel">STAT</label>
+                            <input class="form-control wcModal_form uppercase" id="wcModal_stat_sel" readonly />
+                        </div>
+                    </div>
+            
+                    <!-- ------------------------------------------------>
+            
+                    <div class="col-sm-12">
+                        <div class="col-sm-4 " style="padding:2px">
+                            <label for="wcModal_addr_txt">ADDR</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_addr_txt" >
+                        </div>
+            
+                        <div class="col-sm-3 " style="padding:2px">
+                            <label for="wcModal_city_txt">CITY</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_city_txt" >
+                        </div>
+                        <!-- Options for state inserted by JS -->
+                        <div class="col-sm-1 " style="padding:2px">
+                            <label for="wcModal_state_sel">STATE</label>
+                            <select class="form-control wcModal_form" id="wcModal_state_sel" >
+                            </select>
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_zip_txt">ZIP</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_zip_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_gps_txt">GPS</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_gps_txt" >
+                        </div>
+                    </div>
+                    
+                    <!---------------------------------------------------------------------->
+                    
+                    <div class="col-sm-12">
+                        <div class="col-sm-4 " style="padding:2px">
+                            <label for="wcModal_company_txt">COMPANY</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_company_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_region_txt">REGION</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_region_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_area_txt">AREA</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_area_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_district_txt">DISTRICT</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_district_txt" >
+                        </div>
+            
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_manager_txt">MANAGER</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_manager_txt" >
+                        </div>
+                    </div>
+            
+                    <div class="col-sm-12">
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_ipadr_txt">IP_ADDR</label>
+                            <input type="text" class="form-control wcModal_form" id="wcModal_ipadr_txt" >
+                        </div>
+                        
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_gateway_txt">GATEWAY</label>
+                            <input type="text" class="form-control wcModal_form" id="wcModal_gateway_txt" >
+                        </div>
+
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_netmask_txt"> NETMASK</label>
+                            <input type="text" class="form-control wcModal_form" id="wcModal_netmask_txt" >
+                        </div>
+
+                        <div class="col-sm-2 " style="padding:2px">
+                            <label for="wcModal_iport_txt">IP_PORT</label>
+                            <input type="text" class="form-control wcModal_form" id="wcModal_iport_txt" >
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-sm-10 ">
+                        <div class="col-md-3" style="padding:2px">
+                            <label for="wcModal_act_txt">ACTION</label>
+                            <input type="text" class="form-control wcModal_form uppercase" id="wcModal_act_txt" readonly>
+                        </div>
+                        <input type="hidden" id="wcModal_id_num" style="width:50px;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="wcModal_submit_btn" style="float:left">Submit</button>
+                <button class="btn btn-primary" id="wcModal_clear_btn" type="button" style="float:left">Clear</button>
+                <button class="btn btn-primary" id="wcModal_close_btn" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+        </div>
+    </div>  
+</div>
+    
+    
+<script>
+    
+    function wcModalInsertStatesOption(data) {
+        let a = [];
+        a.push('<option value=""></option>');
+
+        for (let i=0; i<data.length; i++) {
+            a.push('<option>' + data[i].text + '</option>')
+        }
+
+        $('#wcModal_state_sel').empty();
+        $('#wcModal_state_sel').html(a.join(""));
+    }
+    var wcModal_tblRows = []
+
+    function wcModal_displayForm() {
+        $("#wcModal_id_num").        val(wcModal_tblRows[1].id);
+        $("#wcModal_wcname_txt").    val(wcModal_tblRows[1].wcname);
+        $("#wcModal_wcc_txt").       val(wcModal_tblRows[1].wcc);
+        $("#wcModal_clli_txt").      val(wcModal_tblRows[1].clli);
+        $("#wcModal_npanxx_txt").    val(wcModal_tblRows[1].npanxx);
+        $("#wcModal_frloc_txt").     val(wcModal_tblRows[1].frloc);
+        $("#wcModal_tzone_sel").     val(wcModal_tblRows[1].tzone);
+        $("#wcModal_stat_sel").      val(wcModal_tblRows[1].ipcstat);
+        $("#wcModal_addr_txt").      val(wcModal_tblRows[1].loc);
+        $("#wcModal_city_txt").      val(wcModal_tblRows[1].city);
+        $("#wcModal_state_sel").     val(wcModal_tblRows[1].state);
+        $("#wcModal_zip_txt").       val(wcModal_tblRows[1].zip);
+        $("#wcModal_gps_txt").       val(wcModal_tblRows[1].gps);
+        $("#wcModal_company_txt").   val(wcModal_tblRows[1].company);
+        $("#wcModal_region_txt").    val(wcModal_tblRows[1].region);
+        $("#wcModal_area_txt").      val(wcModal_tblRows[1].area);
+        $("#wcModal_district_txt").  val(wcModal_tblRows[1].district);
+        $("#wcModal_manager_txt").   val(wcModal_tblRows[1].manager);
+        $("#wcModal_ipadr_txt").     val(wcModal_tblRows[1].ipadr);
+        $("#wcModal_gateway_txt").   val(wcModal_tblRows[1].gateway);
+        $("#wcModal_netmask_txt").   val(wcModal_tblRows[1].netmask);
+        $("#wcModal_iport_txt").     val(wcModal_tblRows[1].iport);
+        $("#wcModal_act_txt").       val($("#wc_act_sel").val());
+    }
+    
+    function wcModal_resetForm(){
+        $("#wcModal_id_num").        val(wcModal_tblRows[1].id);
+        $("#wcModal_wcname_txt").    val(wcModal_tblRows[0].wcname);
+        $("#wcModal_wcc_txt").       val(wcModal_tblRows[0].wcc);
+        $("#wcModal_clli_txt").      val(wcModal_tblRows[0].clli);
+        $("#wcModal_npanxx_txt").    val(wcModal_tblRows[0].npanxx);
+        $("#wcModal_frloc_txt").     val(wcModal_tblRows[0].frloc);
+        $("#wcModal_tzone_sel").     val(wcModal_tblRows[0].tzone);
+        $("#wcModal_stat_sel").      val(wcModal_tblRows[0].ipcstat);
+        $("#wcModal_addr_txt").      val(wcModal_tblRows[0].loc);
+        $("#wcModal_city_txt").      val(wcModal_tblRows[0].city);
+        $("#wcModal_state_sel").     val(wcModal_tblRows[0].state);
+        $("#wcModal_zip_txt").       val(wcModal_tblRows[0].zip);
+        $("#wcModal_gps_txt").       val(wcModal_tblRows[0].gps);
+        $("#wcModal_company_txt").   val(wcModal_tblRows[0].company);
+        $("#wcModal_region_txt").    val(wcModal_tblRows[0].region);
+        $("#wcModal_area_txt").      val(wcModal_tblRows[0].area);
+        $("#wcModal_district_txt").  val(wcModal_tblRows[0].district);
+        $("#wcModal_manager_txt").   val(wcModal_tblRows[0].manager);
+        $("#wcModal_ipadr_txt").     val(wcModal_tblRows[0].ipadr);
+        $("#wcModal_gateway_txt").   val(wcModal_tblRows[0].gateway);
+        $("#wcModal_netmask_txt").   val(wcModal_tblRows[0].netmask);
+        $("#wcModal_iport_txt").     val(wcModal_tblRows[0].iport);
+        $("#wcModal_rslt").val("");
+    }
+    
+    
+    function wcModal_disableForm() {
+        $(".wcModal_form").prop("disabled","disabled");
+        $("#wcModal_clear_btn"). hide();
+    }
+    
+    function wcModal_enableForm() {
+        $(".wcModal_form").prop("disabled",false);
+        $("#wcModal_id_num").prop("disabled","disabled");
+        $("#wcModal_stat_sel").prop("disabled","disabled");
+        $("#wcModal_clear_btn").show();
+    }
+    
+    function wcModal_disableNetworkData(){
+        $("#wcModal_ipadr_txt").prop("disabled", true);
+        $("#wcModal_gateway_txt").prop("disabled", true);
+        $("#wcModal_netmask_txt").prop("disabled", true);
+        $("#wcModal_iport_txt").prop("disabled", true);
+        
+        $("#wcModal_clear_btn"). hide();
+    }
+    
+    function wcModal_enableNetworkData(){
+        $("#wcModal_ipadr_txt").prop("disabled", false);
+        $("#wcModal_gateway_txt").prop("disabled", false);
+        $("#wcModal_netmask_txt").prop("disabled", false);
+        $("#wcModal_iport_txt").prop("disabled", false);
+        
+        $("#wcModal_clear_btn").show();
+    }
+    
+    //---------------WCMODAL AJAX FUNCTION---------------//
+    
+    function wcModal_query(action) {
+        $.ajax({
+            url: ipcDispatch,
+            type: 'post',
+            data: {     
+                api:    "ipcWc",
+                act:    action,
+                user:     user.uname,
+                grp:      user.grp,
+                ugrp:     user.ugrp,
+                id:         $("#wcModal_id_num").val().toUpperCase(),
+                wcname:     $("#wcModal_wcname_txt").val().toUpperCase(),
+                wcc:        $("#wcModal_wcc_txt").val().toUpperCase(),
+                clli:       $("#wcModal_clli_txt").val().toUpperCase(),
+                npanxx:     $("#wcModal_npanxx_txt").val().toUpperCase(),
+                frloc:      $("#wcModal_frloc_txt").val().toUpperCase(),
+                tzone:      $("#wcModal_tzone_sel").val().toUpperCase(),
+                stat:       $("#wcModal_stat_sel").val().toUpperCase(),
+                addr:       $("#wcModal_addr_txt").val().toUpperCase(),
+                city:       $("#wcModal_city_txt").val().toUpperCase(),
+                state:      $("#wcModal_state_sel").val().toUpperCase(),
+                zip:        $("#wcModal_zip_txt").val().toUpperCase(),
+                gps:        $("#wcModal_gps_txt").val().toUpperCase(),
+                company:    $("#wcModal_company_txt").val().toUpperCase(),
+                region:     $("#wcModal_region_txt").val().toUpperCase(),
+                area:       $("#wcModal_area_txt").val().toUpperCase(),
+                district:   $("#wcModal_district_txt").val().toUpperCase(),
+                manager:    $("#wcModal_manager_txt").val().toUpperCase(),
+                ipadr:      $("#wcModal_ipadr_txt").val().toUpperCase(),
+                gateway:    $("#wcModal_gateway_txt").val().toUpperCase(),
+                netmask:    $("#wcModal_netmask_txt").val().toUpperCase(),
+                iport:      $("#wcModal_iport_txt").val().toUpperCase()
+        
+            },
+            dataType: "json"
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
+            }
+            else {
+                if (data.rows.length === 0) {
+                    if (action != "query") {
+                        postResponse($('#wcModal .modal-footer'), data.rslt, "No Record Found in Database!");
+                        return;
+                    }
+                }
+                else {
+                    wcModal_tblRows = data.rows;
+                    wcModal_displayForm();
+                    wc_tblRows = wcModal_tblRows;
+                    wc_displayForm();
+                    if(action !== 'query') {
+                        postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
+                    }
+                   
+
+                }
+            } 
+        });
+    }
+    
+    function wcModal_turnup() {
+        $.ajax({
+            url: ipcDispatch,
+            type: "post",
+                data: {
+                api:        "ipcWc",
+                act:        'TURN_UP',
+                user:       user.uname,
+                grp:        user.grp,
+                ugrp:       user.ugrp,
+                wcname:     $("#wc_wcname_txt").val().toUpperCase(),
+                wcc:        $("#wc_wcc_txt").val().toUpperCase(),
+                clli:       $("#wc_clli_txt").val().toUpperCase(),
+                npanxx:     $("#wc_npanxx_txt").val().toUpperCase(),
+                frloc:      $("#wc_frloc_txt").val().toUpperCase(),
+            },
+            dataType: "json"
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
+            }
+            else {
+                wcModal_query('query');
+                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER TURNED-UP SUCCESSFULLY");
+            } 
+    
+        });
+    
+    }
+    
+    function wcModal_holdWc() {
+    
+        $.ajax({
+            url: ipcDispatch,
+            type: "post",
+            data: {     
+                api:        "ipcWc",
+                act:        'HOLD',
+                user:       user.uname,
+                grp:        user.grp,
+                ugrp:       user.ugrp,
+                wcname:     $("#wcModal_wcname_txt").val().toUpperCase(),
+                wcc:        $("#wcModal_wcc_txt").val().toUpperCase(),
+                clli:       $("#wcModal_clli_txt").val().toUpperCase(),
+                npanxx:     $("#wcModal_npanxx_txt").val().toUpperCase(),
+                frloc:      $("#wcModal_frloc_txt").val().toUpperCase()
+            },
+            dataType: "json"
+        }).done(function (data) {       
+            if (data.rslt == "fail") {
+                postResponse($('#wcModal .modal-footer'), data.rslt, data.reason);
+            }
+            else {
+                wcModal_query('query');
+                postResponse($('#wcModal .modal-footer'), data.rslt, "WIRE CENTER HOLD SUCCESSFULLY");
+            } 
+        });
+    }
+
+
+    // WCMODAL Events Handling
+$("#wcModal_submit_btn").click(function () {
+    if ($("#wcModal_npanxx_txt").val().length < 6 || $("#wcModal_npanxx_txt").val().length > 6) {
+        postResponse($('#wcModal .modal-footer'), "fail", "INVALID NPANXX: NPANXX MUST BE 6 DIGITS");
+        return;
+    }
+    if ($("#wcModal_id_num").val() != "") {
+        if($("#wcModal_act_txt").val() == "TURN_UP") {
+            wcModal_turnup();
+        }
+        else if($("#wcModal_act_txt").val() == "HOLD") {
+            wcModal_holdWc();
+        }
+        else {
+            wcModal_query($("#wcModal_act_txt").val());
+        }
+    }
+    else {
+        postResponse($('#wcModal .modal-footer'), "fail", "Missing WC ID");
+    }
+});
+
+$("#wcModal_clear_btn").click(function () {
+   if ($("#wcModal_id_num").val() != "") {
+       wcModal_tblRows = wc_tblRows;
+       wcModal_displayForm();
+   } 
+});
+
+$("#wcModal_close_btn").click(function () {
+    if ($("#wcModal_id_num").val() !="") {
+        $("#wc_act_sel").val("");
+    }
+});
+
+$("#wcModal").on("hidden.bs.modal", function(){
+    $("#wc_act_sel").val("");
+});
+
+$(".wcModal_form").on('click', function() {
+    clearErrors();
+});
+</script>

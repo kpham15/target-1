@@ -1,0 +1,99 @@
+<!-- Forms -->
+<div class="col-md-4">
+  <form id="database-backup-forms" class="form-horizontal">
+
+    <!-- USER -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">USER:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control database-backup-forms-input" id="database-backup-forms-user" disabled="">
+      </div>
+    </div>
+
+    <!--DB Backup File Name -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">FILE NAME:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control database-backup-forms-input" id="database-backup-forms-filename" disabled="">
+      </div>
+    </div>
+
+    <!-- Backup Type -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">BACKUP TYPE:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control database-backup-forms-input" id="database-backup-forms-type" disabled="">
+      </div>
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">DATE:</label>
+        <div class="col-sm-8">
+        <input type="text" class="form-control database-backup-forms-input" id="database-backup-forms-date" disabled="">
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">ACTION:</label>
+        <div class="col-sm-8">
+        <select id="database-backup-forms-action" class="form-control database-backup-forms-input">
+          <option value=""></option>
+          <option value="MANUAL">BACKUP MANUALLY</option>
+          <option value="DELETE">DELETE BACKUP FILE</option>
+        </select>
+        </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+
+  $(document).ready(function() {
+
+    // Action Change event handler
+    $('#database-backup-forms-action').change(function() {
+
+      $('.database-backup-modal-input').val('');
+      $('#database-backup-modal-post-response-text').text('');
+
+      let user = $('#database-backup-forms-user').val();
+      let fileName = $('#database-backup-forms-filename').val();
+      let type = $('#database-backup-forms-type').val();
+      let date = $('#database-backup-forms-date').val();
+      let action = $('#database-backup-forms-action').val();
+
+      clearErrors();
+
+      if (action == "MANUAL") {
+        $('.database-backup-modal-input').hide();
+        $('#database-backup-modal-action').val(action);
+        $('#database-backup-modal').modal('show');
+      }
+      else if (action == "DELETE") {
+        $('.database-backup-modal-input').show();
+
+        // check if fileName is blank
+        if (fileName === "") {
+          inputError($('#database-backup-forms-action'),'Select a file from the list');
+          $('#database-backup-forms-action').val('');
+          return;
+        }
+
+        $('#database-backup-modal-user').val(user);
+        $('#database-backup-modal-filename').val(fileName);
+        $('#database-backup-modal-type').val(type);
+        $('#database-backup-modal-date').val(date);
+        $('#database-backup-modal-action').val(action);
+
+        $('#database-backup-modal').modal('show');
+      }
+    })
+    // click event on sidebar menu
+    $('.menu-item[page_id="database-backup-page"]').click(function() {
+      queryDatabaseBackup();
+    })
+  })
+</script>

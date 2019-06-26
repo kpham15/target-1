@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="node-status-row">
+    <!-- Node Boxes go here -->
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+  function updateNodeStatus() {
+    nodeInfo.forEach(function(node) {
+      if ($('.node-box[node_id='+node.node+']').length > 0) {
+        updateNodeBox(node);
+      } else {
+        createNodeBox(node);
+      }
+    });
+  }
+
+  function updateNodeBox(node) {
+    $('[node_id="'+node.node+'"] .node-box-stat').text(node.node_stat);
+    $('[node_id="'+node.node+'"] .node-box-temp-volt').text(node.node_temp + ' | ' + node.node_volt);
+    $('[node_id="'+node.node+'"] .node-box-rack').text(node.node_rack);
+    $('[node_id="'+node.node+'"] .node-box-alm').text(node.node_alm);
+
+    let almColor = '';
+
+    if (node.node_alm === 'CRI') {
+      almColor = 'bg-critical';
+    } else if (node.node_alm === 'MAJ') {
+      almColor = 'bg-major';
+    } else if (node.node_alm === 'MIN') {
+      almColor = 'bg-minor';
+    } else if (node.node_alm === 'NONE') {
+      almColor = 'bg-no-alarm';
+    }
+
+    $('[node_id='+node.node+'] .info-box-icon').attr('class', 'info-box-icon ' + almColor);
+  }
+
+  function createNodeBox(node) {
+    // HTML template for node box
+    let nodeBox =  '<div class="node-box" node_id="'+node.node+'">' +
+                      '<div class="info-box">' +
+                        '<span class="info-box-icon"></span>' +
+                        '<div class="node-box-content info-box-content">' +
+                          '<span class="info-box-text node-box-name">Node ' + node.node + '</span>' +
+                          '<span class="info-box-text node-box-stat">' + node.node_stat + '</span>' +
+                          '<span class="info-box-text node-box-temp-volt">' +
+                            node.node_temp + ' | ' + node.node_volt +
+                          '</span>' +
+                          '<span class="info-box-text node-box-rack">' + node.node_rack + '</span>' +
+                          '<span class="node-box-alm" style="display:none;">'+node.node_alm+'</span>' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>';
+
+    // Append node box to html body
+    $('.node-status-row').append(nodeBox);
+
+    // Add color to status bar depending on alarm state
+    let almColor = '';
+
+    if (node.node_alm === 'CRI') {
+      almColor = 'bg-critical';
+    } else if (node.node_alm === 'MAJ') {
+      almColor = 'bg-major';
+    } else if (node.node_alm === 'MIN') {
+      almColor = 'bg-minor';
+    } else if (node.node_alm === 'NONE') {
+      almColor = 'bg-no-alarm';
+    }
+
+    $('[node_id='+node.node+'] .info-box-icon').addClass(almColor);
+    return;
+  }
+
+  $(document).ready(function() {
+
+  });
+</script>

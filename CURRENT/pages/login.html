@@ -1,0 +1,325 @@
+<div id="login-page" style="display: none;">
+  <div class="login-box">
+    <div class="login-logo">
+      <a>
+        <p id="login-title">
+          <b>I</b>ntelligent<br/>
+          <b>P</b>rovisioning<br/>
+          <b>C</b>enter
+        </p>
+      </a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+  
+      <form>
+        <div id="login-forms">
+          <div class="form-group has-feedback">
+            <input id="login_username" type="username" class="login-input-fields form-control" placeholder="Username">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input id="login_password_input" type="password" class="login-input-fields form-control" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+        </div>
+        <div id="newpassword-forms" style="display:none;">
+          <div class="form-group has-feedback">
+            <input id="login_newPassWord" type="password" class="login-input-fields form-control" placeholder="New Password">
+            <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+              <input id="login_confirmPassWord" type="password" class="login-input-fields form-control" placeholder="Retype Password">
+              <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="checkbox icheck">
+              <label>
+                <input id="login-remember" type="checkbox"> Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-xs-4">
+            <button id="login_btn" type="button" class="btn btn-primary btn-block btn-flat login-input-fields">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+  
+      <div class="login-bottom-actions text-center">
+        <p>- OR -</p>
+        <button id="change-password-btn" type="button" class="btn btn-primary btn-block btn-flat login-bottom-button login-input-fields">First Login / Change Password</button>
+      </div>
+      <div id= "login_warning" style="text-align: center; display:none;">
+        <label style="color:red;"></label>
+        <div><a id="login_continue">(Change Password Later)</a></div>
+      </div>
+    </div>
+    <!-- /.login-box-body -->
+  </div>
+  <!-- /.login-box -->
+  
+  <!-- Jumbotron Warning -->
+  <div class="container">
+    <div id="login-disclaimer" class="jumbotron">
+      <span class="text-center" style="color:red;">
+        <h1>WARNING</h1>
+      </span>
+      
+      <p class="text-center"><strong>PRIVATE/PROPRIETARY</strong></p>
+      <p>
+        <strong>
+          NO DISCLOSURE OUTSIDE TELEPATH NETWORKS EXCEPT BY WRITTEN AGREEMENT. ANY UNAUTHORIZED ACCESS TO, OR MISSUSE OF THE SYSTEM OR DATA MAY RESULT IN CIVIL AND/OR CRIMINAL PROSECUTION, EMPLOYEE DISCIPLINE UP TO AND INCLUDING DISCHARGE, OR TERMINATION OF VENDOR/SERVICE CONTRACTS.
+        </strong>
+      </p>
+      <p class="text-center"><strong>THIS SYSTEM ACCESS/USAGE IS MONITORED AND AUDITED.</strong></p>
+    </div>
+  </div>
+  <!-- END Jumbotron Warning -->
+</div>
+
+<!-- Successful Login Modal -->
+<div class="modal fade" id="login-success-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+  $(document).ready(function() {
+
+    // Watches login success modal, on close run loginSuccess()
+    $('#login-success-modal').on('hidden.bs.modal', function(e) {
+      if (user.uname !== '') {
+        loginSuccess();
+      }
+    });
+
+    // Click event for change password button
+    $('#change-password-btn').click(function() {
+      if ($(this).hasClass('active')) {
+        $(this).text('First Login / Change Password').button('toggle');
+        $('#newpassword-forms').hide();
+        $('#newpassword-forms .login-input-fields').val('');
+        clearErrors();
+      } else {
+        $(this).text('Go Back').button('toggle');
+        $('#newpassword-forms').show();
+        clearErrors();
+      }
+    });
+
+    $('#login-remember').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  
+  
+   
+    var login = {
+  
+      // jQuery Selectors
+      username:         $('#login_username'),
+      password:         $('#login_password_input'),
+      newpassword:      $('#login_newPassWord'),
+      confirmPassword:  $('#login_confirmPassWord'),
+      loginBtn:         $('#login_btn'),
+  
+  
+      // General Functions
+      getSwVersion: function() {
+        $.post("../indexFunc.php", { act: "queryReadMe" }, function(data, status) {
+          // @TODO create a function in the sidebar/header to call that updates the software version and descriptions
+          // var obj = JSON.parse(data);
+          // login.swVersion.text('Version: ' + obj.ver);
+          // mB.versionDescr.val(obj.descr);
+          // mB.versionLbl.text('Version: ' + obj.ver);
+        });
+      },
+  
+      submitLogin: function() {
+        keyId = "";
+        $.post(ipcDispatch, {
+          api: "ipcConfirm",
+          act: "confirm"
+        }, function(data, status) {
+          var obj = JSON.parse(data);
+          let modal = {}
+  
+          if (obj.rslt == 'fail') {
+            modal.title = obj.rslt;
+            modal.body = obj.reason;
+            modal.type = 'danger';
+          } else {
+            keyId = obj.key;
+  
+            if (keyId == '') {
+              modal.title = 'KEY EMPTY';
+              modal.body = 'Confirm key is not available yet';
+              modal.type = 'warning';
+              modalHandler(modal);
+
+              return;
+            }
+            login.postUserPassword();
+          }
+        });
+      },
+  
+      postUserPassword: function() {
+        let newPw = login.newpassword.val();
+        if (login.newpassword.val() !== '' && login.newpassword.val() !== login.confirmPassword.val()) {
+          clearErrors();
+          inputError(login.newpassword, '');
+          inputError(login.confirmPassword, 'New password and Confirm password must match each other.');
+          return;
+        }
+  
+        $.post(ipcDispatch,
+        {
+          api: "ipcLogin",
+          act: "login",
+          user: login.username.val(),
+          pw: encode(login.password.val()),
+          newPw: encode(login.newpassword.val())
+        }, function(data, status) {
+          var obj = JSON.parse(data);
+          let modal = {};
+
+          if (obj.rslt == "fail") {
+            loginErrorHandler(obj);
+          } else {
+            
+            user.uname = obj.rows[0].uname;
+            user.fname = obj.rows[0].fname;
+            user.mi = obj.rows[0].mi;
+            user.lname = obj.rows[0].lname;
+            user.grp = obj.rows[0].grp;
+            user.ugrp = obj.rows[0].ugrp;
+            user.idle_to = obj.rows[0].user_idle_to;
+            user.com = obj.rows[0].com;
+            login.username.val("");
+            login.password.val("");
+            login.newpassword.val("");
+            login.confirmPassword.val("");
+
+            if(user.com !== "") {
+              displayUserImg(user.com);
+            }
+            
+            if(newPw !== "") {
+              $('#login-success-modal .modal-title').text(obj.rslt);
+              $('#login-success-modal .modal-body').text(obj.reason);
+              // Open login success modal
+              $('#login-success-modal').modal('show');
+            }
+            else{
+              if (user.uname !== '') {
+                if(obj.hasOwnProperty("pw_exp_alert")){
+                  if(obj["pw_exp_alert"] !== "") {
+                    $("#login_warning > label").text("YOUR PASSWORD WILL EXPIRE IN "+obj["pw_exp_alert"]+" DAYS")
+                    $("#login_warning").show();
+                    return;
+                  }
+                }
+                loginSuccess();
+              }
+  
+            }
+
+            // @TODO find out what these do
+            // opt.query('queryOpt');
+            // bulletinBoard.query('query');
+            // brdcstModal.loadOwner();
+            // mB.start();
+          }
+        });
+      }
+    }
+  
+    // ================ Click Events ================= //
+    $("#login_continue").click(function(){
+      loginSuccess();
+      $("#login_warning").hide();
+    })
+
+    login.loginBtn.click(function(e) {
+      e.preventDefault();
+      
+      login.submitLogin();
+    });
+  
+    $(".login-input-fields").keypress(function(event) {
+      if (event.which == 13) {
+          event.preventDefault();
+          login.loginBtn.trigger('click');
+      }
+    });
+
+    $(document).on("mousedown",".login-input-fields", function(){
+      clearErrors();
+      $("#login_warning").hide()
+    })
+  
+    // @TODO create register user/first login functionality
+
+    // Login Error Handling
+    function loginErrorHandler(error) {
+      clearErrors();
+
+      if (error.reason.toLowerCase().includes('invalid')) {
+        if (error.reason.toLowerCase().includes('format')) {
+          inputError(login.newpassword, '');
+          inputError(login.confirmPassword, 'Password must be 6-15 characters with at least 1 letter and 1 number.');
+        } else {
+          inputError(login.username, '');
+          inputError(login.password, 'Username/Password Invalid');
+        }
+      } else if (error.reason.toLowerCase().includes('first')) {
+        if (!$('#change-password-btn').hasClass('active')) {
+          $('#change-password-btn').trigger('click');
+        }
+        $('.login-input-fields').each(function() {
+          if ($(this).attr('id') === 'login_confirmPassWord') {
+            inputError($(this), 'First time logging in. Must change password.');
+          } else {
+            inputError($(this),'');
+          }
+        });
+      } else if (error.reason.toLowerCase().includes('previous')) {
+        $('.login-input-fields').each(function() {
+          if ($(this).attr('id') === 'login_confirmPassWord') {
+            inputError($(this), error.reason);
+          } else {
+            inputError($(this),'');
+          }
+        })
+      } else if (error.reason.toLowerCase().includes('locked')) {
+        inputError(login.username, '');
+        inputError(login.password, 'Too many login attempts, user locked.');
+      }
+      else {
+        inputError(login.username, '');
+        inputError(login.password, error.reason);
+      }
+    }
+
+  });
+</script>

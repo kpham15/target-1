@@ -1,0 +1,126 @@
+<!-- Modal -->
+<div class="modal fade" id="batchExcModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">UPLOAD BATCH FILE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="background-color: lightgray; padding:15px">
+                    <div class="col-sm-12">
+                        <h4>CHOOSE A FILE FROM YOUR COMPUTER:</h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Choose a csv file <input class="form-control" type="file" style="display:none" id="batchExcModal_file" accept=".csv">
+                                </span>
+                            </label>
+                            <input id="batchExcModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="batchExcModal_submit_btn" style="width:13%;float:left">Submit</button>
+                    <button class="btn btn-primary" id="batchExcModal_clear_btn" style="width:10%;float:left">Clear</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+$(document).on('change', '#batchExcModal_file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $("#batchExcModal_fileText").val(label);
+});
+
+$(document).on('click', '#batchExcModal_file', function() {
+    clearErrors();
+});
+
+function batchExcModal_add() {
+    if ($("#batchExcModal_file").val() == "") {
+        postResponse($('#batchExcModal .modal-footer'), "fail", "There is no file uploaded!");
+        return;
+    }
+    let file= document.getElementById("batchExcModal_file").files[0];
+    if (file.size > 2097152) {
+        postResponse($('#batchExcModal .modal-footer'), "fail", "The file size must be less than 2MB!");
+    }
+    else {
+        let data = new FormData();
+        data.append("api", "ipcBatchExc");
+        data.append("user", user.uname);
+        data.append("grp", user.grp);
+        data.append("ugrp", user.ugrp);
+        data.append("act", "ADD");
+        data.append("file", file);  
+
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            let obj = JSON.parse(data);
+            if (obj["rslt"] == "fail") {
+                postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
+            }
+            else {
+                if (obj['rows'].length == 0) {
+                postResponse($('#batchExcModal .modal-footer'), "fail", "No batch record found!");
+                }
+                else {
+                    let a = [];
+                    batchExcList = obj['rows'];
+                    a.push('<option value="">Select a batch file</option>');
+
+                    for (let i=0; i<obj["rows"].length; i++) 
+                    {  
+                        a.push('<option value = "'+ i +'">' + batchExcList[i].filename + '</option>');
+                    }
+
+                    $("#batchExc_file_sel").empty();
+                    $("#batchExc_file_sel").html(a.join(""));
+                    postResponse($('#batchExcModal .modal-footer'), obj.rslt, obj.reason);
+
+                }  
+            } 
+        });
+
+    }
+}
+
+function batchExcModal_clearForm() {
+    $("#batchExcModal_file").val("");
+    $("#batchExcModal_fileText").val("");
+    clearErrors();
+}
+
+$("#batchExcModal_clear_btn").click(function(e){
+    e.preventDefault();
+    batchExcModal_clearForm();
+})
+
+$("#batchExcModal_submit_btn").click(function(e){
+    e.preventDefault();
+    batchExcModal_add();
+});
+
+$("#batchExcModal").on("hidden.bs.modal", function(){
+    batchExec_clearForm();
+});
+
+</script>

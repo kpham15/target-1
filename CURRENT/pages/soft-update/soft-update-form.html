@@ -1,0 +1,205 @@
+<div class="col-sm-3">
+    <div class="col-sm-10 " style="padding:2px;">
+        <label for="swUpd_act_sel">ACTION</label>
+        <select id="swUpd_act_sel" class="form-control" style="padding:2px;">
+            <option></option>
+            <option>UPLOAD SW</option>
+            <option>INSTALL UPDATE SW</option>
+            <option>RUN CURRENT SW</option>
+            <option>RUN UPDATE SW</option>
+            <!-- <option>RUN DEFAULT SW</option> -->
+            <option>APPLY UPDATE SW</option>
+            <!-- <option>APPLY DEFAULT SW</option> -->
+            <!-- <option>SET DEFAULT SW</option>                    -->
+             <!-- <option>DELETE</option> -->
+        </select>
+        <br>
+    </div>
+
+</div>
+
+<script>
+
+function swUpd_start() {
+    $("#swUpd_act_sel").val("");
+    swUpd_displayTable(); 
+}
+
+function swUpd_query(action){
+
+    $.ajax({
+        url: ipcDispatch,
+        type: "POST",
+        data: {
+            "user":   user.uname,
+            "grp":    user.grp,
+            "ugrp":   user.ugrp,
+            act: action,
+            api: "ipcSwUpdate",
+        },
+        dataType: "json"
+    })
+    .done(function(obj) {
+        if (obj["rslt"] == "fail") {
+            let modal = {
+                title: obj.rslt,
+                body: obj.reason,
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            if(action != 'INSTALL UPDATE SW' && action != 'SET DEFAULT SW') {
+                let urlParts = window.location.href.split("/");
+                urlParts.pop(); 
+                urlParts.pop(); 
+                urlParts = urlParts.join("/");
+                window.location.replace(urlParts); 
+            }
+            else {
+                swUpd_updateInfo();
+                let modal = {
+                    title: obj.rslt,
+                    body: obj.reason,
+                    type: 'success'
+                }
+                modalHandler(modal);
+            } 
+        } 
+    })
+}
+
+
+function swUpd_updateInfo(){
+    $.ajax({
+        url: ipcSwInfo,
+        data: {
+            act: "querySw"
+        },
+        dataType: "json"
+    }).done(function(obj) {
+        folderSwList = obj;
+        swUpd.displayTable(); 
+    })
+}
+
+function swUpd_confirm(){
+    if ($("#swUpd_act_sel").val()  ==  "RUN CURRENT SW") {
+        swUpd_query('RUN CURRENT SW');
+        $("#swUpd_act_sel").val("");
+    }
+    else if ($("#swUpd_act_sel").val()  ==  "RUN UPDATE SW") {
+        swUpd_query('RUN UPDATE SW');
+        $("#swUpd_act_sel").val("");
+    }
+    else if ($("#swUpd_act_sel").val()  ==  "RUN DEFAULT SW") {
+        swUpd_query('RUN DEFAULT SW');
+        $("#swUpd_act_sel").val("");
+    }
+    else if ($("#swUpd_act_sel").val()  ==  "APPLY UPDATE SW") {
+        if(folderSwList.UPDATE.status != 'Running') {
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW Update should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            swUpd_query('APPLY UPDATE SW');
+            $("#swUpd_act_sel").val("");
+        }
+    
+    }
+    else if ($("#swUpd_act_sel").val()  ==  "APPLY DEFAULT SW") {
+        if(folderSwList.DEFAULT.status != 'Running') {
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW Default should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            swUpd_query('APPLY DEFAULT SW');
+            $("#swUpd_act_sel").val("");
+        }
+    }
+    else if ($("#swUpd_act_sel").val() == "SET DEFAULT SW") {
+        if(folderSwList.CURRENT.status != 'Running') {
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW CURRENT should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            swUpd_query('SET DEFAULT SW');
+            $("#swUpd_act_sel").val("");
+        }
+        
+    }  
+}
+
+
+
+$("#swUpd_act_sel").change(function() {
+if ($("#swUpd_act_sel").val() !="") {
+    if ($("#swUpd_act_sel").val()  ==  "UPLOAD SW") {
+        if(folderSwList.CURRENT.status != 'Running') {
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW CURRENT should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            swUpdModal_clearForm();
+            $("#swUpdModal").modal();
+        }
+
+        
+    }
+    else if ($("#swUpd_act_sel").val()  ==  "INSTALL UPDATE SW") {
+        if(folderSwList.CURRENT.status != 'Running') {
+            let modal = {
+                title: "Error",
+                body: "To run this action. SW CURRENT should be in status Running",
+                type: 'danger'
+            }
+            modalHandler(modal);
+        }
+        else {
+            swUpd_query('INSTALL UPDATE SW');
+            $("#swUpd_act_sel").val("");
+        }
+        
+    }
+    else {
+        let modal = {
+            title: "Error",
+            body: "This action will reload the page. Continue?",
+            type: 'danger',
+            confirm: true,
+            func: swUpd_confirm
+        }
+        modalHandler(modal);
+        
+    }
+    
+    
+}
+
+});
+
+
+$(document).ready(function(){
+    $(".menu-item[page_id='soft-update-page']").click(function() {
+        swUpd_start()
+    });
+})
+
+
+</script>

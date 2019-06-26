@@ -1,0 +1,84 @@
+
+<div class="col-sm-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">LIST OF CKTS:</h3>
+        </div>
+        <div class="box-body">
+            <table id="provReport_tbl" class="table table-striped table-bordered table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>USER</th>
+                        <th>ORDNO</th>
+                        <th>TKTNO</th>
+                        <th>CKID</th>
+                        <th>ACTION</th>
+                        <th>RESULT</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var provReportDataTable = $("#provReport_tbl").DataTable({
+        dom: "frtip",
+        "data": [],
+        "pageLength": 4,
+        "columns":[
+            {
+                "data":"date",
+                "render": function(data) {
+                    if(data === "") return data;
+                    let date = moment(data).format(wcInfo.date_format + ' HH:mm:ss');
+                    return date;
+                }
+            },
+            {"data":"user"},
+            {"data":"ordno"},
+            {"data":"tktno"},
+            {"data":"ckid"},
+            {"data":"action"},
+            {"data":"result"},
+        ],
+        "order":[[0,"desc"]]
+    })
+
+    function provReportQueryProvlog(action){
+        $.ajax({
+            url: ipcDispatch,
+            type: "post",
+            data: {
+                api:            'ipcProvReport',
+                act:            action,
+                uname:          $("#provReport_user_txt").val(),
+                action:         $("#provReport_action_sel").val(),
+                ordno:          $("#provReport_ordno_txt").val().toUpperCase(),
+                ckid:           $("#provReport_ckid_txt").val().toUpperCase(),
+                fromDate:       provReportStartDate,
+                toDate:         provReportEndDate,     
+
+                user:     user.uname,
+                grp:      user.grp,
+                ugrp:     user.ugrp
+            },
+            dataType: "json"
+        }).done(function(data){
+            let res = data.rows;
+
+            if (res.length == 0) {
+                inputError($('#provReport_report_sel'),'No Record Found');
+            }
+  
+            provReportDataTable.clear().draw();
+            provReportDataTable.rows.add(res);
+            provReportDataTable.columns.adjust().draw();
+        })
+    }
+    
+
+</script>

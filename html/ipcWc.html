@@ -521,7 +521,7 @@ var wc = {
                 }
                 
                 if (((time-loginTime) > (idle_to - 60)) && ((time - loginTime) < idle_to)) {
-                    confirm("YOUR SESSION WILL BE TIMED OUT IN " + (idle_to - (time-loginTime)) + " SECONDS.\nSELECT OK TO CONTINUE.", function () {
+                    confirm("YOUR SESSION WILL BE TIMED OUT IN " + (idle_to - (time-loginTime)) + " SECONDS.\nSELECT OK TO CONTINUE.", false, function () {
                         wc.cancelTimeOut();
                     });
                 }

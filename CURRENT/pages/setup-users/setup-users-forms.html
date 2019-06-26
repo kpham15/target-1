@@ -1,0 +1,465 @@
+<!-- Forms -->
+<div class="col-md-5">
+  <form id="setup-users-forms">
+    <!-- Top Row -->
+    <div class="row">
+      <!-- USER -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>USER:</label>
+          <input id="setup-users-forms-user" class="form-control setup-users-forms-input" />
+        </div>
+      </div>
+      <!-- STATUS -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>STATUS:</label>
+          <select id="setup-users-forms-stat" class="form-control setup-users-forms-input">
+            <option value=""></option>
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+            <option value="LOCKED">LOCKED</option>
+            <option value="DISABLED">DISABLED</option>
+          </select>
+        </div>
+      </div>
+      <!-- LAST LOGIN -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>LAST LOGIN:</label>
+          <input id="setup-users-forms-lastlogin" type="text" class="form-control setup-users-forms-input" disabled="" />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-viewuser" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="row">
+      <!--FIRST NAME -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>FIRST NAME</label>
+          <input id="setup-users-forms-fname" type="text" class="form-control setup-users-forms-input" />
+        </div>
+      </div>
+      <!-- MI -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>MI</label>
+          <input id="setup-users-forms-mi" type="text" class="form-control setup-users-forms-input" maxlength="1" />
+        </div>
+      </div>
+      <!-- LAST NAME -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>LAST NAME</label>
+          <input id="setup-users-forms-lname" type="text" class="form-control setup-users-forms-input" />
+        </div>
+      </div>
+      <!-- EID -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>EID</label>
+          <input id="setup-users-forms-eid"  type="text" class="form-control setup-users-forms-input" disabled="" />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-viewfname" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 3 -->
+    <div class="row">
+      <!-- TELEPHONE NUMBER -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>TEL</label>
+          <label>TN:</label>
+          <input id="setup-users-tn-cbx" type="checkbox" checked />
+            <div class="input-group">
+              <input id="setup-users-forms-phonenum" type="text" class="form-control users-phonenum setup-users-forms-input" style="display:none;"/>
+              <input id="setup-users-forms-phonenum-tn" type="text" class="form-control users-phonenum setup-users-forms-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
+            </div>
+        </div>
+      </div>
+      <!-- EMAIL -->
+      <div class="col-md-7">
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input id="setup-users-forms-email" type="text" class="form-control setup-users-forms-input" placeholder="name@email.com" />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-viewtel" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 4 -->
+    <div class="row">
+      <!-- TITLE -->
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>TITLE</label>
+          <input id="setup-users-forms-title" type="text" class="form-control setup-users-forms-input" />
+        </div>
+      </div>
+      <!-- GROUP -->
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>GROUP:</label>
+          <select id="setup-users-forms-group" class="form-control setup-users-forms-input">
+            <option value=""></option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="SUPERVISOR">SUPERVISOR</option>
+            <option value="TECH-I">TECH-I</option>
+            <option value="TECH-II">TECH-II</option>
+            <option value="GENERAL">GENERAL</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-viewtitle" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Action Row -->
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>ACTION:</label>
+          <select id="setup-users-forms-action" class="form-control setup-users-forms-input">
+            <option value=""></option>
+            <option value="ADD">ADD</option>
+            <option value="UPDATE">UPDATE</option>
+            <option value="LOCK">LOCK</option>
+            <option value="ENABLE">ENABLE</option>
+            <option value="DISABLE">DISABLE</option>
+            <option value="DELETE">DELETE</option>
+            <option value="RESET_PW">RESET PASSWORD</option>
+            <option value="UPLOAD_IMAGE">UPLOAD_IMAGE</option>
+            <option value="REMOVE_USER_IMAGE">REMOVE_USER_IMAGE</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button id="setup-users-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+function setupUserAdd(obj) {
+  $('#setup-users-modal-action').val(obj.action);
+  $('#setup-users-modal-action').prop('disabled', true);
+  $('#setup-users-modal').modal('show');
+}
+
+function setupUserUpdate(obj) {
+
+  if (obj.uname == "") {
+    inputError($('#setup-users-forms-action'),'Select a user from the list');
+    $('#setup-users-forms-action').val('');
+    return;
+  }
+  else {
+    $('#setup-users-modal-action').val(obj.action);
+
+    $('#setup-users-modal-action').prop('disabled', true);
+
+    $('#setup-users-modal-user').val(obj.uname);
+    $('#setup-users-modal-ssn').val(obj.ssn);
+    $('#setup-users-modal-stat').val(obj.stat);
+    $('#setup-users-modal-stat').prop('disabled', true);
+
+    $('#setup-users-modal-fname').val(obj.fname);
+    $('#setup-users-modal-mi').val(obj.mi);
+    $('#setup-users-modal-lname').val(obj.lname);
+    $('#setup-users-modal-email').val(obj.email);
+    $('#setup-users-modal-title').val(obj.title);
+    $('#setup-users-modal-group').val(obj.group);
+  
+    $('#setup-users-modal-tel').val(obj.tel);
+    $('#setup-users-modal-tel-tn').val(obj.tel);
+  
+    $('#setup-users-modal').modal('show');
+  }
+}
+
+function setupUserOther(obj) {
+
+  if (obj.uname == "") {
+    inputError($('#setup-users-forms-action'),'Select a user from the list');
+    $('#setup-users-forms-action').val('');
+    return;
+  }
+  else {
+    $('#setup-users-modal-action').val(obj.action);
+    $('#setup-users-modal-action').prop('disabled', true);
+
+    $('#setup-users-modal-user').val(obj.uname);
+    $('#setup-users-modal-ssn').val(obj.ssn);
+    $('#setup-users-modal-stat').val(obj.stat);
+    $('#setup-users-modal-fname').val(obj.fname);
+    $('#setup-users-modal-mi').val(obj.mi);
+    $('#setup-users-modal-lname').val(obj.lname);
+    $('#setup-users-modal-email').val(obj.email);
+    $('#setup-users-modal-title').val(obj.title);
+    $('#setup-users-modal-group').val(obj.group);
+
+    $('.setup-users-modal-input').prop('disabled', true);
+  
+    $('#setup-users-modal-tel').val(obj.tel);
+    $('#setup-users-modal-tel-tn').val(obj.tel);
+  
+    $('#setup-users-modal').modal('show');
+  }
+}
+
+function setupUserUploadImg(obj) {
+  if (obj.uname == "") {
+    inputError($('#setup-users-forms-action'),'Select a user from the list');
+    $('#setup-users-forms-action').val('');
+    return;
+  }
+  setup_users_uploadUserImage_clearForm();
+  $('#setup_users_uploadUserImage').modal('show');
+
+}
+
+
+$(document).ready(function() {
+
+  // Action Change Event
+  $('#setup-users-forms-action').change(function() {
+
+    $('#setup-users-modal-post-response-text').text('');
+    $('.setup-users-modal-input').prop('disabled', false);
+
+    let tel = "";
+    if ($('#setup-users-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-forms-phonenum-tn').val();
+    }
+    else {
+      tel = $('#setup-users-forms-phonenum').val();
+    }
+
+    let obj = {
+      action:     $(this).val(),
+      tel:        tel,
+      uname:      $('#setup-users-forms-user').val(),
+      ssn:        $('#setup-users-forms-eid').val(),
+      stat:       $('#setup-users-forms-stat').val(),
+      fname:      $('#setup-users-forms-fname').val(),
+      mi:         $('#setup-users-forms-mi').val(),
+      lname:      $('#setup-users-forms-lname').val(),
+      email:      $('#setup-users-forms-email').val(),
+      title:      $('#setup-users-forms-title').val(),
+      group:      $('#setup-users-forms-group').val(),
+    }
+
+    clearErrors();
+
+    if (obj.action === 'ADD') {
+      setupUserAdd(obj);
+    }
+    else if (obj.action === 'UPDATE') {
+      setupUserUpdate(obj);
+    }
+    else if (obj.action === 'UPLOAD_IMAGE') {
+      setupUserUploadImg(obj);
+    }
+    else if (obj.action === 'REMOVE_USER_IMAGE') {
+      setupUserOther(obj);
+    }
+    else {
+      setupUserOther(obj);
+    }
+    
+  });
+
+  // Clear Button Click Event
+  $('#setup-users-forms-clear').click(function() {
+    $('.setup-users-forms-input').val('');
+    $('#setup-users-forms-viewuser').trigger('click');
+    clearErrors();
+  })
+
+  // Click Event View 1
+  $('#setup-users-forms-viewuser').click(function() {
+    clearErrors();
+
+    let userTxt = $('#setup-users-forms-user').val();
+    let status = $('#setup-users-forms-stat').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findUser",
+        "user":     user.uname,
+        "uname":    userTxt,
+        "stat":     status,
+      },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewuser'),'No Results Found');
+      }
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+
+  });
+
+  // Click Event View 2
+  $('#setup-users-forms-viewfname').click(function() {
+
+    clearErrors();
+
+    let fname = $('#setup-users-forms-fname').val();
+    let lname = $('#setup-users-forms-lname').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findNameSsn",
+        "user":     user.uname,
+        "fname":    fname,
+        "lname":    lname,
+    },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewfname'),'No Results Found');
+      }
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+
+
+  });
+
+  // Click Event View 3
+  $('#setup-users-forms-viewtel').click(function() {
+
+    clearErrors();
+
+    let tel = "";
+
+    if ($('#setup-users-tn-cbx').prop('checked')) {
+      tel = $('#setup-users-forms-phonenum-tn').val();
+    }
+    else {
+      tel = $('#setup-users-forms-phonenum').val();
+    }
+
+    let email = $('#setup-users-forms-email').val();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findTelEmail",
+        "user":     user.uname,
+        "tel":      tel,
+        "email":    email,
+    },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewtel'),'No Results Found');
+      }
+
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+
+
+  });
+
+  // Click Event View 4
+  $('#setup-users-forms-viewtitle').click(function() {
+
+    clearErrors();
+
+    let title = $('#setup-users-forms-title').val();
+    let ugrp = $('#setup-users-forms-group').val();
+      
+      $.ajax({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":      "ipcUser",
+          "act":      "findTitleGrp",
+          "user":     user.uname,
+          "title":    title,
+          "ugrp":     ugrp,
+      },
+        dataType:     'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewtitle'),'No Results Found');
+      }
+
+        setupUsersDatatable.clear().draw();
+        setupUsersDatatable.rows.add(res);
+        setupUsersDatatable.columns.adjust().draw();
+      });
+  });
+
+  //Initialize inputmask
+  $('#setup-users-forms-phonenum-tn').inputmask();
+
+  //TN Checkbox Handler
+  $('#setup-users-tn-cbx').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#setup-users-tn-cbx').on('ifToggled', function(){
+    $('.users-phonenum').toggle();
+  });
+
+  // Side NavBar Click Event
+  $('.menu-item[page_id="setup-users-page"]').click(function() {
+    $('#setup-users-forms-viewuser').trigger('click');
+  })
+
+});
+
+</script>

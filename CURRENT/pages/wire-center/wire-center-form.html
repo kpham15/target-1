@@ -1,0 +1,284 @@
+
+
+<div class="row">
+    <div class="col-sm-11">
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_wcname_txt">WCNAME</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_wcname_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_wcc_txt">WCC</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_wcc_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_clli_txt">CLLI</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_clli_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_npanxx_txt">NPANXX</label>
+            <input type="number" class="form-control" id="wc_npanxx_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_frloc_txt">FRM_ID</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_frloc_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_ipctyp_txt">IPC_TYP</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_ipctyp_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_ipcmod_txt">IPC_MOD</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_ipcmod_txt" readonly>
+        </div>
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_tzone_sel">TZONE</label>
+            <input class="form-control" id="wc_tzone_sel" disabled>
+        </div>
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_stat_sel">STAT</label>
+            <input class="form-control" id="wc_stat_sel" disabled="">
+        </div>
+    </div>
+
+    <div class="col-sm-11">
+        <div class="col-sm-4 " style="padding:2px">
+            <label for="wc_addr_txt">LOC_ADDR</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_addr_txt" readonly>
+        </div>
+
+        <div class="col-sm-3 " style="padding:2px">
+            <label for="wc_city_txt">CITY</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_city_txt" readonly>
+        </div>
+
+        <div class="col-sm-1 " style="padding:2px">
+            <label for="wc_state_sel">STATE</label>
+            <input class="form-control" id="wc_state_sel" disabled>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_zip_txt">ZIP</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_zip_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_gps_txt">GPS</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_gps_txt" readonly>
+        </div>
+    </div>
+        
+    <div class="col-sm-11">
+        <div class="col-sm-4 " style="padding:2px">
+            <label for="wc_company_txt">COMPANY</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_company_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_region_txt">REGION</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_region_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_area_txt">AREA</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_area_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_district_txt">DISTRICT</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_district_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_manager_txt">MANAGER</label>
+            <input style="text-transform: uppercase" type="text" class="form-control" id="wc_manager_txt" readonly>
+        </div>
+    </div>
+
+    <div class="col-sm-11">
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_ipadr_txt">IP_ADDR</label>
+            <input type="text" class="form-control" id="wc_ipadr_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_gateway_txt">GATEWAY </label>
+            <input type="text" class="form-control" id="wc_gateway_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+                <label for="wc_netmask_txt"> NETMASK</label>
+                <input type="text" class="form-control" id="wc_netmask_txt" readonly>
+        </div>
+
+        <div class="col-sm-2 " style="padding:2px">
+                <label for="wc_iport_txt">IP_PORT</label>
+                <input type="text" class="form-control" id="wc_iport_txt" readonly>
+        </div>
+
+        <div>
+            <br><br>
+            <input type="hidden" id="wc_id_num" style="width:50px;" readonly>
+            <label id="wc_result_lbl" style="color:red"></label>
+        </div>
+    </div>
+
+    <div class="col-sm-11">
+        <div class="col-sm-2 " style="padding:2px">
+            <label for="wc_act_sel">ACTION</label>
+            <select class="form-control" id="wc_act_sel">
+                <option></option>
+                <option>UPDATE</option>
+                <option>RESET</option>
+                <option>UPDATE_NETWORK</option>
+                <option>TURN_UP</option>
+                <option>HOLD</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./pages/wire-center/wire-center-options.js"></script>
+
+<script>
+var wc_ipcTime = "";
+var wc_tblRows = [];
+
+function wc_displayForm(){
+    $("#wc_id_num").        val(wc_tblRows[1].id);
+    $("#wc_id_num").        prop("disabled","disabled");
+    $("#wc_wcname_txt").    val(wc_tblRows[1].wcname);
+    $("#wc_wcc_txt").       val(wc_tblRows[1].wcc);
+    $("#wc_clli_txt").      val(wc_tblRows[1].clli);
+    $("#wc_npanxx_txt").    val(wc_tblRows[1].npanxx);
+    $("#wc_frloc_txt").     val(wc_tblRows[1].frloc);
+    $("#wc_ipctyp_txt").    val(wc_tblRows[1].ipctyp);
+    $("#wc_ipcmod_txt").    val(wc_tblRows[1].ipcmod);
+    $("#wc_tzone_sel").     val(wc_tblRows[1].tzone);
+    $("#wc_stat_sel").      val(wc_tblRows[1].ipcstat);
+    $("#wc_addr_txt").      val(wc_tblRows[1].loc);
+    $("#wc_city_txt").      val(wc_tblRows[1].city);
+    $("#wc_state_sel").     val(wc_tblRows[1].state);
+    $("#wc_zip_txt").       val(wc_tblRows[1].zip);
+    $("#wc_gps_txt").       val(wc_tblRows[1].gps);
+    $("#wc_company_txt").   val(wc_tblRows[1].company);
+    $("#wc_region_txt").    val(wc_tblRows[1].region);
+    $("#wc_area_txt").      val(wc_tblRows[1].area);
+    $("#wc_district_txt").  val(wc_tblRows[1].district);
+    $("#wc_manager_txt").   val(wc_tblRows[1].manager);
+    $("#wc_ipadr_txt").     val(wc_tblRows[1].ipadr);
+    $("#wc_gateway_txt").   val(wc_tblRows[1].gateway);
+    $("#wc_netmask_txt").   val(wc_tblRows[1].netmask);
+    $("#wc_iport_txt").     val(wc_tblRows[1].iport);
+
+}
+
+function wc_query(action) {
+    
+    $.post({
+        type: "post",
+        url: ipcDispatch,
+        data: {     
+            api:"ipcWc",
+            act:action,
+            user: user.uname,
+            grp:  user.grp,
+            ugrp: user.ugrp,
+
+        },
+        dataType: "json"
+    }).done(
+    function (obj) {       
+        if (obj.rslt == "fail") {
+            let modal = {
+                title:  'fail',
+                body: obj.reason,
+                type : 'error'
+            }
+            modalHandler(modal);
+        }
+        else {
+            if (obj.rows.length === 0) {
+                if (action != "query") {
+                    let modal = {
+                        title:  'fail',
+                        body:  'No Record Found',
+                        type : 'error'
+                    }
+                    modalHandler(modal);
+                    return;
+                }
+            }
+            else {
+                wc_tblRows = obj.rows;
+                wc_displayForm();
+            }
+        } 
+    });
+}
+
+
+$("#wc_act_sel").change(function() {
+    
+    wcModalInsertStatesOption(wcOptionsState);
+
+    if ($("#wc_id_num").val() != "") {
+        if ($("#wc_act_sel").val()  ==  "UPDATE") {
+            wcModal_tblRows = wc_tblRows;
+            wcModal_displayForm();
+            wcModal_enableForm();
+            wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
+            $("#wcModal").modal();
+        } 
+        else if ($("#wc_act_sel").val()  ==  "RESET") {
+            wcModal_tblRows = wc_tblRows;
+            wcModal_resetForm();
+            $("#wcModal_act_txt").val($("#wc_act_sel").val());
+            wcModal_disableForm();
+            wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
+            $("#wcModal").modal();
+        } 
+        else if ($("#wc_act_sel").val()  ==  "UPDATE_NETWORK") {
+            wcModal_tblRows = wc_tblRows;
+            wcModal_displayForm();
+            wcModal_disableForm();
+            wcModal_enableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
+            $("#wcModal").modal();
+        } 
+        else if ($("#wc_act_sel").val()  ==  "TURN_UP") {
+            wcModal_tblRows = wc_tblRows;
+            wcModal_displayForm();
+            wcModal_disableForm();
+            wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
+            $("#wcModal").modal();
+
+        }
+        else if ($("#wc_act_sel").val()  ==  "HOLD") {
+            wcModal_tblRows = wc_tblRows;
+            wcModal_displayForm();
+            wcModal_disableForm();
+            wcModal_disableNetworkData();
+            $("#wcModal select").css("-webkit-appearance", "menulist");
+            $("#wcModal select:disabled").css("-webkit-appearance", "none");
+            $("#wcModal").modal();
+        }  
+    }   
+});
+
+
+$(document).ready(function(){
+    $(".menu-item[page_id='wire-center-page']").click(function() {
+        wc_query('query');
+        $("#wire-center-page select").css("-webkit-appearance", "menulist");
+        $("#wire-center-page select:disabled").css("-webkit-appearance", "none");
+    });
+})
+</script>

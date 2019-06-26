@@ -1,0 +1,109 @@
+<!-- MODAL -->
+<div class="modal fade" id="node-operation-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">NODE OPERATION</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <!-- Top Row -->
+          <div class="row">
+            <!-- NODE -->
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>NODE:</label>
+                <input id="node-operation-modal-node" type="text" class="form-control node-operation-modal-input" disabled="">
+              </div>
+            </div>
+
+            <!-- DEVICE -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>DEVICE:</label>
+                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input" disabled="">
+              </div>
+            </div>
+
+            <!-- SERIAL NUMBER -->
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>SERIAL NUMBER:</label>
+                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTION Row -->
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>ACTION:</label>
+                <input id="node-operation-modal-action" type="text" class="form-control node-operation-modal-input" disabled="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button id="node-operation-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  // Modal Close Event Listener
+  $('#node-operation-modal').on('hidden.bs.modal', function(e) {
+    $('#node-operation-forms-clear').trigger('click');
+  })
+  
+  // Submit Button Click Event
+  $('#node-operation-modal-submit').click(function() {
+    let action = $('#node-operation-modal-action').val();
+    let node = $('#node-operation-modal-node').val();
+    let device = $('#node-operation-modal-device').val();
+    let serialnum = $('#node-operation-modal-serialnum').val();
+
+    $.ajax({
+      type:          "POST",
+      url:           ipcDispatch,
+      data:          {
+        "api":        "ipcNodeOpe",
+        "act":        action,
+        "user":       user.uname,
+        "node":       node,
+        "dev":        device,
+        "serial_no":  serialnum
+      },
+      dataType:   'json'    
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (data.rslt === 'fail') {
+        postResponse($('#node-operation-modal .modal-footer'), data.rslt, data.reason);
+      }
+      else {
+        postResponse($('#node-operation-modal .modal-footer'), data.rslt, data.reason);
+      }
+    });
+  });
+
+  $(".node-operation-modal-input").on('click', function() {
+    clearErrors();
+  });
+});
+</script>

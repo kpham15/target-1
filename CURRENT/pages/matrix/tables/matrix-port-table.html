@@ -1,0 +1,61 @@
+<!-- Table -->
+<div id="matrix-port" class="box box-primary" style="display: none">
+  <div class="box-header with-border">
+    <h3 class="box-title">LIST OF PORTS:</h3>
+  </div>
+  <div class="box-body">
+    <table id="matrix-port-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+      <thead>
+        <tr>
+          <th>PORT</th>
+          <th>PSTA</th>
+          <th>FAC</th>
+          <th>CKID</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // Initialize Datatable
+  var matrixPortDatatable = $('#matrix-port-table').DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 7,
+    "columns": [
+      {"data":"port"},
+      {"data":"psta"},
+      {"data":"fac"},
+      {"data":"ckid"},
+    ],
+    "scrollY": "252px",
+  });
+
+  function queryMatrixPorts() {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:    "ipcMxc",
+        act:    "VIEW_PORT_STATUS",
+        user:   user.uname,
+
+        node:   $("#matrix-form-node").val().toUpperCase(),
+        shelf:  $("#matrix-form-shelf").val(),
+        slot:   $("#matrix-form-slot").val(),
+        type:   $("#matrix-form-type").val(),
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = [];
+      if (data.hasOwnProperty('rows')) {
+        res = data.rows;
+      }
+      matrixPortDatatable.clear().draw();
+      matrixPortDatatable.rows.add(res);
+      matrixPortDatatable.columns.adjust().draw();
+    });
+  }
+
+</script>

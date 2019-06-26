@@ -1,0 +1,182 @@
+<!-- FORM -->
+<div class="col-md-12">
+  <form id="maintReport-form">
+    <!-- ROW 1 BEGIN-->
+    <div class="row">
+
+      <!-- USER -->
+      <div class="col-md-1">
+        <label>USER</label>
+        <input id="maintReport-form-user" class="form-control maintReport-form-input">
+      </div>
+
+      <!-- TKTNO -->
+      <div class="col-md-2">
+        <label>TKTNO</label>
+        <input id="maintReport-form-tktno" class="form-control maintReport-form-input">
+      </div>
+
+      <!-- ACTION -->
+      <div class="col-md-2">
+        <label>ACTION</label>
+        <select class="form-control maintReport-form" id="maintReport-form-action">
+          <option></option>
+          <option>MTC_CONN</option>
+          <option>MTC_DISCON</option>
+          <option>MTC_RESTORE</option>
+          <option>RESTORE_MTCD</option>
+        </select>
+      </div>
+
+			<!-- DateRangePicker -->
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>DATE RANGE:</label>
+					<div class="input-group">
+						  <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+						  </div>
+						  <input type="text" id="maintReport-form-daterange" class="form-control pull-right">
+					</div>
+				</div>
+      </div>
+      
+    </div>
+    <!-- END ROW 1 -->
+
+    <!-- ROW 2 BEGIN -->
+    <div class="row">
+
+      <!-- REPORT -->
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>REPORT:</label>
+					<select id="maintReport-form-report" class="form-control maintReport-form-input">
+						<option value="VIEW REPORT">VIEW REPORT</option>
+						<option value="CREATE REPORT">CREATE REPORT</option>
+					</select>
+				</div>
+      </div>
+
+			<!-- Submit Button -->
+			<button id="maintReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
+				Submit
+      </button>
+      
+			<!-- Clear Button -->
+			<button id="maintReport-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
+				Clear
+			</button>
+
+    </div>
+    <!-- ROW 2 END -->
+    
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  // DOWNLOAD REPORT
+	function downloadMaintReports(args) {
+		var data, filename, link;
+    var csv = convertArrayOfObjectsToCSV({
+      data: maintReportDatatable.data().toArray()
+    });
+    if (csv == null) {
+      inputError($('#maintReport-form-report'),'No Reports To Create');
+      return;
+    }
+    
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+  }
+
+	$(document).ready(function() {
+    
+		var maintReportStartDate = moment(new Date()).format('YYYY-MM-DD');
+		var maintReportEndDate = moment(new Date()).format('YYYY-MM-DD');
+
+		// Initialze daterangepicker and assign values to start and from dates
+		function initializeMaintReportDateRangePicker () {
+			$('input[id="maintReport-form-daterange"]').daterangepicker({
+				opens: 'bottom',
+				startDate: moment(),
+			}, function(start, end, label) {
+				maintReportStartDate  = start.format('YYYY-MM-DD');
+				maintReportEndDate    = end.format('YYYY-MM-DD');
+			});
+		}
+
+		initializeMaintReportDateRangePicker();
+
+    // UPON LOAD PAGE FIRST TIME
+    var maintReportFirstLoad = true;
+    $(".menu-item[page_id='maint-report-page']").click(async function() {
+      if (maintReportFirstLoad != true) {
+        return;
+      }
+      // load event log table upon visiting page
+      maintReportQueryMaintlog(maintReportStartDate, maintReportEndDate);
+
+      maintReportFirstLoad = false;
+    });
+		
+
+		// Click Event For 'Submit Button'
+		$('#maintReport-form-submit').click(function() {
+      clearErrors();
+      
+			let report = $('#maintReport-form-report').val();
+
+			if (report === '') {
+				inputError($('#maintReport-form-report'),'Select An Option');
+			}
+			else if (report === "VIEW REPORT") {
+				
+				maintReportQueryMaintlog(maintReportStartDate, maintReportEndDate);
+			}
+			//@TODO if there are too many rows, does not download?
+
+			else if (report === "CREATE REPORT") {
+				downloadMaintReports({filename: `MAINTENANCE_REPORT_${maintReportStartDate}_${maintReportEndDate}.csv`});
+			}
+		});
+
+		// Click Event For 'Clear Button'
+		$('#maintReport-form-clear').click(function() {
+
+			let currDate = moment(new Date()).format('YYYY-MM-DD');
+
+			$('.maintReport-form-input').val('');
+      $('#maintReport-form-report').val("VIEW REPORT");
+			maintReportDatatable.clear().draw();
+
+			$('#maintReport-daterange').val('').daterangepicker("update");
+			maintReportStartDate = currDate;
+			maintReportEndDate = currDate;
+
+			// reinitialize daterangepicker
+			initializeMaintReportDateRangePicker();
+			
+			clearErrors();
+		});
+
+		// REPORT Change listener
+		$('.maintReport-form-input').on("click", function() {
+			clearErrors();
+		});
+
+	});
+
+
+
+</script>

@@ -1,0 +1,217 @@
+.table-hover>tbody>tr.bg-primary:hover,
+.table-striped>tbody>tr.bg-primary:nth-of-type(odd) {
+  background-color: #337ab7;
+}
+
+/* ============ Login Page ============== */
+.login-page {
+  background-color: #C5F8F9;
+}
+.login-logo {
+  width: 180px;
+  margin: auto;
+  text-align: left;
+}
+#login-title {
+  line-height: 100%;
+}
+.login-box {
+  margin: 1% auto;
+}
+/* ============ END Login Page ===============*/
+
+/* =========== All Page Stylings ============= */
+.active-page {
+  display: block !important;
+}
+.content-header {
+  margin-bottom: 10px;
+}
+input:not(.lowercase) {
+  text-transform: uppercase;
+}
+/* =========== END All Page Stylings ============= */
+
+/* ============ Nav Wrapper Styling ============== */
+.skin-blue .main-header .logo {
+  background-color: #1700CC;
+}
+.skin-blue .main-header .logo:hover {
+  background-color: #1700CC;
+}
+.skin-blue .main-header .navbar {
+  background-color: #1700CC;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+  background: rgba(0,0,0,0.1);
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+  border-left-color: #aaa;
+  border-right-color: #aaa;
+}
+.nav-tabs-custom>.nav-tabs.node-tabs {
+  border-bottom-color: #aaa;
+}
+.nav.navbar-nav .navbar-text {
+  color: #FFF;
+}
+#alarm-header-icon {
+  display: inline;
+  width: auto;
+}
+.dropdown-menu li>a {
+  color: #000;
+}
+.nav.node-tabs>li>a {
+  padding: 8px;
+}
+hr.content-page-divider {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 1px solid #3c8dbc;
+}
+#main-section-content {
+  background-color: #C5F8F9;
+}
+.treeview-menu>li>a>.far,
+.sidebar-menu > li > a > .fab,
+.sidebar-menu > li > a > .fas {
+  width: 20px;
+}
+.skin-blue .main-sidebar {
+  background-color: #1700CC;
+}
+.skin-blue .sidebar-menu>li.active>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li.menu-open>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li:hover>a {
+  background-color: #1500B3;
+}
+.skin-blue .sidebar-menu>li.header {
+  background-color: #10008C;
+  color: #ccc;
+}
+.skin-blue .sidebar-menu .treeview-menu>li>a {
+  background-color: #197BD9;
+  color: #eee;
+}
+.skin-blue .sidebar-menu>li>.treeview-menu {
+  background-color: #197BD9;
+}
+.skin-blue .sidebar-form input[type="text"] {
+  background-color: #fff;
+}
+.skin-blue .sidebar-menu .treeview-menu>li>a:hover,
+.skin-blue .sidebar-menu .treeview-menu>li.active>a {
+  background-color: #125899;
+}
+/* ============ END Nav Wrapper Styling =============== */
+
+/* ============= Modal Styling ============== */
+.modal-footer .modal-confirm-btn {
+  display: none;
+}
+.post-response {
+  text-align: left;
+}
+/* ============= END Modal Styling =============*/
+
+/* ============ IPC Colors ============ */
+.bg-critical {
+  background-color: #FF0000 !important;
+  color: #fff !important;
+}
+.bg-major {
+  background-color: #FA693C !important;
+  color: #fff !important;
+}
+.bg-minor {
+  background-color: #FFFF00 !important;
+  color: #000000 !important;
+}
+.bg-no-alarm {
+  background-color: #00FF00 !important;
+  color: #000000 !important;
+}
+.response-success {
+  color: #00a65a !important;
+}
+.response-fail {
+  color: #dd4b39 !important;
+}
+/* ============ END IPC Alarm Colors ============ */
+
+/* ============ Sysview Page CSS ============= */
+.addBorder {
+  box-shadow: 0px 0px 0px 2px black inset;
+  box-sizing: border-box;
+}
+
+.node-status-row {
+  margin-top: 10px;
+  display: flex;
+}
+.node-box {
+  width: 9%;
+  margin-right: 8px;
+}
+.node-box .info-box-icon {
+  width: 20px;
+}
+.node-box-content {
+  margin-left: 20px !important;
+}
+.info-box.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.mio-btn > p {
+  margin: 0;
+  line-height: 100%;
+}
+.port-grid .info-box-text {
+  font-size: 16px !important;
+}
+.port-grid .info-box {
+  width:20%; 
+  float:left; 
+  margin-bottom:0;
+  padding:10px;
+  border:1px solid #ddd !important;
+  color: #fff;
+}
+.mio-tabs .btn-group {
+  margin-bottom: 10px;
+}
+.port-box {
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+.port-box button {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.nav-tabs-custom .port-box.dropdown.open>a:focus {
+  color: inherit;
+}
+.sysview-actions-row {
+  margin-bottom: 15px;
+}
+/* ============ END Sysview Page CSS ============ */
+
+
+/* ============ DataTable extra style=========== */
+table {
+  table-layout: fixed;
+  width: 100% !important;
+}
+/* =============END DataTable CSS=============== */

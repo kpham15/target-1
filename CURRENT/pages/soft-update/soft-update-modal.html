@@ -1,0 +1,107 @@
+<div id="swUpdModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SOFTWARE UPLOAD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="background-color: lightgray; padding:15px;">
+                    <div class="col-sm-12">
+                        <h4>CHOOSE A SOFTWARE FILE FROM YOUR COMPUTER:</h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Choose a zip file <input class="btn btn-primary" type="file" style="display:none" id="swUpdModal_file" accept=".zip">
+                                </span>
+                            </label>
+                            <input id="swUpdModal_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="swUpdModal_submit_btn" style="width:13%;float:left">Submit</button>
+                    <button class="btn btn-primary" id="swUpdModal_clear_btn" style="width:10%;float:left">Clear</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width:10%;float:left">Close</button>
+                    <span style="width:60%;  float:left">
+                        <label id="swUpdModal_rslt"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).on('change', '#swUpdModal_file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $("#swUpdModal_fileText").val(label);
+});
+
+
+
+function swUpdModal_add() {
+    if($("#swUpdModal_file").val() == "") {
+        $("#swUpdModal_rslt").css("color","red").text("There is no file uploaded!")
+        return;
+    }
+    let file= document.getElementById("swUpdModal_file").files[0];
+    if (file.size > 2097152) {
+        $("#swUpdModal_rslt").css("color","red").text("The file size must be less than 2MB!")
+        return;
+    }
+
+    let data = new FormData();
+    data.append("user", $("#main_currentUser").text());
+    data.append("act", "UPLOAD SW");
+    data.append("api", 'ipcSwUpdate')
+    data.append("user", user.uname)
+    data.append("grp", user.grp)
+    data.append("ugrp", user.ugrp)
+    data.append("file", file);  
+
+    $.ajax({
+        url: ipcDispatch,
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+    })
+    .done(function(data, status){
+        let obj = JSON.parse(data);
+        if(obj.rslt == 'fail') {
+            postResponse($('#swUpdModal .modal-footer'), obj.rslt, obj.reason);
+        }
+        else {
+            postResponse($('#swUpdModal .modal-footer'), obj.rslt, obj.reason);
+        }
+
+    });
+
+}
+
+function swUpdModal_clearForm() {
+    $("#swUpdModal_file").val("");
+    $("#swUpdModal_fileText").val("")
+    $("#swUpdModal_rslt").text("")
+}
+
+$("#swUpdModal_clear_btn").click(function(){
+    swUpdModal_clearForm();
+})
+
+$("#swUpdModal_submit_btn").click(function(){
+    swUpdModal_add();
+});
+
+
+$("#swUpdModal").on("hidden.bs.modal", function(){
+    $("#swUpd_act_sel").val("");
+});
+
+
+</script>

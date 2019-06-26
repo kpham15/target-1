@@ -1,0 +1,383 @@
+
+<!-- Row one for Action and buttons  -->
+<div class="row">
+<div class="col-sm-12" style="padding-left: 0px">
+    <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+        <div class="form-group">
+            <label for="rt_action_sel">ACTION</label>
+            <select id="rt_action_sel" class="form-control">
+                <option></option>
+                <option>ADD</option>
+                <option>DELETE</option>
+                <option>UPDATE</option>
+        </select>
+        </div>
+    </div>
+    <div class="col-sm-10" style="padding-left: 5px; padding-right: 5px">
+        <div class="form-group">
+            <button class="btn btn-primary" id="rt_submit_btn" style="margin-top:25px">SUBMIT</button>
+            <button class="btn btn-primary" id="rt_clear_btn" style="margin-top:25px">CLEAR</button>
+        </div>
+    </div>
+</div>
+
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_sot_sel">SOT</label>
+    <select style="padding:2px" id="rt_sot_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>N</option>
+        <option>T</option>
+        <option>C</option>
+        <option>D</option>
+        <option>F</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_ot_sel">OT</label>
+    <select style="padding:2px" id="rt_ot_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>NC</option>
+        <option>CH</option>
+        <option>CD</option>
+        <option>T</option>
+        <option>F</option>
+        <option>CPT</option>
+        <option>DTR</option>
+        <option>JAM</option>
+        <option>LST</option>
+        <option>SET</option>
+        <option>WAO</option>
+        <option>ATR</option>
+        <option>FTR</option>
+        <option>CIO</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rot_sel">ROT</label>
+    <select style="padding:2px" id="rt_rot_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>N</option>
+        <option>C</option>
+        <option>D</option>
+        <option>T</option>
+        <option>F</option>
+        <option>CPT</option>
+        <option>DTR</option>
+        <option>JAM</option>
+        <option>LST</option>
+        <option>SET</option>
+        <option>WAO</option>
+        <option>ATR</option>
+        <option>FTR</option>
+        <option>CIO</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_cls_sel">CLS</label>
+    <select style="padding:2px" id="rt_cls_sel" class="form-control ft_release_form">
+        <option></option>
+        <option>B</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_oc_sel">OC</label>
+    <select style="padding:2px" id="rt_oc_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>BTH</option>
+        <option>CMB</option>
+        <option>UNE</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_adsr_sel">ADSR</label>
+    <select style="padding:2px" id="rt_adsr_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>Y</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rtAct_sel">ACT</label>
+    <select style="padding:2px" id="rt_rtAct_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>C</option>
+        <option>I</option>
+        <option>O</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_facType_sel">FAC_TYPE</label>
+    <select style="padding:2px" id="rt_facType_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>OE</option>
+        <option>CP</option>
+        <option>ME</option>
+        <option>TRE</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_facId_sel">FAC_ID</label>
+    <select style="padding:2px" id="rt_facId_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>SL*</option>
+        <option>ADSL*</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_fddInt_sel">FDD_INT</label>
+    <select style="padding:2px" id="rt_fddInt_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>0</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_ddInt_sel">DD_INT</label>
+    <select style="padding:2px" id="rt_ddInt_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>+1</option>
+        <option>0</option>
+        <option>-1</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rtyp_sel">RTYPE</label>
+    <select style="padding:2px" id="rt_rtyp_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>AUTO</option>
+        <option>MANUAL</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_rt_sel">RT</label>
+    <select style="padding:2px" id="rt_rt_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>01:00</option>
+        <option>08:00</option>
+        <option>13:00</option>
+        <option>10:00</option>
+    </select>
+</div>
+<div style="width:12%; float:left; padding:3px;">
+    <label for="rt_jeopCond_sel">JCOND</label>
+    <select style="padding:2px" id="rt_jeopCond_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>Hold For Call</option>
+    </select>
+</div>
+<div style="width:6%; float:left; padding:3px;">
+    <label for="rt_jeop_sel">JEOP</label>
+    <select style="padding:2px" id="rt_jeop_sel"  class="form-control ft_release_form">
+        <option></option>
+        <option>ID</option>
+    </select>
+</div>
+<!-- Table -->
+<div class="col-sm-12" style="padding:5px">
+    <div class="box box-primary">
+        <div class="box-body">
+            <table id="ft_release_table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                <thead>
+                <tr>
+                    <th>SOT</th>
+                    <th>OT</th>
+                    <th>ROT</th>
+                    <th>CLS</th>
+                    <th>OC</th>
+                    <th>ADSR</th>
+                    <th>ACT</th>
+                    <th>FAC_TYPE</th>
+                    <th>FAC_ID</th>
+                    <th>FDD_INT </th>
+                    <th>DD_INT</th>
+                    <th>RTYPE</th>
+                    <th>RT</th>
+                    <th>JCOND</th>
+                    <th>JEOP</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+<script>
+var ft_releaseDataTable = $("#ft_release_table").DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 5,
+    "columns": [
+        {"data":"sot"},
+        {"data":"ot"},
+        {"data":"rot"},
+        {"data":"cls"},
+        {"data":"oc"},
+        {"data":"adsr"},
+        {"data":"act"},
+        {"data":"ftyp"},
+        {"data":"fac"},
+        {"data":"fdd_int"},
+        {"data":"dd_int"},
+        {"data":"rtyp"},
+        {"data":"rt"},
+        {"data":"jcond"},
+        {"data":"jeop"},
+    ],
+   
+});
+  
+var ft_release_id = ""
+
+function ft_release_clearForm() {
+    $("select").val("");
+    ft_release_id = 0;
+}
+
+function ft_release_query(action) {
+    $.ajax({
+        url: ipcDispatch,
+        type: 'post',
+        data:{
+            api:        "ipcFtRelease",
+            act:	    action,
+            user:	    user.uname,
+            grp:        user.grp,
+            ugrp:       user.ugrp,
+            sot:        $("#rt_sot_sel").val(),
+            ot:         $("#rt_ot_sel").val(),
+            rot:        $("#rt_rot_sel").val(),
+            cls:        $("#rt_cls_sel").val(),
+            oc:         $("#rt_oc_sel").val(),
+            adsr:       $("#rt_adsr_sel").val(),
+            rtAct:      $("#rt_rtAct_sel").val(),
+            facType:    $("#rt_facType_sel").val(),
+            facId:      $("#rt_facId_sel").val(),
+            fddInt:     $("#rt_fddInt_sel").val(),
+            ddInt:      $("#rt_ddInt_sel").val(),
+            rtyp:       $("#rt_rtyp_sel").val(),
+            rt:         $("#rt_rt_sel").val(),
+            jCond:      $("#rt_jeopCond_sel").val(),
+            jeop:       $("#rt_jeop_sel").val(),
+            id:         ft_release_id,
+        },
+        dataType: "json"
+    }).done(function (data) {
+        if (data.rslt  ==  "fail") {
+            inputError($('#rt_submit_btn'),data.reason);
+        }
+        else {
+            if (data.rows.length  ==  0 && action != "DELETE") {
+                inputError($('#rt_submit_btn'),"No Record Found");
+            }
+            else {
+                let res = data.rows;
+                ft_releaseDataTable.clear().draw();
+                ft_releaseDataTable.rows.add(res);
+                ft_releaseDataTable.columns.adjust().draw();
+                if (action != "query") {
+                    inputSuccess($('#rt_submit_btn'),action+': FT_RELEASE SUCCESS');
+                }
+            }
+        }
+    });
+    
+}
+
+
+// UPON LOAD PAGE FIRST TIME
+var ft_releaseFirstLoad = true;
+$(".menu-item[page_id='ft-release-page']").click(function() {
+    if (ft_releaseFirstLoad != true) {
+        return;
+    }
+    ft_release_query("query");
+    ft_releaseFirstLoad = false;
+});
+
+$(document).on("click","#ft_release_table tbody tr", function(){
+    let data = ft_releaseDataTable.row(this).data();
+    if(data == undefined)
+        return;
+    
+    $('#ft_release_table tbody tr').removeClass('bg-primary');
+    $(this).addClass('bg-primary');
+
+    $("#rt_sot_sel").val(data.sot);
+    $("#rt_ot_sel").val(data.ot);
+    $("#rt_rot_sel").val(data.rot);
+    $("#rt_cls_sel").val(data.cls);       
+    $("#rt_oc_sel").val(data.oc);  
+    $("#rt_adsr_sel").val(data.adsr); 
+    $("#rt_rtAct_sel").val(data.act); 
+    $("#rt_facType_sel").val(data.ftyp);
+    $("#rt_facId_sel").val(data.fac); 
+    $("#rt_fddInt_sel").val(data.fdd_int); 
+    $("#rt_ddInt_sel").val(data.dd_int); 
+    $("#rt_rtyp_sel").val(data.rtyp); 
+    $("#rt_rt_sel").val(data.rt); 
+    $("#rt_jeopCond_sel").val(data.jcond); 
+    $("#rt_jeop_sel").val(data.jeop);
+    ft_release_id = data.id;
+   
+    //this code is to prevent user pick one row and submit ADD
+    $("#rt_action_sel").val("");
+})
+
+
+$("select").on("mousedown",function(){
+    clearErrors();
+})
+
+// Clear Button
+$("#rt_clear_btn").click(function() {
+    clearErrors();
+    ft_release_clearForm();
+    ft_release_query('query');
+});
+
+
+// Submit Button
+$("#rt_submit_btn").click(function() {
+    clearErrors();
+    if ($("#rt_action_sel").val() == "ADD") {
+        if($("#rt_ot_sel").val() == "" || $("#rt_rt_sel").val() == "") {
+            inputError($('#rt_submit_btn'),'OT AND RT MUST NOT BE EMPTY');
+            return;
+        }
+        ft_release_query("ADD");
+        $("#rt_action_sel").val("");
+    }
+    else if ($("#rt_action_sel").val() == "UPDATE") {
+        if(ft_release_id === 0) {
+            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            return;
+        }
+        ft_release_query("UPDATE");
+        $("#rt_action_sel").val("");
+    }
+    else if ($("#rt_action_sel").val() == "DELETE") {
+        if(ft_release_id === 0) {
+            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            return;
+        }
+        ft_release_query("DELETE");
+        $("#rt_action_sel").val("");
+    }
+    else {
+        inputError($('#rt_action_sel'),'SELECT AN OPTION');
+       
+    }
+});
+
+//this code is to prevent user pick one row and submit ADD
+$("#rt_action_sel").change(function(){
+    if($("#rt_action_sel").val() == "ADD") {
+        $(".ft_release_form").val("");
+        ft_release_id = 0
+    }
+})
+
+</script>

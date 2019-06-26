@@ -476,7 +476,7 @@ testAccess.submitBtn.on("click", function() {
             else if (testAccess.act.val() == "RESET") {
                 for (var i = 1; i < 11; i++) {
                     if ($("#testAccess_name" + i + "_cbx").prop('checked') == true) {
-                        confirm("Are you sure you want to reset the Test Equipment Name for Test Access <strong>" + i + "</strong>?", function() {
+                        confirm("Are you sure you want to reset the Test Equipment Name for Test Access <strong>" + i + "</strong>?", false, function() {
                             testAccess.query("RESET");
                         });
                         checkedBox = true;

@@ -1,0 +1,109 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">LIST OF CKTS:</h3>
+  </div>
+  <div class="box-body">
+    <table id="ftOrders-cktTable" class="table table-striped table-bordered table-hover table-condensed" style="width:100%;">
+      <thead>
+        <tr>
+          <th>CTID</th>
+          <th>CLS</th>
+          <th>ADSR</th>
+          <th>SSM</th>
+          <th>SSP</th>
+          <th>ACT</th>
+          <th>R_ORDNO</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // Initialize Datatable
+  var ftOrdersCktDatatable = $('#ftOrders-cktTable').DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 3,
+    "columns": [
+      {"data":"ctid"},
+      {"data":"cls"},
+      {"data":"adsr"},
+      {"data":"ssm"},
+      {"data":"ssp"},
+      {"data":"act"},
+      {"data":"relordno"},
+    ],
+    "order": [[ 0, "asc" ]],
+    "bLengthChange": false,
+    "searching": false,
+    "paging": false,
+    "info": false,
+    "scrollY": "100px",
+  });
+
+  function queryFtOrdersCkt(ordno) {
+    $.ajax({
+      type: 'POST',
+      url: ipcDispatch,
+      data: {
+        api:    "ipcFtOrd",
+        act:    "queryCkt",
+        user:   user.uname,
+        ordno:  ordno,
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      ftOrdersCktDatatable.clear().draw();
+      ftOrdersCktDatatable.rows.add(res);
+      ftOrdersCktDatatable.columns.adjust().draw();
+    });
+  }
+
+  $(document).ready(function() {
+
+    // Click events on table rows
+    $(document).on('click', '#ftOrders-cktTable tbody tr', function() {
+      let data = ftOrdersCktDatatable.row(this).data();
+
+      $('#ftOrders-cktForm-id').val(data.id);
+      $('#ftOrders-cktForm-ctid').val(data.ctid);
+      $('#ftOrders-cktForm-cls').val(data.cls);
+      $('#ftOrders-cktForm-adsr').val(data.adsr);
+      $('#ftOrders-cktForm-ssm').val(data.ssm);
+      $('#ftOrders-cktForm-ssp').val(data.ssp);
+      $('#ftOrders-cktForm-act').val(data.act);
+      $('#ftOrders-cktForm-r_Ordno').val(data.relordno);
+      $('#ftOrders-cktForm-cttype').val(data.cttype);
+      $('#ftOrders-cktForm-octtype').val(data.octtype);
+      $('#ftOrders-cktForm-octid').val(data.octid);
+      $('#ftOrders-cktForm-oc').val(data.oc);
+      $('#ftOrders-cktForm-lst').val(data.lst);
+      $('#ftOrders-cktForm-noscm').val(data.noscm);
+      $('#ftOrders-cktForm-r_Cttype').val(data.relcttype);
+      $('#ftOrders-cktForm-r_Ctid').val(data.relctid);
+      $('#ftOrders-cktForm-r_Ot').val(data.relot);
+      $('#ftOrders-cktForm-r_Act').val(data.relact);
+
+      // give selected class
+      $('#ftOrders-cktTable tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
+      clearErrors();
+
+      // REMOVE HIGHLIGHT FROM FORMS
+      $('#ftOrders-ordForm-action').val("").change();
+      
+      // CLEAR FAC FORM
+      $('.ftOrders-facForm-input').val("").change();
+
+      // LOAD FAC TABLE USING CTID AND ORDNO FORM CKT
+      queryFtOrdersFac(data.ctid, data.ordno);
+    });
+  });
+
+  
+
+</script>

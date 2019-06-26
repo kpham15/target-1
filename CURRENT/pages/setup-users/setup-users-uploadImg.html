@@ -1,0 +1,118 @@
+<!-- Modal -->
+<div class="modal fade" id="setup_users_uploadUserImage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">UPLOAD USER IMAGE</h4>
+        </div>
+    
+        <div class="modal-body">
+            <div class="row" style="background-color: lightgray; padding:15px">
+                <div class="col-sm-12">
+                    <h4>CHOOSE A IMAGE FILE FROM YOUR COMPUTER:</h4>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary">
+                                Choose a png file <input class="form-control" type="file" style="display:none" id="setup_users_uploadUserImage_file" accept=".png">
+                            </span>
+                        </label>
+                        <input id="setup_users_uploadUserImage_fileText" type="text" class="form-control" readonly="" style="color:blue;font-weight: bold;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer row">
+                <button class="btn btn-primary" id="setup_users_uploadUserImage_submit_btn" style="width:13%;float:left">Submit</button>
+                <button class="btn btn-primary" id="setup_users_uploadUserImage_clear_btn" style="width:10%;float:left">Clear</button>
+                <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width:10%;float:left">Close</button>
+                <div style="width:60%;float:left">
+                    <label id="setup_users_uploadUserImage_rslt"></label>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+$(document).on('change', '#setup_users_uploadUserImage_file', function() {
+    var input = $(this),
+    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    $("#setup_users_uploadUserImage_fileText").val(label);
+});
+
+function setup_users_uploadUserImage_add() {
+    if($("#setup_users_uploadUserImage_file").val() == "") {
+        $("#setup_users_uploadUserImage_rslt").css("color","red").text("There is no image file uploaded!")
+        return;
+    }
+    let file= document.getElementById("setup_users_uploadUserImage_file").files[0];
+    let filename = $("#setup-users-forms-user").val() + ".png";
+
+    if (file.size > 1048576) {
+        $("#setup_users_uploadUserImage_rslt").css("color","red").text("The image file size must be less than 1MB!")
+    }
+    else {
+        let data = new FormData();
+        data.append("api", "ipcUser");
+        data.append("user", user.uname);
+        data.append("uname", $("#setup-users-forms-user").val())
+        data.append("grp", user.grp);
+        data.append("ugrp", user.ugrp);
+        data.append("act", "UPLOAD_IMG");
+        data.append("file", file, filename);  
+
+
+        $.ajax({
+            url: ipcDispatch,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+        })
+        .done(function(data, status){
+            let obj = JSON.parse(data);
+            if (obj["rslt"] == "fail") {
+                $("#setup_users_uploadUserImage_rslt").css("color","red").text(obj.reason)
+            }
+            else {
+                $("#setup_users_uploadUserImage_rslt").css("color","green").text(obj.reason) 
+                //display image in user box
+                if($("#setup-users-forms-user").val() == user.uname) {
+                    displayUserImg(filename)
+                }
+                
+            } 
+        });
+
+    }
+}
+
+function setup_users_uploadUserImage_clearForm() {
+    $("#setup_users_uploadUserImage_file").val("");
+    $("#setup_users_uploadUserImage_fileText").val("");
+    $("#setup_users_uploadUserImage_rslt").text("")
+}
+
+$("#setup_users_uploadUserImage_clear_btn").click(function(){
+    setup_users_uploadUserImage_clearForm();
+})
+
+$("#setup_users_uploadUserImage_submit_btn").click(function(e){
+    setup_users_uploadUserImage_add();
+});
+
+$("#setup_users_uploadUserImage").on("hidden.bs.modal",function(){
+    $('.setup-users-forms-input').val('');
+})
+
+
+</script>

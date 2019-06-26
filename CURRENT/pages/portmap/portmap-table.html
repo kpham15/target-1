@@ -1,0 +1,147 @@
+<div class="col-md-7">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">LIST OF PORTS:</h3>
+    </div>
+    <div class="box-body">
+      <table id="portmap-table" class="table table-striped table-bordered table-hover" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>PORT</th>
+            <th>PSTA</th>
+            <th>FAC_ID</th>
+            <th>FAC_TYP</th>
+            <th>ORT</th>
+            <th>SPCFNC</th>
+            <th>CKID</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var portmapNode = '';
+  var portmapSlot = '';
+  var portmapPnum = '';
+  var portmapFacid = '';
+  var portmapPortid = '';
+  var portmapFtyp = '';
+  var portmapOrt = '';
+  var portmapSpcfnc = '';
+
+  // Initialize Datatable
+  var portmapDatatable = $('#portmap-table').DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 8,
+    "columns": [
+      {"data":"id"},
+      {"data":"port"},
+      {"data":"psta"},
+      {"data":"fac"},
+      {"data":"ftyp"},
+      {"data":"ort"},
+      {"data":"spcfnc"},
+      {"data":"ckid"}
+    ],
+    "columnDefs": [
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    "order": [[ 0, "asc" ]]
+  });
+
+  function queryPort(action) {
+    let ckid = '';
+    if ($('#portmap-tn-check').prop('checked')) {
+      ckid = $('#portmap-form-ckid-tn').val();
+    } else {
+      ckid = $('#portmap-form-ckid').val();
+    }
+
+    $.ajax({
+      type: "POST",
+      url: ipcDispatch,
+      data: {
+        "api":      "ipcPortmap",
+        "act":      action,
+        "user":     user.uname,
+        "node":     portmapNode,
+        "slot":     portmapSlot,
+        "pnum":     portmapPnum,
+        "ptyp":     $('#portmap-form-ptyp').val(),
+        "psta":     $('#portmap-form-psta').val(),
+        "port":     $('#portmap-form-port').val().toUpperCase(),
+        "fac":      $('#portmap-form-fac').val().toUpperCase(),
+        "fac_id":   portmapFacid,
+        "port_id":  portmapPortid,
+        "ckid":     ckid
+      },
+      dataType: 'json'
+    }).done(function(data) {
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason
+      }
+
+      if (data.rslt === 'fail') {
+        modal.type = "danger";
+        modalHandler(modal);
+      } else {
+        if (res.length === 0) {
+          if (action !== 'query') {
+            modal.type = "warning";
+            modal.body = "No record found";
+            modalHandler(modal);
+          } 
+        } else {
+            portmapDatatable.clear().draw();
+            portmapDatatable.rows.add(res);
+            portmapDatatable.columns.adjust().draw();
+        }
+      }
+
+    });
+  }
+
+
+
+  $(document).ready(function() {
+
+    $(document).on('click', '#portmap-table tbody tr', function() {
+      let data = portmapDatatable.row(this).data();
+
+      portmapPortid = data.id;
+      portmapFacid = data.fac_id;
+      portmapNode = data.node;
+      portmapSlot = data.slot;
+      portmapPnum = data.pnum;
+      portmapFtyp = data.ftyp;
+      portmapOrt = data.ort;
+      portmapSpcfnc = data.spcfnc;
+      $('#portmap-form-ptyp').val(data.ptyp);
+      $('#portmap-form-port').val(data.port);
+      $('#portmap-form-psta').val(data.psta);
+      $('#portmap-form-fac').val(data.fac);
+      if ($('#portmap-tn-check').prop('checked')) {
+        $('#portmap-tn-check').iCheck('toggle');
+      }
+      $('.portmap-form-ckid-num').val(data.ckid);
+
+      // give selected class
+      $('#portmap-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
+      clearErrors();
+      $("#portmap-form-action").val("").change();
+    });
+  });
+
+</script>
