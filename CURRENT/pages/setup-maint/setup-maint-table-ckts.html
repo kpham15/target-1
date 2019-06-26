@@ -212,7 +212,9 @@
       $('#setup-maint-table-tkts tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
       
-    })
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
 
     // Click Event on Cons Table
     $(document).on('click', '#setup-maint-table-cons tbody tr', function() {
@@ -231,6 +233,9 @@
       //give selected class
       $('#setup-maint-table-cons tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+      
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
 
     })
     
@@ -279,7 +284,11 @@
           setupMaintTableCons.rows.add(res);
           setupMaintTableCons.columns.adjust().draw();
         }
-      })
-    })
+      });
+
+      
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
   });
 </script>
