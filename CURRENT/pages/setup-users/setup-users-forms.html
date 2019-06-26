@@ -419,8 +419,8 @@ $(document).ready(function() {
 
     clearErrors();
 
-    let title = $('#setup-users-forms-title').val();
-    let ugrp = $('#setup-users-forms-group').val();
+    let title = $('#setup-users-forms-title').val().toUpperCase();
+    let ugrp = $('#setup-users-forms-group').val().toUpperCase();
       
       $.ajax({
         type:     'POST',
