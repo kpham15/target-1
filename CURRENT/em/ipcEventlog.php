@@ -61,7 +61,12 @@
 
 		$refObj = new REF();
 		//get evt_del from refObj, use alm_del for now
-		$event_del = $refObj->ref[0]['alm_del'];
+		$event_del = $refObj->ref['evt_del'];
+		if($event_del == 0){
+			$event_del = $refObj->default['evt_del'];
+			if($event_del == 0)
+				$event_del = 180;
+		}
 
 		//convert value into seconds
 		$event_del_in_sec = $event_del * 86400;

@@ -23,7 +23,7 @@
             // Check REF table for auto_ordno & auto_ckid
             $refObj = new REF();
             if ($ordno == '' || $ordno == null) {
-                if ($refObj->ref[0]['auto_ordno'] == 'Y') {
+                if ($refObj->ref['auto_ordno'] == 'Y') {
                     $time = new DateTime('now');
                     $timestr = $time->format('H:i:s');
                     $ordno = strtoupper(substr($userObj->uname, 0, 4)) . $timestr;
@@ -35,7 +35,7 @@
             }
     
             if ($ckid == '' || $ckid == null) {
-                if ($refObj->ref[0]['auto_ckid'] == 'Y') {
+                if ($refObj->ref['auto_ckid'] == 'Y') {
                     $ckid = $ffac;
                 } else {
                     $result['rslt'] = 'fail';

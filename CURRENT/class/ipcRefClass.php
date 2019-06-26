@@ -2,6 +2,7 @@
 class REF {
     public $id          = 0;
     public $ref         = array();
+    public $default     = array();
     public $val         = 0;
 
     public $rslt        = "";
@@ -39,7 +40,9 @@ class REF {
                 $this->rows   = $rows;
             }
             for ($i=0; $i<count($rows); $i++) {
-                $this->ref[0][$rows[$i]["ref"]] = $rows[$i]["val"];
+                $this->ref[$rows[$i]["ref"]] = $rows[$i]["val"];
+                $this->default[$rows[$i]["ref"]] = $rows[$i]["def"];
+
             }
         }
     }

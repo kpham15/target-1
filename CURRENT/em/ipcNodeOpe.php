@@ -663,7 +663,7 @@ function updateCpsVolt($hwRsp) {
         return $result;
     }
 
-    $voltRange = $refObj->ref[0]['volt_range'];
+    $voltRange = $refObj->ref['volt_range'];
     
     $voltRangeArray = explode("-", $voltRange);
     $minVolt = $voltRangeArray[0];
@@ -781,7 +781,7 @@ function updateCpsTemp($hwRsp) {
     }
 
     // obtain temp_max from refObj
-    $tempMax = $refObj->ref[0]['temp_max'];
+    $tempMax = $refObj->ref['temp_max'];
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {
