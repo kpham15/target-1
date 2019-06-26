@@ -234,6 +234,8 @@
         // Click events on table rows
         $(document).on('click', '#svc_ckt_table tbody tr', function() {
             clearErrors();
+            $("#svc_act_sel").val("").change();
+
             let data = svcCktDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -264,11 +266,12 @@
             $('#svc_ckt_table tbody tr').removeClass('bg-primary');
             $(this).addClass('bg-primary');
     
-            // clearErrors();
         });
         
         $(document).on('click', '#svc_ord_table tbody tr', function() {
             clearErrors();
+            $("#svc_act_sel").val("").change();
+    
             let data = svcOrdDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -301,6 +304,8 @@
 
         $(document).on('click', '#svc_cktcon_table tbody tr', function() {
             clearErrors();
+            $("#svc_act_sel").val("").change();
+            
             let data = svcCktconDatatable.row(this).data();
             if(data == undefined)
                 return;
