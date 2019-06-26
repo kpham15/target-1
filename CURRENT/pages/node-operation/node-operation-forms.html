@@ -44,9 +44,6 @@
         </button>
       </div>
     </div>
-    <div class="form-group">
-      <label id="node-operation-forms-post-response-text"></label>
-    </div>
   </form>
 </div>
 
@@ -65,13 +62,12 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        $('#node-operation-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        inputError($("#node-operations-forms-action"), data.rslt + " - " + data.reason);
       } 
       else {
-      nodeOperationDatatable.clear().draw();
-      nodeOperationDatatable.rows.add(res);
-      nodeOperationDatatable.columns.adjust().draw();
-      $('#node-operation-forms-post-response-text').text('');
+        nodeOperationDatatable.clear().draw();
+        nodeOperationDatatable.rows.add(res);
+        nodeOperationDatatable.columns.adjust().draw();
       }
 
     })
@@ -113,8 +109,6 @@
     // Action change event
     $('#node-operation-forms-action').change(function() {
       $('.node-operation-modal-input').val('');
-      $('#node-operation-modal-post-response-text').text('');
-      $('#node-operation-forms-post-response-text').text('');
 
       let obj = {
         action:     $(this).val(),
@@ -136,7 +130,6 @@
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
       $('.node-operation-forms-input').val('');
-      $('#node-operation-forms-post-response-text').text('');
 
       queryNodeOperation();
     })
@@ -146,5 +139,8 @@
       queryNodeOperation();
     });
 
+    $(".node-operations-forms-input").click(function() {
+      clearErrors();
+    });
   });
 </script>

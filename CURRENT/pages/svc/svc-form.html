@@ -7,7 +7,7 @@
                     <label for="svc_ckid_txt">CKID</label>
                     <label for="svc_tn_cbx">TN:</label>
                     <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" checked>
-                    <input style="text-transform: uppercase; display:none" type="text" class="form-control svc-form svc-ckid-txt">
+                    <input style="display:none" type="text" class="form-control svc-form svc-ckid-txt">
                     <input id="svc_ckid" type="text" class="form-control svc-form svc-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="col-sm-6 " style="padding: 2px ;">
                 <div class="form-group">
                     <label for="svc_ordno_txt">ORDNO</label>
-                    <input style="text-transform: uppercase" type="text" class="form-control svc-form" id="svc_ordno_txt">
+                    <input type="text" class="form-control svc-form" id="svc_ordno_txt">
                 </div>
             </div>
             
@@ -111,12 +111,12 @@
                     <label for="svc_ffac_txt" style="float:left">FAC(X):</label>
                     &nbsp;&nbsp;&nbsp;
                     <a id="svc_ffacSearch_btn" style="height: 25px">Search</a>
-                    <input style="text-transform: uppercase" type="text" class ="form-control svc-form" id="svc_ffac_txt">
+                    <input type="text" class ="form-control svc-form" id="svc_ffac_txt">
                     <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
                         <label for="svc_portX_txt">PORT(X):</label>
                     </div>
                     <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
-                        <input style="text-transform: uppercase" type="text" class="form-control svc-form" id="svc_portX_txt">
+                        <input type="text" class="form-control svc-form" id="svc_portX_txt">
                     </div>
                 </div>
             </div> 
@@ -125,12 +125,12 @@
                     <label for="svc_tfac_txt" style="float:left">FAC(Y):</label>
                     &nbsp;&nbsp;&nbsp;
                     <a id="svc_tfacSearch_btn" style="height: 25px">Search</a>
-                    <input style="text-transform: uppercase" type="text" class ="form-control svc-form" id="svc_tfac_txt">
+                    <input type="text" class ="form-control svc-form" id="svc_tfac_txt">
                     <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
                         <label for="svc_portY_txt">PORT(Y):</label>
                     </div>
                     <div class="col-sm-7" style="padding-left: 0px; padding-right: 0px">
-                        <input style="text-transform: uppercase" type="text" class="form-control svc-form" id="svc_portY_txt">
+                        <input type="text" class="form-control svc-form" id="svc_portY_txt">
                     </div>
                 </div>
             </div> 
@@ -187,8 +187,8 @@
 <script>
     var svcFacSearchDatatable = $("#svc_facSearch_table").DataTable({
         "dom": 'frtip', 
-        "scrollY":        "100px",
         "data": [],
+        "pageLength": 3,
         "columns": [
             {"data":"fac"},
             {"data":"psta"},

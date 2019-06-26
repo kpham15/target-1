@@ -23,8 +23,9 @@
 
 <script type="text/javascript">
   var pathAdminDatatable = $("#pathAdmin-table").DataTable({
-    "scrollY": "200px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 5,
     "columns": [
       {"data":"id"},
       {"data":"ctyp"},

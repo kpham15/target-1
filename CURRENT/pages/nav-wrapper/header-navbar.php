@@ -220,6 +220,7 @@
     $('#header-timezone').text(wcInfo.tzone);
   }
 
+
   $(document).ready(function() {
 
     // Watches logout modal, on close reload page

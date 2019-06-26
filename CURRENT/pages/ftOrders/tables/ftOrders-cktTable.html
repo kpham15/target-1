@@ -22,7 +22,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var ftOrdersCktDatatable = $('#ftOrders-cktTable').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"ctid"},
       {"data":"cls"},

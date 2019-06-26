@@ -55,7 +55,9 @@
 
 <script type="text/javascript">
 var headerAlarmDatatable = $('#header-alarm-table').DataTable({
-  data: [],
+  dom: "frtip",
+  "data": [],
+  "pageLength": 3,
   columns: [
     {data:"almid"},
     {data:"sev"},

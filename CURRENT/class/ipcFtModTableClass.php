@@ -97,6 +97,29 @@ class FTMODTABLE {
     public function add($ot, $pri, $cdd, $noscm, $rtype, $processingfile) {
         global $db;
 
+        if($ot == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING OT";
+            return;
+        }
+
+        if($rtype == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING RTYPE";
+            return;
+        }
+
+        if($processingfile == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING PROCESSING FILE";
+            return;
+        }
+
+        $this->checkDuplication($ot, $pri, $cdd, $noscm, $rtype, $processingfile);
+        if($this->rslt == "fail") {
+            return;
+        }
+
         $qry = "INSERT INTO 
                 t_ftmodification 
                 (ot, pri, cdd, noscm, rtype, 
@@ -143,6 +166,28 @@ class FTMODTABLE {
 
     public function update($id, $ot, $pri, $cdd, $noscm, $rtype, $processingfile) {
         global $db;
+        if($ot == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING OT";
+            return;
+        }
+
+        if($rtype == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING RTYPE";
+            return;
+        }
+
+        if($processingfile == "") {
+            $this->rslt = "fail";
+            $this->reason = "MISSING PROCESSING FILE";
+            return;
+        }
+
+        $this->checkDuplication($ot, $pri, $cdd, $noscm, $rtype, $processingfile);
+        if($this->rslt == "fail") {
+            return;
+        }
 
         $qry = "UPDATE t_ftmodification SET 
                 id = '$id', 
@@ -165,6 +210,42 @@ class FTMODTABLE {
 		}
 
  
+    }
+
+    public function checkDuplication($ot, $pri, $cdd, $noscm, $rtype, $processingfile) {
+        global $db;
+        $duplication_list = [];
+
+        $qry = "SELECT * FROM t_ftmodification WHERE 
+                ot = '$ot' AND 
+                pri = '$pri' AND 
+                cdd = '$cdd' AND 
+                noscm = '$noscm' AND 
+                rtype = '$rtype' AND 
+                processing_file = '$processingfile'
+                ";
+        
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = "fail";
+            $this->reason = mysqli_error($db);
+        }
+        else {
+            $this->rslt = "success";
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $duplication_list[] = $row['id'];
+                }
+                $this->rslt = "fail";
+                $this->reason = "Duplication Error";
+            }
+            else {
+                $this->rslt = "success";
+                $this->reason = "Ready to proceed task";
+            }
+            
+        }
+        return $duplication_list;
     }
 }
 

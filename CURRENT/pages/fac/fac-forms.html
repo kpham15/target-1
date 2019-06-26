@@ -31,26 +31,39 @@
     <div class="row">
       <!-- FAC_TYP -->
       <div class="col-md-2">
-        <label>FAC_TYP</label>
-        <select id="fac-form-ftyp" class="form-control fac-form-input">
-          <option value=""></option>
-        </select>
+        <div class="form-group">
+          <label>FAC_TYP</label>
+          <select id="fac-form-ftyp" class="form-control fac-form-input">
+            <option value=""></option>
+          </select>
+        </div>
       </div>
 
       <!-- ORT-->
       <div class="col-md-2">
-        <label>ORT</label>
-        <select id="fac-form-ort" class="form-control fac-form-input">
-          <option value=""></option>
-        </select>
+        <div class="form-group">
+          <label>ORT</label>
+          <select id="fac-form-ort" class="form-control fac-form-input">
+            <option value=""></option>
+          </select>
+        </div>
       </div>
 
       <!-- SPCFNC-->
       <div class="col-md-3">
-        <label>SPCFNC</label>
-        <select id="fac-form-spcfnc" class="form-control fac-form-input">
-          <option value=""></option>
-        </select>
+        <div class="form-group">
+          <label>SPCFNC</label>
+          <select id="fac-form-spcfnc" class="form-control fac-form-input">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>PORT</label>
+          <input type="text" id="fac-form-port" class="form-control fac-form-input" disabled>
+        </div>
       </div>
     </div>
 
@@ -101,6 +114,7 @@
       let ort = $("#fac-form-ort").val();
       let psta = $("#fac-form-psta").val();
       let spcfnc = $("#fac-form-spcfnc").val();
+      let port = $("#fac-form-port").val();
 
       clearErrors();
 
@@ -114,6 +128,8 @@
         $("#fac-modal-range").parent().parent().show();
 
 
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
         $('#fac-modal').modal('show');
       }
       // UPDATE Action
@@ -133,10 +149,14 @@
         $("#fac-modal-ort").val(ort);
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
+        $("#fac-modal-port").val(port);
 
         $("#fac-modal-range").parent().parent().hide();
 
         $('#fac-modal-action').val('UPDATE');
+
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
 
         $('#fac-modal').modal('show');
       }
@@ -154,10 +174,13 @@
         $("#fac-modal-ort").val(ort);
         $("#fac-modal-psta").val(psta);
         $("#fac-modal-spcfnc").val(spcfnc);
+        $("#fac-modal-port").val(port);
 
         $("#fac-modal-range").parent().parent().hide();
 
         $('#fac-modal-action').val('DELETE');
+        $("#fac-modal select").css('-webkit-appearance', 'menulist');
+        $("#fac-modal select:disabled").css('-webkit-appearance', 'none');
 
         $('#fac-modal').modal('show');
       }

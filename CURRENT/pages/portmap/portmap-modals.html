@@ -42,11 +42,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>PORT_TYP</label>
-                <select class="form-control portmap-modal-field portmap-modal-port-forms" id="portmap-modal-ptyp" target="ptyp" disabled>
-                  <option value=""></option>
-                  <option value="x">X</option>
-                  <option value="y">Y</option>
-                </select>
+                <input type="text" class="form-control portmap-modal-field portmap-modal-port-forms uppercase" id="portmap-modal-ptyp" target="ptyp" disabled>
               </div>
             </div>
   
@@ -54,16 +50,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>PSTA</label>
-                <select class="form-control portmap-modal-field portmap-modal-port-forms" id="portmap-modal-psta" target="psta" disabled>
-                  <option value=""></option>
-                  <option value="uas">UAS</option>
-                  <option value="sf">SF</option>
-                  <option value="conn">CONN</option>
-                  <option value="def">DEF</option>
-                  <option value="mtcd">MTCD</option>
-                  <option value="maint">MAINT</option>
-                  <option value="unq">UNQ</option>
-                </select>
+                <input type="text" class="form-control portmap-modal-field portmap-modal-port-forms uppercase" id="portmap-modal-psta" target="psta" disabled>
               </div>
             </div>
   
@@ -80,7 +67,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>FAC_TYP</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="ftyp" id="portmap-modal-ftyp">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="ftyp" id="portmap-modal-ftyp"></select>
               </div>
             </div>
   
@@ -88,7 +75,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>ORT</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="ort" id="portmap-modal-ort">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="ort" id="portmap-modal-ort"></select>
               </div>
             </div>
   
@@ -96,7 +83,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>SPCFNC</label>
-                <input type="text" class="form-control portmap-modal-field portmap-modal-fac-forms" target="spcfnc" id="portmap-modal-spcfnc">
+                <select class="form-control portmap-modal-field portmap-modal-fac-forms" target="spcfnc" id="portmap-modal-spcfnc"></select>
               </div>
             </div>
           </form>
@@ -140,8 +127,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button id="portmap-modal-submit" type="button" class="btn btn-primary">Submit</button>
+        <button id="portmap-modal-submit" type="button" class="btn btn-primary pull-left">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -150,6 +137,8 @@
 <script type="text/javascript">
   // Initialize Datatable
   var portmapModalFacDatatable = $('#portmap-modal-fac-table').DataTable({
+    "dom":  "frtip",
+    "pageLength": 4,
     "data": [],
     "columns": [
       {"data":"id"},
@@ -158,15 +147,7 @@
       {"data":"ort"},
       {"data":"spcfnc"}
     ],
-    "columnDefs": [
-      {
-        "targets": [0],
-        "visible": false,
-        "searchable": false
-      }
-    ],
     "order": [[ 0, 'asc' ]],
-    "scrollY": "200px"
   });
 
   function portmapModalClear() {
@@ -186,14 +167,9 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
 
       if (data.rslt === 'fail') {
-        modal.type = 'danger';
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
         portmapModalFacDatatable.clear().draw();
         portmapModalFacDatatable.rows.add(res);
@@ -218,7 +194,7 @@
     }
     $('.portmap-modal-field[target]').each(function() {
       let target = $(this).attr('target');
-      formData[target] = $(this).val();
+      formData[target] = $(this).val().toUpperCase();
     });
 
     $.ajax({
@@ -227,19 +203,12 @@
       data: formData,
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows
-      let modal = {
-        title:  data.rslt,
-        body: data.reason
-      }
+      let res = data.rows;
 
       if (data.rslt === 'fail') {
-        modal.type = "danger";
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
-        $('#setup-portmap-modal').modal('hide');
-        modal.type = "success";
-        modalHandler(modal);
+        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
         
         let page = portmapDatatable.page();
 
@@ -268,18 +237,18 @@
     $('#portmap-modal-submit').click(function() {
       let action = $('#portmap-modal-action').val();
 
-      if (action === 'MAP') {
-        if (!(portmapFacid > 0)) { 
-          $('.portmap-modal-fac-forms').each(function() {
-            if ($(this).attr('target') === 'fac') {
-              inputError($(this), 'Must select a facility to map to.');
-            } else {
-              inputError($(this),'');
-            }
-          });
-          return;
-        }
-      }
+      // if (action === 'MAP') {
+      //   if (!(portmapFacid > 0)) { 
+      //     $('.portmap-modal-fac-forms').each(function() {
+      //       if ($(this).attr('target') === 'fac') {
+      //         inputError($(this), 'Must select a facility to map to.');
+      //       } else {
+      //         inputError($(this),'');
+      //       }
+      //     });
+      //     return;
+      //   }
+      // }
 
       portmapSubmit(action);
     });
@@ -299,5 +268,7 @@
     });
   });
 
-
+  $(".portmap-modal-field").on('click', function() {
+    clearErrors();
+  });
 </script>

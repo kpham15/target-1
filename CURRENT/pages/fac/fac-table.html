@@ -24,7 +24,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var facDatatable = $('#fac-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 8,
     "columns": [
       {"data":"fac"},
       {"data":"ftyp"},
@@ -34,7 +36,6 @@
       {"data":"psta"},
     ],
     "order": [[ 0, "asc" ]],
-    "scrollY": "400px",
   });
 
   function queryFac() {
@@ -82,6 +83,7 @@
       $('#fac-form-ort').val(data.ort);
       $('#fac-form-psta').val(data.psta);
       $('#fac-form-spcfnc').val(data.spcfnc);
+      $("#fac-form-port").val(data.port);
 
       // give selected class
       $('#fac-table tbody tr').removeClass('bg-primary');

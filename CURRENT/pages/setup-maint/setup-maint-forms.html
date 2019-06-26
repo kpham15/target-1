@@ -141,11 +141,6 @@
           </button>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label id="setup-maint-forms-post-response-text" style="margin-top:32px;"></label>
-        </div>
-      </div>
     </div>
   </form>
 </div>
@@ -423,8 +418,6 @@
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
-      $('#setup-maint-modal-post-response-text').text('');
-      $('#setup-maint-forms-post-response-text').text('');
       clearErrors();
       $('.setup-maint-forms-input').val('');
       $('.setup-maint-modal-input').val('');
@@ -446,8 +439,6 @@
 
     // Action Change Event
     $('#setup-maint-forms-action').change(function() {
-      $('#setup-maint-forms-post-response-text').text('');
-      $('#setup-maint-modal-post-response-text').text('');
       $('.setup-maint-modal-input').val('');
       clearErrors();
       
@@ -496,8 +487,6 @@
 
     // View Button 1
     $('#setup-maint-forms-viewckid').click(function() {
-
-      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').show();
       $('#setup-maint-table-tkts-div').hide();
 
@@ -529,7 +518,7 @@
         }
 
         if (data.rslt == 'fail') {
-          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
         }
         else {
           setupMaintTableCkts.clear().draw();
@@ -571,7 +560,7 @@
         }
 
         if (data.rslt == 'fail') {
-          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
         }
         else {
           setupMaintTableTkts.clear().draw();
@@ -595,6 +584,10 @@
     // side navbar click event
     $('.menu-item[page_id="setup-maint-page"]').click(function() {
       $('#setup-maint-forms-viewckid').trigger('click');
-    })
+    });
+
+    $(".setup-maint-form-input").on('click', function() {
+      clearErrors();
+    });
   })
 </script>

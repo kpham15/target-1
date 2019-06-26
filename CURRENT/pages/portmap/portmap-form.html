@@ -2,36 +2,37 @@
   <form id="portmap-forms">
     <div class="row">
 
-      <div class="col-md-5">
+      <div class="col-md-5" style="padding-right: 2px">
         <div class="form-group">
           <label>PORT</label>
           <input id="portmap-form-port" type="text" class="form-control portmap-form-input">
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding-right: 2px; padding-left: 2px">
         <div class="form-group">
           <label>PORT_TYP</label>
-          <select id="portmap-form-ptyp" class="form-control portmap-form-input portmap-form-select">
+          <select id="portmap-form-ptyp" class="form-control portmap-form-input portmap-form-select" style="padding-left: 2px">
             <option value=""></option>
-            <option value="x">X</option>
-            <option value="y">Y</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
           </select>
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding-right: 15px; padding-left: 2px">
         <div class="form-group">
           <label>PSTA</label>
-          <select id="portmap-form-psta" class="form-control portmap-form-input portmap-form-select">
+          <select id="portmap-form-psta" class="form-control portmap-form-input portmap-form-select" style="padding-left: 2px">
             <option value=""></option>
-            <option value="uas">UAS</option>
-            <option value="sf">SF</option>
-            <option value="conn">CONN</option>
-            <option value="def">DEF</option>
-            <option value="mtcd">MTCD</option>
-            <option value="maint">MAINT</option>
-            <option value="unq">UNQ</option>
+            <option value="UAS">UAS</option>
+            <option value="SF">SF</option>
+            <option value="CONN">CONN</option>
+            <option value="DEF">DEF</option>
+            <option value="MTCD">MTCD</option>
+            <option value="MAINT">MAINT</option>
+            <option value="UNQ">UNQ</option>
           </select>
         </div>
       </div>
@@ -69,8 +70,8 @@
           <label>ACTION</label>
           <select id="portmap-form-action" class="form-control portmap-form-input">
             <option value=""></option>
-            <option value="map">MAP</option>
-            <option value="unmap">UNMAP</option>
+            <option value="MAP">MAP</option>
+            <option value="UNMAP">UNMAP</option>
           </select>
         </div>
       </div>
@@ -92,8 +93,7 @@
         let target = $(this).attr('target');
         $(this).val(obj[target]);
       });
-
-      $('#portmap-modal-action').val(obj.value.toUpperCase());
+      $('#portmap-modal-action').val(obj.value);
     }
 
     function portmapActionMap(obj) {
@@ -108,6 +108,8 @@
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').show();
           portmapQueryAvailFac();
+          $("#setup-portmap-modal select").css('-webkit-appearance', 'menulist');
+          $("#setup-portmap-modal select:disabled").css('-webkit-appearance', 'none');
           $('#setup-portmap-modal').modal('show');
         }
       } else {
@@ -123,6 +125,8 @@
           $('.portmap-modal-fac-forms').prop('disabled',true);
           portmapPopulateModal(obj);
           $('#portmap-modal-factbl-row').hide();
+          $("#setup-portmap-modal select").css('-webkit-appearance', 'menulist');
+          $("#setup-portmap-modal select:disabled").css('-webkit-appearance', 'none');
           $('#setup-portmap-modal').modal('show');
         } else {
           inputError($('#portmap-form-action'),'This PORT has not been MAPPED');
@@ -182,6 +186,9 @@
         port:     $('#portmap-form-port').val(),
         psta:     $('#portmap-form-psta').val(),
         fac:      $('#portmap-form-fac').val(),
+        ftyp:     portmapFtyp,
+        ort:      portmapOrt,
+        spcfnc:   portmapSpcfnc
       }
 
       if ($('#portmap-tn-check').prop('checked')) {
@@ -193,11 +200,11 @@
       clearErrors();
       
       // MAP Action
-      if (obj.value === 'map') {
+      if (obj.value === 'MAP') {
         portmapActionMap(obj);
       }
       // UNMAP Action
-      else if (obj.value === 'unmap') {
+      else if (obj.value === 'UNMAP') {
         portmapActionUnmap(obj);
       }
     });
