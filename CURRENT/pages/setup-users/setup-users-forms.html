@@ -341,8 +341,8 @@ $(document).ready(function() {
 
     clearErrors();
 
-    let fname = $('#setup-users-forms-fname').val();
-    let lname = $('#setup-users-forms-lname').val();
+    let fname = $('#setup-users-forms-fname').val().toUpperCase();
+    let lname = $('#setup-users-forms-lname').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
