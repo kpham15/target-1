@@ -308,8 +308,8 @@ $(document).ready(function() {
   $('#setup-users-forms-viewuser').click(function() {
     clearErrors();
 
-    let userTxt = $('#setup-users-forms-user').val();
-    let status = $('#setup-users-forms-stat').val();
+    let userTxt = $('#setup-users-forms-user').val().toUpperCase();
+    let status = $('#setup-users-forms-stat').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
