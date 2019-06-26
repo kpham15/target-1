@@ -210,8 +210,8 @@ hr.content-page-divider {
 
 
 /* ============ DataTable extra style=========== */
-/* table {
+table:not(.table-condensed) {
   table-layout: fixed;
   width: 100% !important;
-} */
+}
 /* =============END DataTable CSS=============== */
