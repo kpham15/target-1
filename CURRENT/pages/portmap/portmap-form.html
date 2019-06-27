@@ -209,6 +209,10 @@
       clearErrors();
       $("#portmap-form-action").val("");
     });
+
+    $("#portmap-form-action:not(option)").on('click', function() {
+      $("#portmap-form-action").val("");
+    });
   });
 
 
