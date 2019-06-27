@@ -572,7 +572,7 @@
       $('#setup-maint-forms-viewckid').trigger('click');
     });
 
-    $(".setup-maint-forms-input").on('click', function() {
+    $(".setup-maint-forms-input:not($setup-maint-forms-action)").on('click', function() {
       clearErrors();
       $("#setup-maint-forms-action").val("").change();
     });
