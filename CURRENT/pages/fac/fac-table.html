@@ -76,6 +76,10 @@
     // Click events on table rows
     $(document).on('click', '#fac-table tbody tr', function() {
       let data = facDatatable.row(this).data();
+      
+      if (data == undefined) {
+        return;
+      }
 
       $('#fac-form-id').val(data.id);
       $('#fac-form-facId').val(data.fac);
