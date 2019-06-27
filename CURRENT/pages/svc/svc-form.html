@@ -158,14 +158,14 @@
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
                     <label>ACTION</label>
-                    <input id="svc_act_sel" class="form-control">
-                    <!-- <select class="form-control" id="svc_act_sel" style="padding: 2px " >
+                    <!-- <input id="svc_act_sel" class="form-control"> -->
+                    <select class="form-control" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
                         <option>DISCONNECT</option>
                         <option>CHANGE</option>
-                    </select> -->
+                    </select>
                 </div>
             </div>
             
@@ -384,7 +384,7 @@
     
         $(".svc-form").on('click', function() {
             clearErrors();
-            $("#svc_act_sel").val("").change();
+            $("#svc_act_sel").val("");
         });
     });
     
