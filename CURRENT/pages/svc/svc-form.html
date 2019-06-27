@@ -157,7 +157,7 @@
         <div class="row">
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
-                    <label for="svc_act_sel">ACTION</label>    
+                    <label>ACTION</label>    
                     <select class="form-control" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
@@ -382,10 +382,10 @@
             }
         });
     
-        // $(".svc-form").on('click', function() {
-        //     clearErrors();
-        //     $("#svc_act_sel").val("").change();
-        // });
+        $(".svc-form").on('click', function() {
+            clearErrors();
+            $("#svc_act_sel").val("").change();
+        });
     });
     
 
