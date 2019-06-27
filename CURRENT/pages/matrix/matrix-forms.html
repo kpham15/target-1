@@ -132,8 +132,9 @@
   });
 
   // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
-  $(".matrix-form-input").on("click", function() {
+  $(".matrix-form-input:not(#matrix-form-action)").on("click", function() {
     clearErrors();
+    $("#matrix-form-action").val("").change();
   });
 
   // ACTION
