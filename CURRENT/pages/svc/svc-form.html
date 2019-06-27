@@ -386,7 +386,12 @@
             }
         });
     
-        $(document).on('input', '.svc-form .dataTables_filter', function() {
+        $(document).on('input', '.svc-form', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
+        });
+
+        $(document).on('input', '.dataTables_filter', function() {
             clearErrors();
             $("#svc_act_sel").val("");
         });
