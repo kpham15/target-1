@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="svc_ckid_txt">CKID</label>
                     <label for="svc_tn_cbx">TN:</label>
-                    <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" checked>
+                    <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" class="svc-form" checked>
                     <input style="display:none" type="text" class="form-control svc-form svc-ckid-txt">
                     <input id="svc_ckid" type="text" class="form-control svc-form svc-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
                 </div>
@@ -35,7 +35,7 @@
         
             
             <div class="col-sm-2 " style="padding: 2px ;">
-                <button id="svc_findCkid_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+                <button id="svc_findCkid_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary svc-form">View</button>
             </div> 
         </div>
 
@@ -72,7 +72,7 @@
             <input type="hidden" class="form-control svc-form" id="svc_date_date" readonly>
             
             <div class="col-sm-2 " style="padding: 2px ;">
-                <button id="svc_findOrd_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+                <button id="svc_findOrd_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary svc-form">View</button>
             </div> 
         </div>
 
@@ -169,7 +169,7 @@
             </div>
             
             <div class="col-sm-8 " style="padding: 2px ;">
-                <button id="svc_clear_btn" type="button" class="btn btn-primary" style="margin-top:25px;">Clear</button>
+                <button id="svc_clear_btn" type="button" class="btn btn-primary svc-form" style="margin-top:25px;">Clear</button>
                 <!-- 3 input fields to be hidden after testing -->
                 <input class="svc-form" id="svc_cktId_num" type="hidden" style="width:50px">
                 <input class="svc-form" id="svc_cktconId_num" type="hidden" style="width:50px">
@@ -251,6 +251,8 @@
         $("#svc_cls_sel").val("RES");
         $("#svc_adsr_sel").val("N");
         $("#svc_mlo_sel").val("N");
+        clearErrors();
+        $("#svc_act_sel").val("").change();
         svcQueryCkid();
         svcOrdDatatable.clear().draw();
         svcCktconDatatable.clear().draw();
@@ -265,13 +267,10 @@
 
         $(".menu-item[page_id='svc-page']").click(function() {
             resetSvcPage();
-            clearErrors();
-            $("#svc_act_sel").val("").change();
         });
 
         $("#svc_clear_btn").click(function(e){
             resetSvcPage();
-            clearErrors();
         });
 
         $("#svc_ffacSearch_btn").click(function(e){
