@@ -57,8 +57,13 @@
 			$refObj = new REF();
 	
 			//get cfg_del from refObj
-			$cfg_del = $refObj->ref[0]['cfg_del'];
-			
+			$cfg_del = $refObj->ref['cfg_del'];
+			if($cfg_del == 0){
+				$cfg_del = $refObj->default['cfg_del'];
+				if($cfg_del == 0)
+					$cfg_del = 180;
+			}
+
 			//convert value into seconds
 			$cfg_del_in_sec = $cfg_del * 86400;
 			

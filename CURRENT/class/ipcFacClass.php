@@ -222,7 +222,7 @@
         public function queryTestFacByNode($node) {
             global $db;
             
-            $qry = "SELECT t_facs.fac, t_facs.port FROM t_facs left join t_ports on t_facs.port_id=t_ports.id WHERE t_ports.ptyp='Z' AND t_ports.psta='TST' AND t_ports.node='$node' ORDER BY fac";
+            $qry = "SELECT t_facs.fac, t_facs.port FROM t_facs left join t_ports on t_facs.port_id=t_ports.id WHERE t_ports.ptyp='Z' AND t_ports.psta='SF' AND t_ports.node='$node' ORDER BY fac";
         
             $res = $db->query($qry);
             if (!$res) {

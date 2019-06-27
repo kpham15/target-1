@@ -96,6 +96,15 @@
                 return $result;
             }
 
+            $wcObj = new WC();
+            if($wcObj->stat == "OOS") {
+                if($userObj->ugrp != 'ADMIN') {
+                    $result["rslt"]     = FAIL;
+                    $result["reason"]   = "DENIED - WIRE CENTER IS OOS";
+                    return $result;
+                }
+            }
+
             // Deny if user is currently LOCKED or DISABLED
             if ($userObj->stat == "LOCKED" || $userObj->stat == "DISABLED") {
                 $result['rslt'] = FAIL;
@@ -124,14 +133,14 @@
                 //if not first time login, Deny if password has expired
                 $pwDurationSec = strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate) ;
                 $pwDurationDay = $pwDurationSec/(60*60*24);
-                if($pwDurationDay >= $refObj->ref[0]["pw_expire"]) {
+                if($pwDurationDay >= $refObj->ref["pw_expire"]) {
                     $result['rslt'] = FAIL;
                     $result['reason'] = "PLEASE CHANGE PASSWORD, CURRENT PASSWORD HAS EXPIRED";
                     return $result;
                 }
                 
-                $pwAlertDay = $refObj->ref[0]["pw_expire"] - ((strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate))/(60*60*24));
-                if($pwAlertDay > 0 && $pwAlertDay <= $refObj->ref[0]["pw_alert"]) {
+                $pwAlertDay = $refObj->ref["pw_expire"] - ((strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate))/(60*60*24));
+                if($pwAlertDay > 0 && $pwAlertDay <= $refObj->ref["pw_alert"]) {
                     $result['pw_exp_alert'] = (int)$pwAlertDay;
                 }
 
@@ -166,6 +175,15 @@
             else {
                 $result["reason"]   = "LOGIN SUCCESSFUL";
             }
+
+            // if user_idle_to is 0/empty/null, set value to default, if default is 0/empty/null, set value = 45
+            $userIdleInfo = $refObj->ref['user_idle_to'];
+            if($userIdleInfo == 0){
+                $userIdleInfo = $refObj->default['user_idle_to'];
+                if($userIdleInfo == 0)
+                    $userIdleInfo = 45;
+            }
+
             $result['rows'] = array(array('uname' => $userObj->uname,
                                         'lname'=>$userObj->lname,
                                         'fname'=>$userObj->fname,
@@ -174,7 +192,7 @@
                                         'ugrp'=>$userObj->ugrp,
                                         'loginTime'=>$userObj->login,
                                         'com'=>$userObj->com,
-                                        'user_idle_to'=>$refObj->ref[0]['user_idle_to']));
+                                        'user_idle_to'=>$userIdleInfo));
             return $result;
             
         }

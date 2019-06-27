@@ -244,7 +244,7 @@ class MXC {
         $sms = new SMS($this->psta, $this->ssta, $evt);
         if ($sms->rslt == "fail") {
             $this->rslt = "fail";
-            $this->reason = $sms->reason;
+            $this->reason = "INVALID PSTA ($sms->psta)";
             return;
         }
         
@@ -290,7 +290,7 @@ class MXC {
         $sms = new SMS($this->psta, $this->ssta, $evt);
         if ($sms->rslt == "fail") {
             $this->rslt = "fail";
-            $this->reason = $sms->reason;
+            $this->reason = "INVALID PSTA ($sms->psta)";
             return;
         }
         
