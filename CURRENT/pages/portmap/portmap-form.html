@@ -205,10 +205,10 @@
       }
     });
 
-    $(".portmap-form-input:not(#portmap-form-action)").on('click', function() {
+    $(".portmap-form-input").on('click', function() {
       console.log("on click");
       clearErrors();
-      $("#portmap-form-action").val("").change();
+      $("#portmap-form-action").val("");
     });
   });
 
