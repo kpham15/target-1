@@ -276,7 +276,7 @@
 
         $("#svc_ffacSearch_btn").click(function(e){
             clearErrors();
-            $("#svc_action_sel").val("").change();
+            $("#svc_act_sel").val("").change();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
@@ -292,7 +292,7 @@
 
         $("#svc_tfacSearch_btn").click(function(e){
             clearErrors();
-            $("#svc_action_sel").val("").change();
+            $("#svc_act_sel").val("").change();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
@@ -391,11 +391,11 @@
         });
 
         $("#svc_ffacSearch_btn").on('click', function() {
-            $("#svc_action_sel").val("").change();
+            $("#svc_act_sel").val("").change();
         });
 
         $("#svc_tfacSearch_btn").on('click', function() {
-            $("#svc_action_sel").val("").change();
+            $("#svc_act_sel").val("").change();
         });
 
 
