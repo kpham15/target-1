@@ -123,7 +123,7 @@
       <div class="col-md-4" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
+          <select id="setup-maint-forms-action" class="form-control">
             <option value=""></option>
             <option value="MTC_DISCON">MTC_DISCON</option>
             <option value="MTC_CONN">MTC_CONN</option>
@@ -139,6 +139,11 @@
           <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
             Clear
           </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label id="setup-maint-forms-post-response-text" style="margin-top:32px;"></label>
         </div>
       </div>
     </div>
@@ -572,7 +577,7 @@
       $('#setup-maint-forms-viewckid').trigger('click');
     });
 
-    $(".setup-maint-forms-input:not($setup-maint-forms-action)").on('click', function() {
+    $(".setup-maint-forms-input").on('click', function() {
       clearErrors();
       $("#setup-maint-forms-action").val("").change();
     });
