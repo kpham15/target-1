@@ -158,7 +158,7 @@
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
                     <label for="svc_act_sel">ACTION</label>    
-                    <select class="form-control" id="svc_act_sel" style="padding: 2px " >
+                    <select class="form-control svc-form" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
@@ -387,7 +387,7 @@
             }
         });
     
-        $(".svc-form").on('click', function() {
+        $(".svc-form:not(#svc_act_sel)").on('click', function() {
             clearErrors();
             $("#svc_act_sel").val("").change();
         });
