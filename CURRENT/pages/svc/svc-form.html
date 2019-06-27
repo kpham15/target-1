@@ -110,7 +110,7 @@
                 <div class="form-group">
                     <label for="svc_ffac_txt" style="float:left">FAC(X):</label>
                     &nbsp;&nbsp;&nbsp;
-                    <a id="svc_ffacSearch_btn" style="height: 25px">Search</a>
+                    <a id="svc_ffacSearch_btn" class="svc-form" style="height: 25px">Search</a>
                     <input type="text" class ="form-control svc-form" id="svc_ffac_txt">
                     <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
                         <label for="svc_portX_txt">PORT(X):</label>
@@ -124,7 +124,7 @@
                 <div class="form-group">
                     <label for="svc_tfac_txt" style="float:left">FAC(Y):</label>
                     &nbsp;&nbsp;&nbsp;
-                    <a id="svc_tfacSearch_btn" style="height: 25px">Search</a>
+                    <a id="svc_tfacSearch_btn" class="svc-form" style="height: 25px">Search</a>
                     <input type="text" class ="form-control svc-form" id="svc_tfac_txt">
                     <div class="col-sm-5" style="padding-left: 0px; padding-right: 0px">
                         <label for="svc_portY_txt">PORT(Y):</label>
@@ -383,7 +383,6 @@
         });
     
         $(".svc-form").on('input', function() {
-            console.log("hi");
             clearErrors();
             $("#svc_act_sel").val("");
         });
