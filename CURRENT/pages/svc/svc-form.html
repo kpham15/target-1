@@ -311,46 +311,50 @@
             let idx = $("#svc_cktconIdx_num").val();
             
             clearSvcModal();
-            if (act != "") {
-                if(act == "CONNECT") {
-                    $("#svcModal_newConForm").show();
+            if(act == "CONNECT") {
+                $("#svcModal_newConForm").show();
+                $("#svcModal_discConForm").hide();
+                $("#svcModal_changeConForm").hide();
+            }
+            else {
+                if(cktId == "" || cktId == 0) {
+                    console.log("test1");
+                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
+                    return;
+                }
+                if(act == "UPDATE_CKT") {
+                    console.log("test2");
+                    $("#svcModal_newConForm").hide();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
                 }
-                else {
-                    if(cktId == "" || cktId == 0) {
-                        inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
+                else if(act == "DISCONNECT") {
+                    console.log("test3");
+                    if(idx == "" || idx == 0) {
+                    console.log("test4");
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                         return;
                     }
-                    if(act == "UPDATE_CKT") {
-                        $("#svcModal_newConForm").hide();
-                        $("#svcModal_discConForm").hide();
-                        $("#svcModal_changeConForm").hide();
-                    }
-                    else if(act == "DISCONNECT") {
-                        if(idx == "" || idx == 0) {
-                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                            return;
-                        }
-                        $("#svcModal_newConForm").hide();
-                        $("#svcModal_discConForm").show();
-                        $("#svcModal_changeConForm").hide();
+                    $("#svcModal_newConForm").hide();
+                    $("#svcModal_discConForm").show();
+                    $("#svcModal_changeConForm").hide();
 
-                    }
-                    else if(act == "CHANGE") {
-                        if(idx == "" || idx == 0) {
-                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                            return;
-                        }
-                        $("#svcModal_newConForm").hide();
-                        $("#svcModal_discConForm").hide();
-                        $("#svcModal_changeConForm").show();
-                    }
                 }
-                // $("#svc_modal input,#svc_modal select").val("");
-                populateSvcModal();
-                $("#svc_modal").modal("show");
+                else if(act == "CHANGE") {
+                    console.log("test5");
+                    if(idx == "" || idx == 0) {
+                    console.log("test6");
+                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                        return;
+                    }
+                    $("#svcModal_newConForm").hide();
+                    $("#svcModal_discConForm").hide();
+                    $("#svcModal_changeConForm").show();
+                }
             }
+                    console.log("test7");
+            populateSvcModal();
+            $("#svc_modal").modal("show");
 
             
         })
