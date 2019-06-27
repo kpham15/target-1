@@ -320,21 +320,16 @@
                 }
                 else {
                     if(cktId == "" || cktId == 0) {
-                        console.log("test1");
                         inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
-                    console.log("test1.5");
                         return;
                     }
                     if(act == "UPDATE_CKT") {
-                        console.log("test2");
                         $("#svcModal_newConForm").hide();
                         $("#svcModal_discConForm").hide();
                         $("#svcModal_changeConForm").hide();
                     }
                     else if(act == "DISCONNECT") {
-                        console.log("test3");
                         if(idx == "" || idx == 0) {
-                        console.log("test4");
                             inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                             return;
                         }
@@ -344,9 +339,7 @@
 
                     }
                     else if(act == "CHANGE") {
-                        console.log("test5");
                         if(idx == "" || idx == 0) {
-                        console.log("test6");
                             inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                             return;
                         }
@@ -355,13 +348,10 @@
                         $("#svcModal_changeConForm").show();
                     }
                 }
-                        console.log("test7");
                 populateSvcModal();
                 $("#svc_modal").modal("show");
             }
-
-            
-        })
+        });
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
             clearErrors();
@@ -391,8 +381,6 @@
         });
     
         $(".svc-form").on('click', function() {
-
-            console.log("test8");
             clearErrors();
             $("#svc_act_sel").val("").change();
         });
