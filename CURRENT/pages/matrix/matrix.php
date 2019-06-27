@@ -47,6 +47,7 @@
     // load matrix table upon visiting page
     queryMatrixCards();
 
+    clearErrors();
     matrixFirstLoad = false;
   });
   
