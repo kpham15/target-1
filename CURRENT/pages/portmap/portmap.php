@@ -30,6 +30,7 @@ var portmapFirstLoad = true;
 $('.menu-item[page_id="portmap-page"]').click(function() {
     if (portmapFirstLoad != true) {
         clearErrors();
+        $("portmap-form-action").val("").change();
         return;
     }
 
