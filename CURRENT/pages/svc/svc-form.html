@@ -196,8 +196,16 @@
             {"data":"port"},
         ],
         "order": [[ 0, "desc" ]]
-    })
+    });
 
+    $(document).ready(function() {
+        $("svc_facSearch_table_filter input").addClass("svc_facSearch_table_search");
+    });
+
+    $(".svc_facSearch_table_search").on('click', function() {
+        clearErrors();
+        $("#svc_act_sel").val("").change();
+    });
     function clearSearchArea(){
         $(".svc-facSearch-form").val("");
         svcFacSearchDatatable.clear().draw();
@@ -359,6 +367,7 @@
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
             clearErrors();
+            $("#svc_act_sel").val("");
             let data = svcFacSearchDatatable.row(this).data();
             if(data == undefined)
                 return;
