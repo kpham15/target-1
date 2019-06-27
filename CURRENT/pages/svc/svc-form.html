@@ -197,10 +197,6 @@
         ],
         "order": [[ 0, "desc" ]]
     });
-
-    $(document).ready(function() {
-        $("svc_facSearch_table_filter input").addClass("svc-form");
-    });
     
     function clearSearchArea(){
         $(".svc-facSearch-form").val("");
@@ -390,7 +386,7 @@
             }
         });
     
-        $(document).on('input', '.svc-form', function() {
+        $(document).on('input', '.svc-form .dataTables_filter', function() {
             clearErrors();
             $("#svc_act_sel").val("");
         });
