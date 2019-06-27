@@ -73,7 +73,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label>ACTION</label>
-        <select id="matrix-form-action" class="form-control matrix-form-input">
+        <select id="matrix-form-action" class="form-control">
           <option></option>
           <option action="lck">LCK</option>
           <option action="unlck">UN-LCK</option>
@@ -132,7 +132,7 @@
   });
 
   // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
-  $(".matrix-form-input:not(#matrix-form-action)").on("click", function() {
+  $(".matrix-form-input").on("click", function() {
     clearErrors();
     $("#matrix-form-action").val("").change();
   });
