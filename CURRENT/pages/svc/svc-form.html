@@ -291,8 +291,9 @@
         })
 
         $("#svc_tfacSearch_btn").click(function(e){
-            clearErrors();
             $("#svc_act_sel").val("");
+            console.log("HI");
+            clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
