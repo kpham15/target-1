@@ -68,7 +68,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="portmap-form-action" class="form-control">
+          <select id="portmap-form-action" class="form-control portmap-form-input">
             <option value=""></option>
             <option value="MAP">MAP</option>
             <option value="UNMAP">UNMAP</option>
@@ -205,7 +205,7 @@
       }
     });
 
-    $(".portmap-form-input").on('click', function() {
+    $(".portmap-form-input:not(#portmap-form-action)").on('click', function() {
       clearErrors();
       $("#portmap-form-action").val("");
     });
