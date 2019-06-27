@@ -212,7 +212,7 @@
     });
 
     $("#portmap-form-action").on('click', function() {
-      if ($(this).val() != "") {
+      if ($(this).val() == "") {
         clearErrors();
         $(this).val("").click();
       }
