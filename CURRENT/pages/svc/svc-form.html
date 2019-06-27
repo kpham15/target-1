@@ -253,7 +253,7 @@
         $("#svc_adsr_sel").val("N");
         $("#svc_mlo_sel").val("N");
         clearErrors();
-        $("#svc_act_sel").val("").change();
+        $("#svc_act_sel").val("");
         svcQueryCkid();
         svcOrdDatatable.clear().draw();
         svcCktconDatatable.clear().draw();
@@ -292,7 +292,7 @@
 
         $("#svc_tfacSearch_btn").click(function(e){
             clearErrors();
-            $("#svc_act_sel").val("").change();
+            $("#svc_act_sel").val("");
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "Y") {
@@ -391,11 +391,11 @@
         });
 
         $("#svc_ffacSearch_btn").on('click', function() {
-            $("#svc_act_sel").val("").change();
+            $("#svc_act_sel").val("");
         });
 
         $("#svc_tfacSearch_btn").on('click', function() {
-            $("#svc_act_sel").val("").change();
+            $("#svc_act_sel").val("");
         });
 
 
