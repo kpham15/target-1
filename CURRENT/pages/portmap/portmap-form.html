@@ -215,6 +215,8 @@
       if ($(this).val() == "") {
         clearErrors();
         $(this).val("").click();
+      } else {
+        return;
       }
     });
   });
