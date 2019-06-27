@@ -159,7 +159,7 @@
                 <div class="form-group">
                     <label>ACTION</label>
                     <!-- <input id="svc_act_sel" class="form-control"> -->
-                    <select class="form-control svc-form" id="svc_act_sel" style="padding: 2px " >
+                    <select class="form-control" id="svc_act_sel" style="padding: 2px " >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
@@ -381,17 +381,8 @@
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
         });
-
-        $(document).on('click','.svc-form', function() {
-            console.log('document .on (click)');
-        });
-
-        $('.svc-form').click(function() {
-            console.log('.click');
-        });
     
         $(".svc-form").on('mousedown', function() {
-            console.log('.on (click)')
             clearErrors();
             $("#svc_act_sel").val("");
         });
