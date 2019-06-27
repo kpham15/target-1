@@ -265,6 +265,8 @@
 
         $(".menu-item[page_id='svc-page']").click(function() {
             resetSvcPage();
+            clearErrors();
+            $("#svc_act_sel").val("").change();
         });
 
         $("#svc_clear_btn").click(function(e){
