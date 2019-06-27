@@ -35,6 +35,7 @@ $('.menu-item[page_id="portmap-page"]').click(function() {
     loadFacOptions("queryFtyp", "ftyp", createPortOptions);
     loadFacOptions("queryOrt", "ort", createPortOptions);
     loadFacOptions("querySpcfnc", "spcfnc", createPortOptions);
+    clearErrors();
 
     portmapFirstLoad = false;
 })
