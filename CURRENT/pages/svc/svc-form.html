@@ -292,7 +292,6 @@
 
         $("#svc_tfacSearch_btn").click(function(e){
             $("#svc_act_sel").val("");
-            console.log("HI");
             clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
@@ -375,7 +374,7 @@
         })
     
         $("#svc_tn_cbx").change(function(){
-            $("#svc_action_sel").val("").change();
+            $("#svc_act_sel").val("").change();
             if($("#svc_tn_cbx").is(':checked')){
                 $(".svc-ckid-txt").attr("id","").hide();
                 $(".svc-ckid-tn").attr("id","svc_ckid").show();
@@ -391,11 +390,11 @@
             $("#svc_act_sel").val("");
         });
 
-        $("#svc_ffacSearch_btn").on('click', function() {
+        $("#svc_findCkid_btn").on('click', function() {
             $("#svc_act_sel").val("");
         });
 
-        $("#svc_tfacSearch_btn").on('click', function() {
+        $("#svc_findOrd_btn").on('click', function() {
             $("#svc_act_sel").val("");
         });
 
