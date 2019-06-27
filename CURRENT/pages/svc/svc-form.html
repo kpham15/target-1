@@ -252,7 +252,6 @@
         $("#svc_adsr_sel").val("N");
         $("#svc_mlo_sel").val("N");
         clearErrors();
-        $("#svc_act_sel").val("").change();
         svcQueryCkid();
         svcOrdDatatable.clear().draw();
         svcCktconDatatable.clear().draw();
@@ -311,50 +310,54 @@
             let idx = $("#svc_cktconIdx_num").val();
             
             clearSvcModal();
-            if(act == "CONNECT") {
-                $("#svcModal_newConForm").show();
-                $("#svcModal_discConForm").hide();
-                $("#svcModal_changeConForm").hide();
-            }
-            else {
-                if(cktId == "" || cktId == 0) {
-                    console.log("test1");
-                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
-                    return;
-                }
-                if(act == "UPDATE_CKT") {
-                    console.log("test2");
-                    $("#svcModal_newConForm").hide();
+            if (act == "") {
+                return;
+            } else {
+                if(act == "CONNECT") {
+                    $("#svcModal_newConForm").show();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
                 }
-                else if(act == "DISCONNECT") {
-                    console.log("test3");
-                    if(idx == "" || idx == 0) {
-                    console.log("test4");
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                else {
+                    if(cktId == "" || cktId == 0) {
+                        console.log("test1");
+                        inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
                         return;
                     }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").show();
-                    $("#svcModal_changeConForm").hide();
+                    if(act == "UPDATE_CKT") {
+                        console.log("test2");
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").hide();
+                    }
+                    else if(act == "DISCONNECT") {
+                        console.log("test3");
+                        if(idx == "" || idx == 0) {
+                        console.log("test4");
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").show();
+                        $("#svcModal_changeConForm").hide();
 
-                }
-                else if(act == "CHANGE") {
-                    console.log("test5");
-                    if(idx == "" || idx == 0) {
-                    console.log("test6");
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        return;
                     }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").hide();
-                    $("#svcModal_changeConForm").show();
+                    else if(act == "CHANGE") {
+                        console.log("test5");
+                        if(idx == "" || idx == 0) {
+                        console.log("test6");
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").show();
+                    }
                 }
+                        console.log("test7");
+                populateSvcModal();
+                $("#svc_modal").modal("show");
             }
-                    console.log("test7");
-            populateSvcModal();
-            $("#svc_modal").modal("show");
 
             
         })
