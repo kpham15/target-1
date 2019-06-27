@@ -381,10 +381,19 @@
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
         });
+
+        $(document).on('click','.svc-form', function() {
+            console.log('document .on (click)');
+        });
+
+        $('.svc-form').click(function() {
+            console.log('.click');
+        });
     
         $(".svc-form").on('click', function() {
-            clearErrors();
-            $("#svc_act_sel").val("");
+            console.log('.on (click)')
+            // clearErrors();
+            // $("#svc_act_sel").val("");
         });
     });
     
