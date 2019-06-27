@@ -390,7 +390,7 @@
             }
         });
     
-        $(".svc-form").on('input', function() {
+        $(document).on('input', '.svc-form', function() {
             clearErrors();
             $("#svc_act_sel").val("");
         });
