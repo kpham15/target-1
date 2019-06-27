@@ -276,7 +276,7 @@
 
         $("#svc_ffacSearch_btn").click(function(e){
             clearErrors();
-            $("#svc_act_sel").val("").change();
+            $("#svc_act_sel").val("");
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
