@@ -28,9 +28,9 @@
 var portmapFirstLoad = true;
 
 $('.menu-item[page_id="portmap-page"]').click(function() {
+    clearErrors();
+    $("#portmap-form-action").val("").change();
     if (portmapFirstLoad != true) {
-        clearErrors();
-        $("#portmap-form-action").val("").change();
         return;
     }
 
