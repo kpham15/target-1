@@ -29,13 +29,13 @@ var portmapFirstLoad = true;
 
 $('.menu-item[page_id="portmap-page"]').click(function() {
     if (portmapFirstLoad != true) {
+        clearErrors();
         return;
     }
 
     loadFacOptions("queryFtyp", "ftyp", createPortOptions);
     loadFacOptions("queryOrt", "ort", createPortOptions);
     loadFacOptions("querySpcfnc", "spcfnc", createPortOptions);
-    clearErrors();
 
     portmapFirstLoad = false;
 })
