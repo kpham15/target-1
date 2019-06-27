@@ -147,22 +147,26 @@
 
     // Find port button click handler
     $('#pm_findPort_btn').click(function() {
+      $("#portmap-form-action").val("").change();
       queryPort('findPort');
     });
 
     // Find fac button click handler
     $('#pm_findFac_btn').click(function() {
+      $("#portmap-form-action").val("").change();
       queryPort('findFac');
     });
 
     // Find ckid button click handler
     $('#pm_findCkid_btn').click(function() {
+      $("#portmap-form-action").val("").change();
       queryPort('findCkid');
     });
 
     // Clear button click handler
     $('#portmap-form-clear').click(function() {
       $('.portmap-form-input').val('');
+      $("#portmap-form-action").val("").change();
       portmapDatatable.clear().draw();
 
       clearErrors();
