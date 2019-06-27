@@ -267,7 +267,7 @@ $(document).ready(function(){
     });
 });
 
-$(".batchExc_field").on('click', function() {
+$(".batchExc_field:not(#batchExc_act_sel)").on('click', function() {
     clearErrors();
     $("#batchExc_act_sel").val("").change();
 });
