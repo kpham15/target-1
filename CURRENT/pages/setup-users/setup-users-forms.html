@@ -171,6 +171,7 @@
 function setupUserAdd(obj) {
   $('#setup-users-modal-action').val(obj.action);
   $('#setup-users-modal-action').prop('disabled', true);
+  $('#setup-users-modal-stat').prop('disabled', true);
   $('#setup-users-modal').modal('show');
 }
 
@@ -309,8 +310,8 @@ $(document).ready(function() {
   $('#setup-users-forms-viewuser').click(function() {
     clearErrors();
 
-    let userTxt = $('#setup-users-forms-user').val();
-    let status = $('#setup-users-forms-stat').val();
+    let userTxt = $('#setup-users-forms-user').val().toUpperCase();
+    let status = $('#setup-users-forms-stat').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
@@ -342,8 +343,9 @@ $(document).ready(function() {
 
     clearErrors();
 
-    let fname = $('#setup-users-forms-fname').val();
-    let lname = $('#setup-users-forms-lname').val();
+    let fname = $('#setup-users-forms-fname').val().toUpperCase();
+    let mi = $('#setup-users-forms-mi').val().toUpperCase();
+    let lname = $('#setup-users-forms-lname').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
@@ -353,6 +355,7 @@ $(document).ready(function() {
         "act":      "findNameSsn",
         "user":     user.uname,
         "fname":    fname,
+        "mi":       mi,
         "lname":    lname,
     },
       dataType:     'json'
@@ -385,7 +388,7 @@ $(document).ready(function() {
       tel = $('#setup-users-forms-phonenum').val();
     }
 
-    let email = $('#setup-users-forms-email').val();
+    let email = $('#setup-users-forms-email').val().toUpperCase();
 
     $.ajax({
       type:     'POST',
@@ -418,8 +421,8 @@ $(document).ready(function() {
 
     clearErrors();
 
-    let title = $('#setup-users-forms-title').val();
-    let ugrp = $('#setup-users-forms-group').val();
+    let title = $('#setup-users-forms-title').val().toUpperCase();
+    let ugrp = $('#setup-users-forms-group').val().toUpperCase();
       
       $.ajax({
         type:     'POST',
