@@ -33,6 +33,10 @@
   $(".menu-item[page_id='fac-page']").click(function() {
     $("#fac-page select").css('-webkit-appearance', 'menulist');
     $("#fac-page select:disabled").css('-webkit-appearance', 'none');
+
+    clearErrors();
+    $("#fac-form-action").val("").change();
+
     if (facFirstLoad != true) {
       return;
     }
