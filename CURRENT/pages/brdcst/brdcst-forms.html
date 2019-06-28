@@ -138,12 +138,12 @@ $(document).ready(function(obj) {
     let obj = {
       value:      $(this).val(),
       currDate:   moment(new Date()).format('MM-DD-YYYY'),
-      owner:      $('#brdcst-form-msgowner').val(),
-      sa:         $('#brdcst-form-sa').val(),
+      owner:      $('#brdcst-form-msgowner').val().toUpperCase(),
+      sa:         $('#brdcst-form-sa').val().toUpperCase(),
       action:     $('#brdcst-form-action').val(),
-      title:      $('#brdcst-form-msgtitle').val(),
-      date:       $('#brdcst-form-date').val(),
-      detail:     $('#brdcst-form-details').val()
+      title:      $('#brdcst-form-msgtitle').val().toUpperCase(),
+      date:       $('#brdcst-form-date').val().toUpperCase(),
+      detail:     $('#brdcst-form-details').val().toUpperCase()
     }
 
     clearErrors();
