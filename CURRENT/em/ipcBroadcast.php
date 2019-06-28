@@ -130,8 +130,12 @@
 			$refObj = new REF();
 	
 			//get cfg_del from refObj
-			$brdcst_del = $refObj->ref[0]['brdcst_del'];
-			
+			$brdcst_del = $refObj->ref['brdcst_del'];
+			if($brdcst_del == 0){
+				$brdcst_del = $refObj->default['brdcst_del'];
+				if($brdcst_del == 0)
+					$brdcst_del = 180;
+			}
 			//convert value into seconds
 			$brdcst_del_in_sec = $brdcst_del * 86400;
 			

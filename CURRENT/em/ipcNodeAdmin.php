@@ -154,7 +154,7 @@ if ($act == "START_NODE") {
 
         if ($sms->rslt === FAIL) {
             $result['rslt'] = $sms->rslt;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION START-NODE";
         } else {
             $result = startNode($node, $nodeObj, $userObj);
             if ($result['rslt'] == 'success') {
@@ -178,7 +178,7 @@ if ($act == "STOP_NODE") {
 
         if ($sms->rslt === FAIL) {
             $result['rslt'] = $sms->rslt;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION STOP-NODE";
         } else {
             $result = stopNode($node, $nodeObj, $userObj);
             if ($result['rslt'] == 'success') {
@@ -234,7 +234,7 @@ if ($act == "DISCOVER_NODE") {
 
         if ($sms->rslt === FAIL) {
             $result['rslt'] = $sms->rslt;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION DISCOVER-NODE";
         } else {
             $result = discoverIP($defaultIp,$defaultIpPort);
 
@@ -261,7 +261,7 @@ if ($act == "ASSIGN_NODE_IP") {
 
         if ($sms->rslt === FAIL) {
             $result['rslt'] = $sms->rslt;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION ASSIGN-NODE-IP";
         } else {
             $result = assignIP($defaultIp, $defaultIpPort, $ipadr, $port, $nodeObj);
         }
@@ -282,7 +282,7 @@ if ($act == "UNASSIGN_NODE") { // @TODO may change act name
 
         if ($sms->rslt === FAIL) {
             $result['rslt'] = $sms->rslt;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION UNASSIGN-NODE";
         } else {
             $result = unassignNode($ipadr, $port, $sms->npsta, $sms->nssta, $nodeObj);
         }
@@ -701,7 +701,7 @@ function assignIP($oldIp, $oldport, $newIp, $newPort, $nodeObj){
     $sms = new SMS($nodeObj->psta, $nodeObj->ssta, 'ASSIGN_NODE');
     if ($sms->rslt === 'fail') {
         $result['rslt'] = $sms->rslt;
-        $result['reason'] = $sms->reason;
+        $result['reason'] = "INVALID PSTA ($sms->psta) FOR ACTION ASSIGN IP";
         return $result;
     }
 

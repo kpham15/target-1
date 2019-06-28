@@ -23,7 +23,7 @@
     <div class="col-sm-9">
         <div class="col-sm-12 " style="padding:2px;">
             <label>SCRIPTS:</label>
-            <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid"></div>
+            <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid; text-transform: uppercase"></div>
         </div>
         <div class="form-group" style="float: left">
             <button style="margin:25px" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
@@ -178,10 +178,10 @@ function batchExec_recurExecute(i) {
             }
 
     
-            if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
-                $("#batchExc_download_btn").prop("disabled", false);
-                return;
-            }
+            // if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
+            //     $("#batchExc_download_btn").prop("disabled", false);
+            //     return;
+            // }
 
             batchExec_recurExecute(i+1);
         });
