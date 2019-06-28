@@ -73,7 +73,7 @@
       <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="fac-form-action" class="form-control fac-form-input">
+          <select id="fac-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -139,7 +139,6 @@
       else if (value === 'update') {
         if ( !id || id === '') {
           inputError($(this),'Select facility from table.');
-          $("#fac-form-action").val("");
           return;
         }
 
@@ -167,7 +166,6 @@
       else if (value === 'delete') {
         if ( !id || id === '') {
           inputError($(this),'Select facility from table.');
-          $("#fac-form-action").val("");
           return;
         }
 
@@ -199,10 +197,20 @@
     $('#fac-form-clear').click(function() {
       $('.fac-form-input').val('');
       $('#fac-table tbody tr').removeClass('bg-primary');
-
       clearErrors();
+      $("#fac-form-action").val("").change();
     });
 
+    // Clear Errors and Action when form fields is affected by an input
+    $(".fac-form-input").on('input', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
+    });
 
+    // Clear errors and action when buttons are clicked
+    $("#fac-form button").on('click', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
+    });
   });
 </script>
