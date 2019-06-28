@@ -61,7 +61,7 @@ class REF {
         $this->reason = "REF has been reset";
     }
     
-    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range) {
+    public function updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range, $temp_format) {
         $this->updPwExpire      ($pw_expire);
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
@@ -146,6 +146,11 @@ class REF {
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
         }
+        $this->updTempFormat     ($temp_format);
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
+        
         
         $this->queryRefs();
         $this->rslt     =   SUCCESS;
@@ -612,6 +617,27 @@ class REF {
         else {
             $this->rslt     = SUCCESS;
             $this->reason = "VOLT_RANGE_UPDATED";
+        }
+    }
+
+    public function updTempFormat($temp_format) {
+        global $db;
+        //temp_format = F, C
+        if ($temp_format != "F" || $temp_format != "C") {
+            $this->rslt     = FAIL;
+            $this->reason   = "temp_format:Invalid Value ($temp_format)";
+            return;
+        }
+
+        $qry = "UPDATE t_ref SET val='" . $temp_format . "' WHERE ref = 'temp_format'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt     = FAIL;
+            $this->reason   = mysqli_error($db);
+        }
+        else {
+            $this->rslt     = SUCCESS;
+            $this->reason = "TEMP_FORMAT_UPDATED";
         }
     }
 }   //end of REF CLASS

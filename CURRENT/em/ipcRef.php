@@ -111,6 +111,11 @@ if (isset($_POST['volt_range'])) {
     $volt_range = $_POST['volt_range'];
 }
 
+$temp_format = "";
+if (isset($_POST['temp_format'])) {
+    $temp_format = $_POST['temp_format'];
+}
+
 
 $evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, $_POST);
 
@@ -134,7 +139,7 @@ if ($action == "query") {
 }
 
 if ($action == "update") {
-    $result = updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range);
+    $result = updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range, $temp_format);
     $evtLog->log($result["rslt"], $result["reason"]);
     echo json_encode($result);
     mysqli_close($db);
@@ -162,7 +167,7 @@ function queryRefs($refObj) {
 
 }
 
-function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range) {
+function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range, $temp_format) {
 
     if ($userObj->grpObj->ipcadm != "Y") {
         $result['rslt'] = 'fail';
