@@ -237,7 +237,7 @@
 
 		// get date_format
 		$refObj = new REF();
-		$date_format = $refObj->ref[0]['date_format'];
+		$date_format = $refObj->ref['date_format'];
 
 		$rows = [];
 		$row['wcname'] = $wcObj->wcname;

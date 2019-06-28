@@ -132,7 +132,7 @@
 		$cktObj = new CKT($ckid);
 		if ($cktObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $cktObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$cktObj->reason;
             return $result;
         }
 
@@ -140,7 +140,7 @@
         $cktconObj = new CKTCON($cktObj->cktcon);
         if ($cktconObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$cktconObj->reason;
             return $result;
         }
 
@@ -148,7 +148,7 @@
         $cktconObj->loadIdx($idx);
         if ($cktconObj->rslt == FAIL) {
             $result['rslt'] = "fail";
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$cktconObj->reason;
             return $result;
         }
 
@@ -156,7 +156,7 @@
 		$ffacObj = new FAC($ffac);
 		if ($ffacObj->rslt != SUCCESS || $ffacObj->port_id == 0) {
 			$result['rslt'] = "fail";
-            $result['reason'] = INVALID_FAC . ": " . $ffac;
+            $result['reason'] = "PROVISIONING CHANGE - INVALID_FAC: " . $ffac;
 			return $result;
         }
         
@@ -170,7 +170,7 @@
 		$tfacObj = new FAC($tfac);
 		if ($tfacObj->rslt != SUCCESS || $tfacObj->port_id == 0) {
 			$result['rslt'] = "fail";
-            $result['reason'] = INVALID_FAC . ": " . $tfac;
+            $result['reason'] = "PROVISIONING CHANGE - INVALID_FAC: " . $tfac;
 			return $result;
         }
 
@@ -183,7 +183,7 @@
         if(($ffacObj->port!= $cktconObj->fport && $tfacObj->port != $cktconObj->tport) ||
             ($ffacObj->port == $cktconObj->fport && $tfacObj->port == $cktconObj->tport) ){
             $result['rslt'] = "fail";
-            $result['reason'] = INVALID_FACS . ": " . $tfac." ".$ffac;
+            $result['reason'] = "PROVISIONING CHANGE - INVALID_FACS: " . $tfac." ".$ffac;
 			return $result;
         }
 
@@ -191,7 +191,7 @@
         $oldFportObj->loadPort($cktconObj->fport);
         if ($oldFportObj->rslt == 'fail') {
 			$result['rslt'] = "fail";
-            $result['reason'] = "PROV_CHANGE: INVALID OLD FPORT - " . $cktconObj->fport;
+            $result['reason'] = "PROVISIONING CHANGE - INVALID OLD FPORT: " . $cktconObj->fport;
 			return $result;
         }
 
@@ -199,7 +199,7 @@
         $oldTportObj->loadPort($cktconObj->tport);
         if ($oldTportObj->rslt == 'fail') {
 			$result['rslt'] = "fail";
-            $result['reason'] = "PROV_CHANGE: INVALID OLD TPORT - " . $cktconObj->tport;
+            $result['reason'] = "PROVISIONING CHANGE - INVALID OLD TPORT:" . $cktconObj->tport;
 			return $result;
         }
 
@@ -207,7 +207,7 @@
         $sms = new SMS($oldFportObj->psta, $oldFportObj->ssta, "SV_DISCON");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $sms->reason." ".$oldFportObj->port;
+            $result['reason'] = "PROVISIONING CHANGE -"."INVALID PSTA ($sms->psta)"." ".$oldFportObj->port;
             return $result;
         }
         $oldFportObj->npsta = $sms->npsta;
@@ -216,7 +216,7 @@
         $sms = new SMS($oldTportObj->psta, $oldTportObj->ssta, "SV_DISCON");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $sms->reason." ".$oldTportObj->port;
+            $result['reason'] = "PROVISIONING CHANGE -"."INVALID PSTA ($sms->psta)"." ".$oldTportObj->port;
             return $result;
         }
         $oldTportObj->npsta = $sms->npsta;
@@ -228,7 +228,7 @@
         // $pathObj->load();
         // if($pathObj->rslt == 'fail') {
         //     $result['rslt'] = 'fail';
-        //     $result['reason'] = "PROVISIONING CONNECT - " . $pathObj->reason;
+        //     $result['reason'] = ""PROVISIONING CHANGE -" . $pathObj->reason;
         //     return $result; 
         // }
         // $pathObj->resetPath();
@@ -240,7 +240,7 @@
         $cktconObj->deleteIdx($cktconObj->con, $cktconObj->idx);
         if ($cktconObj->rslt != SUCCESS) {
             $result['rslt'] = $cktconObj->rslt;
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$cktconObj->reason;
             return $result;
         }
         
@@ -250,7 +250,7 @@
         //     $cktObj->deleteCkt($ckid);
         //     if ($cktObj->rslt == FAIL) {
         //         $ressult['rslt'] = FAIL;
-        //         $result['reason'] = $cktObj->reason;
+        //         $result['reason'] = "PROVISIONING CHANGE -".$cktObj->reason;
         //         return $result;
         //     }
         // }
@@ -259,28 +259,28 @@
         $oldFportObj->updPsta($oldFportObj->npsta, $oldFportObj->nssta, "-");
 		if ($oldFportObj->rslt != SUCCESS) {
 			$result['rslt'] = $oldFportObj->rslt;
-            $result['reason'] = $oldFportObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$oldFportObj->reason;
 			return $result;
 		}
 
         $oldFportObj->updCktLink(0, 0, 0);
 		if ($oldFportObj->rslt != SUCCESS) {
 			$result['rslt'] = $oldFportObj->rslt;
-            $result['reason'] = $oldFportObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$oldFportObj->reason;
 			return $result;
         }
         
         $oldTportObj->updPsta($oldTportObj->npsta, $oldTportObj->nssta, "-");
 		if ($oldTportObj->rslt != SUCCESS) {
 			$result['rslt'] = $oldTportObj->rslt;
-            $result['reason'] = $oldTportObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$oldTportObj->reason;
 			return $result;
 		}
 
         $oldTportObj->updCktLink(0, 0, 0);
 		if ($oldTportObj->rslt != SUCCESS) {
 			$result['rslt'] = $oldTportObj->rslt;
-            $result['reason'] = $oldTportObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -".$oldTportObj->reason;
 			return $result;
         }
 
@@ -307,7 +307,7 @@
         $tfacObj->setPortObj();
         if ($tfacObj->portObj->ckt_id > 0) {
             $result["rslt"] = FAIL;
-            $result["reason"] = "PROVISIONING CONNECT - " . "FAC(Y) " . $tfac . " is already part of a CKT CONNECTION";
+            $result["reason"] = "PROVISIONING CHANGE - FAC(Y) " . $tfac . " is already part of a CKT CONNECTION";
             return $result;
         }
 
@@ -315,7 +315,7 @@
         $sms = new SMS($ffacObj->portObj->psta, $ffacObj->portObj->ssta, "SV_CONN");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = "PROVISIONING CONNECT - " . $sms->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $ffacObj->portObj->npsta = $sms->npsta;
@@ -324,7 +324,7 @@
         $sms = new SMS($tfacObj->portObj->psta, $tfacObj->portObj->ssta, "SV_CONN");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = "PROVISIONING CONNECT - " . $sms->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $tfacObj->portObj->npsta = $sms->npsta;
@@ -339,7 +339,7 @@
         // $pathObj->createPath();
         // if($pathObj->rslt == 'fail') {
         //     $result['rslt'] = 'fail';
-        //     $result['reason'] = "PROVISIONING CONNECT - " . $pathObj->reason;
+        //     $result['reason'] = "PROVISIONING CHANGE -". $pathObj->reason;
         //     return $result; 
         // }
         // apply the PATH into the t_stg 
@@ -353,7 +353,7 @@
         $cktconObj->addIdx($cktObj->cktcon, $cktObj->id, $cktObj->ckid, $ctyp, $ctyp, $ffacObj->port_id, $ffacObj->port, 1, $tfacObj->port_id, $tfacObj->port, 1, $path_id);
         if ($cktconObj->rslt != SUCCESS) {
             $result['rslt'] = $cktconObj->rslt;
-            $result['reason'] = "PROVISIONING CONNECT - " . $cktconObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". $cktconObj->reason;
             return $result;
         }
             
@@ -361,28 +361,28 @@
         $ffacObj->portObj->updPsta($ffacObj->portObj->npsta, $ffacObj->portObj->nssta, "-");
         if ($ffacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $ffacObj->portObj->rslt;
-            $result['reason'] = "PROVISIONING CONNECT - " . $ffacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". $ffacObj->portObj->reason;
             return $result;
         }
 
         $ffacObj->portObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
         if ($ffacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $ffacObj->portObj->rslt;
-            $result['reason'] = "PROVISIONING CONNECT - " . $ffacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". $ffacObj->portObj->reason;
             return $result;
         }
         
         $tfacObj->portObj->updPsta($tfacObj->portObj->npsta, $tfacObj->portObj->nssta, "-");
         if ($tfacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $tfacObj->portObj->rslt;
-            $result['reason'] = "PROVISIONING CONNECT - " . $tfacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". $tfacObj->portObj->reason;
             return $result;
         }
 
         $tfacObj->portObj->updCktLink($cktObj->id, $cktconObj->con, $cktconObj->idx);
         if ($tfacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $tfacObj->portObj->rslt;
-            $result['reason'] = "PROVISIONING CONNECT - " . $tfacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING CHANGE -". $tfacObj->portObj->reason;
             return $result;
         }
 

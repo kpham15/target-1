@@ -40,8 +40,9 @@
 
 <script type="text/javascript">
   var sysview_viewPathDataTable = $("#sysview_viewPath_modal-table").DataTable({
-    "scrollY": "100px",
+    dom: "frtip",
     "data": [],
+    "pageLength": 2,
     "columns": [
       {"data":"id"},
       {"data":"ctyp"},

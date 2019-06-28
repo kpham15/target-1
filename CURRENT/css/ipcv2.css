@@ -30,6 +30,9 @@
 input:not(.lowercase) {
   text-transform: uppercase;
 }
+textarea:not(.lowercase) {
+  text-transform: uppercase;
+}
 /* =========== END All Page Stylings ============= */
 
 /* ============ Nav Wrapper Styling ============== */
