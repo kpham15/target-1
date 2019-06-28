@@ -242,6 +242,7 @@ function setupUserUploadImg(obj) {
     return;
   }
   setup_users_uploadUserImage_clearForm();
+  $("#setup_users_uploadUserImage_header").html("UPLOAD IMAGE FOR USER "+$("#setup-users-forms-user").val().toUpperCase())
   $('#setup_users_uploadUserImage').modal('show');
 
 }
