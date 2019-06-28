@@ -100,7 +100,6 @@
       if (portmapPortid > 0) {
         if (portmapFacid > 0) {
           inputError($('#portmap-form-action'),'This PORT is already MAPPED');
-          $('#portmap-form-action').val('');
           return;
         } else {
           portmapModalClear();
@@ -114,7 +113,6 @@
         }
       } else {
         inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
-        $('#portmap-form-action').val('');
       }
     }
 
@@ -130,11 +128,9 @@
           $('#setup-portmap-modal').modal('show');
         } else {
           inputError($('#portmap-form-action'),'This PORT has not been MAPPED');
-          $('#portmap-form-action').val('');
         }
       } else {
         inputError($('#portmap-form-action'),'Please select a PORT from LIST OF PORTS');
-        $('#portmap-form-action').val('')
       }
     }
 
@@ -208,5 +204,12 @@
         portmapActionUnmap(obj);
       }
     });
+
+    $(".portmap-form-input").on('click', function() {
+      // clearErrors();
+      // $("#portmap-form-action").val("").change();
+    });
   });
+
+
 </script>
