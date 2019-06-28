@@ -208,7 +208,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
-			$result['reason'] = "MAINTENANCE RESTORE MTCD - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE RESTORE MTCD - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$ffacObj->portObj->npsta = $sms->npsta;
@@ -219,7 +219,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
-			$result['reason'] = "MAINTENANCE RESTORE MTCD - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE RESTORE MTCD - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$tfacObj->portObj->npsta = $sms->npsta;

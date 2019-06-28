@@ -65,8 +65,12 @@ function deleteExpiredAlmLog() {
     $refObj = new REF();
 
     //get prov_del from refObj
-    $alm_del = $refObj->ref[0]['alm_del'];
-    
+    $alm_del = $refObj->ref['alm_del'];
+    if($alm_del == 0){
+        $alm_del = $refObj->default['alm_del'];
+        if($alm_del == 0)
+            $alm_del = 180;
+    }
     //convert value into seconds
     $alm_del_in_sec = $alm_del * 86400;
     
