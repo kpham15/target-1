@@ -161,7 +161,7 @@ function setupUsersModalSubmit(obj) {
     let res = data.rows
 
     if (data.rslt == 'fail') {
-        postResponse($('#setup-users-modal .modal-footer'), data.rslt, data.reason);
+      postResponse($('#setup-users-modal .modal-footer'), data.rslt, data.reason);
     }
     else {
       postResponse($('#setup-users-modal .modal-footer'), data.rslt, data.reason);
@@ -221,6 +221,7 @@ $(document).ready(function() {
 
   // Modal Close Event Handler
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
+    clearErrors();
     $('.setup-users-forms-input').val('');
     $('.setup-users-modal-input').val('');
     setupUsersDatatable.clear().draw();
