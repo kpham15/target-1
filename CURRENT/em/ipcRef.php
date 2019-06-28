@@ -175,7 +175,7 @@ function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repe
         return $result;
     }
 
-    $refObj->updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range);
+    $refObj->updateRefs($pw_expire, $pw_alert, $pw_reuse, $pw_repeat, $brdcst_del, $user_disable, $user_idle_to, $alm_archv, $alm_del, $cfg_archv, $cfg_del, $prov_archv, $prov_del, $maint_archv, $maint_del, $auto_ckid, $auto_ordno, $date_format, $mtc_restore, $temp_max, $volt_range, $temp_format);
     $result['rslt']   = $refObj->rslt;
     $result['reason'] = $refObj->reason;
     $result['rows']   = $refObj->ref;
