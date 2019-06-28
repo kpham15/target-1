@@ -132,16 +132,18 @@
                 }
                 //if not first time login, Deny if password has expired
                 $pwDurationSec = strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate) ;
-                $pwDurationDay = $pwDurationSec/(60*60*24);
+                $pwDurationDay = ceil($pwDurationSec/(60*60*24));
+
                 if($pwDurationDay >= $refObj->ref["pw_expire"]) {
                     $result['rslt'] = FAIL;
                     $result['reason'] = "PLEASE CHANGE PASSWORD, CURRENT PASSWORD HAS EXPIRED";
                     return $result;
                 }
                 
-                $pwAlertDay = $refObj->ref["pw_expire"] - ((strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate))/(60*60*24));
+                $pwAlertDay = floor($refObj->ref["pw_expire"] - ((strtotime(date("Y-m-d H:i:s")) - strtotime($userObj->pwdate))/(60*60*24)));
+
                 if($pwAlertDay > 0 && $pwAlertDay <= $refObj->ref["pw_alert"]) {
-                    $result['pw_exp_alert'] = (int)$pwAlertDay;
+                    $result['pw_exp_alert'] = $pwAlertDay;
                 }
 
             }
