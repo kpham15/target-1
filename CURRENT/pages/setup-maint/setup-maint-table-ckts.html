@@ -194,6 +194,9 @@
 
       $('#setup-maint-forms-action').prop('disabled',true);
       let data = setupMaintTableTkts.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       $('#setup-maint-forms-ckid').val(data.ckid);
       $('#setup-maint-forms-ckid-tn').val(data.ckid);
@@ -219,6 +222,9 @@
 
       $('#setup-maint-forms-action').prop('disabled',false);
       let data = setupMaintTableCons.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       maintTableConsId = data.idx;
 
@@ -241,6 +247,9 @@
       maintTableConsId = "";
 
       let data = setupMaintTableCkts.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       maintTableCktsId = data.id;
       
