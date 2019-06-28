@@ -364,7 +364,7 @@ class USERS {
         }
     }
 
-    public function updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com){
+    public function updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp){
         global $db;
 			
 		$grp = $this->getGrpId($ugrp);
@@ -399,9 +399,6 @@ class USERS {
 			$qry .= ",email='$email'";
         }
         
-        if ($com != "") {
-			$qry .= ",com='$com'";
-		}
 		
 		$qry .= " WHERE upper(uname)=upper('$this->uname')";
 		
@@ -539,7 +536,24 @@ class USERS {
         }
     }
 
-    ///////////////------LOCK USER--------/////////////
+    public function updateUserImage($com) {
+        global $db;
+
+        $qry = "UPDATE t_users SET com='$com' WHERE id='$this->id'";
+        $res = $db->query($qry);
+        if (!$res) {
+            $this->rslt = FAIL;
+            $this->reason = mysqli_error($db);
+            return false;
+        }
+        else {
+            $this->rslt = SUCCESS;
+            $this->reason = 'USER IMAGE UPDATED';
+            return true;
+        }
+    }
+
+    ///////////////-------------/////////////
    
     public function lckUser(){
         global $db;

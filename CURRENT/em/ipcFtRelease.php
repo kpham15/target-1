@@ -53,21 +53,17 @@
         $facId = $_POST['facId'];
     }
 
-    $fddInt = 0;
+    $fddInt = "";
     if (isset($_POST['fddInt'])) {
         $fddInt = $_POST['fddInt'];
     }
-    if ($fddInt == "") {
-        $fddInt = 0;
-    }
 
-    $ddInt = 0;
+
+    $ddInt = "";
     if (isset($_POST['ddInt'])) {
         $ddInt = $_POST['ddInt'];
     }
-    if ($ddInt == "") {
-        $ddInt = 0;
-    }
+
 
     $rtyp = "";
     if (isset($_POST['rtyp'])) {
@@ -182,8 +178,8 @@
     }
 
     function updateFtRelease($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop, $ftreleaseObj) {
-
-		$ftreleaseObj->update($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop);
+        
+        $ftreleaseObj->update($id, $sot, $ot, $rot, $cls, $oc, $adsr, $rtAct, $facType, $facId, $fddInt, $ddInt, $rtyp, $rt, $jCond, $jeop);
 		$result['rslt']     = $ftreleaseObj->rslt;
         $result['reason']   = $ftreleaseObj->reason;
         

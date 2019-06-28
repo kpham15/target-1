@@ -21,7 +21,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var ftOrdersFacDatatable = $('#ftOrders-facTable').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"act"},
       {"data":"op"},
@@ -35,7 +37,6 @@
     "searching": false,
     "paging": false,
     "info": false,
-    "scrollY": "100px",
   });
 
   function queryFtOrdersFac(ctid, ordno) {

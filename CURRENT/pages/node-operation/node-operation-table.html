@@ -23,13 +23,22 @@
 <script type="text/javascript">
 // Initialize Datatable
   var nodeOperationDatatable = $('#node-operation-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"node"},
       {"data":"serial_no"},
       {"data":"psta"},
       {"data":"ssta"},
       {"data":"dev"},
+    ],
+    "columnDefs": [
+      { "width": "10%", "targets": 0 },
+      { "width": "40%", "targets": 1 },
+      { "width": "15%", "targets": 2 },
+      { "width": "15%", "targets": 3 },
+      { "width": "20%", "targets": 4 }
     ]
   });
 

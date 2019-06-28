@@ -22,7 +22,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var ftOrdersCktDatatable = $('#ftOrders-cktTable').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 3,
     "columns": [
       {"data":"ctid"},
       {"data":"cls"},
@@ -37,7 +39,6 @@
     "searching": false,
     "paging": false,
     "info": false,
-    "scrollY": "100px",
   });
 
   function queryFtOrdersCkt(ordno) {

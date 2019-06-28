@@ -1,0 +1,252 @@
+
+<!-- Row one for Action and buttons  -->
+<div class="row">
+    <div class="col-sm-12" style="padding-left: 0px">
+        <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+            <div class="form-group">
+                <label for="mt_action_sel">ACTION</label>
+                <select id="mt_action_sel" class="form-control">
+                    <option></option>
+                    <option>ADD</option>
+                    <option>DELETE</option>
+                    <option>UPDATE</option>
+            </select>
+            </div>
+        </div>
+        <div class="col-sm-10" style="padding-left: 5px; padding-right: 5px">
+            <div class="form-group">
+                <button class="btn btn-primary" id="mt_submit_btn" style="margin-top:25px">SUBMIT</button>
+                <button class="btn btn-primary" id="mt_clear_btn" style="margin-top:25px">CLEAR</button>
+            </div>
+        </div>
+    </div>
+    
+    <div style="width:10%; float:left; padding:3px;">
+        <label for="mt_ot_sel">OT</label>
+        <select style="padding:2px" id="mt_ot_sel" class="form-control ft_modification_form">
+            <option></option>
+            <option>NC</option>
+            <option>T</option>
+            <option>CD</option>
+            <option>CH</option>
+            <option>F</option>
+            <option>MCT</option>
+        </select>
+    </div>
+
+    <div style="width:10%; float:left; padding:3px;">
+        <label for="mt_pri_sel">PRI</label>
+        <select style="padding:2px" id="mt_pri_sel" class="form-control ft_modification_form">
+            <option></option>
+            <option>1</option>
+            <option>0</option>
+        </select>
+    </div>
+    <div style="width:10%; float:left; padding:3px;">
+        <label for="mt_cdd_sel">CDD</label>
+        <select style="padding:2px" id="mt_cdd_sel" class="form-control ft_modification_form">
+            <option></option>
+            <option>Y</option>
+        </select>
+    </div>
+    <div style="width:25%; float:left; padding:3px;">
+        <label for="mt_noscm_sel">NOSCM</label>
+        <select style="padding:2px" id="mt_noscm_sel" class="form-control ft_modification_form">
+            <option></option>
+            <option>CDD</option>
+            <option>MOD, MDD, CAN</option>
+            <option>CDD, MOD, MDD, CAN</option>
+        </select>
+    </div>
+    <div style="width:15%; float:left; padding:3px;">
+        <label for="mt_rtype_sel">RTYPE</label>
+        <select style="padding:2px" id="mt_rtype_sel"  class="form-control ft_modification_form">
+            <option></option>
+            <option>ADMIN</option>
+            <option>IMMEDIATE</option>
+        </select>
+    </div>
+    <div style="width:20%; float:left; padding:3px;">
+        <label for="mt_processingfile_sel">PROCESSING_FILE</label>
+        <select  style="padding:2px" id="mt_processingfile_sel"  class="form-control ft_modification_form">
+            <option></option>
+            <option>ADMIN</option>
+            <option>MODIFICATION</option>
+            <option>IMMEDIATE</option>
+        </select>
+    </div>
+    <!-- Table -->
+    <div class="col-sm-12" style="padding:5px">
+        <div class="box box-primary">
+            <div class="box-body">
+                <table id="ft_modification_table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th>OT</th>
+                        <th>PRI</th>
+                        <th>CDD</th>
+                        <th>NOSCM</th>
+                        <th>RTYPE</th>
+                        <th>PROCESSING_FILE</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+    
+    
+<script>
+var ft_modificationDataTable = $("#ft_modification_table").DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 5,
+    
+    "columns": [
+        {"data":"ot"},
+        {"data":"pri"},
+        {"data":"cdd"},
+        {"data":"noscm"},
+        {"data":"rtype"},
+        {"data":"processing_file"},
+    ],
+    
+});
+    
+var ft_modification_id = "";
+
+function ft_modification_clearForm() {
+    $("select").val("");
+    ft_modification_id = 0;
+}
+
+function ft_modification_query(action) {
+    $.ajax({
+        url: ipcDispatch,
+        type: 'post',
+        data:{
+            api:        "ipcFtModTable",
+            act:	    action,
+            user:	    user.uname,
+            grp:        user.grp,
+            ugrp:       user.ugrp,
+            ot:         $("#mt_ot_sel").val(),
+            pri:        $("#mt_pri_sel").val(),
+            cdd:        $("#mt_cdd_sel").val(),
+            noscm:      $("#mt_noscm_sel").val(),
+            rtype:      $("#mt_rtype_sel").val(),
+            processingfile:$("#mt_processingfile_sel").val(),
+            id:         ft_modification_id,
+        },
+        dataType: "json"
+    }).done(function (data) {
+        if (data.rslt  ==  "fail") {
+            inputError($('#mt_submit_btn'),data.reason);
+        }
+        else {
+            if (data.rows.length  ==  0 && action != "DELETE") {
+                inputError($('#mt_submit_btn'),"No Record Found");
+            }
+            else {
+                let res = data.rows;
+                ft_modificationDataTable.clear().draw();
+                ft_modificationDataTable.rows.add(res);
+                ft_modificationDataTable.columns.adjust().draw();
+                if (action != "query") {
+                    inputSuccess($('#mt_submit_btn'),action+': FT_MOD_TABLE SUCCESS');
+                }
+            }
+        }
+    });
+    
+}
+
+// UPON LOAD PAGE FIRST TIME
+var ft_modificationFirstLoad = true;
+$(".menu-item[page_id='ft-modification-page']").click(function() {
+    if (ft_modificationFirstLoad != true) {
+        return;
+    }
+    ft_modification_query("query");
+    ft_modificationFirstLoad = false;
+});
+
+$(document).on("click","#ft_modification_table tbody tr", function(){
+    let data = ft_modificationDataTable.row(this).data();
+    if(data == undefined)
+        return;
+    
+    $('#ft_modification_table tbody tr').removeClass('bg-primary');
+    $(this).addClass('bg-primary');
+
+    $("#mt_ot_sel").val(data.ot);
+    $("#mt_pri_sel").val(data.pri);
+    $("#mt_cdd_sel").val(data.cdd); 
+    $("#mt_noscm_sel").val(data.noscm);  
+    $("#mt_rtype_sel").val(data.rtype); 
+    $("#mt_processingfile_sel").val(data.processing_file); 
+    ft_modification_id = data.id;
+
+    //this code is to avoid user pick a row from the table and submit ADD
+    $("#mt_action_sel").val("");
+    clearErrors();
+})
+
+
+$("select").on("mousedown",function(){
+    clearErrors();
+})
+
+// Clear Button
+$("#mt_clear_btn").click(function() {
+    clearErrors();
+    ft_modification_clearForm();
+    ft_modification_query('query');
+});
+
+
+// Submit Button
+$("#mt_submit_btn").click(function() {
+    clearErrors();
+    if ($("#mt_action_sel").val() == "ADD") {
+        if($("#mt_ot_sel").val() == "" || $("#mt_rtype_sel").val() == "" || $("#mt_processingfile_sel").val() == "") {
+            inputError($('#mt_submit_btn'),'OT, RTYPE AND PROCESSING FILE MUST NOT BE EMPTY');
+            return;
+        }
+        ft_modification_query("ADD");
+        $("#mt_action_sel").val("");
+    }
+    else if ($("#mt_action_sel").val() == "UPDATE") {
+        if(ft_modification_id === 0) {
+            inputError($('#mt_submit_btn'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
+            return;
+        }
+        ft_modification_query("UPDATE");
+        $("#mt_action_sel").val("");
+    }
+    else if ($("#mt_action_sel").val() == "DELETE") {
+        if(ft_modification_id === 0) {
+            inputError($('#mt_submit_btn'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
+            return;
+        }
+        ft_modification_query("DELETE");
+        $("#mt_action_sel").val("");
+    }
+    else {
+        inputError($('#mt_action_sel'),'Select An Option');
+        
+    }
+});
+
+//this code is to avoid user pick a row from the table and submit ADD
+$("#mt_action_sel").change(function(){
+    if($("#mt_action_sel").val() == "ADD") {
+        $(".ft_modification_form").val("");
+        ft_modification_id=0;
+    }
+})
+
+</script>
+        

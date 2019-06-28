@@ -21,7 +21,9 @@
 <script type="text/javascript">
   // Initialize Datatable
   var matrixCardDatatable = $('#matrix-card-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 10,
     "columns": [
       {"data":"node"},
       {"data":"shelf"},
@@ -30,7 +32,6 @@
       {"data":"psta"},
     ],
     "order": [[ 0, "asc" ]],
-    "scrollY": "400px",
   });
 
   function queryMatrixCards() {

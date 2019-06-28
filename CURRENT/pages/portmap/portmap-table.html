@@ -28,10 +28,15 @@
   var portmapPnum = '';
   var portmapFacid = '';
   var portmapPortid = '';
+  var portmapFtyp = '';
+  var portmapOrt = '';
+  var portmapSpcfnc = '';
 
   // Initialize Datatable
   var portmapDatatable = $('#portmap-table').DataTable({
+    dom: "frtip",
     "data": [],
+    "pageLength": 8,
     "columns": [
       {"data":"id"},
       {"data":"port"},
@@ -118,9 +123,12 @@
       portmapNode = data.node;
       portmapSlot = data.slot;
       portmapPnum = data.pnum;
-      $('#portmap-form-ptyp').val(data.ptyp.toLowerCase());
+      portmapFtyp = data.ftyp;
+      portmapOrt = data.ort;
+      portmapSpcfnc = data.spcfnc;
+      $('#portmap-form-ptyp').val(data.ptyp);
       $('#portmap-form-port').val(data.port);
-      $('#portmap-form-psta').val(data.psta.toLowerCase());
+      $('#portmap-form-psta').val(data.psta);
       $('#portmap-form-fac').val(data.fac);
       if ($('#portmap-tn-check').prop('checked')) {
         $('#portmap-tn-check').iCheck('toggle');
@@ -132,6 +140,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#portmap-form-action").val("").change();
     });
   });
 
