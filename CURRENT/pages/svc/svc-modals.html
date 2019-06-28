@@ -479,8 +479,13 @@ $(document).ready(function(){
             $(".svcModal-ckid-tn").attr("id","").hide();
             $(".svcModal-ckid-txt").attr("id","svcModal_ckid").show();
         }
-    })
-})
+    });
+
+    // Clear input error when any modal field is changed/input
+    $("#svcModal-form").on('input', function() {
+        clearErrors();
+    });
+});
     
 
 
