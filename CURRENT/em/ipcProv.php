@@ -330,7 +330,7 @@ include "ipcProvConnect.php";
 		if(!(($ffac == $newffac && $tfac != $newtfac) || ($ffac != $newffac && $tfac == $newtfac))) {
 			$result['rslt'] = 'fail';
 			$result['jeop'] = "SP4:ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
-			$result['reason'] = "PROV CHANGE: ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
+			$result['reason'] = "PROVISIONING CHANGE: ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
 			$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
 			return $result;
 		}
@@ -339,7 +339,7 @@ include "ipcProvConnect.php";
 		if ($newFfacObj->rslt != SUCCESS || $newFfacObj->port_id == 0) {
 			$result['rslt'] = "fail";
 			$result['jeop'] = "SP2:FAC IS INVALID";
-			$result['reason'] = "PROV CHANGE: INVALID_FAC - " . $newffac;
+			$result['reason'] = "PROVISIONING CHANGE: INVALID_FAC - " . $newffac;
 			$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
 			return $result;
 		}
@@ -349,7 +349,7 @@ include "ipcProvConnect.php";
 		if ($newTfacObj->rslt != SUCCESS || $newTfacObj->port_id == 0) {
 			$result['rslt'] = "fail";
 			$result['jeop'] = "SP2:FAC IS INVALID";
-            $result['reason'] = "PROV CHANGE: INVALID_FAC - " . $newtfac;
+            $result['reason'] = "PROVISIONING CHANGE: INVALID_FAC - " . $newtfac;
 			$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
 			return $result;
 		}

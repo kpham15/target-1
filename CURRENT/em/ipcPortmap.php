@@ -215,7 +215,7 @@
         $sms = new SMS($portObj->psta, $portObj->ssta, 'PT_MAP');
         if ($sms->rslt == FAIL) {
 			$result["rslt"] = $sms->rslt;
-            $result["reason"] = $sms->reason;
+            $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION PORT MAP";
             $result['rows'] = [];
 			return $result;
         }
@@ -266,7 +266,7 @@
         $sms = new SMS($portObj->psta, $portObj->ssta, 'PT_UNMAP');
         if ($sms->rslt == FAIL) {
 			$result["rslt"] = $sms->rslt;
-            $result["reason"] = $sms->reason;
+            $result["reason"] = "INVALID PSTA ($sms->psta)";
             $result['rows'] = [];
 			return $result;
         }
@@ -302,7 +302,7 @@
         $sms = new SMS($portObj->psta, $portObj->ssta, "MAN_RS");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $portObj->npsta = $sms->npsta;
@@ -343,7 +343,7 @@
         $sms = new SMS($portObj->psta, $portObj->ssta, "MAN_DEF");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $portObj->npsta = $sms->npsta;
@@ -384,7 +384,7 @@
         $sms = new SMS($portObj->psta, $portObj->ssta, "MAN_SF");
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $portObj->npsta = $sms->npsta;
