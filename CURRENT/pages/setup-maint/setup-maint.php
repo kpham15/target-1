@@ -12,12 +12,12 @@
         </ol>
       </section>
       
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding:2px;">
       <!-- Setup Maint Forms -->
       <?php include __DIR__ . '/setup-maint-forms.html'; ?>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-8" style="padding:2px;">
       <!-- Setup Maint Table Ckts -->
       <?php include __DIR__ . '/setup-maint-table-ckts.html';?>
       </div>
