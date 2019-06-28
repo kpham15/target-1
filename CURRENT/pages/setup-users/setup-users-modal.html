@@ -31,7 +31,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>STATUS</label>
-                <input id="setup-users-modal-stat" type="text" class="form-control setup-users-modal-input">
+                <input id="setup-users-modal-stat" type="text" class="form-control setup-users-modal-input" disabled="" />
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>MI</label>
-                <input id="setup-users-modal-mi" type="text" class="form-control setup-users-modal-input">
+                <input id="setup-users-modal-mi" type="text" class="form-control setup-users-modal-input" maxlength="1">
               </div>
             </div>
             <!-- LNAME -->
@@ -203,15 +203,15 @@ $(document).ready(function() {
     let obj = {
       action:     $('#setup-users-modal-action').val(),
       tel:        tel,
-      user:       $('#setup-users-modal-user').val(),
-      ssn:        $('#setup-users-modal-ssn').val(),
-      status:     $('#setup-users-modal-stat').val(),
-      fname:      $('#setup-users-modal-fname').val(),
-      mi:         $('#setup-users-modal-mi').val(),
-      lname:      $('#setup-users-modal-lname').val(),
-      email:      $('#setup-users-modal-email').val(),
-      title:      $('#setup-users-modal-title').val(),
-      group:      $('#setup-users-modal-group').val(),
+      user:       $('#setup-users-modal-user').val().toUpperCase(),
+      ssn:        $('#setup-users-modal-ssn').val().toUpperCase(),
+      status:     $('#setup-users-modal-stat').val().toUpperCase(),
+      fname:      $('#setup-users-modal-fname').val().toUpperCase(),
+      mi:         $('#setup-users-modal-mi').val().toUpperCase(),
+      lname:      $('#setup-users-modal-lname').val().toUpperCase(),
+      email:      $('#setup-users-modal-email').val().toUpperCase(),
+      title:      $('#setup-users-modal-title').val().toUpperCase(),
+      group:      $('#setup-users-modal-group').val().toUpperCase(),
     }
     
     setupUsersModalSubmit(obj);
