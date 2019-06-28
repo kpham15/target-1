@@ -623,7 +623,7 @@ class REF {
     public function updTempFormat($temp_format) {
         global $db;
         //temp_format = F, C
-        if ($temp_format != "F" || $temp_format != "C") {
+        if ($temp_format === "" || !($temp_format == "F" || $temp_format == "C")) {
             $this->rslt     = FAIL;
             $this->reason   = "temp_format:Invalid Value ($temp_format)";
             return;
