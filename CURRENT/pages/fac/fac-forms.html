@@ -73,7 +73,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="fac-form-action" class="form-control fac-form-input">
+          <select id="fac-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -198,7 +198,11 @@
       $("#fac-form-action").val("").change();
     });
 
-
+    // Clear Errors and Action when form fields is affected by an input
+    $(".fac-form-input").on('input', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
+    });
 
   });
 </script>
