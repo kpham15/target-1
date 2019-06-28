@@ -20,6 +20,7 @@
 
     if (wcInfo.temp_format == 'F') {
       node.node_temp = parseInt(node.node_temp);
+      node.node_temp = (node.node_temp * (9/5)) + 32;
     }
 
     $('[node_id="'+node.node+'"] .node-box-stat').text(node.node_stat);
