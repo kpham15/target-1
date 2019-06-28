@@ -77,7 +77,7 @@
         </div>
 
         <!-- Third row-->
-        <div class="row">
+        <div class="row" id="svc-form-date-div">
 
             <div class="col-sm-5" style="padding:2px;">
                 <div class="form-group">
@@ -408,6 +408,11 @@
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
         });
+
+        $('#svc-form-date-div').on('click', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
+        })
     
         $(document).on('input', '.svc-form', function() {
             clearErrors();
