@@ -234,5 +234,11 @@ $(document).ready(function() {
   $(".setup-users-modal-input").on('click', function() {
     clearErrors();
   });
+
+  // removes arrows on disabled selection fields and adds arrows on enabled selection fields
+  $("#setup-users-modal").on('shown.bs.modal', function() {
+    $("#setup-users-modal select").css('-webkit-appearance', 'menulist');
+    $("#setup-users-modal select:disabled").css('-webkit-appearance', 'none');
+  });
 });
 </script>
