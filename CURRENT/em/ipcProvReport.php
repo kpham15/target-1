@@ -73,8 +73,12 @@
 		$refObj = new REF();
 
 		//get prov_del from refObj
-		$prov_del = $refObj->ref[0]['prov_del'];
-		
+		$prov_del = $refObj->ref['prov_del'];
+		if($prov_del == 0){
+			$prov_del = $refObj->default['prov_del'];
+			if($prov_del == 0)
+				$prov_del = 180;
+		}
 		//convert value into seconds
 		$prov_del_in_sec = $prov_del * 86400;
 		

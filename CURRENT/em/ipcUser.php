@@ -221,7 +221,7 @@
 	}
 
 	if ($act == "DELETE") {
-		$result = deleteUser($userObj, $uname);
+		$result = deleteUser($userObj, $uname, $uploadDir);
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
 		echo json_encode($result);
 		mysqli_close($db);
@@ -266,7 +266,7 @@
 	function removeImg($userObj, $uname, $uploadDir) {
 		try {
 			if ($userObj->ugrp != 'ADMIN' || $userObj->grpObj->setuser != "Y") {
-				throw new Exception('Permission Denied');
+				throw new Exception('REMOVE_IMG: PERMISSION DENIED');
 			}
 
 			$targetUserObj = new USERS($uname);
@@ -283,20 +283,19 @@
 				throw new Exception("NO UPLOAD FOLDER INFORMATION"); 
 			}
 		
-			if (!file_exists($uploadDir)) {
-				throw new Exception("FOLDER PROFILE NOT EXIST"); 
-				
-			}
-			
 			//update database
 			$targetUserObj->updateUserImage("");
 			if($targetUserObj->rslt == 'fail') {
 				throw new Exception("REMOVE_IMG: ".$targetUserObj->reason); 
 			}
-			if (!unlink($uploadDir.'/'.$targetUserObj->com)) {
-				throw new Exception("UNABLE TO DELETE IMAGE FILE"); 
+
+			if (file_exists($uploadDir)) {
+				if (file_exists($uploadDir."/".$targetUserObj->com)) {
+					if (!unlink($uploadDir.'/'.$targetUserObj->com)) {
+						throw new Exception("UNABLE TO DELETE IMAGE FILE"); 
+					}
+				}
 			}
-	
 
 			$targetUserObj->queryByUName("","");
 			$result["rslt"] = 'success';
@@ -348,10 +347,10 @@
 				throw new Exception("UNABLE TO MOVE IMAGE FILE"); 
 			}
 
-			exec("chmod -R 755 ".$uploadDir.'/'.$fileName, $output, $return);
-			if($return !== 0) {
-			    throw new Exception('UNABLE TO CHANGE PERMISSION OF IMG FILE');
-			}
+			// exec("chmod -R 755 ".$uploadDir.'/'.$fileName, $output, $return);
+			// if($return !== 0) {
+			//     throw new Exception('UNABLE TO CHANGE PERMISSION OF IMG FILE');
+			// }
 	
 			$result["rslt"] = 'success';
 			$result["reason"] = "IMAGE_UPLOADED";
@@ -652,7 +651,7 @@
 		return $result;
 	}
 
-	function deleteUser($userObj, $uname) {
+	function deleteUser($userObj, $uname, $uploadDir) {
 
 		$result['log'] = "ACTION = DELETE | UNAME = $uname";
 
@@ -672,6 +671,8 @@
 		
 		// only ADMIN and SUPERVISOR users can delete a user in lower grp
 		if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
+			$delUserImg = removeImg($userObj, $uname, $uploadDir);
+
 			$targetUserObj->deleteUser();
 			if ($targetUserObj->rslt == "fail") {
 				$result['rslt'] = $targetUserObj->rslt;

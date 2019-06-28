@@ -275,7 +275,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$fportObj->psta.")";            
-            $result['reason'] = "MAINTENANCE CONNECT - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE CONNECT - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $fportObj->npsta = $sms->npsta;
@@ -285,7 +285,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$tportObj->psta.")";            
-            $result['reason'] = "MAINTENANCE CONNECT - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE CONNECT - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $tportObj->npsta = $sms->npsta;
@@ -457,7 +457,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
-            $result['reason'] = "MAINTENANCE RESTORE - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE RESTORE - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $ffacObj->portObj->npsta = $sms->npsta;
@@ -468,7 +468,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
-            $result['reason'] = "MAINTENANCE RESTORE - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE RESTORE - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $tfacObj->portObj->npsta = $sms->npsta;
@@ -610,7 +610,7 @@
         if($tbusObj->rslt == 'fail') {
             $result['rslt'] = $tbusObj->rslt;
             $result['jeop'] = "SP5:$tbusObj->reason";
-            $result['reason'] = $tbusObj->reason;
+            $result['reason'] = "MAINTENANCE TEST - " .$tbusObj->reason;
             return $result;
         }
         
@@ -620,7 +620,7 @@
             $zport = $rows[0]['zport'];
             $port = $rows[0]['port'];
             $result['jeop'] = "SP5:TEST BUS IS BUSY AT $zport and $port";
-            $result['reason'] = "MAIN TEST - TEST BUS IS BUSY AT $zport and $port";
+            $result['reason'] = "MAINTENANCE TEST - TEST BUS IS BUSY AT $zport and $port";
             return $result;
         }
         
@@ -656,7 +656,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$fportObj->psta.")";            
-            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE TEST - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $fportObj->npsta = $sms->npsta;
@@ -666,7 +666,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$tstportObj->psta.")";            
-            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE TEST - " . "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $tstportObj->npsta = $sms->npsta;
@@ -685,7 +685,7 @@
         if($portTypeObj->rslt == 'fail') {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP5:$portTypeObj->reason";            
-            $result['reason'] = "MAINTENANCE TEST - " . $sms->reason;
+            $result['reason'] = "MAINTENANCE TEST - " . $portTypeObj->reason;
             return $result;
         }
         //create relay format for fport

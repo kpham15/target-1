@@ -187,7 +187,7 @@ function cps_disconnected($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-DISCONNECTED";
     return $result;
 }
 
@@ -224,7 +224,7 @@ function cps_connected($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-CONNECTED";
     return $result;
 }
 
@@ -261,7 +261,7 @@ function cps_online($node) {
         }
     }
     $result["rslt"] = $sms->rslt;
-    $result["reason"] = $sms->reason;
+    $result["reason"] = "INVALID PSTA ($sms->psta) FOR ACTION CPS-ONLINE";
     return $result;
 }
 
@@ -663,7 +663,7 @@ function updateCpsVolt($hwRsp) {
         return $result;
     }
 
-    $voltRange = $refObj->ref[0]['volt_range'];
+    $voltRange = $refObj->ref['volt_range'];
     
     $voltRangeArray = explode("-", $voltRange);
     $minVolt = $voltRangeArray[0];
@@ -781,7 +781,7 @@ function updateCpsTemp($hwRsp) {
     }
 
     // obtain temp_max from refObj
-    $tempMax = $refObj->ref[0]['temp_max'];
+    $tempMax = $refObj->ref['temp_max'];
 
     // makes new alm if temp is out of range
     if ($temp_hi > $tempMax) {

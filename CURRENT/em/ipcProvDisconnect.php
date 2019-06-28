@@ -21,7 +21,7 @@
 		if ($cktObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP5:$cktObj->reason"; 
-            $result['reason'] = $cktObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$cktObj->reason;
             return $result;
         }
 
@@ -30,7 +30,7 @@
         if ($cktconObj->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP5:$cktconObj->reason"; 
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$cktconObj->reason;
             return $result;
         }
         
@@ -39,14 +39,14 @@
 		if ($ffacObj->rslt != SUCCESS || $ffacObj->port_id == 0) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP2:FAC IS INVALID"; 
-            $result['reason'] = INVALID_FAC . ": " . $ffac;
+            $result['reason'] = "PROVISIONING DISCONNECT - INVALID_FAC: " . $ffac;
 			return $result;
 		}
         $ffacObj->setPortObj();
         if ($ffacObj->portObj->cktcon != $cktconObj->con) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP4:FAC IS MAPPED TO DIFFERENT PORT";
-            $result['reason'] = "FAC: " . $ffac . " cktcon: " . $ffacObj->portObj->cktcon . " is not part of CKTCON: " . $cktconObj->con;
+            $result['reason'] = "PROVISIONING DISCONNECT - FAC: " . $ffac . " cktcon: " . $ffacObj->portObj->cktcon . " is not part of CKTCON: " . $cktconObj->con;
 			return $result;
         }
         
@@ -55,14 +55,14 @@
 		if ($tfacObj->rslt != SUCCESS || $tfacObj->port_id == 0) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP2:FAC IS INVALID"; 
-            $result['reason'] = INVALID_FAC . ": " . $tfac;
+            $result['reason'] = "PROVISIONING DISCONNECT - INVALID_FAC: " . $tfac;
 			return $result;
         }
         $tfacObj->setPortObj();
         if ($tfacObj->portObj->cktcon != $cktconObj->con) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP4:FAC IS MAPPED TO DIFFERENT PORT";
-            $result['reason'] = "FAC: " . $tfac . " is not part of CKTCON: " . $cktconObj->con;
+            $result['reason'] = "PROVISIONING DISCONNECT - "."FAC: " . $tfac . " is not part of CKTCON: " . $cktconObj->con;
 			return $result;
         }
 
@@ -70,7 +70,7 @@
         if ($ffacObj->portObj->con_idx != $tfacObj->portObj->con_idx) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP5:FFAC and TFAC are not connected on same CKTCON/IDX";
-            $result['reason'] = "FFAC and TFAC are not connected on same CKTCON/IDX";
+            $result['reason'] = "PROVISIONING DISCONNECT - "."FFAC and TFAC are not connected on same CKTCON/IDX";
 			return $result;
         }
 
@@ -79,7 +79,7 @@
         if ($cktconObj->rslt == FAIL) {
             $result['rslt'] = "fail";
             $result['jeop'] = "SP5:$cktconObj->reason";
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$cktconObj->reason;
 			return $result;
         }
         
@@ -95,7 +95,7 @@
                 if ($fNodeObj->stat !== 'INS') {
                     $result['rslt'] = 'fail';
                     $result['jeop'] = "SP5:ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";
-                    $result['reason'] = "ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";
+                    $result['reason'] = "PROVISIONING DISCONNECT - "."ACCESS DENIED; NODE ($fNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $fNodeObj->user";
                     return $result;
                 }
         
@@ -103,7 +103,7 @@
                 if ($tNodeObj->stat !== 'INS') {
                     $result['rslt'] = 'fail';
                     $result['jeop'] = "SP5:ACCESS DENIED; NODE ($tNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $tNode->user";
-                    $result['reason'] = "ACCESS DENIED; NODE ($tNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $tNodeObj->user";
+                    $result['reason'] = "PROVISIONING DISCONNECT - "."ACCESS DENIED; NODE ($tNode) HAS BEEN LOCKED BY SYSTEM ADMINISTRATOR $tNodeObj->user";
                     return $result;
                 }
         
@@ -113,7 +113,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$ffacObj->portObj->psta.")";            
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ". "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $ffacObj->portObj->npsta = $sms->npsta;
@@ -123,7 +123,7 @@
         if ($sms->rslt == FAIL) {
             $result['rslt'] = FAIL;
             $result['jeop'] = "SP3:FAC STATUS (".$tfacObj->portObj->psta.")";            
-            $result['reason'] = $sms->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ". "INVALID PSTA ($sms->psta)";
             return $result;
         }
         $tfacObj->portObj->npsta = $sms->npsta;
@@ -136,7 +136,7 @@
         if($pathObj->rslt == 'fail') {
             $result['rslt'] = 'fail';
             $result['jeop'] = "SP5:UNABLE TO LOAD PATH";            
-            $result['reason'] = "PROVISIONING CONNECT - " . $pathObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ". $pathObj->reason;
             return $result; 
         }
         $pathObj->resetPath();
@@ -149,7 +149,7 @@
         if ($cktconObj->rslt != SUCCESS) {
             $result['rslt'] = $cktconObj->rslt;
             $result['jeop'] = "SP5:$cktconObj->reason";            
-            $result['reason'] = $cktconObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$cktconObj->reason;
             return $result;
         }
         
@@ -160,7 +160,7 @@
             if ($cktObj->rslt == FAIL) {
                 $ressult['rslt'] = FAIL;
                 $result['jeop'] = "SP5:$cktObj->reason";            
-                $result['reason'] = $cktObj->reason;
+                $result['reason'] = "PROVISIONING DISCONNECT - ".$cktObj->reason;
                 return $result;
             }
         }
@@ -170,7 +170,7 @@
 		if ($ffacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $ffacObj->portObj->rslt;
             $result['jeop'] = "SP5:".$ffacObj->portObj->reason;
-            $result['reason'] = $ffacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$ffacObj->portObj->reason;
 			return $result;
 		}
 
@@ -178,7 +178,7 @@
 		if ($ffacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $ffacObj->portObj->rslt;
             $result['jeop'] = "SP5:".$ffacObj->portObj->reason;
-            $result['reason'] = $ffacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$ffacObj->portObj->reason;
 			return $result;
         }
         
@@ -186,7 +186,7 @@
 		if ($tfacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $tfacObj->portObj->rslt;
             $result['jeop'] = "SP5:".$tfacObj->portObj->reason;
-            $result['reason'] = $tfacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$tfacObj->portObj->reason;
 			return $result;
 		}
 
@@ -194,7 +194,7 @@
 		if ($tfacObj->portObj->rslt != SUCCESS) {
             $result['rslt'] = $tfacObj->portObj->rslt;
             $result['jeop'] = "SP5:".$tfacObj->portObj->reason;
-            $result['reason'] = $tfacObj->portObj->reason;
+            $result['reason'] = "PROVISIONING DISCONNECT - ".$tfacObj->portObj->reason;
 			return $result;
         }
         
