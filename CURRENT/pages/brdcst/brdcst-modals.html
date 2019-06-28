@@ -91,11 +91,11 @@
     $('#brdcst-modal-submit').click(function() {
       let action = $('#brdcst-modal-action').val();
       let id = brdcstId;
-      let msg = $('#brdcst-modal-msgtitle').val();
-      let owner = $('#brdcst-modal-msgowner').val();
-      let ownerId = $('#brdcst-modal-msgowner').val();
-      let sa = $('#brdcst-modal-sa').val();
-      let detail = $('#brdcst-modal-details').val();
+      let msg = $('#brdcst-modal-msgtitle').val().toUpperCase();
+      let owner = $('#brdcst-modal-msgowner').val().toUpperCase();
+      let ownerId = $('#brdcst-modal-msgowner').val().toUpperCase();
+      let sa = $('#brdcst-modal-sa').val().toUpperCase();
+      let detail = $('#brdcst-modal-details').val().toUpperCase();
 
       $.ajax({
         type: "POST",
