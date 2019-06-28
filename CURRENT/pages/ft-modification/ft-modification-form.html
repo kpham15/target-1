@@ -195,8 +195,9 @@ $(document).on("click","#ft_modification_table tbody tr", function(){
 })
 
 
-$("select").on("mousedown",function(){
+$(".ft_modification_form").on("mousedown",function(){
     clearErrors();
+    $("#mt_action_sel").val("").change();
 })
 
 // Clear Button

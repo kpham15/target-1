@@ -169,7 +169,7 @@
       let res = data.rows;
 
       if (data.rslt === 'fail') {
-        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
+        postResponse($("#setup-portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
         portmapModalFacDatatable.clear().draw();
         portmapModalFacDatatable.rows.add(res);
@@ -206,9 +206,9 @@
       let res = data.rows;
 
       if (data.rslt === 'fail') {
-        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
+        postResponse($("#setup-portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
-        postResponse($("#portmap-modal .modal-footer"), data.rslt, data.reason);
+        postResponse($("#setup-portmap-modal .modal-footer"), data.rslt, data.reason);
         
         let page = portmapDatatable.page();
 
