@@ -238,8 +238,10 @@
 		// get date_format
 		$refObj = new REF();
 		$date_format = $refObj->ref['date_format'];
+		$temp_format = $refObj->ref['temp_format'];
 
 		$rows = [];
+		$row['temp_format'] = $temp_format;
 		$row['wcname'] = $wcObj->wcname;
 		$row['wcc'] = $wcObj->wcc;
 		$row['npanxx'] = $wcObj->npanxx;

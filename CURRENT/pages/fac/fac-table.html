@@ -26,7 +26,7 @@
   var facDatatable = $('#fac-table').DataTable({
     dom: "frtip",
     "data": [],
-    "pageLength": 8,
+    "pageLength": 10,
     "columns": [
       {"data":"fac"},
       {"data":"ftyp"},
@@ -76,6 +76,10 @@
     // Click events on table rows
     $(document).on('click', '#fac-table tbody tr', function() {
       let data = facDatatable.row(this).data();
+      
+      if (data == undefined) {
+        return;
+      }
 
       $('#fac-form-id').val(data.id);
       $('#fac-form-facId').val(data.fac);
@@ -90,6 +94,12 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#fac-form-action").val("").change();
+    });
+
+    $("#fac-table_filter input").on('input', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
     });
   });
 </script>

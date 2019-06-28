@@ -4,7 +4,7 @@
     <!-- Row 1 -->
     <div class="row">
       <!-- FAC_ID -->
-      <div class="col-md-7">
+      <div class="col-md-7" style="padding:2px;">
         <div class="form-group">
           <label>FAC_ID</label>
           <input id="fac-form-facId" type="text" class="form-control fac-form-input">
@@ -12,7 +12,7 @@
       </div>
 
       <!-- PSTA -->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>PSTA</label>
           <select id="fac-form-psta" class="form-control fac-form-input">
@@ -30,7 +30,7 @@
     <!-- Row 2 -->
     <div class="row">
       <!-- FAC_TYP -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>FAC_TYP</label>
           <select id="fac-form-ftyp" class="form-control fac-form-input">
@@ -40,7 +40,7 @@
       </div>
 
       <!-- ORT-->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>ORT</label>
           <select id="fac-form-ort" class="form-control fac-form-input">
@@ -50,7 +50,7 @@
       </div>
 
       <!-- SPCFNC-->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>SPCFNC</label>
           <select id="fac-form-spcfnc" class="form-control fac-form-input">
@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>PORT</label>
           <input type="text" id="fac-form-port" class="form-control fac-form-input" disabled>
@@ -70,10 +70,10 @@
     <!-- Row 3 -->
     <div class="row">
       <!-- Action Dropdown -->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="fac-form-action" class="form-control fac-form-input">
+          <select id="fac-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -81,20 +81,23 @@
           </select>
         </div>
       </div>
+      <div class="col-md-9"  style="padding:2px;">
+        <!-- CLEAR BTN -->
+        <button id="fac-form-clear" type="button" class="btn btn-primary" style="margin-top: 25px;">
+          CLEAR
+        </button>
+    
+        <!-- VIEW BUTTON -->
+        <button id="fac-form-view" type="button" class="btn btn-primary" style="margin-top: 25px;">
+          VIEW
+        </button>
+    
+        <!-- FAC ID NUM -->
+        <input type="hidden" id="fac-form-id" class="fac-form-input" style="width:20px;">
+      
+      </div>
     </div>
 
-    <!-- CLEAR BTN -->
-    <button id="fac-form-clear" type="button" class="btn btn-primary">
-      CLEAR
-    </button>
-
-    <!-- VIEW BUTTON -->
-    <button id="fac-form-view" type="button" class="btn btn-primary">
-      VIEW
-    </button>
-
-    <!-- FAC ID NUM -->
-    <input type="hidden" id="fac-form-id" class="fac-form-input" style="width:20px;">
     
   </form>
 </div>
@@ -136,7 +139,6 @@
       else if (value === 'update') {
         if ( !id || id === '') {
           inputError($(this),'Select facility from table.');
-          $("#fac-form-action").val("");
           return;
         }
 
@@ -164,7 +166,6 @@
       else if (value === 'delete') {
         if ( !id || id === '') {
           inputError($(this),'Select facility from table.');
-          $("#fac-form-action").val("");
           return;
         }
 
@@ -196,10 +197,20 @@
     $('#fac-form-clear').click(function() {
       $('.fac-form-input').val('');
       $('#fac-table tbody tr').removeClass('bg-primary');
-
       clearErrors();
+      $("#fac-form-action").val("").change();
     });
 
+    // Clear Errors and Action when form fields is affected by an input
+    $(".fac-form-input").on('input', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
+    });
 
+    // Clear errors and action when buttons are clicked
+    $("#fac-form button").on('click', function() {
+      clearErrors();
+      $("#fac-form-action").val("").change();
+    });
   });
 </script>
