@@ -119,7 +119,7 @@
 <!-- Row 3 -->
 <div class="row">
   <!-- Action Dropdown -->
-  <div class="col-md-3">
+  <div class="col-md-3" style="padding:2px;">
     <div class="form-group">
       <label>ACTION</label>
       <select id="ftOrders-ordForm-action" class="form-control ftOrders-ordForm-input">
@@ -133,17 +133,19 @@
   </div>
 
   <!-- SUBMIT BUTTON -->
-  <button id="ftOrders-ordForm-submit" type="button" class="btn btn-primary" style="margin-top: 25px">
-    SUBMIT
-  </button>
-
-  <!-- CLEAR BUTTON -->
-  <button id="ftOrders-ordForm-clear" type="button" class="btn btn-primary" style="margin-top: 25px">
-    CLEAR
-  </button>
-
-  <!-- ORD ID NUM -->
-  <input type="hidden" id="ftOrders-ordForm-id" class="ftOrders-ordForm-input" style="width:20px;">
+  <div class="col-md-4" style="padding:2px;">
+    <button id="ftOrders-ordForm-submit" type="button" class="btn btn-primary" style="margin-top: 25px">
+      SUBMIT
+    </button>
+  
+    <!-- CLEAR BUTTON -->
+    <button id="ftOrders-ordForm-clear" type="button" class="btn btn-primary" style="margin-top: 25px">
+      CLEAR
+    </button>
+  
+    <!-- ORD ID NUM -->
+    <input type="hidden" id="ftOrders-ordForm-id" class="ftOrders-ordForm-input" style="width:20px;">
+  </div>
 </div>
 
 <script type="text/javascript">
