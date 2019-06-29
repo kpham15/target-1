@@ -469,12 +469,13 @@ $(document).ready(function() {
   });
 
   $(".setup-users-forms-input").on('input', function() {
+    console.log("WTF");
     clearErrors();
     $("#setup-users-forms-action").val("").change();
   });
 
   $("#setup-users-table_filter input").addClass('setup-users-form-input');
-  
+
   $("#setup-users-form button").on('click', function() {
     clearErrors();
     $("#setup-users-forms-action").val("").change();
