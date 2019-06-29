@@ -458,8 +458,10 @@ $(document).ready(function() {
 
   // Side NavBar Click Event
   $('.menu-item[page_id="setup-users-page"]').click(function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
     $('#setup-users-forms-viewuser').trigger('click');
-  })
+  });
 
 });
 
