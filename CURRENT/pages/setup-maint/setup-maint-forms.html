@@ -585,6 +585,8 @@
     // side navbar click event
     $('.menu-item[page_id="setup-maint-page"]').click(function() {
       $('#setup-maint-forms-viewckid').trigger('click');
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
     });
 
     $(".setup-maint-forms-input").on('input', function() {
