@@ -201,6 +201,9 @@
       $("#fac-form-action").val("").change();
     });
 
+    // Add class to search in table
+    $("#fac-table_filter input").addClass("fac-form-input");
+
     // Clear Errors and Action when form fields is affected by an input
     $(".fac-form-input").on('input', function() {
       clearErrors();
@@ -212,5 +215,7 @@
       clearErrors();
       $("#fac-form-action").val("").change();
     });
+
+
   });
 </script>
