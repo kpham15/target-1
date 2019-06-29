@@ -157,7 +157,6 @@
         if(data.hasOwnProperty('rows'))
             res = data.rows;
   
-        $("#svc_ckt_table input").addClass('svc-form');
         svcCktDatatable.clear().draw();
         svcCktDatatable.rows.add(res);
         svcCktDatatable.columns.adjust().draw();
@@ -213,8 +212,6 @@
     }
     
     $(document).ready(function() {
-
-        $("#svc_ckt_table_filter input").addClass('svc-form');
     
         $('#svc_findCkid_btn').click(function(e) {
             e.preventDefault();
