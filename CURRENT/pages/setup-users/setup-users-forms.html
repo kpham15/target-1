@@ -250,8 +250,6 @@ $(document).ready(function() {
 
   // Action Change Event
   $('#setup-users-forms-action').change(function() {
-
-    $('#setup-users-modal-post-response-text').text('');
     $('.setup-users-modal-input').prop('disabled', false);
 
     let tel = "";
@@ -299,41 +297,15 @@ $(document).ready(function() {
   // Clear Button Click Event
   $('#setup-users-forms-clear').click(function() {
     $('.setup-users-forms-input').val('');
-    $('#setup-users-forms-viewuser').trigger('click');
     clearErrors();
     $("#setup-users-forms-action").val("").change();
+
   });
 
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
     clearErrors();
-
-    let userTxt = $('#setup-users-forms-user').val().toUpperCase();
-    let status = $('#setup-users-forms-stat').val().toUpperCase();
-
-    $.ajax({
-      type:     'POST',
-      url:      ipcDispatch,
-      data:     {
-        "api":      "ipcUser",
-        "act":      "findUser",
-        "user":     user.uname,
-        "uname":    userTxt,
-        "stat":     status,
-      },
-      dataType:     'json'
-    }).done(function(data) {
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#setup-users-forms-viewuser'),'No Results Found');
-      }
-
-      setupUsersDatatable.clear().draw();
-      setupUsersDatatable.rows.add(res);
-      setupUsersDatatable.columns.adjust().draw();
-    });
-
+    setupUsersViewUser();
   });
 
   // Click Event View 2
@@ -465,11 +437,10 @@ $(document).ready(function() {
   $('.menu-item[page_id="setup-users-page"]').click(function() {
     clearErrors();
     $("#setup-users-forms-action").val("").change();
-    $('#setup-users-forms-viewuser').trigger('click');
+    setupUsersViewUser();
   });
 
   $(".setup-users-forms-input").on('input', function() {
-    console.log("WTF");
     clearErrors();
     $("#setup-users-forms-action").val("").change();
   });
