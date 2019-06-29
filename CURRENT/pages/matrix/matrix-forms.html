@@ -135,8 +135,9 @@
   });
 
   // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
-  $(".matrix-form-input").on("click", function() {
+  $(".matrix-form-input").on("input", function() {
     clearErrors();
+    $("#matrix-form-action").val("").change();
   });
 
   // ACTION
