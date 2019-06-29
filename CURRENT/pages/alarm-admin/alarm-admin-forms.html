@@ -157,7 +157,9 @@ $(document).ready(function() {
   // Click event for sidebar, loads page first time
 	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
 		queryAlarmAdmin();
-  })
+    clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
+  });
   
   // Change event on Action
   $('#alarm-admin-forms-action').change(function() {
