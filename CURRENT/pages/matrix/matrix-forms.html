@@ -138,13 +138,18 @@
 
     $("#matrix-card-table_filter input").addClass('matrix-form-input');
     $("#matrix-port-table_filter input").addClass('matrix-form-input');
-    
+
     // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
     $(".matrix-form-input").on("input", function() {
       clearErrors();
       $("#matrix-form-action").val("").change();
     });
 
+    $("#matrix-form button").on('click', function() {
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+    });
+    
     // ACTION
     $("#matrix-form-action").change(function() {
       let action          = $(this).val();
