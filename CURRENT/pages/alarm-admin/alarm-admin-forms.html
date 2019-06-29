@@ -150,9 +150,10 @@ $(document).ready(function() {
     $('.alarm-admin-forms-input').val('');
 
     clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
 
     queryAlarmAdmin();
-  })
+  });
 
   // Click event for sidebar, loads page first time
 	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
