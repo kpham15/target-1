@@ -171,6 +171,7 @@
       if (data.rslt === 'fail') {
         postResponse($("#setup-portmap-modal .modal-footer"), data.rslt, data.reason);
       } else {
+        portmapModalFacDatatable.search("").draw();
         portmapModalFacDatatable.clear().draw();
         portmapModalFacDatatable.rows.add(res);
         portmapModalFacDatatable.columns.adjust().draw();
