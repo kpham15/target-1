@@ -9,7 +9,7 @@
         <div class="col-sm-6 " style="padding:2px;">
             <div class="form-group">
                 <label for="batchExc_act_sel">ACTION</label>
-                <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
+                <select id="batchExc_act_sel" class="form-control" style="padding: 2px">
                     <option></option>
                     <option>UPLOAD</option>
                     <option>DELETE</option>
@@ -270,5 +270,6 @@ $(document).ready(function(){
 
 $(".batchExc_field").on('click', function() {
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
 });
 </script>
