@@ -102,7 +102,7 @@
             modalHandler(modal);
           } 
         } else {
-            portmapDataTable.search("").draw();
+            portmapDatatable.search("").draw();
             portmapDatatable.clear().draw();
             portmapDatatable.rows.add(res);
             portmapDatatable.columns.adjust().draw();
@@ -115,6 +115,8 @@
 
 
   $(document).ready(function() {
+
+    $("#portmap-table_filter input").addClass('portmap-form-input');
 
     $(document).on('click', '#portmap-table tbody tr', function() {
       let data = portmapDatatable.row(this).data();
