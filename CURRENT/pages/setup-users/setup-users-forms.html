@@ -141,7 +141,7 @@
       <div class="col-md-5" style="padding: 2px">
         <div class="form-group">
           <label>ACTION:</label>
-          <select id="setup-users-forms-action" class="form-control setup-users-forms-input" style="padding: 2px">
+          <select id="setup-users-forms-action" class="form-control" style="padding: 2px">
             <option value=""></option>
             <option value="ADD">ADD</option>
             <option value="UPDATE">UPDATE</option>
@@ -179,7 +179,6 @@ function setupUserUpdate(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   else {
@@ -210,7 +209,6 @@ function setupUserOther(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   else {
@@ -239,7 +237,6 @@ function setupUserOther(obj) {
 function setupUserUploadImg(obj) {
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   setup_users_uploadUserImage_clearForm();
@@ -304,7 +301,7 @@ $(document).ready(function() {
     $('.setup-users-forms-input').val('');
     $('#setup-users-forms-viewuser').trigger('click');
     clearErrors();
-  })
+  });
 
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
