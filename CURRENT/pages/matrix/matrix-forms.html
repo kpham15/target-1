@@ -114,57 +114,64 @@
     matrixFirstLoad = false;
   });
 
-  // VIEW BUTTON
-  $('#matrix-form-view').click(function(e) {
-    e.preventDefault();
+  $(document).ready(function() {
 
-    queryMatrixCards();
+    // VIEW BUTTON
+    $('#matrix-form-view').click(function(e) {
+      e.preventDefault();
 
-    clearErrors();
-  });
+      queryMatrixCards();
 
-  // CLEAR BUTTON
-  $("#matrix-form-clear").click(function() {
-    $(".matrix-form-input").val("").change();
-    $("#matrix-form-node").val("1").change();
-    $('#matrix-card-table tbody tr').removeClass('bg-primary');
-    $("#matrix-port").css('display', 'none');
-    clearErrors();
-    $("#matrix-form-action").val("").change();
-    queryMatrixCards();
-  });
+      clearErrors();
+    });
 
-  // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
-  $(".matrix-form-input").on("input", function() {
-    clearErrors();
-    $("#matrix-form-action").val("").change();
-  });
+    // CLEAR BUTTON
+    $("#matrix-form-clear").click(function() {
+      $(".matrix-form-input").val("").change();
+      $("#matrix-form-node").val("1").change();
+      $('#matrix-card-table tbody tr').removeClass('bg-primary');
+      $("#matrix-port").css('display', 'none');
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+      queryMatrixCards();
+    });
 
-  // ACTION
-  $("#matrix-form-action").change(function() {
-    let action          = $(this).val();
-    let mxcId           = $("#matrix-form-id").val();
-    let mxcModalInputs  = $(".matrix-modal-input");
-    let mxcModal        = $("#matrix-modal");
+    $("#matrix-card-table_filter input").addClass('matrix-form-input');
+    $("#matrix-port-table_filter input").addClass('matrix-form-input');
+    
+    // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
+    $(".matrix-form-input").on("input", function() {
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+    });
 
-    if (action != "") {
-      mxcModalInputs.val("").change();
-      if (mxcId != "") {
-        populateMxcModal();
-        mxcModal.modal("show");
-      } else {
-        if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
+    // ACTION
+    $("#matrix-form-action").change(function() {
+      let action          = $(this).val();
+      let mxcId           = $("#matrix-form-id").val();
+      let mxcModalInputs  = $(".matrix-modal-input");
+      let mxcModal        = $("#matrix-modal");
+
+      if (action != "") {
+        mxcModalInputs.val("").change();
+        if (mxcId != "") {
           populateMxcModal();
-          $(".matrix-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
           mxcModal.modal("show");
         } else {
-          inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
-          $(this).val("");
+          if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
+            populateMxcModal();
+            $(".matrix-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
+            mxcModal.modal("show");
+          } else {
+            inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
+          }
         }
       }
-    }
-  });
+    });
 
+
+
+  });
   function populateMxcModal() {
     $("#matrix-modal-node").val($("#matrix-form-node").val());
     $("#matrix-modal-shelf").val($("#matrix-form-shelf").val());
