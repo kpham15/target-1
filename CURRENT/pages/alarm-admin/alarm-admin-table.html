@@ -1,5 +1,5 @@
 <!-- Table -->
-<div class="col-md-12">
+<div class="col-md-12"  style="padding:2px;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF ALARMS:</h3>
@@ -85,6 +85,7 @@
       alarmAdminDatatable.clear().draw();
       alarmAdminDatatable.rows.add(res);
       alarmAdminDatatable.columns.adjust().draw();
+      alarmAdminDatatable.search('').draw();
     })
   }
   
@@ -92,6 +93,10 @@
     // click events on table rows
     $(document).on('click', '#alarm-admin-table tbody tr', function() {
       let data = alarmAdminDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
 
       $('#alarm-admin-forms-almid').val(data.almid);
       $('#alarm-admin-forms-source').val(data.src);
