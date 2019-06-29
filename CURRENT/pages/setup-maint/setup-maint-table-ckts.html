@@ -116,7 +116,7 @@
 
   // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
-    dom: "rtip",
+    dom: "frtip",
     "data": [],
     "pageLength": 3,
     "columns":    [
@@ -160,6 +160,7 @@
         setupMaintTableCkts.clear().draw();
         setupMaintTableCkts.rows.add(res);
         setupMaintTableCkts.columns.adjust().draw();
+        setupMaintTableCkts.search('').draw();
       }
     })
   }
