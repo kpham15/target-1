@@ -111,7 +111,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="pathAdmin-form-action" class="form-control pathAdmin-form-input">
+          <select id="pathAdmin-form-action" class="form-control">
             <option value=""></option>
             <option>SET_DEFECTIVE_PATH</option>
             <option>REPLACE_DEFECTIVE_PATH</option>
@@ -149,6 +149,9 @@ $("#pathAdmin-form-clear").on('click', function() {
 });
 
 $(".menu-item[page_id='path-admin-page']").click(function() {
+  clearErrors();
+  $("#pathAdmin-form-action").val("").change();
+  
   // POPULATE NODE SELECTION BOX
   var html = [];
   for (i = 0; i < wcInfo.nodes; i++) {
