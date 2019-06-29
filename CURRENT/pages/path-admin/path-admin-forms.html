@@ -261,7 +261,10 @@ $('#pathAdmin-tn-check').iCheck({
 $('#pathAdmin-tn-check').on('ifToggled', function() {
   $('.pathAdmin-form-ckid-num').toggle();
 });
-
+$("#pathAdmin-tn-check").on('ifChanged', function() {
+  clearErrors();
+  $("#pathAdmin-form-action").val("").change();
+});
 
 
 
