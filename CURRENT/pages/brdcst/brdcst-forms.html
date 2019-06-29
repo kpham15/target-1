@@ -83,6 +83,11 @@
 var brdcstId = '';
 
 $(document).ready(function(obj) {
+  $(".menu-item[page_id='brdcst-page']").click(function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+  });
+
   $("#brdcst-table_filter input").addClass('brdcst-form-input');
 
   $(".brdcst-form-input").on('input', function() {
