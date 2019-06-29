@@ -94,6 +94,11 @@ $(document).ready(function(obj) {
     $("#brdcst-form-action").val("").change();
   });
 
+  $("#brdcst-modal").on('shown.bs.modal', function() {
+    $("#brdcst-modal select").css('-webkit-appearance', 'menulist');
+    $("#brdcst-modal select:disabled").css('-webkit-appearance', 'none');
+  });
+
   function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
