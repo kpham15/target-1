@@ -178,6 +178,7 @@ $(document).ready(function(obj) {
 
   $('#brdcst-modal').on('hidden.bs.modal', function (e) {
     $('.brdcst-modal-field').prop('disabled', true).val('');
+    $("#brdcst-form-action").val("").change();
   });
 
   $('#brdcst-form-clear').click(function() {
