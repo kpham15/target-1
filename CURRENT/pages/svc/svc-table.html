@@ -160,6 +160,7 @@
         svcCktDatatable.clear().draw();
         svcCktDatatable.rows.add(res);
         svcCktDatatable.columns.adjust().draw();
+        svcCktDatatable.search('').draw();
       });
     }
   
@@ -228,9 +229,8 @@
             $("#svc_cktconArea").hide();
             $("#svc_ordArea").show();
             queryOrd();
-        })
+        });
 
-    
         // Click events on table rows
         $(document).on('click', '#svc_ckt_table tbody tr', function() {
             clearErrors();
@@ -268,6 +268,7 @@
     
         });
         
+
         $(document).on('click', '#svc_ord_table tbody tr', function() {
             clearErrors();
             $("#svc_act_sel").val("").change();
