@@ -89,6 +89,11 @@ $(document).ready(function(obj) {
     $("#brdcst-form-action").val("").change();
   });
 
+  $("#brdcst-form button").on('click', function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+  });
+
   function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
