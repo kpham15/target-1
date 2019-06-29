@@ -455,6 +455,10 @@ $(document).ready(function() {
   $('#setup-users-tn-cbx').on('ifToggled', function(){
     $('.users-phonenum').toggle();
   });
+  $("#setup-users-tn-cbx").on('ifChanged', function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+  });
 
   // Side NavBar Click Event
   $('.menu-item[page_id="setup-users-page"]').click(function() {
