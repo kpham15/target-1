@@ -276,20 +276,22 @@ $(document).ready(function() {
 
     clearErrors();
 
-    if (obj.action === 'ADD') {
-      setupUserAdd(obj);
-    }
-    else if (obj.action === 'UPDATE') {
-      setupUserUpdate(obj);
-    }
-    else if (obj.action === 'UPLOAD_IMAGE') {
-      setupUserUploadImg(obj);
-    }
-    else if (obj.action === 'REMOVE_USER_IMAGE') {
-      setupUserOther(obj);
-    }
-    else {
-      setupUserOther(obj);
+    if (obj.action != "") {
+      if (obj.action === 'ADD') {
+        setupUserAdd(obj);
+      }
+      else if (obj.action === 'UPDATE') {
+        setupUserUpdate(obj);
+      }
+      else if (obj.action === 'UPLOAD_IMAGE') {
+        setupUserUploadImg(obj);
+      }
+      else if (obj.action === 'REMOVE_USER_IMAGE') {
+        setupUserOther(obj);
+      }
+      else {
+        setupUserOther(obj);
+      }
     }
     
   });
