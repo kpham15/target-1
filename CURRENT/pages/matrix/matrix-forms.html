@@ -73,7 +73,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label>ACTION</label>
-        <select id="matrix-form-action" class="form-control matrix-form-input">
+        <select id="matrix-form-action" class="form-control">
           <option></option>
           <option action="lck">LCK</option>
           <option action="unlck">UN-LCK</option>
@@ -105,6 +105,8 @@
   // LOAD TABLE WHEN PAGE FIRST LOADS
   var matrixFirstLoad = true;
   $(".menu-item[page_id='matrix-page']").click(function() {
+    clearErrors();
+    $("#matrix-form-action").val("").change();
     if (matrixFirstLoad != true) {
       return;
     }
