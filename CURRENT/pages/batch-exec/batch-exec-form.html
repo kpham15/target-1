@@ -201,6 +201,7 @@ $("#batchExc_execute_btn").click(function(){
 });
 
 $("#batchExc_act_sel").change(function() {
+    clearErrors();
     if ($("#batchExc_act_sel").val() !="") {
         if ($("#batchExc_act_sel").val()  ==  "UPLOAD") {
             batchExcModal_clearForm();
