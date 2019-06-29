@@ -31,7 +31,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="brdcst-form-action" class="form-control brdcst-form-input">
+          <select id="brdcst-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -84,8 +84,9 @@ var brdcstId = '';
 
 $(document).ready(function(obj) {
 
-  $(".brdcst-form-input").on('click', function() {
+  $(".brdcst-form-input").on('input', function() {
     clearErrors();
+    $("#brdcst-form-action").val("").change();
   });
 
   function brdcstActionAdd() {
