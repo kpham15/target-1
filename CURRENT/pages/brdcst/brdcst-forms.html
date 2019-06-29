@@ -99,6 +99,8 @@ $(document).ready(function(obj) {
     $("#brdcst-modal select:disabled").css('-webkit-appearance', 'none');
   });
 
+
+
   function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
 
@@ -183,6 +185,7 @@ $(document).ready(function(obj) {
     brdcstId = '';
 
     clearErrors();
+    $("#brdcst-form-action").val("").change();
     brdcstDatatable.clear().draw();
   });
 });
