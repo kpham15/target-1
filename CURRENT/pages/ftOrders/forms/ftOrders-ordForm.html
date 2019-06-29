@@ -269,7 +269,9 @@
 
   // CLEAR BUTTON
   $("#ftOrders-ordForm-clear").on('click', function() {
-
+    clearErrors();
+    $("#ftOrders-ordForm-action").val("").change();
+    
     // clears forms and tables then redraws ord table
     queryFtOrdersOrd();
     $(".ftOrders-ordForm-input").val("").change();
