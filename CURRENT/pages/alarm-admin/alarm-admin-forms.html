@@ -189,9 +189,12 @@ $(document).ready(function() {
     $('#alarm-admin-forms-refresh').trigger('click');
   });
 
+  $("#alarm-admin-table_filter input").addClass('alarm-admin-forms-input');
+  
   $(".alarm-admin-forms-input").on('input', function() {
     clearErrors();
     $("#alarm-admin-forms-action").val("").change();
   });
+
 });
 </script>
