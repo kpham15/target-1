@@ -591,5 +591,12 @@
       clearErrors();
       $("#setup-maint-forms-action").val("").change();
     });
-  })
+
+    $("#setup-maint-forms-cbx").on("ifChanged", function() {
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
+    
+    
+  });
 </script>
