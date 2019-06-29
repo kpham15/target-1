@@ -139,7 +139,7 @@
 
     // TN Checkbox Handler
     $('#portmap-tn-check').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue'
+      checkboxClass: 'icheckbox_minimal-blue',
     });
     $('#portmap-tn-check').on('ifToggled', function() {
       $('.portmap-form-ckid-num').toggle();
@@ -215,12 +215,10 @@
       $("#portmap-form-action").val("").change();
     });
 
-    $("#portmap-tn-check").change(function() {
+    $("#portmap-tn-check").on("ifChanged", function() {
       clearErrors();
       $("#portmap-form-action").val("").change();
     });
-
-
   });
 
 
