@@ -139,133 +139,136 @@
 
 <script type="text/javascript">
 
-// CLEAR BUTTON
-$("#pathAdmin-form-clear").on('click', function() {
-  $(".pathAdmin-form-input").val("").change();
-  $("#pathAdmin-form-node").val("1").change();
-  $("#pathAdmin-form-slot").val("1").change();
-  pathAdminDatatable.clear().draw();
-  clearErrors();
-});
+$(document).ready(function() {
 
-$(".menu-item[page_id='path-admin-page']").click(function() {
-  clearErrors();
-  $("#pathAdmin-form-action").val("").change();
+  // CLEAR BUTTON
+  $("#pathAdmin-form-clear").on('click', function() {
+    $(".pathAdmin-form-input").val("").change();
+    $("#pathAdmin-form-node").val("1").change();
+    $("#pathAdmin-form-slot").val("1").change();
+    pathAdminDatatable.clear().draw();
+    clearErrors();
+  });
 
-  // POPULATE NODE SELECTION BOX
-  var html = [];
-  for (i = 0; i < wcInfo.nodes; i++) {
-    let node = i + 1;
-    html.push(`<option>${node}</option>`);
-  }
-  $("#pathAdmin-form-node").html(html.join(''));
-});
+  $(".menu-item[page_id='path-admin-page']").click(function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
 
-// NODE SLOT VIEW BUTTON
-$("#pathAdmin-form-view_node_slot").on("click", function() {
-  clearErrors();
+    // POPULATE NODE SELECTION BOX
+    var html = [];
+    for (i = 0; i < wcInfo.nodes; i++) {
+      let node = i + 1;
+      html.push(`<option>${node}</option>`);
+    }
+    $("#pathAdmin-form-node").html(html.join(''));
+  });
 
-  let node = $("#pathAdmin-form-node");
-  let slot = $("#pathAdmin-form-slot");
+  // NODE SLOT VIEW BUTTON
+  $("#pathAdmin-form-view_node_slot").on("click", function() {
+    clearErrors();
 
-  if (node.val() == "") {
-    inputError(node, 'Select a node');
-  } else if (slot.val() == "") {
-    inputError(slot, 'Select a slot');
-  } else {
-    pathAdminQueryByNodeSlot();
-  }
-});
+    let node = $("#pathAdmin-form-node");
+    let slot = $("#pathAdmin-form-slot");
 
-// CKID VIEW BUTTON
-$("#pathAdmin-form-view_ckid").on("click", function() {
-  clearErrors();
-  let ckid = $("#pathAdmin-form-ckid");
-  if ($("#pathAdmin-tn-check").is(":checked")) {
-    ckid = $("#pathAdmin-form-ckid-tn");
-  }
+    if (node.val() == "") {
+      inputError(node, 'Select a node');
+    } else if (slot.val() == "") {
+      inputError(slot, 'Select a slot');
+    } else {
+      pathAdminQueryByNodeSlot();
+    }
+  });
 
-  if (ckid.val() == "") {
-    inputError(ckid, 'Missing CKID');
-  } else {
-    pathAdminQueryByCkid();
-  }
-});
+  // CKID VIEW BUTTON
+  $("#pathAdmin-form-view_ckid").on("click", function() {
+    clearErrors();
+    let ckid = $("#pathAdmin-form-ckid");
+    if ($("#pathAdmin-tn-check").is(":checked")) {
+      ckid = $("#pathAdmin-form-ckid-tn");
+    }
 
-// FAC_ID VIEW BUTTON
-$("#pathAdmin-form-view_fac_id").on("click", function() {
-  clearErrors();
+    if (ckid.val() == "") {
+      inputError(ckid, 'Missing CKID');
+    } else {
+      pathAdminQueryByCkid();
+    }
+  });
 
-  let fac_id = $("#pathAdmin-form-fac_id");
+  // FAC_ID VIEW BUTTON
+  $("#pathAdmin-form-view_fac_id").on("click", function() {
+    clearErrors();
 
-  if (fac_id.val() == "") {
-    inputError(fac_id, 'Missing FAC_ID');
-  } else {
-    pathAdminQueryByFacId();
-  }
-});
+    let fac_id = $("#pathAdmin-form-fac_id");
 
-// PORT VIEW BUTTON
-$("#pathAdmin-form-view_port").on("click", function() {
-  clearErrors();
+    if (fac_id.val() == "") {
+      inputError(fac_id, 'Missing FAC_ID');
+    } else {
+      pathAdminQueryByFacId();
+    }
+  });
 
-  let port = $("#pathAdmin-form-port");
+  // PORT VIEW BUTTON
+  $("#pathAdmin-form-view_port").on("click", function() {
+    clearErrors();
 
-  if (port.val() == "") {
-    inputError(port, 'Missing PORT');
-  } else {
-    pathAdminQueryByPort();
-  }
-});
+    let port = $("#pathAdmin-form-port");
 
-// SUBMIT BUTTON
-$("#pathAdmin-form-submit").on('click', function() {
-  clearErrors();
+    if (port.val() == "") {
+      inputError(port, 'Missing PORT');
+    } else {
+      pathAdminQueryByPort();
+    }
+  });
 
-  let action = $("#pathAdmin-form-action");
+  // SUBMIT BUTTON
+  $("#pathAdmin-form-submit").on('click', function() {
+    clearErrors();
 
-  // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
-  if (action.val() == "SET_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
+    let action = $("#pathAdmin-form-action");
 
-  } else if (action.val() == "REPLACE_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
+    // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
+    if (action.val() == "SET_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
 
-  } else if (action.val() == "RELEASE_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
+    } else if (action.val() == "REPLACE_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
 
-  } else {
-    inputError(action, 'Select an Action');
-  }
-  
-});
+    } else if (action.val() == "RELEASE_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
 
-$("#pathAdmin-table_filter input").addClass("pathAdmin-form-input");
+    } else {
+      inputError(action, 'Select an Action');
+    }
+    
+  });
 
-// CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
-$(".pathAdmin-form-input").on('input', function() {
-  clearErrors();
-  $("#pathAdmin-form-action").val("").change();
-});
+  $("#pathAdmin-table_filter input").addClass("pathAdmin-form-input");
 
-$("#pathAdmin-form button").on('click', function() {
-  clearErrors();
-  $("#pathAdmin-form-action").val("").change();
-});
+  // CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
+  $(".pathAdmin-form-input").on('input', function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
 
-// Initialize inputmask
-$('#pathAdmin-form-ckid-tn').inputmask();
+  $("#pathAdmin-form button").on('click', function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
 
-// TN Checkbox Handler
-$('#pathAdmin-tn-check').iCheck({
-  checkboxClass: 'icheckbox_minimal-blue'
-});
-$('#pathAdmin-tn-check').on('ifToggled', function() {
-  $('.pathAdmin-form-ckid-num').toggle();
-});
-$("#pathAdmin-tn-check").on('ifChanged', function() {
-  clearErrors();
-  $("#pathAdmin-form-action").val("").change();
+  // Initialize inputmask
+  $('#pathAdmin-form-ckid-tn').inputmask();
+
+  // TN Checkbox Handler
+  $('#pathAdmin-tn-check').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#pathAdmin-tn-check').on('ifToggled', function() {
+    $('.pathAdmin-form-ckid-num').toggle();
+  });
+  $("#pathAdmin-tn-check").on('ifChanged', function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
 });
 
 
