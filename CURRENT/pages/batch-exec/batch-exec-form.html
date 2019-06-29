@@ -47,6 +47,7 @@ function batchExec_start() {
 }
 
 function batchExec_clearForm(){
+    clearErrors();
     $("#batchExc_act_sel").val("");
     $("#batchExc_file_sel").val("");
     // batchExc.tbl.body.empty();
@@ -264,6 +265,7 @@ $("#batchExc_download_btn").click(function(){
 
 $(document).ready(function(){
     $(".menu-item[page_id='batch-exec-page']").click(function() {
+        
         batchExec_start();
     });
 });
