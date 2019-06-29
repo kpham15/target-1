@@ -205,6 +205,9 @@
       }
     });
 
+
+    $("#portmap-table_filter input").addClass('portmap-form-input');
+    
     $(".portmap-form-input").on('input', function() {
       clearErrors();
       $("#portmap-form-action").val("").change();
@@ -219,6 +222,7 @@
       clearErrors();
       $("#portmap-form-action").val("").change();
     });
+
   });
 
 

@@ -116,8 +116,6 @@
 
   $(document).ready(function() {
 
-    $("#portmap-table_filter input").addClass('portmap-form-input');
-
     $(document).on('click', '#portmap-table tbody tr', function() {
       let data = portmapDatatable.row(this).data();
     if (data == undefined) {
