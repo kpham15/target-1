@@ -597,6 +597,10 @@
       $("#setup-maint-forms-action").val("").change();
     });
     
+    $("#setup-maint-forms button").on('click', function() {
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
 
   });
 </script>
