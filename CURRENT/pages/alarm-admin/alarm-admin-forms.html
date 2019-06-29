@@ -82,7 +82,6 @@ function validateAck(obj) {
   if (obj.almid !== "") {
     if (obj.ack !== "") {
       inputError($('#alarm-admin-forms-ack'),'Alarm already Acknowledged');
-      $('#alarm-admin-forms-action').val('');
       return;
     }
     else {
@@ -97,7 +96,6 @@ function validateAck(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
@@ -121,7 +119,6 @@ function validateUnack(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
@@ -138,7 +135,6 @@ function validateClr(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
