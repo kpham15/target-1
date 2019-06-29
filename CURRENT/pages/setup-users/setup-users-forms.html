@@ -468,6 +468,10 @@ $(document).ready(function() {
     $('#setup-users-forms-viewuser').trigger('click');
   });
 
+  $(".setup-users-forms-input").on('input', function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+  });
 });
 
 </script>
