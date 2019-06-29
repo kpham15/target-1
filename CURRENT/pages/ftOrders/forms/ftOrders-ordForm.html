@@ -328,7 +328,7 @@
   });
 
   // CLEAR ERRORS WHEN INPUT IS CLICKED
-  $(".ftOrders-cktForm-input", ".ftOrders-facForm-input",  ".ftOrders-ordForm-input").on('click', function() {
+  $(".ftOrders-cktForm-input, .ftOrders-facForm-input, .ftOrders-ordForm-input").on('click', function() {
     clearErrors();
     $("#ftOrders-ordForm-action").val("").change();
   });
