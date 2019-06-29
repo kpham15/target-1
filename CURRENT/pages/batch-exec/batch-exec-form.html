@@ -197,6 +197,7 @@ function batchExec_recurExecute(i) {
     
 $("#batchExc_execute_btn").click(function(){
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
     batchExec_executeCommand();
 });
 
