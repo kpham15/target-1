@@ -58,6 +58,8 @@
       $('#setup-users-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
 
-    })
+      clearErrors();
+      $("#setup-users-forms-action").val("").change();
+    });
   });
 </script>
