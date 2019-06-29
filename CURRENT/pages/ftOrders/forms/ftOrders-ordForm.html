@@ -118,7 +118,7 @@
   <div class="col-md-3">
     <div class="form-group">
       <label>ACTION</label>
-      <select id="ftOrders-ordForm-action" class="form-control ftOrders-ordForm-input">
+      <select id="ftOrders-ordForm-action" class="form-control">
         <option value=""></option>
         <option>FETCH_FT_ORDERS</option>
         <option>PROCESS_ORDER</option>
@@ -330,6 +330,7 @@
   // CLEAR ERRORS WHEN INPUT IS CLICKED
   $(".ftOrders-cktForm-input .ftOrders-facForm-input .ftOrders-ordForm-input").on('click', function() {
     clearErrors();
+    $("#ftOrders-ordForm-action").val("").change();
   });
 
 </script>
