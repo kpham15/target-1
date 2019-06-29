@@ -77,17 +77,28 @@
         </div>
 
         <!-- Third row-->
-        <div class="row">
-            <div class="col-sm-5 " style="padding: 2px ;">
+        <div class="row" id="svc-form-date-div">
+
+            <div class="col-sm-5" style="padding:2px;">
                 <div class="form-group">
-                    <label for="svc_dd_date">DD</label>
-                    <input type="date" class="form-control svc-form" id="svc_dd_date">
+                    <label>DD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svc_dd_date">
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-5 " style="padding: 2px ;">
+            <div class="col-sm-5" style="padding:2px;">
                 <div class="form-group">
-                    <label for="svc_fdd_date">FDD</label>
-                    <input type="date" class="form-control svc-form" id="svc_fdd_date">
+                    <label>FDD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svc_fdd_date">
+                    </div>
                 </div>
             </div>
         </div>  
@@ -263,6 +274,15 @@
     }
 
     $(document).ready(function(){
+
+        $("#svc_dd_date").datepicker({
+            orientation: "bottom"
+        });
+
+        $("#svc_fdd_date").datepicker({
+            orientation: "bottom"
+        });
+
         $(".svc-ckid-tn").inputmask();
 
         $(".menu-item[page_id='svc-page']").click(function() {
@@ -317,6 +337,7 @@
                 return;
             } else {
                 if(act == "CONNECT") {
+                    $('.svcModal-form').prop('disabled', false);
                     $("#svcModal_newConForm").show();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
@@ -327,6 +348,7 @@
                         return;
                     }
                     if(act == "UPDATE_CKT") {
+                        $('.svcModal-form').prop('disabled', false);
                         $("#svcModal_newConForm").hide();
                         $("#svcModal_discConForm").hide();
                         $("#svcModal_changeConForm").hide();
@@ -336,6 +358,7 @@
                             inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                             return;
                         }
+                        $('.svcModal-form').prop('disabled', true);
                         $("#svcModal_newConForm").hide();
                         $("#svcModal_discConForm").show();
                         $("#svcModal_changeConForm").hide();
@@ -346,6 +369,7 @@
                             inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
                             return;
                         }
+                        $('.svcModal-form').prop('disabled', false);
                         $("#svcModal_newConForm").hide();
                         $("#svcModal_discConForm").hide();
                         $("#svcModal_changeConForm").show();
@@ -384,6 +408,11 @@
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
         });
+
+        $('#svc-form-date-div').on('change', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
+        })
     
         $(document).on('input', '.svc-form', function() {
             clearErrors();
