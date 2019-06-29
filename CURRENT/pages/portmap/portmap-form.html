@@ -55,7 +55,7 @@
       <div class="col-md-9" style="padding: 2px">
         <div class="form-group">
           <label>CKID TN: </label>
-          <input id="portmap-tn-check" type="checkbox" checked>
+          <input id="portmap-tn-check" type="checkbox" class="portmap-form-input" checked>
           <input id="portmap-form-ckid" type="text" class="form-control portmap-form-input portmap-form-ckid-num" style="display:none;">
           <input id="portmap-form-ckid-tn" type="text" class="form-control portmap-form-input portmap-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
@@ -68,7 +68,7 @@
       <div class="col-md-4" style="padding: 2px">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="portmap-form-action" class="form-control portmap-form-input">
+          <select id="portmap-form-action" class="form-control">
             <option value=""></option>
             <option value="MAP">MAP</option>
             <option value="UNMAP">UNMAP</option>
@@ -139,7 +139,7 @@
 
     // TN Checkbox Handler
     $('#portmap-tn-check').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue'
+      checkboxClass: 'icheckbox_minimal-blue',
     });
     $('#portmap-tn-check').on('ifToggled', function() {
       $('.portmap-form-ckid-num').toggle();
@@ -205,10 +205,24 @@
       }
     });
 
-    $(".portmap-form-input").on('click', function() {
-      // clearErrors();
-      // $("#portmap-form-action").val("").change();
+
+    $("#portmap-table_filter input").addClass('portmap-form-input');
+    
+    $(".portmap-form-input").on('input', function() {
+      clearErrors();
+      $("#portmap-form-action").val("").change();
     });
+
+    $("#portmap-forms button").on('click', function() {
+      clearErrors();
+      $("#portmap-form-action").val("").change();
+    });
+
+    $("#portmap-tn-check").on("ifChanged", function() {
+      clearErrors();
+      $("#portmap-form-action").val("").change();
+    });
+
   });
 
 
