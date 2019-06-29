@@ -232,6 +232,8 @@ $(document).ready(function() {
   $('#setup-users-modal').on('hidden.bs.modal', function(e) {
     $('.setup-users-forms-input').val('');
     $('.setup-users-modal-input').val('');
-  })
+    $("#setup-users-forms-action").val("").change();
+    clearErrors();
+  });
 });
 </script>
