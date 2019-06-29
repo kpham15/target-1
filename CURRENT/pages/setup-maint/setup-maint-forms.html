@@ -587,8 +587,9 @@
       $('#setup-maint-forms-viewckid').trigger('click');
     });
 
-    $(".setup-maint-form-input").on('click', function() {
+    $(".setup-maint-form-input").on('input', function() {
       clearErrors();
+      $("#setup-maint-forms-action").val("").change();
     });
   })
 </script>
