@@ -151,7 +151,7 @@ $("#pathAdmin-form-clear").on('click', function() {
 $(".menu-item[page_id='path-admin-page']").click(function() {
   clearErrors();
   $("#pathAdmin-form-action").val("").change();
-  
+
   // POPULATE NODE SELECTION BOX
   var html = [];
   for (i = 0; i < wcInfo.nodes; i++) {
@@ -241,7 +241,12 @@ $("#pathAdmin-form-submit").on('click', function() {
 });
 
 // CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
-$(".pathAdmin-form-input:not(#pathAdmin-form-action)").on('click', function() {
+$(".pathAdmin-form-input").on('input', function() {
+  clearErrors();
+  $("#pathAdmin-form-action").val("").change();
+});
+
+$("#pathAdmin-form button").on('click', function() {
   clearErrors();
   $("#pathAdmin-form-action").val("").change();
 });
@@ -256,6 +261,7 @@ $('#pathAdmin-tn-check').iCheck({
 $('#pathAdmin-tn-check').on('ifToggled', function() {
   $('.pathAdmin-form-ckid-num').toggle();
 });
+
 
 
 
