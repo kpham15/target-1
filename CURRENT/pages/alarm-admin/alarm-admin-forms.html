@@ -41,7 +41,7 @@
       <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>ACTION:</label>
-          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+          <select id="alarm-admin-forms-action" class="form-control">
               <option value=""></option>
               <option value="ACK">ACK</option>
               <option value="UN-ACK">UN-ACK</option>
@@ -188,6 +188,6 @@ $(document).ready(function() {
 
   $('#alarm-admin-modal').on('hidden.bs.modal', function(e) {
     $('#alarm-admin-forms-refresh').trigger('click');
-  })
+  });
 });
 </script>
