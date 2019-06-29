@@ -188,13 +188,12 @@ $(document).ready(function(obj) {
   });
 
   $('#brdcst-form-clear').click(function() {
-    console.log("HI");
     $('.brdcst-form-input').val('');
     brdcstId = '';
 
     clearErrors();
     $("#brdcst-form-action").val("").change();
-    brdcstDatatable.clear().draw();
+    queryBrdcst();
   });
 });
 </script>
