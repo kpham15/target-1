@@ -135,6 +135,8 @@
   
     // side bar menu click event
     $('.menu-item[page_id="node-operation-page"').click(function() {
+      clearErrors();
+      $("#node-operation-forms-action").val("").change();
       queryNodeOperation();
     });
 
