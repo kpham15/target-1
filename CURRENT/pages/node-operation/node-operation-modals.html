@@ -78,6 +78,7 @@ $(document).ready(function() {
   
   // Submit Button Click Event
   $('#node-operation-modal-submit').click(function() {
+    clearErrors();
     let action = $('#node-operation-modal-action').val();
     let node = $('#node-operation-modal-node').val();
     let device = $('#node-operation-modal-device').val();
