@@ -442,12 +442,12 @@ $(document).ready(function() {
     setupUsersViewUser();
   });
 
+  $("#setup-users-table_filter input").addClass('setup-users-forms-input');
+
   $(".setup-users-forms-input").on('input', function() {
     clearErrors();
     $("#setup-users-forms-action").val("").change();
   });
-
-  $("#setup-users-table_filter input").addClass('setup-users-forms-input');
 
   $("#setup-users-forms button").on('click', function() {
     clearErrors();
