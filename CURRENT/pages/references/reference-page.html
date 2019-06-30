@@ -178,6 +178,9 @@ $(document).ready(function() {
 
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
+		clearErrors();
+		$('#reference-page-post-response-text').text('');
+		$('#reference-page-action').val('');
 		refStartup();
 	});
 
