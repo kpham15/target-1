@@ -94,10 +94,11 @@ $(document).ready(function() {
 	// Change any option to clear the red/green text
 	$('#ref-select-div').on('change', function() {
 		$('#reference-page-post-response-text').text('');
-	})
+	});
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
+		clearErrors();
 
 		let refObj = {};
 
@@ -154,7 +155,6 @@ $(document).ready(function() {
 				
 				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
 				
-				$('#reference-page-action').val('');
 			}
 		});
 
@@ -174,12 +174,12 @@ $(document).ready(function() {
 	// Click event for action selection
 	$('#reference-page-action').change(function() {
 		clearErrors();
-	})
+	});
 
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
 		refStartup();
-	})
+	});
 
 
 });
