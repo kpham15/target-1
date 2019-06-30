@@ -152,6 +152,8 @@
     
     // ACTION
     $("#matrix-form-action").change(function() {
+      clearErrors();
+
       let action          = $(this).val();
       let mxcId           = $("#matrix-form-id").val();
       let mxcModalInputs  = $(".matrix-modal-input");
