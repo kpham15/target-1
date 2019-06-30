@@ -69,7 +69,12 @@ $(document).ready(function() {
   // Modal Close Event Listener
   $('#node-operation-modal').on('hidden.bs.modal', function(e) {
     $('#node-operation-forms-clear').trigger('click');
-  })
+  });
+
+  $("#node-operation-modal").on('shown.bs.modal', function() {
+    $("#node-operation-modal select").css('-webkit-appearance', 'menulist');
+    $("#node-operation-modal select:disabled").css('-webkit-appearance', 'none');
+  });
   
   // Submit Button Click Event
   $('#node-operation-modal-submit').click(function() {
