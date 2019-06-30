@@ -65,6 +65,7 @@
         inputError($("#node-operation-forms-action"), data.rslt + " - " + data.reason);
       } 
       else {
+        nodeOperationDatatable.search("").draw();
         nodeOperationDatatable.clear().draw();
         nodeOperationDatatable.rows.add(res);
         nodeOperationDatatable.columns.adjust().draw();
@@ -127,10 +128,10 @@
 
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
-      queryNodeOperation();
       clearErrors();
       $("#node-operation-forms-action").val("").change();
       $('.node-operation-forms-input').val('');
+      queryNodeOperation();
     });
   
     // side bar menu click event
