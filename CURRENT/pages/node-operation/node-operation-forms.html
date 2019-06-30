@@ -62,7 +62,7 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        inputError($("#node-operations-forms-action"), data.rslt + " - " + data.reason);
+        inputError($("#node-operation-forms-action"), data.rslt + " - " + data.reason);
       } 
       else {
         nodeOperationDatatable.clear().draw();
@@ -140,8 +140,9 @@
       queryNodeOperation();
     });
 
-    $(".node-operations-forms-input").click(function() {
+    $(".node-operation-forms-input").on('input', function() {
       clearErrors();
+      $("#node-operation-forms-action").val("").change();
     });
   });
 </script>
