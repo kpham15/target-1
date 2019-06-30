@@ -57,6 +57,7 @@
         inputError($('#setup-users-forms-viewuser'),'No Results Found');
       }
 
+      setupUsersDatatable.search("").draw();
       setupUsersDatatable.clear().draw();
       setupUsersDatatable.rows.add(res);
       setupUsersDatatable.columns.adjust().draw();
