@@ -140,11 +140,13 @@
       queryNodeOperation();
     });
 
+    $("#node-operation-table_filter input").addClass('node-operation-forms-input');
+    
     $(".node-operation-forms-input").on('input', function() {
       clearErrors();
       $("#node-operation-forms-action").val("").change();
     });
 
-    
+
   });
 </script>
