@@ -76,7 +76,6 @@
   function validateNodeOpeNode(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -91,7 +90,6 @@
   function validateNodeOpeStop(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -125,14 +123,15 @@
         validateNodeOpeStop(obj);
       }
 
-    })
+    });
 
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
+      clearErrors();
+      $("#node-operation-forms-action").val("").change();
       $('.node-operation-forms-input').val('');
-
       queryNodeOperation();
-    })
+    });
   
     // side bar menu click event
     $('.menu-item[page_id="node-operation-page"').click(function() {
