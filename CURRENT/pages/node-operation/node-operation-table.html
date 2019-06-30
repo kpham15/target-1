@@ -54,6 +54,9 @@
       // give selected class
       $('#node-operation-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
-    })
+
+      clearErrors();
+      $("#node-operation-forms-aciton").val("").change();
+    });
   });
 </script>
