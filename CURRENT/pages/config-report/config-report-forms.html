@@ -80,11 +80,17 @@
     var data, filename, link;
     var table = $(".configReport-table[style='display: block'] table").attr('id');
     if (table == "configReport-portmap-table") {
-      dataTable = configReportPortmapDatatable;
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportPortmapDatatable.data().toArray()
+      });
     } else if (table == "configReport-wirecenter-table") {
-      dataTable = configReportWcDatatable;
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportWcDatatable.data().toArray()
+      });
     } else if (table == "configReport-facility-table") {
-      dataTable = configreportFacDatatable;
+      var csv = convertArrayOfObjectsToCSV({
+        data: configreportFacDatatable.data().toArray()
+      });
     }
     var csv = convertArrayOfObjectsToCSV({
       data: dataTable.data().toArray()
