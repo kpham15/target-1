@@ -94,6 +94,8 @@ $(document).ready(function() {
 	// Change any option to clear the red/green text
 	$('#ref-select-div').on('change', function() {
 		$('#reference-page-post-response-text').text('');
+		clearErrors();
+		$("#reference-page-action").val("").change();
 	});
 
 	// Click event for submit button
@@ -183,10 +185,7 @@ $(document).ready(function() {
 		$('#reference-page-action').val('');
 		refStartup();
 	});
-	$(".ref-select-box").on('input', function() {
-		clearErrors();
-		$("#reference-page-action").val("").change();
-	});
+
 });
 </script>
 
