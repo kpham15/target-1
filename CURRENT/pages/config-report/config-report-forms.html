@@ -149,7 +149,8 @@
           configReportQueryFaclog(configReportStartDate, configReportEndDate);
         }
       } else if (report.val() === "CREATE REPORT") {
-        downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
+        console.log('createreportclick');
+        // downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
       }
     });
 
