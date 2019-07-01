@@ -199,14 +199,17 @@
     $("#configReport-portmap-table_filter input").addClass('configReport-form-input');
     $("#configReport-wirecenter-table_filter input").addClass('configReport-form-input');
     $("#configReport-facility-table_filter input").addClass('configReport-form-input');
-    
+
     // CLEAR ERRORS WHEN CLICK ON FIELD
     $(".configReport-form-input").on('input', function() {
       clearErrors();
       $("#configReport-form-report").val("VIEW REPORT").change();
     });
 
-
+    $("#configReport-form-daterange").on('change', function() {
+      clearErrors();
+      $("#configReport-form-report").val("VIEW REPORT").change();
+    });
     // END OF DOCUMENT READY
   });
 
