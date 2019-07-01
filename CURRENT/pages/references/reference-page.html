@@ -92,9 +92,9 @@ function displayRefs(data) {
 $(document).ready(function() {
 
 	// Change any option to clear the red/green text
-	$('#ref-select-div').on('change', function() {
+	$('#ref-select-div:not("#reference-page-action")').on('change', function() {
 		clearErrors();
-		$('#reference-page-post-response-text').text('');
+		$("#reference-page-action").val("").change();
 	});
 
 	// Click event for submit button
