@@ -41,7 +41,7 @@
       <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>ACTION:</label>
-          <select id="alarm-admin-forms-action" class="form-control alarm-admin-forms-input">
+          <select id="alarm-admin-forms-action" class="form-control">
               <option value=""></option>
               <option value="ACK">ACK</option>
               <option value="UN-ACK">UN-ACK</option>
@@ -82,7 +82,6 @@ function validateAck(obj) {
   if (obj.almid !== "") {
     if (obj.ack !== "") {
       inputError($('#alarm-admin-forms-ack'),'Alarm already Acknowledged');
-      $('#alarm-admin-forms-action').val('');
       return;
     }
     else {
@@ -97,7 +96,6 @@ function validateAck(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
@@ -121,7 +119,6 @@ function validateUnack(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
@@ -138,7 +135,6 @@ function validateClr(obj) {
   }
   else {
     inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
-    $('#alarm-admin-forms-action').val('');
     return;
   }
 }
@@ -150,14 +146,17 @@ $(document).ready(function() {
     $('.alarm-admin-forms-input').val('');
 
     clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
 
     queryAlarmAdmin();
-  })
+  });
 
   // Click event for sidebar, loads page first time
 	$('.menu-item[page_id="alarm-admin-page"]').click(function() {
 		queryAlarmAdmin();
-  })
+    clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
+  });
   
   // Change event on Action
   $('#alarm-admin-forms-action').change(function() {
@@ -189,5 +188,20 @@ $(document).ready(function() {
   $('#alarm-admin-modal').on('hidden.bs.modal', function(e) {
     $('#alarm-admin-forms-refresh').trigger('click');
   });
+<<<<<<< HEAD
+=======
+
+  $("#alarm-admin-table_filter input").addClass('alarm-admin-forms-input');
+
+  $(".alarm-admin-forms-input").on('input', function() {
+    clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
+  });
+
+  $("#alarm-admin-forms-left buttons").on('click', function() {
+    clearErrors();
+    $("#alarm-admin-forms-action").val("").change();
+  });
+>>>>>>> ipcv2
 });
 </script>
