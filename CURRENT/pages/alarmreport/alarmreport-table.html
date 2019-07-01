@@ -72,6 +72,7 @@
       dataType: 'json'
     }).done(function(data) {
 			if(data.rslt == 'fail') {
+				clearErrors();
         inputError($("#alarmreport-forms-report"),data.reason);
       }
 			else {
