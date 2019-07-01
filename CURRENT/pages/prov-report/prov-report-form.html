@@ -80,6 +80,8 @@ $(document).ready(function(){
     // UPON LOAD PAGE FIRST TIME
     var provReportFirstLoad = true;
     $(".menu-item[page_id='prov-report-page']").click(async function() {
+      clearErrors();
+      $("#provReport_report_sel").val("VIEW REPORT").change();
       if (provReportFirstLoad != true) {
         return;
       }
