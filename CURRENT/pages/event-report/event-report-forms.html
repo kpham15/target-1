@@ -220,6 +220,11 @@ $(document).ready(function() {
     $("#eventReport-form-report").val("VIEW REPORT");
   });
 
+  $("#eventReport-form-daterange").on('click', function() {
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT");
+  });
+
   // CHANGE FUNCTION FIELD BASED ON EVENT
   $("#eventReport-form-event").on("change", function() {
 
