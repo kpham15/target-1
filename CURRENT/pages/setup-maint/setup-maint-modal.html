@@ -928,8 +928,13 @@
       $('#setup-maint-forms-action').val('');
     });
 
-    $("#setup-maint-modal-input").on('click', function() {
+    $(".setup-maint-modal-input").on('click', function() {
       clearErrors();
+    });
+
+    $("#setup-maint-modal").on('shown.bs.modal', function() {
+      $("#setup-maint-modal select").css('-webkit-appearance', 'menulist');
+      $("#setup-maint-modal select:disabled").css('-webkit-appearance', 'none');
     });
   });
 </script>
