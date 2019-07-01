@@ -405,6 +405,7 @@ $("#wcModal_close_btn").click(function () {
 
 $("#wcModal").on("hidden.bs.modal", function(){
     $("#wc_act_sel").val("");
+    clearErrors();
 });
 
 $(".wcModal_form").on('click', function() {
