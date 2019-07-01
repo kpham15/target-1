@@ -92,9 +92,9 @@
         data: configreportFacDatatable.data().toArray()
       });
     }
-    var csv = convertArrayOfObjectsToCSV({
-      data: dataTable.data().toArray()
-    });
+    // var csv = convertArrayOfObjectsToCSV({
+    //   data: dataTable.data().toArray()
+    // });
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
       return;
