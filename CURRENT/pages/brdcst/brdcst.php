@@ -24,6 +24,19 @@
 </div>
 
 <script type="text/javascript">
+
+  var brdcstFirstLoad = true;
+
+  $(".menu-item[page_id='brdcst-page']").click(function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+    if (brdcstFirstLoad != true) {
+      return;
+    }
+
+    loadOwners();
+    brdcstFirstLoad = false;
+  });
   function loadOwners() {
     $.ajax({
       type: 'POST',
