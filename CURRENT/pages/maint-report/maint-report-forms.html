@@ -121,6 +121,9 @@
     // UPON LOAD PAGE FIRST TIME
     var maintReportFirstLoad = true;
     $(".menu-item[page_id='maint-report-page']").click(async function() {
+			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
+			
       if (maintReportFirstLoad != true) {
         return;
       }
