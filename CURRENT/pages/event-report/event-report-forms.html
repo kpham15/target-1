@@ -203,9 +203,9 @@ $(document).ready(function() {
 
     let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+    eventReportDatatable.clear().draw();
     $('.eventReport-form-input').val('').change();
     $('#eventReport-form-report').val("VIEW REPORT");
-    eventReportDatatable.clear().draw();
 
     $('#eventReport-daterange').val('').daterangepicker("update");
     eventReportStartDate = currDate;
@@ -218,7 +218,7 @@ $(document).ready(function() {
   });
 
   $("#eventReport-table_filter input").addClass('eventReport-form-input');
-  
+
   // CLEAR ERRORS WHEN CLICK ON FIELD
   $(".eventReport-form-input").on('input', function() {
     clearErrors();
