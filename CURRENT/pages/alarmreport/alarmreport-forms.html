@@ -171,9 +171,9 @@
 
 			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+			alarmreportDatatable.clear().draw();
 			$('.alarmreport-forms-input').val('');
 			$("#alarmreport-forms-report").val("VIEW REPORT");
-			alarmreportDatatable.clear().draw();
 
 			$('#alarmreport-daterange').val('').daterangepicker("update");
 			alarmreportStartDate = currDate;
@@ -184,6 +184,8 @@
 			
 			clearErrors();
 		})
+
+		$("#alarmreport-table_filter input").addClass('alarmreport-forms-input');
 
 		// Clears errors when any input is clicked
 		$(".alarmreport-forms-input").on("input", function() {
