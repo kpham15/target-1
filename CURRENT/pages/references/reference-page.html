@@ -90,6 +90,7 @@ function displayRefs(data) {
 }
 
 $(document).ready(function() {
+	refStartup();
 
 	var refFirstLoad = true;
 	// Click event for sidebar, loads page first time
@@ -99,7 +100,6 @@ $(document).ready(function() {
 		if (refFirstLoad != true) {
 			return;
 		}
-		refStartup();
 		$(document).ready(function() {
 			// Change any option to clear the red/green text
 			$('#ref-select-box').on('change', function() {
