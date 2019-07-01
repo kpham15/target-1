@@ -91,11 +91,24 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
-	// Change any option to clear the red/green text
-	$('#ref-select-box').not("#reference-page-action").on('change', function() {
+	var refFirstLoad = true;
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
 		clearErrors();
 		$("#reference-page-action").val("").change();
+		if (refFirstLoad != true) {
+			return;
+		}
+		refStartup();
+		// Change any option to clear the red/green text
+		$('#ref-select-box').not("#reference-page-action").on('change', function() {
+			clearErrors();
+			$("#reference-page-action").val("").change();
+		});
+		refFirstLoad = false;
 	});
+
+
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
@@ -173,12 +186,6 @@ $(document).ready(function() {
 		clearErrors();
 	});
 
-	// Click event for sidebar, loads page first time
-	$('.menu-item[page_id="references-page"]').click(function() {
-		refStartup();
-		clearErrors();
-		$("#reference-page-action").val("").change();
-	});
 
 
 });
