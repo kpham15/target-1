@@ -78,8 +78,9 @@
   // DOWNLOAD REPORT
   function downloadConfigReports(args) {
     var data, filename, link;
+    var table = $(".configReport-table[style='display: block'] table").attr('id');
     var csv = convertArrayOfObjectsToCSV({
-      data: $(".configReport-table[style='display: block'] table").data().toArray()
+      data: $(table).data().toArray()
     });
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
