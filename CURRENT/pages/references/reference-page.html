@@ -100,10 +100,13 @@ $(document).ready(function() {
 			return;
 		}
 		refStartup();
-		// Change any option to clear the red/green text
-		$('#ref-select-box').on('change', function() {
-			clearErrors();
-			$("#reference-page-action").val("").change();
+		$(document).ready(function() {
+			// Change any option to clear the red/green text
+			$('#ref-select-box').on('change', function() {
+				clearErrors();
+				$("#reference-page-action").val("").change();
+			});
+
 		});
 		refFirstLoad = false;
 	});
