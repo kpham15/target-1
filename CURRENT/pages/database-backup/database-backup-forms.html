@@ -14,7 +14,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">FILE NAME:</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control database-backup-forms-input" id="database-backup-forms-filename" disabled="">
+        <input type="text" class="form-control database-backup-forms-input lowercase" id="database-backup-forms-filename" disabled="">
       </div>
     </div>
 
@@ -38,7 +38,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">ACTION:</label>
         <div class="col-sm-8">
-        <select id="database-backup-forms-action" class="form-control database-backup-forms-input">
+        <select id="database-backup-forms-action" class="form-control">
           <option value=""></option>
           <option value="MANUAL">BACKUP MANUALLY</option>
           <option value="DELETE">DELETE BACKUP FILE</option>
@@ -78,7 +78,6 @@
         // check if fileName is blank
         if (fileName === "") {
           inputError($('#database-backup-forms-action'),'Select a file from the list');
-          $('#database-backup-forms-action').val('');
           return;
         }
 
@@ -94,6 +93,17 @@
     // click event on sidebar menu
     $('.menu-item[page_id="database-backup-page"]').click(function() {
       queryDatabaseBackup();
-    })
-  })
+      clearErrors();
+      $("#database-backup-forms-action").val("").change();
+      $(".database-backup-forms-input").val("");
+    });
+
+    $("#database-backup-table_filter input").addClass('database-backup-forms-input');
+  
+    $(".database-backup-forms-input").on('input', function() {
+      clearErrors();
+      $("#database-backup-forms-action").val("").change();
+    });
+
+  });
 </script>
