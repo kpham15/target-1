@@ -221,6 +221,12 @@ $(document).ready(function() {
     }
   });
 
+  // ACTION SELECT CHANGE
+  $('#pathAdmin-form-action').change(function() {
+    clearErrors();
+  })
+
+
   // SUBMIT BUTTON
   $("#pathAdmin-form-submit").on('click', function() {
     clearErrors();
