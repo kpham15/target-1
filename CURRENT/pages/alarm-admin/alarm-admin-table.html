@@ -81,12 +81,29 @@
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason
+      }
 
-      alarmAdminDatatable.clear().draw();
-      alarmAdminDatatable.rows.add(res);
-      alarmAdminDatatable.columns.adjust().draw();
-      alarmAdminDatatable.search('').draw();
-    })
+      if (data.rslt === 'fail') {
+        modal.type = "danger";
+        modalHandler(modal);
+      } else {
+        if (res.length === 0) {
+          if (action !== 'query') {
+            modal.type = "warning";
+            modal.body = "No record found";
+            modalHandler(modal);
+          } 
+        } else {
+            alarmAdminDatatable.search("").draw();
+            alarmAdminDatatable.clear().draw();
+            alarmAdminDatatable.rows.add(res);
+            alarmAdminDatatable.columns.adjust().draw();
+        }
+      }
+    });
   }
   
   $(document).ready(function() {
@@ -110,6 +127,7 @@
 
       // Clear Errors when click on table row
       clearErrors();
+      $("#alarm-admin-forms-action").val("").change();
     })
   });
 </script>
