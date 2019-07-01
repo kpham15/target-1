@@ -120,6 +120,8 @@ $(document).ready(function(){
         }
     });
 
+    $("#provReport-tbl_filter input").addClass('provReport-form');
+    
     $('#provReport-form').on("input", function() {
         clearErrors();
         $("#provReport_report_sel").val("VIEW REPORT").change();
