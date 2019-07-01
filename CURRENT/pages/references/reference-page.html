@@ -101,7 +101,7 @@ $(document).ready(function() {
 		}
 		refStartup();
 		// Change any option to clear the red/green text
-		$('#ref-select-box').not("#reference-page-action").on('change', function() {
+		$('#ref-select-box').on('change', function() {
 			clearErrors();
 			$("#reference-page-action").val("").change();
 		});
