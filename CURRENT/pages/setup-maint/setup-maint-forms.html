@@ -8,8 +8,8 @@
         <div class="form-group">
           <label>CKID:</label>
           <label>TN:</label>
-          <input id="setup-maint-forms-cbx" type="checkbox" checked />
-          <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none; text-transform: uppercase;"/>
+          <input id="setup-maint-forms-cbx" type="checkbox" class="setup-maint-forms-input" checked />
+          <input id="setup-maint-forms-ckid" type="text" class="form-control maint-ckid setup-maint-forms-input" style="display:none; "/>
           <input id="setup-maint-forms-ckid-tn" type="text" class="form-control maint-ckid setup-maint-forms-input" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <!-- View Button -->
       <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
-          <button id="setup-maint-forms-viewckid" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+          <button id="setup-maint-forms-viewckid" type="button" class="btn btn-primary" style="margin-top:25px">
             View
           </button>
         </div>
@@ -42,7 +42,7 @@
       <div class="col-md-6" style="padding:2px;">
         <div class="form-group">
           <label>TKTNO</label>
-          <input id="setup-maint-forms-tktno" type="text" class="form-control setup-maint-forms-input" style="text-transform: uppercase;">
+          <input id="setup-maint-forms-tktno" type="text" class="form-control setup-maint-forms-input">
         </div>
       </div>
       <!-- MLO -->
@@ -62,7 +62,7 @@
       <!-- View Button -->
       <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
-          <button id="setup-maint-forms-viewtkt" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
+          <button id="setup-maint-forms-viewtkt" type="button" class="btn btn-primary" style="margin-top:25px;">
             View
           </button>
         </div>
@@ -71,7 +71,7 @@
     <!-- Row 3 -->
     <div class="row">
       <!-- CONTYP -->
-      <div class="col-md-2" style="padding:2px;">
+      <div class="col-md-2" style="padding:2px; margin-top:2px;">
         <div class="form-group">
           <label>CONTYP</label>
           <input id="setup-maint-forms-contyp" class="form-control setup-maint-forms-input maint-row4" disabled="" />
@@ -91,7 +91,7 @@
             <label>PORT(X):</label>
           </div>
         </div>
-        <div class="col-md-8" style="padding:2px;">
+        <div class="col-md-8" style="padding:2px; margin-top:-3px">
           <div class="form-group">
             <input id="setup-maint-forms-fport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
@@ -106,12 +106,12 @@
           </div>
         </div>
         <!-- PORT(Y) -->
-        <div class="col-md-4" style="padding:2px;">
+        <div class="col-md-4" style="padding:2px; margin-top:-3px">
           <div class="form-group">
             <label>PORT(Y):</label>
           </div>
         </div>
-        <div class="col-md-8" style="padding:2px;">
+        <div class="col-md-8" style="padding:2px; margin-top:-3px">
           <div class="form-group">
             <input id="setup-maint-forms-tport" type="text" class="form-control setup-maint-forms-input maint-row4" disabled="" />
           </div>
@@ -123,7 +123,7 @@
       <div class="col-md-4" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="setup-maint-forms-action" class="form-control setup-maint-forms-input">
+          <select id="setup-maint-forms-action" class="form-control">
             <option value=""></option>
             <option value="MTC_DISCON">MTC_DISCON</option>
             <option value="MTC_CONN">MTC_CONN</option>
@@ -136,7 +136,7 @@
       </div>
       <div class="col-md-2" style="padding:2px;">
         <div class="form group">
-          <button id="setup-maint-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
+          <button id="setup-maint-forms-clear" type="button" class="btn btn-primary" style="margin-top:25px">
             Clear
           </button>
         </div>
@@ -184,12 +184,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -228,12 +226,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -259,12 +255,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -290,12 +284,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -331,12 +323,10 @@
   function validateMtcTest(obj) {
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -384,12 +374,10 @@
 
     if (maintTableCktsId == "" || maintTableCktsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CKID from the LIST OF CKID(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     } 
     else if (maintTableConsId == "" || maintTableConsId == 0) {
       inputError($('#setup-maint-forms-action'),'Please select a CONNECTION from the LIST OF CONNECTION(S)');
-      $('#setup-maint-forms-action').val('');
       return;
     }
     else {
@@ -415,6 +403,8 @@
   }
 
   $(document).ready(function() {
+
+    $("#setup-maint-table-ckts_filter input").addClass('setup-maint-forms-input');
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
@@ -524,6 +514,7 @@
           setupMaintTableCkts.clear().draw();
           setupMaintTableCkts.rows.add(res);
           setupMaintTableCkts.columns.adjust().draw();
+          setupMaintTableCkts.search('').draw();
         }
 
         
@@ -584,10 +575,24 @@
     // side navbar click event
     $('.menu-item[page_id="setup-maint-page"]').click(function() {
       $('#setup-maint-forms-viewckid').trigger('click');
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
     });
 
-    $(".setup-maint-form-input").on('click', function() {
+    $(".setup-maint-forms-input").on('input', function() {
       clearErrors();
+      $("#setup-maint-forms-action").val("").change();
     });
-  })
+
+    $("#setup-maint-forms-cbx").on("ifChanged", function() {
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
+    
+    $("#setup-maint-forms button").on('click', function() {
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+    });
+
+  });
 </script>

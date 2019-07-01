@@ -1,5 +1,5 @@
 <!-- Table -->
-<div class="col-md-12">
+<div class="col-md-12"  style="padding:2px;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF ALARMS:</h3>
@@ -80,24 +80,40 @@
       },
       dataType:   'json'
     }).done(function(data) {
-      if(data.rslt == 'fail') {
-        clearErrors();
-        inputError($("#alarm-admin-forms-action"),data.reason);
+      let res = data.rows;
+      let modal = {
+        title: data.rslt,
+        body: data.reason
       }
-      else {
-        let res = data.rows;
-        alarmAdminDatatable.clear().draw();
-        alarmAdminDatatable.rows.add(res);
-        alarmAdminDatatable.columns.adjust().draw();
+
+      if (data.rslt === 'fail') {
+        modal.type = "danger";
+        modalHandler(modal);
+      } else {
+        if (res.length === 0) {
+          if (action !== 'query') {
+            modal.type = "warning";
+            modal.body = "No record found";
+            modalHandler(modal);
+          } 
+        } else {
+            alarmAdminDatatable.search("").draw();
+            alarmAdminDatatable.clear().draw();
+            alarmAdminDatatable.rows.add(res);
+            alarmAdminDatatable.columns.adjust().draw();
+        }
       }
-      
-    })
+    });
   }
   
   $(document).ready(function() {
     // click events on table rows
     $(document).on('click', '#alarm-admin-table tbody tr', function() {
       let data = alarmAdminDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
 
       $('#alarm-admin-forms-almid').val(data.almid);
       $('#alarm-admin-forms-source').val(data.src);
@@ -111,6 +127,7 @@
 
       // Clear Errors when click on table row
       clearErrors();
+      $("#alarm-admin-forms-action").val("").change();
     })
   });
 </script>

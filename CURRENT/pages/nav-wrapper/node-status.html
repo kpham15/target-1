@@ -17,6 +17,12 @@
   }
 
   function updateNodeBox(node) {
+
+    if (wcInfo.temp_format == 'F') {
+      node.node_temp = parseInt(node.node_temp);
+      node.node_temp = Math.round((node.node_temp * (9/5)) + 32) + 'F';
+    }
+
     $('[node_id="'+node.node+'"] .node-box-stat').text(node.node_stat);
     $('[node_id="'+node.node+'"] .node-box-temp-volt').text(node.node_temp + ' | ' + node.node_volt);
     $('[node_id="'+node.node+'"] .node-box-rack').text(node.node_rack);

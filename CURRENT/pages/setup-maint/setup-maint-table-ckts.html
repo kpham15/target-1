@@ -116,7 +116,7 @@
 
   // Initialize Datatable for Ckts
   var setupMaintTableCkts = $('#setup-maint-table-ckts').DataTable({
-    dom: "rtip",
+    dom: "frtip",
     "data": [],
     "pageLength": 3,
     "columns":    [
@@ -157,9 +157,11 @@
         $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        setupMaintTableCkts.search("").draw();
         setupMaintTableCkts.clear().draw();
         setupMaintTableCkts.rows.add(res);
         setupMaintTableCkts.columns.adjust().draw();
+        setupMaintTableCkts.search('').draw();
       }
     })
   }
@@ -182,6 +184,7 @@
         $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
       }
       else {
+        setupMaintTableCons.search("").draw();
         setupMaintTableCons.clear().draw();
         setupMaintTableCons.rows.add(res);
         setupMaintTableCons.columns.adjust().draw();
@@ -194,6 +197,9 @@
 
       $('#setup-maint-forms-action').prop('disabled',true);
       let data = setupMaintTableTkts.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       $('#setup-maint-forms-ckid').val(data.ckid);
       $('#setup-maint-forms-ckid-tn').val(data.ckid);
@@ -211,6 +217,9 @@
       // give selected class
       $('#setup-maint-table-tkts tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
       
     })
 
@@ -219,6 +228,9 @@
 
       $('#setup-maint-forms-action').prop('disabled',false);
       let data = setupMaintTableCons.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       maintTableConsId = data.idx;
 
@@ -232,7 +244,10 @@
       $('#setup-maint-table-cons tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
 
-    })
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
+
+    });
     
     // Click Event on Ckts Table
     $(document).on('click', '#setup-maint-table-ckts tbody tr', function() {
@@ -241,6 +256,9 @@
       maintTableConsId = "";
 
       let data = setupMaintTableCkts.row(this).data();
+      if (data == undefined) {
+        return;
+      }
 
       maintTableCktsId = data.id;
       
@@ -257,6 +275,9 @@
       // give selected class
       $('#setup-maint-table-ckts tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
+
+      clearErrors();
+      $("#setup-maint-forms-action").val("").change();
 
       $.ajax({
         type:       'POST',
@@ -279,7 +300,7 @@
           setupMaintTableCons.rows.add(res);
           setupMaintTableCons.columns.adjust().draw();
         }
-      })
-    })
+      });
+    });
   });
 </script>

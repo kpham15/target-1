@@ -212,7 +212,7 @@
           color = 'bg-green';
           break;
         case "MTCD":
-          color = 'bg-major';
+          color = 'bg-orange';
           break;
         case "MAINT":
           color = 'bg-major';
@@ -447,7 +447,7 @@
   $(document).ready(function() {
 
     // Click event Port Box -> MT_DISCONNECT
-    $(document).on('click', '.mt-disconnect', function() {
+    $(document).on('click', '.mt-disconnect:not(.disabled)', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
@@ -459,7 +459,7 @@
     });
 
     // Click event Port Box Menu -> RESTORE_MTCD
-    $(document).on('click', '.restore-mtcd', function() {
+    $(document).on('click', '.restore-mtcd:not(.disabled)', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
@@ -471,7 +471,7 @@
     });
 
     // Click even Port Box Menu -> MT_RESTORE
-    $(document).on('click', '.mt-restore', function() {
+    $(document).on('click', '.mt-restore:not(.disabled)', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
       clearErrors();
       $('#setup-maint-modal-post-response-text').text('');
@@ -483,7 +483,7 @@
     });
 
     // Click even Port Box Menu -> MT_TEST
-    $(document).on('click', '.mt-test', function() {
+    $(document).on('click', '.mt-test:not(.disabled)', function() {
       let ckid = $(this).closest('.port-box').find('span.port-ckid').text();
 
       // clear modal
@@ -611,7 +611,7 @@
 
       if (stat.includes('bg-green')) {
         mtDisconnect = '';
-      } else if (stat.includes('bg-minor')) {
+      } else if (stat.includes('bg-orange')) {
         mtRestore = '';
         mtTest = '';
       } else if (stat.includes('bg-major')) {

@@ -211,7 +211,7 @@
         $("#wcModal_gateway_txt").   val(wcModal_tblRows[0].gateway);
         $("#wcModal_netmask_txt").   val(wcModal_tblRows[0].netmask);
         $("#wcModal_iport_txt").     val(wcModal_tblRows[0].iport);
-        $("#wcModal_rslt").val("");
+     
     }
     
     
@@ -289,7 +289,7 @@
             else {
                 if (data.rows.length === 0) {
                     if (action != "query") {
-                        postResponse($('#wcModal .modal-footer'), data.rslt, "No Record Found in Database!");
+                        postResponse($('#wcModal .modal-footer'), data.rslt, "NO RECORD FOUND IN DATABASE!");
                         return;
                     }
                 }

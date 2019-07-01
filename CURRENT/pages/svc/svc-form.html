@@ -1,11 +1,11 @@
 <div class='col-md-4'>
-    <form class='svc-form'>
+    <form>
         <!-- First row -->
         <div class='row'>
-            <div class="col-sm-6 " style="padding:2px;">
+            <div class="col-sm-6" style="padding:2px;">
                 <div class="form-group">
                     <label for="svc_ckid_txt">CKID</label>
-                    <label for="svc_tn_cbx">TN:</label>
+                    <label for="svc_tn_cbx" class="svc-form">TN:</label>
                     <input type="checkbox" id="svc_tn_cbx" style="margin-top:2px" checked>
                     <input style="display:none" type="text" class="form-control svc-form svc-ckid-txt">
                     <input id="svc_ckid" type="text" class="form-control svc-form svc-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
@@ -35,7 +35,7 @@
         
             
             <div class="col-sm-2 " style="padding: 2px ;">
-                <button id="svc_findCkid_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+                <button id="svc_findCkid_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary svc-form">View</button>
             </div> 
         </div>
 
@@ -72,22 +72,33 @@
             <input type="hidden" class="form-control svc-form" id="svc_date_date" readonly>
             
             <div class="col-sm-2 " style="padding: 2px ;">
-                <button id="svc_findOrd_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary">View</button>
+                <button id="svc_findOrd_btn" style="text-align:right; margin-top:25px;" class="btn btn-primary svc-form">View</button>
             </div> 
         </div>
 
         <!-- Third row-->
-        <div class="row">
-            <div class="col-sm-5 " style="padding: 2px ;">
+        <div class="row" id="svc-form-date-div">
+
+            <div class="col-sm-5" style="padding:2px;">
                 <div class="form-group">
-                    <label for="svc_dd_date">DD</label>
-                    <input type="date" class="form-control svc-form" id="svc_dd_date">
+                    <label>DD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svc_dd_date">
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-5 " style="padding: 2px ;">
+            <div class="col-sm-5" style="padding:2px;">
                 <div class="form-group">
-                    <label for="svc_fdd_date">FDD</label>
-                    <input type="date" class="form-control svc-form" id="svc_fdd_date">
+                    <label>FDD:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right svc-form datepicker" id="svc_fdd_date">
+                    </div>
                 </div>
             </div>
         </div>  
@@ -158,7 +169,7 @@
             <div class="col-sm-3 " style="padding: 2px ;"> 
                 <div class="form-group">
                     <label for="svc_act_sel">ACTION</label>    
-                    <select class="form-control svc-form" id="svc_act_sel" style="padding: 2px" >
+                    <select class="form-control" id="svc_act_sel" style="padding: 2px" >
                         <option></option>
                         <option>UPDATE_CKT</option>
                         <option>CONNECT</option>
@@ -169,7 +180,7 @@
             </div>
             
             <div class="col-sm-8 " style="padding: 2px ;">
-                <button id="svc_clear_btn" type="button" class="btn btn-primary" style="margin-top:25px;">Clear</button>
+                <button id="svc_clear_btn" type="button" class="btn btn-primary svc-form" style="margin-top:25px;">Clear</button>
                 <!-- 3 input fields to be hidden after testing -->
                 <input class="svc-form" id="svc_cktId_num" type="hidden" style="width:50px">
                 <input class="svc-form" id="svc_cktconId_num" type="hidden" style="width:50px">
@@ -195,8 +206,8 @@
             {"data":"port"},
         ],
         "order": [[ 0, "desc" ]]
-    })
-
+    });
+    
     function clearSearchArea(){
         $(".svc-facSearch-form").val("");
         svcFacSearchDatatable.clear().draw();
@@ -251,6 +262,8 @@
         $("#svc_cls_sel").val("RES");
         $("#svc_adsr_sel").val("N");
         $("#svc_mlo_sel").val("N");
+        clearErrors();
+        $("#svc_act_sel").val("");
         svcQueryCkid();
         svcOrdDatatable.clear().draw();
         svcCktconDatatable.clear().draw();
@@ -261,19 +274,28 @@
     }
 
     $(document).ready(function(){
+
+        $("#svc_dd_date").datepicker({
+            orientation: "bottom"
+        });
+
+        $("#svc_fdd_date").datepicker({
+            orientation: "bottom"
+        });
+
         $(".svc-ckid-tn").inputmask();
 
         $(".menu-item[page_id='svc-page']").click(function() {
-            resetSvcPage()
+            resetSvcPage();
         });
 
         $("#svc_clear_btn").click(function(e){
-            clearErrors();
-            resetSvcPage();  
-        })
+            resetSvcPage();
+        });
 
         $("#svc_ffacSearch_btn").click(function(e){
             clearErrors();
+            $("#svc_act_sel").val("");
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
             if(ftyp == "X") {
@@ -288,6 +310,7 @@
         })
 
         $("#svc_tfacSearch_btn").click(function(e){
+            $("#svc_act_sel").val("");
             clearErrors();
             let ftyp = $("#svc_facSearch").attr("ftyp");
             svcFacSearchDatatable.clear().draw();
@@ -310,58 +333,56 @@
             let idx = $("#svc_cktconIdx_num").val();
             
             clearSvcModal();
-
-            if(act == "CONNECT") {
-                $("#svcModal_newConForm").show();
-                $("#svcModal_discConForm").hide();
-                $("#svcModal_changeConForm").hide();
-            }
-            else {
-                if(cktId == "" || cktId == 0) {
-                    inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
-                    $("#svc_act_sel").val("");
-                    return;
-                }
-                if(act == "UPDATE_CKT") {
-                    $("#svcModal_newConForm").hide();
+            if (act == "") {
+                return;
+            } else {
+                if(act == "CONNECT") {
+                    $('.svcModal-form').prop('disabled', false);
+                    $("#svcModal_newConForm").show();
                     $("#svcModal_discConForm").hide();
                     $("#svcModal_changeConForm").hide();
-                }
-                else if(act == "DISCONNECT") {
-                    if(idx == "" || idx == 0) {
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        $("#svc_act_sel").val("");
-                        return;
-                    }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").show();
-                    $("#svcModal_changeConForm").hide();
-
-                }
-                else if(act == "CHANGE") {
-                    if(idx == "" || idx == 0) {
-                        inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
-                        $("#svc_act_sel").val("");
-                        return;
-                    }
-                    $("#svcModal_newConForm").hide();
-                    $("#svcModal_discConForm").hide();
-                    $("#svcModal_changeConForm").show();
                 }
                 else {
-                    $("#svc_act_sel").val("");
-                    return;
-                }
-            }
+                    if(cktId == "" || cktId == 0) {
+                        inputError($('#svc_act_sel'),'Please select a CKT from the LIST OF CKTs');
+                        return;
+                    }
+                    if(act == "UPDATE_CKT") {
+                        $('.svcModal-form').prop('disabled', false);
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").hide();
+                    }
+                    else if(act == "DISCONNECT") {
+                        if(idx == "" || idx == 0) {
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $('.svcModal-form').prop('disabled', true);
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").show();
+                        $("#svcModal_changeConForm").hide();
 
-            
-            // $("#svc_modal input,#svc_modal select").val("");
-            populateSvcModal();
-            $("#svc_modal").modal("show");
-        })
+                    }
+                    else if(act == "CHANGE") {
+                        if(idx == "" || idx == 0) {
+                            inputError($('#svc_act_sel'),'Please select a CON from the LIST OF CONNECTIONS');
+                            return;
+                        }
+                        $('.svcModal-form').prop('disabled', false);
+                        $("#svcModal_newConForm").hide();
+                        $("#svcModal_discConForm").hide();
+                        $("#svcModal_changeConForm").show();
+                    }
+                }
+                populateSvcModal();
+                $("#svc_modal").modal("show");
+            }
+        });
 
         $(document).on("click","#svc_facSearch_table tbody tr", function(){
             clearErrors();
+            $("#svc_act_sel").val("").change();
             let data = svcFacSearchDatatable.row(this).data();
             if(data == undefined)
                 return;
@@ -377,6 +398,7 @@
         })
     
         $("#svc_tn_cbx").change(function(){
+            $("#svc_act_sel").val("").change();
             if($("#svc_tn_cbx").is(':checked')){
                 $(".svc-ckid-txt").attr("id","").hide();
                 $(".svc-ckid-tn").attr("id","svc_ckid").show();
@@ -385,9 +407,33 @@
                 $(".svc-ckid-tn").attr("id","").hide();
                 $(".svc-ckid-txt").attr("id","svc_ckid").show();
             }
+        });
+
+        $('#svc-form-date-div').on('change', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
         })
     
-    })
+        $(document).on('input', '.svc-form', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
+        });
+
+        $(document).on('input', '.dataTables_filter', function() {
+            clearErrors();
+            $("#svc_act_sel").val("");
+        });
+
+        $("#svc_findCkid_btn").on('click', function() {
+            $("#svc_act_sel").val("");
+        });
+
+        $("#svc_findOrd_btn").on('click', function() {
+            $("#svc_act_sel").val("");
+        });
+
+
+    });
     
 
 </script>

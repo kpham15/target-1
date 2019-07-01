@@ -36,7 +36,7 @@
   var portmapDatatable = $('#portmap-table').DataTable({
     dom: "frtip",
     "data": [],
-    "pageLength": 8,
+    "pageLength": 10,
     "columns": [
       {"data":"id"},
       {"data":"port"},
@@ -85,23 +85,16 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
-
       if (data.rslt === 'fail') {
-        modal.type = "danger";
-        modalHandler(modal);
+        inputError($("#portmap-form-action"),data.reason);
       } else {
+        let res = data.rows;
         if (res.length === 0) {
           if (action !== 'query') {
-            modal.type = "warning";
-            modal.body = "No record found";
-            modalHandler(modal);
+            inputError($("#portmap-form-action"),"NO RECORD FOUND");
           } 
         } else {
+            portmapDatatable.search("").draw();
             portmapDatatable.clear().draw();
             portmapDatatable.rows.add(res);
             portmapDatatable.columns.adjust().draw();
@@ -117,7 +110,9 @@
 
     $(document).on('click', '#portmap-table tbody tr', function() {
       let data = portmapDatatable.row(this).data();
-
+    if (data == undefined) {
+      return;
+    }
       portmapPortid = data.id;
       portmapFacid = data.fac_id;
       portmapNode = data.node;

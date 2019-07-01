@@ -22,7 +22,7 @@
 <script type="text/javascript">
   // Initialize Datatable
   var brdcstDatatable = $('#brdcst-table').DataTable({
-    "dom":  "frtip",
+    dom:  "frtip",
     "pageLength": 10,
     "data": [],
     "columns": [
@@ -56,6 +56,7 @@
     }).done(function(data) {
       let res = data.rows;
 
+      brdcstDatatable.search("").draw();
       brdcstDatatable.clear().draw();
       brdcstDatatable.rows.add(res);
       brdcstDatatable.columns.adjust().draw();
@@ -89,6 +90,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#brdcst-form-action").val("").change();
     });
   });
 </script>

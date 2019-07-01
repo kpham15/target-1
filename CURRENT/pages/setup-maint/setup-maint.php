@@ -2,22 +2,22 @@
   <div class="container-fluid">
     
      <!-- Content Header (Page header) -->
-      <section class="content-header">
+      <section class="content-header" style="padding:2px;">
         <h1>
-          Setup Maintenance Connection
+          SETUP MAINTENANCE CONNECTION
         </h1>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="padding-top: 0px">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Setup Maintenance Connection</li>
         </ol>
       </section>
       
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding:2px;">
       <!-- Setup Maint Forms -->
       <?php include __DIR__ . '/setup-maint-forms.html'; ?>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-8" style="padding:2px;">
       <!-- Setup Maint Table Ckts -->
       <?php include __DIR__ . '/setup-maint-table-ckts.html';?>
       </div>
