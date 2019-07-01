@@ -94,7 +94,9 @@
     $('.menu-item[page_id="database-backup-page"]').click(function() {
       queryDatabaseBackup();
       clearErrors();
-      $("#database-backup-form-action").val("").change();
+      $("#database-backup-forms-action").val("").change();
+      $(".database-backup-forms-input").val("");
     });
+
   });
 </script>
