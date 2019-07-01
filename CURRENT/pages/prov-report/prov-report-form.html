@@ -72,6 +72,7 @@ var provReportStartDate = moment(new Date()).format('YYYY-MM-DD');
 var provReportEndDate = moment(new Date()).format('YYYY-MM-DD');
 
 $(document).ready(function(){
+    $("#provReport-tbl_filter input").addClass('provReport-form');
     $('#provReport_daterange').daterangepicker({},function(start,end){
         provReportStartDate = start.format("YYYY-MM-DD");
         provReportEndDate = end.format("YYYY-MM-DD");
@@ -120,7 +121,6 @@ $(document).ready(function(){
         }
     });
 
-    $("#provReport-tbl_filter input").addClass('provReport-form');
     
     $('.provReport-form').on("input", function() {
         $("#provReport_report_sel").val("VIEW REPORT").change();
