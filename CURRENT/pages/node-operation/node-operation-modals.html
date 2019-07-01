@@ -25,7 +25,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>DEVICE:</label>
-                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input" disabled="">
+                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input lowercase" disabled="">
               </div>
             </div>
 
@@ -33,7 +33,7 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label>SERIAL NUMBER:</label>
-                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input" disabled="">
+                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input lowercase" disabled="">
               </div>
             </div>
           </div>
@@ -69,10 +69,16 @@ $(document).ready(function() {
   // Modal Close Event Listener
   $('#node-operation-modal').on('hidden.bs.modal', function(e) {
     $('#node-operation-forms-clear').trigger('click');
-  })
+  });
+
+  $("#node-operation-modal").on('shown.bs.modal', function() {
+    $("#node-operation-modal select").css('-webkit-appearance', 'menulist');
+    $("#node-operation-modal select:disabled").css('-webkit-appearance', 'none');
+  });
   
   // Submit Button Click Event
   $('#node-operation-modal-submit').click(function() {
+    clearErrors();
     let action = $('#node-operation-modal-action').val();
     let node = $('#node-operation-modal-node').val();
     let device = $('#node-operation-modal-device').val();
