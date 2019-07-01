@@ -9,7 +9,7 @@
         <div class="col-sm-6 " style="padding:2px;">
             <div class="form-group">
                 <label for="batchExc_act_sel">ACTION</label>
-                <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
+                <select id="batchExc_act_sel" class="form-control" style="padding: 2px">
                     <option></option>
                     <option>UPLOAD</option>
                     <option>DELETE</option>
@@ -47,6 +47,7 @@ function batchExec_start() {
 }
 
 function batchExec_clearForm(){
+    clearErrors();
     $("#batchExc_act_sel").val("");
     $("#batchExc_file_sel").val("");
     // batchExc.tbl.body.empty();
@@ -197,10 +198,13 @@ function batchExec_recurExecute(i) {
     
 $("#batchExc_execute_btn").click(function(){
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
     batchExec_executeCommand();
 });
 
 $("#batchExc_act_sel").change(function() {
+    clearErrors();
+    
     if ($("#batchExc_act_sel").val() !="") {
         if ($("#batchExc_act_sel").val()  ==  "UPLOAD") {
             batchExcModal_clearForm();
@@ -214,7 +218,6 @@ $("#batchExc_act_sel").change(function() {
             else {
                 inputError($("#batchExc_act_sel"), "Please select a batch file!");
             }
-            $("#batchExc_act_sel").val("");
         }
     }
 
@@ -264,11 +267,13 @@ $("#batchExc_download_btn").click(function(){
 
 $(document).ready(function(){
     $(".menu-item[page_id='batch-exec-page']").click(function() {
+        
         batchExec_start();
     });
 });
 
-$(".batchExc_field").on('click', function() {
+$(".batchExc_field").on('input', function() {
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
 });
 </script>
