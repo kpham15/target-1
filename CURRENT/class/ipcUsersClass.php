@@ -613,8 +613,8 @@ class USERS {
 
     public function enableUser(){
         global $db;
-
-		$qry = "UPDATE t_users SET stat='INACTIVE', lastlogin=now(), pw=ssn, pwcnt=0 WHERE uname='$this->uname'";
+        $pw = encryptData($this->ssn);
+		$qry = "UPDATE t_users SET stat='INACTIVE', lastlogin=now(), pw='$pw', pwcnt=0 WHERE upper(uname)=upper('$this->uname')";
 		
 		$res = $db->query($qry);
         if (!$res) {
