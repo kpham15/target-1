@@ -49,6 +49,7 @@
             <div class="form-group">
               <label>FUNCTION:</label>
               <select id="eventReport-form-function" class="form-control eventReport-form-input" disabled>
+                <option></option>
               </select>
             </div>
           </div>
@@ -58,6 +59,7 @@
             <div class="form-group">
               <label>TASK:</label>
               <select id="eventReport-form-task" class="form-control eventReport-form-input" disabled>
+                <option></option>
               </select>
             </div>
           </div>
@@ -198,9 +200,8 @@ $(document).ready(function() {
 
     let currDate = moment(new Date()).format('YYYY-MM-DD');
 
-    $('.eventReport-form-input').val('').change();
+    $('.eventReport-form-input').val('');
     $('#eventReport-form-report').val("VIEW REPORT");
-    
     eventReportDatatable.clear().draw();
 
     $('#eventReport-daterange').val('').daterangepicker("update");
