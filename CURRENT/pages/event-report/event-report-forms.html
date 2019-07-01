@@ -69,7 +69,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label>REPORT:</label>
-              <select id="eventReport-form-report" class="form-control eventReport-form-input">
+              <select id="eventReport-form-report" class="form-control">
                 <option value="VIEW REPORT">VIEW REPORT</option>
                 <option value="CREATE REPORT">CREATE REPORT</option>
               </select>
@@ -161,6 +161,9 @@ $(document).ready(function() {
   // UPON LOAD PAGE FIRST TIME
   var eventReportFirstLoad = true;
   $(".menu-item[page_id='event-report-page']").click(async function() {
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT").change();
+
     if (eventReportFirstLoad != true) {
       return;
     }
@@ -211,8 +214,9 @@ $(document).ready(function() {
   });
 
   // CLEAR ERRORS WHEN CLICK ON FIELD
-  $(".eventReport-form-input").on('click', function() {
+  $(".eventReport-form-input").on('input', function() {
     clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT");
   });
 
   // CHANGE FUNCTION FIELD BASED ON EVENT
