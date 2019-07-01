@@ -97,7 +97,7 @@
     //   });
     // }
     var csv = convertArrayOfObjectsToCSV({
-      data: alarmreportDatatable.data().toArray()
+      data: configReportPortmapDatatable.data().toArray()
     });
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
@@ -172,6 +172,7 @@
       } else if (report.val() === "CREATE REPORT") {
         console.log(report);
         downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
+        console.log(report);
       }
     });
 
