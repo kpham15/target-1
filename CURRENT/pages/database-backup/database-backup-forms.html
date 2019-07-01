@@ -98,5 +98,12 @@
       $(".database-backup-forms-input").val("");
     });
 
+    $("#database-backup-table_filter input").addClass('database-backup-forms-input');
+    
+    $(".database-backup-forms-input").on('input', function() {
+      clearErrors();
+      $("#database-backup-forms-action").val("").change();
+    });
+
   });
 </script>
