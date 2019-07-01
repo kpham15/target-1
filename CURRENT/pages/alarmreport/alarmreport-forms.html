@@ -137,6 +137,8 @@
     // UPON LOAD PAGE FIRST TIME
     var alarmReportFirstLoad = true;
     $(".menu-item[page_id='alarmreport-page']").click(async function() {
+			clearErrors();
+			$("#alarmreport-forms-report").val("VIEW REPORT").change();
       if (alarmReportFirstLoad != true) {
         return;
       }
