@@ -66,16 +66,22 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-      
-      $("#eventReport-form-report").val("VIEW REPORT").change();
-
-      if (res.length == 0) {
-        inputError($('#eventReport-form-report'),'No Record Found');
+      if (data.rslt === 'fail') {
+        clearErrors();
+        inputError($("#eventReport-form-action"),data.reason);
+      } else {
+        let res = data.rows;
+        if (res.length === 0) {
+          if (action !== 'query') {
+            inputError($("#eventReport-form-action"),"NO RECORD FOUND");
+          } 
+        } else {
+          eventReportDatatable.search("").draw();
+          eventReportDatatable.clear().draw();
+          eventReportDatatable.rows.add(res);
+          eventReportDatatable.columns.adjust().draw();
+        }
       }
-      eventReportDatatable.clear().draw();
-      eventReportDatatable.rows.add(res);
-      eventReportDatatable.columns.adjust().draw();
     });
   }
 
