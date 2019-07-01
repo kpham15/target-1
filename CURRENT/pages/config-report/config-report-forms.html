@@ -120,6 +120,9 @@
     // UPON LOAD PAGE FIRST TIME
     var configReportFirstLoad = true;
     $(".menu-item[page_id='config-report-page']").click(async function() {
+      clearErrors();
+      $("#configReport-form-report").val("VIEW REPORT").change();
+      
       if (configReportFirstLoad != true) {
         return;
       }
