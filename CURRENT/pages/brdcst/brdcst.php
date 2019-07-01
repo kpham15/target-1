@@ -2,13 +2,13 @@
   <div class="container-fluid">
     
      <!-- Content Header (Page header) -->
-      <section class="content-header">
+      <section class="content-header" style="padding:2px;">
         <h1>
           Broadcast Notifications
         </h1>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="padding-top: 0px">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Broadcast Notifications</li>
+          <li class="active">BROADCAST NOTIFICATIONS</li>
         </ol>
       </section>
     
