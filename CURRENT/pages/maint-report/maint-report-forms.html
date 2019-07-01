@@ -19,7 +19,7 @@
       <!-- ACTION -->
       <div class="col-md-2">
         <label>ACTION</label>
-        <select class="form-control maintReport-form" id="maintReport-form-action">
+        <select class="form-control maintReport-form-input" id="maintReport-form-action">
           <option></option>
           <option>MTC_CONN</option>
           <option>MTC_DISCON</option>
@@ -51,7 +51,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label>REPORT:</label>
-					<select id="maintReport-form-report" class="form-control maintReport-form-input">
+					<select id="maintReport-form-report" class="form-control">
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
 					</select>
@@ -121,6 +121,9 @@
     // UPON LOAD PAGE FIRST TIME
     var maintReportFirstLoad = true;
     $(".menu-item[page_id='maint-report-page']").click(async function() {
+			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
+
       if (maintReportFirstLoad != true) {
         return;
       }
@@ -156,9 +159,9 @@
 
 			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+			maintReportDatatable.clear().draw();
 			$('.maintReport-form-input').val('');
       $('#maintReport-form-report').val("VIEW REPORT");
-			maintReportDatatable.clear().draw();
 
 			$('#maintReport-daterange').val('').daterangepicker("update");
 			maintReportStartDate = currDate;
@@ -170,11 +173,22 @@
 			clearErrors();
 		});
 
+		$("#maintReport-table_filter input").addClass('maintReport-form-input');
+
 		// REPORT Change listener
-		$('.maintReport-form-input').on("click", function() {
+		$('.maintReport-form-input').on("input", function() {
+			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
+		});
+
+		$("#maintReport-form-report").on('change', function() {
 			clearErrors();
 		});
 
+		$("#maintReport-form-daterange").on('change', function() {
+			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
+		});
 	});
 
 
