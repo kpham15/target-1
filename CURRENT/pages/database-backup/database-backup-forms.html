@@ -94,6 +94,8 @@
     // click event on sidebar menu
     $('.menu-item[page_id="database-backup-page"]').click(function() {
       queryDatabaseBackup();
-    })
-  })
+      clearErrors();
+      $("#database-backup-form-action").val("").change();
+    });
+  });
 </script>
