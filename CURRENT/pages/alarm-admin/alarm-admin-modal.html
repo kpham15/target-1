@@ -127,4 +127,9 @@
   $(".alarm-admin-modal-field").on('click', function() {
     clearErrors();
   });
+
+  $('#alarm-admin-modal').on('shown.bs.modal', function() {
+    $("#alarm-admin-modal select").css('-webkit-appearance', 'menulist');
+    $("#alarm-admin-modal select:disabled").css('-webkit-appearance', 'none');
+  });
 </script>
