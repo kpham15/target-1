@@ -200,7 +200,7 @@ $(document).ready(function() {
 
     let currDate = moment(new Date()).format('YYYY-MM-DD');
 
-    $('.eventReport-form-input').val('');
+    $('.eventReport-form-input').val('').change();
     $('#eventReport-form-report').val("VIEW REPORT");
     eventReportDatatable.clear().draw();
 
