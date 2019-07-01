@@ -150,7 +150,7 @@
 	}
 
 	function inputError(selector, string) {
-		let helpBlock = '<span class="help-block">'+string+'</span>';
+		let helpBlock = '<span class="help-block">'+string.toUpperCase()+'</span>';
 		if (selector.closest('form').hasClass('form-horizontal')) {
 			selector.parent().append(helpBlock);
 		} else {
@@ -171,17 +171,17 @@
 		element.append(html);
 
 		let color = "";
-		if (rslt == "fail") {
+		if (rslt.toUpperCase() == "FAIL") {
 			color = 'response-fail';
-		} else if (rslt == "success") {
+		} else if (rslt.toUpperCase() == "SUCCESS") {
 			color = 'response-success';
 		}
 		$('.post-response').addClass(color);
-		$('.post-response label').text(`${rslt} - ${reason}`);
+		$('.post-response label').text(`${rslt.toUpperCase()} - ${reason.toUpperCase()}`);
 	}
 	
 	function inputSuccess(selector, string) {
-		let helpBlock = '<span class="help-block">'+string+'</span>';
+		let helpBlock = '<span class="help-block">'+string.toUpperCase()+'</span>';
 		if (selector.closest('form').hasClass('form-horizontal')) {
 			selector.parent().append(helpBlock);
 		} else {

@@ -72,6 +72,9 @@ if($wcObj->stat == "OOS") {
     if($userObj->ugrp != 'ADMIN') {
         $result["rslt"]     = FAIL;
         $result["reason"]   = "DENIED - WIRE CENTER IS OOS";
+        echo json_encode($result);
+        mysqli_close($db);
+        $debugObj->close();
         return $result;
     }
 }

@@ -51,7 +51,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label>REPORT:</label>
-					<select id="alarmreport-forms-report" class="form-control alarmreport-forms-input">
+					<select id="alarmreport-forms-report" class="form-control">
 						<option value="VIEW REPORT">VIEW REPORT</option>
 						<option value="CREATE REPORT">CREATE REPORT</option>
 					</select>
@@ -128,6 +128,8 @@
 				alarmreportStartDate = start.format('YYYY-MM-DD');
 				alarmreportEndDate = end.format('YYYY-MM-DD');
 			});
+
+			clearErrors();
 		}
 
 		initializeAlarmreportDateRangePicker();
@@ -135,6 +137,8 @@
     // UPON LOAD PAGE FIRST TIME
     var alarmReportFirstLoad = true;
     $(".menu-item[page_id='alarmreport-page']").click(async function() {
+			clearErrors();
+			$("#alarmreport-forms-report").val("VIEW REPORT").change();
       if (alarmReportFirstLoad != true) {
         return;
       }
@@ -167,9 +171,9 @@
 
 			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+			alarmreportDatatable.clear().draw();
 			$('.alarmreport-forms-input').val('');
 			$("#alarmreport-forms-report").val("VIEW REPORT");
-			alarmreportDatatable.clear().draw();
 
 			$('#alarmreport-daterange').val('').daterangepicker("update");
 			alarmreportStartDate = currDate;
@@ -181,10 +185,21 @@
 			clearErrors();
 		})
 
+		$("#alarmreport-table_filter input").addClass('alarmreport-forms-input');
+
 		// Clears errors when any input is clicked
-		$(".alarmreport-forms-input").on("click", function() {
+		$(".alarmreport-forms-input").on("input", function() {
 			clearErrors();
+			$("#alarmreport-forms-report").val("VIEW REPORT").change();
 		});
 
+		$("#alarmreport-daterange").on('change', function() {
+			clearErrors();
+			$("#alarmreport-forms-report").val("VIEW REPORT").change();
+		});
+
+		$("#alarmreport-forms-report").on('change', function() {
+			clearErrors();
+		});
 	});
 </script>
