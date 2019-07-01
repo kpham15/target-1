@@ -123,7 +123,7 @@
     $(".menu-item[page_id='maint-report-page']").click(async function() {
 			clearErrors();
 			$("#maintReport-form-report").val("VIEW REPORT").change();
-			
+
       if (maintReportFirstLoad != true) {
         return;
       }
@@ -159,9 +159,9 @@
 
 			let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+			maintReportDatatable.clear().draw();
 			$('.maintReport-form-input').val('');
       $('#maintReport-form-report').val("VIEW REPORT");
-			maintReportDatatable.clear().draw();
 
 			$('#maintReport-daterange').val('').daterangepicker("update");
 			maintReportStartDate = currDate;
@@ -173,10 +173,15 @@
 			clearErrors();
 		});
 
+		$("#maintReport-table_filter input").addClass('maintReport-form-input');
+		
 		// REPORT Change listener
-		$('.maintReport-form-input').on("click", function() {
+		$('.maintReport-form-input').on("input", function() {
 			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
 		});
+
+
 
 	});
 
