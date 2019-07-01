@@ -42,10 +42,16 @@ $('.menu-item[page_id="portmap-page"]').click(function() {
 })
 
 function createPortOptions(data, type) {
+    if(data.rslt ==="fail") {
+        clearErrors();
+        inputError($("#portmap-form-action"),data.reason);
+        return;
+    }
+    let res = data.rows;
     var a = [];
     a.push('<option value=""></option>');
     
-    data.forEach(function(option) {
+    res.forEach(function(option) {
       let html = `<option value="${option[type]}">${option[type]}</option>`;
       a.push(html);
     });

@@ -68,15 +68,19 @@
             },
             dataType: "json"
         }).done(function(data){
-            let res = data.rows;
+            if (data.rslt === 'fail') {
+                inputError($("#provReport_report_sel"),data.reason);
+            } else {
+                let res = data.rows;
 
-            if (res.length == 0) {
-                inputError($('#provReport_report_sel'),'No Record Found');
+                if (res.length == 0) {
+                    inputError($('#provReport_report_sel'),'No Record Found');
+                }
+    
+                provReportDataTable.clear().draw();
+                provReportDataTable.rows.add(res);
+                provReportDataTable.columns.adjust().draw();
             }
-  
-            provReportDataTable.clear().draw();
-            provReportDataTable.rows.add(res);
-            provReportDataTable.columns.adjust().draw();
         })
     }
     

@@ -177,7 +177,7 @@
 	}
 
 	if ($act == "upd" || $act == "UPDATE") {
-		$result = updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com);
+		$result = updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp);
 
 		/* sample code for eventlog */
 		$evtLog->log($result["rslt"], $result['log'] . " | " . $result["reason"]);
@@ -416,7 +416,7 @@
 		}
 	}
 
-	function updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp, $com){
+	function updUser($userObj, $uname, $lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp){
 
 		if ($userObj->grpObj->setuser != "Y") {
 			$result['rslt'] = 'fail';
@@ -448,8 +448,6 @@
 		if ($title != $targetUserObj->title)
 			$result['log'] .= " | TITLE=" . $targetUserObj->title . " --> " . $title;
 		
-		if ($com != $targetUserObj->com)
-			$result['log'] .= " | COM=" . $targetUserObj->com . " --> " . $com;
 
 		// end of sample code
 
@@ -463,16 +461,16 @@
 		if($userObj->uname == $targetUserObj->uname) {
 			// only admins can change their own names
 			if ($userObj->ugrp == "ADMIN")
-				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp, $com);
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $targetUserObj->ugrp);
 				// other users cannot change their names
 			else {
-				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp,"");
+				$targetUserObj->updUser("", "", "", "", $tel, $email, "", $targetUserObj->ugrp);
 			}
 		}
 		else {
 			// ADMIN and SUPERVISOR user can update other users in lower ugrp
 			if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
-				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp,$com);
+				$targetUserObj->updUser($lname, $fname, $mi, $ssn, $tel, $email, $title, $ugrp);
 			}
 			else {
 				$result['rslt'] = 'fail';
