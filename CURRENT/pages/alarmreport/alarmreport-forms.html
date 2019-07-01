@@ -186,8 +186,9 @@
 		})
 
 		// Clears errors when any input is clicked
-		$(".alarmreport-forms-input").on("click", function() {
+		$(".alarmreport-forms-input").on("input", function() {
 			clearErrors();
+			$("#alarmreport-forms-report").val("VIEW REPORT").change();
 		});
 
 	});
