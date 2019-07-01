@@ -119,7 +119,7 @@ $(document).ready(function(){
             
         }
     });
-    
+
     $("#provReport_tbl_filter input").addClass('provReport-form');
 
     
@@ -130,6 +130,11 @@ $(document).ready(function(){
 
     $('#provReport_report_sel').on('change', function() {
         clearErrors();
+    });
+
+    $("#provReport_daterange").on('change', function() {
+        clearErrors();
+        $("#provReport_report_sel").val("").change();
     });
 });
 
