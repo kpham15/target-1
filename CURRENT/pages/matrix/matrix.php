@@ -12,7 +12,7 @@
       </ol>
     </section>
 
-    <div class="col-md-5" style="padding:2px;">
+    <div class="col-md-5">
       <!-- MATRIX FORM -->
       <?php include __DIR__ . '/matrix-forms.html'; ?>
 
@@ -21,7 +21,7 @@
 
     </div>
 
-    <div class="col-md-7" style="padding:2px;">
+    <div class="col-md-7">
       <!-- MATRIX CARDS TABLE -->
       <?php include __DIR__ . '/tables/matrix-card-table.html'; ?>
 
