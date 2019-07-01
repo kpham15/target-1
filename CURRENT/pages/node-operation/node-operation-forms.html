@@ -30,7 +30,7 @@
     <div class="form-group">
       <label for="node-operation-forms-action" class="col-sm-2 control-label">ACTION:</label>
       <div class="col-sm-6">
-        <select class="form-control node-operation-forms-input" id="node-operation-forms-action">
+        <select class="form-control" id="node-operation-forms-action">
           <option value=""></option>
           <option value="DISCOVER">DISCOVER</option>
           <option value="STOP">STOP</option>
@@ -62,9 +62,10 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        inputError($("#node-operations-forms-action"), data.rslt + " - " + data.reason);
+        inputError($("#node-operation-forms-action"), data.rslt + " - " + data.reason);
       } 
       else {
+        nodeOperationDatatable.search("").draw();
         nodeOperationDatatable.clear().draw();
         nodeOperationDatatable.rows.add(res);
         nodeOperationDatatable.columns.adjust().draw();
@@ -76,7 +77,6 @@
   function validateNodeOpeNode(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -91,7 +91,6 @@
   function validateNodeOpeStop(obj) {
     if (obj.node == "") {
       inputError($('#node-operation-forms-action'),'Select an node from the list');
-      $('#node-operation-forms-action').val('');
       return;
     } else {
       $('#node-operation-modal-action').val(obj.action);
@@ -125,22 +124,30 @@
         validateNodeOpeStop(obj);
       }
 
-    })
+    });
 
     // Clear button click event
     $('#node-operation-forms-clear').click(function() {
+      clearErrors();
+      $("#node-operation-forms-action").val("").change();
       $('.node-operation-forms-input').val('');
-
       queryNodeOperation();
-    })
+    });
   
     // side bar menu click event
     $('.menu-item[page_id="node-operation-page"').click(function() {
+      clearErrors();
+      $("#node-operation-forms-action").val("").change();
       queryNodeOperation();
     });
 
-    $(".node-operations-forms-input").click(function() {
+    $("#node-operation-table_filter input").addClass('node-operation-forms-input');
+
+    $(".node-operation-forms-input").on('input', function() {
       clearErrors();
+      $("#node-operation-forms-action").val("").change();
     });
+
+
   });
 </script>

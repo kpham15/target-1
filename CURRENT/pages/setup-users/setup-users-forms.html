@@ -141,7 +141,7 @@
       <div class="col-md-5" style="padding: 2px">
         <div class="form-group">
           <label>ACTION:</label>
-          <select id="setup-users-forms-action" class="form-control setup-users-forms-input" style="padding: 2px">
+          <select id="setup-users-forms-action" class="form-control" style="padding: 2px">
             <option value=""></option>
             <option value="ADD">ADD</option>
             <option value="UPDATE">UPDATE</option>
@@ -156,11 +156,11 @@
         </div>
       </div>
       <div class="col-md-2" style="padding: 2px">
-        <div class="form-group">
+        <!-- <div class="form-group"> -->
           <button id="setup-users-forms-clear" type="button" class="btn btn-primary btn-flat" style="margin-top:25px">
             Clear
           </button>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </form>
@@ -179,7 +179,6 @@ function setupUserUpdate(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   else {
@@ -210,7 +209,6 @@ function setupUserOther(obj) {
 
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   else {
@@ -239,7 +237,6 @@ function setupUserOther(obj) {
 function setupUserUploadImg(obj) {
   if (obj.uname == "") {
     inputError($('#setup-users-forms-action'),'Select a user from the list');
-    $('#setup-users-forms-action').val('');
     return;
   }
   setup_users_uploadUserImage_clearForm();
@@ -253,8 +250,6 @@ $(document).ready(function() {
 
   // Action Change Event
   $('#setup-users-forms-action').change(function() {
-
-    $('#setup-users-modal-post-response-text').text('');
     $('.setup-users-modal-input').prop('disabled', false);
 
     let tel = "";
@@ -281,20 +276,22 @@ $(document).ready(function() {
 
     clearErrors();
 
-    if (obj.action === 'ADD') {
-      setupUserAdd(obj);
-    }
-    else if (obj.action === 'UPDATE') {
-      setupUserUpdate(obj);
-    }
-    else if (obj.action === 'UPLOAD_IMAGE') {
-      setupUserUploadImg(obj);
-    }
-    else if (obj.action === 'REMOVE_USER_IMAGE') {
-      setupUserOther(obj);
-    }
-    else {
-      setupUserOther(obj);
+    if (obj.action != "") {
+      if (obj.action === 'ADD') {
+        setupUserAdd(obj);
+      }
+      else if (obj.action === 'UPDATE') {
+        setupUserUpdate(obj);
+      }
+      else if (obj.action === 'UPLOAD_IMAGE') {
+        setupUserUploadImg(obj);
+      }
+      else if (obj.action === 'REMOVE_USER_IMAGE') {
+        setupUserOther(obj);
+      }
+      else {
+        setupUserOther(obj);
+      }
     }
     
   });
@@ -302,40 +299,16 @@ $(document).ready(function() {
   // Clear Button Click Event
   $('#setup-users-forms-clear').click(function() {
     $('.setup-users-forms-input').val('');
-    $('#setup-users-forms-viewuser').trigger('click');
     clearErrors();
-  })
+    $("#setup-users-forms-action").val("").change();
+    setupUsersViewUser();
+
+  });
 
   // Click Event View 1
   $('#setup-users-forms-viewuser').click(function() {
     clearErrors();
-
-    let userTxt = $('#setup-users-forms-user').val().toUpperCase();
-    let status = $('#setup-users-forms-stat').val().toUpperCase();
-
-    $.ajax({
-      type:     'POST',
-      url:      ipcDispatch,
-      data:     {
-        "api":      "ipcUser",
-        "act":      "findUser",
-        "user":     user.uname,
-        "uname":    userTxt,
-        "stat":     status,
-      },
-      dataType:     'json'
-    }).done(function(data) {
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#setup-users-forms-viewuser'),'No Results Found');
-      }
-
-      setupUsersDatatable.clear().draw();
-      setupUsersDatatable.rows.add(res);
-      setupUsersDatatable.columns.adjust().draw();
-    });
-
+    setupUsersViewUser();
   });
 
   // Click Event View 2
@@ -458,12 +431,29 @@ $(document).ready(function() {
   $('#setup-users-tn-cbx').on('ifToggled', function(){
     $('.users-phonenum').toggle();
   });
+  $("#setup-users-tn-cbx").on('ifChanged', function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+  });
 
   // Side NavBar Click Event
   $('.menu-item[page_id="setup-users-page"]').click(function() {
-    $('#setup-users-forms-viewuser').trigger('click');
-  })
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+    setupUsersViewUser();
+  });
 
+  $("#setup-users-table_filter input").addClass('setup-users-forms-input');
+
+  $(".setup-users-forms-input").on('input', function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+  });
+
+  $("#setup-users-forms button").on('click', function() {
+    clearErrors();
+    $("#setup-users-forms-action").val("").change();
+  });
 });
 
 </script>
