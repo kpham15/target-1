@@ -2,17 +2,17 @@
   <div class="container-fluid">
     
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" style="padding:2px;">
       <h1>
         Lock/Unlock Matrix Cards and Nodes
       </h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb" style="padding-top: 0px">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Lock/Unlock Matrix Cards and Nodes</li>
       </ol>
     </section>
 
-    <div class="col-md-5">
+    <div class="col-md-5" style="padding:2px;">
       <!-- MATRIX FORM -->
       <?php include __DIR__ . '/matrix-forms.html'; ?>
 
@@ -21,7 +21,7 @@
 
     </div>
 
-    <div class="col-md-7">
+    <div class="col-md-7" style="padding:2px;">
       <!-- MATRIX CARDS TABLE -->
       <?php include __DIR__ . '/tables/matrix-card-table.html'; ?>
 
