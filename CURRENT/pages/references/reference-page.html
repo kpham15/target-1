@@ -183,8 +183,10 @@ $(document).ready(function() {
 		$('#reference-page-action').val('');
 		refStartup();
 	});
-
-
+	$(".ref-select-box").on('input', function() {
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
 });
 </script>
 
