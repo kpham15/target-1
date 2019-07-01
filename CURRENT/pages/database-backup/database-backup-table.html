@@ -35,6 +35,7 @@
     }).done(function(data) {
       let res = data.rows;
 
+      databaseBackupDatatable.search("").draw();
       databaseBackupDatatable.clear().draw();
       databaseBackupDatatable.rows.add(res);
       databaseBackupDatatable.columns.adjust().draw();
@@ -82,6 +83,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#database-backup-forms-action").val("").change();
     });
   });
 </script>
