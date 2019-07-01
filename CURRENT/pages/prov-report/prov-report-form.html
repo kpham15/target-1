@@ -92,12 +92,12 @@ $(document).ready(function(){
     });
 
     $("#provReport_clear_btn").click(function(){
+        provReportDataTable.clear().draw();
         $(".provReport-form").val("");
         $("#provReport_report_sel").val("VIEW REPORT");
         $('#provReport_daterange').val('').daterangepicker("update")
-        provReportDataTable.clear().draw();
         clearErrors();
-    })
+    });
 
     $("#provReport_submit_btn").click(function(){
 
@@ -118,11 +118,12 @@ $(document).ready(function(){
             downloadCSV({filename: `PROVISIONING_REPORT_${fromDate}_${toDate}.csv`});
             
         }
-    })
-
-    $('#provReport-form').on("click", function() {
-        clearErrors();
     });
-})
+
+    $('#provReport-form').on("input", function() {
+        clearErrors();
+        $("#provReport_report_sel").val("VIEW REPORT").change();
+    });
+});
 
 </script>
