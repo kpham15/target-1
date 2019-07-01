@@ -130,7 +130,7 @@ $(document).ready(function(obj) {
     $('#brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
     
     $('#brdcst-modal-date').val(obj.date);
-    $('#brdcst-modal-msgowner').val(obj.owner);
+    $('#brdcst-modal-msgowner').val(obj.owner).change();
     $('#brdcst-modal-msgtitle').val(obj.title);
     $('#brdcst-modal-sa').val(obj.sa);
     $('#brdcst-modal-details').val(obj.detail);
@@ -162,7 +162,7 @@ $(document).ready(function(obj) {
     let obj = {
       value:      $(this).val(),
       currDate:   moment(new Date()).format('MM-DD-YYYY'),
-      owner:      $('#brdcst-form-msgowner').val().change(),
+      owner:      $('#brdcst-form-msgowner').val(),
       sa:         $('#brdcst-form-sa').val().toUpperCase(),
       action:     $('#brdcst-form-action').val(),
       title:      $('#brdcst-form-msgtitle').val().toUpperCase(),
