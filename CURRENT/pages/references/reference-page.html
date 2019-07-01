@@ -96,7 +96,7 @@ $(document).ready(function() {
 		$('#reference-page-post-response-text').text('');
 	});
 
-	$("#ref-select-div select").on('change', function() {
+	$("#ref-select-div select").on('input', function() {
 		clearErrors();
 		$("#reference-page-action").val("");
 	});
