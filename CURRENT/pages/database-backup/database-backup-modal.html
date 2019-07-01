@@ -62,9 +62,9 @@
 
           <!-- Footer -->
           <div class="modal-footer">
-              <button id="database-backup-modal-submit" type="button" class="btn btn-primary pull-left">
-                Submit
-              </button>
+            <button id="database-backup-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Close
             </button>
@@ -119,6 +119,7 @@ $(document).ready(function() {
   $('#database-backup-modal').on('hidden.bs.modal', function(e) {
     $('.database-backup-forms-input').val('');
     $('.database-backup-modal-input').val('');
-  })
-})
+    $("#database-backup-forms-action").val("").change();
+  });
+});
 </script>
