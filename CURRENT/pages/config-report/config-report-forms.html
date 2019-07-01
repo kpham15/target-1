@@ -79,8 +79,15 @@
   function downloadConfigReports(args) {
     var data, filename, link;
     var table = $(".configReport-table[style='display: block'] table").attr('id');
+    if (table == "configReport-portmap-table") {
+      dataTable = configReportPortmapDatatable;
+    } else if (table == "configReport-wirecenter-table") {
+      dataTable = configReportWcDatatable;
+    } else if (table == "configReport-facility-table") {
+      dataTable = configreportFacDatatable;
+    }
     var csv = convertArrayOfObjectsToCSV({
-      data: $(table).data().toArray()
+      data: dataTable.data().toArray()
     });
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
