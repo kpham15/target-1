@@ -153,6 +153,7 @@
       if (res.length == 0) {
         inputError($('#configReport-form-report'),'No Record Found');
       }
+      configReportPortmapDatatable.search("").draw();
       configReportPortmapDatatable.clear().draw();
       configReportPortmapDatatable.rows.add(res);
       configReportPortmapDatatable.columns.adjust().draw();
@@ -188,6 +189,7 @@
       if (res.length == 0) {
         inputError($('#configReport-form-report'),'No Record Found');
       }
+      configReportWcDatatable.search("").draw();
       configReportWcDatatable.clear().draw();
       configReportWcDatatable.rows.add(res);
       configReportWcDatatable.columns.adjust().draw();
@@ -223,6 +225,7 @@
       if (res.length == 0) {
         inputError($('#configReport-form-report'),'No Record Found');
       }
+      configReportFacDatatable.search("").draw();
       configReportFacDatatable.clear().draw();
       configReportFacDatatable.rows.add(res);
       configReportFacDatatable.columns.adjust().draw();
