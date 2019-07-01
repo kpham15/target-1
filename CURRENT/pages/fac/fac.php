@@ -2,11 +2,11 @@
   <div class="container-fluid">
     
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" style="padding:2px;">
       <h1>
         SETUP FACILITIES
       </h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb" style="padding-top:0px;">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Setup Facilities</li>
       </ol>
@@ -33,6 +33,10 @@
   $(".menu-item[page_id='fac-page']").click(function() {
     $("#fac-page select").css('-webkit-appearance', 'menulist');
     $("#fac-page select:disabled").css('-webkit-appearance', 'none');
+
+    clearErrors();
+    $("#fac-form-action").val("").change();
+
     if (facFirstLoad != true) {
       return;
     }

@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="alarm-admin-modal">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,7 +14,7 @@
           <!-- Top Row -->
           <div class="row">
             <!-- ALMID -->
-            <div class="col-md-3">
+            <div class="col-md-6" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>ALMID:</label>
                 <input id="alarm-admin-modal-almid" type="text" class="form-control alarm-admin-modal-field" disabled="">
@@ -22,50 +22,52 @@
             </div>
 
             <!-- SRC -->
-            <div class="col-md-3">
+            <div class="col-md-6" style="padding: 0px 20px 0px 2px;">
               <div class="form-group">
                 <label>SRC:</label>
                 <input id="alarm-admin-modal-source" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
-
+          </div>
+          <!-- Row 2 -->
+          <div class="row">
             <!-- ACK -->
-            <div class="col-md-3">
+            <div class="col-md-6" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
-                <label>ACK</label>
+                <label>ACK:</label>
                 <input id="alarm-admin-modal-ack" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
 
             <!-- COND -->
-            <div class="col-md-3">
+            <div class="col-md-6" style="padding: 0px 20px 0px 2px;">
               <div class="form-group">
-                <label>COND</label>
+                <label>COND:</label>
                 <input id="alarm-admin-modal-condition" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
           </div>
-          <!-- Row 2 -->
+
+          <!-- Row 3 -->
           <div class="row">
             <!-- COMMENTS -->
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding: 0px 20px 0px 20px;">
               <div class="form-group">
                 <label>COMMENTS:</label>
                 <textarea id="alarm-admin-modal-comments" class="form-control alarm-admin-modal-field" rows="5"></textarea>
               </div>
             </div>
           </div>
-          <!-- Row 3 -->
+          <!-- Row 4 -->
           <div class="row">
             <!-- ACTION -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>ACTION:</label>
                 <input id="alarm-admin-modal-action" type="text" class="form-control alarm-admin-modal-field" disabled="">
               </div>
             </div>
           </div>
-
         </form>
       </div>
 
@@ -89,11 +91,11 @@
     //click event for submit button
     $('#alarm-admin-modal-submit').click(function() {
       let action = $('#alarm-admin-modal-action').val();
-      let almid = $('#alarm-admin-modal-almid').val();
-      let source = $('#alarm-admin-modal-source').val();
-      let ack = $('#alarm-admin-modal-ack').val();
-      let condition = $('#alarm-admin-modal-condition').val();
-      let comments = $('#alarm-admin-modal-comments').val();
+      let almid = $('#alarm-admin-modal-almid').val().toUpperCase();
+      let source = $('#alarm-admin-modal-source').val().toUpperCase();
+      let ack = $('#alarm-admin-modal-ack').val().toUpperCase();
+      let condition = $('#alarm-admin-modal-condition').val().toUpperCase();
+      let comments = $('#alarm-admin-modal-comments').val().toUpperCase();
 
       $.ajax({
         type:     "POST",
@@ -124,5 +126,10 @@
 
   $(".alarm-admin-modal-field").on('click', function() {
     clearErrors();
+  });
+
+  $('#alarm-admin-modal').on('shown.bs.modal', function() {
+    $("#alarm-admin-modal select").css('-webkit-appearance', 'menulist');
+    $("#alarm-admin-modal select:disabled").css('-webkit-appearance', 'none');
   });
 </script>

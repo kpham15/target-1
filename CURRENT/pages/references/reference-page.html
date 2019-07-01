@@ -73,7 +73,7 @@ function queryReferences() {
 		},
 		dataType: 'json'
 	}).done(function(data) {
-		let res = data.rows[0];
+		let res = data.rows;
 		
 		displayRefs(res);
 	});
@@ -141,7 +141,8 @@ $(document).ready(function() {
 				"temp_max": 			refObj.temp_max,
 				"user_disable": 	refObj.user_disable,
 				"user_idle_to": 	refObj.user_idle_to,
-				"volt_range": 		refObj.volt_range
+				"volt_range": 		refObj.volt_range,
+				"temp_format": 		refObj.temp_format
 			},
 			dataType: 'json'
 		}).done(function(data) {

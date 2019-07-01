@@ -49,7 +49,16 @@ function lib_ValidateUser($userObj) {
     if ($userObj->uname != 'ADMIN' && $userObj->uname != 'SYSTEM') {
         $refObj = new REF();
         // if time since last action exceeds user_idle_to then logout user
-        $idle_to = $refObj->ref[0]['user_idle_to'] * 60;
+        // if user_idle_to is 0/empty/null, set value to default, if default is 0/empty/null, set value = 45
+        $userIdleInfo = $refObj->ref['user_idle_to'];
+        if($userIdleInfo == 0){
+            $userIdleInfo = $refObj->default['user_idle_to'];
+            if($userIdleInfo == 0)
+                $userIdleInfo = 45;
+        }
+    
+        $idle_to = $userIdleInfo * 60;
+
         if ($userObj->stat == 'ACTIVE') {
             if (lib_IsTimedOut($userObj->login, $idle_to)) {
                 $userObj->updateLogout();

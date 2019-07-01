@@ -419,4 +419,19 @@ var refOptions = [
 			}
 		]
 	},
+	{
+		title: 			"TEMPERATURE FORMAT",
+		selectId: 	"reference-page-tempformat",
+		ref_id:     "temp_format",
+		options: 		[
+			{
+				value:	"F",
+				text: 	"F"
+			},
+			{
+				value: 	"C",
+				text: 	"C"
+			},
+		]
+	},
 ]

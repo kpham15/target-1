@@ -14,7 +14,7 @@
                 <div class="col-sm-4 " style="padding: 0px 2px 0px 20px;;">
                     <label for="svcModal_ckid_txt">CKID</label>
                     <label for="svcModal_tn_cbx">TN:</label>
-                    <input type="checkbox" id="svcModal_tn_cbx" style="padding-top:2px">
+                    <input type="checkbox" id="svcModal_tn_cbx" class="svcModal-form" tyle="padding-top:2px">
                     <input style="text-transform: uppercase;" type="text" class="form-control svcModal-form svcModal-ckid-txt" id="svcModal_ckid" placeholder="123-456-7890">
                     <input style="display:none" type="text" class="form-control svcModal-form svcModal-ckid-tn" placeholder="555-555-5555"  data-inputmask='"mask": "999-999-9999"' data-mask=""/>
 
@@ -191,13 +191,27 @@
             </div>
             <!-- DD and FDD row -->
             <div class="row">
-                <div class="col-sm-5 " style="padding: 0px 2px 0px 20px;">
-                    <label for="svcModal_dd_date">DD</label>
-                    <input type="date" class="form-control svcModal-form" id="svcModal_dd_date">
+                <div class="col-sm-5" style="padding: 0px 2px 0px 20px;">
+                    <div class="form-group">
+                        <label>DD:</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right svcModal-form datepicker" id="svcModal_dd_date">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-5 " style="padding: 0px 2px 0px 2px;">
-                    <label for="svcModal_fdd_date">FDD</label>
-                    <input type="date" class="form-control svcModal-form" id="svcModal_fdd_date">
+                <div class="col-sm-5" style="padding:2px;">
+                    <div class="form-group">
+                        <label>FDD:</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right svcModal-form datepicker" id="svcModal_fdd_date">
+                        </div>
+                    </div>
                 </div>
             </div>            
             <!-- Action row -->
@@ -205,17 +219,18 @@
                 <div class="col-sm-3 " style="padding: 0px 2px 0px 20px;"> 
                     <label for="svcModal_act_txt">ACTION</label>    
                     <input type="text" class="form-control svcModal-form" id="svcModal_act_txt" readonly>
-                </div>
-                <div class="col-sm-9" style="margin-top:25px">
-                    <label id="svcModal_rslt" style="color: rgb(0, 128, 0);"></label>
-                </div>    
+                </div> 
             </div>
             
         </div>
     
         <div class="modal-footer">
-            <button id="svc-modal-submit" type="button" class="btn btn-primary" style="float:left">Submit</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:left">Close</button>
+            <button id="svc-modal-submit" type="button" class="btn btn-primary" style="float:left">
+              Submit
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
         </div>
         </div>
     </div>
@@ -256,6 +271,9 @@ function populateSvcModal(){
     $("#svcModal_oldPortX_txt").val($("#svc_portX_txt").val());
     $("#svcModal_oldTfac_txt").val($("#svc_tfac_txt").val());
     $("#svcModal_oldPortY_txt").val($("#svc_portY_txt").val());
+
+    $('#svcModal_dd_date').val($('#svc_dd_date').val());
+    $('#svcModal_fdd_date').val($('#svc_fdd_date').val());
 
     $("#svcModal_act_txt").val($("#svc_act_sel").val());
 
@@ -311,7 +329,6 @@ function clearSvcModal() {
     $("#svcModal_cls_sel").val("RES");
     $("#svcModal_adsr_sel").val("N");
     $("#svcModal_mlo_sel").val("N");
-    $("#svcModal_rslt").text("")
     clearSvcModalFacSearch();
 }
 
@@ -323,6 +340,15 @@ function clearSvcModalFacSearch(){
 }
 
 $(document).ready(function(){
+
+    $("#svcModal_dd_date").datepicker({
+        orientation: "bottom"
+    });
+
+    $("#svcModal_fdd_date").datepicker({
+        orientation: "bottom"
+    });
+
     $(".svcModal-ckid-tn").inputmask();
 
     $("#svcModal_newFfacSearch_btn").click(function(){
@@ -370,6 +396,8 @@ $(document).ready(function(){
         let prot = $("#svcModal_prot_sel").val().toUpperCase();
         let ordno = $("#svcModal_ordno_txt").val().toUpperCase();
         let mlo = $("#svcModal_mlo_sel").val().toUpperCase();
+        let dd = $('#svcModal_dd_date').val();
+        let fdd = $('#svcModal_fdd_date').val();
         
         let ctyp, ffac, tfac, fport, tport;
         if(act == "CONNECT") {
@@ -422,6 +450,8 @@ $(document).ready(function(){
                 tfac:   tfac,
                 fport:  fport,
                 tport:  tport,
+                dd:     dd,
+                fdd:    fdd,
                 ckt_id:	ckt_id,
                 cktcon: cktcon,
                 idx:	idx,
@@ -479,8 +509,13 @@ $(document).ready(function(){
             $(".svcModal-ckid-tn").attr("id","").hide();
             $(".svcModal-ckid-txt").attr("id","svcModal_ckid").show();
         }
-    })
-})
+    });
+
+    // Clear input error when any modal field is changed/input
+    $(".svcModal-form").on('input', function() {
+        clearErrors();
+    });
+});
     
 
 

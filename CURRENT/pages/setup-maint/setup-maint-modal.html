@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="setup-maint-modal">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,7 +51,7 @@
             <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>TKTNO</label>
-                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" style="text-transform: uppercase;" />
+                <input id="setup-maint-modal-tktno" type="text" class="form-control setup-maint-modal-input" />
               </div>
             </div>
             <!-- MLO -->
@@ -90,7 +90,7 @@
           <div id="setup-maint-modal-change-div" class="row" style="display:none">
             <div id="setup-maint-modal-change-out" class="col-md-12">
               <div class="form-group">
-                <label class="col-md-1" style="padding: 0px 2px 0px 20px;">OUT:</label>
+                <label class="col-md-1" style="padding: 0px 2px 0px 10px;">OUT:</label>
                 <!-- Border for Out -->
                 <div class="col-md-11" style="border:lightgray solid 1px;">
                   <!-- CONTYP -->
@@ -101,38 +101,38 @@
                     </div>
                   </div>
                   <!-- FAC(X) -->
-                  <div class="col-md-5">
+                  <div class="col-md-5" style="padding: 0px 2px 0px 2px;">
                     <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(X):</label>
                         <input id="setup-maint-modal-change-out-ffac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
-                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(X):</label>
                       </div>
                     </div>
-                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-8" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-out-fport" type="text" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
                   </div>
                   <!-- FAC(Y) -->
-                  <div class="col-md-5">
+                  <div class="col-md-5" style="padding: 0px 2px 0px 2px;">
                     <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(Y):</label>
                         <input id="setup-maint-modal-change-out-tfac" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
                     </div>
-                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(Y):</label>
                       </div>
                     </div>
-                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-8" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-out-tport" class="form-control setup-maint-modal-input" disabled="" />
                       </div>
@@ -143,7 +143,7 @@
             </div>
             <div id="setup-maint-modal-change-in" class="col-md-12">
               <div class="form-group">
-                <label class="col-md-1" style="padding: 0px 2px 0px 20px;">IN:</label>
+                <label class="col-md-1" style="padding: 0px 2px 0px 10px;">IN:</label>
                 <!-- Border for IN -->
                 <div class="col-md-11" style="border:lightgray solid 1px;">
                   <!-- CONTYP -->
@@ -159,7 +159,7 @@
                     </div>
                   </div>
                   <!-- FAC(X) -->
-                  <div class="col-md-5">
+                  <div class="col-md-5" style="padding: 0px 2px 0px 2px;">
                     <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(X):</label>
@@ -167,19 +167,19 @@
                         <input id="setup-maint-modal-change-in-ffac" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
-                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(X):</label>
                       </div>
                     </div>
-                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-8" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-in-fport" type="text" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
                   </div>
                   <!-- FAC(Y) -->
-                  <div class="col-md-5">
+                  <div class="col-md-5" style="padding: 0px 2px 0px 2px;">
                     <div class="col-md-12" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>FAC(Y):</label>
@@ -187,31 +187,33 @@
                         <input id="setup-maint-modal-change-in-tfac" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
-                    <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-4" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <label>PORT(Y):</label>
                       </div>
                     </div>
-                    <div class="col-md-9" style="padding: 0px 2px 0px 2px;">
+                    <div class="col-md-8" style="padding: 0px 2px 0px 2px;">
                       <div class="form-group">
                         <input id="setup-maint-modal-change-in-tport" type="text" class="form-control setup-maint-modal-input" />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div id="setup-maint-modal-change-search-div" ftyp="" class="col-md-11 col-md-offset-1" style="display:none;">
-              <div class="box box-primary">
-                <table id="setup-maint-modal-change-table" class="table table-striped table-bordered table-hover" style="width:100%;">
-                <thead>
-                  <tr>
-                    <th>FAC</th>
-                    <th>PSTA</th>
-                    <th>PORT</th>
-                  </tr>
-                </thead>
-              </table>
+                <div id="setup-maint-modal-change-search-div" ftyp="" class="col-md-11 col-md-offset-1" style="padding: 2px; display:none; border:lightgray solid 1px;">
+                  <div class="col-md-12 panel panel-defualt" style="margin:0 0 1px 0; padding: 0px;">
+                    <div class="box box-primary">
+                      <table id="setup-maint-modal-change-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>FAC</th>
+                          <th>PSTA</th>
+                          <th>PORT</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -417,13 +419,13 @@
         "api":    "ipcMaintConnect",
         "act":      obj.action,
         "user":     user.uname,
-        "ckid":     obj.ckid.toUpperCase(),
-        "cls":      obj.cls.toUpperCase(),
-        "adsr":     obj.adsr.toUpperCase(),
-        "prot":     obj.prot.toUpperCase(),
-        "tktno":    obj.tktno.toUpperCase(),
-        "mlo":      obj.mlo.toUpperCase(),
-        "ctyp":     obj.ctyp.toUpperCase(),
+        "ckid":     obj.ckid,
+        "cls":      obj.cls,
+        "adsr":     obj.adsr,
+        "prot":     obj.prot,
+        "tktno":    obj.tktno,
+        "mlo":      obj.mlo,
+        "ctyp":     obj.ctyp,
         "ffac":     maintPickedFfac,
         "tfac":     maintPickedTfac,
       },
@@ -464,15 +466,15 @@
         "api":    "ipcMaintDiscon",
         "act":    "MTC_DISCON",
         "user":   user.uname,
-        "ckid":   obj.ckid.toUpperCase(),
-        "cls":    obj.cls.toUpperCase(),
-        "adsr":   obj.adsr.toUpperCase(),
-        "prot":   obj.prot.toUpperCase(),
-        "tktno":  obj.tktno.toUpperCase(),
-        "mlo":    obj.mlo.toUpperCase(),
-        "ctyp":   obj.ctyp.toUpperCase(),
-        "ffac":   obj.ffac.toUpperCase(),
-        "tfac":   obj.tfac.toUpperCase(),
+        "ckid":   obj.ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
       },
       dataType:   'json',
     }).done(function(data) {
@@ -510,15 +512,15 @@
         "api":    "ipcMaintRestoreMtcd",
         "act":    "RESTORE_MTCD",
         "user":   user.uname,
-        "ckid":   obj.ckid.toUpperCase(),
-        "cls":    obj.cls.toUpperCase(),
-        "adsr":   obj.adsr.toUpperCase(),
-        "prot":   obj.prot.toUpperCase(),
-        "tktno":  obj.tktno.toUpperCase(),
-        "mlo":    obj.mlo.toUpperCase(),
-        "ctyp":   obj.ctyp.toUpperCase(),
-        "ffac":   obj.ffac.toUpperCase(),
-        "tfac":   obj.tfac.toUpperCase(),
+        "ckid":   obj.ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
       },
       dataType:   'json',
     }).done(function(data) {
@@ -556,15 +558,15 @@
         "api":    "ipcMaintConnect",
         "act":    "MTC_RESTORE",
         "user":   user.uname,
-        "ckid":   obj.ckid.toUpperCase(),
-        "cls":    obj.cls.toUpperCase(),
-        "adsr":   obj.adsr.toUpperCase(),
-        "prot":   obj.prot.toUpperCase(),
-        "tktno":  obj.tktno.toUpperCase(),
-        "mlo":    obj.mlo.toUpperCase(),
-        "ctyp":   obj.ctyp.toUpperCase(),
-        "ffac":   obj.ffac.toUpperCase(),
-        "tfac":   obj.tfac.toUpperCase(),
+        "ckid":   obj.ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
+        "ffac":   obj.ffac,
+        "tfac":   obj.tfac,
       },
       dataType:   'json',
     }).done(function(data) {
@@ -618,13 +620,13 @@
         "api":    "ipcMaintConnect",
         "act":    obj.action,
         "user":   user.uname,
-        "ckid":   obj.ckid.toUpperCase(),
-        "cls":    obj.cls.toUpperCase(),
-        "adsr":   obj.adsr.toUpperCase(),
-        "prot":   obj.prot.toUpperCase(),
-        "tktno":  obj.tktno.toUpperCase(),
-        "mlo":    obj.mlo.toUpperCase(),
-        "ctyp":   obj.ctyp.toUpperCase(),
+        "ckid":   obj.ckid,
+        "cls":    obj.cls,
+        "adsr":   obj.adsr,
+        "prot":   obj.prot,
+        "tktno":  obj.tktno,
+        "mlo":    obj.mlo,
+        "ctyp":   obj.ctyp,
         "ffac":   maintTestFac,
         "tstfac": maintTestPort,
       },
@@ -677,21 +679,21 @@
         "api":      "ipcProv",
         "act":      "CHANGE",
         "user":     user.uname,
-        "ckid":     obj.ckid.toUpperCase(),
-        "cls":      obj.cls.toUpperCase(),
-        "adsr":     obj.adsr.toUpperCase(),
-        "prot":     obj.prot.toUpperCase(),
-        "tktno":    obj.tktno.toUpperCase(),
-        "mlo":      obj.mlo.toUpperCase(),
-        "ctyp":     obj.ctyp.toUpperCase(),
-        "ffac":     obj.oldFfac.toUpperCase(),
-        "tfac":     obj.oldTfac.toUpperCase(),
-        "newffac":  obj.newFfac.toUpperCase(),
-        "newtfac":  obj.newTfac.toUpperCase(),
-        "fport":    obj.fport.toUpperCase(),
-        "tport":    obj.tport.toUpperCase(),
-        "newfport": obj.newFport.toUpperCase(),
-        "newtport": obj.newTport.toUpperCase(),
+        "ckid":     obj.ckid,
+        "cls":      obj.cls,
+        "adsr":     obj.adsr,
+        "prot":     obj.prot,
+        "tktno":    obj.tktno,
+        "mlo":      obj.mlo,
+        "ctyp":     obj.ctyp,
+        "ffac":     obj.oldFfac,
+        "tfac":     obj.oldTfac,
+        "newffac":  obj.newFfac,
+        "newtfac":  obj.newTfac,
+        "fport":    obj.fport,
+        "tport":    obj.tport,
+        "newfport": obj.newFport,
+        "newtport": obj.newTport,
       },
       dataType:     'json',
     }).done(function(data) {
@@ -805,24 +807,24 @@
       }
 
       let obj = {
-        ckid:     ckid,
-        cls:      $('#setup-maint-modal-cls').val(),
-        adsr:     $('#setup-maint-modal-adsr').val(),
-        prot:     $('#setup-maint-modal-prot').val(),
-        tktno:    $('#setup-maint-modal-tktno').val(),
-        mlo:      $('#setup-maint-modal-mlo').val(),
-        action:   $('#setup-maint-modal-action').val(),
-        ctyp:     $('#setup-maint-modal-contyp').val(),
-        ffac:     $('#setup-maint-modal-ffac').val(),
-        tfac:     $('#setup-maint-modal-tfac').val(),
-        fport:    $('#setup-maint-modal-change-out-fport').val(),
+        ckid:     ckid.toUpperCase(),
+        cls:      $('#setup-maint-modal-cls').val().toUpperCase(),
+        adsr:     $('#setup-maint-modal-adsr').val().toUpperCase(),
+        prot:     $('#setup-maint-modal-prot').val().toUpperCase(),
+        tktno:    $('#setup-maint-modal-tktno').val().toUpperCase(),
+        mlo:      $('#setup-maint-modal-mlo').val().toUpperCase(),
+        action:   $('#setup-maint-modal-action').val().toUpperCase(),
+        ctyp:     $('#setup-maint-modal-contyp').val().toUpperCase(),
+        ffac:     $('#setup-maint-modal-ffac').val().toUpperCase(),
+        tfac:     $('#setup-maint-modal-tfac').val().toUpperCase(),
+        fport:    $('#setup-maint-modal-change-out-fport').val().toUpperCase(),
         tport:    $('#setup-maint-modal-change-out-tport').val(),
-        oldFfac:  $('#setup-maint-modal-change-out-ffac').val(),
-        oldTfac:  $('#setup-maint-modal-change-out-tfac').val(),
-        newFfac:  $('#setup-maint-modal-change-in-ffac').val(),
-        newTfac:  $('#setup-maint-modal-change-in-tfac').val(),
-        newFport: $('#setup-maint-modal-change-in-fport').val(),
-        newTport: $('#setup-maint-modal-change-in-tport').val()
+        oldFfac:  $('#setup-maint-modal-change-out-ffac').val().toUpperCase(),
+        oldTfac:  $('#setup-maint-modal-change-out-tfac').val().toUpperCase(),
+        newFfac:  $('#setup-maint-modal-change-in-ffac').val().toUpperCase(),
+        newTfac:  $('#setup-maint-modal-change-in-tfac').val().toUpperCase(),
+        newFport: $('#setup-maint-modal-change-in-fport').val().toUpperCase(),
+        newTport: $('#setup-maint-modal-change-in-tport').val().toUpperCase()
       }
 
       
@@ -926,8 +928,13 @@
       $('#setup-maint-forms-action').val('');
     });
 
-    $("#setup-maint-modal-input").on('click', function() {
+    $(".setup-maint-modal-input").on('click', function() {
       clearErrors();
+    });
+
+    $("#setup-maint-modal").on('shown.bs.modal', function() {
+      $("#setup-maint-modal select").css('-webkit-appearance', 'menulist');
+      $("#setup-maint-modal select:disabled").css('-webkit-appearance', 'none');
     });
   });
 </script>

@@ -92,7 +92,7 @@
 		// Check REF table for auto_ordno & auto_ckid
 		$refObj = new REF();
 		if ($tktno == '' || $tktno == null) {
-			if ($refObj->ref[0]['auto_ordno'] == 'Y') {
+			if ($refObj->ref['auto_ordno'] == 'Y') {
 				$time = new DateTime('now');
 				$timestr = $time->format('H:i:s');
 				$ordno = strtoupper(substr($userObj->uname, 0, 4)) . $timestr;
@@ -165,7 +165,7 @@
 		if ($sms->rslt != SUCCESS) {
 			$result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$fpObj->psta.")";            
-			$result['reason'] = "MAINTENANCE DISCONNECT - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE DISCONNECT - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$fpObj->npsta = $sms->npsta;
@@ -175,7 +175,7 @@
 		if ($sms->rslt != SUCCESS) {
 			$result['rslt'] = $sms->rslt;
             $result['jeop'] = "SP3:FAC STATUS (".$tpObj->psta.")";            
-			$result['reason'] = "MAINTENANCE DISCONNECT - " . $sms->reason;
+			$result['reason'] = "MAINTENANCE DISCONNECT - " . "INVALID PSTA ($sms->psta)";
 			return $result;
 		}
 		$tpObj->npsta = $sms->npsta;

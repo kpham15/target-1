@@ -9,7 +9,7 @@
         <div class="col-sm-6 " style="padding:2px;">
             <div class="form-group">
                 <label for="batchExc_act_sel">ACTION</label>
-                <select id="batchExc_act_sel" class="form-control batchExc_field" style="padding: 2px">
+                <select id="batchExc_act_sel" class="form-control" style="padding: 2px">
                     <option></option>
                     <option>UPLOAD</option>
                     <option>DELETE</option>
@@ -23,7 +23,7 @@
     <div class="col-sm-9">
         <div class="col-sm-12 " style="padding:2px;">
             <label>SCRIPTS:</label>
-            <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid"></div>
+            <div id="batchExc_script_txt" style="overflow: scroll; width:100%; height: 400px; padding:10px 10px 10px 10px; background-color:rgb(199, 214, 216); border: 3px gray solid; text-transform: uppercase"></div>
         </div>
         <div class="form-group" style="float: left">
             <button style="margin:25px" class="btn btn-primary" id="batchExc_execute_btn">EXECUTE</button>    
@@ -47,6 +47,7 @@ function batchExec_start() {
 }
 
 function batchExec_clearForm(){
+    clearErrors();
     $("#batchExc_act_sel").val("");
     $("#batchExc_file_sel").val("");
     // batchExc.tbl.body.empty();
@@ -178,10 +179,10 @@ function batchExec_recurExecute(i) {
             }
 
     
-            if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
-                $("#batchExc_download_btn").prop("disabled", false);
-                return;
-            }
+            // if(data["rslt"] == "fail" && paraValueArray[0] == "PROV") {
+            //     $("#batchExc_download_btn").prop("disabled", false);
+            //     return;
+            // }
 
             batchExec_recurExecute(i+1);
         });
@@ -197,10 +198,13 @@ function batchExec_recurExecute(i) {
     
 $("#batchExc_execute_btn").click(function(){
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
     batchExec_executeCommand();
 });
 
 $("#batchExc_act_sel").change(function() {
+    clearErrors();
+    
     if ($("#batchExc_act_sel").val() !="") {
         if ($("#batchExc_act_sel").val()  ==  "UPLOAD") {
             batchExcModal_clearForm();
@@ -214,7 +218,6 @@ $("#batchExc_act_sel").change(function() {
             else {
                 inputError($("#batchExc_act_sel"), "Please select a batch file!");
             }
-            $("#batchExc_act_sel").val("");
         }
     }
 
@@ -264,11 +267,13 @@ $("#batchExc_download_btn").click(function(){
 
 $(document).ready(function(){
     $(".menu-item[page_id='batch-exec-page']").click(function() {
+        
         batchExec_start();
     });
 });
 
-$(".batchExc_field").on('click', function() {
+$(".batchExc_field").on('input', function() {
     clearErrors();
+    $("#batchExc_act_sel").val("").change();
 });
 </script>
