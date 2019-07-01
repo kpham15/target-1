@@ -174,15 +174,21 @@
 		});
 
 		$("#maintReport-table_filter input").addClass('maintReport-form-input');
-		
+
 		// REPORT Change listener
 		$('.maintReport-form-input').on("input", function() {
 			clearErrors();
 			$("#maintReport-form-report").val("VIEW REPORT").change();
 		});
 
+		$("#maintReport-form-report").on('change', function() {
+			clearErrors();
+		});
 
-
+		$("#maintReport-form-daterange").on('change', function() {
+			clearErrors();
+			$("#maintReport-form-report").val("VIEW REPORT").change();
+		});
 	});
 
 
