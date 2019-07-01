@@ -76,31 +76,31 @@
 <script type="text/javascript">
 
   // DOWNLOAD REPORT
-  function downloadConfigReports(args) {
+  function downloadConfigurationReports(args) {
     console.log("arrives correctly 2");
 
     var data, filename, link;
-    // var table = $(".configReport-table[style='display: block'] table").attr('id');
-    // console.log("HI");
-    // if (table == "configReport-portmap-table") {
-    // console.log("HI1");
-    //   var csv = convertArrayOfObjectsToCSV({
-    //     data: configReportPortmapDatatable.data().toArray()
-    //   });
-    // } else if (table == "configReport-wirecenter-table") {
-    // console.log("HI2");
-    //   var csv = convertArrayOfObjectsToCSV({
-    //     data: configReportWcDatatable.data().toArray()
-    //   });
-    // } else if (table == "configReport-facility-table") {
-    // console.log("HI3");
-    //   var csv = convertArrayOfObjectsToCSV({
-    //     data: configreportFacDatatable.data().toArray()
-    //   });
-    // }
-    var csv = convertArrayOfObjectsToCSV({
-      data: configReportPortmapDatatable.data().toArray()
-    });
+    var table = $(".configReport-table[style='display: block'] table").attr('id');
+    console.log("HI");
+    if (table == "configReport-portmap-table") {
+    console.log("HI1");
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportPortmapDatatable.data().toArray()
+      });
+    } else if (table == "configReport-wirecenter-table") {
+    console.log("HI2");
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportWcDatatable.data().toArray()
+      });
+    } else if (table == "configReport-facility-table") {
+    console.log("HI3");
+      var csv = convertArrayOfObjectsToCSV({
+        data: configreportFacDatatable.data().toArray()
+      });
+    }
+    // var csv = convertArrayOfObjectsToCSV({
+    //   data: configReportPortmapDatatable.data().toArray()
+    // });
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
       return;
@@ -173,7 +173,7 @@
         }
       } else if (report.val() === "CREATE REPORT") {
         console.log("arrives correctly 1");
-        downloadConfigReports("abc");
+        downloadConfigurationReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
         console.log("arrives correctly 3");
       }
     });
