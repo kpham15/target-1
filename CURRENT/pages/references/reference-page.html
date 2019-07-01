@@ -88,17 +88,21 @@ function displayRefs(data) {
 	});
 	
 }
+$(document).ready(function() {
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
+		clearErrors();
+		$('#reference-page-post-response-text').text('');
+		$('#reference-page-action').val('');
+		refStartup();
+	});
+});
 
 $(document).ready(function() {
 
 	// Change any option to clear the red/green text
 	$('#ref-select-div').on('change', function() {
 		$('#reference-page-post-response-text').text('');
-	});
-
-	$("#ref-select-div select").on('input', function() {
-		clearErrors();
-		$("#reference-page-action").val("");
 	});
 
 	// Click event for submit button
@@ -174,19 +178,16 @@ $(document).ready(function() {
 		$('#reference-page-post-response-text').text('');
 		$('#reference-page-action').val('');
 		clearErrors();
-	})
+	});
+
+	$(".ref-select-box").change(function() {
+		clearErrors();
+		$("#reference-page-action").val("");
+	});
 
 	// Click event for action selection
 	$('#reference-page-action').change(function() {
 		clearErrors();
-	});
-
-	// Click event for sidebar, loads page first time
-	$('.menu-item[page_id="references-page"]').click(function() {
-		clearErrors();
-		$('#reference-page-post-response-text').text('');
-		$('#reference-page-action').val('');
-		refStartup();
 	});
 
 });
