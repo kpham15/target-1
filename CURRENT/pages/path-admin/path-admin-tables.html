@@ -164,6 +164,10 @@
     $(document).on('click', '#pathAdmin-table tbody tr', function() {
       let data = pathAdminDatatable.row(this).data();
 
+      if (data == undefined) {
+        return;
+      }
+
       $("#pathAdmin-form-ckid").val(data.ckid);
       $("#pathAdmin-form-ckid-tn").val(data.ckid);
       $("#pathAdmin-form-path").val(data.path);
