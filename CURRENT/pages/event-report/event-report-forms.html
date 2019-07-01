@@ -49,6 +49,7 @@
             <div class="form-group">
               <label>FUNCTION:</label>
               <select id="eventReport-form-function" class="form-control eventReport-form-input" disabled>
+                <option></option>
               </select>
             </div>
           </div>
@@ -58,6 +59,7 @@
             <div class="form-group">
               <label>TASK:</label>
               <select id="eventReport-form-task" class="form-control eventReport-form-input" disabled>
+                <option></option>
               </select>
             </div>
           </div>
@@ -69,7 +71,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label>REPORT:</label>
-              <select id="eventReport-form-report" class="form-control eventReport-form-input">
+              <select id="eventReport-form-report" class="form-control">
                 <option value="VIEW REPORT">VIEW REPORT</option>
                 <option value="CREATE REPORT">CREATE REPORT</option>
               </select>
@@ -154,6 +156,9 @@ $(document).ready(function() {
       eventReportStartDate  = start.format('YYYY-MM-DD');
       eventReportEndDate    = end.format('YYYY-MM-DD');
     });
+
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT").change();
   }
 
   initializeConfigReportDateRangePicker();
@@ -161,6 +166,9 @@ $(document).ready(function() {
   // UPON LOAD PAGE FIRST TIME
   var eventReportFirstLoad = true;
   $(".menu-item[page_id='event-report-page']").click(async function() {
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT").change();
+
     if (eventReportFirstLoad != true) {
       return;
     }
@@ -195,10 +203,9 @@ $(document).ready(function() {
 
     let currDate = moment(new Date()).format('YYYY-MM-DD');
 
+    eventReportDatatable.clear().draw();
     $('.eventReport-form-input').val('').change();
     $('#eventReport-form-report').val("VIEW REPORT");
-    
-    eventReportDatatable.clear().draw();
 
     $('#eventReport-daterange').val('').daterangepicker("update");
     eventReportStartDate = currDate;
@@ -210,9 +217,17 @@ $(document).ready(function() {
     clearErrors();
   });
 
+  $("#eventReport-table_filter input").addClass('eventReport-form-input');
+
   // CLEAR ERRORS WHEN CLICK ON FIELD
-  $(".eventReport-form-input").on('click', function() {
+  $(".eventReport-form-input").on('input', function() {
     clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT");
+  });
+
+  $("#eventReport-form-daterange").on('change', function() {
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT");
   });
 
   // CHANGE FUNCTION FIELD BASED ON EVENT
@@ -258,6 +273,9 @@ $(document).ready(function() {
     }
   });
 
+  $("#eventReport-form-report").on('change', function() {
+    clearErrors();
+  });
 
   // END OF DOCUMENT READY
 });
