@@ -210,6 +210,10 @@
       clearErrors();
       $("#configReport-form-report").val("VIEW REPORT").change();
     });
+
+    $("#configReport-form-report").on('change', function() {
+      clearErrors();
+    });
     // END OF DOCUMENT READY
   });
 
