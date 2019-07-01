@@ -77,6 +77,8 @@
 
   // DOWNLOAD REPORT
   function downloadConfigReports(args) {
+    console.log("arrives correctly 2");
+
     var data, filename, link;
     // var table = $(".configReport-table[style='display: block'] table").attr('id');
     // console.log("HI");
@@ -170,6 +172,7 @@
           configReportQueryFaclog(configReportStartDate, configReportEndDate);
         }
       } else if (report.val() === "CREATE REPORT") {
+        console.log("arrives correctly 1");
         downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
       }
     });
