@@ -156,6 +156,9 @@ $(document).ready(function() {
       eventReportStartDate  = start.format('YYYY-MM-DD');
       eventReportEndDate    = end.format('YYYY-MM-DD');
     });
+
+    clearErrors();
+    $("#eventReport-form-report").val("VIEW REPORT").change();
   }
 
   initializeConfigReportDateRangePicker();
@@ -216,11 +219,6 @@ $(document).ready(function() {
 
   // CLEAR ERRORS WHEN CLICK ON FIELD
   $(".eventReport-form-input").on('input', function() {
-    clearErrors();
-    $("#eventReport-form-report").val("VIEW REPORT");
-  });
-
-  $("#eventReport-form-daterange").on('click', function() {
     clearErrors();
     $("#eventReport-form-report").val("VIEW REPORT");
   });
