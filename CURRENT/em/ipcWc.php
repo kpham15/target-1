@@ -544,11 +544,11 @@
 		
 		$result['log'] = "ACTION = RESET";
 
-		if ($userObj->ugrp != 'ADMIN') {
+		if ($userObj->grpObj->setwc != "Y") {
 			$result['rslt'] = 'fail';
 			$result['reason'] = 'PERMISSION DENIED';
 			$result['rows'] = [];
-			
+			return $result;
 		}
 		$wcObj->resetWc($id);
 		if($wcObj->rslt == FAIL) {
@@ -568,7 +568,7 @@
 
 		$result['log'] = "ACTION = TURN_UP | WCNAME = $wcname | WCC = $wcc | CLLI = $clli | NPANXX = $npanxx | FRLOC = $frloc";
 
-		if ($userObj->ugrp != 'ADMIN') {
+		if ($userObj->grpObj->setwc != "Y") {
 			$result['rslt'] = 'fail';
 			$result['reason'] = 'PERMISSION DENIED';
 			$result['rows'] = [];
@@ -595,7 +595,7 @@
 
 		$result['log'] = "ACTION = HOLD | WCNAME = $wcname | WCC = $wcc | CLLI = $clli | NPANXX = $npanxx | FRLOC = $frloc";
 
-		if ($userObj->ugrp != 'ADMIN') {
+		if ($userObj->grpObj->setwc != "Y") {
 			$result['rslt'] = 'fail';
 			$result['reason'] = 'PERMISSION DENIED';
 			$result['rows'] = [];

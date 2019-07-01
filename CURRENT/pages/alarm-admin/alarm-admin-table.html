@@ -80,11 +80,17 @@
       },
       dataType:   'json'
     }).done(function(data) {
-      let res = data.rows;
-
-      alarmAdminDatatable.clear().draw();
-      alarmAdminDatatable.rows.add(res);
-      alarmAdminDatatable.columns.adjust().draw();
+      if(data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#alarm-admin-forms-action"),data.reason);
+      }
+      else {
+        let res = data.rows;
+        alarmAdminDatatable.clear().draw();
+        alarmAdminDatatable.rows.add(res);
+        alarmAdminDatatable.columns.adjust().draw();
+      }
+      
     })
   }
   
