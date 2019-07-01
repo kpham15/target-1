@@ -13,15 +13,11 @@
     </section>
 
     <div class="col-md-5">
-      <div class="col-md-12">
-        <!-- MATRIX FORM -->
-        <?php include __DIR__ . '/matrix-forms.html'; ?>
-      </div>
+      <!-- MATRIX FORM -->
+      <?php include __DIR__ . '/matrix-forms.html'; ?>
 
-      <div class="col-md-12">
-        <!-- VIEW PORT TABLE -->
-        <?php include __DIR__ . '/tables/matrix-port-table.html'; ?>
-      </div>
+      <!-- VIEW PORT TABLE -->
+      <?php include __DIR__ . '/tables/matrix-port-table.html'; ?>
 
     </div>
 
