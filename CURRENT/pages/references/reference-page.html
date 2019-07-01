@@ -90,28 +90,21 @@ function displayRefs(data) {
 }
 
 $(document).ready(function() {
-	refStartup();
 
 	var refFirstLoad = true;
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
+		refStartup();
 		clearErrors();
 		$("#reference-page-action").val("").change();
-		if (refFirstLoad != true) {
-			return;
-		}
-		$(document).ready(function() {
-			// Change any option to clear the red/green text
-			$('#ref-select-box').on('change', function() {
-				clearErrors();
-				$("#reference-page-action").val("").change();
-			});
-
-		});
-		refFirstLoad = false;
+		
 	});
 
-
+	// Change any option to clear the red/green text
+	$('.ref-select-row').on('change', function() {
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
