@@ -94,6 +94,9 @@ $(document).ready(function() {
 	// Change any option to clear the red/green text
 	$('#ref-select-div').on('change', function() {
 		$('#reference-page-post-response-text').text('');
+	});
+
+	$(".ref-select-box").on('change', function() {
 		clearErrors();
 		$("#reference-page-action").val("").change();
 	});
