@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header" style="padding:2px;">
       <h1>
-        Lock/Unlock Matrix Cards and Nodes
+        LOCK/UNLOCK MATRIX CARDS AND NODES
       </h1>
       <ol class="breadcrumb" style="padding-top: 0px">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
