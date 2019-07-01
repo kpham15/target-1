@@ -31,7 +31,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="brdcst-form-action" class="form-control brdcst-form-input">
+          <select id="brdcst-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -83,10 +83,29 @@
 var brdcstId = '';
 
 $(document).ready(function(obj) {
-
-  $(".brdcst-form-input").on('click', function() {
+  $(".menu-item[page_id='brdcst-page']").click(function() {
     clearErrors();
+    $("#brdcst-form-action").val("").change();
   });
+
+  $("#brdcst-table_filter input").addClass('brdcst-form-input');
+
+  $(".brdcst-form-input").on('input', function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+  });
+
+  $("#brdcst-form button").on('click', function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+  });
+
+  $("#brdcst-modal").on('shown.bs.modal', function() {
+    $("#brdcst-modal select").css('-webkit-appearance', 'menulist');
+    $("#brdcst-modal select:disabled").css('-webkit-appearance', 'none');
+  });
+
+
 
   function brdcstActionAdd() {
     $('#brdcst-modal-msgowner, #brdcst-modal-msgtitle, #brdcst-modal-sa, #brdcst-modal-details').prop('disabled', false);
@@ -165,14 +184,16 @@ $(document).ready(function(obj) {
 
   $('#brdcst-modal').on('hidden.bs.modal', function (e) {
     $('.brdcst-modal-field').prop('disabled', true).val('');
+    $("#brdcst-form-action").val("").change();
   });
 
   $('#brdcst-form-clear').click(function() {
+    brdcstDatatable.clear().draw();
     $('.brdcst-form-input').val('');
     brdcstId = '';
 
     clearErrors();
-    brdcstDatatable.clear().draw();
+    $("#brdcst-form-action").val("").change();
   });
 });
 </script>
