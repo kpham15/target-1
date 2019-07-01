@@ -150,12 +150,9 @@ $(document).ready(function() {
 			let res = data.rows;
 
 			if (data.rslt === 'fail') {
-				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+				inputError($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			} else {
-				
-				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-				
-				$('#reference-page-action').val('');
+				inputSuccess($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			}
 		});
 
@@ -167,20 +164,21 @@ $(document).ready(function() {
 
 		queryReferences();
 
-		$('#reference-page-post-response-text').text('');
 		$('#reference-page-action').val('');
 		clearErrors();
-	})
+	});
 
 	// Click event for action selection
 	$('#reference-page-action').change(function() {
 		clearErrors();
-	})
+	});
 
 	// Click event for sidebar, loads page first time
 	$('.menu-item[page_id="references-page"]').click(function() {
 		refStartup();
-	})
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
 
 
 });
