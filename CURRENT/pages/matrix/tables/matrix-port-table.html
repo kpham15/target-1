@@ -51,6 +51,7 @@
       if (data.hasOwnProperty('rows')) {
         res = data.rows;
       }
+      matrixPortDatatable.search("").draw();
       matrixPortDatatable.clear().draw();
       matrixPortDatatable.rows.add(res);
       matrixPortDatatable.columns.adjust().draw();

@@ -55,6 +55,7 @@
       if (data.hasOwnProperty('rows')) {
         res = data.rows;
       }
+      matrixCardDatatable.search("").draw();
       matrixCardDatatable.clear().draw();
       matrixCardDatatable.rows.add(res);
       matrixCardDatatable.columns.adjust().draw();
@@ -77,6 +78,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#matrix-form-action").val("").change();
 
       // LOAD LIST OF PORTS TABLE
       $("#matrix-port").css('display', 'block');
