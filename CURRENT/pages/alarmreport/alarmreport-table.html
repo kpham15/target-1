@@ -71,17 +71,19 @@
       },
       dataType: 'json'
     }).done(function(data) {
-			let res = data.rows;
-
-			if (res.length == 0) {
-				inputError($('#alarmreport-forms-report'),'No Record Found');
-				// console.log("rows are empty");
+			if(data.rslt == 'fail') {
+        inputError($("#fac-form-action"),data.reason);
+      }
+			else {
+				let res = data.rows;
+				if (res.length == 0) {
+					inputError($('#alarmreport-forms-report'),'No Record Found');
+				}
+				alarmreportDatatable.clear().draw();
+				alarmreportDatatable.rows.add(res);
+				alarmreportDatatable.columns.adjust().draw();
 			}
-
-      alarmreportDatatable.search("").draw();
-      alarmreportDatatable.clear().draw();
-      alarmreportDatatable.rows.add(res);
-      alarmreportDatatable.columns.adjust().draw();
+		
     });
 	}
 	

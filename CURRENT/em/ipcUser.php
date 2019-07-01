@@ -265,13 +265,17 @@
 	// Functions section
 	function removeImg($userObj, $uname, $uploadDir) {
 		try {
-			if ($userObj->ugrp != 'ADMIN' || $userObj->grpObj->setuser != "Y") {
+			if ($userObj->grpObj->setuser != "Y") {
 				throw new Exception('REMOVE_IMG: PERMISSION DENIED');
 			}
 
 			$targetUserObj = new USERS($uname);
 			if ($targetUserObj->rslt != SUCCESS) {
 				throw new Exception("REMOVE_IMG: ".$targetUserObj->reason); 
+			}
+
+			if ($userObj->grp > $targetUserObj->grp) {
+				throw new Exception('REMOVE_IMG: PERMISSION DENIED');
 			}
 
 			//check the prerequisites
@@ -549,6 +553,12 @@
 			return $result;
 		}
 
+		if($targetUserObj->stat !== "LOCKED") {
+			$result['rslt'] = "fail";
+			$result['reason'] = "UNLOCK_USER: USER IS NOT LOCKED";
+			return $result;
+		}
+
 		// only ADMIN and SUPERVISOR users can UNLOCK a user in lower grp
 		if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
 			$targetUserObj->unlckUser();
@@ -629,6 +639,12 @@
 			return $result;
 		}
 
+		if($targetUserObj->stat !== "DISABLED") {
+			$result['rslt'] = "fail";
+			$result['reason'] = "UNLOCK_USER: USER IS NOT DISABLED";
+			return $result;
+		}
+
 		// only ADMIN and SUPERVISOR users can enable a user in lower grp
 		if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
 			$targetUserObj->enableUser();
@@ -657,7 +673,7 @@
 
 		if ($userObj->grpObj->setuser != "Y") {
 			$result['rslt'] = 'fail';
-            $result['reason'] = "DELETE_USER: Permission Denied";
+            $result['reason'] = "DELETE_USER: PERMISSION_DENIED";
 			return $result;
 		}
 
