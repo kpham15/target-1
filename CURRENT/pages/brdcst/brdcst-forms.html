@@ -91,6 +91,7 @@ $(document).ready(function(obj) {
   $(".menu-item[page_id='brdcst-page']").click(function() {
     clearErrors();
     $("#brdcst-form-action").val("").change();
+    loadOwners();
   });
 
   $("#brdcst-table_filter input").addClass('brdcst-form-input');
