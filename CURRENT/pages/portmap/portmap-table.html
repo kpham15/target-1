@@ -89,7 +89,10 @@
         clearErrors();
         inputError($("#portmap-form-action"),data.reason);
       } else {
-        let res = data.rows;
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
         if (res.length === 0) {
           if (action !== 'query') {
             inputError($("#portmap-form-action"),"NO RECORD FOUND");
