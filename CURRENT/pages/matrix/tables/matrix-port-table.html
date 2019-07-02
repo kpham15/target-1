@@ -47,14 +47,23 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = [];
-      if (data.hasOwnProperty('rows')) {
-        res = data.rows;
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#matrix-form-action"),data.reason);
       }
-      matrixPortDatatable.search("").draw();
-      matrixPortDatatable.clear().draw();
-      matrixPortDatatable.rows.add(res);
-      matrixPortDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#matrix-form-action'),'No Record Found');
+        }
+        matrixPortDatatable.search("").draw();
+        matrixPortDatatable.clear().draw();
+        matrixPortDatatable.rows.add(res);
+        matrixPortDatatable.columns.adjust().draw();
+      }
     });
   }
 
