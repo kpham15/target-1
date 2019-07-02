@@ -58,14 +58,16 @@ function createRefSelect(data) {
 	// 								'</div>';
 	let refElements="";
 	let n = refOptions.length;
-	let columns = Math.ceil(n/7);
+	let maxElementPerColumn = 7
+	let columns = Math.ceil(n/maxElementPerColumn);
 	
 	for(let i=0; i<columns; i++) {
 		let col = '<div class="col-md-3">' ;
-		for(let j=0; j<7; j++) {
-			let elementId = i*7 + j;
-			if(elementId >= n)
+		for(let j=0; j<maxElementPerColumn; j++) {
+			let elementId = i*maxElementPerColumn + j;
+			if(elementId >= n) {
 				break;
+			}
 			let elementData = refOptions[elementId];
 			let element = '<div class="form-group">' +
 											'<label>'+elementData.title+'</label>' +
