@@ -143,11 +143,12 @@ function ft_modification_query(action) {
         dataType: "json"
     }).done(function (data) {
         if (data.rslt  ==  "fail") {
-            inputError($('#mt_submit_btn'),data.reason);
+            clearErrors();
+            inputError($('#mt_action_sel'),data.reason);
         }
         else {
             if (data.rows.length  ==  0 && action != "DELETE") {
-                inputError($('#mt_submit_btn'),"No Record Found");
+                inputError($('#mt_action_sel'),"No Record Found");
             }
             else {
                 let res = data.rows;
@@ -155,7 +156,7 @@ function ft_modification_query(action) {
                 ft_modificationDataTable.rows.add(res);
                 ft_modificationDataTable.columns.adjust().draw();
                 if (action != "query") {
-                    inputSuccess($('#mt_submit_btn'),action+': FT_MOD_TABLE SUCCESS');
+                    inputSuccess($('#mt_action_sel'),action+': FT_MOD_TABLE SUCCESS');
                 }
             }
         }
@@ -213,7 +214,7 @@ $("#mt_submit_btn").click(function() {
     clearErrors();
     if ($("#mt_action_sel").val() == "ADD") {
         if($("#mt_ot_sel").val() == "" || $("#mt_rtype_sel").val() == "" || $("#mt_processingfile_sel").val() == "") {
-            inputError($('#mt_submit_btn'),'OT, RTYPE AND PROCESSING FILE MUST NOT BE EMPTY');
+            inputError($('#mt_action_sel'),'OT, RTYPE AND PROCESSING FILE MUST NOT BE EMPTY');
             return;
         }
         ft_modification_query("ADD");
@@ -221,7 +222,7 @@ $("#mt_submit_btn").click(function() {
     }
     else if ($("#mt_action_sel").val() == "UPDATE") {
         if(ft_modification_id === 0) {
-            inputError($('#mt_submit_btn'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
+            inputError($('#mt_action_sel'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
             return;
         }
         ft_modification_query("UPDATE");
@@ -229,7 +230,7 @@ $("#mt_submit_btn").click(function() {
     }
     else if ($("#mt_action_sel").val() == "DELETE") {
         if(ft_modification_id === 0) {
-            inputError($('#mt_submit_btn'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
+            inputError($('#mt_action_sel'),'PLEASE CHOOSE ONE ROW IN THE TABLE FIRST');
             return;
         }
         ft_modification_query("DELETE");

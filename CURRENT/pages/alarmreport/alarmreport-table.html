@@ -72,7 +72,8 @@
       dataType: 'json'
     }).done(function(data) {
 			if(data.rslt == 'fail') {
-        inputError($("#fac-form-action"),data.reason);
+				clearErrors();
+        inputError($("#alarmreport-forms-report"),data.reason);
       }
 			else {
 				let res = data.rows;
