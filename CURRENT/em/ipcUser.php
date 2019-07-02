@@ -450,7 +450,6 @@
 		
 
 		// end of sample code
-
 		if ($targetUserObj->rslt != SUCCESS) {
 			$result['rslt'] = $targetUserObj->rslt;
 			$result['reason'] = "UPDATE_USER: ".$targetUserObj->reason;

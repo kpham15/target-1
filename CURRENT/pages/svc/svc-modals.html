@@ -399,6 +399,15 @@ $(document).ready(function(){
         let dd = $('#svcModal_dd_date').val();
         let fdd = $('#svcModal_fdd_date').val();
         
+        let newffac = $("#svcModal_newFfac_txt").val().toUpperCase();
+        let newtfac = $("#svcModal_newTfac_txt").val().toUpperCase();
+        let newfport = $("#svcModal_newPortX_txt").val().toUpperCase();
+        let newtport = $("#svcModal_newPortY_txt").val().toUpperCase();
+
+        let ckt_id=	$("#svc_cktId_txt").val();
+        let cktcon= $("#svc_cktconId_num").val();
+        let idx=	$("#svc_cktconIdx_num").val();
+
         let ctyp, ffac, tfac, fport, tport;
         if(act == "CONNECT") {
             ctyp = $("#svcModal_ctyp_sel").val().toUpperCase();
@@ -423,15 +432,13 @@ $(document).ready(function(){
             tport = $("#svcModal_oldPortY_txt").val().toUpperCase();
 
             ctyp = $("#svcModal_newCtyp_sel").val().toUpperCase();
-        }
-        let newffac = $("#svcModal_newFfac_txt").val().toUpperCase();
-        let newtfac = $("#svcModal_newTfac_txt").val().toUpperCase();
-        let newfport = $("#svcModal_newPortX_txt").val().toUpperCase();
-        let newtport = $("#svcModal_newPortY_txt").val().toUpperCase();
 
-        let ckt_id=	$("#svc_cktId_txt").val();
-        let cktcon= $("#svc_cktconId_num").val();
-        let idx=	$("#svc_cktconIdx_num").val();
+            if(newffac == "" || newtfac == "") {
+                postResponse($('#svc_modal .modal-footer'), "fail", "MISSING IN:FAC(X/Y)");
+                return;
+            }
+        }
+
 
         $.ajax({
             type: "post",
@@ -467,8 +474,6 @@ $(document).ready(function(){
             },
             dataType: "json"
         }).done(function(data){
-            let res = data.rows;
-
             if (data.rslt === 'fail') {
                 postResponse($('#svc_modal .modal-footer'), data.rslt, data.reason);
             } else {
