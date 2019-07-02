@@ -1,5 +1,5 @@
 <!-- Table -->
-<div id="matrix-port" class="box box-primary" style="display: none">
+<div id="matrix-port" class="box box-primary" style="display: none; margin-left:-12px;">
   <div class="box-header with-border">
     <h3 class="box-title">LIST OF PORTS:</h3>
   </div>
@@ -47,14 +47,19 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = [];
-      if (data.hasOwnProperty('rows')) {
-        res = data.rows;
+      if (data.rslt === 'fail') {
+        clearErrors();
+        inputError($("#matrix-form-action"),data.reason);
+      } else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        matrixPortDatatable.search("").draw();
+        matrixPortDatatable.clear().draw();
+        matrixPortDatatable.rows.add(res);
+        matrixPortDatatable.columns.adjust().draw();
       }
-      matrixPortDatatable.search("").draw();
-      matrixPortDatatable.clear().draw();
-      matrixPortDatatable.rows.add(res);
-      matrixPortDatatable.columns.adjust().draw();
     });
   }
 

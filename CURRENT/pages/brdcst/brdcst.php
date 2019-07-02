@@ -2,11 +2,11 @@
   <div class="container-fluid">
     
      <!-- Content Header (Page header) -->
-      <section class="content-header">
+      <section class="content-header" style="padding:2px;">
         <h1>
-          Broadcast Notifications
+          BROADCAST NOTIFICATIONS
         </h1>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="padding-top: 0px">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Broadcast Notifications</li>
         </ol>
@@ -24,6 +24,19 @@
 </div>
 
 <script type="text/javascript">
+
+  var brdcstFirstLoad = true;
+
+  $(".menu-item[page_id='brdcst-page']").click(function() {
+    clearErrors();
+    $("#brdcst-form-action").val("").change();
+    if (brdcstFirstLoad != true) {
+      return;
+    }
+
+    loadOwners();
+    brdcstFirstLoad = false;
+  });
   function loadOwners() {
     $.ajax({
       type: 'POST',

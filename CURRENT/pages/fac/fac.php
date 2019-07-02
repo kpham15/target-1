@@ -68,6 +68,7 @@
 
   function createFacOptions(data, type) {
     if(data.rslt ==="fail") {
+      clearErrors();
       inputError($("#fac-form-action"),data.reason);
       return;
     }

@@ -327,13 +327,27 @@ include "ipcProvConnect.php";
 	}
 
 	function provChange($userObj, $ordno, $mlo, $ckid, $cls, $adsr, $prot, $ctyp, $ffac, $tfac, $newffac, $newtfac, $fport, $tport,$newfport, $newtport, $dd, $fdd, $tktno) {
-		if(!(($ffac == $newffac && $tfac != $newtfac) || ($ffac != $newffac && $tfac == $newtfac))) {
+		// if(!(($ffac == $newffac && $tfac != $newtfac) || ($ffac != $newffac && $tfac == $newtfac))) {
+		// 	$result['rslt'] = 'fail';
+		// 	$result['jeop'] = "SP4:ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
+		// 	$result['reason'] = "PROVISIONING CHANGE: ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
+		// 	$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
+		// 	return $result;
+		// }
+		if ($userObj->grpObj->prov != "Y") {
 			$result['rslt'] = 'fail';
-			$result['jeop'] = "SP4:ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
-			$result['reason'] = "PROVISIONING CHANGE: ONLY ONE NEW/IN FACILITY MUST BE THE SAME WITH THE OLD/OUT ONE";
-			$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
+			$result['jeop'] = "SP5:PERMISSION DENIED";
+            $result['reason'] = 'Permission Denied';
 			return $result;
 		}
+
+		if($newffac == "" || $newtfac == "") {
+			$result['rslt'] = "fail";
+			$result['jeop'] = "SP2:FAC IS INVALID";
+			$result['reason'] = "PROVISIONING CHANGE: MISSING IN:FAC(X/Y)";
+			$result['log'] = "ACTION = PROV_CHANGE | ORDNO = $ordno | MLO = $mlo | CKID = $ckid | IDX = $idx | CLS = $cls | ADSR = $adsr | PROT = $prot | CONTYP = $ctyp | OLD-FAC(X) = $ffac | OLD-FAC(Y) = $tfac | NEW-FAC(X) = $newffac | NEW-FAC(Y) = $newtfac";
+			return $result;
+		}	
 
 		$newFfacObj = new FAC($newffac);
 		if ($newFfacObj->rslt != SUCCESS || $newFfacObj->port_id == 0) {

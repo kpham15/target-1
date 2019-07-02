@@ -5,13 +5,13 @@
       <div class="row">
   
         <!-- USER -->
-        <div class="col-md-1">
+        <div class="col-md-1" style="padding:2px;">
           <label>USER</label>
           <input id="configReport-form-user" class="form-control configReport-form-input">
         </div>
   
         <!-- DateRangePicker -->
-        <div class="col-md-4">
+        <div class="col-md-4" style="padding:2px;">
           <div class="form-group">
             <label>DATE RANGE:</label>
             <div class="input-group">
@@ -30,10 +30,10 @@
       <div class="row">
   
         <!-- REPORT -->
-        <div class="col-md-2">
+        <div class="col-md-2" style="padding:2px;">
           <div class="form-group">
             <label>REPORT:</label>
-            <select id="configReport-form-report" class="form-control configReport-form-input">
+            <select id="configReport-form-report" class="form-control">
               <option value="VIEW REPORT">VIEW REPORT</option>
               <option value="CREATE REPORT">CREATE REPORT</option>
             </select>
@@ -41,7 +41,7 @@
         </div>
 
         <!-- REPORT -->
-        <div class="col-md-2">
+        <div class="col-md-3" style="padding:2px;">
           <div class="form-group">
             <label>TYPE:</label>
             <select id="configReport-form-type" class="form-control configReport-form-input">
@@ -52,7 +52,7 @@
           </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-4" style="padding:2px;">
           <div class="form-group">
             <!-- Submit Button -->
             <button id="configReport-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -76,11 +76,22 @@
 <script type="text/javascript">
 
   // DOWNLOAD REPORT
-  function downloadConfigReports(args) {
+  function downloadConfigurationReports(args) {
     var data, filename, link;
-    var csv = convertArrayOfObjectsToCSV({
-      data: configReportDatatable.data().toArray()
-    });
+    var table = $(".configReport-table[style='display: block'] table").attr('id');
+    if (table == "configReport-portmap-table") {
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportPortmapDatatable.data().toArray()
+      });
+    } else if (table == "configReport-wirecenter-table") {
+      var csv = convertArrayOfObjectsToCSV({
+        data: configReportWcDatatable.data().toArray()
+      });
+    } else if (table == "configReport-facility-table") {
+      var csv = convertArrayOfObjectsToCSV({
+        data: configreportFacDatatable.data().toArray()
+      });
+    }
     if (csv == null) {
       inputError($('#configReport-form-report'),'No Reports To Create');
       return;
@@ -120,6 +131,9 @@
     // UPON LOAD PAGE FIRST TIME
     var configReportFirstLoad = true;
     $(".menu-item[page_id='config-report-page']").click(async function() {
+      clearErrors();
+      $("#configReport-form-report").val("VIEW REPORT").change();
+
       if (configReportFirstLoad != true) {
         return;
       }
@@ -149,7 +163,7 @@
           configReportQueryFaclog(configReportStartDate, configReportEndDate);
         }
       } else if (report.val() === "CREATE REPORT") {
-        downloadConfigReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
+        downloadConfigurationReports({filename: `CONFIGURATION_REPORT_${configReportStartDate}_${configReportEndDate}.csv`});
       }
     });
 
@@ -158,14 +172,14 @@
 
       let currDate = moment(new Date()).format('YYYY-MM-DD');
 
-      $('.configReport-form-input').val('');
-      $('#configReport-form-type').val("SETUP PORT MAPPING");
-      $('#configReport-form-report').val("VIEW REPORT");
       
       configReportPortmapDatatable.clear().draw();
       configReportWcDatatable.clear().draw();
       configReportFacDatatable.clear().draw();
       
+      $('.configReport-form-input').val('');
+      $('#configReport-form-type').val("SETUP PORT MAPPING");
+      $('#configReport-form-report').val("VIEW REPORT");
       $('#configReport-daterange').val('').daterangepicker("update");
       configReportStartDate = currDate;
       configReportEndDate = currDate;
@@ -193,11 +207,24 @@
       }
     });
 
+    $("#configReport-portmap-table_filter input").addClass('configReport-form-input');
+    $("#configReport-wirecenter-table_filter input").addClass('configReport-form-input');
+    $("#configReport-facility-table_filter input").addClass('configReport-form-input');
+
     // CLEAR ERRORS WHEN CLICK ON FIELD
-    $(".configReport-form-input").on('click', function() {
+    $(".configReport-form-input").on('input', function() {
       clearErrors();
+      $("#configReport-form-report").val("VIEW REPORT").change();
     });
 
+    $("#configReport-form-daterange").on('change', function() {
+      clearErrors();
+      $("#configReport-form-report").val("VIEW REPORT").change();
+    });
+
+    $("#configReport-form-report").on('change', function() {
+      clearErrors();
+    });
     // END OF DOCUMENT READY
   });
 
