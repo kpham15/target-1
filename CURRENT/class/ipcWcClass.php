@@ -220,7 +220,10 @@ class WC {
         if(!(($addr == "" && $city == "" && $state == "" && $zip == "") || 
         ($addr != "" && $city != "" && $state != "" && $zip != ""))) {
             $this->rslt = FAIL;
-            $this->reason = "ADDR, CITY, STATE, ZIP MUST ALL HAVE DATA OR EMPTY";
+            if($addr == "") $this->reason = "MISSING ADDR";
+            if($city == "") $this->reason = "MISSING CITY";
+            if($state == "") $this->reason = "MISSING STATE";
+            if($zip == "") $this->reason = "MISSING ZIP";
             return; 
         }
         //End address validation
