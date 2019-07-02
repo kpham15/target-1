@@ -503,12 +503,9 @@
       }).done(function(data) {
         let res = data.rows;
 
-        if (res.length == 0) {
-          inputError($('#setup-maint-forms-ckid'),'No Results Found');
-        }
-
         if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
         }
         else {
           setupMaintTableCkts.clear().draw();
@@ -524,7 +521,6 @@
     // View Button 2
     $('#setup-maint-forms-viewtkt').click(function() {
 
-      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').hide();
       $('#setup-maint-table-tkts-div').show();
       $('#setup-maint-table-cons-div').hide();
@@ -548,10 +544,6 @@
 
         if (res.length == 0) {
           inputError($('#setup-maint-forms-tktno'),'No Results Found');
-        }
-
-        if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
         }
         else {
           setupMaintTableTkts.clear().draw();
