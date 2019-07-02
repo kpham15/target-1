@@ -428,6 +428,34 @@
         }
       })
   }
+
+  function queryMaintTktno(tktno) {
+    $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcMaintReport",
+          "act":    "queryTkt",
+          "user":   user.uname,
+          "tktno":  tktno.toUpperCase()
+        },
+        dataType:   'json',
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
+        }
+        else {
+          setupMaintTableTkts.clear().draw();
+          setupMaintTableTkts.rows.add(res);
+          setupMaintTableTkts.columns.adjust().draw();
+        }
+      })
+  }
+
+
   $(document).ready(function() {
 
     $("#setup-maint-table-ckts_filter input").addClass('setup-maint-forms-input');
@@ -515,33 +543,8 @@
       else {
         ckid = $('#setup-maint-forms-ckid').val();
       }
+      queryMaintCkid(ckid);
 
-      $.ajax ({
-        type:     'POST',
-        url:      ipcDispatch,
-        data:     {
-          "api":    "ipcProv",
-          "act":    "queryCkid",
-          "user":   user.uname,
-          "ckid":   ckid.toUpperCase()
-        },
-        dataType:   'json'
-      }).done(function(data) {
-        let res = data.rows;
-
-        if (data.rslt == 'fail') {
-          clearErrors();
-          inputError($('#setup-maint-forms-action'),data.reason);
-        }
-        else {
-          setupMaintTableCkts.clear().draw();
-          setupMaintTableCkts.rows.add(res);
-          setupMaintTableCkts.columns.adjust().draw();
-          setupMaintTableCkts.search('').draw();
-        }
-
-        
-      })
     })
     
     // View Button 2
@@ -555,29 +558,8 @@
 
       let tktno = $('#setup-maint-forms-tktno').val();
 
-      $.ajax ({
-        type:     'POST',
-        url:      ipcDispatch,
-        data:     {
-          "api":    "ipcMaintReport",
-          "act":    "queryTkt",
-          "user":   user.uname,
-          "tktno":  tktno.toUpperCase()
-        },
-        dataType:   'json',
-      }).done(function(data) {
-        let res = data.rows;
-
-        if (data.rslt == 'fail') {
-          clearErrors();
-          inputError($('#setup-maint-forms-tktno'),data.reason);
-        }
-        else {
-          setupMaintTableTkts.clear().draw();
-          setupMaintTableTkts.rows.add(res);
-          setupMaintTableTkts.columns.adjust().draw();
-        }
-      })
+      queryMaintTktno(tktno);
+      
     })
     
     // Initialize inputmask
