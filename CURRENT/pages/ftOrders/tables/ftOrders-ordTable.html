@@ -50,11 +50,23 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-
-      ftOrdersOrdDatatable.clear().draw();
-      ftOrdersOrdDatatable.rows.add(res);
-      ftOrdersOrdDatatable.columns.adjust().draw();
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#ftOrders-ordForm-action"),data.reason);
+      }
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#ftOrders-ordForm-action'),'No Record Found');
+        }
+        ftOrdersOrdDatatable.search("").draw();
+        ftOrdersOrdDatatable.clear().draw();
+        ftOrdersOrdDatatable.rows.add(res);
+        ftOrdersOrdDatatable.columns.adjust().draw();
+      }
     });
   }
 
