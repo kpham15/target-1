@@ -542,8 +542,9 @@
       }).done(function(data) {
         let res = data.rows;
 
-        if (res.length == 0) {
-          inputError($('#setup-maint-forms-tktno'),'No Results Found');
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-tktno'),data.reason);
         }
         else {
           setupMaintTableTkts.clear().draw();
