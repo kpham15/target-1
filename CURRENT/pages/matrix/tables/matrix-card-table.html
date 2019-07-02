@@ -76,6 +76,10 @@
     $(document).on('click', '#matrix-card-table tbody tr', function() {
       let data = matrixCardDatatable.row(this).data();
 
+      if (data == undefined) {
+        return;
+      }
+
       $('#matrix-form-id').val(data.id);
       $('#matrix-form-node').val(data.node);
       $('#matrix-form-shelf').val(data.shelf);
