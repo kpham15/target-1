@@ -71,19 +71,23 @@
       },
       dataType: 'json'
     }).done(function(data) {
-			if(data.rslt == 'fail') {
-				clearErrors();
+      if (data.rslt == 'fail') {
+        clearErrors();
         inputError($("#alarmreport-forms-report"),data.reason);
       }
-			else {
-				let res = data.rows;
-				if (res.length == 0) {
-					inputError($('#alarmreport-forms-report'),'No Record Found');
-				}
-				alarmreportDatatable.clear().draw();
-				alarmreportDatatable.rows.add(res);
-				alarmreportDatatable.columns.adjust().draw();
-			}
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#alarmreport-forms-report'),'No Record Found');
+        }
+        alarmreportDatatable.search("").draw();
+        alarmreportDatatable.clear().draw();
+        alarmreportDatatable.rows.add(res);
+        alarmreportDatatable.columns.adjust().draw();
+      }
 		
     });
 	}
