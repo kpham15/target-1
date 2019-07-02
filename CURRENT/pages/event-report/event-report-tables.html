@@ -66,16 +66,23 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-      
-      $("#eventReport-form-report").val("VIEW REPORT").change();
-
-      if (res.length == 0) {
-        inputError($('#eventReport-form-report'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#eventReport-form-report"),data.reason);
       }
-      eventReportDatatable.clear().draw();
-      eventReportDatatable.rows.add(res);
-      eventReportDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#eventReport-form-report'),'No Record Found');
+        }
+        eventReportDatatable.search("").draw();
+        eventReportDatatable.clear().draw();
+        eventReportDatatable.rows.add(res);
+        eventReportDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -99,6 +106,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#eventReport-form-action").val("").change();
     });
   });
   
