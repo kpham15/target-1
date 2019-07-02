@@ -216,6 +216,18 @@ class WC {
         }
         //END NPANXX validation
         
+        //ADDR, CITY, STATE, ZIP either have data or empty, but not partially
+        if(!(($addr == "" && $city == "" && $state == "" && $zip == "") || 
+        ($addr != "" && $city != "" && $state != "" && $zip != ""))) {
+            $this->rslt = FAIL;
+            if($addr == "") $this->reason = "MISSING ADDR";
+            if($city == "") $this->reason = "MISSING CITY";
+            if($state == "") $this->reason = "MISSING STATE";
+            if($zip == "") $this->reason = "MISSING ZIP";
+            return; 
+        }
+        //End address validation
+
         // set timezone offset
         if ($tzone == 'PST')        // Pacific Standard Time
             $tz = -8;
