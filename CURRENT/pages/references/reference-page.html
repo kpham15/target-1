@@ -99,9 +99,20 @@ function queryReferences() {
 		},
 		dataType: 'json'
 	}).done(function(data) {
-		let res = data.rows;
-		
-		displayRefs(res);
+		if (data.rslt == 'fail') {
+			clearErrors();
+			inputError($("#reference-page-action"),data.reason);
+		}
+		else {
+			let res = [];
+			if (data.hasOwnProperty('rows')) {
+				res = data.rows;
+			}
+			if (res.length == 0) {
+				inputError($('#reference-page-action'),'No Record Found');
+			}
+			displayRefs(res);
+		}
 	});
 }
 
@@ -134,6 +145,7 @@ $(document).ready(function() {
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
+		clearErrors();
 
 		let refObj = {};
 
