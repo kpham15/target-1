@@ -5,15 +5,15 @@
     <div class="row">
 
       <!-- MSG OWNER -->
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding:2px;">
         <div class="form-group">
           <label>MSG OWNER</label>
-          <input id="brdcst-form-msgowner" type="text" class="form-control brdcst-form-input" disabled="">
+          <input id="brdcst-form-msgowner" type="text" class="form-control brdcst-form-input lowercase" disabled="" />
         </div>
       </div>
   
       <!-- SA dropdown -->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>SA</label>
           <select id="brdcst-form-sa" class="form-control brdcst-form-input">
@@ -28,7 +28,7 @@
     <!-- Middle Row -->
     <div class="row">
       <!-- Action Dropdown -->
-      <div class="col-md-6">
+      <div class="col-md-6" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
           <select id="brdcst-form-action" class="form-control">
@@ -44,7 +44,7 @@
     <!-- Bottom Row -->
     <div class="row">
       <!-- Message Title -->
-      <div class="col-md-8">
+      <div class="col-md-8" style="padding:2px;">
         <div class="form-group">
           <label>MESSAGE TITLE</label>
           <input id="brdcst-form-msgtitle" type="text" class="form-control brdcst-form-input" disabled="">
@@ -52,30 +52,35 @@
       </div>
       
       <!-- Date field -->
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding:2px;">
         <div class="form-group">
           <label>DATE</label>
           <input id="brdcst-form-date" type="text" class="form-control brdcst-form-input" disabled="">
         </div>
       </div>
+    </div>
 
+    <div class="row">
       <!-- Messsage Details -->
-      <div class="col-md-12">
+      <div class="col-md-12" style="padding:2px;">
         <div class="form-group">
           <label>MESSAGE DETAILS</label>
           <textarea id="brdcst-form-details" class="form-control brdcst-form-input" rows="5" disabled=""></textarea>
         </div>
       </div>
     </div>
-
-    <!-- Clear Button -->
-    <button id="brdcst-form-clear" type="button" class="btn btn-primary btn-flat">
-      Clear
-    </button>
-    <!-- View Button -->
-    <button type="button" id="view-brdcst" class="btn btn-primary btn-flat">
-      View
-    </button>
+    <div class="row">
+      <div class="col-md-4" style="padding:2px;">
+        <!-- Clear Button -->
+        <button id="brdcst-form-clear" type="button" class="btn btn-primary">
+          Clear
+        </button>
+        <!-- View Button -->
+        <button type="button" id="view-brdcst" class="btn btn-primary">
+          View
+        </button>
+      </div>
+    </div>
   </form>
 </div>
 
@@ -83,11 +88,6 @@
 var brdcstId = '';
 
 $(document).ready(function(obj) {
-  $(".menu-item[page_id='brdcst-page']").click(function() {
-    clearErrors();
-    $("#brdcst-form-action").val("").change();
-  });
-
   $("#brdcst-table_filter input").addClass('brdcst-form-input');
 
   $(".brdcst-form-input").on('input', function() {
@@ -157,7 +157,7 @@ $(document).ready(function(obj) {
     let obj = {
       value:      $(this).val(),
       currDate:   moment(new Date()).format('MM-DD-YYYY'),
-      owner:      $('#brdcst-form-msgowner').val().toUpperCase(),
+      owner:      $('#brdcst-form-msgowner').val(),
       sa:         $('#brdcst-form-sa').val().toUpperCase(),
       action:     $('#brdcst-form-action').val(),
       title:      $('#brdcst-form-msgtitle').val().toUpperCase(),
@@ -166,7 +166,6 @@ $(document).ready(function(obj) {
     }
 
     clearErrors();
-    loadOwners();
 
     // ADD Action
     if (obj.value === 'add') {

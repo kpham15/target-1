@@ -1,11 +1,11 @@
 <!-- Dropdown selections -->
-<div id="ref-select-div" class="col-md-7">
+<div id="ref-select-div" class="col-md-9" style="padding:2px;">
     <!-- Selection Boxes Dyanamically Created -->
     <div class="row ref-select-row">
 		</div>
 		<!-- Action Row -->
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label>ACTION</label>
 					<select id="reference-page-action" class="form-control">
@@ -15,21 +15,19 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<label id="reference-page-post-response-text" style="margin-top: 32px;"></label>
-				</div>
+			<div class="col-md-3">
+				<!-- Submit Button -->
+				<button id="reference-page-submit" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Submit
+				</button>
+				<!-- Refresh Button -->
+				<button id="reference-page-refresh" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Refresh
+				</button>
 			</div>
 		</div>
 
-		<!-- Submit Button -->
-		<button id="reference-page-submit" type="button" class="btn btn-primary btn-flat">
-			Submit
-		</button>
-		<!-- Refresh Button -->
-		<button id="reference-page-refresh" type="button" class="btn btn-primary btn-flat">
-			Refresh
-		</button>
+
 </div>
 
 <script type="text/javascript" src="./pages/references/reference-page-options.js"></script>
@@ -39,27 +37,55 @@
 function refStartup() {
 
 	if ($('.ref-select-box').length === 0) {
-		for (let i=0; i<refOptions.length; i++) {
-			let refSelect = createRefSelect(refOptions[i]);
+		
+			let refSelect = createRefSelect(refOptions);
 			$('.ref-select-row').append(refSelect);
 		}
 		queryReferences();
 	}
-}
+
 
 function createRefSelect(data) {
-	let refSelect = '<div class="col-md-4">' +
-										'<div class="form-group">' +
-											'<label>'+data.title+'</label>' +
-											'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
-	for (let i=0; i<data.options.length; i++) {
-		refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	// let refSelect = '<div class="col-md-3">' +
+	// 									'<div class="form-group">' +
+	// 										'<label>'+data.title+'</label>' +
+	// 										'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
+	// for (let i=0; i<data.options.length; i++) {
+	// 	refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	// }
+	// refSelect +=				'</select>' +
+	// 									'</div>' +
+	// 								'</div>';
+	let refElements="";
+	let n = refOptions.length;
+	let maxElementPerColumn = 7
+	let columns = Math.ceil(n/maxElementPerColumn);
+	
+	for(let i=0; i<columns; i++) {
+		let col = '<div class="col-md-3">' ;
+		for(let j=0; j<maxElementPerColumn; j++) {
+			let elementId = i*maxElementPerColumn + j;
+			if(elementId >= n) {
+				break;
+			}
+			let elementData = refOptions[elementId];
+			let element = '<div class="form-group">' +
+											'<label>'+elementData.title+'</label>' +
+											'<select id="'+elementData.selectId+'" class="form-control ref-select-box" ref_id="'+elementData.ref_id+'">';
+			for (let i=0; i<elementData.options.length; i++) {
+				element += '<option value="'+elementData.options[i].value+'">'+elementData.options[i].text+'</option>';
+			}
+			element +=				'</select>' +
+			'</div>';
+			col +=element;
+		}
+		col += '</div>';
+		refElements += col;
 	}
-	refSelect +=				'</select>' +
-										'</div>' +
-									'</div>';
 
-	return refSelect;
+
+
+	return refElements;
 }
 
 function queryReferences() {
@@ -91,10 +117,20 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	var refFirstLoad = true;
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
+		refStartup();
+		clearErrors();
+		$("#reference-page-action").val("").change();
+		
+	});
+
 	// Change any option to clear the red/green text
-	$('#ref-select-div').on('change', function() {
-		$('#reference-page-post-response-text').text('');
-	})
+	$('.ref-select-row').on('change', function() {
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
@@ -149,12 +185,9 @@ $(document).ready(function() {
 			let res = data.rows;
 
 			if (data.rslt === 'fail') {
-				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+				inputError($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			} else {
-				
-				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-				
-				$('#reference-page-action').val('');
+				inputSuccess($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			}
 		});
 
@@ -166,20 +199,15 @@ $(document).ready(function() {
 
 		queryReferences();
 
-		$('#reference-page-post-response-text').text('');
 		$('#reference-page-action').val('');
 		clearErrors();
-	})
+	});
 
 	// Click event for action selection
 	$('#reference-page-action').change(function() {
 		clearErrors();
-	})
+	});
 
-	// Click event for sidebar, loads page first time
-	$('.menu-item[page_id="references-page"]').click(function() {
-		refStartup();
-	})
 
 
 });
