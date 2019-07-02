@@ -51,13 +51,17 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      if (data.rslt === 'fail') {
+      if (data.rslt == 'fail') {
         clearErrors();
         inputError($("#matrix-form-action"),data.reason);
-      } else {
+      }
+      else {
         let res = [];
         if (data.hasOwnProperty('rows')) {
           res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#matrix-form-action'),'No Record Found');
         }
         matrixCardDatatable.search("").draw();
         matrixCardDatatable.clear().draw();
