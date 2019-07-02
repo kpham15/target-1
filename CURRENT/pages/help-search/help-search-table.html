@@ -58,6 +58,10 @@
     $(document).on('click', '#helpsearch-table tbody tr', function() {
       let data = helpSearchDatatable.row(this).data();
 
+      if (data == undefined) {
+        return;
+      }
+
       $('#helpsearch-form-item').val(data.item);
       $('#helpsearch-form-descr').val(data.descr);
 

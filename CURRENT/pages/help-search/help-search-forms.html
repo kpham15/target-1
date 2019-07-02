@@ -3,30 +3,31 @@
   <form id="helpsearch-form">
     <!---top row-->
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" style="padding:2px;">
         <div class="form-group">
           <label>ITEM</label>
           <input id="helpsearch-form-item"
           type="text" class="form-control helpsearch-input">
         </div>
       </div>
-      
-      <button type="button" id="view-helpsearch" class="btn btn-primary btn-flat" style="margin-top:25px;">
-          View
-      </button>
+      <div class="col-md-2" style="padding:2px;">
+        <button type="button" id="view-helpsearch" class="btn btn-primary" style="margin-top:25px;">
+            View
+        </button>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" style="padding:2px;">
         <div class="form-group">
-          <label>Description</label>
+          <label>DESCRIPTION</label>
           <textarea id="helpsearch-form-descr" class="form-control helpsearch-input" rows="5"></textarea>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
           <select id="help-form-action" class="form-control helpsearch-input">
@@ -38,12 +39,14 @@
         </div>
       </div>
       
-      <button type="button" id="submit-helpsearch" class="btn btn-primary btn-flat" style="margin-top:25px;"> 
-        Submit
-      </button>
-      <button id="clear-helpsearch" type="button" class="btn btn-primary btn-flat" style="margin-top:25px;">
-        Clear
-      </button>
+      <div class="col-md-6" style="padding:2px;">
+        <button type="button" id="submit-helpsearch" class="btn btn-primary" style="margin-top:25px;"> 
+          Submit
+        </button>
+        <button id="clear-helpsearch" type="button" class="btn btn-primary" style="margin-top:25px;">
+          Clear
+        </button>
+      </div>
     </div>
   </form>
 </div>
