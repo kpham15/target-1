@@ -371,12 +371,15 @@ class USERS {
 		if ($grp["rslt"] == "fail") {
 			$this->rslt = "fail";
             $this->reason = $grp["reason"];
+            return false;
 		}
 		$grpId = $grp["id"];
 		
 		$qry = "UPDATE t_users SET grp='$grpId'";
 		
-		
+		if ($ugrp != "") {
+            $qry .= ",ugrp='$ugrp'";
+		}
 		if ($lname != "") {
             $qry .= ",lname='$lname'";
 		}

@@ -86,6 +86,7 @@
       dataType: 'json'
     }).done(function(data) {
       if (data.rslt === 'fail') {
+        clearErrors();
         inputError($("#portmap-form-action"),data.reason);
       } else {
         let res = data.rows;

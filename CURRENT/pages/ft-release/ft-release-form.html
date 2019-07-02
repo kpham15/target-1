@@ -266,11 +266,12 @@ function ft_release_query(action) {
         dataType: "json"
     }).done(function (data) {
         if (data.rslt  ==  "fail") {
-            inputError($('#rt_submit_btn'),data.reason);
+            clearErrors();
+            inputError($('#rt_action_sel'),data.reason);
         }
         else {
             if (data.rows.length  ==  0 && action != "DELETE") {
-                inputError($('#rt_submit_btn'),"No Record Found");
+                inputError($('#rt_action_sel'),"No Record Found");
             }
             else {
                 let res = data.rows;
@@ -278,7 +279,7 @@ function ft_release_query(action) {
                 ft_releaseDataTable.rows.add(res);
                 ft_releaseDataTable.columns.adjust().draw();
                 if (action != "query") {
-                    inputSuccess($('#rt_submit_btn'),action+': FT_RELEASE SUCCESS');
+                    inputSuccess($('#rt_action_sel'),action+': FT_RELEASE SUCCESS');
                 }
             }
         }
@@ -344,7 +345,7 @@ $("#rt_submit_btn").click(function() {
     clearErrors();
     if ($("#rt_action_sel").val() == "ADD") {
         if($("#rt_ot_sel").val() == "" || $("#rt_rt_sel").val() == "") {
-            inputError($('#rt_submit_btn'),'OT AND RT MUST NOT BE EMPTY');
+            inputError($('#rt_action_sel'),'OT AND RT MUST NOT BE EMPTY');
             return;
         }
         ft_release_query("ADD");
@@ -352,7 +353,7 @@ $("#rt_submit_btn").click(function() {
     }
     else if ($("#rt_action_sel").val() == "UPDATE") {
         if(ft_release_id === 0) {
-            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            inputError($('#rt_action_sel'),'PLEASE CHOOSE A ROW FROM THE TABLE');
             return;
         }
         ft_release_query("UPDATE");
@@ -360,7 +361,7 @@ $("#rt_submit_btn").click(function() {
     }
     else if ($("#rt_action_sel").val() == "DELETE") {
         if(ft_release_id === 0) {
-            inputError($('#rt_submit_btn'),'PLEASE CHOOSE A ROW FROM THE TABLE');
+            inputError($('#rt_action_sel'),'PLEASE CHOOSE A ROW FROM THE TABLE');
             return;
         }
         ft_release_query("DELETE");
