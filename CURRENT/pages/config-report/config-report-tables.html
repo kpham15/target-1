@@ -148,15 +148,23 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#configReport-form-report"),data.reason);
       }
-      configReportPortmapDatatable.search("").draw();
-      configReportPortmapDatatable.clear().draw();
-      configReportPortmapDatatable.rows.add(res);
-      configReportPortmapDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#configReport-form-report'),'No Record Found');
+        }
+        configReportPortmapDatatable.search("").draw();
+        configReportPortmapDatatable.clear().draw();
+        configReportPortmapDatatable.rows.add(res);
+        configReportPortmapDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -184,15 +192,23 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#configReport-form-report"),data.reason);
       }
-      configReportWcDatatable.search("").draw();
-      configReportWcDatatable.clear().draw();
-      configReportWcDatatable.rows.add(res);
-      configReportWcDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#configReport-form-report'),'No Record Found');
+        }
+        configReportWcDatatable.search("").draw();
+        configReportWcDatatable.clear().draw();
+        configReportWcDatatable.rows.add(res);
+        configReportWcDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -220,15 +236,23 @@
       },
       dataType: "json"
     }).done(function(data){
-      let res = data.rows;
-      
-      if (res.length == 0) {
-        inputError($('#configReport-form-report'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#configReport-form-report"),data.reason);
       }
-      configReportFacDatatable.search("").draw();
-      configReportFacDatatable.clear().draw();
-      configReportFacDatatable.rows.add(res);
-      configReportFacDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#configReport-form-report'),'No Record Found');
+        }
+        configReportFacDatatable.search("").draw();
+        configReportFacDatatable.clear().draw();
+        configReportFacDatatable.rows.add(res);
+        configReportFacDatatable.columns.adjust().draw();
+      }
     });
   }
   
