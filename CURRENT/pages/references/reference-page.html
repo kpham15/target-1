@@ -1,5 +1,5 @@
 <!-- Dropdown selections -->
-<div id="ref-select-div" class="col-md-9">
+<div id="ref-select-div" class="col-md-12">
     <!-- Selection Boxes Dyanamically Created -->
     <div class="row ref-select-row">
 		</div>
@@ -37,27 +37,53 @@
 function refStartup() {
 
 	if ($('.ref-select-box').length === 0) {
-		for (let i=0; i<refOptions.length; i++) {
-			let refSelect = createRefSelect(refOptions[i]);
+		
+			let refSelect = createRefSelect(refOptions);
 			$('.ref-select-row').append(refSelect);
 		}
 		queryReferences();
 	}
-}
+
 
 function createRefSelect(data) {
-	let refSelect = '<div class="col-md-4">' +
-										'<div class="form-group">' +
-											'<label>'+data.title+'</label>' +
-											'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
-	for (let i=0; i<data.options.length; i++) {
-		refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	// let refSelect = '<div class="col-md-3">' +
+	// 									'<div class="form-group">' +
+	// 										'<label>'+data.title+'</label>' +
+	// 										'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
+	// for (let i=0; i<data.options.length; i++) {
+	// 	refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	// }
+	// refSelect +=				'</select>' +
+	// 									'</div>' +
+	// 								'</div>';
+	let refElements="";
+	let n = refOptions.length();
+	let columns = ceil(n/7);
+	
+	for(let i=0; i<columns; i++) {
+		let col = '<div class="col-md-3">' ;
+		for(let j=0; j<7; j++) {
+			let elementId = i*7 + j;
+			if(elementId >= n)
+				break;
+			let elementData = refOptions[elementId];
+			let element = '<div class="form-group">' +
+											'<label>'+elementData.title+'</label>' +
+											'<select id="'+elementData.selectId+'" class="form-control ref-select-box" ref_id="'+elementData.ref_id+'">';
+			for (let i=0; i<elementData.options.length; i++) {
+				element += '<option value="'+elementData.options[i].value+'">'+elementData.options[i].text+'</option>';
+			}
+			element +=				'</select>' +
+			'</div>';
+			col +=element;
+		}
+		col += '</div>';
+		refElements += col;
 	}
-	refSelect +=				'</select>' +
-										'</div>' +
-									'</div>';
 
-	return refSelect;
+
+
+	return refElements;
 }
 
 function queryReferences() {
