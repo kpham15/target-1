@@ -66,20 +66,23 @@
       },
       dataType: "json"
     }).done(function(data){
-			if(data.rslt == 'fail') {
-				clearErrors();
-        inputError($("#eventReport-form-action"),data.reason);
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#eventReport-form-report"),data.reason);
       }
-			else {
-				let res = data.rows;
-				if (res.length == 0) {
-					inputError($('#eventReport-form-action'),'No Record Found');
-				}
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#eventReport-form-report'),'No Record Found');
+        }
         eventReportDatatable.search("").draw();
         eventReportDatatable.clear().draw();
         eventReportDatatable.rows.add(res);
         eventReportDatatable.columns.adjust().draw();
-			}
+      }
     });
   }
 
