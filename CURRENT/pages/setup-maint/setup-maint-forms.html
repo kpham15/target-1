@@ -402,6 +402,32 @@
     }
   }
 
+  function queryMaintCkid(ckid) {
+    $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcProv",
+          "act":    "queryCkid",
+          "user":   user.uname,
+          "ckid":   ckid.toUpperCase()
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
+        }
+        else {
+          setupMaintTableCkts.clear().draw();
+          setupMaintTableCkts.rows.add(res);
+          setupMaintTableCkts.columns.adjust().draw();
+          setupMaintTableCkts.search('').draw();
+        }
+      })
+  }
   $(document).ready(function() {
 
     $("#setup-maint-table-ckts_filter input").addClass('setup-maint-forms-input');
@@ -489,33 +515,35 @@
       else {
         ckid = $('#setup-maint-forms-ckid').val();
       }
+      
+      queryMaintCkid(ckid);
 
-      $.ajax ({
-        type:     'POST',
-        url:      ipcDispatch,
-        data:     {
-          "api":    "ipcProv",
-          "act":    "queryCkid",
-          "user":   user.uname,
-          "ckid":   ckid.toUpperCase()
-        },
-        dataType:   'json'
-      }).done(function(data) {
-        let res = data.rows;
+      // $.ajax ({
+      //   type:     'POST',
+      //   url:      ipcDispatch,
+      //   data:     {
+      //     "api":    "ipcProv",
+      //     "act":    "queryCkid",
+      //     "user":   user.uname,
+      //     "ckid":   ckid.toUpperCase()
+      //   },
+      //   dataType:   'json'
+      // }).done(function(data) {
+      //   let res = data.rows;
 
-        if (data.rslt == 'fail') {
-          clearErrors();
-          inputError($('#setup-maint-forms-action'),data.reason);
-        }
-        else {
-          setupMaintTableCkts.clear().draw();
-          setupMaintTableCkts.rows.add(res);
-          setupMaintTableCkts.columns.adjust().draw();
-          setupMaintTableCkts.search('').draw();
-        }
+      //   if (data.rslt == 'fail') {
+      //     clearErrors();
+      //     inputError($('#setup-maint-forms-action'),data.reason);
+      //   }
+      //   else {
+      //     setupMaintTableCkts.clear().draw();
+      //     setupMaintTableCkts.rows.add(res);
+      //     setupMaintTableCkts.columns.adjust().draw();
+      //     setupMaintTableCkts.search('').draw();
+      //   }
 
         
-      })
+      // })
     })
     
     // View Button 2
