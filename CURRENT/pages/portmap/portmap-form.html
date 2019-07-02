@@ -165,8 +165,8 @@
 
     // Clear button click handler
     $('#portmap-form-clear').click(function() {
-      $('.portmap-form-input').val('');
       portmapDatatable.clear().draw();
+      $('.portmap-form-input').val('');
 
       clearErrors();
     });
