@@ -51,13 +51,23 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = [];
-      if (data.hasOwnProperty('rows')) {
-        res = data.rows;
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#matrix-form-action"),data.reason);
       }
-      matrixCardDatatable.clear().draw();
-      matrixCardDatatable.rows.add(res);
-      matrixCardDatatable.columns.adjust().draw();
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#matrix-form-action'),'No Record Found');
+        }
+        matrixCardDatatable.search("").draw();
+        matrixCardDatatable.clear().draw();
+        matrixCardDatatable.rows.add(res);
+        matrixCardDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -65,6 +75,10 @@
     // Click events on table rows
     $(document).on('click', '#matrix-card-table tbody tr', function() {
       let data = matrixCardDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
 
       $('#matrix-form-id').val(data.id);
       $('#matrix-form-node').val(data.node);
@@ -77,6 +91,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#matrix-form-action").val("").change();
 
       // LOAD LIST OF PORTS TABLE
       $("#matrix-port").css('display', 'block');

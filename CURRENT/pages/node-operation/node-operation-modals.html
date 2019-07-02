@@ -14,7 +14,7 @@
           <!-- Top Row -->
           <div class="row">
             <!-- NODE -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>NODE:</label>
                 <input id="node-operation-modal-node" type="text" class="form-control node-operation-modal-input" disabled="">
@@ -22,25 +22,25 @@
             </div>
 
             <!-- DEVICE -->
-            <div class="col-md-3">
+            <div class="col-md-3" style="padding: 0px 2px 0px 2px;">
               <div class="form-group">
                 <label>DEVICE:</label>
-                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input" disabled="">
+                <input id="node-operation-modal-device" type="text" class="form-control node-operation-modal-input lowercase" disabled="">
               </div>
             </div>
 
             <!-- SERIAL NUMBER -->
-            <div class="col-md-7">
+            <div class="col-md-7" style="padding: 0px 20px 0px 2px;">
               <div class="form-group">
                 <label>SERIAL NUMBER:</label>
-                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input" disabled="">
+                <input id="node-operation-modal-serialnum" type="text" class="form-control node-operation-modal-input lowercase" disabled="">
               </div>
             </div>
           </div>
 
           <!-- ACTION Row -->
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>ACTION:</label>
                 <input id="node-operation-modal-action" type="text" class="form-control node-operation-modal-input" disabled="">
@@ -69,10 +69,16 @@ $(document).ready(function() {
   // Modal Close Event Listener
   $('#node-operation-modal').on('hidden.bs.modal', function(e) {
     $('#node-operation-forms-clear').trigger('click');
-  })
+  });
+
+  $("#node-operation-modal").on('shown.bs.modal', function() {
+    $("#node-operation-modal select").css('-webkit-appearance', 'menulist');
+    $("#node-operation-modal select:disabled").css('-webkit-appearance', 'none');
+  });
   
   // Submit Button Click Event
   $('#node-operation-modal-submit').click(function() {
+    clearErrors();
     let action = $('#node-operation-modal-action').val();
     let node = $('#node-operation-modal-node').val();
     let device = $('#node-operation-modal-device').val();

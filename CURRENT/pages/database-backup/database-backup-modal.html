@@ -14,7 +14,7 @@
           <!-- Row 1 -->
           <div class="row">
             <!-- USER -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label class="database-backup-modal-input">USER:</label>
                 <input id="database-backup-modal-user" type="text" class="form-control database-backup-modal-input" disabled="">
@@ -22,10 +22,10 @@
             </div>
 
             <!-- BACKUP FILE NAME -->
-            <div class="col-md-8">
+            <div class="col-md-8" style="padding: 0px 20px 0px 2px;">
               <div class="form-group">
                 <label class="database-backup-modal-input">BACKUP FILE NAME:</label>
-                <input id="database-backup-modal-filename" type="text" class="form-control database-backup-modal-input" disabled="">
+                <input id="database-backup-modal-filename" type="text" class="form-control database-backup-modal-input lowercase" disabled="">
               </div>
             </div>
           </div>
@@ -33,7 +33,7 @@
           <!-- Row 2 -->
           <div class="row">
             <!-- TYPE -->
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label class="database-backup-modal-input">TYPE:</label>
                 <input id="database-backup-modal-type" type="text" class="form-control database-backup-modal-input" disabled="">
@@ -41,7 +41,7 @@
             </div>
 
             <!-- DATE -->
-            <div class="col-md-8">
+            <div class="col-md-8" style="padding: 0px 20px 0px 2px;">
               <div class="form-group">
                 <label class="database-backup-modal-input">DATE:</label>
                 <input id="database-backup-modal-date" type="text" class="form-control database-backup-modal-input" disabled="">
@@ -52,7 +52,7 @@
           <!-- Row 3 -->
           <div class="row">
             <!-- ACTION -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0px 2px 0px 20px;">
               <div class="form-group">
                 <label>ACTION:</label>
                 <input id="database-backup-modal-action" type="input" class="form-control database-backup-modal-action" disabled="">
@@ -62,9 +62,9 @@
 
           <!-- Footer -->
           <div class="modal-footer">
-              <button id="database-backup-modal-submit" type="button" class="btn btn-primary pull-left">
-                Submit
-              </button>
+            <button id="database-backup-modal-submit" type="button" class="btn btn-primary pull-left">
+              Submit
+            </button>
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Close
             </button>
@@ -119,6 +119,7 @@ $(document).ready(function() {
   $('#database-backup-modal').on('hidden.bs.modal', function(e) {
     $('.database-backup-forms-input').val('');
     $('.database-backup-modal-input').val('');
-  })
-})
+    $("#database-backup-forms-action").val("").change();
+  });
+});
 </script>

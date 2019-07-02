@@ -47,6 +47,10 @@
     $(document).on('click', '#node-operation-table tbody tr', function() {
       let data = nodeOperationDatatable.row(this).data();
 
+      if (data == undefined) {
+        return;
+      }
+      
       $('#node-operation-forms-node').val(data.node);
       $('#node-operation-forms-device').val(data.dev);
       $('#node-operation-forms-serialnum').val(data.serial_no);
@@ -54,6 +58,9 @@
       // give selected class
       $('#node-operation-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
-    })
+
+      clearErrors();
+      $("#node-operation-forms-action").val("").change();
+    });
   });
 </script>

@@ -35,6 +35,34 @@
     ]
   });
 
+  function setupUsersViewUser() {
+    let userTxt = $('#setup-users-forms-user').val().toUpperCase();
+    let status = $('#setup-users-forms-stat').val().toUpperCase();
+
+    $.ajax({
+      type:     'POST',
+      url:      ipcDispatch,
+      data:     {
+        "api":      "ipcUser",
+        "act":      "findUser",
+        "user":     user.uname,
+        "uname":    userTxt,
+        "stat":     status,
+      },
+      dataType:     'json'
+    }).done(function(data) {
+      let res = data.rows;
+
+      if (res.length == 0) {
+        inputError($('#setup-users-forms-viewuser'),'No Results Found');
+      }
+
+      setupUsersDatatable.search("").draw();
+      setupUsersDatatable.clear().draw();
+      setupUsersDatatable.rows.add(res);
+      setupUsersDatatable.columns.adjust().draw();
+    });
+  }
   $(document).ready(function() {
     // Click Event on Table Rows
     $(document).on('click', '#setup-users-table tbody tr', function() {
@@ -58,6 +86,8 @@
       $('#setup-users-table tbody tr').removeClass('bg-primary');
       $(this).addClass('bg-primary');
 
-    })
+      clearErrors();
+      $("#setup-users-forms-action").val("").change();
+    });
   });
 </script>

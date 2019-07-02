@@ -3,7 +3,7 @@
 
   <!-- ROW 1: NODE; SHELF; TYPE; SLOT; PORT STATUS; VIEW-->
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <label>NODE</label>
         <select id="matrix-form-node" class="form-control matrix-form-input">
@@ -13,7 +13,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <label>SHELF</label>
         <select id="matrix-form-shelf" class="form-control matrix-form-input">
@@ -23,7 +23,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <label>TYPE</label>
         <select id="matrix-form-type" class="form-control matrix-form-input">
@@ -34,7 +34,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <label>SLOT</label>
         <select id="matrix-form-slot" class="form-control matrix-form-input">
@@ -57,7 +57,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <button id="matrix-form-view" type="button" class="btn btn-primary" style="margin-top:25px">
           VIEW
@@ -70,10 +70,10 @@
 
   <!-- ROW 2: ACTION; CLEAR-->
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4" style="padding:2px;">
       <div class="form-group">
         <label>ACTION</label>
-        <select id="matrix-form-action" class="form-control matrix-form-input">
+        <select id="matrix-form-action" class="form-control">
           <option></option>
           <option action="lck">LCK</option>
           <option action="unlck">UN-LCK</option>
@@ -83,7 +83,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding:2px;">
       <div class="form-group">
         <button id="matrix-form-clear" type="button" class="btn btn-primary" style="margin-top:25px">
           Clear
@@ -105,6 +105,8 @@
   // LOAD TABLE WHEN PAGE FIRST LOADS
   var matrixFirstLoad = true;
   $(".menu-item[page_id='matrix-page']").click(function() {
+    clearErrors();
+    $("#matrix-form-action").val("").change();
     if (matrixFirstLoad != true) {
       return;
     }
@@ -112,55 +114,71 @@
     matrixFirstLoad = false;
   });
 
-  // VIEW BUTTON
-  $('#matrix-form-view').click(function(e) {
-    e.preventDefault();
+  $(document).ready(function() {
 
-    queryMatrixCards();
+    // VIEW BUTTON
+    $('#matrix-form-view').click(function(e) {
+      e.preventDefault();
 
-    clearErrors();
-  });
+      queryMatrixCards();
 
-  // CLEAR BUTTON
-  $("#matrix-form-clear").click(function() {
-    $(".matrix-form-input").val("").change();
-    $("#matrix-form-node").val("1").change();
-    $('#matrix-card-table tbody tr').removeClass('bg-primary');
-    $("#matrix-port").css('display', 'none');
-    clearErrors();
-    queryMatrixCards();
-  });
+      clearErrors();
+    });
 
-  // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
-  $(".matrix-form-input").on("click", function() {
-    clearErrors();
-  });
+    // CLEAR BUTTON
+    $("#matrix-form-clear").click(function() {
+      $(".matrix-form-input").val("").change();
+      $("#matrix-form-node").val("1").change();
+      $('#matrix-card-table tbody tr').removeClass('bg-primary');
+      $("#matrix-port").css('display', 'none');
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+      queryMatrixCards();
+    });
 
-  // ACTION
-  $("#matrix-form-action").change(function() {
-    let action          = $(this).val();
-    let mxcId           = $("#matrix-form-id").val();
-    let mxcModalInputs  = $(".matrix-modal-input");
-    let mxcModal        = $("#matrix-modal");
+    $("#matrix-card-table_filter input").addClass('matrix-form-input');
+    $("#matrix-port-table_filter input").addClass('matrix-form-input');
 
-    if (action != "") {
-      mxcModalInputs.val("").change();
-      if (mxcId != "") {
-        populateMxcModal();
-        mxcModal.modal("show");
-      } else {
-        if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
+    // CLEAR ERRORS WHEN CLICK ON INPUT FIELDS
+    $(".matrix-form-input").on("input", function() {
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+    });
+
+    $("#matrix-form button").on('click', function() {
+      clearErrors();
+      $("#matrix-form-action").val("").change();
+    });
+    
+    // ACTION
+    $("#matrix-form-action").change(function() {
+      clearErrors();
+
+      let action          = $(this).val();
+      let mxcId           = $("#matrix-form-id").val();
+      let mxcModalInputs  = $(".matrix-modal-input");
+      let mxcModal        = $("#matrix-modal");
+
+      if (action != "") {
+        mxcModalInputs.val("").change();
+        if (mxcId != "") {
           populateMxcModal();
-          $(".matrix-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
           mxcModal.modal("show");
         } else {
-          inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
-          $(this).val("");
+          if (action == "LCK_NODE" || action == "UN-LCK_NODE") {
+            populateMxcModal();
+            $(".matrix-modal-input:not(#matrix-modal-node, #matrix-modal-action)").val("");
+            mxcModal.modal("show");
+          } else {
+            inputError($(this), "Please select a CARD from LIST OF MATRIX CARDS");
+          }
         }
       }
-    }
-  });
+    });
 
+
+
+  });
   function populateMxcModal() {
     $("#matrix-modal-node").val($("#matrix-form-node").val());
     $("#matrix-modal-shelf").val($("#matrix-form-shelf").val());

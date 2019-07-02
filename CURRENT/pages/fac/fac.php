@@ -62,26 +62,21 @@
       },
       dataType: 'json',
     }).done(function(data) {
-      let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
-
-      if (data.rslt === "fail") {
-        modal.type = 'danger',
-        modalHandler(modal);
-      } else {
-        callback(res, type);
-      }
+      callback(data, type);
     });
   }
 
   function createFacOptions(data, type) {
+    if(data.rslt ==="fail") {
+      clearErrors();
+      inputError($("#fac-form-action"),data.reason);
+      return;
+    }
+    let res = data.rows;
     var a = [];
     a.push('<option value=""></option>');
     
-    data.forEach(function(option) {
+    res.forEach(function(option) {
       let html = `<option value="${option[type]}">${option[type]}</option>`;
       a.push(html);
     });

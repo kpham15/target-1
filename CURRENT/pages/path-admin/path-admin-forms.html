@@ -5,7 +5,7 @@
     <div class="row">
 
       <!-- NODE -->
-      <div class="col-md-1">
+      <div class="col-md-1" style="padding:2px;">
         <div class="form-group">
           <label>NODE</label>
           <select id="pathAdmin-form-node" class="form-control pathAdmin-form-input">
@@ -15,7 +15,7 @@
       </div>
 
       <!-- SLOT -->
-      <div class="col-md-1">
+      <div class="col-md-1" style="padding:2px;">
         <div class="form-group">
           <label>SLOT</label>          
           <select id="pathAdmin-form-slot" class="form-control pathAdmin-form-input">
@@ -32,7 +32,7 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW NODE SLOT Button -->
           <button id="pathAdmin-form-view_node_slot" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- CKID -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>CKID TN: </label>
           <input id="pathAdmin-tn-check" type="checkbox" checked>
@@ -50,7 +50,7 @@
           <input id="pathAdmin-form-ckid-tn" type="text" class="form-control pathAdmin-form-input pathAdmin-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW CKID Button -->
           <button id="pathAdmin-form-view_ckid" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -60,13 +60,13 @@
       </div>
 
       <!-- FAC_ID -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>FAC_ID:</label>
           <input id="pathAdmin-form-fac_id" class="form-control pathAdmin-form-input">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW FAC_ID Button -->
           <button id="pathAdmin-form-view_fac_id" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -76,13 +76,13 @@
       </div>
       
       <!-- PORT -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>PORT:</label>
           <input id="pathAdmin-form-port" class="form-control pathAdmin-form-input">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW PORT Button -->
           <button id="pathAdmin-form-view_port" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -96,7 +96,7 @@
 
     <!-- ROW 2 BEGIN -->
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10" style="padding:2px;">
         <div class="form-group">
           <label>PATH</label>
           <input id="pathAdmin-form-path" class="form-control pathAdmin-form-input" disabled>
@@ -108,10 +108,10 @@
     <!-- ROW 3 BEGIN -->
     <div class="row">
       <!-- Action Dropdown -->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="pathAdmin-form-action" class="form-control pathAdmin-form-input">
+          <select id="pathAdmin-form-action" class="form-control">
             <option value=""></option>
             <option>SET_DEFECTIVE_PATH</option>
             <option>REPLACE_DEFECTIVE_PATH</option>
@@ -119,7 +119,7 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6" style="padding:2px;">
         <div class="form-group">
           <!-- Submit Button -->
           <button id="pathAdmin-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -139,119 +139,138 @@
 
 <script type="text/javascript">
 
-// CLEAR BUTTON
-$("#pathAdmin-form-clear").on('click', function() {
-  $(".pathAdmin-form-input").val("").change();
-  $("#pathAdmin-form-node").val("1").change();
-  $("#pathAdmin-form-slot").val("1").change();
-  pathAdminDatatable.clear().draw();
-  clearErrors();
-});
+$(document).ready(function() {
 
-$(".menu-item[page_id='path-admin-page']").click(function() {
-  // POPULATE NODE SELECTION BOX
-  var html = [];
-  for (i = 0; i < wcInfo.nodes; i++) {
-    let node = i + 1;
-    html.push(`<option>${node}</option>`);
-  }
-  $("#pathAdmin-form-node").html(html.join(''));
-});
+  // CLEAR BUTTON
+  $("#pathAdmin-form-clear").on('click', function() {
+    $(".pathAdmin-form-input").val("").change();
+    $("#pathAdmin-form-node").val("1").change();
+    $("#pathAdmin-form-slot").val("1").change();
+    pathAdminDatatable.clear().draw();
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
 
-// NODE SLOT VIEW BUTTON
-$("#pathAdmin-form-view_node_slot").on("click", function() {
-  clearErrors();
+  $(".menu-item[page_id='path-admin-page']").click(function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
 
-  let node = $("#pathAdmin-form-node");
-  let slot = $("#pathAdmin-form-slot");
+    // POPULATE NODE SELECTION BOX
+    var html = [];
+    for (i = 0; i < wcInfo.nodes; i++) {
+      let node = i + 1;
+      html.push(`<option>${node}</option>`);
+    }
+    $("#pathAdmin-form-node").html(html.join(''));
+  });
 
-  if (node.val() == "") {
-    inputError(node, 'Select a node');
-  } else if (slot.val() == "") {
-    inputError(slot, 'Select a slot');
-  } else {
-    pathAdminQueryByNodeSlot();
-  }
-});
+  // NODE SLOT VIEW BUTTON
+  $("#pathAdmin-form-view_node_slot").on("click", function() {
+    clearErrors();
 
-// CKID VIEW BUTTON
-$("#pathAdmin-form-view_ckid").on("click", function() {
-  clearErrors();
-  let ckid = $("#pathAdmin-form-ckid");
-  if ($("#pathAdmin-tn-check").is(":checked")) {
-    ckid = $("#pathAdmin-form-ckid-tn");
-  }
+    let node = $("#pathAdmin-form-node");
+    let slot = $("#pathAdmin-form-slot");
 
-  if (ckid.val() == "") {
-    inputError(ckid, 'Missing CKID');
-  } else {
-    pathAdminQueryByCkid();
-  }
-});
+    if (node.val() == "") {
+      inputError(node, 'Select a node');
+    } else if (slot.val() == "") {
+      inputError(slot, 'Select a slot');
+    } else {
+      pathAdminQueryByNodeSlot();
+    }
+  });
 
-// FAC_ID VIEW BUTTON
-$("#pathAdmin-form-view_fac_id").on("click", function() {
-  clearErrors();
+  // CKID VIEW BUTTON
+  $("#pathAdmin-form-view_ckid").on("click", function() {
+    clearErrors();
+    let ckid = $("#pathAdmin-form-ckid");
+    if ($("#pathAdmin-tn-check").is(":checked")) {
+      ckid = $("#pathAdmin-form-ckid-tn");
+    }
 
-  let fac_id = $("#pathAdmin-form-fac_id");
+    if (ckid.val() == "") {
+      inputError(ckid, 'Missing CKID');
+    } else {
+      pathAdminQueryByCkid();
+    }
+  });
 
-  if (fac_id.val() == "") {
-    inputError(fac_id, 'Missing FAC_ID');
-  } else {
-    pathAdminQueryByFacId();
-  }
-});
+  // FAC_ID VIEW BUTTON
+  $("#pathAdmin-form-view_fac_id").on("click", function() {
+    clearErrors();
 
-// PORT VIEW BUTTON
-$("#pathAdmin-form-view_port").on("click", function() {
-  clearErrors();
+    let fac_id = $("#pathAdmin-form-fac_id");
 
-  let port = $("#pathAdmin-form-port");
+    if (fac_id.val() == "") {
+      inputError(fac_id, 'Missing FAC_ID');
+    } else {
+      pathAdminQueryByFacId();
+    }
+  });
 
-  if (port.val() == "") {
-    inputError(port, 'Missing PORT');
-  } else {
-    pathAdminQueryByPort();
-  }
-});
+  // PORT VIEW BUTTON
+  $("#pathAdmin-form-view_port").on("click", function() {
+    clearErrors();
 
-// SUBMIT BUTTON
-$("#pathAdmin-form-submit").on('click', function() {
-  clearErrors();
+    let port = $("#pathAdmin-form-port");
 
-  let action = $("#pathAdmin-form-action");
+    if (port.val() == "") {
+      inputError(port, 'Missing PORT');
+    } else {
+      pathAdminQueryByPort();
+    }
+  });
 
-  // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
-  if (action.val() == "SET_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
+  // ACTION SELECT CHANGE
+  $('#pathAdmin-form-action').change(function() {
+    clearErrors();
+  })
 
-  } else if (action.val() == "REPLACE_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
 
-  } else if (action.val() == "RELEASE_DEFECTIVE_PATH") {
-    inputError(action, 'Action not ready yet');
+  // SUBMIT BUTTON
+  $("#pathAdmin-form-submit").on('click', function() {
+    clearErrors();
 
-  } else {
-    inputError(action, 'Select an Action');
-  }
-  
-});
+    let action = $("#pathAdmin-form-action");
 
-// CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
-$(".pathAdmin-form-input:not(#pathAdmin-form-action)").on('click', function() {
-  clearErrors();
-  $("#pathAdmin-form-action").val("").change();
-});
+    // @TODO: THESE ACTIONS HAVE NO CODE FOR THEM YET
+    if (action.val() == "SET_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
 
-// Initialize inputmask
-$('#pathAdmin-form-ckid-tn').inputmask();
+    } else if (action.val() == "REPLACE_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
 
-// TN Checkbox Handler
-$('#pathAdmin-tn-check').iCheck({
-  checkboxClass: 'icheckbox_minimal-blue'
-});
-$('#pathAdmin-tn-check').on('ifToggled', function() {
-  $('.pathAdmin-form-ckid-num').toggle();
+    } else if (action.val() == "RELEASE_DEFECTIVE_PATH") {
+      inputError(action, 'Action not ready yet');
+
+    } else {
+      inputError(action, 'Select an Action');
+    }
+    
+  });
+
+  $("#pathAdmin-table_filter input").addClass("pathAdmin-form-input");
+
+  // CLEAR ERRORS WHEN ANY ITEM IS CLICKED IN FORM
+  $(".pathAdmin-form-input").on('input', function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
+
+  // Initialize inputmask
+  $('#pathAdmin-form-ckid-tn').inputmask();
+
+  // TN Checkbox Handler
+  $('#pathAdmin-tn-check').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue'
+  });
+  $('#pathAdmin-tn-check').on('ifToggled', function() {
+    $('.pathAdmin-form-ckid-num').toggle();
+  });
+  $("#pathAdmin-tn-check").on('ifChanged', function() {
+    clearErrors();
+    $("#pathAdmin-form-action").val("").change();
+  });
 });
 
 

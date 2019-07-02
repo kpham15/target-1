@@ -54,11 +54,16 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-
-      facDatatable.clear().draw();
-      facDatatable.rows.add(res);
-      facDatatable.columns.adjust().draw();
+      if(data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#fac-form-action"),data.reason);
+      }
+      else {
+        let res = data.rows;
+        facDatatable.clear().draw();
+        facDatatable.rows.add(res);
+        facDatatable.columns.adjust().draw();
+      }
     });
   }
 

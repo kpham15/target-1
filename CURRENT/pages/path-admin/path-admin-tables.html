@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12" style="padding:2px;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF PATHS:</h3>
@@ -60,6 +60,7 @@
       if (res.length == 0) {
         inputError($('#pathAdmin-form-view_node_slot'),'No Record Found');
       }
+      pathAdminDatatable.search("").draw();
       pathAdminDatatable.clear().draw();
       pathAdminDatatable.rows.add(res);
       pathAdminDatatable.columns.adjust().draw();
@@ -93,6 +94,7 @@
       if (res.length == 0) {
         inputError($('#pathAdmin-form-view_ckid'),'No Record Found');
       }
+      pathAdminDatatable.search("").draw();
       pathAdminDatatable.clear().draw();
       pathAdminDatatable.rows.add(res);
       pathAdminDatatable.columns.adjust().draw();
@@ -121,6 +123,7 @@
       if (res.length == 0) {
         inputError($('#pathAdmin-form-view_fac_id'),'No Record Found');
       }
+      pathAdminDatatable.search("").draw();
       pathAdminDatatable.clear().draw();
       pathAdminDatatable.rows.add(res);
       pathAdminDatatable.columns.adjust().draw();
@@ -149,6 +152,7 @@
       if (res.length == 0) {
         inputError($('#pathAdmin-form-view_port'),'No Record Found');
       }
+      pathAdminDatatable.search("").draw();
       pathAdminDatatable.clear().draw();
       pathAdminDatatable.rows.add(res);
       pathAdminDatatable.columns.adjust().draw();
@@ -160,9 +164,16 @@
     $(document).on('click', '#pathAdmin-table tbody tr', function() {
       let data = pathAdminDatatable.row(this).data();
 
+      if (data == undefined) {
+        return;
+      }
+
       $("#pathAdmin-form-ckid").val(data.ckid);
       $("#pathAdmin-form-ckid-tn").val(data.ckid);
       $("#pathAdmin-form-path").val(data.path);
+
+      clearErrors();
+      $("#pathAdmin-form-action").val("").change();
       
     });
   });

@@ -85,21 +85,14 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
-
       if (data.rslt === 'fail') {
-        modal.type = "danger";
-        modalHandler(modal);
+        clearErrors();
+        inputError($("#portmap-form-action"),data.reason);
       } else {
+        let res = data.rows;
         if (res.length === 0) {
           if (action !== 'query') {
-            modal.type = "warning";
-            modal.body = "No record found";
-            modalHandler(modal);
+            inputError($("#portmap-form-action"),"NO RECORD FOUND");
           } 
         } else {
             portmapDatatable.search("").draw();
