@@ -66,22 +66,20 @@
       },
       dataType: "json"
     }).done(function(data){
-      if (data.rslt === 'fail') {
-        clearErrors();
+			if(data.rslt == 'fail') {
+				clearErrors();
         inputError($("#eventReport-form-action"),data.reason);
-      } else {
-        let res = data.rows;
-        if (res.length === 0) {
-          if (action !== 'query') {
-            inputError($("#eventReport-form-action"),"NO RECORD FOUND");
-          } 
-        } else {
-          eventReportDatatable.search("").draw();
-          eventReportDatatable.clear().draw();
-          eventReportDatatable.rows.add(res);
-          eventReportDatatable.columns.adjust().draw();
-        }
       }
+			else {
+				let res = data.rows;
+				if (res.length == 0) {
+					inputError($('#eventReport-form-action'),'No Record Found');
+				}
+        eventReportDatatable.search("").draw();
+        eventReportDatatable.clear().draw();
+        eventReportDatatable.rows.add(res);
+        eventReportDatatable.columns.adjust().draw();
+			}
     });
   }
 
@@ -101,6 +99,7 @@
       $(this).addClass('bg-primary');
 
       clearErrors();
+      $("#eventReport-form-action").val("").change();
     });
   });
   
