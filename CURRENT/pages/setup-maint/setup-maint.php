@@ -44,7 +44,7 @@
       let res = data.rows;
       
       if (data.rslt == 'fail') {
-        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
         var a = [];
@@ -80,7 +80,7 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
         let a = [];
@@ -112,7 +112,7 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
         let a = [];
