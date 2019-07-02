@@ -58,7 +58,7 @@ function createRefSelect(data) {
 	// 								'</div>';
 	let refElements="";
 	let n = refOptions.length;
-	let columns = ceil(n/7);
+	let columns = Math.ceil(n/7);
 	
 	for(let i=0; i<columns; i++) {
 		let col = '<div class="col-md-3">' ;
