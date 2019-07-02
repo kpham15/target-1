@@ -434,6 +434,8 @@
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
+      let ckid = "";
+      queryMaintCkid(ckid);
       clearErrors();
       $('.setup-maint-forms-input').val('');
       $('.setup-maint-modal-input').val('');
@@ -450,7 +452,6 @@
       maintPstaFfac = "";
       maintTestFac = "";
       maintTestPort = "";
-      $('#setup-maint-forms-viewckid').trigger('click');
     })
 
     // Action Change Event
@@ -515,35 +516,33 @@
       else {
         ckid = $('#setup-maint-forms-ckid').val();
       }
-      
-      queryMaintCkid(ckid);
 
-      // $.ajax ({
-      //   type:     'POST',
-      //   url:      ipcDispatch,
-      //   data:     {
-      //     "api":    "ipcProv",
-      //     "act":    "queryCkid",
-      //     "user":   user.uname,
-      //     "ckid":   ckid.toUpperCase()
-      //   },
-      //   dataType:   'json'
-      // }).done(function(data) {
-      //   let res = data.rows;
+      $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcProv",
+          "act":    "queryCkid",
+          "user":   user.uname,
+          "ckid":   ckid.toUpperCase()
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
 
-      //   if (data.rslt == 'fail') {
-      //     clearErrors();
-      //     inputError($('#setup-maint-forms-action'),data.reason);
-      //   }
-      //   else {
-      //     setupMaintTableCkts.clear().draw();
-      //     setupMaintTableCkts.rows.add(res);
-      //     setupMaintTableCkts.columns.adjust().draw();
-      //     setupMaintTableCkts.search('').draw();
-      //   }
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
+        }
+        else {
+          setupMaintTableCkts.clear().draw();
+          setupMaintTableCkts.rows.add(res);
+          setupMaintTableCkts.columns.adjust().draw();
+          setupMaintTableCkts.search('').draw();
+        }
 
         
-      // })
+      })
     })
     
     // View Button 2
@@ -595,7 +594,8 @@
 
     // side navbar click event
     $('.menu-item[page_id="setup-maint-page"]').click(function() {
-      $('#setup-maint-forms-viewckid').trigger('click');
+      let ckid = "";
+      queryMaintCkid(ckid);
       clearErrors();
       $("#setup-maint-forms-action").val("").change();
     });
