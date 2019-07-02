@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12" style="padding:2px;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF EVENTS:</h3>
@@ -83,6 +83,10 @@
     // Click events on table rows
     $(document).on('click', '#eventReport-table tbody tr', function() {
       let data = eventReportDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
 
       $('#eventReport-form-user').val(data.user).change();
       $('#eventReport-form-event').val(data.evt).change();
