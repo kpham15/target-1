@@ -1,5 +1,5 @@
 <!-- Table -->
-<div class="col-md-12">
+<div class="col-md-12" style="padding:2px;">
 	<div class="box box-primary">
 		<div class="box-header with-border">
 			<h3 class="box-title">LIST OF ALARMS:</h3>
@@ -92,6 +92,10 @@
 		// Click events on table rows
 		$(document).on('click', '#alarmreport-table tbody tr', function() {
 			let data = alarmreportDatatable.row(this).data();
+
+			if (data == undefined) {
+				return;
+			}
 
 			$('#alarmreport-forms-comments').val(data.remark);
 
