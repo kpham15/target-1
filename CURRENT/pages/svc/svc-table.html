@@ -153,14 +153,24 @@
         },
         dataType: 'json'
       }).done(function(data) {
-        let res = [];
-        if(data.hasOwnProperty('rows'))
-            res = data.rows;
-  
-        svcCktDatatable.clear().draw();
-        svcCktDatatable.rows.add(res);
-        svcCktDatatable.columns.adjust().draw();
-        svcCktDatatable.search('').draw();
+
+        if (data.rslt == 'fail') {
+            clearErrors();
+            inputError($("#svc_act_sel"),data.reason);
+        }
+        else {
+            let res = [];
+            if (data.hasOwnProperty('rows')) {
+                res = data.rows;
+            }
+            if (res.length == 0) {
+                inputError($('#svc_act_sel'),'No Record Found');
+            }
+            svcCktDatatable.clear().draw();
+            svcCktDatatable.rows.add(res);
+            svcCktDatatable.columns.adjust().draw();
+            svcCktDatatable.search('').draw();
+        }
       });
     }
   
@@ -179,13 +189,24 @@
             },
             dataType: 'json'
         }).done(function(data) {
-            let res = [];
-            if(data.hasOwnProperty('rows'))
-                res = data.rows;
-            svcOrdDatatable.clear().draw();
-            svcOrdDatatable.rows.add(res);
-            svcOrdDatatable.columns.adjust().draw();
-        })
+
+            if (data.rslt == 'fail') {
+                clearErrors();
+                inputError($("#svc_act_sel"),data.reason);
+            }
+            else {
+                let res = [];
+                if (data.hasOwnProperty('rows')) {
+                    res = data.rows;
+                }
+                if (res.length == 0) {
+                    inputError($('#svc_act_sel'),'No Record Found');
+                }
+                svcOrdDatatable.rows.add(res);
+                svcOrdDatatable.columns.adjust().draw();
+                svcOrdDatatable.search('').draw();
+            }
+        });
     }
     
     function svcQueryCktConByCkid(ckid) {
@@ -202,13 +223,23 @@
             },
             dataType: 'json',
         }).done(function(data){
-            let res = [];
-            if(data.hasOwnProperty('rows'))
-                res = data.rows;
 
-            svcCktconDatatable.clear().draw();
-            svcCktconDatatable.rows.add(res);
-            svcCktconDatatable.columns.adjust().draw();
+            if (data.rslt == 'fail') {
+                clearErrors();
+                inputError($("#svc_act_sel"),data.reason);
+            }
+            else {
+                let res = [];
+                if (data.hasOwnProperty('rows')) {
+                    res = data.rows;
+                }
+                if (res.length == 0) {
+                    inputError($('#svc_act_sel'),'No Record Found');
+                }
+                svcCktconDatatable.rows.add(res);
+                svcCktconDatatable.columns.adjust().draw();
+                svcCktconDatatable.search('').draw();
+            }
         })
     }
     
