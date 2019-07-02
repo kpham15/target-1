@@ -426,11 +426,11 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"F",
-				text: 	"F"
+				text: 	"F - FAHRENHEIT"
 			},
 			{
 				value: 	"C",
-				text: 	"C"
+				text: 	"C - CELSIUS"
 			},
 		]
 	},

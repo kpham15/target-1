@@ -1,5 +1,5 @@
 <!-- Dropdown selections -->
-<div id="ref-select-div" class="col-md-7">
+<div id="ref-select-div" class="col-md-9">
     <!-- Selection Boxes Dyanamically Created -->
     <div class="row ref-select-row">
 		</div>
@@ -16,20 +16,18 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="form-group">
-					<label id="reference-page-post-response-text" style="margin-top: 32px;"></label>
-				</div>
+				<!-- Submit Button -->
+				<button id="reference-page-submit" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Submit
+				</button>
+				<!-- Refresh Button -->
+				<button id="reference-page-refresh" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Refresh
+				</button>
 			</div>
 		</div>
 
-		<!-- Submit Button -->
-		<button id="reference-page-submit" type="button" class="btn btn-primary btn-flat">
-			Submit
-		</button>
-		<!-- Refresh Button -->
-		<button id="reference-page-refresh" type="button" class="btn btn-primary btn-flat">
-			Refresh
-		</button>
+
 </div>
 
 <script type="text/javascript" src="./pages/references/reference-page-options.js"></script>
@@ -48,7 +46,7 @@ function refStartup() {
 }
 
 function createRefSelect(data) {
-	let refSelect = '<div class="col-md-4">' +
+	let refSelect = '<div class="col-md-3">' +
 										'<div class="form-group">' +
 											'<label>'+data.title+'</label>' +
 											'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
@@ -91,10 +89,20 @@ function displayRefs(data) {
 
 $(document).ready(function() {
 
+	var refFirstLoad = true;
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
+		refStartup();
+		clearErrors();
+		$("#reference-page-action").val("").change();
+		
+	});
+
 	// Change any option to clear the red/green text
-	$('#ref-select-div').on('change', function() {
-		$('#reference-page-post-response-text').text('');
-	})
+	$('.ref-select-row').on('change', function() {
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
 
 	// Click event for submit button
 	$('#reference-page-submit').click(function() {
@@ -149,12 +157,9 @@ $(document).ready(function() {
 			let res = data.rows;
 
 			if (data.rslt === 'fail') {
-				$('#reference-page-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+				inputError($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			} else {
-				
-				$('#reference-page-post-response-text').css('color','green').text(data.rslt + ' - ' + data.reason);
-				
-				$('#reference-page-action').val('');
+				inputSuccess($('#reference-page-action'), data.rslt + ' - ' + data.reason);
 			}
 		});
 
@@ -166,20 +171,15 @@ $(document).ready(function() {
 
 		queryReferences();
 
-		$('#reference-page-post-response-text').text('');
 		$('#reference-page-action').val('');
 		clearErrors();
-	})
+	});
 
 	// Click event for action selection
 	$('#reference-page-action').change(function() {
 		clearErrors();
-	})
+	});
 
-	// Click event for sidebar, loads page first time
-	$('.menu-item[page_id="references-page"]').click(function() {
-		refStartup();
-	})
 
 
 });
