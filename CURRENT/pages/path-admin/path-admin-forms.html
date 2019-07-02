@@ -5,7 +5,7 @@
     <div class="row">
 
       <!-- NODE -->
-      <div class="col-md-1">
+      <div class="col-md-1" style="padding:2px;">
         <div class="form-group">
           <label>NODE</label>
           <select id="pathAdmin-form-node" class="form-control pathAdmin-form-input">
@@ -15,7 +15,7 @@
       </div>
 
       <!-- SLOT -->
-      <div class="col-md-1">
+      <div class="col-md-1" style="padding:2px;">
         <div class="form-group">
           <label>SLOT</label>          
           <select id="pathAdmin-form-slot" class="form-control pathAdmin-form-input">
@@ -32,7 +32,7 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW NODE SLOT Button -->
           <button id="pathAdmin-form-view_node_slot" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- CKID -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>CKID TN: </label>
           <input id="pathAdmin-tn-check" type="checkbox" checked>
@@ -50,7 +50,7 @@
           <input id="pathAdmin-form-ckid-tn" type="text" class="form-control pathAdmin-form-input pathAdmin-form-ckid-num" placeholder="555-555-5555" data-inputmask='"mask": "999-999-9999"' data-mask="">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW CKID Button -->
           <button id="pathAdmin-form-view_ckid" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -60,13 +60,13 @@
       </div>
 
       <!-- FAC_ID -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>FAC_ID:</label>
           <input id="pathAdmin-form-fac_id" class="form-control pathAdmin-form-input">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW FAC_ID Button -->
           <button id="pathAdmin-form-view_fac_id" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -76,13 +76,13 @@
       </div>
       
       <!-- PORT -->
-      <div class="col-md-2">
+      <div class="col-md-2" style="padding:2px;">
         <div class="form-group">
           <label>PORT:</label>
           <input id="pathAdmin-form-port" class="form-control pathAdmin-form-input">
         </div>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="padding:2px;">
         <div class="form-group">
           <!-- VIEW PORT Button -->
           <button id="pathAdmin-form-view_port" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -96,7 +96,7 @@
 
     <!-- ROW 2 BEGIN -->
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10" style="padding:2px;">
         <div class="form-group">
           <label>PATH</label>
           <input id="pathAdmin-form-path" class="form-control pathAdmin-form-input" disabled>
@@ -108,7 +108,7 @@
     <!-- ROW 3 BEGIN -->
     <div class="row">
       <!-- Action Dropdown -->
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
           <select id="pathAdmin-form-action" class="form-control">
@@ -119,7 +119,7 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6" style="padding:2px;">
         <div class="form-group">
           <!-- Submit Button -->
           <button id="pathAdmin-form-submit" type="button" class="btn btn-primary" style="margin-top:25px">
@@ -220,6 +220,12 @@ $(document).ready(function() {
       pathAdminQueryByPort();
     }
   });
+
+  // ACTION SELECT CHANGE
+  $('#pathAdmin-form-action').change(function() {
+    clearErrors();
+  })
+
 
   // SUBMIT BUTTON
   $("#pathAdmin-form-submit").on('click', function() {

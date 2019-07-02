@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12" style="padding:2px;">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">LIST OF PATHS:</h3>
@@ -163,6 +163,10 @@
     // CLICK EVENTS ON TABLE ROWS
     $(document).on('click', '#pathAdmin-table tbody tr', function() {
       let data = pathAdminDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
 
       $("#pathAdmin-form-ckid").val(data.ckid);
       $("#pathAdmin-form-ckid-tn").val(data.ckid);
