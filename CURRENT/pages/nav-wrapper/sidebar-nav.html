@@ -23,7 +23,7 @@
           </button>
         </span>
       </div>
-      <div id="search_info_display"style="display:none; width:208px; position: absolute; background-color: white; z-index: 10; height: 200px; overflow:auto; padding:5px;"></div>
+      <div id="search_info_display"style="display:none; width:208px; position: absolute; background-color: white; z-index: 10; max-height: 200px; overflow:auto; padding:5px;"></div>
     </form>
     <!-- /.search form -->
 
@@ -380,8 +380,15 @@
         for(let i=0; i<res.length; i++) {
           a += `<strong>${res[i].item}</strong>:${res[i].descr}<hr>`
         }
-        $("#search_info_display").show()
-        $("#search_info_display").html(a)
+        if(a != "") {
+          $("#search_info_display").show()
+          $("#search_info_display").html(a)
+        }
+        else {
+          $("#search_info_display").html("")
+          $("#search_info_display").hide();
+        }
+        
       }
     });
   })
