@@ -156,9 +156,10 @@
 
     // click event sidebar menu
     $('.menu-item[page_id="helpsearch-page"]').click(function() {
-      queryHelpsearch();
+      // queryHelpsearch();
       clearErrors();
       $('#help-form-action').val('').change();
+      helpSearchTableId = "";
     })
 
     
