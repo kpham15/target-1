@@ -55,14 +55,12 @@
 
   function validateHelpSearchUpdate(action) {
     if (helpSearchTableId === "") {
-      // clearErrors();
-      // inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
-      // return;
-      console.log('i am empty');
+      clearErrors();
+      inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
+      return;
     }
     else {
-      // submitHelpSearch(action);
-      console.log('i should have a value');
+      submitHelpSearch(action);
     }
   }
 
@@ -98,17 +96,19 @@
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
 
-      if (action == "add") {
+      if (action == "") {
+        clearErrors();
+        return;
+      }
+      else if (action == "add") {
         submitHelpSearch(action.toUpperCase());
       }
       else if (action == "update"){
-        validateHelpSearchUpdate(action);
+        validateHelpSearchUpdate(action.toUpperCase());
       }
       else if (action == "delete") {
-        validateHelpSearchDelete(action);
+        validateHelpSearchDelete(action.toUpperCase());
       }
-
-      submitHelpSearch(action.toUpperCase());
     });
 
     // clear button click
