@@ -294,7 +294,7 @@
 		let randomNum = Math.floor(Math.random() * 100000);
         let url = "../PROFILE/"+fileName+"?"+randomNum ;
         let img = new Image();
-        img.src = url;
+		
         img.onload = function(){
             let ratio = img.width/img.height;
             let imgDropbox_height = 135;
@@ -308,7 +308,8 @@
             $("#dropdown_userPic").attr("width",imgHeader_width);
             $("#dropdown_userPic").attr("height",imgHeader_height);
             $("#dropdown_userPic").attr("src",url);
-        } 
+		} 
+		img.src = url;
 	}
   
 </script>
