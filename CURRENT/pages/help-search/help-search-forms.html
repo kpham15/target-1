@@ -55,12 +55,14 @@
 
   function validateHelpSearchUpdate(action) {
     if (helpSearchTableId === "") {
-      clearErrors();
-      inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
-      return;
+      // clearErrors();
+      // inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
+      // return;
+      console.log('i am empty');
     }
     else {
-      submitHelpSearch(action);
+      // submitHelpSearch(action);
+      console.log('i should have a value');
     }
   }
 
