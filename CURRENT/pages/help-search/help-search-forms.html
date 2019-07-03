@@ -121,18 +121,22 @@
       helpSearchTableId = "";
     });
 
+    $("#helpsearch-table_filter input").addClass('helpsearch-input');
+
     // listener for text fields
     $('.helpsearch-input').on('input', function() {
       clearErrors();
       $('#help-form-action').val('');
     })
 
+
+    
     // action change listener
     $('#help-form-action').change(function() {
       clearErrors();
     })
 
-    $("#helpsearch-table_filter input").addClass('helpsearch-input');
+    
 
   });
 
