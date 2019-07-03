@@ -98,13 +98,13 @@
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
 
-      if (action == "ADD") {
+      if (action == "add") {
         submitHelpSearch(action.toUpperCase());
       }
-      else if (action == "UPDATE"){
+      else if (action == "update"){
         validateHelpSearchUpdate(action);
       }
-      else if (action == "DELETE") {
+      else if (action == "delete") {
         validateHelpSearchDelete(action);
       }
 
