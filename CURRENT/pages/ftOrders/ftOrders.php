@@ -82,6 +82,9 @@
   // FtOrders menu item click event
   var ftOrdersFirstLoad = true;
   $(".menu-item[page_id='ftOrders-page']").click(function() {
+    clearErrors();
+    $("#ftOrders-ordForm-action").val("").change();
+    
     if (ftOrdersFirstLoad != true) {
       return;
     }

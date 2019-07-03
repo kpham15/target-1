@@ -118,7 +118,7 @@
   <div class="col-md-3">
     <div class="form-group">
       <label>ACTION</label>
-      <select id="ftOrders-ordForm-action" class="form-control ftOrders-ordForm-input">
+      <select id="ftOrders-ordForm-action" class="form-control">
         <option value=""></option>
         <option>FETCH_FT_ORDERS</option>
         <option>PROCESS_ORDER</option>
@@ -258,78 +258,88 @@
 
 
   // EVENT HANDLERS
-  
-  // VIEW BUTTON 1 
-  $("#ftOrders-ordForm-view1").on("click", function() {
-    ftOrdersCktDatatable.clear().draw();
-    $(".ftOrders-cktForm-input").val("").change();
-    ftOrdersFacDatatable.clear().draw();
-    $(".ftOrders-facForm-input").val("").change();
-  });
+  $(document).ready(function() {
 
-  // CLEAR BUTTON
-  $("#ftOrders-ordForm-clear").on('click', function() {
+    // VIEW BUTTON 1 
+    $("#ftOrders-ordForm-view1").on("click", function() {
+      ftOrdersCktDatatable.clear().draw();
+      $(".ftOrders-cktForm-input").val("").change();
+      ftOrdersFacDatatable.clear().draw();
+      $(".ftOrders-facForm-input").val("").change();
+    });
 
-    // clears forms and tables then redraws ord table
-    queryFtOrdersOrd();
-    $(".ftOrders-ordForm-input").val("").change();
-    ftOrdersCktDatatable.clear().draw();
-    $(".ftOrders-cktForm-input").val("").change();
-    ftOrdersFacDatatable.clear().draw();
-    $(".ftOrders-facForm-input").val("").change();
-  });
+    // CLEAR BUTTON
+    $("#ftOrders-ordForm-clear").on('click', function() {
+      clearErrors();
+      $("#ftOrders-ordForm-action").val("").change();
 
-  // SUBMIT BUTTON
-  $("#ftOrders-ordForm-submit").on('click', function() {
-    let action = $("#ftOrders-ordForm-action").val()
-    if ( action == "FETCH_FT_ORDERS") {
-      fetchFtOrders();
-    } else if (action == "PROCESS_ORDER") {
-      processFtOrder();
-    } else if (action == "PROCESS_CKT") {
-      processFtCkt();
-    } else if (action == "PROCESS_FAC") {
-      processFtConnection();
-    }
-    $("#ftOrders-ordForm-action").val("").change();
-  });
+      // clears forms and tables then redraws ord table
+      queryFtOrdersOrd();
+      $(".ftOrders-ordForm-input").val("").change();
+      ftOrdersCktDatatable.clear().draw();
+      $(".ftOrders-cktForm-input").val("").change();
+      ftOrdersFacDatatable.clear().draw();
+      $(".ftOrders-facForm-input").val("").change();
+    });
 
-  // ACTION CHANGE
-  $("#ftOrders-ordForm-action").on('change', function() {
-
-    clearErrors();
-
-    // REMOVE BACKGROUND COLOR FROM ALL FORMS
-    $(".ftOrders-form").css('background-color', '');
-
-    // ADD BACKGROUND COLOR FOR THE RELEVANT FORM BASED ON ACTION
-    if ($(this).val() == "PROCESS_ORDER") {
-      if ($("#ftOrders-ordForm-id").val() != "") {
-        $("#ftOrders-ordForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
-      } else {
-        inputError($(this),'PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS');
+    // SUBMIT BUTTON
+    $("#ftOrders-ordForm-submit").on('click', function() {
+      let action = $("#ftOrders-ordForm-action").val()
+      if ( action == "FETCH_FT_ORDERS") {
+        fetchFtOrders();
+      } else if (action == "PROCESS_ORDER") {
+        processFtOrder();
+      } else if (action == "PROCESS_CKT") {
+        processFtCkt();
+      } else if (action == "PROCESS_FAC") {
+        processFtConnection();
       }
-    } else if ($(this).val() == "PROCESS_CKT") {
-      if ($("#ftOrders-cktForm-id").val() != "") {
-        $("#ftOrders-cktForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+      $("#ftOrders-ordForm-action").val("").change();
+    });
 
-      } else {
-        inputError($(this),'PLEASE SELECT A CKT FROM THE LIST OF CKTS');
-      }
-    } else if ($(this).val() == "PROCESS_FAC") {
-      if ($("#ftOrders-facForm-id").val() != "") {
-        $("#ftOrders-facForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
-      } else {
-        inputError($(this),'PLEASE SELECT A FAC FROM THE LIST OF FACS');
-      }
-    } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
-      return;
-    }
-  });
+    // ACTION CHANGE
+    $("#ftOrders-ordForm-action").on('change', function() {
 
-  // CLEAR ERRORS WHEN INPUT IS CLICKED
-  $(".ftOrders-cktForm-input .ftOrders-facForm-input .ftOrders-ordForm-input").on('click', function() {
-    clearErrors();
+      clearErrors();
+
+      // REMOVE BACKGROUND COLOR FROM ALL FORMS
+      $(".ftOrders-form").css('background-color', '');
+
+      // ADD BACKGROUND COLOR FOR THE RELEVANT FORM BASED ON ACTION
+      if ($(this).val() == "PROCESS_ORDER") {
+        if ($("#ftOrders-ordForm-id").val() != "") {
+          $("#ftOrders-ordForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+        } else {
+          inputError($(this),'PLEASE SELECT AN ORDER FROM THE LIST OF ORDERS');
+        }
+      } else if ($(this).val() == "PROCESS_CKT") {
+        if ($("#ftOrders-cktForm-id").val() != "") {
+          $("#ftOrders-cktForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+
+        } else {
+          inputError($(this),'PLEASE SELECT A CKT FROM THE LIST OF CKTS');
+        }
+      } else if ($(this).val() == "PROCESS_FAC") {
+        if ($("#ftOrders-facForm-id").val() != "") {
+          $("#ftOrders-facForm").parent().css('background-color', "#00c0ef").css('border-radius', '4px');
+        } else {
+          inputError($(this),'PLEASE SELECT A FAC FROM THE LIST OF FACS');
+        }
+      } else if ($(this).val() == "FETCH_FT_ORDERS" || $(this).val() == "") {
+        return;
+      }
+    });
+
+    // CLEAR ERRORS WHEN INPUT IS CLICKED
+    $(".ftOrders-cktForm-input, .ftOrders-facForm-input, .ftOrders-ordForm-input").on('input', function() {
+      clearErrors();
+      $("#ftOrders-ordForm-action").val("").change();
+    });
+
+    $("#ftOrders-ordForm button").on('click', function() {
+      clearErrors();
+      $("#ftOrders-ordForm-action").val("").change();
+    });
   });
 
 </script>
