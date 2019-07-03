@@ -52,19 +52,19 @@
 </div>
 
 <script type="text/javascript">
+
   function validateHelpSearchUpdate(action) {
     if (helpSearchTableId == "") {
       clearErrors();
       inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
+      return;
     }
     else {
       submitHelpSearch(action);
     }
   }
 
-  $(document).ready(function() {
-
-    function submitHelpSearch(action) {
+  function submitHelpSearch(action) {
       $.ajax({
         type: "POST",
         url: ipcDispatch,
@@ -90,6 +90,8 @@
       });
     }
 
+  $(document).ready(function() {
+
     // submit btn click
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
@@ -112,6 +114,7 @@
       clearErrors();
       $('.helpsearch-input').val('');
       $('#help-form-action').val('');
+      queryHelpsearch();
       helpSearchTableId = "";
     });
 
