@@ -294,31 +294,39 @@ function svcModal_searchFac(){
         },
         dataType: 'json'
     }).done(function(data) {
-        let res = [];
-        let ftyp = $("#svcModal_newFacSearch").attr("ftyp");
-        if(data.hasOwnProperty('rows')) {
-            for (var i=0; i<data.rows.length; i++) {
-                if(data.rows[i].port == "") {
-                    continue;
-                }
-                if(ftyp == "X")
-                    if(data.rows[i].port.split('-')[2] == 'X')
-                        res.push(data.rows[i]);
-                    else 
+        if (data.rslt == 'fail') {
+            clearErrors();
+            postResponse($('#svc_modal .modal-footer'), data.rslt, data.reason);
+        }
+        else {
+            let res = [];
+            let ftyp = $("#svcModal_newFacSearch").attr("ftyp");
+            if (data.hasOwnProperty('rows')) {
+                for (var i=0; i<data.rows.length; i++) {
+                    if(data.rows[i].port == "") {
                         continue;
-                else {
-                    if(data.rows[i].port.split('-')[2] == 'Y')
-                        res.push(data.rows[i]);
-                    else 
-                        continue;
+                    }
+                    if(ftyp == "X")
+                        if(data.rows[i].port.split('-')[2] == 'X')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    else {
+                        if(data.rows[i].port.split('-')[2] == 'Y')
+                            res.push(data.rows[i]);
+                        else 
+                            continue;
+                    }
                 }
             }
+            if (res.length == 0) {
+                postResponse($('#svc_modal .modal-footer'), data.rslt, data.reason);
+            }
+            svcModalFacSearchDatatable.search("").draw();
+            svcModalFacSearchDatatable.clear().draw();
+            svcModalFacSearchDatatable.rows.add(res);
+            svcModalFacSearchDatatable.columns.adjust().draw();
         }
-                
-        
-        svcModalFacSearchDatatable.clear().draw();
-        svcModalFacSearchDatatable.rows.add(res);
-        svcModalFacSearchDatatable.columns.adjust().draw();
     });
 }
 
@@ -389,6 +397,8 @@ $(document).ready(function(){
     
     
     $("#svc-modal-submit").click(function(){
+        clearErrors();
+        
         let act = $("#svcModal_act_txt").val().toUpperCase();
         let ckid = $("#svcModal_ckid").val().toUpperCase();
         let cls = $("#svcModal_cls_sel").val().toUpperCase();

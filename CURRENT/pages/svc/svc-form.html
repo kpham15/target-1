@@ -230,30 +230,39 @@
             },
             dataType: 'json'
         }).done(function(data) {
-            let res = [];
-            let ftyp = $("#svc_facSearch").attr("ftyp");
-            if(data.hasOwnProperty('rows')) {
-                for (var i=0; i<data.rows.length; i++) {
-                    if(data.rows[i].port == "") {
-                        continue;
-                    }
-                    if(ftyp == "X")
-                        if(data.rows[i].port.split('-')[2] == 'X')
-                            res.push(data.rows[i]);
-                        else 
+            if (data.rslt == 'fail') {
+                clearErrors();
+                inputError($("#svc_act_sel"),data.reason);
+            }
+            else {
+                let res = [];
+                let ftyp = $("#svc_facSearch").attr("ftyp");
+                if (data.hasOwnProperty('rows')) {
+                    for (var i=0; i<data.rows.length; i++) {
+                        if(data.rows[i].port == "") {
                             continue;
-                    else {
-                        if(data.rows[i].port.split('-')[2] == 'Y')
-                            res.push(data.rows[i]);
-                        else 
-                            continue;
+                        }
+                        if(ftyp == "X")
+                            if(data.rows[i].port.split('-')[2] == 'X')
+                                res.push(data.rows[i]);
+                            else 
+                                continue;
+                        else {
+                            if(data.rows[i].port.split('-')[2] == 'Y')
+                                res.push(data.rows[i]);
+                            else 
+                                continue;
+                        }
                     }
                 }
+                if (res.length == 0) {
+                    inputError($('#svc_act_sel'),'No Record Found');
+                }
+                svcFacSearchDatatable.search("").draw();
+                svcFacSearchDatatable.clear().draw();
+                svcFacSearchDatatable.rows.add(res);
+                svcFacSearchDatatable.columns.adjust().draw();
             }
-            
-            svcFacSearchDatatable.clear().draw();
-            svcFacSearchDatatable.rows.add(res);
-            svcFacSearchDatatable.columns.adjust().draw();
         });
     }
 
