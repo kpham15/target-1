@@ -57,13 +57,16 @@
     }).done(function(data){
       let res = data.rows;
 
-      if (res.length == 0) {
-        inputError($('#pathAdmin-form-view_node_slot'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#pathAdmin-form-action'), data.rslt);
       }
-      pathAdminDatatable.search("").draw();
-      pathAdminDatatable.clear().draw();
-      pathAdminDatatable.rows.add(res);
-      pathAdminDatatable.columns.adjust().draw();
+      else {
+        pathAdminDatatable.search("").draw();
+        pathAdminDatatable.clear().draw();
+        pathAdminDatatable.rows.add(res);
+        pathAdminDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -91,13 +94,17 @@
     }).done(function(data){
       let res = data.rows;
 
-      if (res.length == 0) {
-        inputError($('#pathAdmin-form-view_ckid'),'No Record Found');
+
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#pathAdmin-form-action'), data.rslt);
       }
-      pathAdminDatatable.search("").draw();
-      pathAdminDatatable.clear().draw();
-      pathAdminDatatable.rows.add(res);
-      pathAdminDatatable.columns.adjust().draw();
+      else {
+        pathAdminDatatable.search("").draw();
+        pathAdminDatatable.clear().draw();
+        pathAdminDatatable.rows.add(res);
+        pathAdminDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -120,13 +127,16 @@
     }).done(function(data){
       let res = data.rows;
 
-      if (res.length == 0) {
-        inputError($('#pathAdmin-form-view_fac_id'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#pathAdmin-form-action'), data.rslt);
       }
-      pathAdminDatatable.search("").draw();
-      pathAdminDatatable.clear().draw();
-      pathAdminDatatable.rows.add(res);
-      pathAdminDatatable.columns.adjust().draw();
+      else {
+        pathAdminDatatable.search("").draw();
+        pathAdminDatatable.clear().draw();
+        pathAdminDatatable.rows.add(res);
+        pathAdminDatatable.columns.adjust().draw();
+      }
     });
   }
 
@@ -149,13 +159,16 @@
     }).done(function(data){
       let res = data.rows;
 
-      if (res.length == 0) {
-        inputError($('#pathAdmin-form-view_port'),'No Record Found');
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#pathAdmin-form-action'), data.rslt);
       }
-      pathAdminDatatable.search("").draw();
-      pathAdminDatatable.clear().draw();
-      pathAdminDatatable.rows.add(res);
-      pathAdminDatatable.columns.adjust().draw();
+      else {
+        pathAdminDatatable.search("").draw();
+        pathAdminDatatable.clear().draw();
+        pathAdminDatatable.rows.add(res);
+        pathAdminDatatable.columns.adjust().draw();
+      }
     });
   }
   
