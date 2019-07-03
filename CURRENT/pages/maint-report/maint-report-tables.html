@@ -66,13 +66,19 @@
       dataType: "json"
     }).done(function(data){
       let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#maintReport-form-report'),'No Record Found');
+      
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#maintReport-form-report'), data.reason);
       }
-      maintReportDatatable.clear().draw();
-      maintReportDatatable.rows.add(res);
-      maintReportDatatable.columns.adjust().draw();
+      else {
+        if (res.length == 0) {
+          inputError($('#maintReport-form-report'),'No Record Found');
+        }
+        maintReportDatatable.clear().draw();
+        maintReportDatatable.rows.add(res);
+        maintReportDatatable.columns.adjust().draw();
+      }
     });
   }
   
