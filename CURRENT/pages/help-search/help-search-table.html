@@ -54,6 +54,8 @@
     });
   }
 
+  var helpSearchTableId = ""
+
   $(document).ready(function() {
 
     $('#view-helpsearch').click(function() {
@@ -67,6 +69,8 @@
       if (data == undefined) {
         return;
       }
+      
+      helpSearchTableId = data.item;
 
       $('#helpsearch-form-item').val(data.item);
       $('#helpsearch-form-descr').val(data.descr);
