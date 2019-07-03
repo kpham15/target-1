@@ -183,8 +183,8 @@
         body: data.reason,
       }
       if (data.rslt == "fail") {
-        modal.type = 'danger'
-        modalHandler(modal);
+        clearErrors();
+        inputError($('#ftOrders-ordForm-action'), data.reason);
       } else {
         modal.type = "success";
         modalHandler(modal);
@@ -211,8 +211,8 @@
         body: data.reason,
       }
       if (data.rslt == "fail") {
-        modal.type = 'danger'
-        modalHandler(modal);
+        clearErrors();
+        inputError($('#ftOrders-ordForm-action'), data.reason);
       } else {
         modal.type = "success";
         modalHandler(modal);
@@ -243,8 +243,8 @@
         body: data.reason,
       }
       if (data.rslt == "fail") {
-        modal.type = 'danger'
-        modalHandler(modal);
+        clearErrors();
+        inputError($('#ftOrders-ordForm-action'), data.reason);
       } else {
         modal.type = "success";
         modalHandler(modal);
