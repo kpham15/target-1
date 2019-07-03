@@ -101,7 +101,7 @@
 
       if (action == "") {
         clearErrors();
-        return;
+        inputError($('#help-form-action'),'ACTION IS REQUIRED');
       }
       else if (action == "add") {
         submitHelpSearch(action.toUpperCase());
