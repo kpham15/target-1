@@ -53,7 +53,7 @@
 
 <script type="text/javascript">
 
-  function validateHelpSearchUpdate(action) {
+  function validateHelpSearch(action) {
     if (helpSearchTableId === "") {
       clearErrors();
       inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
@@ -82,11 +82,13 @@
         if (data.rslt === 'fail') {
           clearErrors();
           inputError($('#help-form-action'), data.reason);
+          helpSearchTableId = "";
         }
         else {
           queryHelpsearch();
           // $('#help-form-action').val('');
           inputSuccess($('#help-form-action'), data.reason);
+          helpSearchTableId = "";
         }
       });
     }
@@ -105,10 +107,10 @@
         submitHelpSearch(action.toUpperCase());
       }
       else if (action == "update"){
-        validateHelpSearchUpdate(action.toUpperCase());
+        validateHelpSearch(action.toUpperCase());
       }
       else if (action == "delete") {
-        validateHelpSearchDelete(action.toUpperCase());
+        validateHelpSearch(action.toUpperCase());
       }
     });
 
