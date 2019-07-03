@@ -35,10 +35,17 @@
     }).done(function(data) {
       let res = data.rows;
 
-      databaseBackupDatatable.search("").draw();
-      databaseBackupDatatable.clear().draw();
-      databaseBackupDatatable.rows.add(res);
-      databaseBackupDatatable.columns.adjust().draw();
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#database-backup-forms-action'), data.reason);
+      }
+      else {
+        databaseBackupDatatable.search("").draw();
+        databaseBackupDatatable.clear().draw();
+        databaseBackupDatatable.rows.add(res);
+        databaseBackupDatatable.columns.adjust().draw();
+      }
+
     })
   }
 

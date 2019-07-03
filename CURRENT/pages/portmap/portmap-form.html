@@ -88,6 +88,9 @@
 
   $(document).ready(function() {
 
+
+    $("#portmap-table_filter input").addClass('portmap-form-input');
+
     function portmapPopulateModal(obj) {
       $('.portmap-modal-field').each(function() {
         let target = $(this).attr('target');
@@ -162,8 +165,8 @@
 
     // Clear button click handler
     $('#portmap-form-clear').click(function() {
-      $('.portmap-form-input').val('');
       portmapDatatable.clear().draw();
+      $('.portmap-form-input').val('');
 
       clearErrors();
     });
@@ -205,8 +208,6 @@
       }
     });
 
-
-    $("#portmap-table_filter input").addClass('portmap-form-input');
     
     $(".portmap-form-input").on('input', function() {
       clearErrors();

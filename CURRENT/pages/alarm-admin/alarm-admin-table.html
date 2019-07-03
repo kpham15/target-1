@@ -81,27 +81,16 @@
       dataType:   'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
 
       if (data.rslt === 'fail') {
-        modal.type = "danger";
-        modalHandler(modal);
-      } else {
-        if (res.length === 0) {
-          if (action !== 'query') {
-            modal.type = "warning";
-            modal.body = "No record found";
-            modalHandler(modal);
-          } 
-        } else {
+        clearErrors();
+        inputError($('#alarm-admin-forms-action'),data.reason);
+      } 
+      else {
             alarmAdminDatatable.search("").draw();
             alarmAdminDatatable.clear().draw();
             alarmAdminDatatable.rows.add(res);
             alarmAdminDatatable.columns.adjust().draw();
-        }
       }
     });
   }

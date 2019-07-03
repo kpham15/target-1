@@ -53,11 +53,23 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      let res = data.rows;
-
-      ftOrdersCktDatatable.clear().draw();
-      ftOrdersCktDatatable.rows.add(res);
-      ftOrdersCktDatatable.columns.adjust().draw();
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($("#ftOrders-ordForm-action"),data.reason);
+      }
+      else {
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#ftOrders-ordForm-action'),'No Record Found');
+        }
+        ftOrdersCktDatatable.search("").draw();
+        ftOrdersCktDatatable.clear().draw();
+        ftOrdersCktDatatable.rows.add(res);
+        ftOrdersCktDatatable.columns.adjust().draw();
+      }
     });
   }
 

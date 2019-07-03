@@ -73,12 +73,8 @@ function batchExec_query(action){
     })
     .done(function(data, status) {
         if (data["rslt"] == "fail") {
-            let modal = {
-                title:  data.rslt,
-                body: data.reason,
-                type : 'danger'
-            }
-            modalHandler(modal);
+            clearErrors();
+            inputError($("#batchExc_act_sel"), data.reason);
         }
         else {
             if (action == "QUERYBATS") {

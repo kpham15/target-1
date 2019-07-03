@@ -38,7 +38,7 @@
     <!-- Row 3 -->
     <div class="row">
       <!-- ACTION -->
-      <div class="col-md-2" style="padding:2px;">
+      <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION:</label>
           <select id="alarm-admin-forms-action" class="form-control">
@@ -95,7 +95,7 @@ function validateAck(obj) {
     }
   }
   else {
-    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    inputError($('#alarm-admin-forms-action'),'SELECT AN ALARM FROM THE LIST OF ALARM(S)');
     return;
   }
 }
@@ -118,7 +118,7 @@ function validateUnack(obj) {
     }
   }
   else {
-    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    inputError($('#alarm-admin-forms-action'),'SELECT AN ALARM FROM THE LIST OF ALARM(S)');
     return;
   }
 }
@@ -134,7 +134,7 @@ function validateClr(obj) {
     $('#alarm-admin-modal').modal('show');
   }
   else {
-    inputError($('#alarm-admin-forms-action'),'Select an alarm from the list');
+    inputError($('#alarm-admin-forms-action'),'SELECT AN ALARM FROM THE LIST OF ALARM(S)');
     return;
   }
 }
