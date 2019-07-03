@@ -68,7 +68,8 @@
       let res = data.rows;
       
       if (data.rslt == 'fail') {
-        inputError($('#maintReport-form-action'),data.reason);
+        clearErrors();
+        inputError($('#maintReport-form-report'), data.reason);
       }
       else {
         if (res.length == 0) {
