@@ -64,6 +64,23 @@
     }
   }
 
+  function validateHelpSearchAdd(action) {
+    let item = $('#helpsearch-form-item').val();
+    let descr = $('#helpsearch-form-descr').val();
+
+    if (item == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-item'),'ITEM IS REQUIRED');
+    }
+    else if (descr == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-descr'),'DESCRIPTION IS REQUIRED');
+    }
+    else {
+      submitHelpSearch(action);
+    }
+  }
+
   function submitHelpSearch(action) {
       $.ajax({
         type: "POST",
@@ -104,7 +121,7 @@
         inputError($('#help-form-action'),'ACTION IS REQUIRED');
       }
       else if (action == "add") {
-        submitHelpSearch(action.toUpperCase());
+        validateHelpSearchAdd(action.toUpperCase());
       }
       else if (action == "update"){
         validateHelpSearch(action.toUpperCase());
