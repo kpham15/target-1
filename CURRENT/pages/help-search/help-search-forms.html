@@ -30,7 +30,7 @@
       <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="help-form-action" class="form-control helpsearch-input">
+          <select id="help-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -89,7 +89,13 @@
     $('#clear-helpsearch').click(function() {
       clearErrors();
       $('.helpsearch-input').val('');
+      $('#help-form-action').val('');
     });
+
+    $('.helpsearch-input').on('input', function() {
+      clearErrors();
+      $('#help-form-action').val('');
+    })
 
   });
 
