@@ -402,12 +402,68 @@
     }
   }
 
+  function queryMaintCkid(ckid) {
+    $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcProv",
+          "act":    "queryCkid",
+          "user":   user.uname,
+          "ckid":   ckid.toUpperCase()
+        },
+        dataType:   'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
+        }
+        else {
+          setupMaintTableCkts.clear().draw();
+          setupMaintTableCkts.rows.add(res);
+          setupMaintTableCkts.columns.adjust().draw();
+          setupMaintTableCkts.search('').draw();
+        }
+      })
+  }
+
+  function queryMaintTktno(tktno) {
+    $.ajax ({
+        type:     'POST',
+        url:      ipcDispatch,
+        data:     {
+          "api":    "ipcMaintReport",
+          "act":    "queryTkt",
+          "user":   user.uname,
+          "tktno":  tktno.toUpperCase()
+        },
+        dataType:   'json',
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt == 'fail') {
+          clearErrors();
+          inputError($('#setup-maint-forms-action'),data.reason);
+        }
+        else {
+          setupMaintTableTkts.clear().draw();
+          setupMaintTableTkts.rows.add(res);
+          setupMaintTableTkts.columns.adjust().draw();
+        }
+      })
+  }
+
+
   $(document).ready(function() {
 
     $("#setup-maint-table-ckts_filter input").addClass('setup-maint-forms-input');
 
     // Clear Button Click Event
     $('#setup-maint-forms-clear').click(function() {
+      let ckid = "";
+      queryMaintCkid(ckid);
       clearErrors();
       $('.setup-maint-forms-input').val('');
       $('.setup-maint-modal-input').val('');
@@ -424,7 +480,6 @@
       maintPstaFfac = "";
       maintTestFac = "";
       maintTestPort = "";
-      $('#setup-maint-forms-viewckid').trigger('click');
     })
 
     // Action Change Event
@@ -442,7 +497,6 @@
 
       let obj = {
         action:     $('#setup-maint-forms-action').val(),
-        // ckid:     $('#setup-maint-forms-ckid').val(),
         cls:        $('#setup-maint-forms-cls').val(),
         adsr:       $('#setup-maint-forms-adsr').val(),
         tktno:      $('#setup-maint-forms-tktno').val(),
@@ -489,42 +543,13 @@
       else {
         ckid = $('#setup-maint-forms-ckid').val();
       }
+      queryMaintCkid(ckid);
 
-      $.ajax ({
-        type:     'POST',
-        url:      ipcDispatch,
-        data:     {
-          "api":    "ipcProv",
-          "act":    "queryCkid",
-          "user":   user.uname,
-          "ckid":   ckid.toUpperCase()
-        },
-        dataType:   'json'
-      }).done(function(data) {
-        let res = data.rows;
-
-        if (res.length == 0) {
-          inputError($('#setup-maint-forms-ckid'),'No Results Found');
-        }
-
-        if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
-        }
-        else {
-          setupMaintTableCkts.clear().draw();
-          setupMaintTableCkts.rows.add(res);
-          setupMaintTableCkts.columns.adjust().draw();
-          setupMaintTableCkts.search('').draw();
-        }
-
-        
-      })
     })
     
     // View Button 2
     $('#setup-maint-forms-viewtkt').click(function() {
 
-      $('#setup-maint-forms-post-response-text').text('');
       $('#setup-maint-table-ckts-div').hide();
       $('#setup-maint-table-tkts-div').show();
       $('#setup-maint-table-cons-div').hide();
@@ -533,32 +558,8 @@
 
       let tktno = $('#setup-maint-forms-tktno').val();
 
-      $.ajax ({
-        type:     'POST',
-        url:      ipcDispatch,
-        data:     {
-          "api":    "ipcMaintReport",
-          "act":    "queryTkt",
-          "user":   user.uname,
-          "tktno":  tktno.toUpperCase()
-        },
-        dataType:   'json',
-      }).done(function(data) {
-        let res = data.rows;
-
-        if (res.length == 0) {
-          inputError($('#setup-maint-forms-tktno'),'No Results Found');
-        }
-
-        if (data.rslt == 'fail') {
-          postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
-        }
-        else {
-          setupMaintTableTkts.clear().draw();
-          setupMaintTableTkts.rows.add(res);
-          setupMaintTableTkts.columns.adjust().draw();
-        }
-      })
+      queryMaintTktno(tktno);
+      
     })
     
     // Initialize inputmask
@@ -574,7 +575,8 @@
 
     // side navbar click event
     $('.menu-item[page_id="setup-maint-page"]').click(function() {
-      $('#setup-maint-forms-viewckid').trigger('click');
+      let ckid = "";
+      queryMaintCkid(ckid);
       clearErrors();
       $("#setup-maint-forms-action").val("").change();
     });

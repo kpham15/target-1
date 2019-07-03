@@ -154,7 +154,8 @@
     }).done(function(data) {
       let res = data.rows;
       if (data.rslt == 'fail') {
-        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        clearErrors();
+        inputError($('#setup-maint-forms-action'),data.reason);
       }
       else {
         setupMaintTableCkts.search("").draw();
@@ -181,7 +182,8 @@
       let res = data.rows;
 
       if (data.rslt == 'fail') {
-        $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        clearErrors();
+        inputError($('#setup-maint-forms-action'),data.reason);
       }
       else {
         setupMaintTableCons.search("").draw();
@@ -293,7 +295,8 @@
         let res = data.rows;
         
         if (data.rslt == 'fail') {
-          $('#setup-maint-forms-post-response-text').css('color','red').text(data.rslt + ' - ' + data.reason);
+        clearErrors();
+        inputError($('#setup-maint-forms-action'),data.reason);
         }
         else {
           setupMaintTableCons.clear().draw();

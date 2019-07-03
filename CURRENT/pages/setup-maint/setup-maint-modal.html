@@ -727,32 +727,37 @@
     }).done(function(data) {
       let res = [];
       let ftyp = $('#setup-maint-modal-change-search-div').attr('ftyp');
-      if (data.hasOwnProperty('rows')) {
-        for (let i=0; i<data.rows.length; i++) {
-          if (data.rows[i].port == "") {
-            continue;
-          }
-          if (ftyp == 'X') {
-            if (data.rows[i].port.split('-')[2] == 'X') {
-              res.push(data.rows[i]);
-            }
-            else {
+      if (data.rslt == 'fail') {
+        postResponse($('#setup-maint-modal .modal-footer'), data.rslt, data.reason);
+      }
+      else {
+        if (data.hasOwnProperty('rows')) {
+          for (let i=0; i<data.rows.length; i++) {
+            if (data.rows[i].port == "") {
               continue;
             }
-          }
-          else {
-            if (data.rows[i].port.split('-')[2] == 'Y') {
-              res.push(data.rows[i]);
+            if (ftyp == 'X') {
+              if (data.rows[i].port.split('-')[2] == 'X') {
+                res.push(data.rows[i]);
+              }
+              else {
+                continue;
+              }
             }
             else {
-              continue;
+              if (data.rows[i].port.split('-')[2] == 'Y') {
+                res.push(data.rows[i]);
+              }
+              else {
+                continue;
+              }
             }
           }
         }
+        maintChangeSearchDatatable.clear().draw();
+        maintChangeSearchDatatable.rows.add(res);
+        maintChangeSearchDatatable.columns.adjust().draw();
       }
-      maintChangeSearchDatatable.clear().draw();
-      maintChangeSearchDatatable.rows.add(res);
-      maintChangeSearchDatatable.columns.adjust().draw();
     })
   }
   
