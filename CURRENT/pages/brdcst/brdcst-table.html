@@ -56,10 +56,17 @@
     }).done(function(data) {
       let res = data.rows;
 
-      brdcstDatatable.search("").draw();
-      brdcstDatatable.clear().draw();
-      brdcstDatatable.rows.add(res);
-      brdcstDatatable.columns.adjust().draw();
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#brdcst-form-action'), data.reason);
+      }
+      else {
+        brdcstDatatable.search("").draw();
+        brdcstDatatable.clear().draw();
+        brdcstDatatable.rows.add(res);
+        brdcstDatatable.columns.adjust().draw();
+      }
+
     });
   }
 
