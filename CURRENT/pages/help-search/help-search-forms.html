@@ -85,7 +85,8 @@
         }
         else {
           queryHelpsearch();
-          $('#help-form-action').val('');
+          // $('#help-form-action').val('');
+          inputSuccess($('#help-form-action'), data.reason);
         }
       });
     }
