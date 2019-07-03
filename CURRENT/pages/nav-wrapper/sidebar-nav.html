@@ -17,12 +17,13 @@
     <!-- search form (Optional) -->
     <form class="sidebar-form">
       <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <input id="search_info_input" type="text" name="q" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
-            <button type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-            </button>
-          </span>
+          <button id="search_info_btn" type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+          </button>
+        </span>
       </div>
+      <div id="search_info_display"style="display:none; width:208px; position: absolute; background-color: white; z-index: 10; max-height: 200px; overflow:auto; padding:5px;"></div>
     </form>
     <!-- /.search form -->
 
@@ -347,4 +348,64 @@
 
     modalHandler(modal);
   });
+
+  //---------------Search/help area in side bar---------------//
+  $("#search_info_btn").click(function(){
+    let searchValue = $("#search_info_input").val().trim();
+    if(searchValue == "") {
+      $("#search_info_display").html("")
+      $("#search_info_display").hide();
+      return;
+    }
+     
+    $.ajax({
+      type:'POST',
+      url: ipcDispatch,
+      data: {
+        "api": "ipcSearch",
+        "act": "search",
+        "user": user.uname,
+        "item": searchValue.toUpperCase()
+      },
+      dataType: 'json'
+
+    }).done(function(data) {
+      if(data.rslt == 'fail') {
+        $("#search_info_display").show()
+        $("#search_info_display").html(data.reason.toUpperCase())
+      }
+      else {
+        let res = data.rows;
+        let a = "";
+        for(let i=0; i<res.length; i++) {
+          a += `<strong>${res[i].item}</strong>:${res[i].descr}<hr>`
+        }
+        if(a != "") {
+          $("#search_info_display").show()
+          $("#search_info_display").html(a)
+        }
+        else {
+          $("#search_info_display").html("")
+          $("#search_info_display").hide();
+        }
+        
+      }
+    });
+  })
+  
+  $('#search_info_input').keypress(function(e){
+    if(e.which == 13)
+    {
+      $("#search_info_btn").trigger('click');
+      return false;
+    }
+});
+  $('body').click(function(e){    
+    if(e.target.id == "search_info_display" || $(e.target).closest('#menu_content').length)
+        return;
+    $("#search_info_display").html("");
+    $("#search_info_display").hide();
+
+  });
+
 </script>

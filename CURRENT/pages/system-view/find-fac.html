@@ -86,6 +86,7 @@ $(document).on('click', '#sysview_findFac_table tbody tr', function() {
     if(data == undefined)
         return;
     let port = data.port;
+
     if(port != "") {
         let portExtract = port.split('-');
         let node = portExtract[0];
