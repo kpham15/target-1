@@ -51,16 +51,16 @@
       },
       dataType:     'json'
     }).done(function(data) {
-      let res = data.rows;
-
-      if (res.length == 0) {
-        inputError($('#setup-users-forms-viewuser'),'No Results Found');
+      if (data.rslt === 'fail') {
+        clearErrors();
+        inputError($("#setup-users-forms-action"),data.reason);
+      } else {
+        let res = data.rows;
+        setupUsersDatatable.search("").draw();
+        setupUsersDatatable.clear().draw();
+        setupUsersDatatable.rows.add(res);
+        setupUsersDatatable.columns.adjust().draw();
       }
-
-      setupUsersDatatable.search("").draw();
-      setupUsersDatatable.clear().draw();
-      setupUsersDatatable.rows.add(res);
-      setupUsersDatatable.columns.adjust().draw();
     });
   }
   $(document).ready(function() {
