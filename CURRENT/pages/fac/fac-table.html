@@ -54,12 +54,19 @@
       },
       dataType: 'json'
     }).done(function(data) {
-      if(data.rslt == 'fail') {
+      if (data.rslt == 'fail') {
         clearErrors();
         inputError($("#fac-form-action"),data.reason);
       }
       else {
-        let res = data.rows;
+        let res = [];
+        if (data.hasOwnProperty('rows')) {
+          res = data.rows;
+        }
+        if (res.length == 0) {
+          inputError($('#fac-form-action'),'No Record Found');
+        }
+        facDatatable.search("").draw();
         facDatatable.clear().draw();
         facDatatable.rows.add(res);
         facDatatable.columns.adjust().draw();
