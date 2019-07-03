@@ -54,7 +54,7 @@
 <script type="text/javascript">
 
   function validateHelpSearchUpdate(action) {
-    if (helpSearchTableId == "") {
+    if (helpSearchTableId === "") {
       clearErrors();
       inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
       return;
