@@ -149,11 +149,16 @@
       $('#help-form-action').val('');
     })
 
-
-    
     // action change listener
     $('#help-form-action').change(function() {
       clearErrors();
+    })
+
+    // click event sidebar menu
+    $('.menu-item[page_id="helpsearch-page"]').click(function() {
+      queryHelpsearch();
+      clearErrors();
+      $('#help-form-action').val('').change();
     })
 
     
