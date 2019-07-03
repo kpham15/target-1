@@ -21,7 +21,7 @@
       <div class="col-md-12" style="padding:2px;">
         <div class="form-group">
           <label>DESCRIPTION</label>
-          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input" rows="5"></textarea>
+          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input lowercase" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -87,6 +87,7 @@
     });
 
     $('#clear-helpsearch').click(function() {
+      clearErrors();
       $('.helpsearch-input').val('');
     });
 
