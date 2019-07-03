@@ -35,6 +35,11 @@
     }).done(function(data) {
       let res = data.rows;
 
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#database-backup-forms-action'), data.reason);
+      }
+
       databaseBackupDatatable.search("").draw();
       databaseBackupDatatable.clear().draw();
       databaseBackupDatatable.rows.add(res);
