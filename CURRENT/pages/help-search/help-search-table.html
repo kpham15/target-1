@@ -42,9 +42,15 @@
 
     }).done(function(data) {
       let res = data.rows;
-      helpSearchDatatable.clear().draw();
-      helpSearchDatatable.rows.add(res);
-      helpSearchDatatable.columns.adjust().draw();
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#help-form-action'), data.reason);
+      }
+      else {
+        helpSearchDatatable.clear().draw();
+        helpSearchDatatable.rows.add(res);
+        helpSearchDatatable.columns.adjust().draw();
+      }
     });
   }
 

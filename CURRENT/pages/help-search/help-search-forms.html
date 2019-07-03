@@ -68,18 +68,12 @@
         dataType: 'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          title: data.rslt,
-          body: data.reason
-        }
 
         if (data.rslt === 'fail') {
-          modal.type = "danger";
-          modalHandler(modal);
+          clearErrors();
+          inputError($('#help-form-action'), data.reason);
         }
         else {
-          modal.type = 'success';
-          modalHandler(modal);
           queryHelpsearch();
           $('#help-form-action').val('');
         }
