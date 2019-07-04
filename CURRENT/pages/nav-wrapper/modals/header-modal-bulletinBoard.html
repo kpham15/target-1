@@ -68,13 +68,18 @@ function queryBulletinBoard() {
     },
     dataType:   'json'
   }).done(function(data) {
-    let res = [];
-    if (data.hasOwnProperty('rows')) {
-      res = data.rows;
+    if (data.rslt === 'fail') {
+        clearErrors();
+        postResponse($('#header-bulletinBoard-modal .modal-footer'), data.rslt, data.reason);
+    } else {
+      let res = [];
+      if (data.hasOwnProperty('rows')) {
+        res = data.rows;
+      }
+      bulletinBoardDatatable.clear().draw();
+      bulletinBoardDatatable.rows.add(res);
+      bulletinBoardDatatable.columns.adjust().draw();
     }
-    bulletinBoardDatatable.clear().draw();
-    bulletinBoardDatatable.rows.add(res);
-    bulletinBoardDatatable.columns.adjust().draw();
   })
 }
 

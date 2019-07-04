@@ -92,6 +92,7 @@
     if (bulletinBoardFirstLoad != true) {
       return;
     }
+    clearErrors();
     $("#header-bulletinBoard-modal").modal('show');
     bulletinBoardFirstLoad = false;
   }
