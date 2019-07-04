@@ -61,7 +61,8 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal" style="width:100%; margin-bottom: 5px">Close</button>
                     </div>
                 </div>
-
+                <div id="sysview_findConn_footer">
+                </div>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -126,13 +127,18 @@ function sysview_findConn_queryCkid() {
         },
         dataType: 'json'
     }).done(function(data) {
-        let res = [];
-        if(data.hasOwnProperty('rows')){
-            res = data.rows;
+        if (data.rslt === 'fail') {
+            clearErrors();
+            postResponse($('#sysview_findConn_modal #sysview_findConn_footer'), data.rslt, data.reason);
+        } else {
+            let res = [];
+            if(data.hasOwnProperty('rows')){
+                res = data.rows;
+            }
+            sysview_findConn_cktDatatable.clear().draw();
+            sysview_findConn_cktDatatable.rows.add(res);
+            sysview_findConn_cktDatatable.columns.adjust().draw();
         }
-        sysview_findConn_cktDatatable.clear().draw();
-        sysview_findConn_cktDatatable.rows.add(res);
-        sysview_findConn_cktDatatable.columns.adjust().draw();
     });
 }
 
@@ -150,17 +156,22 @@ function sysview_findConn_queryCktConByCkid(ckid) {
         },
         dataType: 'json',
     }).done(function(data){
-        let res = [];
-        if(data.hasOwnProperty('rows'))
-            res = data.rows;
+        if (data.rslt === 'fail') {
+            clearErrors();
+            postResponse($('#sysview_findConn_modal #sysview_findConn_footer'), data.rslt, data.reason);
+        } else {
+            let res = [];
+            if(data.hasOwnProperty('rows'))
+                res = data.rows;
 
-        sysview_findConn_cktconDatatable.clear().draw();
-        sysview_findConn_cktconDatatable.rows.add(res);
-        sysview_findConn_cktconDatatable.columns.adjust().draw();
+            sysview_findConn_cktconDatatable.clear().draw();
+            sysview_findConn_cktconDatatable.rows.add(res);
+            sysview_findConn_cktconDatatable.columns.adjust().draw();
+        }
     })
 }
 
-function sysview_fincConn_resetModal(){
+function sysview_findConn_resetModal(){
     $("#sysview_findConn_cktArea").show()
     $("#sysview_findConn_cktconArea").hide()
     $("#sysview_findConn_submit").prop("disabled",false)
@@ -171,7 +182,8 @@ function sysview_fincConn_resetModal(){
 }
 
 $("#find_conn_btn").click(function(){
-    sysview_fincConn_resetModal();
+    sysview_findConn_resetModal();
+    clearErrors();
     $("#sysview_findConn_modal").modal();
 })
 
@@ -182,6 +194,7 @@ $('#sysview_findConn_modal').on('shown.bs.modal', function (e) {
 $("#sysview_findConn_submit").click(function(){
     if(sysview_findConn_ckid === "")
         return;
+    clearErrors()
     $("#sysview_findConn_submit").prop("disabled", true);
     $("#sysview_findConn_goBack").prop("disabled", false);
     $("#sysview_findConn_cktArea").hide();
@@ -191,6 +204,7 @@ $("#sysview_findConn_submit").click(function(){
 })
 
 $("#sysview_findConn_goBack").click(function(){
+    clearErrors()
     $("#sysview_findConn_submit").prop("disabled", false);
     $("#sysview_findConn_goBack").prop("disabled", true);
     $("#sysview_findConn_cktArea").show();
@@ -200,7 +214,8 @@ $("#sysview_findConn_goBack").click(function(){
 $(document).on('click', '#sysview_findConn_cktTable tbody tr', function() {
     let data = sysview_findConn_cktDatatable.row(this).data();
     if(data == undefined)
-        return;   
+        return;  
+    clearErrors() 
     // give selected class
     $('#sysview_findConn_cktTable tbody tr').removeClass('bg-primary');
     $(this).addClass('bg-primary');
@@ -212,7 +227,8 @@ $(document).on('click', '#sysview_findConn_cktTable tbody tr', function() {
 $(document).on('click', '#sysview_findConn_cktconArea tbody tr', function() {
     let data = sysview_findConn_cktconDatatable.row(this).data();
     if(data == undefined)
-        return;   
+        return;  
+    clearErrors() 
     // give selected class
     $('#sysview_findConn_cktconArea tbody tr').removeClass('bg-primary');
     $(this).addClass('bg-primary');

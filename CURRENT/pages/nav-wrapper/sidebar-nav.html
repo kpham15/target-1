@@ -351,6 +351,7 @@
 
   //---------------Search/help area in side bar---------------//
   $("#search_info_btn").click(function(){
+    $('#search_info_display').scrollTop(0)
     let searchValue = $("#search_info_input").val().trim();
     if(searchValue == "") {
       $("#search_info_display").html("")
@@ -372,7 +373,7 @@
     }).done(function(data) {
       if(data.rslt == 'fail') {
         $("#search_info_display").show()
-        $("#search_info_display").html(data.reason.toUpperCase())
+        $("#search_info_display").html('<font color="red">'+data.reason.toUpperCase()+'</font>')
       }
       else {
         let res = data.rows;

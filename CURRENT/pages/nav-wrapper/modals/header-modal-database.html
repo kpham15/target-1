@@ -95,11 +95,16 @@ function queryDatabaseDownload() {
     },
     dataType:   'json'
   }).done(function(data) {
-    let res = data.rows;
+    if (data.rslt === 'fail') {
+        clearErrors();
+        postResponse($('#header-database-download-modal .modal-footer'), data.rslt, data.reason);
+    } else {
+      let res = data.rows;
 
-    databaseDownloadDatatable.clear().draw();
-    databaseDownloadDatatable.rows.add(res);
-    databaseDownloadDatatable.columns.adjust().draw();
+      databaseDownloadDatatable.clear().draw();
+      databaseDownloadDatatable.rows.add(res);
+      databaseDownloadDatatable.columns.adjust().draw();
+    }
   })
 }
 
@@ -137,14 +142,16 @@ $(document).ready(function() {
       if (data.rslt == 'fail') { 
         postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, data.reason);
       }
+      else {
+        if (action == "DELETE") {
+          postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "File Deleted");
+        }
 
-      if (action == "DELETE") {
-        postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "File Deleted");
+        if (action == "MANUAL") {
+          postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile);
+        }
       }
-
-      if (action == "MANUAL") {
-        postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile);
-      }
+    
     });
 
   });
