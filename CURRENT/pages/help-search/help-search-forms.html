@@ -21,7 +21,7 @@
       <div class="col-md-12" style="padding:2px;">
         <div class="form-group">
           <label>DESCRIPTION</label>
-          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input" rows="5"></textarea>
+          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input lowercase" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
       <div class="col-md-3" style="padding:2px;">
         <div class="form-group">
           <label>ACTION</label>
-          <select id="help-form-action" class="form-control helpsearch-input">
+          <select id="help-form-action" class="form-control">
             <option value=""></option>
             <option value="add">ADD</option>
             <option value="update">UPDATE</option>
@@ -52,9 +52,36 @@
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function() {
 
-    function submitHelpSearch(action) {
+  function validateHelpSearch(action) {
+    if (helpSearchTableId === "") {
+      clearErrors();
+      inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
+      return;
+    }
+    else {
+      submitHelpSearch(action);
+    }
+  }
+
+  function validateHelpSearchAdd(action) {
+    let item = $('#helpsearch-form-item').val();
+    let descr = $('#helpsearch-form-descr').val();
+
+    if (item == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-item'),'ITEM IS REQUIRED');
+    }
+    else if (descr == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-descr'),'DESCRIPTION IS REQUIRED');
+    }
+    else {
+      submitHelpSearch(action);
+    }
+  }
+
+  function submitHelpSearch(action) {
       $.ajax({
         type: "POST",
         url: ipcDispatch,
@@ -68,33 +95,74 @@
         dataType: 'json'
       }).done(function(data) {
         let res = data.rows;
-        let modal = {
-          title: data.rslt,
-          body: data.reason
-        }
 
         if (data.rslt === 'fail') {
-          modal.type = "danger";
-          modalHandler(modal);
+          clearErrors();
+          inputError($('#help-form-action'), data.reason);
+          helpSearchTableId = "";
         }
         else {
-          modal.type = 'success';
-          modalHandler(modal);
+          // $('.helpsearch-input').val('');
           queryHelpsearch();
-          $('#help-form-action').val('');
+          // $('#help-form-action').val('');
+          inputSuccess($('#help-form-action'), data.reason);
+          helpSearchTableId = "";
         }
       });
     }
 
+  $(document).ready(function() {
+
+    // submit btn click
     $('#submit-helpsearch').click(function() {
       let action = $('#help-form-action').val();
 
-      submitHelpSearch(action.toUpperCase());
+      if (action == "") {
+        clearErrors();
+        inputError($('#help-form-action'),'ACTION IS REQUIRED');
+      }
+      else if (action == "add") {
+        validateHelpSearchAdd(action.toUpperCase());
+      }
+      else if (action == "update"){
+        validateHelpSearch(action.toUpperCase());
+      }
+      else if (action == "delete") {
+        validateHelpSearch(action.toUpperCase());
+      }
     });
 
+    // clear button click
     $('#clear-helpsearch').click(function() {
+      clearErrors();
       $('.helpsearch-input').val('');
+      $('#help-form-action').val('');
+      queryHelpsearch();
+      helpSearchTableId = "";
     });
+
+    $("#helpsearch-table_filter input").addClass('helpsearch-input');
+
+    // listener for text fields
+    $('.helpsearch-input').on('input', function() {
+      clearErrors();
+      $('#help-form-action').val('');
+    })
+
+    // action change listener
+    $('#help-form-action').change(function() {
+      clearErrors();
+    })
+
+    // click event sidebar menu
+    $('.menu-item[page_id="helpsearch-page"]').click(function() {
+      // queryHelpsearch();
+      // helpSearchTableId = "";
+      clearErrors();
+      $('#help-form-action').val('').change();
+    })
+
+    
 
   });
 

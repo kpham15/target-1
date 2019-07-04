@@ -49,14 +49,10 @@
       dataType: 'json'
     }).done(function(data) {
       let res = data.rows;
-      let modal = {
-        title: data.rslt,
-        body: data.reason
-      }
 
       if (data.rslt === 'fail') {
-        modal.type = "danger",
-        modalHandler(modal);
+        clearErrors();
+        inputError($('#brdcst-form-action'), data.reason);
       } else {
         createMsgOwners(res);
       }
