@@ -129,7 +129,7 @@
   }
 
   function validateFacAdd(obj) {
-    if (obj.action == "") {
+    if (obj.facId == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
     }
