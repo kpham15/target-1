@@ -217,7 +217,7 @@ class REF {
 
         if ($pw_reuse != 0 && $pw_repeat == 0) {
             $this->rslt = FAIL;
-            $this->reason = "PW REPEAT cannot be N/A if PW REPEAT IS ($pw_repeat)";
+            $this->reason = "PW REPEAT cannot be N/A if PW REUSE IS NOT N/A";
             return;
         }
 
