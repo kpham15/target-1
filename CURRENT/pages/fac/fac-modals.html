@@ -98,30 +98,21 @@
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('#fac-modal-submit').click(function() {
-      let id = $('#fac-form-id').val();
 
-      let facId = $("#fac-modal-facId").val();
-      let range = $("#fac-modal-range").val();
-      let ftyp = $("#fac-modal-ftyp").val();
-      let ort = $("#fac-modal-ort").val();
-      let spcfnc = $("#fac-modal-spcfnc").val();
-      let action = $('#fac-modal-action').val();
-      
-      $.ajax({
+  function facModalSumbit(obj) {
+    $.ajax({
         type: "POST",
         url: ipcDispatch,
         data: {
           api:    "ipcFacilities",
           act:    action,
           user:   user.uname,
-          fac_id: id,
-          fac:    facId.toUpperCase(),
-          ftyp:   ftyp,
-          ort:    ort,
-          spcfnc: spcfnc,
-          range:  range,
+          fac_id: obj.id,
+          fac:    obj.facId.toUpperCase(),
+          ftyp:   obj.ftyp,
+          ort:    obj.ort,
+          spcfnc: obj.spcfnc,
+          range:  obj.range,
         },
         dataType: 'json'
       }).done(function(data) {
@@ -135,6 +126,74 @@
           queryFac();
         }
       });
+  }
+
+  function validateFacAdd(obj) {
+    if (action == "") {
+      clearErrors();
+      inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
+    }
+  }
+
+
+  $(document).ready(function() {
+    $('#fac-modal-submit').click(function() {
+
+      let obj = {
+        id:       $('#fac-form-id').val(),
+        facId:    $("#fac-modal-facId").val(),
+        range:    $("#fac-modal-range").val(),
+        ftyp:     $("#fac-modal-ftyp").val(),
+        ort:      $("#fac-modal-ort").val(),
+        spcfnc:   $("#fac-modal-spcfnc").val(),
+        action:   $('#fac-modal-action').val()
+      }
+
+      // let id = $('#fac-form-id').val();
+
+      // let facId = $("#fac-modal-facId").val();
+      // let range = $("#fac-modal-range").val();
+      // let ftyp = $("#fac-modal-ftyp").val();
+      // let ort = $("#fac-modal-ort").val();
+      // let spcfnc = $("#fac-modal-spcfnc").val();
+      // let action = $('#fac-modal-action').val();
+
+      if (action == "ADD") {
+        validateFacAdd(obj);
+      }
+      else if (action == "UPDATE") {
+        
+      }
+      else if (action == "DELETE") {
+
+      }
+      
+      // $.ajax({
+      //   type: "POST",
+      //   url: ipcDispatch,
+      //   data: {
+      //     api:    "ipcFacilities",
+      //     act:    action,
+      //     user:   user.uname,
+      //     fac_id: id,
+      //     fac:    facId.toUpperCase(),
+      //     ftyp:   ftyp,
+      //     ort:    ort,
+      //     spcfnc: spcfnc,
+      //     range:  range,
+      //   },
+      //   dataType: 'json'
+      // }).done(function(data) {
+      //   let res = data.rows;
+
+      //   if (data.rslt === 'fail') {
+      //     postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
+      //   } else {
+      //     $('#fac-form-clear').trigger('click');
+      //     postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
+      //     queryFac();
+      //   }
+      // });
     });
 
     // remove error messages when click on modal field
