@@ -36,17 +36,19 @@
 
 function pwreuseChange(pwreuse) {
 	if (pwreuse == "0") {
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', false);
 		$("#reference-page-pwrepeat").val("0");
-		$("#reference-page-pwrepeat").prop('disabled', true);
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
 	} else {
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', true);
 		$("#reference-page-pwrepeat").val("240");
-		$("#reference-page-pwrepeat").prop('disabled', false);
 	}
 }
 
 function pwrepeatChange(pwrepeat) {
 	if (pwrepeat == "0") {
-		$("#reference-page-reuse").val("0");
+		$("#reference-page-pwreuse").val("0");
 	} else {
 		return;
 	}
