@@ -134,7 +134,7 @@
       clearErrors();
       inputError($('#fac_modal-facId'),'FAC_ID must not contain spaces');
     }
-    if (obj.facId == "") {
+    else if (obj.facId == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
     }
