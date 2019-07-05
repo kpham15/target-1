@@ -92,154 +92,154 @@
         $pw4Date = strtotime($userObj->pw4);
         $pw4Age = round(($now - $pw4Date) / (60 * 60 * 24));
 
-        if ($refObj->pw_reuse == "0") {
+        if ($refObj->ref['pw_reuse'] == "0") {
             return true;
-        } else if ($refObj->pw_reuse > "0") {
-            if ($refObj->pw_reuse == "1") {
+        } else if ($refObj->ref['pw_reuse'] > "0") {
+            if ($refObj->ref['pw_reuse'] == "1") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
-                    if ($pwAge > $refObj->pw_repeat) {
+                    if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
-                    if ($pw0Age > $refObj->pw_repeat) {
+                    if ($pw0Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-            } else if ($refObj->pw_reuse == "2") {
+            } else if ($refObj->ref['pw_reuse'] == "2") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
-                    if ($pwAge > $refObj->pw_repeat) {
+                    if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
-                    if ($pw0Age > $refObj->pw_repeat) {
+                    if ($pw0Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
                     // check age
-                    if ($pw1Age > $refObj->pw_repeat) {
+                    if ($pw1Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-            } else if ($refObj->pw_reuse == "3") {
+            } else if ($refObj->ref['pw_reuse'] == "3") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
-                    if ($pwAge > $refObj->pw_repeat) {
+                    if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
-                    if ($pw0Age > $refObj->pw_repeat) {
+                    if ($pw0Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
                     // check age
-                    if ($pw1Age > $refObj->pw_repeat) {
+                    if ($pw1Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw2)) {
                     // check age
-                    if ($pw2Age > $refObj->pw_repeat) {
+                    if ($pw2Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-            } else if ($refObj->pw_reuse == "4") {
+            } else if ($refObj->ref['pw_reuse'] == "4") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
-                    if ($pwAge > $refObj->pw_repeat) {
+                    if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
-                    if ($pw0Age > $refObj->pw_repeat) {
+                    if ($pw0Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
                     // check age
-                    if ($pw1Age > $refObj->pw_repeat) {
+                    if ($pw1Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw2)) {
                     // check age
-                    if ($pw2Age > $refObj->pw_repeat) {
+                    if ($pw2Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw3)) {
                     // check age
-                    if ($pw3Age > $refObj->pw_repeat) {
+                    if ($pw3Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-            } else if ($refObj->pw_reuse == "5") {
+            } else if ($refObj->ref['pw_reuse'] == "5") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
-                    if ($pwAge > $refObj->pw_repeat) {
+                    if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
-                    if ($pw0Age > $refObj->pw_repeat) {
+                    if ($pw0Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
                     // check age
-                    if ($pw1Age > $refObj->pw_repeat) {
+                    if ($pw1Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw2)) {
                     // check age
-                    if ($pw2Age > $refObj->pw_repeat) {
+                    if ($pw2Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw3)) {
                     // check age
-                    if ($pw3Age > $refObj->pw_repeat) {
+                    if ($pw3Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw4)) {
                     // check age
-                    if ($pw4Age > $refObj->pw_repeat) {
+                    if ($pw4Age > $refObj->ref['pw_repeat']) {
                         return true;
                     } else {
                         return false;
@@ -328,7 +328,14 @@
             // otherwise, update user pw
             else {
                 if (decryptData($userObj->pw) == $userObj->ssn) {  
-                    $userObj->updatePw_firstTime($newPw);
+                    $pwReuseTest = testPwReuse($newPw);
+                    if ($pwReuseTest == true) {
+                        $userObj->updatePw_firstTime($newPw);
+                    } else {
+                        $result['rslt'] = FAIL;
+                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . "PASSWORD IS NOT ALLOWED";
+                        return $result;
+                    }
                 }
                 else {
                     $pwReuseTest = testPwReuse($newPw);
@@ -336,7 +343,7 @@
                         $userObj->updatePw($newPw);
                     } else {
                         $result['rslt'] = FAIL;
-                        $result["reason"] = "REUSE OF LAST $refObj->pw_reuse PASSWORD IS NOT ALLOWED";
+                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . "PASSWORD IS NOT ALLOWED";
                         return $result;
                     }
                 }
