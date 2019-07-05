@@ -129,9 +129,12 @@
   }
 
   function validateFacAdd(obj) {
-    if (action == "") {
+    if (obj.action == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
+    }
+    else {
+      facModalSumbit(obj);
     }
   }
 
