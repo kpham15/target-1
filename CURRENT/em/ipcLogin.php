@@ -330,22 +330,22 @@
                 $userObj = new USERS($user);
                 $now = time();
                 $pwDate = strtotime($userObj->pwdate);
-                $pwAge = round(($now - $pwDate) / (60 * 60 * 24));
+                $pwAge = ceil(($now - $pwDate) / (60 * 60 * 24));
         
                 $pw0Date = strtotime($userObj->pw0);
-                $pw0Age = round(($now - $pw0Date) / (60 * 60 * 24));
+                $pw0Age = ceil(($now - $pw0Date) / (60 * 60 * 24));
         
                 $pw1Date = strtotime($userObj->pw1);
-                $pw1Age = round(($now - $pw1Date) / (60 * 60 * 24));
+                $pw1Age = ceil(($now - $pw1Date) / (60 * 60 * 24));
         
                 $pw2Date = strtotime($userObj->pw2);
-                $pw2Age = round(($now - $pw2Date) / (60 * 60 * 24));
+                $pw2Age = ceil(($now - $pw2Date) / (60 * 60 * 24));
         
                 $pw3Date = strtotime($userObj->pw3);
-                $pw3Age = round(($now - $pw3Date) / (60 * 60 * 24));
+                $pw3Age = ceil(($now - $pw3Date) / (60 * 60 * 24));
         
                 $pw4Date = strtotime($userObj->pw4);
-                $pw4Age = round(($now - $pw4Date) / (60 * 60 * 24));
+                $pw4Age = ceil(($now - $pw4Date) / (60 * 60 * 24));
 
                 if (decryptData($userObj->pw) == $userObj->ssn) {  
                     $pwReuseTest = testPwReuse($newPw);
