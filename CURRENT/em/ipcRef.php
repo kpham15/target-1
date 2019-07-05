@@ -117,7 +117,7 @@ if (isset($_POST['temp_format'])) {
 }
 
 
-$evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, $_POST);
+$evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "IPC REFERENCE DATA", $action, '');
 
 $refObj = new REF();
 if ($refObj->rslt != SUCCESS) {
