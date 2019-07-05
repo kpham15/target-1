@@ -392,7 +392,7 @@ var refOptions = [
 			},
 			{
 				value: 	"75",
-				text: 	"75C"
+				text: 	"75C OR 167F"
 			},
 			{
 				value: 	"80",
