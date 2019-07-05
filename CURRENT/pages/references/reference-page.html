@@ -181,22 +181,6 @@ $(document).ready(function() {
 	$('.ref-select-row').on('change', function() {
 		clearErrors();
 		$("#reference-page-action").val("").change();
-
-
-		if ($("#reference-page-pwreuse").val() == "0") {
-			$("#reference-page-pwrepeat").val("0");
-			$("#reference-page-pwrepeat").prop('disabled', true);
-		} else {
-			$("#reference-page-pwrepeat").val("240");
-			$("#reference-page-pwrepeat").prop('disabled', false);
-		}
-
-
-		if ($("#reference-page-pwrepeat").val() == "0") {
-			$("#reference-page-pwreuse").val("0");
-		}
-
-
 	});
 
 	// Click event for submit button
