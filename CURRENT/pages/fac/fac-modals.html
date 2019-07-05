@@ -129,12 +129,21 @@
   }
 
   function validateFacAdd(obj) {
-    let space = obj.facId.indexOf(' ');
-    if (space != 0) {
+
+
+    if (obj.facId.match(/\s/g)) {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
+      return;
     }
-    else if (obj.facId == "") {
+    // let space = obj.facId.indexOf(' ');
+    // if (space != 0) {
+    //   clearErrors();
+    //   inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
+    //   return;
+    // }
+
+    if (obj.facId == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
     }
