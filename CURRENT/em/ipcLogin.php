@@ -333,7 +333,7 @@
                         $userObj->updatePw_firstTime($newPw);
                     } else {
                         $result['rslt'] = FAIL;
-                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . "PASSWORD IS NOT ALLOWED";
+                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
                         return $result;
                     }
                 }
@@ -343,7 +343,7 @@
                         $userObj->updatePw($newPw);
                     } else {
                         $result['rslt'] = FAIL;
-                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . "PASSWORD IS NOT ALLOWED";
+                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
                         return $result;
                     }
                 }
