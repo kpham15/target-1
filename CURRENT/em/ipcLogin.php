@@ -95,6 +95,7 @@
         if ($refObj->ref['pw_reuse'] == "0") {
             return true;
         } else if ($refObj->ref['pw_reuse'] > "0") {
+            return "2";
             if ($refObj->ref['pw_reuse'] == "1") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
@@ -365,7 +366,7 @@
                     } else {
                         $result['rslt'] = FAIL;
                         // $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
-                        $result["reason"] = $refObj->ref;
+                        $result["reason"] = $pwReuseTest;
                         return $result;
                     }
                 }
