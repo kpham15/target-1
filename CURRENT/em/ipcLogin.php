@@ -133,6 +133,8 @@
                     } else {
                         return false;
                     }
+                } else {
+                    return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "3") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
