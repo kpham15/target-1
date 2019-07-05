@@ -77,19 +77,19 @@
         $pwDate = strtotime($userObj->pwdate);
         $pwAge = ceil(($now - $pwDate) / (60 * 60 * 24));
 
-        $pw0Date = strtotime($userObj->pw0);
+        $pw0Date = strtotime($userObj->t0);
         $pw0Age = ceil(($now - $pw0Date) / (60 * 60 * 24));
 
-        $pw1Date = strtotime($userObj->pw1);
+        $pw1Date = strtotime($userObj->t1);
         $pw1Age = ceil(($now - $pw1Date) / (60 * 60 * 24));
 
-        $pw2Date = strtotime($userObj->pw2);
+        $pw2Date = strtotime($userObj->t2);
         $pw2Age = ceil(($now - $pw2Date) / (60 * 60 * 24));
 
-        $pw3Date = strtotime($userObj->pw3);
+        $pw3Date = strtotime($userObj->t3);
         $pw3Age = ceil(($now - $pw3Date) / (60 * 60 * 24));
 
-        $pw4Date = strtotime($userObj->pw4);
+        $pw4Date = strtotime($userObj->t4);
         $pw4Age = ceil(($now - $pw4Date) / (60 * 60 * 24));
 
         if ($refObj->ref['pw_reuse'] == "0") {
@@ -366,7 +366,7 @@
                         $result['rslt'] = FAIL;
                         // $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
                         if ($pwAge > $refObj->ref['pw_repeat']) {
-                            $result["reason"] = "good";
+                            $result["reason"] = ;
                         } else {
                             $result["reason"] = "bad";
                         }
