@@ -70,7 +70,7 @@
         return $result;
     }
 
-    function testPwReuse($newpw) {
+    function testPwReuse($newpw, $user) {
         $refObj = new REF();
         $userObj = new USERS($user);
         $now = time();
@@ -361,7 +361,7 @@
                 $pw4Age = ceil(($now - $pw4Date) / (60 * 60 * 24));
 
                 if (decryptData($userObj->pw) == $userObj->ssn) {  
-                    $pwReuseTest = testPwReuse($newPw);
+                    $pwReuseTest = testPwReuse($newPw, $user);
                     if ($pwReuseTest == true) {
                         $userObj->updatePw_firstTime($newPw);
                     } else {
@@ -372,7 +372,7 @@
                     }
                 }
                 else {
-                    $pwReuseTest = testPwReuse($newPw);
+                    $pwReuseTest = testPwReuse($newPw, $user);
                     if ($pwReuseTest == true) {
                         $userObj->updatePw($newPw);
                     } else {
