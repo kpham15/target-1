@@ -102,11 +102,18 @@
           helpSearchTableId = "";
         }
         else {
-          // $('.helpsearch-input').val('');
-          queryHelpsearch();
-          // $('#help-form-action').val('');
-          inputSuccess($('#help-form-action'), data.reason);
-          helpSearchTableId = "";
+
+          if (action == 'DELETE') {
+            $('.helpsearch-input').val('');
+            queryHelpSearch();
+            inputSuccess($('#help-form-action'), data.reason);
+            helpSearchTableId = "";
+          }
+          else {
+            queryHelpsearch();
+            inputSuccess($('#help-form-action'), data.reason);
+            helpSearchTableId = "";
+          }
         }
       });
     }
