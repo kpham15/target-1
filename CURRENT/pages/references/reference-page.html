@@ -242,6 +242,23 @@ $(document).ready(function() {
 		clearErrors();
 	});
 
+	$("#reference-page-pwreuse").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwrepeat").val("0");
+			$("#reference-page-pwrepeat").prop('disabled', true);
+		} else {
+			$("#reference-page-pwrepeat").val("240");
+			$("#reference-page-pwrepeat").prop('disabled', false);
+		}
+	});
+
+	$("#reference-page-pwrepeat").on("change", function() {
+		if (pwrepeat == "0") {
+			$("#reference-page-reuse").val("0");
+		} else {
+			return;
+		}
+	});
 
 });
 </script>
