@@ -102,11 +102,9 @@
           helpSearchTableId = "";
         }
         else {
-          // $('.helpsearch-input').val('');
-          queryHelpsearch();
-          // $('#help-form-action').val('');
-          inputSuccess($('#help-form-action'), data.reason);
-          helpSearchTableId = "";
+            queryHelpsearch();
+            inputSuccess($('#help-form-action'), data.reason);
+            helpSearchTableId = "";
         }
       });
     }
@@ -156,8 +154,8 @@
 
     // click event sidebar menu
     $('.menu-item[page_id="helpsearch-page"]').click(function() {
-      // queryHelpsearch();
-      // helpSearchTableId = "";
+      queryHelpsearch();
+      helpSearchTableId = "";
       clearErrors();
       $('#help-form-action').val('').change();
     })
