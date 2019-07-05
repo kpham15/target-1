@@ -116,6 +116,7 @@
             } else if ($refObj->ref['pw_reuse'] == "2") {
                 $a = "pw";
                 if (decryptData($newpw) == decryptData($userObj->$a)) {
+                    echo decryptData($userObj->$a);
                     // check age
                     if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
