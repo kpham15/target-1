@@ -70,14 +70,18 @@ class REF {
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
         }
-        $this->updPwReuse       ($pw_reuse);
+        $this->updPwReuseAndRepeat($pw_reuse, $pw_repeat);
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
         }
-        $this->updPwRepeat      ($pw_repeat);
-        if ($this->rslt != SUCCESS) {
-            return $this->rslt . $this->reason;
-        }
+        // $this->updPwReuse       ($pw_reuse);
+        // if ($this->rslt != SUCCESS) {
+        //     return $this->rslt . $this->reason;
+        // }
+        // $this->updPwRepeat      ($pw_repeat);
+        // if ($this->rslt != SUCCESS) {
+        //     return $this->rslt . $this->reason;
+        // }
         $this->updBrdcstDel     ($brdcst_del);
         if ($this->rslt != SUCCESS) {
             return $this->rslt . $this->reason;
@@ -197,6 +201,33 @@ class REF {
         else {
             $this->rslt     = SUCCESS;
             $this->reason   = "PW_ALERT_UPDATED";
+        }
+    }
+
+    public function updPwReuseAndRepeat($pw_reuse, $pw_repeat) {
+        global $db;
+
+        // if pw_reuse == 0, pw_repeat == 0
+        // if pw_reuse == other, pw_repeat != 0
+        if ($pw_reuse == 0 && $pw_repeat != 0) {
+            $this->rslt = FAIL;
+            $this->reason = "PW REUSE and PW REPEAT must both be N/A";
+            return;
+        }
+
+        if ($pw_reuse != 0 && $pw_repeat == 0) {
+            $this->rslt = FAIL;
+            $this->reason = "PW REPEAT cannot be N/A if PW REPEAT IS ($pw_repeat)";
+            return;
+        }
+
+        $this->updPwReuse($pw_reuse);
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
+        }
+        $this->updPwRepeat($pw_repeat);
+        if ($this->rslt != SUCCESS) {
+            return $this->rslt . $this->reason;
         }
     }
 
