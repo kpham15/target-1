@@ -364,8 +364,8 @@
                         $userObj->updatePw($newPw);
                     } else {
                         $result['rslt'] = FAIL;
-                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
-                        // $result["reason"] = $pwAge;
+                        // $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
+                        $result["reason"] = $pwReuseTest;
                         return $result;
                     }
                 }
