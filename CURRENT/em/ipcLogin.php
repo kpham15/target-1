@@ -91,7 +91,7 @@
 
         $pw4Date = strtotime($userObj->t4);
         $pw4Age = ceil(($now - $pw4Date) / (60 * 60 * 24));
-        echo $userObj->pwdate;
+        echo $userObj->pw;
 
         if ($refObj->ref['pw_reuse'] == "0") {
             return true;
