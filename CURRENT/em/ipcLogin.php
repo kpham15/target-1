@@ -114,7 +114,7 @@
                     return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "2") {
-                if (decryptData($newpw) == decryptData($userObj->$a)) {
+                if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
                     if ($pwAge > $refObj->ref['pw_repeat']) {
                         return true;
