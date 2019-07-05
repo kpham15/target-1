@@ -364,12 +364,12 @@
                         $userObj->updatePw($newPw);
                     } else {
                         $result['rslt'] = FAIL;
-                        // $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
-                        if ($pwAge > $refObj->ref['pw_repeat']) {
-                            $result["reason"] = ;
-                        } else {
-                            $result["reason"] = "bad";
-                        }
+                        $result["reason"] = "REUSE OF LAST " . $refObj->ref['pw_reuse'] . " PASSWORD IS NOT ALLOWED";
+                        // if ($pwAge > $refObj->ref['pw_repeat']) {
+                        //     $result["reason"] = ;
+                        // } else {
+                        //     $result["reason"] = "bad";
+                        // }
                         return $result;
                     }
                 }
