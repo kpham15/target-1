@@ -54,13 +54,31 @@ function pwrepeatChange(pwrepeat) {
 
 function refStartup() {
 
-	if ($('.ref-select-box').length === 0) {
-		
-			let refSelect = createRefSelect(refOptions);
-			$('.ref-select-row').append(refSelect);
-		}
-		queryReferences();
+	if ($('.ref-select-box').length === 0) {		
+		let refSelect = createRefSelect(refOptions);
+		$('.ref-select-row').append(refSelect);
 	}
+	queryReferences();
+
+	$("#reference-page-pwreuse").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwrepeat").val("0");
+			$("#reference-page-pwrepeat").prop('disabled', true);
+		} else {
+			$("#reference-page-pwrepeat").val("240");
+			$("#reference-page-pwrepeat").prop('disabled', false);
+		}
+	});
+
+	$("#reference-page-pwrepeat").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-reuse").val("0");
+		} else {
+			return;
+		}
+	});
+
+}
 
 
 function createRefSelect(data) {
@@ -258,23 +276,7 @@ $(document).ready(function() {
 		clearErrors();
 	});
 
-	$("#reference-page-pwreuse").on("change", function() {
-		if ($(this).val() == "0") {
-			$("#reference-page-pwrepeat").val("0");
-			$("#reference-page-pwrepeat").prop('disabled', true);
-		} else {
-			$("#reference-page-pwrepeat").val("240");
-			$("#reference-page-pwrepeat").prop('disabled', false);
-		}
-	});
 
-	$("#reference-page-pwrepeat").on("change", function() {
-		if ($(this).val() == "0") {
-			$("#reference-page-reuse").val("0");
-		} else {
-			return;
-		}
-	});
 
 });
 </script>
