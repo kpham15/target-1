@@ -698,7 +698,7 @@ class USERS {
             return FALSE;
         }
 
-        if ((decryptData($newPw) !== decryptData($this->pw)) && (decryptData($newPw) !== decryptData($this->pw0)) && (decryptData($newPw) !== decryptData($this->pw1)) && (decryptData($newPw) !== decryptData($this->pw2)) && (decryptData($newPw) !== decryptData($this->pw3)) && (decryptData($newPw) !== decryptData($this->pw4))) {
+        // if ((decryptData($newPw) !== decryptData($this->pw)) && (decryptData($newPw) !== decryptData($this->pw0)) && (decryptData($newPw) !== decryptData($this->pw1)) && (decryptData($newPw) !== decryptData($this->pw2)) && (decryptData($newPw) !== decryptData($this->pw3)) && (decryptData($newPw) !== decryptData($this->pw4))) {
             $this->pw4 = $this->pw3;
             $this->pw3 = $this->pw2;
             $this->pw2 = $this->pw1;
@@ -720,12 +720,12 @@ class USERS {
             $this->reason = "USER PW CHANGE SUCCESS";
             return true;
 
-        }
-        else {
-            $this->rslt = "fail";
-            $this->reason = "Password cannot be the same as previous 5 passwords!";
-            return false;
-        }
+        // }
+        // else {
+        //     $this->rslt = "fail";
+        //     $this->reason = "Password cannot be the same as previous 5 passwords!";
+        //     return false;
+        // }
     }
 
 }
