@@ -63,10 +63,10 @@ function refStartup() {
 	$("#reference-page-pwreuse").on("change", function() {
 		if ($(this).val() == "0") {
 			$("#reference-page-pwrepeat").val("0");
-			$("#reference-page-pwrepeat").prop('disabled', true);
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
 		} else {
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
 			$("#reference-page-pwrepeat").val("240");
-			$("#reference-page-pwrepeat").prop('disabled', false);
 		}
 	});
 
