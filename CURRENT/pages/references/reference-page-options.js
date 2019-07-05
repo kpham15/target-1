@@ -388,7 +388,7 @@ var refOptions = [
 		options: 		[
 			{
 				value:	"70",
-				text: 	"70C"
+				text: 	"70C OR 158F"
 			},
 			{
 				value: 	"75",
@@ -396,7 +396,7 @@ var refOptions = [
 			},
 			{
 				value: 	"80",
-				text: 	"80C"
+				text: 	"80C OR 176F"
 			}
 		]
 	},
