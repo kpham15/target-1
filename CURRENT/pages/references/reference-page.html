@@ -34,6 +34,24 @@
 
 <script type="text/javascript">
 
+function pwreuseChange(pwreuse) {
+	if (pwreuse == "0") {
+		$("#reference-page-pwrepeat").val("0");
+		$("#reference-page-pwrepeat").prop('disabled', true);
+	} else {
+		$("#reference-page-pwrepeat").val("240");
+		$("#reference-page-pwrepeat").prop('disabled', false);
+	}
+}
+
+function pwrepeatChange(pwrepeat) {
+	if (pwrepeat == "0") {
+		$("#reference-page-reuse").val("0");
+	} else {
+		return;
+	}
+}
+
 function refStartup() {
 
 	if ($('.ref-select-box').length === 0) {
@@ -224,23 +242,6 @@ $(document).ready(function() {
 		clearErrors();
 	});
 
-	function pwreuseChange(pwreuse) {
-		if (pwreuse == "0") {
-			$("#reference-page-pwrepeat").val("0");
-			$("#reference-page-pwrepeat").prop('disabled', true);
-		} else {
-			$("#reference-page-pwrepeat").val("240");
-			$("#reference-page-pwrepeat").prop('disabled', false);
-		}
-	}
-
-	function pwrepeatChange(pwrepeat) {
-		if (pwrepeat == "0") {
-			$("#reference-page-reuse").val("0");
-		} else {
-			return;
-		}
-	}
 
 });
 </script>
