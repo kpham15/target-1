@@ -123,7 +123,11 @@ function displayRefs(data) {
 
 		$(this).val(data[refId]);
 	});
+
+	pwreuseChange($("#reference-page-pwreuse").val());
+	pwrepeatChange($("#reference-page-pwrepeat").val());
 	
+
 }
 
 $(document).ready(function() {
