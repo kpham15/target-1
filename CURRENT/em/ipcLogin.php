@@ -165,6 +165,8 @@
                     } else {
                         return false;
                     }
+                } else {
+                    return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "4") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
@@ -202,6 +204,8 @@
                     } else {
                         return false;
                     }
+                } else {
+                    return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "5") {
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
@@ -246,6 +250,8 @@
                     } else {
                         return false;
                     }
+                } else {
+                    return true;
                 }
             }
         }
