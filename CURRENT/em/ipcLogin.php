@@ -114,7 +114,7 @@
                     return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "2") {
-                echo $userObj->pwdate . "\n";
+                echo $userObj . "\n";
                 echo $pwAge . " : " . $refObj->ref['pw_repeat'];
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
