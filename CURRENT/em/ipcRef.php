@@ -175,7 +175,7 @@ function updateRefs($userObj,$refObj, $pw_expire, $pw_alert, $pw_reuse, $pw_repe
         return $result;
     }
 
-    $result['reason'] = "PW EXPIRE VALUE IS ";
+    $result['reason'] = "PW EXPIRE VALUE IS " . $refObj->ref['volt_range'];
     return $result;
     // if ($pw_expire != $refObj->ref['pw_expire'])
 
