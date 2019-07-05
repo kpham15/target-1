@@ -127,9 +127,9 @@ function libFilterUsers($userLogginObj, $rows) {
                 // if userLoggin is higher than rows user
                 if($userLogginObj->grp <= $rows[$i]['grp']) {
                     if($userLogginObj->ugrp == "ADMIN") {
-                        if ($rows[$i]['ugrp'] == "ADMIN") {
-                            $rows[$i]['ssn'] = "";
-                        }
+                        // if ($rows[$i]['ugrp'] == "ADMIN") {
+                        //     $rows[$i]['ssn'] = "";
+                        // } 
                         $filteredRows[] = $rows[$i];
                     }
                     else {
@@ -202,7 +202,7 @@ function changePermissionFiles($directory, $permission){
     {
         if(is_dir($file)) { 
             // chmod($file, 0777);
-            changePermissionFiles($file);
+            changePermissionFiles($file, $permission);
         } else {
             if(!chmod($file, $permission)) {
                 throw new Exception("UNABLE_CONFIGURE_PERMISSION_FILE");

@@ -8,7 +8,7 @@ class DEBUG{
 
     public function __construct(){
         
-        $file = __DIR__ . "/../../ipc-debug.cfg";
+        $file = __DIR__ . "/../../../ipc-debug.cfg";
         $str = file_get_contents($file);
         $data = trim($str);
         if ($data == '1') {

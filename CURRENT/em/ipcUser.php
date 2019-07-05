@@ -726,7 +726,7 @@
 			}
 			
 			// only ADMIN and SUPERVISOR users can resetpw a user in lower grp
-			if ($userObj->grp < 3 && $userObj->grp < $targetUserObj->grp) {
+			if (($userObj->ugrp == 'ADMIN') || ($userObj->ugrp == "SUPERVISOR" && $userObj->grp < $targetUserObj->grp)) {
 				$targetUserObj->resetPw();
 				if ($targetUserObj->rslt == "fail") {
 					$result['rslt'] = $targetUserObj->rslt;
