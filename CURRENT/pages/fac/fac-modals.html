@@ -130,13 +130,17 @@
 
   function validateFacAdd(obj) {
 
+    let lastFacCharPosition = obj.facId.length - 1;
+    let facBeginLetter = split(obj.facId[0]);
+    let facLastLetter = split(obj.facId[lastFacCharPosition]);
+
     // checks for empty input
     if (obj.facId == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
     // check for begin or end w/ dash
-    else if (obj.facId.indexOf('-') == 0 || obj.facId.indexOf('-') == obj.facId.length-1) {
+    else if (facBeginLetter == '-' || faLastLetter == '-') {
       clearErrors();
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
