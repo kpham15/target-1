@@ -246,11 +246,21 @@
         public function add($fac, $ftyp, $ort, $spcfnc) {
             global $db;
 
+            $lastFacCharPosition = strlen($fac) - 1;
+
             if ($fac == '') {
                 $this->rslt = FAIL;
-                $this->reason = "INVALID FAC";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
+
+            // if (strpos($fac, '-') == 0 || strpos($fac, '-') == $lastFacCharPosition) {
+            //     $this->rslt = FAIL;
+            //     $this->reason = "INVALID FAC FORMAT";
+            //     return false;
+            // }
+
+
             
             $ftypObj = new FTYP($ftyp);
             if ($ftypObj->rslt == FAIL) {
