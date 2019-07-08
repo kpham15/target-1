@@ -247,6 +247,8 @@
             global $db;
 
             $lastFacCharPosition = strlen($fac) - 1;
+            $facBeginLetter = $fac[0];
+            $facLastLetter = $fac[$lastFacCharPosition];
 
             if ($fac == '') {
                 $this->rslt = FAIL;
@@ -255,9 +257,9 @@
             }
 
             // check dash in beginning and end
-            if (strpos($fac, '-') == 0) {
+            if ($facBeginLetter == '-') {
                 $this->rslt = FAIL;
-                $this->reason = "STROPOS VALUE" . strpos($fac,'-');
+                $this->reason = "FACBEGIN LETTER IS = $facBeginLetter";
                 return false;
             }
 
