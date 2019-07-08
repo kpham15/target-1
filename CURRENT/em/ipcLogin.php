@@ -118,6 +118,7 @@
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
                     if ($pwAge > $refObj->ref['pw_repeat']) {
+                        echo 1;
                         return true;
                     } else {
                         return false;
@@ -125,6 +126,7 @@
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
                     // check age
                     if ($pw0Age > $refObj->ref['pw_repeat']) {
+                        echo 2;                        
                         return true;
                     } else {
                         return false;
@@ -132,12 +134,13 @@
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
                     // check age
                     if ($pw1Age > $refObj->ref['pw_repeat']) {
+                        echo 3;                        
                         return true;
                     } else {
                         return false;
                     }
                 } else {
-                    echo "2";
+                    echo 4;
                     return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "3") {
