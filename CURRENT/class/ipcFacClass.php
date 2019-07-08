@@ -258,7 +258,7 @@
             }
 
             // check for non alphanumeric characters
-            if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
+            if (preg_match('/^[-a-zA-Z0-9]+$/', $fac)) {
 
                 // check dash in beginning and end
                 if ($facBeginLetter == '-' || $facLastLetter == '-') {
