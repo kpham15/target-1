@@ -250,18 +250,31 @@
 
             if ($fac == '') {
                 $this->rslt = FAIL;
-                $this->reason = "INVALID FAC FORMAT";
+                $this->reason = "emtpy value error";
                 return false;
             }
 
-            // if (strpos($fac, '-') == 0 || strpos($fac, '-') == $lastFacCharPosition) {
-            //     $this->rslt = FAIL;
-            //     $this->reason = "INVALID FAC FORMAT";
-            //     return false;
-            // }
+            // check dash in beginning and end
+            if (strpos($fac, '-') == 0 || strpos($fac, '-') == $lastFacCharPosition) {
+                $this->rslt = FAIL;
+                $this->reason = "string in begin or end error";
+                return false;
+            }
 
+            // check contiguous dash
+            if (strpos($fac, '--') != false) {
+                $this->rslt = FAIL;
+                $this->reason = "contigous dash error";
+                return false;
+            }
 
-            
+            // check white space
+            if (preg_match('/\s/', $fac) == 1) {
+                $this->rslt = FAIL;
+                $this->reason = "white space error";
+                return false;
+            }
+
             $ftypObj = new FTYP($ftyp);
             if ($ftypObj->rslt == FAIL) {
                 $this->rslt = FAIL;
@@ -285,30 +298,35 @@
                 }
             }
             
-
-            $qry = "INSERT INTO 
-                    t_facs 
-                    (fac, ftyp, ort, spcfnc) 
-                    VALUES 
-                    ('$fac', '$ftyp', '$ort', '$spcfnc')";
-                    
-            $res = $db->query($qry);
-            if (!$res) {
-                $this->rslt = FAIL;
-                $this->reason = mysqli_error($db);
-                return false;
+            if (preg_match('/^[a-zA-Z0-9-_]+$/', $fac)) {
+                $qry = "INSERT INTO 
+                        t_facs 
+                        (fac, ftyp, ort, spcfnc) 
+                        VALUES 
+                        ('$fac', '$ftyp', '$ort', '$spcfnc')";
+                        
+                $res = $db->query($qry);
+                if (!$res) {
+                    $this->rslt = FAIL;
+                    $this->reason = mysqli_error($db);
+                    return false;
+                }
+                else {
+                    $this->rslt = SUCCESS;
+                    $this->reason = 'FAC_ADDED';
+                    $this->id = $db->insert_id;
+                    $this->fac = $fac;
+                    $this->ftyp = $ftyp;
+                    $this->ort = $ort;
+                    $this->spcfnc = $spcfnc;
+                    $this->port = '';
+                    $this->port_id = 0;
+                    return true;
+                }
             }
             else {
-                $this->rslt = SUCCESS;
-                $this->reason = 'FAC_ADDED';
-                $this->id = $db->insert_id;
-                $this->fac = $fac;
-                $this->ftyp = $ftyp;
-                $this->ort = $ort;
-                $this->spcfnc = $spcfnc;
-                $this->port = '';
-                $this->port_id = 0;
-                return true;
+                $this->rslt = FAIL;
+                $this->reason = "FAC_ID must not contain weird characters";
             }
         }
 

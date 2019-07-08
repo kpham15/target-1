@@ -131,31 +131,27 @@
   function validateFacAdd(obj) {
 
     // checks for empty input
-    if (obj.facId == "") {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
-    }
-    // check for begin w/ dash
-    else if (obj.facId.indexOf('-') == 0 || obj.facId.indexOf('-') == obj.facId.length-1) {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'FAC_ID cannot start or end w/ dash');
-    }
-    // check for end w/ dash
-    // else if (obj.facId.indexOf('-') == obj.facId.length - 1) {
+    // if (obj.facId == "") {
     //   clearErrors();
-    //   inputError($('#fac-modal-facId'),'FAC_ID cannot end w/ dash');
+    //   inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
     // }
-    // check for double dash
-    else if (obj.facId.indexOf('--') != -1 ) {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'FAC_ID must not contain contiguous dash');
-    }
-    // check for white space
-    else if (obj.facId.match(/\s/g)) {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
-    }
-    else {
+    // // check for begin or end w/ dash
+    // else if (obj.facId.indexOf('-') == 0 || obj.facId.indexOf('-') == obj.facId.length-1) {
+    //   clearErrors();
+    //   inputError($('#fac-modal-facId'),'FAC_ID cannot start or end w/ dash');
+    // }
+    // // check for double dash
+    // else if (obj.facId.indexOf('--') != -1 ) {
+    //   clearErrors();
+    //   inputError($('#fac-modal-facId'),'FAC_ID must not contain contiguous dash');
+    // }
+    // // check for white space
+    // else if (obj.facId.match(/\s/g)) {
+    //   clearErrors();
+    //   inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
+    // }
+    // else {
+      // check for characters other than alphanumeric and dash
       if (obj.facId.match(/^[a-zA-Z0-9-_]+$/)) {
         facModalSumbit(obj);
       }
@@ -163,7 +159,7 @@
         clearErrors();
         inputError($('#fac-modal-facId'),'FAC_ID must not contain weird characters');
       }
-    }
+    // }
   }
 
 
