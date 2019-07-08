@@ -148,7 +148,7 @@
         clearErrors();
         inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
       }
-      // check for double dash
+      // check for contiguous dash
       else if (obj.facId.indexOf('--') != -1 ) {
         clearErrors();
         inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
