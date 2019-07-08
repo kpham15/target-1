@@ -705,9 +705,15 @@ class USERS {
             $this->pw1 = $this->pw0;
             $this->pw0 = $this->pw;
 
+            $this->t4 = $this->t3;
+            $this->t3 = $this->t2;
+            $this->t2 = $this->t1;
+            $this->t1 = $this->t0;
+            $this->t0 = $this->pwdate;
+
             $this->pw = $newPw;
             
-            $qry = "UPDATE t_users SET pw='$this->pw', pw0='$this->pw0',pw1='$this->pw1',pw2='$this->pw2',pw3='$this->pw3',pw4='$this->pw4', pwdate=now(), pwcnt=0 WHERE upper(uname)=upper('$this->uname')";
+            $qry = "UPDATE t_users SET pw='$this->pw', pw0='$this->pw0',pw1='$this->pw1',pw2='$this->pw2',pw3='$this->pw3',pw4='$this->pw4', t4='$this->t4', t3='$this->t3', t2='$this->t2', t1='$this->t1', t0=now(), pwdate=now(), pwcnt=0 WHERE upper(uname)=upper('$this->uname')";
             $res = $db->query($qry);
 
             if (!$res) {
