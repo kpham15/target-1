@@ -263,6 +263,7 @@
                 // check dash in beginning and end
                 if ($facBeginLetter == '-' || $facLastLetter == '-') {
                     $this->rslt = FAIL;
+                    // $this->reason = "INVALID FAC FORMAT";
                     $this->reason = "dash front back";
                     return false;
                 }
