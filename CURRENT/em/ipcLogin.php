@@ -128,7 +128,7 @@
                     // check age
                     if ($pw0Age > $refObj->ref['pw_repeat']) {
                         echo 2;         
-                        echo $now . " : " . $pw0Age . " : " . $refObj->ref['pw_repeat'];               
+                        echo $now . " : " . $pw0Date . " : " . $pw0Age . " : " . $refObj->ref['pw_repeat'];               
                         return true;
                     } else {
                         echo 2;
