@@ -246,10 +246,16 @@
         public function add($fac, $ftyp, $ort, $spcfnc) {
             global $db;
 
+            // make sure all variables are uppercase
+            $fac = strtoupper($fac);
+            $ftyp = strtoupper($ftyp);
+            $ort = strtoupper($ort);
+            $spcfnc = strtoupper($spcfnc);
+
+            //  create variables for checking first and last character of fac
             $lastFacCharPosition = strlen($fac) - 1;
             $facBeginLetter = $fac[0];
             $facLastLetter = $fac[$lastFacCharPosition];
-            $fac = strtoupper($fac);
 
             // checks empty fac
             if ($fac == '') {

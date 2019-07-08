@@ -10,8 +10,8 @@
 
  /* Initialize expected inputs */
 
-    $act = "";
-    if (isset($_POST['act'])) {
+	$act = "";
+	if (isset($_POST['act'])) {
 		$act = $_POST['act'];
 	}
 		
@@ -20,20 +20,19 @@
 		$fac_id = $_POST['fac_id'];
 	}
 	    
-    $fac = "";
-    if (isset($_POST['fac'])) {
-		// $fac = strtoupper($_POST['fac']);
-		$fac = ($_POST['fac']);
+	$fac = "";
+	if (isset($_POST['fac'])) {
+		$fac = strtoupper($_POST['fac']);
 	}
 		
-    
-    $ftyp = "";
-    if (isset($_POST['ftyp'])) {
+	
+	$ftyp = "";
+	if (isset($_POST['ftyp'])) {
 		$ftyp = strtoupper($_POST['ftyp']);
 	}
 		
-    $ort = "";
-    if (isset($_POST['ort'])) {
+	$ort = "";
+	if (isset($_POST['ort'])) {
 		$ort = strtoupper($_POST['ort']);
 	}
 
