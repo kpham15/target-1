@@ -151,11 +151,11 @@
       inputError($('#fac-modal-facId'),'FAC_ID must not contain contiguous dash');
     }
     // check for white space
-    else if (obj.facId.match(/\s/g)) {
+    else if (obj.facId.search(/\s/g)) {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
     }
-    else if (obj.facId.match(/\W/g)) {
+    else if (obj.facId.search(/\W/g)) {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID must not contain other characters');
     }
