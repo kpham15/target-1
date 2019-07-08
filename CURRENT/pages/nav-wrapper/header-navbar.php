@@ -236,7 +236,7 @@
     // Click Event for Database Manual Backup
     $('#backup-database').click(function() {
       clearErrors();
-      $('#header-database-backup-modal-action').val('MANUAL');
+      $('#header-database-backup-modal-action').val('BACKUP MANUALLY');
       $('#header-database-backup-modal').modal('show');
     });
 

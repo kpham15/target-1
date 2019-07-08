@@ -40,8 +40,8 @@
         <div class="col-sm-8">
         <select id="database-backup-forms-action" class="form-control">
           <option value=""></option>
-          <option value="MANUAL">BACKUP MANUALLY</option>
-          <option value="DELETE">DELETE BACKUP FILE</option>
+          <option value="BACKUP MANUALLY">BACKUP MANUALLY</option>
+          <option value="DELETE BACKUP FILE">DELETE BACKUP FILE</option>
         </select>
         </div>
     </div>
@@ -67,12 +67,12 @@
 
       clearErrors();
 
-      if (action == "MANUAL") {
+      if (action == "BACKUP MANUALLY") {
         $('.database-backup-modal-input').hide();
         $('#database-backup-modal-action').val(action);
         $('#database-backup-modal').modal('show');
       }
-      else if (action == "DELETE") {
+      else if (action == "DELETE BACKUP FILE") {
         $('.database-backup-modal-input').show();
 
         // check if fileName is blank

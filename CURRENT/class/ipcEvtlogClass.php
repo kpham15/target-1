@@ -25,7 +25,7 @@
 			
 			$this->reason = $this->input . "\n" . $rslt . ": " . $msg;
 
-			$qry - "INSERT INTO
+			$qry = "INSERT INTO
 					t_evtlog 
 					(user, fnc, evt, rslt, detail, 
 					time) 
