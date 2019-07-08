@@ -14,7 +14,7 @@ if (isset($_FILES['file']['tmp_name'])) {
     }
 }
 
-$evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "UPDATE SOFTWARE RELEASES", $act, $_POST);
+$evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "SOFTWARE UPDATE", $act, $_POST);
 
 
 

@@ -35,7 +35,7 @@ var eventReportFunctionOptions = {
     "SYSTEM SHUTDOWN",
     "RESTORE SYSTEM",
     "BACKUP DATABASE",
-    "UPDATE SOFTWARE RELEASES",
+    "SOFTWARE UPDATE",
     "NODE ADMINISTRATION",
   ],
 }
@@ -136,8 +136,8 @@ var eventReportTaskOptions = {
   ],
 
   BACKUPDATABASE: [
-    "BACKUP DB",
-    "RESTORE BACKUP DB",
+    "BACKUP MANUALLY",
+    "DELETE BACKUP FILE",
   ],
 
   RESTORESYSTEM: [
@@ -145,8 +145,11 @@ var eventReportTaskOptions = {
   ],
 
   UPDATESOFTWARERELEASES: [
-    "UPDATE SOFTWARE",
-    "ROLLBACK SOFTWARE",
+    "UPLOAD SW",
+    "INSTALL UPDATE SW",
+    "RUN CURRENT SW",
+    "RUN UPDATE SW",
+    "APPLY UPDATE SW"
   ],
 
   NODEADMINISTRATION: [

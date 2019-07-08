@@ -653,8 +653,13 @@ class USERS {
     public function resetPw(){
         global $db;
 
-        $pw = encryptData($this->ssn);
-		$qry = "UPDATE t_users SET pw='$pw', pwcnt=0 WHERE upper(uname)=upper('$this->uname')";
+        $this->pw4 = $this->pw3;
+        $this->pw3 = $this->pw2;
+        $this->pw2 = $this->pw1;
+        $this->pw1 = $this->pw0;
+        $this->pw0 = $this->pw;
+        $this->pw = encryptData($this->ssn);
+        $qry = "UPDATE t_users SET pw='$this->pw', pw0='$this->pw0',pw1='$this->pw1',pw2='$this->pw2',pw3='$this->pw3',pw4='$this->pw4', pwdate=now(), pwcnt=0 WHERE upper(uname)=upper('$this->uname')";
 		
 		$res = $db->query($qry);
         if (!$res) {
@@ -667,6 +672,7 @@ class USERS {
             $this->reason = "RESET_PW";
             return true;
         }
+
     }
 
     public function updatePw_firstTime($newPw) {

@@ -37,7 +37,7 @@
 		}
 	}
 
-	
+	$evtLog = new EVENTLOG($user, "IPC ADMINISTRATION", "BACKUP DATABASE", $act, "");
 	$ipAddress = $_SERVER['SERVER_ADDR'];
 	if($ipAddress == '::1') {
 		$ipAddress = '127.0.0.1';
@@ -62,41 +62,44 @@
 		mysqli_close($co5kDb);
 		return;
 	}
-	else if ($act == "MANUAL") {
+	else if ($act == "BACKUP MANUALLY") {
 		$result = manualBkup($userObj, $ipAddress, $co5kDb);
+		$evtLog->log($result["rslt"],$result["reason"]);
 		echo json_encode($result);
 		mysqli_close($ipcCon);
 		mysqli_close($db);
 		mysqli_close($co5kDb);
 		return;
 	}
-	else if ($act == "UPLOAD") {
-		$result = uploadBkup($userObj, $ipAddress, $fileName);
-		echo json_encode($result);
-		mysqli_close($ipcCon);
-		mysqli_close($db);
-		mysqli_close($co5kDb);
-		return;
-	}
-	else if ($act == "DELETE") {
+	// else if ($act == "UPLOAD") {
+	// 	$result = uploadBkup($userObj, $ipAddress, $fileName);
+	// 	echo json_encode($result);
+	// 	mysqli_close($ipcCon);
+	// 	mysqli_close($db);
+	// 	mysqli_close($co5kDb);
+	// 	return;
+	// }
+	else if ($act == "DELETE BACKUP FILE") {
 		$result = deleteBkup($id, $dbfile, $userObj);
+		$evtLog->log($result["rslt"],$result["reason"]);
 		echo json_encode($result);
 		mysqli_close($ipcCon);
 		mysqli_close($db);
 		mysqli_close($co5kDb);
 		return;
 	}
-	else if ($act == "RESTORE") {
-		$result = restoreDb($co5kDb, $dbfile, $userObj);
-		echo json_encode($result);
-		mysqli_close($ipcCon);
-		mysqli_close($db);
-		mysqli_close($co5kDb);
-		return;
-	}
+	// else if ($act == "RESTORE") {
+	// 	$result = restoreDb($co5kDb, $dbfile, $userObj);
+	// 	echo json_encode($result);
+	// 	mysqli_close($ipcCon);
+	// 	mysqli_close($db);
+	// 	mysqli_close($co5kDb);
+	// 	return;
+	// }
 	else {
  		$result["rslt"] = "fail";
 		$result["reason"] = "ACTION " . $act . " is under development or not supported";
+		$evtLog->log($result["rslt"],$result["reason"]);
 		echo json_encode($result);
 		mysqli_close($ipcCon);
 		mysqli_close($db);
