@@ -249,7 +249,7 @@
             $lastFacCharPosition = strlen($fac) - 1;
             $facBeginLetter = $fac[0];
             $facLastLetter = $fac[$lastFacCharPosition];
-            // $fac = strtoupper($fac);
+            $fac = strtoupper($fac);
 
             // checks empty fac
             if ($fac == '') {
