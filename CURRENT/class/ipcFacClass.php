@@ -252,28 +252,28 @@
 
             if ($fac == '') {
                 $this->rslt = FAIL;
-                $this->reason = "emtpy value error";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
 
             // check dash in beginning and end
             if ($facBeginLetter == '-' || $facLastLetter == '-') {
                 $this->rslt = FAIL;
-                $this->reason = "FACLASTLETTER LETTER IS = $facLastLetter";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
 
             // check contiguous dash
-            if (strpos($fac, '--') != false) {
+            if (strpos($fac, '--') !== false) {
                 $this->rslt = FAIL;
-                $this->reason = "contigous dash";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
 
             // check white space
             if (preg_match('/\s/', $fac) == 1) {
                 $this->rslt = FAIL;
-                $this->reason = "white space";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
 
@@ -300,7 +300,7 @@
                 }
             }
             
-            if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
+            if (preg_match('/^[-a-zA-Z0-9]+$/', $fac)) {
                 $qry = "INSERT INTO 
                         t_facs 
                         (fac, ftyp, ort, spcfnc) 
