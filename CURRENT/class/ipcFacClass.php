@@ -250,34 +250,36 @@
             $facBeginLetter = $fac[0];
             $facLastLetter = $fac[$lastFacCharPosition];
 
+            // checks empty fac
             if ($fac == '') {
                 $this->rslt = FAIL;
                 $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
 
-            // check dash in beginning and end
-            if ($facBeginLetter == '-' || $facLastLetter == '-') {
-                $this->rslt = FAIL;
-                $this->reason = "INVALID FAC FORMAT";
-                return false;
-            }
-
-            // check contiguous dash
-            if (strpos($fac, '--') !== false) {
-                $this->rslt = FAIL;
-                $this->reason = "INVALID FAC FORMAT";
-                return false;
-            }
-
-            // check white space
-            if (preg_match('/\s/', $fac) == 1) {
-                $this->rslt = FAIL;
-                $this->reason = "INVALID FAC FORMAT";
-                return false;
-            }
-
+            // check for non alphanumeric characters
             if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
+
+                // check dash in beginning and end
+                if ($facBeginLetter == '-' || $facLastLetter == '-') {
+                    $this->rslt = FAIL;
+                    $this->reason = "INVALID FAC FORMAT";
+                    return false;
+                }
+
+                // check contiguous dash
+                if (strpos($fac, '--') !== false) {
+                    $this->rslt = FAIL;
+                    $this->reason = "INVALID FAC FORMAT";
+                    return false;
+                }
+
+                // check white space
+                if (preg_match('/\s/', $fac) == 1) {
+                    $this->rslt = FAIL;
+                    $this->reason = "INVALID FAC FORMAT";
+                    return false;
+                }
 
                 $ftypObj = new FTYP($ftyp);
                 if ($ftypObj->rslt == FAIL) {
@@ -330,6 +332,7 @@
             else {
                 $this->rslt = FAIL;
                 $this->reason = "FAC_ID must not contain weird characters";
+                return false;
             }
         }
 
