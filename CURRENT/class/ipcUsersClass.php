@@ -709,7 +709,7 @@ class USERS {
             $this->t3 = $this->t2;
             $this->t2 = $this->t1;
             $this->t1 = $this->t0;
-            $this->t0 = date("Y/m/d H:m:s");
+            $this->t0 = date("Y/m/d H:i:s");
 
             $this->pw = $newPw;
             
