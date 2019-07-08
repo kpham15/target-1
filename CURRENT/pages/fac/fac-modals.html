@@ -129,7 +129,7 @@
   }
 
   function validateFacAdd(obj) {
-
+    let facilityName = obj.facId;
     // checks for white space
     if (obj.facId.match(/\s/g)) {
       clearErrors();
@@ -144,7 +144,7 @@
         return;
     }
 
-    if (obj.facId.IndexOf('-') = 0 || obj.facId.IndexOf('-' = obj.facId.length - 1)) {
+    if ((obj.facId.IndexOf('-') = 0) || (obj.facId.IndexOf('-' = obj.facId.length - 1))) {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID cannot start or end w/ dash');
       return;
