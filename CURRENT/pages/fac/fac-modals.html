@@ -136,27 +136,23 @@
       inputError($('#fac-modal-facId'),'FAC_ID must not contain spaces');
       return;
     }
-
     // check for contigous dash
-    if (obj.facId.indexOf('--') != -1 ) {
+    else if (obj.facId.indexOf('--') != -1 ) {
         clearErrors();
         inputError($('#fac-modal-facId'),'FAC_ID must not contain contiguous dash');
         return;
     }
-
     // check for dash at beginning or end
-    if (obj.facId.indexOf('-') == 0 || obj.facId.indexOf('-') == obj.facId.length - 1) {
+    else if (obj.facId.indexOf('-') == 0 || obj.facId.indexOf('-') == obj.facId.length - 1) {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID cannot start or end w/ dash');
       return;
     }
-
-
-
     // checks for empty input
-    if (obj.facId == "") {
+    else if (obj.facId == "") {
       clearErrors();
       inputError($('#fac-modal-facId'),'FAC_ID Cannot be Empty');
+      return;
     }
     else {
       facModalSumbit(obj);
