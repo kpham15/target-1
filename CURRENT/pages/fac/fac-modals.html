@@ -144,10 +144,16 @@
         return;
     }
 
-    // check for dash at beginning or end
-    if ((obj.facId.indexOf('-') == 0) || (obj.facId.indexOf('-') == (obj.facId.length - 1))) {
+    // check for dash at beginning
+    if (obj.facId.indexOf('-') == 0) {
       clearErrors();
-      inputError($('#fac-modal-facId'),'FAC_ID cannot start or end w/ dash');
+      inputError($('#fac-modal-facId'),'FAC_ID cannot start w/ dash');
+      return;
+    }
+
+    if (obj.facId.indexOf('-') == obj.facId.length - 1) {
+      clearErrors();
+      inputError($('#fac-modal-facId'),'FAC_ID cannot end w/ dash');
       return;
     }
 
