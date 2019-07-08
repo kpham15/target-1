@@ -132,8 +132,10 @@
 
     let lastFacCharPosition = obj.facId.length - 1;
     let facBeginLetter = obj.facId.split("");
+    let facLastLetter = facBeginLetter[lastFacCharPosition];
 
     console.log(facBeginLetter[0]);
+    console.log(facLastLetter);
     return;
     // let facLastLetter = split(obj.facId[lastFacCharPosition]);
 
@@ -143,7 +145,7 @@
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
     // check for begin or end w/ dash
-    else if (facBeginLetter == '-' || faLastLetter == '-') {
+    else if (facBeginLetter[0] == '-' || facLastLetter == '-') {
       clearErrors();
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
