@@ -255,7 +255,7 @@
             }
 
             // check dash in beginning and end
-            if (strpos($fac, '-') == 0 || strpos($fac, '-') == $lastFacCharPosition) {
+            if (strpos($fac, '-') == 0) {
                 $this->rslt = FAIL;
                 $this->reason = "dash in begin or end";
                 return false;
