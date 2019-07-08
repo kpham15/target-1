@@ -184,7 +184,7 @@
                 return;
             }
 
-            $qry = "UPDATE t_ckts SET cls='$cls', adsr='$adsr', prot='$prot', date=now() WHERE ckid='$this->ckid'";
+            $qry = "UPDATE t_ckts SET cls='$cls', adsr='$adsr', prot='$prot', ordno='$ordno', date=now() WHERE ckid='$this->ckid'";
             
             $res = $db->query($qry);
             if (!$res) {
