@@ -277,30 +277,31 @@
                 return false;
             }
 
-            $ftypObj = new FTYP($ftyp);
-            if ($ftypObj->rslt == FAIL) {
-                $this->rslt = FAIL;
-                $this->reason = $ftypObj->reason;
-                return false;
-            }
-        
-            $ortObj = new ORT($ort);
-            if ($ortObj->rslt == FAIL) {
-                $this->rslt = FAIL;
-                $this->reason = $ortObj->reason;
-                return false;
-            }
+            if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
 
-            if ($spcfnc != '') {
-                $spcfncObj = new SPCFNC($spcfnc);
-                if ($spcfncObj->rslt == FAIL) {
+                $ftypObj = new FTYP($ftyp);
+                if ($ftypObj->rslt == FAIL) {
                     $this->rslt = FAIL;
-                    $this->reason = $spcfncObj->reason;
+                    $this->reason = $ftypObj->reason;
                     return false;
                 }
-            }
             
-            if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
+                $ortObj = new ORT($ort);
+                if ($ortObj->rslt == FAIL) {
+                    $this->rslt = FAIL;
+                    $this->reason = $ortObj->reason;
+                    return false;
+                }
+
+                if ($spcfnc != '') {
+                    $spcfncObj = new SPCFNC($spcfnc);
+                    if ($spcfncObj->rslt == FAIL) {
+                        $this->rslt = FAIL;
+                        $this->reason = $spcfncObj->reason;
+                        return false;
+                    }
+                }
+            
                 $qry = "INSERT INTO 
                         t_facs 
                         (fac, ftyp, ort, spcfnc) 
