@@ -257,21 +257,21 @@
             // check dash in beginning and end
             if (strpos($fac, '-') == 0 || strpos($fac, '-') == $lastFacCharPosition) {
                 $this->rslt = FAIL;
-                $this->reason = "string in begin or end error";
+                $this->reason = "dash in begin or end";
                 return false;
             }
 
             // check contiguous dash
             if (strpos($fac, '--') != false) {
                 $this->rslt = FAIL;
-                $this->reason = "contigous dash error";
+                $this->reason = "contigous dash";
                 return false;
             }
 
             // check white space
             if (preg_match('/\s/', $fac) == 1) {
                 $this->rslt = FAIL;
-                $this->reason = "white space error";
+                $this->reason = "white space";
                 return false;
             }
 
@@ -298,7 +298,7 @@
                 }
             }
             
-            if (preg_match('/^[a-zA-Z0-9-_]+$/', $fac)) {
+            if (preg_match('/^[a-zA-Z0-9-]+$/', $fac)) {
                 $qry = "INSERT INTO 
                         t_facs 
                         (fac, ftyp, ort, spcfnc) 
