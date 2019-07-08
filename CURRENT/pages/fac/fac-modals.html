@@ -140,38 +140,39 @@
       clearErrors();
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
-    // check for begin or end w/ dash
-    else if (facStartLetter == '-' || facEndLetter == '-') {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
-    }
-    // check for double dash
-    else if (obj.facId.indexOf('--') != -1 ) {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
-    }
-    // check for white space
-    else if (obj.facId.match(/\s/g)) {
-      clearErrors();
-      inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
-    }
-    else if (obj.ftyp == "") {
-      clearErrors();
-      inputError($('#fac-modal-ftyp'),'MISSING FTYP');
-    }
-    else if (obj.ort == "") {
-      clearErrors();
-      inputError($('#fac-modal-ort'),'MISSING ORT');
-    }
-    else {
-      // check for characters other than alphanumeric and dash
-      if (obj.facId.match(/^[-a-zA-Z0-9]+$/)) {
-        facModalSumbit(obj);
-      }
-      else {
+
+    // check for characters other than alphanumeric and dash
+    if (obj.facId.match(/^[-a-zA-Z0-9]+$/)) {
+      // check for begin or end w/ dash
+      if (facStartLetter == '-' || facEndLetter == '-') {
         clearErrors();
         inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
       }
+      // check for double dash
+      else if (obj.facId.indexOf('--') != -1 ) {
+        clearErrors();
+        inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
+      }
+      // check for white space
+      else if (obj.facId.match(/\s/g)) {
+        clearErrors();
+        inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
+      }
+      else if (obj.ftyp == "") {
+        clearErrors();
+        inputError($('#fac-modal-ftyp'),'MISSING FTYP');
+      }
+      else if (obj.ort == "") {
+        clearErrors();
+        inputError($('#fac-modal-ort'),'MISSING ORT');
+      }
+      else {
+        facModalSumbit(obj);
+      }
+    }
+    else {
+      clearErrors();
+      inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
     }
   }
 
