@@ -125,7 +125,8 @@
                 while ($row = $res->fetch_assoc()) {
                     $rows[] = $row;
                 }
-            }
+			}
+			$result["reason"] = "QUERY SUCCESSFULLY";
             $result["rows"] = $rows;
         }
 		return $result;
@@ -184,6 +185,7 @@
 						}
 					}
 					$result["rows"] = $rows;
+					$result["reason"] = "BACKUP SUCCESSFULLY";
 				}	
 			}
 		}
@@ -246,6 +248,7 @@
 						$rows[] = $row;
 					}
 				}
+				$result["reason"] = "UPLOAD SUCCESSFULLY";
 				$result["rows"] = $rows;
 			}	
 		}
@@ -284,6 +287,7 @@
 							$rows[] = $row;
 						}
 					}
+					$result["reason"] = "DELETE SUCCESSFULLY";
 					$result["rows"] = $rows;
 				}	
 			}
@@ -311,6 +315,7 @@
 
 		if(!$return) {
 			$result["rslt"] = "success";
+			$result["reason"] = "RESTORE SUCCESSFULLY";
 		}
 		else {
 			$result["rslt"] = "fail";

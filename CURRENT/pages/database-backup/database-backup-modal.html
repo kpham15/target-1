@@ -105,8 +105,8 @@ $(document).ready(function() {
         postResponse($('#database-backup-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
+        queryDatabaseBackup();        
         postResponse($('#database-backup-modal .modal-footer'), data.rslt, data.reason);
-        queryDatabaseBackup();
       }  
     })
   });

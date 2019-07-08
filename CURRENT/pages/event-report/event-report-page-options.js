@@ -144,7 +144,7 @@ var eventReportTaskOptions = {
 
   ],
 
-  UPDATESOFTWARERELEASES: [
+  SOFTWAREUPDATE: [
     "UPLOAD SW",
     "INSTALL UPDATE SW",
     "RUN CURRENT SW",

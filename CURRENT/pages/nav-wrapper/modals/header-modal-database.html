@@ -77,7 +77,7 @@ var databaseDownloadDatatable = $('#header-database-download-table').DataTable({
     {"data":"bktyp"},
     {"data":"dbpath",
       "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-        $(nTd).html("<a href='"+oData.dbpath+"'>DOWNLOAD</a>");
+        $(nTd).html("<a href='"+oData.dbpath+"' download>DOWNLOAD</a>");
       }
     },
     {"data":"date"}
@@ -143,11 +143,11 @@ $(document).ready(function() {
         postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, data.reason);
       }
       else {
-        if (action == "DELETE") {
+        if (action == "DELETE BACKUP FILE") {
           postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "File Deleted");
         }
 
-        if (action == "MANUAL") {
+        if (action == "BACKUP MANUALLY") {
           postResponse($('#header-database-backup-modal .modal-footer'), data.rslt, "Database File Created: " + data.rows[(data.rows.length) - 1].dbfile);
         }
       }
