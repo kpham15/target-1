@@ -34,15 +34,55 @@
 
 <script type="text/javascript">
 
+function pwreuseChange(pwreuse) {
+	if (pwreuse == "0") {
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', false);
+		$("#reference-page-pwrepeat").val("0");
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
+	} else {
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', true);
+		$("#reference-page-pwrepeat").val("240");
+	}
+}
+
+function pwrepeatChange(pwrepeat) {
+	if (pwrepeat == "0") {
+		$("#reference-page-pwreuse").val("0");
+	} else {
+		return;
+	}
+}
+
 function refStartup() {
 
-	if ($('.ref-select-box').length === 0) {
-		
-			let refSelect = createRefSelect(refOptions);
-			$('.ref-select-row').append(refSelect);
-		}
-		queryReferences();
+	if ($('.ref-select-box').length === 0) {		
+		let refSelect = createRefSelect(refOptions);
+		$('.ref-select-row').append(refSelect);
 	}
+	queryReferences();
+
+	$("#reference-page-pwreuse").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', false);
+			$("#reference-page-pwrepeat").val("0");
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
+		} else {
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
+			$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', true);
+			$("#reference-page-pwrepeat").val("240");
+		}
+	});
+
+	$("#reference-page-pwrepeat").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwreuse").val("0").change();
+		} else {
+			return;
+		}
+	});
+
+}
 
 
 function createRefSelect(data) {
@@ -123,7 +163,11 @@ function displayRefs(data) {
 
 		$(this).val(data[refId]);
 	});
+
+	pwreuseChange($("#reference-page-pwreuse").val());
+	pwrepeatChange($("#reference-page-pwrepeat").val());
 	
+
 }
 
 $(document).ready(function() {
