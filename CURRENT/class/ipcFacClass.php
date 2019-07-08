@@ -300,7 +300,7 @@
                 }
             }
             
-            if (preg_match('/^[-a-zA-Z0-9]+$/', $fac)) {
+            if (preg_match('/^[-a-zA-Z0-9]+$/', $fac) == 0) {
                 $qry = "INSERT INTO 
                         t_facs 
                         (fac, ftyp, ort, spcfnc) 
