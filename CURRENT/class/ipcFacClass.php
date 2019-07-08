@@ -331,7 +331,7 @@
             }
             else {
                 $this->rslt = FAIL;
-                $this->reason = "FAC_ID must not contain weird characters";
+                $this->reason = "INVALID FAC FORMAT";
                 return false;
             }
         }
