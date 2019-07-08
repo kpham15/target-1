@@ -189,15 +189,6 @@
         action:   $('#fac-modal-action').val()
       }
 
-      // let id = $('#fac-form-id').val();
-
-      // let facId = $("#fac-modal-facId").val();
-      // let range = $("#fac-modal-range").val();
-      // let ftyp = $("#fac-modal-ftyp").val();
-      // let ort = $("#fac-modal-ort").val();
-      // let spcfnc = $("#fac-modal-spcfnc").val();
-      // let action = $('#fac-modal-action').val();
-
       if (obj.action == "ADD") {
         validateFacAdd(obj);
       }
@@ -208,32 +199,6 @@
         facModalSumbit(obj);
       }
       
-      // $.ajax({
-      //   type: "POST",
-      //   url: ipcDispatch,
-      //   data: {
-      //     api:    "ipcFacilities",
-      //     act:    action,
-      //     user:   user.uname,
-      //     fac_id: id,
-      //     fac:    facId.toUpperCase(),
-      //     ftyp:   ftyp,
-      //     ort:    ort,
-      //     spcfnc: spcfnc,
-      //     range:  range,
-      //   },
-      //   dataType: 'json'
-      // }).done(function(data) {
-      //   let res = data.rows;
-
-      //   if (data.rslt === 'fail') {
-      //     postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
-      //   } else {
-      //     $('#fac-form-clear').trigger('click');
-      //     postResponse($('#fac-modal .modal-footer'), data.rslt, data.reason);
-      //     queryFac();
-      //   }
-      // });
     });
 
     // remove error messages when click on modal field
