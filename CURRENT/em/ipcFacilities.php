@@ -22,7 +22,8 @@
 	    
     $fac = "";
     if (isset($_POST['fac'])) {
-		$fac = strtoupper($_POST['fac']);
+		// $fac = strtoupper($_POST['fac']);
+		$fac = ($_POST['fac']);
 	}
 		
     
