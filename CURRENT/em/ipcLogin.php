@@ -91,8 +91,8 @@
 
         $pw4Date = strtotime($userObj->t4);
         $pw4Age = ceil(($now - $pw4Date) / (60 * 60 * 24));
-        echo $userObj->pw;
 
+        
         if ($refObj->ref['pw_reuse'] == "0") {
             return true;
         } else if ($refObj->ref['pw_reuse'] > "0") {
@@ -115,8 +115,6 @@
                     return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "2") {
-                echo $userObj->pwdate;
-                echo $pwAge . " : " . $refObj->ref['pw_repeat'];
                 if (decryptData($newpw) == decryptData($userObj->pw)) {
                     // check age
                     if ($pwAge > $refObj->ref['pw_repeat']) {
