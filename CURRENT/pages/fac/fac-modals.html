@@ -135,7 +135,6 @@
     let facStartLetter = facArray[0];
     let facEndLetter = facArray[lastFacCharPosition];
 
-    // checks for FAC input
     // checks for empty input
     if (obj.facId == "") {
       clearErrors();
@@ -155,6 +154,14 @@
     else if (obj.facId.match(/\s/g)) {
       clearErrors();
       inputError($('#fac-modal-facId'),'INVALID FAC FORMAT');
+    }
+    else if (obj.ftyp == "") {
+      clearErrors();
+      inputError($('#fac-modal-ftyp'),'MISSING FTYP');
+    }
+    else if (obj.ort == "") {
+      clearErrors();
+      inputError($('#fac-modal-ort'),'MISSING ORT');
     }
     else {
       // check for characters other than alphanumeric and dash
