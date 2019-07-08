@@ -121,6 +121,7 @@
                         echo 1;
                         return true;
                     } else {
+                        echo 1;
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw0)) {
@@ -129,6 +130,7 @@
                         echo 2;                        
                         return true;
                     } else {
+                        echo 2;
                         return false;
                     }
                 } else if (decryptData($newpw) == decryptData($userObj->pw1)) {
@@ -137,6 +139,7 @@
                         echo 3;                        
                         return true;
                     } else {
+                        echo 3;
                         return false;
                     }
                 } else {
