@@ -137,6 +137,7 @@
                         return false;
                     }
                 } else {
+                    echo "2";
                     return true;
                 }
             } else if ($refObj->ref['pw_reuse'] == "3") {
