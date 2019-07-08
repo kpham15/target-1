@@ -131,8 +131,11 @@
   function validateFacAdd(obj) {
 
     let lastFacCharPosition = obj.facId.length - 1;
-    let facBeginLetter = split(obj.facId[0]);
-    let facLastLetter = split(obj.facId[lastFacCharPosition]);
+    let facBeginLetter = obj.facId.split("");
+
+    console.log(facBeginLetter[0]);
+    return;
+    // let facLastLetter = split(obj.facId[lastFacCharPosition]);
 
     // checks for empty input
     if (obj.facId == "") {
