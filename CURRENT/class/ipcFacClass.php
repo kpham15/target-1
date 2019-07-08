@@ -257,9 +257,9 @@
             }
 
             // check dash in beginning and end
-            if ($facBeginLetter == '-') {
+            if ($facBeginLetter == '-' || $facLastLetter == '-') {
                 $this->rslt = FAIL;
-                $this->reason = "FACBEGIN LETTER IS = $facBeginLetter";
+                $this->reason = "FACLASTLETTER LETTER IS = $facLastLetter";
                 return false;
             }
 
